@@ -66,104 +66,146 @@ class GroupCheck:
 
         name = self.remove_possessive(name)
         words = name.split()
-        filtered_words = [word for word in words if word.lower() not in stop_words]
-        filtered_words = filtered_words[:4]
+        total_original_words = len(words)
 
-        # remove extra stuff
-        # 's, at, or,
-        primaryNames = [
-            "group",
-            "life",
-            "bible",
-            "ministry",
-            "mission",
-            "team",
-            "study",
-            "men",
-            "mens",
-            "women",
-            "womens",
-            "parents",
-            "parent",
-            "student",
-            "students",
-            "coed",
-            "adult",
-            "child",
-            "children",
-            "teen",
-            "teenager",
-            "teenagers",
-            "kid",
-            "kids",
-            "mom",
-            "moms",
-            "singles",
-            "wives",
-            "fathers",
-            "mothers",
-            "middle",
-            "young",
-            "infant",
-            "infants",
-            "preschooler",
-            "preschoolers",
-            "ladies",
-            "lady",
-            "military",
-            "veterans",
-            "monday",
-            "tuesday",
-            "wednesday",
-            "thursday",
-            "friday",
-            "saturday",
-            "sunday",
-            "school",
-            "gathering",
-            "prayer",
-            "outreach"
-        ]
+        if total_original_words < 10:
+            total_stop_words = len([word for word in words if word.lower() in stop_words])
+            filtered_words = [word for word in words if word.lower() not in stop_words]
+            filtered_words = filtered_words[:4]
 
-        activityNames = [
-            "hiking",
-            "biking",
-            "pickleball",
-            "frisbee",
-            "volleyball",
-            "league",
-            "crochet",
-            "quilter",
-            "quilters",
-            "basketball",
-            "football",
-            "softball",
-            "beach"
-        ]
+            # remove extra stuff
+            # 's, at, or,
+            primaryNames = [
+                "group",
+                "groups",
+                "life",
+                "bible",
+                "studies",
+                "ministry",
+                "mission",
+                "team",
+                "study",
+                "school",
+                "gathering",
+                "prayer",
+                "outreach",
+                "classes",
+                "class",
+                "support",
+                "interest",
+                "mentoring",
+                "community",
+                "connecting"
+            ]
 
-        caringNames = [
-            "divorce",
-            "grief"
-            "infertility",
-            "finance",
-            "marriage"
-        ]
+            typeNames = [
+                "mom",
+                "moms",
+                "singles",
+                "wives",
+                "coed",
+                "adult",
+                "adults",
+                "child",
+                "children",
+                "teen",
+                "teenager",
+                "teenagers",
+                "kid",
+                "kids",
+                "men",
+                "mens",
+                "women",
+                "womens",
+                "parents",
+                "parent",
+                "student",
+                "students",
+                "fathers",
+                "mothers",
+                "middle",
+                "young",
+                "infant",
+                "infants",
+                "preschooler",
+                "preschoolers",
+                "ladies",
+                "lady",
+                "military",
+                "veterans",
+                "55+",
+                "college"
+            ]
 
-        primaryWordCount = self.count_words_in_list(filtered_words, primaryNames)
-        activityWordCount = self.count_words_in_list(filtered_words, activityNames)
-        caringWordCount = self.count_words_in_list(filtered_words, activityNames)
+            dateNames = [
+                "weekly",
+                "monday",
+                "tuesday",
+                "wednesday",
+                "thursday",
+                "friday",
+                "saturday",
+                "sunday",
+                "hour"
+            ]
 
-        totalWordCount = len(filtered_words)
+            activityNames = [
+                "hiking",
+                "biking",
+                "karate",
+                "pickleball",
+                "frisbee",
+                "volleyball",
+                "league",
+                "crochet",
+                "quilter",
+                "quilters",
+                "basketball",
+                "football",
+                "softball",
+                "beach",
+                "wilderness"
+            ]
 
-        #print("words: ", filtered_words)
-        #print("total: ", totalWordCount, ", primary: ", primaryWordCount, ", activity: ", activityWordCount, ", caring: ", caringWordCount)
-        missingWords = totalWordCount - primaryWordCount - activityWordCount - caringWordCount
+            caringNames = [
+                "divorce",
+                "grief"
+                "infertility",
+                "finance",
+                "marriage"
+            ]
 
-        if (totalWordCount == 1 and missingWords == 0) or \
-                (totalWordCount == 2 and missingWords == 0) or \
-                (totalWordCount == 3 and missingWords <= 1) or \
-                (totalWordCount == 4 and missingWords <= 1):
-            foundGroupName = True
+            primaryWordCount = self.count_words_in_list(filtered_words, primaryNames)
+            if (primaryWordCount > 2):
+                primaryWordCount = 2
+
+            typeWordCount = self.count_words_in_list(filtered_words, typeNames)
+            if (typeWordCount > 2):
+                typeWordCount = 2
+
+            activityWordCount = self.count_words_in_list(filtered_words, activityNames)
+            if (activityWordCount > 1):
+                activityWordCount = 1
+
+            dateWordCount = self.count_words_in_list(filtered_words, dateNames)
+            if (dateWordCount > 1):
+                dateWordCount = 1
+
+            caringWordCount = self.count_words_in_list(filtered_words, caringNames)
+            if (caringWordCount > 1):
+                caringWordCount = 1
+
+            totalWordCount = len(filtered_words)
+
+            #print("words: ", filtered_words)
+            #print("total: ", totalWordCount, ", primary: ", primaryWordCount, ", activity: ", activityWordCount, ", caring: ", caringWordCount)
+            missingWords = totalWordCount - primaryWordCount - typeWordCount - activityWordCount - caringWordCount - dateWordCount
+
+            if (total_original_words == 1 and totalWordCount == 1 and missingWords == 0 and activityWordCount == 0 and dateWordCount == 0 and total_stop_words == 0) or \
+                    (total_original_words < 5 and totalWordCount == 2 and missingWords == 0 and total_stop_words <= 1) or \
+                    (totalWordCount == 3 and missingWords <= 1 and total_stop_words <= 1) or \
+                    (totalWordCount == 4 and missingWords <= 1 and total_stop_words <= 2):
+                foundGroupName = True
 
 
         return foundGroupName

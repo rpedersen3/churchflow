@@ -8,7 +8,7 @@ class MissionHillsSpider(scrapy.Spider):
     name = "missionhills"
     #siteurl = 'https://www.calvarygolden.net'
 
-    siteurl = "https://www.missionhills.org"
+    #siteurl = "https://www.missionhills.org"
 
     #siteurl = "https://centcov.org"
 
@@ -26,7 +26,7 @@ class MissionHillsSpider(scrapy.Spider):
 
     #siteurl = "https://longmontcalvary.org"
 
-    #siteurl = "https://www.trinitylittleton.com"
+    siteurl = "https://www.trinitylittleton.com"
 
 
 
@@ -34,10 +34,11 @@ class MissionHillsSpider(scrapy.Spider):
         #'https://www.calvarygolden.net'
 
         #'https://www.missionhills.org/groupfinder/'
-        'https://www.missionhills.org'
+        #'https://www.missionhills.org'
 
         #'https://centcov.org'
 
+        #"https://calvarybible.com/adults-groups/"
         #'https://calvarybible.com'
 
         #'https://truelightonline.org'
@@ -53,7 +54,7 @@ class MissionHillsSpider(scrapy.Spider):
         #'https://longmontcalvary.org/about/our-staff'
 
         #"https://www.trinitylittleton.com/staff"
-        #"https://www.trinitylittleton.com"
+        "https://www.trinitylittleton.com"
 
 
         #'https://www.horizondenver.com/index.php/about-us/our-team/'
@@ -308,6 +309,7 @@ class MissionHillsSpider(scrapy.Spider):
 
         #self.searchForContacts(response)
         self.searchForGroups(response)
+
 
         links = response.xpath('//a/@href').extract()
         for link in links:
