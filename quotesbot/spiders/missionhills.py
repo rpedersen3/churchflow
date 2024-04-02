@@ -2,7 +2,7 @@
 import scrapy
 import re
 from quotesbot.profilecheck import ProfileCheck
-
+from quotesbot.groupcheck import GroupCheck
 
 class MissionHillsSpider(scrapy.Spider):
     name = "missionhills"
@@ -33,6 +33,7 @@ class MissionHillsSpider(scrapy.Spider):
     start_urls = [
         #'https://www.calvarygolden.net'
 
+        #'https://www.missionhills.org/groupfinder/'
         'https://www.missionhills.org'
 
         #'https://centcov.org'
@@ -146,13 +147,13 @@ class MissionHillsSpider(scrapy.Spider):
         else:
             print("email: ", previousProfileEmail)
 
-    def parse(self, response):
+    def searchForContacts(self, response):
 
-        #print('**************** process page: ', response.url)
+        # print('**************** process page: ', response.url)
         if response.url.find('staff') != -1 or \
-            response.url.find('team') != -1 or \
-            response.url.find('leadership') != -1 or \
-            response.url.find('pastor') != -1:
+                response.url.find('team') != -1 or \
+                response.url.find('leadership') != -1 or \
+                response.url.find('pastor') != -1:
 
             print("--------- parse page: ", response.url)
             profCheck = ProfileCheck()
@@ -167,23 +168,23 @@ class MissionHillsSpider(scrapy.Spider):
             currentProfilePhotoEl = ""
             currentProfileNameEl = ""
 
-
             currentProfileEmailEl = ""
             previousProfileEmailEl = ""
 
-            path = response.xpath('//div[not(descendant::div)] | //a[starts-with(@href, "mailto:")] | //img | //h1 | //h2 | //h3 | //strong | //p | //span ')
+            path = response.xpath(
+                '//div[not(descendant::div)] | //a[starts-with(@href, "mailto:")] | //img | //h1 | //h2 | //h3 | //strong | //p | //span ')
             for el in path:
-                #print("--------------- Look for Profile Info -----------------------")
+                # print("--------------- Look for Profile Info -----------------------")
 
                 visible_text = el.xpath('.//text()[normalize-space()]').extract()
                 for text in visible_text:
                     shortText = text.strip()[:40]
-                    #print("short text: ", shortText)
+                    # print("short text: ", shortText)
                     names = shortText.split()
                     for name in names:
-                        #print("name check: ", name)
+                        # print("name check: ", name)
                         if profCheck.isProfileName(name):
-                            #print("found name: ", name)
+                            # print("found name: ", name)
                             l1 = len(currentProfileName.split())
                             if l1 == 0:
                                 currentProfileName = name
@@ -191,29 +192,26 @@ class MissionHillsSpider(scrapy.Spider):
                             elif l1 == 1 and self.checkCommonDiv(currentProfileNameEl, el):
                                 currentProfileName += " "
                                 currentProfileName += name
-                            #elif l1 == 2  and self.checkCommonDiv(currentProfileNameEl, divEl):
+                            # elif l1 == 2  and self.checkCommonDiv(currentProfileNameEl, divEl):
                             #    currentProfileName += " "
                             #    currentProfileName += name
 
-                            #print("found profile name ", currentProfileName)
-
-
+                            # print("found profile name ", currentProfileName)
 
                     if profCheck.isProfileJobTitle(shortText):
                         if currentProfileTitle == "":
                             currentProfileTitle = shortText
-                        #print("found profile jobtitle ", shortText)
+                        # print("found profile jobtitle ", shortText)
 
                     if profCheck.isProfileDepartment(shortText):
                         currentProfileDepartment = shortText
-                        #print("found profile department ", shortText)
+                        # print("found profile department ", shortText)
 
-
-                #mailto_links = divEl.xpath('.//a[starts-with(@href, "mailto:")]')
-                #for link in mailto_links:
+                # mailto_links = divEl.xpath('.//a[starts-with(@href, "mailto:")]')
+                # for link in mailto_links:
                 if el.xpath('@href').get():
                     email_address = el.xpath('@href').get().replace("mailto:", "")
-                    #print("found profile email ", email_address)
+                    # print("found profile email ", email_address)
 
                     currentProfileEmail = email_address
                     currentProfileEmailEl = el
@@ -222,16 +220,15 @@ class MissionHillsSpider(scrapy.Spider):
                         'email_address': email_address
                     }
 
-
                 # Look for profile photo's
 
                 # Extract image URLs from the page
                 if el.xpath('@src | @data-src | @srcset').get():
                     img_src = el.xpath('@src | @data-src | @srcset').get()
-                    #print("***************************** img src found: ", img_src)
+                    # print("***************************** img src found: ", img_src)
 
                     isCDN = False
-                    if img_src.startswith("https://images.squarespace-cdn.com") or  \
+                    if img_src.startswith("https://images.squarespace-cdn.com") or \
                             img_src.startswith("https://static.wixstatic.com") or \
                             img_src.startswith("https://s3.amazonaws.com/media.cloversites.com"):
                         isCDN = True
@@ -239,22 +236,21 @@ class MissionHillsSpider(scrapy.Spider):
                     if (isCDN or img_src.startswith(self.siteurl)) and \
                             profCheck.isProfilePhoto(img_src):
 
-                        #print("photo found: ", img_src)
+                        # print("photo found: ", img_src)
                         if currentProfilePhoto != "" and currentProfileName != "":
                             self.saveContact(currentProfilePhoto,
-                                currentProfileName,
+                                             currentProfileName,
 
-                                currentProfileTitle,
-                                currentProfileDepartment,
-                                currentProfileEmail,
-                                previousProfileEmail,
+                                             currentProfileTitle,
+                                             currentProfileDepartment,
+                                             currentProfileEmail,
+                                             previousProfileEmail,
 
-                                currentProfilePhotoEl,
-                                currentProfileNameEl,
+                                             currentProfilePhotoEl,
+                                             currentProfileNameEl,
 
-                                currentProfileEmailEl,
-                                previousProfileEmailEl)
-
+                                             currentProfileEmailEl,
+                                             previousProfileEmailEl)
 
                         previousProfileEmail = currentProfileEmail
                         previousProfileEmailEl = currentProfileEmailEl
@@ -268,7 +264,6 @@ class MissionHillsSpider(scrapy.Spider):
                         currentProfilePhotoEl = el
                         currentProfileNameEl = ""
                         currentProfileEmailEl = ""
-
 
                         yield {
                             'image_url': img_src
@@ -288,6 +283,31 @@ class MissionHillsSpider(scrapy.Spider):
 
                                  currentProfileEmailEl,
                                  previousProfileEmailEl)
+
+
+    def searchForGroups(self, response):
+
+        groupCheck = GroupCheck()
+        if response.url.find('group') != -1:
+            print('**************** search group page: ', response.url)
+
+
+            path = response.xpath('//h1 | //h2 | //h3 | //h4 | //strong | //p | //span ')
+            for el in path:
+                # print("--------------- Look for Profile Info -----------------------")
+
+                visible_text = el.xpath('.//text()[normalize-space()]').extract()
+                for text in visible_text:
+                    #print("check text for group name: ", text)
+                    #print("text: ", text[:50])
+                    if groupCheck.isGroupName(text):
+                        print("group name: ", text)
+
+
+    def parse(self, response):
+
+        #self.searchForContacts(response)
+        self.searchForGroups(response)
 
         links = response.xpath('//a/@href').extract()
         for link in links:
