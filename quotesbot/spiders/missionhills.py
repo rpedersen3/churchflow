@@ -4,11 +4,18 @@ import re
 from quotesbot.profilecheck import ProfileCheck
 from quotesbot.groupcheck import GroupCheck
 
+class DivCount:
+    def __init__(self, div, level, className, count):
+        self.div = div
+        self.level = level
+        self.className = className
+        self.count = count
+
 class MissionHillsSpider(scrapy.Spider):
     name = "missionhills"
     #siteurl = 'https://www.calvarygolden.net'
 
-    #siteurl = "https://www.missionhills.org"
+    siteurl = "https://www.missionhills.org"
 
     #siteurl = "https://centcov.org"
 
@@ -26,14 +33,14 @@ class MissionHillsSpider(scrapy.Spider):
 
     #siteurl = "https://longmontcalvary.org"
 
-    siteurl = "https://www.trinitylittleton.com"
+    #siteurl = "https://www.trinitylittleton.com"
 
 
 
     start_urls = [
         #'https://www.calvarygolden.net'
 
-        #'https://www.missionhills.org/groupfinder/'
+        'https://www.missionhills.org/groupfinder/'
         #'https://www.missionhills.org'
 
         #'https://centcov.org'
@@ -54,7 +61,7 @@ class MissionHillsSpider(scrapy.Spider):
         #'https://longmontcalvary.org/about/our-staff'
 
         #"https://www.trinitylittleton.com/staff"
-        "https://www.trinitylittleton.com"
+        #"https://www.trinitylittleton.com"
 
 
         #'https://www.horizondenver.com/index.php/about-us/our-team/'
@@ -103,6 +110,76 @@ class MissionHillsSpider(scrapy.Spider):
             cnt = len(ancestors1) - count
 
         return cnt
+
+    def commonDiv(self, el1, el2):
+
+        ancestors1 = el1.xpath('ancestor::div')
+        ancestors2 = el2.xpath('ancestor::div')
+
+        # print('look for common div 1: ', ancestors1)
+        # print('look for common div 2: ', ancestors2)
+
+        common_ancestor_div = None
+        common_ancestor_count = None
+        common_ancestor_class = None
+
+        count = 1
+        for ancestor1 in ancestors1[::-1]:
+            s1 = str(ancestor1)
+            # print('look for common div 1: ', s1)
+            previousClassName = ""
+            for ancestor2 in ancestors2[::-1]:
+                s2 = str(ancestor2)
+                # print('look for common div 2: ', s2)
+
+                if s1 == s2:
+                    #print('s1: ', s1)
+                    print('class ', previousClassName.split()[0])
+                    common_ancestor_div = ancestor1
+                    common_ancestor_class = previousClassName.split()[0]
+                    break
+
+                previousClassName = ancestor2.attrib.get("class", "")
+            if common_ancestor_div:
+                break
+
+            count = count + 1
+
+        cnt = 0
+        if common_ancestor_div != None:
+            common_ancestor_count = len(ancestors1) - count
+            #common_ancestor_class = common_ancestor_div.xpath('//div/@class')
+
+        print('classname: ', common_ancestor_class)
+        return common_ancestor_div, common_ancestor_count, common_ancestor_class
+
+
+    def getBoundingDiv(self, els):
+        print("look for lowest common div")
+        lastEl = None
+        divCounts = []
+        for el1 in els[:5]:
+            if lastEl != None:
+                cDiv, cDivLevel, cClassName = self.commonDiv(el1, lastEl)
+                #cDivLevel = self.commonDivCount(el1, lastEl)
+
+                divCount = DivCount(cDiv, cDivLevel, cClassName, 1)
+                matching_items = [item for item in divCounts if item.level == cDivLevel and item.className == cClassName]
+                if (len(matching_items) == 0):
+                    divCounts.append(divCount)
+                else:
+                    matching_items[0].count = matching_items[0].count + 1
+
+            lastEl = el1
+
+        sortedDivCounts = sorted(divCounts, reverse=True,  key=lambda x: x.count)
+        bestDivLevel = sortedDivCounts[0].level
+        bestClassName = sortedDivCounts[0].className
+        bestDiv = sortedDivCounts[0].div
+
+        print("lowest: ", bestDivLevel)
+        return bestDiv, bestClassName
+
 
     def saveContact(self,
         currentProfilePhoto,
@@ -289,9 +366,14 @@ class MissionHillsSpider(scrapy.Spider):
     def searchForGroups(self, response):
 
         groupCheck = GroupCheck()
+
+
+
+
         if response.url.find('group') != -1:
             print('**************** search group page: ', response.url)
 
+            groupElements = []
 
             path = response.xpath('//h1 | //h2 | //h3 | //h4 | //strong | //p | //span ')
             for el in path:
@@ -302,15 +384,22 @@ class MissionHillsSpider(scrapy.Spider):
                     #print("check text for group name: ", text)
                     #print("text: ", text[:50])
                     if groupCheck.isGroupName(text):
+                        groupElements.append(el)
                         print("group name: ", text)
 
+            if len(groupElements) > 1:
+                #print("get bounding div: ", len(groupElements))
+                boundingDiv, boundingClassName = self.getBoundingDiv(groupElements)
+                html = str(boundingDiv)
+                print('div class name: ', boundingClassName)
+                groupCheck.lookForGroupNames(html, boundingClassName)
 
     def parse(self, response):
 
         #self.searchForContacts(response)
         self.searchForGroups(response)
 
-
+        '''
         links = response.xpath('//a/@href').extract()
         for link in links:
             #print("link: ", link)
@@ -326,7 +415,7 @@ class MissionHillsSpider(scrapy.Spider):
 
                yield scrapy.Request(response.urljoin(pageLink), callback=self.parse)
 
-
+        '''
 
 
 

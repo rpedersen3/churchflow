@@ -9,8 +9,20 @@ from ethnicolr import census_ln
 from names_dataset import NameDataset, NameWrapper
 import math
 import requests
-from collections import Counter
 import re
+from collections import Counter
+
+from openai import OpenAI
+from bs4 import BeautifulSoup
+
+from langchain_core.callbacks.base import BaseCallbackHandler
+from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
+from langchain.chains import LLMChain
+from langchain_community.llms import GPT4All
+from langchain_core.prompts import PromptTemplate
+
+
+
 import nltk
 from nltk.corpus import stopwords
 nltk.download('punkt')
@@ -19,13 +31,17 @@ nltk.download('maxent_ne_chunker')
 nltk.download('words')
 nltk.download('stopwords')
 
-import pandas as pd
+client = OpenAI(
+  organization='',
+  api_key=''
+)
 
-
+import gpt4all
 class GroupCheck:
     name = "groupcheck"
 
     nltk.download('stopwords')
+
 
     def remove_possessive(self, text):
         # Define a regular expression pattern to match "'s" at the end of words
@@ -208,4 +224,116 @@ class GroupCheck:
                 foundGroupName = True
 
 
+
+
+
+
+
         return foundGroupName
+
+
+    def getJsonFromHtmlUsingLocalLLM(self, html):
+
+        s1 = BeautifulSoup(html, 'html.parser')
+
+        # Remove class attributes from all elements
+        for tag in s1.find_all(True):
+            tag.attrs = {}
+        html = s1.prettify()
+
+        #print('div: ', html)
+
+
+        local_path = (
+            "C:/Users/Richard Pedersen/AppData\Local/nomic.ai/GPT4All/Nous-Hermes-2-Mistral-7B-DPO.Q4_0.gguf"
+        )
+
+        model = gpt4all.GPT4All("C:/Users/Richard Pedersen/AppData\Local/nomic.ai/GPT4All/Nous-Hermes-2-Mistral-7B-DPO.Q4_0.gguf"
+                            )
+        with model.chat_session():
+            questions = [
+                "Can you explain what is a large language model?",
+                "Can you give some examples applications?",
+                "Are there any limitations?",
+                "Summarize the above in two sentences.",
+            ]
+            for question in questions:
+                answer = model.generate(question)
+                print("Q:", question)
+                print("A:", answer)
+
+
+    def getJsonFromHtmlUsingOpenAI(self, html):
+
+        s1 = BeautifulSoup(html, 'html.parser')
+
+        # Remove class attributes from all elements
+        for tag in s1.find_all(True):
+            tag.attrs = {}
+        html = s1.prettify()
+
+        print('div: ', html)
+
+        model = 'gpt-3.5-turbo'
+        print("call chat with html")
+        completion = client.chat.completions.create(
+            model=model,  # Feel free to change the model to gpt-3.5-turbo-1106
+            messages=[
+                {"role": "system", "content": "You are a master at scraping and parsing raw HTML."},
+                {"role": "user", "content": html}
+            ],
+            tools=[
+                {
+                    "type": "function",
+                    "function": {
+                        "name": "parse_data",
+                        "description": "Parse raw HTML data nicely",
+                        "parameters": {
+                            'type': 'object',
+                            'properties': {
+                                'data': {
+                                    'type': 'array',
+                                    'items': {
+                                        'type': 'object',
+                                        'properties': {
+                                            'title': {'type': 'string'},
+                                            'time': {'type': 'string'},
+                                            'day': {'type': 'string'}
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            ],
+            tool_choice={
+                "type": "function",
+                "function": {"name": "parse_data"}
+            }
+        )
+
+        # Calling the data results
+        print('done with getting openai stuff')
+        argument_str = completion.choices[0].message.tool_calls[0].function.arguments
+
+        print("json: ", argument_str)
+    def lookForGroupNames(self, htmlText, className):
+
+        soup = BeautifulSoup(htmlText, 'html.parser')
+
+        count = 0
+        if className != "":
+            select = 'div[class*="' + className + '"]'
+            child_div_elements = soup.select(select)
+
+            for div in child_div_elements:
+
+                count = count + 1
+                if count > 120:
+                    break
+
+                self.getJsonFromHtmlUsingLocalLLM(str(div))
+
+
+
