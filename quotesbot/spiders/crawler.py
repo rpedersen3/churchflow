@@ -11,8 +11,8 @@ class DivCount:
         self.className = className
         self.count = count
 
-class MissionHillsSpider(scrapy.Spider):
-    name = "missionhills"
+class ChurchCrawler(scrapy.Spider):
+    name = "crawler"
     #siteurl = 'https://www.calvarygolden.net'
 
     siteurl = "https://www.missionhills.org"
