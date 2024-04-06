@@ -398,10 +398,10 @@ class ChurchCrawler(scrapy.Spider):
     def parse(self, response):
 
         churchFinder = ChurchFinder()
-        churchFinder.findCityDemographicsFromCensusData()
+        #churchFinder.findCityDemographicsFromCensusData()
         #churchFinder.findCityDemographics()
         #churchFinder.findCities()
-        #churchFinder.findChurches()
+        churchFinder.findChurches()
 
         '''
         #self.searchForContacts(response)

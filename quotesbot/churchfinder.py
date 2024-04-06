@@ -4,6 +4,8 @@ import json
 from googleapiclient.discovery import build
 import requests
 from bs4 import BeautifulSoup
+from datetime import datetime
+import time
 
 class ChurchInfo:
     name = "churchinfo"
@@ -435,28 +437,11 @@ class ChurchFinder:
 
     def findChurches(self):
 
-        '''
         service = build(
             "customsearch", "v1", developerKey=""
         )
 
-
-        res = (
-            service.cse()
-            .list(
-                q="websites of christian churches in erie colorado",
-                cx="d744719d644574dd7",
-                start=11
-                #cx="01757666212468239146:omuauf_lfve",
-            )
-            .execute()
-        )
-        print(res)
-        '''
-
-        # Specify the path to your JSON file
-        file_path = "churchscrape1.json"
-
+        # get churches
         churchesData = None
         churches_file_path = "churches.json"
         with open(churches_file_path, "r") as file:
@@ -466,35 +451,98 @@ class ChurchFinder:
         if churches == None:
             churches = []
 
-        # Open the JSON file and read its contents
+        # get cities
+        file_path = "coloradoFrontRangeCities.json"
         with open(file_path, "r") as file:
-            data = json.load(file)
+            citiesData = json.load(file)
 
-            for item in data["items"]:
+        # cycle through cities looking for church web sites
+        cities = citiesData["cities"]
+        selectedCity = None
+        count = 1
+        for city in cities:
 
-                link = item["link"]
-                if link.find('?') == -1 and link.find('&') == -1:
+            if "crawled" not in city:
+                city["crawled"] = str(datetime.now())
+                city["crawled-city"] = city["name"]
 
-                    name = item["displayLink"]
-                    name = name.replace('www.', '')
-                    name = name.replace('.com', '')
-                    name = name.replace('.org', '')
-                    name = name.replace('.net', '')
-                    name = name.replace('.church', '')
+                time.sleep(5)
 
-                    church = {
-                        "link": link,
-                        "name": name
-                    }
-                    churches.append(church)
+                count = count + 1
+                if count > 100:
+                    break
 
-                    print('link: ', item["link"])
+                starts = [1, 11, 21, 31, 41, 51]
 
-        churchesData["churches"] = churches
-        with open(churches_file_path, "w") as json_file:
-            json.dump(churchesData, json_file, indent=4)
+                for st in starts:
+
+                    query = "'" + city["name"] + "' colorado christian church websites"
+                    print("query: ", query)
+                    res = (
+                        service.cse()
+                        .list(
+                            q=query,
+                            cx="d744719d644574dd7",
+                            start=st
+                            #cx="01757666212468239146:omuauf_lfve",
+                        )
+                        .execute()
+                    )
+                    #print("--------------------------------------")
+                    #print(res)
+                    #print("--------------------------------------")
+
+                    found = 0
+                    for item in res["items"]:
+
+                        link = item["link"]
+                        dashCount = len(link.split("/"))
+                        print("link: ", link, ",  dashCount: ", dashCount)
+                        if link.find('?') == -1 and \
+                                link.find('&') == -1 and \
+                                dashCount <= 4 and \
+                                link.find("linkedin") == -1 and \
+                                link.find(".gov") == -1 :
+
+                            found = found + 1
+
+                            name = item["displayLink"]
+                            name = name.replace('www.', '')
+                            name = name.replace('.com', '')
+                            name = name.replace('.org', '')
+                            name = name.replace('.net', '')
+                            name = name.replace('.church', '')
+
+                            # looking for existing church with this link
+                            selectedChurch = None
+                            for church in churches:
+                                if church["link"] == link:
+                                    selectedChurch = church
+                                    break
+
+                            if selectedChurch == None:
+                                print("add church: ", name)
+                                church = {
+                                    "link": link,
+                                    "name": name
+                                }
+                                churches.append(church)
+
+                                print('link: ', item["link"])
+
+                            # save to churches file
+                            churchesData["churches"] = churches
+                            with open(churches_file_path, "w") as json_file:
+                                json.dump(churchesData, json_file, indent=4)
+
+                            # save cities crawled
+                            citiesData["cities"] = cities
+                            with open(file_path, "w") as json_file:
+                                json.dump(citiesData, json_file, indent=4)
 
 
+                    if found < 7:
+                        break
 
         '''
         

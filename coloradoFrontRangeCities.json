@@ -27,7 +27,9 @@
             "populationPerSquareMile": 1581.2,
             "censusFips": "0886117",
             "malePercentage": 50.10486577181208,
-            "femalePercentage": 49.89513422818792
+            "femalePercentage": 49.89513422818792,
+            "crawled": "2024-04-06 15:56:12.221406",
+            "crawled-city": "Woodmoor"
         },
         {
             "name": "Woodland Park",
@@ -58,7 +60,9 @@
             "populationPerSquareMile": 1198.0,
             "censusFips": "0886090",
             "malePercentage": 49.06565656565657,
-            "femalePercentage": 50.93434343434343
+            "femalePercentage": 50.93434343434343,
+            "crawled": "2024-04-06 15:56:13.541719",
+            "crawled-city": "Woodland Park"
         },
         {
             "name": "Windsor",
@@ -89,7 +93,9 @@
             "populationPerSquareMile": 1276.5,
             "censusFips": "0885485",
             "malePercentage": 49.21750825284265,
-            "femalePercentage": 50.78249174715735
+            "femalePercentage": 50.78249174715735,
+            "crawled": "2024-04-06 15:56:14.872637",
+            "crawled-city": "Windsor"
         },
         {
             "name": "Williamsburg",
@@ -107,7 +113,9 @@
             "blackPercent": 0.4,
             "indianPercent": 1.6,
             "asianPercent": 0.7,
-            "hispanicPercent": 9.7
+            "hispanicPercent": 9.7,
+            "crawled": "2024-04-06 15:56:16.614501",
+            "crawled-city": "Williamsburg"
         },
         {
             "name": "Wheat Ridge",
@@ -138,7 +146,9 @@
             "populationPerSquareMile": 3467.3,
             "censusFips": "0884440",
             "malePercentage": 48.77461571701957,
-            "femalePercentage": 51.22538428298043
+            "femalePercentage": 51.22538428298043,
+            "crawled": "2024-04-06 15:56:17.023841",
+            "crawled-city": "Wheat Ridge"
         },
         {
             "name": "Westminster",
@@ -169,7 +179,9 @@
             "populationPerSquareMile": 3682.7,
             "censusFips": "0883835",
             "malePercentage": 49.7734638960771,
-            "femalePercentage": 50.2265361039229
+            "femalePercentage": 50.2265361039229,
+            "crawled": "2024-04-06 15:56:17.880914",
+            "crawled-city": "Westminster"
         },
         {
             "name": "Westcreek",
@@ -187,7 +199,9 @@
             "blackPercent": 0.0,
             "indianPercent": 0.0,
             "asianPercent": 4.2,
-            "hispanicPercent": 6.7
+            "hispanicPercent": 6.7,
+            "crawled": "2024-04-06 15:56:20.063192",
+            "crawled-city": "Westcreek"
         },
         {
             "name": "West Pleasant View",
@@ -205,7 +219,9 @@
             "blackPercent": 1.8,
             "indianPercent": 1.1,
             "asianPercent": 2.7,
-            "hispanicPercent": 14.8
+            "hispanicPercent": 14.8,
+            "crawled": "2024-04-06 15:56:21.111972",
+            "crawled-city": "West Pleasant View"
         },
         {
             "name": "Welby",
@@ -223,7 +239,9 @@
             "blackPercent": 2.3,
             "indianPercent": 2.6,
             "asianPercent": 2.0,
-            "hispanicPercent": 59.4
+            "hispanicPercent": 59.4,
+            "crawled": "2024-04-06 15:56:21.486213",
+            "crawled-city": "Welby"
         },
         {
             "name": "Watkins",
@@ -241,7 +259,9 @@
             "blackPercent": 1.3,
             "indianPercent": 1.3,
             "asianPercent": 0.3,
-            "hispanicPercent": 16.9
+            "hispanicPercent": 16.9,
+            "crawled": "2024-04-06 15:57:26.692247",
+            "crawled-city": "Watkins"
         },
         {
             "name": "Victor",
@@ -259,7 +279,9 @@
             "blackPercent": 0.0,
             "indianPercent": 0.5,
             "asianPercent": 0.3,
-            "hispanicPercent": 2.4
+            "hispanicPercent": 2.4,
+            "crawled": "2024-04-06 15:57:27.593566",
+            "crawled-city": "Victor"
         },
         {
             "name": "Valmont",
@@ -277,7 +299,9 @@
             "blackPercent": 0.0,
             "indianPercent": 0.0,
             "asianPercent": 3.1,
-            "hispanicPercent": 4.7
+            "hispanicPercent": 4.7,
+            "crawled": "2024-04-06 15:57:28.602228",
+            "crawled-city": "Valmont"
         },
         {
             "name": "Upper Witter Gulch",
@@ -295,7 +319,9 @@
             "blackPercent": 0.3,
             "indianPercent": 0.0,
             "asianPercent": 1.1,
-            "hispanicPercent": 6.8
+            "hispanicPercent": 6.8,
+            "crawled": "2024-04-06 15:57:29.014562",
+            "crawled-city": "Upper Witter Gulch"
         },
         {
             "name": "Upper Bear Creek",
@@ -313,7 +339,9 @@
             "blackPercent": 0.2,
             "indianPercent": 0.4,
             "asianPercent": 0.2,
-            "hispanicPercent": 5.1
+            "hispanicPercent": 5.1,
+            "crawled": "2024-04-06 15:57:29.378600",
+            "crawled-city": "Upper Bear Creek"
         },
         {
             "name": "Twin Lakes",
@@ -342,7 +370,9 @@
             "populationPerSquareMile": 5003.6,
             "censusFips": "0879100",
             "malePercentage": 51.470588235294116,
-            "femalePercentage": 48.529411764705884
+            "femalePercentage": 48.529411764705884,
+            "crawled": "2024-04-06 15:57:29.815316",
+            "crawled-city": "Twin Lakes"
         },
         {
             "name": "Todd Creek",
@@ -360,7 +390,9 @@
             "blackPercent": 0.8,
             "indianPercent": 0.9,
             "asianPercent": 3.0,
-            "hispanicPercent": 15.5
+            "hispanicPercent": 15.5,
+            "crawled": "2024-04-06 15:57:30.550638",
+            "crawled-city": "Todd Creek"
         },
         {
             "name": "Timnath",
@@ -390,7 +422,9 @@
             "populationPerSquareMile": 988.1,
             "censusFips": "0877510",
             "malePercentage": 49.77647602898104,
-            "femalePercentage": 50.22352397101896
+            "femalePercentage": 50.22352397101896,
+            "crawled": "2024-04-06 15:57:31.049270",
+            "crawled-city": "Timnath"
         },
         {
             "name": "Thornton",
@@ -421,7 +455,9 @@
             "populationPerSquareMile": 3949.1,
             "censusFips": "0877290",
             "malePercentage": 49.65495851748469,
-            "femalePercentage": 50.34504148251531
+            "femalePercentage": 50.34504148251531,
+            "crawled": "2024-04-06 15:57:31.871291",
+            "crawled-city": "Thornton"
         },
         {
             "name": "The Pinery",
@@ -439,7 +475,9 @@
             "blackPercent": 0.9,
             "indianPercent": 0.4,
             "asianPercent": 1.8,
-            "hispanicPercent": 7.3
+            "hispanicPercent": 7.3,
+            "crawled": "2024-04-06 15:59:38.873983",
+            "crawled-city": "The Pinery"
         },
         {
             "name": "Tall Timber",
@@ -457,7 +495,9 @@
             "blackPercent": 0.0,
             "indianPercent": 0.0,
             "asianPercent": 1.6,
-            "hispanicPercent": 3.2
+            "hispanicPercent": 3.2,
+            "crawled": "2024-04-06 15:59:41.516716",
+            "crawled-city": "Tall Timber"
         },
         {
             "name": "Superior",
@@ -475,7 +515,9 @@
             "blackPercent": 1.1,
             "indianPercent": 0.3,
             "asianPercent": 13.7,
-            "hispanicPercent": 8.1
+            "hispanicPercent": 8.1,
+            "crawled": "2024-04-06 15:59:43.846328",
+            "crawled-city": "Superior"
         },
         {
             "name": "Sunshine",
@@ -493,7 +535,9 @@
             "blackPercent": 0.0,
             "indianPercent": 0.5,
             "asianPercent": 1.0,
-            "hispanicPercent": 1.0
+            "hispanicPercent": 1.0,
+            "crawled": "2024-04-06 15:59:44.265205",
+            "crawled-city": "Sunshine"
         },
         {
             "name": "Sugarloaf",
@@ -511,7 +555,9 @@
             "blackPercent": 0.4,
             "indianPercent": 0.0,
             "asianPercent": 0.7,
-            "hispanicPercent": 3.3
+            "hispanicPercent": 3.3,
+            "crawled": "2024-04-06 15:59:46.408879",
+            "crawled-city": "Sugarloaf"
         },
         {
             "name": "Stratmoor",
@@ -530,7 +576,9 @@
             "blackPercent": 9.4,
             "indianPercent": 2.3,
             "asianPercent": 2.4,
-            "hispanicPercent": 32.0
+            "hispanicPercent": 32.0,
+            "crawled": "2024-04-06 15:59:47.288032",
+            "crawled-city": "Stratmoor"
         },
         {
             "name": "Stonegate",
@@ -548,7 +596,9 @@
             "blackPercent": 1.2,
             "indianPercent": 0.3,
             "asianPercent": 4.6,
-            "hispanicPercent": 8.9
+            "hispanicPercent": 8.9,
+            "crawled": "2024-04-06 15:59:48.065062",
+            "crawled-city": "Stonegate"
         },
         {
             "name": "Sterling Ranch",
@@ -566,7 +616,9 @@
             "blackPercent": 0.9,
             "indianPercent": 0.3,
             "asianPercent": 5.6,
-            "hispanicPercent": 10.3
+            "hispanicPercent": 10.3,
+            "crawled": "2024-04-06 15:59:50.772390",
+            "crawled-city": "Sterling Ranch"
         },
         {
             "name": "Stepping Stone",
@@ -584,7 +636,9 @@
             "blackPercent": 0.6,
             "indianPercent": 0.2,
             "asianPercent": 20.7,
-            "hispanicPercent": 6.3
+            "hispanicPercent": 6.3,
+            "crawled": "2024-04-06 15:59:51.222237",
+            "crawled-city": "Stepping Stone"
         },
         {
             "name": "St. Ann Highlands",
@@ -602,7 +656,9 @@
             "blackPercent": 0.0,
             "indianPercent": 0.0,
             "asianPercent": 1.2,
-            "hispanicPercent": 3.1
+            "hispanicPercent": 3.1,
+            "crawled": "2024-04-06 16:00:36.992433",
+            "crawled-city": "St. Ann Highlands"
         },
         {
             "name": "Sierra Ridge",
@@ -620,7 +676,9 @@
             "blackPercent": 2.8,
             "indianPercent": 0.9,
             "asianPercent": 27.5,
-            "hispanicPercent": 9.8
+            "hispanicPercent": 9.8,
+            "crawled": "2024-04-06 16:00:37.553661",
+            "crawled-city": "Sierra Ridge"
         },
         {
             "name": "Sherrelwood",
@@ -649,7 +707,9 @@
             "populationPerSquareMile": 7880.3,
             "censusFips": "0869810",
             "malePercentage": 51.20657374661951,
-            "femalePercentage": 48.79342625338049
+            "femalePercentage": 48.79342625338049,
+            "crawled": "2024-04-06 16:00:38.040735",
+            "crawled-city": "Sherrelwood"
         },
         {
             "name": "Sheridan",
@@ -680,7 +740,9 @@
             "populationPerSquareMile": 2746.3,
             "censusFips": "0869645",
             "malePercentage": 58.18181818181818,
-            "femalePercentage": 41.81818181818182
+            "femalePercentage": 41.81818181818182,
+            "crawled": "2024-04-06 16:00:38.448354",
+            "crawled-city": "Sheridan"
         },
         {
             "name": "Shaw Heights",
@@ -698,7 +760,9 @@
             "blackPercent": 1.2,
             "indianPercent": 1.5,
             "asianPercent": 5.7,
-            "hispanicPercent": 39.5
+            "hispanicPercent": 39.5,
+            "crawled": "2024-04-06 16:00:38.863906",
+            "crawled-city": "Shaw Heights"
         },
         {
             "name": "Severance",
@@ -716,7 +780,9 @@
             "blackPercent": 0.8,
             "indianPercent": 0.7,
             "asianPercent": 1.0,
-            "hispanicPercent": 14.1
+            "hispanicPercent": 14.1,
+            "crawled": "2024-04-06 16:00:39.245606",
+            "crawled-city": "Severance"
         },
         {
             "name": "Seven Hills",
@@ -734,7 +800,9 @@
             "blackPercent": 0.0,
             "indianPercent": 0.0,
             "asianPercent": 2.3,
-            "hispanicPercent": 1.6
+            "hispanicPercent": 1.6,
+            "crawled": "2024-04-06 16:00:39.685208",
+            "crawled-city": "Seven Hills"
         },
         {
             "name": "Sedalia",
@@ -752,7 +820,9 @@
             "blackPercent": 0.0,
             "indianPercent": 0.0,
             "asianPercent": 0.0,
-            "hispanicPercent": 11.9
+            "hispanicPercent": 11.9,
+            "crawled": "2024-04-06 16:00:40.110685",
+            "crawled-city": "Sedalia"
         },
         {
             "name": "Security-Widefield",
@@ -770,7 +840,9 @@
             "blackPercent": 9.2,
             "indianPercent": 1.4,
             "asianPercent": 2.9,
-            "hispanicPercent": 21.1
+            "hispanicPercent": 21.1,
+            "crawled": "2024-04-06 16:00:40.470196",
+            "crawled-city": "Security-Widefield"
         },
         {
             "name": "Salt Creek",
@@ -789,7 +861,9 @@
             "blackPercent": 0.6,
             "indianPercent": 4.7,
             "asianPercent": 0.2,
-            "hispanicPercent": 80.9
+            "hispanicPercent": 80.9,
+            "crawled": "2024-04-06 16:01:28.756810",
+            "crawled-city": "Salt Creek"
         },
         {
             "name": "Roxborough Park",
@@ -807,7 +881,9 @@
             "blackPercent": 0.6,
             "indianPercent": 0.8,
             "asianPercent": 2.1,
-            "hispanicPercent": 9.7
+            "hispanicPercent": 9.7,
+            "crawled": "2024-04-06 16:01:29.541920",
+            "crawled-city": "Roxborough Park"
         },
         {
             "name": "Rockvale",
@@ -825,7 +901,9 @@
             "blackPercent": 0.4,
             "indianPercent": 1.4,
             "asianPercent": 0.2,
-            "hispanicPercent": 10.8
+            "hispanicPercent": 10.8,
+            "crawled": "2024-04-06 16:01:30.365133",
+            "crawled-city": "Rockvale"
         },
         {
             "name": "Rock Creek Park",
@@ -844,7 +922,9 @@
             "blackPercent": 0.0,
             "indianPercent": 2.9,
             "asianPercent": 1.5,
-            "hispanicPercent": 8.8
+            "hispanicPercent": 8.8,
+            "crawled": "2024-04-06 16:01:30.779201",
+            "crawled-city": "Rock Creek Park"
         },
         {
             "name": "Pueblo West",
@@ -862,7 +942,9 @@
             "blackPercent": 1.3,
             "indianPercent": 1.3,
             "asianPercent": 1.3,
-            "hispanicPercent": 25.4
+            "hispanicPercent": 25.4,
+            "crawled": "2024-04-06 16:01:31.272707",
+            "crawled-city": "Pueblo West"
         },
         {
             "name": "Pueblo",
@@ -893,7 +975,9 @@
             "populationPerSquareMile": 2020.1,
             "censusFips": "0862000",
             "malePercentage": 48.89699309950302,
-            "femalePercentage": 51.10300690049698
+            "femalePercentage": 51.10300690049698,
+            "crawled": "2024-04-06 16:01:32.300565",
+            "crawled-city": "Pueblo"
         },
         {
             "name": "Ponderosa Park",
@@ -911,7 +995,9 @@
             "blackPercent": 0.4,
             "indianPercent": 0.3,
             "asianPercent": 0.8,
-            "hispanicPercent": 7.4
+            "hispanicPercent": 7.4,
+            "crawled": "2024-04-06 16:01:33.266574",
+            "crawled-city": "Ponderosa Park"
         },
         {
             "name": "Platteville",
@@ -930,7 +1016,9 @@
             "blackPercent": 0.3,
             "indianPercent": 1.8,
             "asianPercent": 0.6,
-            "hispanicPercent": 43.3
+            "hispanicPercent": 43.3,
+            "crawled": "2024-04-06 16:01:34.685943",
+            "crawled-city": "Platteville"
         },
         {
             "name": "Pine Valley",
@@ -948,7 +1036,9 @@
             "blackPercent": 0.0,
             "indianPercent": 0.0,
             "asianPercent": 0.6,
-            "hispanicPercent": 2.2
+            "hispanicPercent": 2.2,
+            "crawled": "2024-04-06 16:01:35.073676",
+            "crawled-city": "Pine Valley"
         },
         {
             "name": "Pine Brook Hill",
@@ -966,7 +1056,9 @@
             "blackPercent": 0.2,
             "indianPercent": 0.2,
             "asianPercent": 1.7,
-            "hispanicPercent": 4.5
+            "hispanicPercent": 4.5,
+            "crawled": "2024-04-06 16:01:35.491004",
+            "crawled-city": "Pine Brook Hill"
         },
         {
             "name": "Pierce",
@@ -985,7 +1077,9 @@
             "blackPercent": 0.0,
             "indianPercent": 0.7,
             "asianPercent": 0.5,
-            "hispanicPercent": 25.6
+            "hispanicPercent": 25.6,
+            "crawled": "2024-04-06 16:01:36.105060",
+            "crawled-city": "Pierce"
         },
         {
             "name": "Perry Park",
@@ -1004,7 +1098,9 @@
             "blackPercent": 0.4,
             "indianPercent": 0.6,
             "asianPercent": 1.2,
-            "hispanicPercent": 5.5
+            "hispanicPercent": 5.5,
+            "crawled": "2024-04-06 16:01:36.601666",
+            "crawled-city": "Perry Park"
         },
         {
             "name": "Penrose",
@@ -1023,7 +1119,9 @@
             "blackPercent": 0.2,
             "indianPercent": 1.4,
             "asianPercent": 0.8,
-            "hispanicPercent": 9.5
+            "hispanicPercent": 9.5,
+            "crawled": "2024-04-06 16:01:37.195630",
+            "crawled-city": "Penrose"
         },
         {
             "name": "Parker",
@@ -1054,7 +1152,9 @@
             "populationPerSquareMile": 2619.7,
             "censusFips": "0857630",
             "malePercentage": 49.63597210828548,
-            "femalePercentage": 50.36402789171452
+            "femalePercentage": 50.36402789171452,
+            "crawled": "2024-04-06 16:01:37.616062",
+            "crawled-city": "Parker"
         },
         {
             "name": "Park Center",
@@ -1072,7 +1172,9 @@
             "blackPercent": 0.6,
             "indianPercent": 1.2,
             "asianPercent": 0.2,
-            "hispanicPercent": 11.0
+            "hispanicPercent": 11.0,
+            "crawled": "2024-04-06 16:01:39.583170",
+            "crawled-city": "Park Center"
         },
         {
             "name": "Paragon Estates",
@@ -1090,7 +1192,9 @@
             "blackPercent": 1.0,
             "indianPercent": 0.4,
             "asianPercent": 2.7,
-            "hispanicPercent": 6.2
+            "hispanicPercent": 6.2,
+            "crawled": "2024-04-06 16:01:40.436029",
+            "crawled-city": "Paragon Estates"
         },
         {
             "name": "Palmer Lake",
@@ -1108,7 +1212,9 @@
             "blackPercent": 0.7,
             "indianPercent": 0.6,
             "asianPercent": 1.0,
-            "hispanicPercent": 9.1
+            "hispanicPercent": 9.1,
+            "crawled": "2024-04-06 16:01:40.812911",
+            "crawled-city": "Palmer Lake"
         },
         {
             "name": "Northglenn",
@@ -1139,7 +1245,9 @@
             "populationPerSquareMile": 5181.5,
             "censusFips": "0854330",
             "malePercentage": 50.20586924025071,
-            "femalePercentage": 49.79413075974929
+            "femalePercentage": 49.79413075974929,
+            "crawled": "2024-04-06 16:01:41.201488",
+            "crawled-city": "Northglenn"
         },
         {
             "name": "North Washington",
@@ -1157,7 +1265,9 @@
             "blackPercent": 5.3,
             "indianPercent": 4.4,
             "asianPercent": 1.9,
-            "hispanicPercent": 55.4
+            "hispanicPercent": 55.4,
+            "crawled": "2024-04-06 16:01:41.596045",
+            "crawled-city": "North Washington"
         },
         {
             "name": "Niwot",
@@ -1175,7 +1285,9 @@
             "blackPercent": 0.8,
             "indianPercent": 0.4,
             "asianPercent": 4.2,
-            "hispanicPercent": 5.1
+            "hispanicPercent": 5.1,
+            "crawled": "2024-04-06 16:01:42.991323",
+            "crawled-city": "Niwot"
         },
         {
             "name": "Mountain View",
@@ -1193,7 +1305,9 @@
             "blackPercent": 1.7,
             "indianPercent": 0.7,
             "asianPercent": 2.0,
-            "hispanicPercent": 25.0
+            "hispanicPercent": 25.0,
+            "crawled": "2024-04-06 16:01:43.483683",
+            "crawled-city": "Mountain View"
         },
         {
             "name": "Mountain Meadows",
@@ -1211,7 +1325,9 @@
             "blackPercent": 0.0,
             "indianPercent": 1.7,
             "asianPercent": 0.8,
-            "hispanicPercent": 5.5
+            "hispanicPercent": 5.5,
+            "crawled": "2024-04-06 16:01:45.966780",
+            "crawled-city": "Mountain Meadows"
         },
         {
             "name": "Morrison",
@@ -1229,7 +1345,9 @@
             "blackPercent": 0.0,
             "indianPercent": 1.3,
             "asianPercent": 0.8,
-            "hispanicPercent": 6.6
+            "hispanicPercent": 6.6,
+            "crawled": "2024-04-06 16:01:46.517916",
+            "crawled-city": "Morrison"
         },
         {
             "name": "Monument",
@@ -1248,7 +1366,9 @@
             "blackPercent": 1.5,
             "indianPercent": 0.5,
             "asianPercent": 2.4,
-            "hispanicPercent": 9.0
+            "hispanicPercent": 9.0,
+            "crawled": "2024-04-06 16:01:46.963098",
+            "crawled-city": "Monument"
         },
         {
             "name": "Milliken",
@@ -1267,7 +1387,9 @@
             "blackPercent": 0.4,
             "indianPercent": 1.1,
             "asianPercent": 0.5,
-            "hispanicPercent": 27.5
+            "hispanicPercent": 27.5,
+            "crawled": "2024-04-06 16:01:48.505699",
+            "crawled-city": "Milliken"
         },
         {
             "name": "Midland",
@@ -1285,7 +1407,9 @@
             "blackPercent": 0.0,
             "indianPercent": 0.0,
             "asianPercent": 0.0,
-            "hispanicPercent": 8.8
+            "hispanicPercent": 8.8,
+            "crawled": "2024-04-06 16:01:49.210152",
+            "crawled-city": "Midland"
         },
         {
             "name": "Meridian Village",
@@ -1303,7 +1427,9 @@
             "blackPercent": 1.5,
             "indianPercent": 0.2,
             "asianPercent": 16.4,
-            "hispanicPercent": 7.1
+            "hispanicPercent": 7.1,
+            "crawled": "2024-04-06 16:01:50.663960",
+            "crawled-city": "Meridian Village"
         },
         {
             "name": "Meridian",
@@ -1321,7 +1447,9 @@
             "blackPercent": 3.7,
             "indianPercent": 0.6,
             "asianPercent": 17.4,
-            "hispanicPercent": 11.2
+            "hispanicPercent": 11.2,
+            "crawled": "2024-04-06 16:01:51.166962",
+            "crawled-city": "Meridian"
         },
         {
             "name": "Mead",
@@ -1339,7 +1467,9 @@
             "blackPercent": 0.3,
             "indianPercent": 0.7,
             "asianPercent": 1.2,
-            "hispanicPercent": 13.1
+            "hispanicPercent": 13.1,
+            "crawled": "2024-04-06 16:01:51.658680",
+            "crawled-city": "Mead"
         },
         {
             "name": "Manitou Springs",
@@ -1357,7 +1487,9 @@
             "blackPercent": 1.2,
             "indianPercent": 0.8,
             "asianPercent": 1.1,
-            "hispanicPercent": 6.9
+            "hispanicPercent": 6.9,
+            "crawled": "2024-04-06 16:01:52.158785",
+            "crawled-city": "Manitou Springs"
         },
         {
             "name": "Lyons",
@@ -1375,7 +1507,9 @@
             "blackPercent": 0.2,
             "indianPercent": 0.3,
             "asianPercent": 1.0,
-            "hispanicPercent": 5.3
+            "hispanicPercent": 5.3,
+            "crawled": "2024-04-06 16:01:52.584941",
+            "crawled-city": "Lyons"
         },
         {
             "name": "Loveland",
@@ -1405,7 +1539,9 @@
             "populationPerSquareMile": 2219.1,
             "censusFips": "0846465",
             "malePercentage": 48.554557595119014,
-            "femalePercentage": 51.445442404880986
+            "femalePercentage": 51.445442404880986,
+            "crawled": "2024-04-06 16:01:53.006421",
+            "crawled-city": "Loveland"
         },
         {
             "name": "Louviers",
@@ -1423,7 +1559,9 @@
             "blackPercent": 0.7,
             "indianPercent": 0.7,
             "asianPercent": 1.4,
-            "hispanicPercent": 8.9
+            "hispanicPercent": 8.9,
+            "crawled": "2024-04-06 16:01:55.148549",
+            "crawled-city": "Louviers"
         },
         {
             "name": "Louisville",
@@ -1453,7 +1591,9 @@
             "populationPerSquareMile": 2665.2,
             "censusFips": "0846355",
             "malePercentage": 48.94469047394705,
-            "femalePercentage": 51.05530952605295
+            "femalePercentage": 51.05530952605295,
+            "crawled": "2024-04-06 16:01:55.611754",
+            "crawled-city": "Louisville"
         },
         {
             "name": "Longmont",
@@ -1483,7 +1623,9 @@
             "populationPerSquareMile": 3436.1,
             "censusFips": "0845970",
             "malePercentage": 49.60711938109926,
-            "femalePercentage": 50.39288061890074
+            "femalePercentage": 50.39288061890074,
+            "crawled": "2024-04-06 16:01:56.689642",
+            "crawled-city": "Longmont"
         },
         {
             "name": "Lone Tree",
@@ -1513,7 +1655,9 @@
             "populationPerSquareMile": 1453.2,
             "censusFips": "0845955",
             "malePercentage": 49.36504595523749,
-            "femalePercentage": 50.63495404476251
+            "femalePercentage": 50.63495404476251,
+            "crawled": "2024-04-06 16:01:57.747400",
+            "crawled-city": "Lone Tree"
         },
         {
             "name": "Lochbuie",
@@ -1531,7 +1675,9 @@
             "blackPercent": 1.3,
             "indianPercent": 1.8,
             "asianPercent": 1.4,
-            "hispanicPercent": 45.5
+            "hispanicPercent": 45.5,
+            "crawled": "2024-04-06 16:01:58.888401",
+            "crawled-city": "Lochbuie"
         },
         {
             "name": "Littleton",
@@ -1561,7 +1707,9 @@
             "populationPerSquareMile": 3614.9,
             "censusFips": "0845255",
             "malePercentage": 48.38561289757294,
-            "femalePercentage": 51.61438710242706
+            "femalePercentage": 51.61438710242706,
+            "crawled": "2024-04-06 16:01:59.548457",
+            "crawled-city": "Littleton"
         },
         {
             "name": "Lincoln Park",
@@ -1579,7 +1727,9 @@
             "blackPercent": 0.4,
             "indianPercent": 0.7,
             "asianPercent": 0.3,
-            "hispanicPercent": 7.9
+            "hispanicPercent": 7.9,
+            "crawled": "2024-04-06 16:02:01.666740",
+            "crawled-city": "Lincoln Park"
         },
         {
             "name": "Leyner",
@@ -1597,7 +1747,9 @@
             "blackPercent": 5.0,
             "indianPercent": 2.5,
             "asianPercent": 5.0,
-            "hispanicPercent": 10.0
+            "hispanicPercent": 10.0,
+            "crawled": "2024-04-06 16:02:02.138728",
+            "crawled-city": "Leyner"
         },
         {
             "name": "Lazy Acres",
@@ -1615,7 +1767,9 @@
             "blackPercent": 0.3,
             "indianPercent": 0.0,
             "asianPercent": 0.6,
-            "hispanicPercent": 3.3
+            "hispanicPercent": 3.3,
+            "crawled": "2024-04-06 16:02:02.457542",
+            "crawled-city": "Lazy Acres"
         },
         {
             "name": "Larkspur",
@@ -1633,7 +1787,9 @@
             "blackPercent": 1.5,
             "indianPercent": 0.5,
             "asianPercent": 0.0,
-            "hispanicPercent": 12.1
+            "hispanicPercent": 12.1,
+            "crawled": "2024-04-06 16:02:02.865413",
+            "crawled-city": "Larkspur"
         },
         {
             "name": "Laporte",
@@ -1651,7 +1807,9 @@
             "blackPercent": 0.2,
             "indianPercent": 1.0,
             "asianPercent": 0.8,
-            "hispanicPercent": 10.1
+            "hispanicPercent": 10.1,
+            "crawled": "2024-04-06 16:02:03.656927",
+            "crawled-city": "Laporte"
         },
         {
             "name": "Lakewood",
@@ -1681,7 +1839,9 @@
             "populationPerSquareMile": 3588.1,
             "censusFips": "0843000",
             "malePercentage": 49.51084726638629,
-            "femalePercentage": 50.48915273361371
+            "femalePercentage": 50.48915273361371,
+            "crawled": "2024-04-06 16:02:04.018894",
+            "crawled-city": "Lakewood"
         },
         {
             "name": "Lakeside",
@@ -1699,7 +1859,9 @@
             "blackPercent": 0.0,
             "indianPercent": 0.0,
             "asianPercent": 6.3,
-            "hispanicPercent": 18.8
+            "hispanicPercent": 18.8,
+            "crawled": "2024-04-06 16:02:05.027591",
+            "crawled-city": "Lakeside"
         },
         {
             "name": "Lafayette",
@@ -1729,7 +1891,9 @@
             "populationPerSquareMile": 3297.3,
             "censusFips": "0841835",
             "malePercentage": 49.06448324619381,
-            "femalePercentage": 50.93551675380619
+            "femalePercentage": 50.93551675380619,
+            "crawled": "2024-04-06 16:02:06.523534",
+            "crawled-city": "Lafayette"
         },
         {
             "name": "La Salle",
@@ -1747,7 +1911,9 @@
             "blackPercent": 0.9,
             "indianPercent": 1.1,
             "asianPercent": 0.3,
-            "hispanicPercent": 36.6
+            "hispanicPercent": 36.6,
+            "crawled": "2024-04-06 16:02:07.555505",
+            "crawled-city": "La Salle"
         },
         {
             "name": "Kittredge",
@@ -1765,7 +1931,9 @@
             "blackPercent": 0.8,
             "indianPercent": 0.8,
             "asianPercent": 0.4,
-            "hispanicPercent": 4.8
+            "hispanicPercent": 4.8,
+            "crawled": "2024-04-06 16:02:09.589482",
+            "crawled-city": "Kittredge"
         },
         {
             "name": "Kersey",
@@ -1783,7 +1951,9 @@
             "blackPercent": 0.1,
             "indianPercent": 2.3,
             "asianPercent": 0.1,
-            "hispanicPercent": 30.6
+            "hispanicPercent": 30.6,
+            "crawled": "2024-04-06 16:02:09.984088",
+            "crawled-city": "Kersey"
         },
         {
             "name": "Ken Caryl",
@@ -1812,7 +1982,9 @@
             "populationPerSquareMile": 3438.5,
             "censusFips": "0840377",
             "malePercentage": 49.22658306468309,
-            "femalePercentage": 50.77341693531691
+            "femalePercentage": 50.77341693531691,
+            "crawled": "2024-04-06 16:02:10.403872",
+            "crawled-city": "Ken Caryl"
         },
         {
             "name": "Keenesburg",
@@ -1830,7 +2002,9 @@
             "blackPercent": 1.6,
             "indianPercent": 0.6,
             "asianPercent": 0.1,
-            "hispanicPercent": 13.2
+            "hispanicPercent": 13.2,
+            "crawled": "2024-04-06 16:02:10.816699",
+            "crawled-city": "Keenesburg"
         },
         {
             "name": "Johnstown",
@@ -1860,7 +2034,9 @@
             "populationPerSquareMile": 1254.6,
             "censusFips": "0839855",
             "malePercentage": 50.32653297116107,
-            "femalePercentage": 49.67346702883893
+            "femalePercentage": 49.67346702883893,
+            "crawled": "2024-04-06 16:02:11.214525",
+            "crawled-city": "Johnstown"
         },
         {
             "name": "Jamestown",
@@ -1878,7 +2054,9 @@
             "blackPercent": 0.0,
             "indianPercent": 0.4,
             "asianPercent": 0.0,
-            "hispanicPercent": 2.0
+            "hispanicPercent": 2.0,
+            "crawled": "2024-04-06 16:02:12.158819",
+            "crawled-city": "Jamestown"
         },
         {
             "name": "Inverness",
@@ -1896,7 +2074,9 @@
             "blackPercent": 5.4,
             "indianPercent": 0.5,
             "asianPercent": 14.2,
-            "hispanicPercent": 11.7
+            "hispanicPercent": 11.7,
+            "crawled": "2024-04-06 16:02:13.186819",
+            "crawled-city": "Inverness"
         },
         {
             "name": "Indian Hills",
@@ -1914,7 +2094,9 @@
             "blackPercent": 0.1,
             "indianPercent": 0.5,
             "asianPercent": 1.1,
-            "hispanicPercent": 5.0
+            "hispanicPercent": 5.0,
+            "crawled": "2024-04-06 16:02:14.002452",
+            "crawled-city": "Indian Hills"
         },
         {
             "name": "Idledale",
@@ -1932,7 +2114,9 @@
             "blackPercent": 0.0,
             "indianPercent": 0.0,
             "asianPercent": 0.4,
-            "hispanicPercent": 4.5
+            "hispanicPercent": 4.5,
+            "crawled": "2024-04-06 16:02:14.486201",
+            "crawled-city": "Idledale"
         },
         {
             "name": "Hudson",
@@ -1950,7 +2134,9 @@
             "blackPercent": 0.4,
             "indianPercent": 0.8,
             "asianPercent": 0.6,
-            "hispanicPercent": 33.3
+            "hispanicPercent": 33.3,
+            "crawled": "2024-04-06 16:02:14.922323",
+            "crawled-city": "Hudson"
         },
         {
             "name": "Holly Hills",
@@ -1968,7 +2154,9 @@
             "blackPercent": 2.2,
             "indianPercent": 0.3,
             "asianPercent": 3.7,
-            "hispanicPercent": 8.2
+            "hispanicPercent": 8.2,
+            "crawled": "2024-04-06 16:02:15.456783",
+            "crawled-city": "Holly Hills"
         },
         {
             "name": "Highlands Ranch",
@@ -1997,7 +2185,9 @@
             "populationPerSquareMile": 4262.4,
             "censusFips": "0836410",
             "malePercentage": 48.99365840454739,
-            "femalePercentage": 51.00634159545261
+            "femalePercentage": 51.00634159545261,
+            "crawled": "2024-04-06 16:02:18.412183",
+            "crawled-city": "Highlands Ranch"
         },
         {
             "name": "Hidden Lake",
@@ -2015,7 +2205,9 @@
             "blackPercent": 0.0,
             "indianPercent": 0.0,
             "asianPercent": 0.0,
-            "hispanicPercent": 8.3
+            "hispanicPercent": 8.3,
+            "crawled": "2024-04-06 16:02:19.324111",
+            "crawled-city": "Hidden Lake"
         },
         {
             "name": "Gunbarrel",
@@ -2033,7 +2225,9 @@
             "blackPercent": 0.9,
             "indianPercent": 0.3,
             "asianPercent": 3.3,
-            "hispanicPercent": 6.1
+            "hispanicPercent": 6.1,
+            "crawled": "2024-04-06 16:02:19.784586",
+            "crawled-city": "Gunbarrel"
         },
         {
             "name": "Greenwood Village",
@@ -2063,7 +2257,9 @@
             "populationPerSquareMile": 1898.0,
             "censusFips": "0833035",
             "malePercentage": 49.42960933018928,
-            "femalePercentage": 50.57039066981072
+            "femalePercentage": 50.57039066981072,
+            "crawled": "2024-04-06 16:02:20.643065",
+            "crawled-city": "Greenwood Village"
         },
         {
             "name": "Green Mountain Falls",
@@ -2081,7 +2277,9 @@
             "blackPercent": 1.2,
             "indianPercent": 0.9,
             "asianPercent": 1.5,
-            "hispanicPercent": 5.0
+            "hispanicPercent": 5.0,
+            "crawled": "2024-04-06 16:02:21.157757",
+            "crawled-city": "Green Mountain Falls"
         },
         {
             "name": "Greeley",
@@ -2111,7 +2309,9 @@
             "populationPerSquareMile": 2223.3,
             "censusFips": "0832155",
             "malePercentage": 49.49492164161956,
-            "femalePercentage": 50.50507835838044
+            "femalePercentage": 50.50507835838044,
+            "crawled": "2024-04-06 16:02:21.658430",
+            "crawled-city": "Greeley"
         },
         {
             "name": "Grand View Estates",
@@ -2129,7 +2329,9 @@
             "blackPercent": 2.0,
             "indianPercent": 0.3,
             "asianPercent": 1.3,
-            "hispanicPercent": 9.3
+            "hispanicPercent": 9.3,
+            "crawled": "2024-04-06 16:02:23.825422",
+            "crawled-city": "Grand View Estates"
         },
         {
             "name": "Goldfield",
@@ -2147,7 +2349,9 @@
             "blackPercent": 0.0,
             "indianPercent": 3.2,
             "asianPercent": 0.0,
-            "hispanicPercent": 11.1
+            "hispanicPercent": 11.1,
+            "crawled": "2024-04-06 16:02:25.221957",
+            "crawled-city": "Goldfield"
         },
         {
             "name": "Golden",
@@ -2177,7 +2381,9 @@
             "populationPerSquareMile": 2117.4,
             "censusFips": "0830835",
             "malePercentage": 53.94382077552821,
-            "femalePercentage": 46.05617922447179
+            "femalePercentage": 46.05617922447179,
+            "crawled": "2024-04-06 16:02:26.080137",
+            "crawled-city": "Golden"
         },
         {
             "name": "Gold Hill",
@@ -2207,7 +2413,9 @@
             "populationPerSquareMile": 2117.4,
             "censusFips": "0830835",
             "malePercentage": 61.92660550458716,
-            "femalePercentage": 38.07339449541284
+            "femalePercentage": 38.07339449541284,
+            "crawled": "2024-04-06 16:02:26.907484",
+            "crawled-city": "Gold Hill"
         },
         {
             "name": "Gleneagle",
@@ -2225,7 +2433,9 @@
             "blackPercent": 2.4,
             "indianPercent": 0.5,
             "asianPercent": 3.9,
-            "hispanicPercent": 8.1
+            "hispanicPercent": 8.1,
+            "crawled": "2024-04-06 16:02:27.922776",
+            "crawled-city": "Gleneagle"
         },
         {
             "name": "Glendale",
@@ -2243,7 +2453,9 @@
             "blackPercent": 1.6,
             "indianPercent": 0.0,
             "asianPercent": 0.0,
-            "hispanicPercent": 4.7
+            "hispanicPercent": 4.7,
+            "crawled": "2024-04-06 16:02:30.629740",
+            "crawled-city": "Glendale"
         },
         {
             "name": "Gilcrest",
@@ -2261,7 +2473,9 @@
             "blackPercent": 0.3,
             "indianPercent": 1.0,
             "asianPercent": 0.5,
-            "hispanicPercent": 52.4
+            "hispanicPercent": 52.4,
+            "crawled": "2024-04-06 16:02:33.387072",
+            "crawled-city": "Gilcrest"
         },
         {
             "name": "Genesee",
@@ -2279,7 +2493,9 @@
             "blackPercent": 0.3,
             "indianPercent": 0.4,
             "asianPercent": 2.7,
-            "hispanicPercent": 4.3
+            "hispanicPercent": 4.3,
+            "crawled": "2024-04-06 16:02:33.865119",
+            "crawled-city": "Genesee"
         },
         {
             "name": "Garden City",
@@ -2297,7 +2513,9 @@
             "blackPercent": 1.2,
             "indianPercent": 5.5,
             "asianPercent": 0.8,
-            "hispanicPercent": 71.7
+            "hispanicPercent": 71.7,
+            "crawled": "2024-04-06 16:02:34.379620",
+            "crawled-city": "Garden City"
         },
         {
             "name": "Frederick",
@@ -2315,7 +2533,9 @@
             "blackPercent": 0.7,
             "indianPercent": 0.6,
             "asianPercent": 3.5,
-            "hispanicPercent": 16.4
+            "hispanicPercent": 16.4,
+            "crawled": "2024-04-06 16:02:34.761807",
+            "crawled-city": "Frederick"
         },
         {
             "name": "Franktown",
@@ -2333,7 +2553,9 @@
             "blackPercent": 0.2,
             "indianPercent": 1.0,
             "asianPercent": 1.2,
-            "hispanicPercent": 6.6
+            "hispanicPercent": 6.6,
+            "crawled": "2024-04-06 16:02:35.268367",
+            "crawled-city": "Franktown"
         },
         {
             "name": "Foxfield",
@@ -2351,7 +2573,9 @@
             "blackPercent": 2.0,
             "indianPercent": 0.1,
             "asianPercent": 8.8,
-            "hispanicPercent": 7.2
+            "hispanicPercent": 7.2,
+            "crawled": "2024-04-06 16:02:37.188359",
+            "crawled-city": "Foxfield"
         },
         {
             "name": "Four Square Mile",
@@ -2379,7 +2603,9 @@
             "populationPerSquareMile": 8464.8,
             "censusFips": "0827950",
             "malePercentage": 49.44036376355369,
-            "femalePercentage": 50.55963623644631
+            "femalePercentage": 50.55963623644631,
+            "crawled": "2024-04-06 16:02:38.876502",
+            "crawled-city": "Four Square Mile"
         },
         {
             "name": "Fountain",
@@ -2409,7 +2635,9 @@
             "populationPerSquareMile": 1324.5,
             "censusFips": "0827865",
             "malePercentage": 50.07717602845447,
-            "femalePercentage": 49.92282397154553
+            "femalePercentage": 49.92282397154553,
+            "crawled": "2024-04-06 16:02:39.370582",
+            "crawled-city": "Fountain"
         },
         {
             "name": "Fort Lupton",
@@ -2439,7 +2667,9 @@
             "populationPerSquareMile": 654.9,
             "censusFips": "0827700",
             "malePercentage": 49.7171590194846,
-            "femalePercentage": 50.2828409805154
+            "femalePercentage": 50.2828409805154,
+            "crawled": "2024-04-06 16:02:40.727705",
+            "crawled-city": "Fort Lupton"
         },
         {
             "name": "Fort Collins",
@@ -2469,7 +2699,9 @@
             "populationPerSquareMile": 2968.1,
             "censusFips": "0827425",
             "malePercentage": 49.59484129321006,
-            "femalePercentage": 50.40515870678994
+            "femalePercentage": 50.40515870678994,
+            "crawled": "2024-04-06 16:02:41.216969",
+            "crawled-city": "Fort Collins"
         },
         {
             "name": "Fort Carson",
@@ -2498,7 +2730,9 @@
             "populationPerSquareMile": 632.6,
             "censusFips": "0827370",
             "malePercentage": 65.26875035324704,
-            "femalePercentage": 34.73124964675296
+            "femalePercentage": 34.73124964675296,
+            "crawled": "2024-04-06 16:02:42.271611",
+            "crawled-city": "Fort Carson"
         },
         {
             "name": "Floyd Hill",
@@ -2516,7 +2750,9 @@
             "blackPercent": 0.3,
             "indianPercent": 0.9,
             "asianPercent": 1.7,
-            "hispanicPercent": 6.2
+            "hispanicPercent": 6.2,
+            "crawled": "2024-04-06 16:02:42.717348",
+            "crawled-city": "Floyd Hill"
         },
         {
             "name": "Florissant",
@@ -2534,7 +2770,9 @@
             "blackPercent": 0.0,
             "indianPercent": 0.8,
             "asianPercent": 2.3,
-            "hispanicPercent": 6.3
+            "hispanicPercent": 6.3,
+            "crawled": "2024-04-06 16:02:43.170790",
+            "crawled-city": "Florissant"
         },
         {
             "name": "Florence",
@@ -2552,7 +2790,9 @@
             "blackPercent": 0.7,
             "indianPercent": 1.5,
             "asianPercent": 0.6,
-            "hispanicPercent": 13.9
+            "hispanicPercent": 13.9,
+            "crawled": "2024-04-06 16:02:44.910911",
+            "crawled-city": "Florence"
         },
         {
             "name": "Firestone",
@@ -2582,7 +2822,9 @@
             "populationPerSquareMile": 1207.3,
             "censusFips": "0826600",
             "malePercentage": 50.05799401745925,
-            "femalePercentage": 49.94200598254075
+            "femalePercentage": 49.94200598254075,
+            "crawled": "2024-04-06 16:02:45.330647",
+            "crawled-city": "Firestone"
         },
         {
             "name": "Federal Heights",
@@ -2612,7 +2854,9 @@
             "populationPerSquareMile": 8098.0,
             "censusFips": "0826270",
             "malePercentage": 50.792657488527325,
-            "femalePercentage": 49.207342511472675
+            "femalePercentage": 49.207342511472675,
+            "crawled": "2024-04-06 16:02:45.706543",
+            "crawled-city": "Federal Heights"
         },
         {
             "name": "Fairmount",
@@ -2630,7 +2874,9 @@
             "blackPercent": 0.4,
             "indianPercent": 0.3,
             "asianPercent": 2.3,
-            "hispanicPercent": 6.8
+            "hispanicPercent": 6.8,
+            "crawled": "2024-04-06 16:02:46.138446",
+            "crawled-city": "Fairmount"
         },
         {
             "name": "Evergreen",
@@ -2659,7 +2905,9 @@
             "populationPerSquareMile": 807.8,
             "censusFips": "0825390",
             "malePercentage": 49.54335446438165,
-            "femalePercentage": 50.45664553561835
+            "femalePercentage": 50.45664553561835,
+            "crawled": "2024-04-06 16:02:46.491433",
+            "crawled-city": "Evergreen"
         },
         {
             "name": "Evans",
@@ -2677,7 +2925,9 @@
             "blackPercent": 1.8,
             "indianPercent": 1.8,
             "asianPercent": 2.2,
-            "hispanicPercent": 46.5
+            "hispanicPercent": 46.5,
+            "crawled": "2024-04-06 16:02:47.578202",
+            "crawled-city": "Evans"
         },
         {
             "name": "Erie",
@@ -2708,7 +2958,9 @@
             "populationPerSquareMile": 1521.9,
             "censusFips": "0824950",
             "malePercentage": 49.53059458019842,
-            "femalePercentage": 50.46940541980158
+            "femalePercentage": 50.46940541980158,
+            "crawled": "2024-04-06 16:02:48.108415",
+            "crawled-city": "Erie"
         },
         {
             "name": "Englewood",
@@ -2738,7 +2990,9 @@
             "populationPerSquareMile": 5127.8,
             "censusFips": "0824785",
             "malePercentage": 50.880893668855286,
-            "femalePercentage": 49.119106331144714
+            "femalePercentage": 49.119106331144714,
+            "crawled": "2024-04-06 16:02:49.360425",
+            "crawled-city": "Englewood"
         },
         {
             "name": "Elizabeth",
@@ -2756,7 +3010,9 @@
             "blackPercent": 0.2,
             "indianPercent": 1.0,
             "asianPercent": 0.6,
-            "hispanicPercent": 11.0
+            "hispanicPercent": 11.0,
+            "crawled": "2024-04-06 16:02:50.363849",
+            "crawled-city": "Elizabeth"
         },
         {
             "name": "Eldorado Springs",
@@ -2774,7 +3030,9 @@
             "blackPercent": 0.5,
             "indianPercent": 1.1,
             "asianPercent": 2.1,
-            "hispanicPercent": 8.4
+            "hispanicPercent": 8.4,
+            "crawled": "2024-04-06 16:02:51.944915",
+            "crawled-city": "Eldorado Springs"
         },
         {
             "name": "Elbert",
@@ -2804,7 +3062,9 @@
             "populationPerSquareMile": 14.1,
             "censusFips": "08039",
             "malePercentage": 59.57446808510638,
-            "femalePercentage": 40.42553191489362
+            "femalePercentage": 40.42553191489362,
+            "crawled": "2024-04-06 16:02:52.909706",
+            "crawled-city": "Elbert"
         },
         {
             "name": "Edgewater",
@@ -2822,7 +3082,9 @@
             "blackPercent": 2.4,
             "indianPercent": 1.8,
             "asianPercent": 1.8,
-            "hispanicPercent": 35.2
+            "hispanicPercent": 35.2,
+            "crawled": "2024-04-06 16:02:53.262972",
+            "crawled-city": "Edgewater"
         },
         {
             "name": "Echo Hills",
@@ -2840,7 +3102,9 @@
             "blackPercent": 0.0,
             "indianPercent": 1.6,
             "asianPercent": 1.9,
-            "hispanicPercent": 4.2
+            "hispanicPercent": 4.2,
+            "crawled": "2024-04-06 16:02:53.741390",
+            "crawled-city": "Echo Hills"
         },
         {
             "name": "Eaton",
@@ -2858,7 +3122,9 @@
             "blackPercent": 0.4,
             "indianPercent": 0.3,
             "asianPercent": 1.1,
-            "hispanicPercent": 16.6
+            "hispanicPercent": 16.6,
+            "crawled": "2024-04-06 16:02:54.269199",
+            "crawled-city": "Eaton"
         },
         {
             "name": "East Pleasant View",
@@ -2876,7 +3142,9 @@
             "blackPercent": 2.1,
             "indianPercent": 0.6,
             "asianPercent": 1.8,
-            "hispanicPercent": 7.8
+            "hispanicPercent": 7.8,
+            "crawled": "2024-04-06 16:02:55.173680",
+            "crawled-city": "East Pleasant View"
         },
         {
             "name": "Dove Valley",
@@ -2905,7 +3173,9 @@
             "populationPerSquareMile": 1575.9,
             "censusFips": "0821330",
             "malePercentage": 49.184397163120565,
-            "femalePercentage": 50.815602836879435
+            "femalePercentage": 50.815602836879435,
+            "crawled": "2024-04-06 16:02:55.690326",
+            "crawled-city": "Dove Valley"
         },
         {
             "name": "Divide",
@@ -2923,7 +3193,9 @@
             "blackPercent": 0.0,
             "indianPercent": 0.0,
             "asianPercent": 2.1,
-            "hispanicPercent": 4.2
+            "hispanicPercent": 4.2,
+            "crawled": "2024-04-06 16:05:49.905934",
+            "crawled-city": "Divide"
         },
         {
             "name": "Derby",
@@ -2941,7 +3213,9 @@
             "blackPercent": 1.2,
             "indianPercent": 3.0,
             "asianPercent": 0.6,
-            "hispanicPercent": 72.0
+            "hispanicPercent": 72.0,
+            "crawled": "2024-04-06 16:08:00.196786",
+            "crawled-city": "Derby"
         },
         {
             "name": "Denver",
