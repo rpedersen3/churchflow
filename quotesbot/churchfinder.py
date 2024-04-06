@@ -89,6 +89,161 @@ class ChurchFinder:
 
         return value
 
+    def getValueByClass(self, soup, elType, clName):
+
+        value = None
+        select = elType + '[class="' + clName + '"]'
+
+        print("select: ", select)
+        elements = soup.select(select)
+        for el in elements:
+            value = el.text
+            if value != None and value != "":
+                break
+
+        return value
+
+    def getCity(self, cities, name):
+        for city in cities:
+            if (name.find(city["name"]) >= 0):
+                return city
+
+        return None
+    def findCityDemographicsFromCensusData(self):
+
+        file_path = "coloradoFrontRangeCities.json"
+        with open(file_path, "r") as file:
+            citiesData = json.load(file)
+
+        cities = citiesData["cities"]
+
+
+        # https://www.census.gov
+        # https://data.census.gov/table/DECENNIALDP2020.DP1?g=040XX00US08,08$1600000&y=2020&d=DEC%20Demographic%20Profile
+        data_file_path = 'coloradodemographics.txt'
+
+        # Read data from file
+        with open(data_file_path, 'r') as file:
+
+            dataLines = file.readlines()
+
+            data = []
+            frontRangeData = []
+
+            print("data lines: ", len(dataLines))
+
+            i = 0
+            for dataLine in dataLines:
+
+                dataLine = dataLine.rstrip('\r\n')
+                dataParts = dataLine.split('\t')
+
+                cityName = dataParts[1]
+                selectedCity = self.getCity(cities, cityName)
+
+
+                #if selectedCity == None:
+                    #print("city not found: ", cityName)
+
+                if selectedCity != None:
+                    print("update city data: ", cityName)
+
+                    totalPopulation = int(dataParts[2])
+
+                    #print("pop: ", selectedCity["population2020"], ", value: ", totalPopulation)
+                    selectedCity["population2020"] = totalPopulation
+
+                    #selectedCity["population2010"] = int(0)
+
+                    under5 = int(dataParts[3])
+                    age5to9 = int(dataParts[4])
+                    age10to14 = int(dataParts[5])
+                    age15to19 = int(dataParts[6])
+                    ageOver18 = int(dataParts[22])
+                    ageUnder18 = totalPopulation - ageOver18
+
+                    under5Percent = float(dataParts[163])
+                    over18Percent = float(dataParts[182])
+
+                    #print("under5Percent: ", selectedCity["under5Percent"], ", value: ", under5Percent)
+                    selectedCity["under5Percent"] = under5Percent
+                    #print("under18Percent: ", selectedCity["under18Percent"], ", value: ", 100.0 - over18Percent)
+                    selectedCity["under18Percent"] = 100.0 - over18Percent
+
+
+                    age65to69 = int(dataParts[16])
+                    age70to74 = int(dataParts[17])
+                    age75to79 = int(dataParts[18])
+                    age80to84 = int(dataParts[19])
+                    age85plus = int(dataParts[20])
+                    over65 = int(dataParts[25])
+                    over65Percent = (over65 * 100.0) / totalPopulation
+
+                    #print("over65Percent: ", selectedCity["over65Percent"], ", value: ", over65Percent)
+                    selectedCity["over65Percent"] = float(over65Percent)
+
+                    males = int(dataParts[26])
+                    malePercentage = (males * 100.0) / totalPopulation
+                    femalePercentage = 100.0 - malePercentage
+
+                    selectedCity["malePercentage"] = float(malePercentage)
+                    selectedCity["femalePercentage"] = float(femalePercentage)
+
+                    raceCount = int(dataParts[86])
+                    raceWhite = int(dataParts[87])
+                    raceBlack = int(dataParts[88])
+                    raceIndian = int(dataParts[89])
+                    raceAsian = int(dataParts[90])
+
+
+                    whitePercent = float(dataParts[239])
+                    blackPercent = float(dataParts[240])
+                    indianPercent = float(dataParts[241])
+                    asianPercent = float(dataParts[242])
+
+                    hispanicPercent = float(dataParts[254])
+
+                    #print("white: ", selectedCity["whitePercent"], ", value: ", whitePercent)
+                    selectedCity["whitePercent"] = whitePercent
+                    #print("blackPercent: ", selectedCity["blackPercent"], ", value: ", blackPercent)
+                    selectedCity["blackPercent"] = blackPercent
+                    selectedCity["indianPercent"] = indianPercent
+                    selectedCity["asianPercent"] = asianPercent
+
+                    #print("hispanic: ", selectedCity["hispanicPercent"], ", value: ", hispanicPercent)
+                    selectedCity["hispanicPercent"] = hispanicPercent
+
+                    '''
+                    #selectedCity["veterans"] = int(veterans)
+
+                    households = int(dataParts[133])
+                    selectedCity["households"] = int(households)
+
+                    selectedCity["householdsWithComputerPercent"] = float(householdsWithComputerPercent)
+
+                    selectedCity["householdsWithInternetPercent"] = float(householdsWithInternetPercent)
+
+                    selectedCity["highSchoolPercent"] = float(highSchoolPercent)
+
+                    selectedCity["bachelorsPercent"] = float(bachelorsPercent)
+
+                    selectedCity["retailSalesPerCapita"] = float(retailSalesPerCapita)
+
+                    selectedCity["householdIncome"] = float(householdIncome)
+
+                    selectedCity["populationPerSquareMile"] = float(populationPerSquareMile)
+
+                    selectedCity["censusFips"] = fipsCode
+                    
+                    '''
+
+            citiesData["cities"] = cities
+
+            with open(file_path, "w") as json_file:
+                json.dump(citiesData, json_file, indent=4)
+
+
+
     def findCityDemographics(self):
 
         # https://www.census.gov
@@ -108,7 +263,8 @@ class ChurchFinder:
 
             html = ""
 
-            # get HTML
+            # get url and then HTML
+            # https://programmablesearchengine.google.com/controlpanel/all
             firstPartOfName = selectedCity["name"].split()[0].lower()
             query = "quickfacts " + selectedCity["name"] + " colorado"
             print("google query for: ", query)
@@ -129,8 +285,7 @@ class ChurchFinder:
                     if link.find("quickfacts") >= 0 and \
                             link.find("colorado") >= 0 and \
                             link.find("PST") >= 0 and \
-                            link.find(firstPartOfName) >= 0 and \
-                            link.find("denvercountycolorado") == -1:
+                            link.find(firstPartOfName) >= 0:
                         print("link: ", link)
 
 
@@ -181,92 +336,92 @@ class ChurchFinder:
                 if population2020 != None:
                     print("has 2020 population")
                     selectedCity["population2020"] = int(population2020)
-                else:
+                elif "population2020" in selectedCity:
                     del selectedCity["population2020"]
 
                 if population2010 != None:
                     selectedCity["population2010"] = int(population2010)
-                else:
+                elif "population2010" in selectedCity:
                     del selectedCity["population2010"]
 
                 if under5 != None:
                     selectedCity["under5Percent"] = float(under5)
-                else:
+                elif "under5Percent" in selectedCity:
                     del selectedCity["under5Percent"]
 
                 if under18 != None:
                     selectedCity["under18Percent"] = float(under18)
-                else:
+                elif "under18Percent" in selectedCity:
                     del selectedCity["under18Percent"]
                 if over65 != None:
                     selectedCity["over65Percent"] = float(over65)
-                else:
+                elif "over65Percent" in selectedCity:
                     del selectedCity["over65Percent"]
                 if female != None:
                     selectedCity["femalePercent"] = float(female)
-                else:
+                elif "femalePercent" in selectedCity:
                     del selectedCity["femalePercent"]
 
                 if white != None:
                     selectedCity["whitePercent"] = float(white)
-                else:
+                elif "whitePercent" in selectedCity:
                     del selectedCity["whitePercent"]
                 if black != None:
                     selectedCity["blackPercent"] = float(black)
-                else:
+                elif "blackPercent" in selectedCity:
                     del selectedCity["blackPercent"]
                 if indian != None:
                     selectedCity["indianPercent"] = float(indian)
-                else:
+                elif "indianPercent" in selectedCity:
                     del selectedCity["indianPercent"]
                 if asian != None:
                     selectedCity["asianPercent"] = float(asian)
-                else:
+                elif "asianPercent" in selectedCity:
                     del selectedCity["asianPercent"]
                 if hispanic != None:
                     selectedCity["hispanicPercent"] = float(hispanic)
-                else:
+                elif "hispanicPercent" in selectedCity:
                     del selectedCity["hispanicPercent"]
 
                 if veterans != None:
                     selectedCity["veterans"] = int(veterans)
-                else:
+                elif "veterans" in selectedCity:
                     del selectedCity["veterans"]
                 if households != None:
                     selectedCity["households"] = int(households)
-                else:
+                elif "households" in selectedCity:
                     del selectedCity["households"]
                 if householdsWithComputerPercent != None:
                     selectedCity["householdsWithComputerPercent"] = float(householdsWithComputerPercent)
-                else:
+                elif "householdsWithComputerPercent" in selectedCity:
                     del selectedCity["householdsWithComputerPercent"]
                 if householdsWithInternetPercent != None:
                     selectedCity["householdsWithInternetPercent"] = float(householdsWithInternetPercent)
-                else:
+                elif "householdsWithInternetPercent" in selectedCity:
                     del selectedCity["householdsWithInternetPercent"]
                 if highSchoolPercent != None:
                     selectedCity["highSchoolPercent"] = float(highSchoolPercent)
-                else:
+                elif "highSchoolPercent" in selectedCity:
                     del selectedCity["highSchoolPercent"]
                 if bachelorsPercent != None:
                     selectedCity["bachelorsPercent"] = float(bachelorsPercent)
-                else:
+                elif "bachelorsPercent" in selectedCity:
                     del selectedCity["bachelorsPercent"]
                 if retailSalesPerCapita != None:
                     selectedCity["retailSalesPerCapita"] = float(retailSalesPerCapita)
-                else:
+                elif "retailSalesPerCapita" in selectedCity:
                     del selectedCity["retailSalesPerCapita"]
                 if householdIncome != None:
                     selectedCity["householdIncome"] = float(householdIncome)
-                else:
+                elif "householdIncome" in selectedCity:
                     del selectedCity["householdIncome"]
                 if populationPerSquareMile != None:
                     selectedCity["populationPerSquareMile"] = float(populationPerSquareMile)
-                else:
+                elif "populationPerSquareMile" in selectedCity:
                     del selectedCity["populationPerSquareMile"]
                 if fipsCode != None:
                     selectedCity["censusFips"] = fipsCode
-                else:
+                elif "censusFips" in selectedCity:
                     del selectedCity["censusFips"]
 
                 file_path = "coloradoFrontRangeCities.json"
