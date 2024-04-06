@@ -3,6 +3,7 @@ import scrapy
 import re
 from quotesbot.profilecheck import ProfileCheck
 from quotesbot.groupcheck import GroupCheck
+from quotesbot.churchfinder import ChurchFinder
 
 class DivCount:
     def __init__(self, div, level, className, count):
@@ -396,10 +397,15 @@ class ChurchCrawler(scrapy.Spider):
 
     def parse(self, response):
 
+        churchFinder = ChurchFinder()
+        churchFinder.findCityDemographics()
+        #churchFinder.findCities()
+        #churchFinder.findChurches()
+
+        '''
         #self.searchForContacts(response)
         self.searchForGroups(response)
 
-        '''
         links = response.xpath('//a/@href').extract()
         for link in links:
             #print("link: ", link)

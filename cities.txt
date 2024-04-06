@@ -1,0 +1,478 @@
+Yuma	Yuma	City	8125	CO	Colorado	40.1235	-102.7161	3451
+Yampa	Yampa	City	8107	CO	Colorado	40.153	-106.9085	447
+Wray	Wray	City	8125	CO	Colorado	40.0802	-102.2284	2338
+Woody Creek	Woody Creek	City	8097	CO	Colorado	39.2708	-106.8883	113
+Woodmoor	Woodmoor	City	8041	CO	Colorado	39.1063	-104.8456	8840
+Woodland Park	Woodland Park	City	8119	CO	Colorado	38.9985	-105.0594	7854
+Wolcott	Wolcott	City	8037	CO	Colorado	39.7035	-106.6799	0
+Winter Park	Winter Park	City	8049	CO	Colorado	39.8785	-105.7828	785
+Windsor	Windsor	City	8123	CO	Colorado	40.469	-104.9198	31972
+Williamsburg	Williamsburg	City	8043	CO	Colorado	38.384	-105.171	709
+Wiley	Wiley	City	8099	CO	Colorado	38.1553	-102.7193	352
+Wiggins	Wiggins	City	8087	CO	Colorado	40.2286	-104.0724	1137
+Wheat Ridge	Wheat Ridge	City	8059	CO	Colorado	39.7728	-105.1028	32340
+Weston	Weston	City	8071	CO	Colorado	37.146	-104.8683	23
+Westminster	Westminster	City	8001	CO	Colorado	39.8837	-105.0624	115535
+Westcreek	Westcreek	City	8035	CO	Colorado	39.1499	-105.1626	219
+Westcliffe	Westcliffe	City	8027	CO	Colorado	38.1339	-105.4654	403
+West Pleasant View	West Pleasant View	City	8059	CO	Colorado	39.732	-105.1785	5140
+Wellington	Wellington	City	8069	CO	Colorado	40.7	-105.0054	10769
+Weldona	Weldona	City	8087	CO	Colorado	40.3484	-103.9693	171
+Welby	Welby	City	8001	CO	Colorado	39.8403	-104.9655	16260
+Watkins	Watkins	City	8005	CO	Colorado	39.6984	-104.5773	977
+Ward	Ward	City	8013	CO	Colorado	40.0722	-105.5139	70
+Walsh	Walsh	City	8009	CO	Colorado	37.386	-102.2801	551
+Walsenburg	Walsenburg	City	8055	CO	Colorado	37.6307	-104.7818	3034
+Walden	Walden	City	8057	CO	Colorado	40.7316	-106.2814	622
+Vona	Vona	City	8063	CO	Colorado	39.3021	-102.7434	122
+Vineland	Vineland	City	8101	CO	Colorado	38.2447	-104.4599	405
+Vilas	Vilas	City	8009	CO	Colorado	37.3737	-102.4474	149
+Victor	Victor	City	8119	CO	Colorado	38.7088	-105.1419	315
+Vernon	Vernon	City	8125	CO	Colorado	39.9399	-102.3073	0
+Valmont	Valmont	City	8013	CO	Colorado	40.0341	-105.2058	93
+Valdez	Valdez	City	8071	CO	Colorado	37.1239	-104.6793	25
+Vail	Vail	City	8037	CO	Colorado	39.6385	-106.3613	4900
+Upper Witter Gulch	Upper Witter Gulch	City	8019	CO	Colorado	39.661	-105.4268	725
+Upper Bear Creek	Upper Bear Creek	City	8019	CO	Colorado	39.6319	-105.4154	787
+Two Buttes	Two Buttes	City	8009	CO	Colorado	37.5606	-102.3965	32
+Twin Lakes	Twin Lakes	City	8001	CO	Colorado	39.8229	-105.0036	7635
+Trinidad	Trinidad	City	8071	CO	Colorado	37.1751	-104.4908	8318
+Trail Side	Trail Side	City	8087	CO	Colorado	40.249	-103.8432	136
+Towner	Towner	City	8061	CO	Colorado	38.4705	-102.0804	20
+Towaoc	Towaoc	City	8083	CO	Colorado	37.2126	-108.7265	1284
+Todd Creek	Todd Creek	City	8001	CO	Colorado	39.9797	-104.8734	5015
+Timnath	Timnath	City	8069	CO	Colorado	40.5338	-104.9623	6289
+Thornton	Thornton	City	8001	CO	Colorado	39.9197	-104.9438	140538
+The Pinery	The Pinery	City	8035	CO	Colorado	39.4462	-104.7591	9847
+Telluride	Telluride	City	8113	CO	Colorado	37.9364	-107.827	2593
+Tall Timber	Tall Timber	City	8013	CO	Colorado	40.0151	-105.3498	457
+Tabernash	Tabernash	City	8049	CO	Colorado	39.9788	-105.8441	721
+Swink	Swink	City	8089	CO	Colorado	38.0141	-103.6283	617
+Superior	Superior	City	8013	CO	Colorado	39.934	-105.1588	13283
+Sunshine	Sunshine	City	8013	CO	Colorado	40.0636	-105.3695	210
+Sugarloaf	Sugarloaf	City	8013	CO	Colorado	40.0189	-105.4078	465
+Sugar City	Sugar City	City	8025	CO	Colorado	38.2328	-103.6633	644
+Stratton	Stratton	City	8063	CO	Colorado	39.3029	-102.6034	685
+Stratmoor	Stratmoor	City	8041	CO	Colorado	38.7731	-104.7786	6515
+Strasburg	Strasburg	City	8005	CO	Colorado	39.7181	-104.3195	3369
+Stonewall Gap	Stonewall Gap	City	8071	CO	Colorado	37.1605	-105.0342	47
+Stonegate	Stonegate	City	8035	CO	Colorado	39.5357	-104.8032	9822
+Sterling Ranch	Sterling Ranch	City	8035	CO	Colorado	39.4932	-105.0475	1171
+Sterling	Sterling	City	8075	CO	Colorado	40.6205	-103.1925	13976
+Stepping Stone	Stepping Stone	City	8035	CO	Colorado	39.514	-104.8217	2191
+Steamboat Springs	Steamboat Springs	City	8107	CO	Colorado	40.4777	-106.8243	13193
+Starkville	Starkville	City	8071	CO	Colorado	37.1169	-104.5231	83
+St. Mary's	St. Mary's	City	8019	CO	Colorado	39.8163	-105.6479	267
+St. Ann Highlands	St. Ann Highlands	City	8013	CO	Colorado	39.9873	-105.4559	550
+Springfield	Springfield	City	8009	CO	Colorado	37.405	-102.6189	1318
+Southern Ute	Southern Ute	City	8067	CO	Colorado	37.0749	-107.5933	178
+South Fork	South Fork	City	8105	CO	Colorado	37.6691	-106.6417	387
+Somerset	Somerset	City	8051	CO	Colorado	38.9268	-107.4725	61
+Snyder	Snyder	City	8087	CO	Colorado	40.3309	-103.592	135
+Snowmass Village	Snowmass Village	City	8097	CO	Colorado	39.2212	-106.9392	3089
+Smeltertown	Smeltertown	City	8015	CO	Colorado	38.5524	-106.0085	108
+Simla	Simla	City	8039	CO	Colorado	39.1408	-104.0824	534
+Silverton	Silverton	City	8111	CO	Colorado	37.8107	-107.6649	638
+Silverthorne	Silverthorne	City	8117	CO	Colorado	39.6562	-106.0869	4520
+Silver Plume	Silver Plume	City	8019	CO	Colorado	39.6957	-105.7264	183
+Silver Cliff	Silver Cliff	City	8027	CO	Colorado	38.1204	-105.4104	683
+Silt	Silt	City	8045	CO	Colorado	39.5483	-107.6531	3485
+Sierra Ridge	Sierra Ridge	City	8035	CO	Colorado	39.5286	-104.8172	2316
+Sherrelwood	Sherrelwood	City	8001	CO	Colorado	39.839	-105.0014	20069
+Sheridan Lake	Sheridan Lake	City	8061	CO	Colorado	38.4667	-102.2943	56
+Sheridan	Sheridan	City	8005	CO	Colorado	39.6468	-105.0182	6090
+Shaw Heights	Shaw Heights	City	8001	CO	Colorado	39.8566	-105.0391	5648
+Severance	Severance	City	8123	CO	Colorado	40.5265	-104.865	7691
+Seven Hills	Seven Hills	City	8013	CO	Colorado	40.0361	-105.3323	137
+Seibert	Seibert	City	8063	CO	Colorado	39.298	-102.8695	133
+Segundo	Segundo	City	8071	CO	Colorado	37.1225	-104.7395	138
+Sedgwick	Sedgwick	City	8115	CO	Colorado	40.9355	-102.5256	166
+Sedalia	Sedalia	City	8035	CO	Colorado	39.4396	-104.9699	58
+Security-Widefield	Security-Widefield	City	8041	CO	Colorado	38.7489	-104.7142	40158
+Sawpit	Sawpit	City	8113	CO	Colorado	37.9947	-108.0021	17
+Sanford	Sanford	City	8021	CO	Colorado	37.2574	-105.9007	1359
+San Luis	San Luis	City	8023	CO	Colorado	37.2025	-105.4225	624
+San Acacio	San Acacio	City	8023	CO	Colorado	37.2086	-105.5667	63
+Salt Creek	Salt Creek	City	8101	CO	Colorado	38.2407	-104.5867	771
+Salida	Salida	City	8015	CO	Colorado	38.5298	-105.9979	5671
+Saguache	Saguache	City	8109	CO	Colorado	38.0865	-106.141	530
+Saddle Ridge	Saddle Ridge	City	8087	CO	Colorado	40.3134	-103.8023	111
+Rye	Rye	City	8101	CO	Colorado	37.9212	-104.9322	189
+Roxborough Park	Roxborough Park	City	8035	CO	Colorado	39.4492	-105.0746	8861
+Romeo	Romeo	City	8021	CO	Colorado	37.1718	-105.9854	313
+Rollinsville	Rollinsville	City	8047	CO	Colorado	39.9232	-105.5136	197
+Rocky Ford	Rocky Ford	City	8089	CO	Colorado	38.0499	-103.7225	3876
+Rockvale	Rockvale	City	8043	CO	Colorado	38.3644	-105.1646	632
+Rock Creek Park	Rock Creek Park	City	8041	CO	Colorado	38.7011	-104.8347	103
+Rifle	Rifle	City	8045	CO	Colorado	39.5362	-107.7729	10325
+Ridgway	Ridgway	City	8091	CO	Colorado	38.1573	-107.7545	1033
+Rico	Rico	City	8033	CO	Colorado	37.6891	-108.0316	335
+Redvale	Redvale	City	8085	CO	Colorado	38.1761	-108.4125	315
+Redstone	Redstone	City	8097	CO	Colorado	39.1839	-107.2407	167
+Redlands	Redlands	City	8077	CO	Colorado	39.0886	-108.6582	9092
+Red Feather Lakes	Red Feather Lakes	City	8069	CO	Colorado	40.8071	-105.5864	562
+Red Cliff	Red Cliff	City	8037	CO	Colorado	39.5092	-106.3699	281
+Raymer	Raymer	City	8123	CO	Colorado	40.608	-103.8434	95
+Rangely	Rangely	City	8103	CO	Colorado	40.0861	-108.7795	2381
+Ramah	Ramah	City	8041	CO	Colorado	39.1222	-104.1673	114
+Pueblo West	Pueblo West	City	8101	CO	Colorado	38.3465	-104.7246	32991
+Pueblo	Pueblo	City	8101	CO	Colorado	38.2701	-104.6114	142727
+Pritchett	Pritchett	City	8009	CO	Colorado	37.3701	-102.8588	81
+Portland	Portland	City	8091	CO	Colorado	38.0892	-107.6952	111
+Ponderosa Park	Ponderosa Park	City	8039	CO	Colorado	39.3987	-104.6355	3400
+Poncha Springs	Poncha Springs	City	8015	CO	Colorado	38.514	-106.0944	1098
+Platteville	Platteville	City	8123	CO	Colorado	40.222	-104.834	2879
+Placerville	Placerville	City	8113	CO	Colorado	38.0054	-108.04	321
+Pitkin	Pitkin	City	8051	CO	Colorado	38.6089	-106.5144	133
+Pine Valley	Pine Valley	City	8019	CO	Colorado	39.691	-105.4132	395
+Pine Brook Hill	Pine Brook Hill	City	8013	CO	Colorado	40.0462	-105.3097	734
+Pierce	Pierce	City	8123	CO	Colorado	40.6411	-104.7701	1019
+Piedra	Piedra	City	8053	CO	Colorado	37.4418	-107.1684	35
+Phippsburg	Phippsburg	City	8107	CO	Colorado	40.2302	-106.9508	334
+Peyton	Peyton	City	8041	CO	Colorado	39.033	-104.4904	0
+Perry Park	Perry Park	City	8035	CO	Colorado	39.2595	-104.9825	1854
+Peoria	Peoria	City	8005	CO	Colorado	39.6649	-104.1456	53
+Penrose	Penrose	City	8043	CO	Colorado	38.4213	-105.0004	3305
+Peetz	Peetz	City	8075	CO	Colorado	40.9617	-103.1139	246
+Parshall	Parshall	City	8049	CO	Colorado	40.0554	-106.1757	63
+Parker	Parker	City	8035	CO	Colorado	39.5084	-104.7753	57311
+Park Center	Park Center	City	8043	CO	Colorado	38.4835	-105.224	2156
+Paragon Estates	Paragon Estates	City	8013	CO	Colorado	39.9802	-105.1812	822
+Parachute	Parachute	City	8045	CO	Colorado	39.4508	-108.0529	1607
+Paonia	Paonia	City	8029	CO	Colorado	38.8698	-107.592	1542
+Paoli	Paoli	City	8095	CO	Colorado	40.6128	-102.4718	46
+Palmer Lake	Palmer Lake	City	8041	CO	Colorado	39.1153	-104.906	2652
+Palisade	Palisade	City	8077	CO	Colorado	39.1084	-108.3573	2575
+Pagosa Springs	Pagosa Springs	City	8007	CO	Colorado	37.2675	-107.0307	1548
+Padroni	Padroni	City	8075	CO	Colorado	40.7818	-103.1733	30
+Ovid	Ovid	City	8115	CO	Colorado	40.9609	-102.3883	308
+Ouray	Ouray	City	8091	CO	Colorado	38.0276	-107.6734	1009
+Otis	Otis	City	8121	CO	Colorado	40.1501	-102.9622	526
+Ordway	Ordway	City	8025	CO	Colorado	38.2208	-103.7566	2066
+Orchard Mesa	Orchard Mesa	City	8077	CO	Colorado	39.0363	-108.5166	6592
+Orchard City	Orchard City	City	8029	CO	Colorado	38.8144	-107.9705	3144
+Orchard	Orchard	City	8087	CO	Colorado	40.3321	-104.1178	134
+Ophir	Ophir	City	8113	CO	Colorado	37.8568	-107.8312	198
+Olney Springs	Olney Springs	City	8025	CO	Colorado	38.1663	-103.9445	604
+Olathe	Olathe	City	8085	CO	Colorado	38.6083	-107.9833	1874
+Oak Creek	Oak Creek	City	8107	CO	Colorado	40.2741	-106.9575	722
+Nunn	Nunn	City	8123	CO	Colorado	40.7137	-104.7889	463
+Nucla	Nucla	City	8085	CO	Colorado	38.2668	-108.5487	578
+Norwood	Norwood	City	8113	CO	Colorado	38.129	-108.2919	551
+Northglenn	Northglenn	City	8001	CO	Colorado	39.9108	-104.9783	37899
+North Washington	North Washington	City	8001	CO	Colorado	39.8084	-104.9792	435
+North La Junta	North La Junta	City	8089	CO	Colorado	37.9986	-103.5227	478
+Norrie	Norrie	City	8097	CO	Colorado	39.328	-106.6562	0
+No Name	No Name	City	8045	CO	Colorado	39.5597	-107.293	283
+Niwot	Niwot	City	8013	CO	Colorado	40.098	-105.1552	4216
+New Castle	New Castle	City	8045	CO	Colorado	39.5776	-107.5267	4883
+Nederland	Nederland	City	8013	CO	Colorado	39.9633	-105.5071	1392
+Naturita	Naturita	City	8085	CO	Colorado	38.2183	-108.5665	434
+Nathrop	Nathrop	City	8015	CO	Colorado	38.7486	-106.0764	147
+Mulford	Mulford	City	8045	CO	Colorado	39.4063	-107.1661	609
+Mountain Village	Mountain Village	City	8113	CO	Colorado	37.9324	-107.8577	1577
+Mountain View	Mountain View	City	8059	CO	Colorado	39.7748	-105.0567	648
+Mountain Meadows	Mountain Meadows	City	8013	CO	Colorado	40.027	-105.3832	160
+Mount Crested Butte	Mount Crested Butte	City	8051	CO	Colorado	38.9083	-106.9606	906
+Morrison	Morrison	City	8059	CO	Colorado	39.6368	-105.2006	398
+Morgan Heights	Morgan Heights	City	8087	CO	Colorado	40.2875	-103.8275	151
+Monument	Monument	City	8041	CO	Colorado	39.0736	-104.8467	10026
+Montrose	Montrose	City	8085	CO	Colorado	38.4689	-107.859	20098
+Montezuma	Montezuma	City	8117	CO	Colorado	39.5814	-105.8678	156
+Monte Vista	Monte Vista	City	8105	CO	Colorado	37.5789	-106.1499	4228
+Moffat	Moffat	City	8109	CO	Colorado	38.0027	-105.9065	83
+Minturn	Minturn	City	8037	CO	Colorado	39.5463	-106.3871	1084
+Milliken	Milliken	City	8123	CO	Colorado	40.3115	-104.8561	8122
+Midland	Midland	City	8119	CO	Colorado	38.8468	-105.1579	258
+Merino	Merino	City	8075	CO	Colorado	40.4835	-103.3535	272
+Meridian Village	Meridian Village	City	8035	CO	Colorado	39.528	-104.8258	2747
+Meridian	Meridian	City	8035	CO	Colorado	39.5458	-104.8533	4954
+Meeker	Meeker	City	8103	CO	Colorado	40.0499	-107.8947	2482
+Mead	Mead	City	8123	CO	Colorado	40.2318	-104.9911	4716
+McCoy	McCoy	City	8037	CO	Colorado	39.9144	-106.7257	50
+McClave	McClave	City	8011	CO	Colorado	38.1315	-102.8504	88
+Maysville	Maysville	City	8015	CO	Colorado	38.5305	-106.2156	141
+Maybell	Maybell	City	8081	CO	Colorado	40.5188	-108.0885	43
+Matheson	Matheson	City	8039	CO	Colorado	39.1683	-103.977	25
+Marvel	Marvel	City	8067	CO	Colorado	37.1112	-108.1262	95
+Marble	Marble	City	8051	CO	Colorado	39.0716	-107.1909	180
+Manzanola	Manzanola	City	8089	CO	Colorado	38.1088	-103.8668	497
+Manitou Springs	Manitou Springs	City	8041	CO	Colorado	38.8575	-104.9127	4912
+Mancos	Mancos	City	8083	CO	Colorado	37.3466	-108.2939	1168
+Manassa	Manassa	City	8021	CO	Colorado	37.1738	-105.9373	981
+Lyons	Lyons	City	8013	CO	Colorado	40.223	-105.2692	2261
+Lynn	Lynn	City	8071	CO	Colorado	37.4219	-104.6431	49
+Loveland	Loveland	City	8069	CO	Colorado	40.4166	-105.0623	75938
+Louviers	Louviers	City	8035	CO	Colorado	39.4799	-105.0033	265
+Louisville	Louisville	City	8013	CO	Colorado	39.971	-105.1441	21091
+Longmont	Longmont	City	8013	CO	Colorado	40.1686	-105.1005	104035
+Lone Tree	Lone Tree	City	8035	CO	Colorado	39.5309	-104.8709	13701
+Loma	Loma	City	8077	CO	Colorado	39.2075	-108.805	1471
+Loghill Village	Loghill Village	City	8091	CO	Colorado	38.1994	-107.7754	601
+Log Lane Village	Log Lane Village	City	8087	CO	Colorado	40.2697	-103.829	960
+Lochbuie	Lochbuie	City	8123	CO	Colorado	40.0118	-104.7271	7730
+Littleton	Littleton	City	8005	CO	Colorado	39.5915	-105.0188	45465
+Lincoln Park	Lincoln Park	City	8043	CO	Colorado	38.4255	-105.2132	3724
+Limon	Limon	City	8073	CO	Colorado	39.2653	-103.6857	1167
+Leyner	Leyner	City	8013	CO	Colorado	40.0511	-105.1074	0
+Lewis	Lewis	City	8083	CO	Colorado	37.5017	-108.66	164
+Leadville North	Leadville North	City	8065	CO	Colorado	39.26	-106.3112	1948
+Leadville	Leadville	City	8065	CO	Colorado	39.2473	-106.2934	2623
+Lazy Acres	Lazy Acres	City	8013	CO	Colorado	40.0837	-105.3313	926
+Lazear	Lazear	City	8029	CO	Colorado	38.7788	-107.7805	165
+Las Animas	Las Animas	City	8011	CO	Colorado	38.0695	-103.2236	2564
+Larkspur	Larkspur	City	8035	CO	Colorado	39.2319	-104.8924	260
+Laporte	Laporte	City	8069	CO	Colorado	40.6385	-105.1445	2201
+Lamar	Lamar	City	8099	CO	Colorado	38.074	-102.6154	7636
+Lakewood	Lakewood	City	8059	CO	Colorado	39.6977	-105.1172	155608
+Lakeside	Lakeside	City	8059	CO	Colorado	39.7802	-105.0579	8
+Lake City	Lake City	City	8053	CO	Colorado	38.0303	-107.3106	485
+Laird	Laird	City	8125	CO	Colorado	40.0819	-102.102	6
+Lafayette	Lafayette	City	8013	CO	Colorado	39.9946	-105.0998	99475
+La Veta	La Veta	City	8055	CO	Colorado	37.5085	-105.0085	809
+La Salle	La Salle	City	8123	CO	Colorado	40.3484	-104.7062	2934
+La Junta Gardens	La Junta Gardens	City	8089	CO	Colorado	38.0014	-103.5549	246
+La Junta	La Junta	City	8089	CO	Colorado	37.9791	-103.5471	7282
+La Jara	La Jara	City	8021	CO	Colorado	37.2735	-105.9597	772
+Kremmling	Kremmling	City	8049	CO	Colorado	40.0567	-106.3784	1697
+Kittredge	Kittredge	City	8059	CO	Colorado	39.6593	-105.3045	1023
+Kit Carson	Kit Carson	City	8017	CO	Colorado	38.7628	-102.7954	254
+Kirk	Kirk	City	8125	CO	Colorado	39.6127	-102.592	79
+Kiowa	Kiowa	City	8039	CO	Colorado	39.3436	-104.458	648
+Kim	Kim	City	8071	CO	Colorado	37.247	-103.3534	53
+Keystone	Keystone	City	8117	CO	Colorado	39.5901	-105.9383	611
+Kersey	Kersey	City	8123	CO	Colorado	40.391	-104.5794	1533
+Ken Caryl	Ken Caryl	City	8059	CO	Colorado	39.577	-105.1144	33889
+Keenesburg	Keenesburg	City	8123	CO	Colorado	40.1327	-104.538	1546
+Julesburg	Julesburg	City	8115	CO	Colorado	40.9849	-102.2627	1226
+Johnstown	Johnstown	City	8123	CO	Colorado	40.3499	-104.9482	16596
+Johnson Village	Johnson Village	City	8015	CO	Colorado	38.812	-106.1071	296
+Joes	Joes	City	8125	CO	Colorado	39.6559	-102.6786	72
+Jansen	Jansen	City	8071	CO	Colorado	37.1581	-104.5501	202
+Jamestown	Jamestown	City	8013	CO	Colorado	40.118	-105.3914	281
+Jackson Lake	Jackson Lake	City	8087	CO	Colorado	40.3758	-104.0712	147
+Inverness	Inverness	City	8005	CO	Colorado	39.5758	-104.8653	2342
+Indian Hills	Indian Hills	City	8059	CO	Colorado	39.6294	-105.2509	1545
+Iliff	Iliff	City	8075	CO	Colorado	40.7592	-103.0661	338
+Ignacio	Ignacio	City	8067	CO	Colorado	37.118	-107.6376	1319
+Idledale	Idledale	City	8059	CO	Colorado	39.6688	-105.2432	277
+Idalia	Idalia	City	8125	CO	Colorado	39.7029	-102.2938	54
+Idaho Springs	Idaho Springs	City	8019	CO	Colorado	39.7444	-105.5006	2044
+Hugo	Hugo	City	8073	CO	Colorado	39.1362	-103.4731	951
+Hudson	Hudson	City	8123	CO	Colorado	40.0898	-104.621	2172
+Howard	Howard	City	8043	CO	Colorado	38.4098	-105.8424	962
+Hotchkiss	Hotchkiss	City	8029	CO	Colorado	38.799	-107.7133	1273
+Hot Sulphur Springs	Hot Sulphur Springs	City	8049	CO	Colorado	40.0748	-106.1032	873
+Hooper	Hooper	City	8003	CO	Colorado	37.746	-105.8777	162
+Holyoke	Holyoke	City	8095	CO	Colorado	40.582	-102.2975	2416
+Holly Hills	Holly Hills	City	8005	CO	Colorado	39.6678	-104.9216	2843
+Holly	Holly	City	8099	CO	Colorado	38.0554	-102.1247	809
+Hoehne	Hoehne	City	8071	CO	Colorado	37.2815	-104.389	134
+Hillrose	Hillrose	City	8087	CO	Colorado	40.3245	-103.5224	240
+Highlands Ranch	Highlands Ranch	City	8035	CO	Colorado	39.5419	-104.9708	103238
+Hidden Lake	Hidden Lake	City	8013	CO	Colorado	40.1055	-105.4777	30
+Heeney	Heeney	City	8117	CO	Colorado	39.8712	-106.3002	75
+Hayden	Hayden	City	8107	CO	Colorado	40.4851	-107.239	2116
+Haxtun	Haxtun	City	8095	CO	Colorado	40.642	-102.6297	949
+Haswell	Haswell	City	8061	CO	Colorado	38.4525	-103.1649	73
+Hasty	Hasty	City	8011	CO	Colorado	38.0999	-102.9639	116
+Hartsel	Hartsel	City	8093	CO	Colorado	39.0219	-105.7976	0
+Hartman	Hartman	City	8099	CO	Colorado	38.1212	-102.2217	72
+Gypsum	Gypsum	City	8037	CO	Colorado	39.6287	-106.9348	8047
+Gunnison	Gunnison	City	8051	CO	Colorado	38.548	-106.9246	6459
+Gunbarrel	Gunbarrel	City	8013	CO	Colorado	40.0632	-105.1713	10199
+Guffey	Guffey	City	8093	CO	Colorado	38.7591	-105.5024	24
+Grover	Grover	City	8123	CO	Colorado	40.8691	-104.2259	186
+Greenwood Village	Greenwood Village	City	8005	CO	Colorado	39.6153	-104.9131	15548
+Green Mountain Falls	Green Mountain Falls	City	8041	CO	Colorado	38.9344	-105.0238	615
+Greeley	Greeley	City	8123	CO	Colorado	40.4152	-104.7706	135270
+Grand View Estates	Grand View Estates	City	8035	CO	Colorado	39.5439	-104.8206	830
+Grand Lake	Grand Lake	City	8049	CO	Colorado	40.2502	-105.8232	305
+Grand Junction	Grand Junction	City	8077	CO	Colorado	39.0877	-108.5673	134074
+Granby	Granby	City	8049	CO	Colorado	40.0647	-105.9194	2229
+Granada	Granada	City	8099	CO	Colorado	38.063	-102.3115	527
+Goldfield	Goldfield	City	8119	CO	Colorado	38.7176	-105.1253	64
+Golden	Golden	City	8059	CO	Colorado	39.7406	-105.2118	20041
+Gold Hill	Gold Hill	City	8013	CO	Colorado	40.0597	-105.4189	272
+Glenwood Springs	Glenwood Springs	City	8045	CO	Colorado	39.5455	-107.3347	10017
+Gleneagle	Gleneagle	City	8041	CO	Colorado	39.0453	-104.8288	6259
+Glendale	Glendale	City	8005	CO	Colorado	39.7036	-104.9352	4605
+Gilcrest	Gilcrest	City	8123	CO	Colorado	40.2841	-104.782	1171
+Gerrard	Gerrard	City	8105	CO	Colorado	37.6783	-106.5753	314
+Georgetown	Georgetown	City	8019	CO	Colorado	39.7179	-105.6942	1098
+Genoa	Genoa	City	8073	CO	Colorado	39.2782	-103.4984	131
+Genesee	Genesee	City	8059	CO	Colorado	39.6872	-105.2718	4241
+Garfield	Garfield	City	8015	CO	Colorado	38.5493	-106.2893	0
+Gardner	Gardner	City	8055	CO	Colorado	37.7889	-105.1644	68
+Garden City	Garden City	City	8123	CO	Colorado	40.3948	-104.6893	165
+Fulford	Fulford	City	8037	CO	Colorado	39.5166	-106.6576	0
+Fruitvale	Fruitvale	City	8077	CO	Colorado	39.0933	-108.4789	7883
+Fruita	Fruita	City	8077	CO	Colorado	39.1548	-108.7305	13296
+Frisco	Frisco	City	8117	CO	Colorado	39.5791	-106.0915	2952
+Frederick	Frederick	City	8123	CO	Colorado	40.1088	-104.9701	14127
+Fraser	Fraser	City	8049	CO	Colorado	39.9303	-105.8029	1334
+Franktown	Franktown	City	8035	CO	Colorado	39.3906	-104.7486	217
+Foxfield	Foxfield	City	8005	CO	Colorado	39.5881	-104.7857	648
+Fowler	Fowler	City	8089	CO	Colorado	38.1304	-104.0264	1157
+Four Square Mile	Four Square Mile	City	8005	CO	Colorado	39.6808	-104.888	21723
+Fountain	Fountain	City	8041	CO	Colorado	38.6886	-104.6829	29495
+Fort Morgan	Fort Morgan	City	8087	CO	Colorado	40.2537	-103.7903	11483
+Fort Lupton	Fort Lupton	City	8123	CO	Colorado	40.0827	-104.8068	7947
+Fort Garland	Fort Garland	City	8023	CO	Colorado	37.4279	-105.4351	589
+Fort Collins	Fort Collins	City	8069	CO	Colorado	40.5477	-105.0656	301596
+Fort Carson	Fort Carson	City	8041	CO	Colorado	38.7095	-104.772	16743
+Floyd Hill	Floyd Hill	City	8019	CO	Colorado	39.7217	-105.4313	938
+Florissant	Florissant	City	8119	CO	Colorado	38.9445	-105.29	131
+Florence	Florence	City	8043	CO	Colorado	38.3836	-105.1114	3857
+Fleming	Fleming	City	8075	CO	Colorado	40.6821	-102.8396	663
+Flagler	Flagler	City	8063	CO	Colorado	39.2948	-103.0758	504
+Firestone	Firestone	City	8123	CO	Colorado	40.1565	-104.9494	15949
+Federal Heights	Federal Heights	City	8001	CO	Colorado	39.8651	-105.0154	14111
+Fairplay	Fairplay	City	8093	CO	Colorado	39.2245	-105.9965	718
+Fairmount	Fairmount	City	8059	CO	Colorado	39.7931	-105.1711	9939
+Evergreen	Evergreen	City	8059	CO	Colorado	39.6349	-105.3356	9338
+Evans	Evans	City	8123	CO	Colorado	40.366	-104.739	21727
+Estes Park	Estes Park	City	8069	CO	Colorado	40.3699	-105.5217	5942
+Erie	Erie	City	8123	CO	Colorado	40.0404	-105.0399	29367
+Englewood	Englewood	City	8005	CO	Colorado	39.6468	-104.9942	33500
+Empire	Empire	City	8019	CO	Colorado	39.7595	-105.6825	427
+Ellicott	Ellicott	City	8041	CO	Colorado	38.8256	-104.3829	1282
+Elizabeth	Elizabeth	City	8039	CO	Colorado	39.3589	-104.6196	1792
+Eldorado Springs	Eldorado Springs	City	8013	CO	Colorado	39.9366	-105.2626	295
+Eldora	Eldora	City	8013	CO	Colorado	39.9536	-105.578	393
+Elbert	Elbert	City	8039	CO	Colorado	39.2189	-104.5404	236
+El Moro	El Moro	City	8071	CO	Colorado	37.2349	-104.4491	319
+El Jebel	El Jebel	City	8037	CO	Colorado	39.405	-107.0921	4593
+Edwards	Edwards	City	8037	CO	Colorado	39.6215	-106.6184	10436
+Edgewater	Edgewater	City	8059	CO	Colorado	39.7508	-105.0627	5047
+Eckley	Eckley	City	8125	CO	Colorado	40.1124	-102.4883	327
+Echo Hills	Echo Hills	City	8019	CO	Colorado	39.6748	-105.4134	396
+Eaton	Eaton	City	8123	CO	Colorado	40.5257	-104.713	5648
+East Pleasant View	East Pleasant View	City	8059	CO	Colorado	39.7278	-105.1572	143
+Eagle	Eagle	City	8037	CO	Colorado	39.6366	-106.8125	7420
+Eads	Eads	City	8061	CO	Colorado	38.4814	-102.7797	733
+Durango	Durango	City	8067	CO	Colorado	37.2659	-107.8781	18953
+Downieville-Lawson-Dumont	Downieville-Lawson-Dumont	City	8019	CO	Colorado	39.7662	-105.6125	482
+Dove Valley	Dove Valley	City	8005	CO	Colorado	39.5752	-104.8309	5052
+Dove Creek	Dove Creek	City	8033	CO	Colorado	37.7668	-108.9071	705
+Dotsero	Dotsero	City	8037	CO	Colorado	39.6463	-107.054	954
+Dolores	Dolores	City	8083	CO	Colorado	37.4741	-108.4998	865
+Divide	Divide	City	8119	CO	Colorado	38.9449	-105.1619	162
+Dinosaur	Dinosaur	City	8081	CO	Colorado	40.2399	-109.0066	129
+Dillon	Dillon	City	8117	CO	Colorado	39.6213	-106.0393	1147
+Derby	Derby	City	8001	CO	Colorado	39.84	-104.9172	8995
+Denver	Denver	City	8031	CO	Colorado	39.762	-104.8758	2650725
+Delta	Delta	City	8029	CO	Colorado	38.756	-108.0772	9036
+Del Norte	Del Norte	City	8105	CO	Colorado	37.6786	-106.3539	1667
+Deer Trail	Deer Trail	City	8005	CO	Colorado	39.6154	-104.0434	599
+De Beque	De Beque	City	8077	CO	Colorado	39.3105	-108.2049	484
+Dakota Ridge	Dakota Ridge	City	8059	CO	Colorado	39.6192	-105.1344	34361
+Dacono	Dacono	City	8123	CO	Colorado	40.0623	-104.9476	6084
+Crowley	Crowley	City	8025	CO	Colorado	38.1935	-103.8597	306
+Crook	Crook	City	8075	CO	Colorado	40.859	-102.8013	135
+Crisman	Crisman	City	8013	CO	Colorado	40.0416	-105.3675	163
+Cripple Creek	Cripple Creek	City	8119	CO	Colorado	38.7467	-105.1851	992
+Crestone	Crestone	City	8109	CO	Colorado	37.9945	-105.6962	31
+Crested Butte	Crested Butte	City	8051	CO	Colorado	38.8676	-106.9773	1419
+Crawford	Crawford	City	8029	CO	Colorado	38.7051	-107.6097	373
+Craig	Craig	City	8081	CO	Colorado	40.5171	-107.5554	9026
+Cotopaxi	Cotopaxi	City	8043	CO	Colorado	38.3738	-105.6912	46
+Cortez	Cortez	City	8083	CO	Colorado	37.3503	-108.5768	8742
+Copper Mountain	Copper Mountain	City	8117	CO	Colorado	39.4769	-106.2011	348
+Cope	Cope	City	8121	CO	Colorado	39.6692	-102.8501	56
+Conejos	Conejos	City	8021	CO	Colorado	37.0872	-106.016	7
+Commerce City	Commerce City	City	8001	CO	Colorado	39.8641	-104.843	61516
+Comanche Creek	Comanche Creek	City	8005	CO	Colorado	39.615	-104.3268	401
+Columbine Valley	Columbine Valley	City	8005	CO	Colorado	39.5993	-105.0352	1701
+Columbine	Columbine	City	8059	CO	Colorado	39.5879	-105.0694	25924
+Colorado Springs	Colorado Springs	City	8041	CO	Colorado	38.8674	-104.7605	628808
+Colorado City	Colorado City	City	8101	CO	Colorado	37.9381	-104.8451	2315
+Colona	Colona	City	8091	CO	Colorado	38.3276	-107.7793	90
+Collbran	Collbran	City	8077	CO	Colorado	39.24	-107.9635	579
+Cokedale	Cokedale	City	8071	CO	Colorado	37.1444	-104.6216	98
+Coaldale	Coaldale	City	8043	CO	Colorado	38.3558	-105.8131	425
+Coal Creek	Coal Creek	City	8059	CO	Colorado	39.9071	-105.3799	2581
+Clifton	Clifton	City	8077	CO	Colorado	39.0764	-108.4605	20122
+City of Creede	City of Creede	City	8079	CO	Colorado	37.8486	-106.9253	312
+Cimarron Hills	Cimarron Hills	City	8041	CO	Colorado	38.8597	-104.6995	18619
+Cheyenne Wells	Cheyenne Wells	City	8017	CO	Colorado	38.8192	-102.3521	898
+Cherry Hills Village	Cherry Hills Village	City	8005	CO	Colorado	39.6375	-104.948	6426
+Cherry Creek	Cherry Creek	City	8005	CO	Colorado	39.6094	-104.8645	11389
+Cheraw	Cheraw	City	8089	CO	Colorado	38.1076	-103.511	194
+Chacra	Chacra	City	8045	CO	Colorado	39.577	-107.451	321
+Central City	Central City	City	8047	CO	Colorado	39.7945	-105.512	680
+Center	Center	City	8109	CO	Colorado	37.7512	-106.1105	2377
+Centennial	Centennial	City	8005	CO	Colorado	39.5926	-104.8673	107972
+Cedaredge	Cedaredge	City	8029	CO	Colorado	38.8941	-107.9255	2584
+CaĆ±on City	Canon City	City	8043	CO	Colorado	38.443	-105.2203	17157
+Cattle Creek	Cattle Creek	City	8045	CO	Colorado	39.4667	-107.2599	733
+Catherine	Catherine	City	8045	CO	Colorado	39.4017	-107.133	214
+Cathedral	Cathedral	City	8053	CO	Colorado	38.0836	-107.0306	30
+Castle Rock	Castle Rock	City	8035	CO	Colorado	39.3763	-104.8535	71037
+Castle Pines Village	Castle Pines Village	City	8035	CO	Colorado	39.4418	-104.897	4356
+Castle Pines	Castle Pines	City	8035	CO	Colorado	39.4625	-104.8706	11296
+Cascade-Chipita Park	Cascade-Chipita Park	City	8041	CO	Colorado	38.9433	-105.0023	1256
+Carbondale	Carbondale	City	8045	CO	Colorado	39.3949	-107.2148	6464
+Capulin	Capulin	City	8021	CO	Colorado	37.2819	-106.105	120
+Campo	Campo	City	8009	CO	Colorado	37.1047	-102.5786	126
+Calhan	Calhan	City	8041	CO	Colorado	39.0345	-104.2994	394
+Byers	Byers	City	8005	CO	Colorado	39.7101	-104.219	1433
+Burlington	Burlington	City	8063	CO	Colorado	39.3042	-102.2712	3212
+Buena Vista	Buena Vista	City	8015	CO	Colorado	38.8319	-106.1387	2859
+Brush	Brush	City	8087	CO	Colorado	40.2598	-103.6323	5323
+Broomfield	Broomfield	City	8014	CO	Colorado	39.9542	-105.0526	72697
+Brookside	Brookside	City	8043	CO	Colorado	38.4135	-105.1909	249
+Brook Forest	Brook Forest	City	8059	CO	Colorado	39.5739	-105.3944	434
+Brighton	Brighton	City	8001	CO	Colorado	39.9716	-104.7963	39895
+Briggsdale	Briggsdale	City	8123	CO	Colorado	40.6359	-104.3284	145
+Brick Center	Brick Center	City	8005	CO	Colorado	39.6002	-104.4579	178
+Breckenridge	Breckenridge	City	8117	CO	Colorado	39.4995	-106.0432	5086
+Branson	Branson	City	8071	CO	Colorado	37.0155	-103.8838	57
+Brandon	Brandon	City	8061	CO	Colorado	38.4464	-102.4412	0
+Bow Mar	Bow Mar	City	8005	CO	Colorado	39.6251	-105.0511	986
+Boulder	Boulder	City	8013	CO	Colorado	40.0248	-105.2524	120818
+Boone	Boone	City	8101	CO	Colorado	38.2495	-104.2583	263
+Bonanza Mountain Estates	Bonanza Mountain Estates	City	8013	CO	Colorado	39.9768	-105.4798	148
+Bonanza	Bonanza	City	8109	CO	Colorado	38.2966	-106.1419	12
+Blue Valley	Blue Valley	City	8019	CO	Colorado	39.6996	-105.4921	171
+Blue Sky	Blue Sky	City	8087	CO	Colorado	40.3002	-103.8056	156
+Blue River	Blue River	City	8117	CO	Colorado	39.4362	-106.035	947
+Blende	Blende	City	8101	CO	Colorado	38.247	-104.5714	660
+Blanca	Blanca	City	8023	CO	Colorado	37.4393	-105.5135	344
+Black Hawk	Black Hawk	City	8047	CO	Colorado	39.8043	-105.495	85
+Black Forest	Black Forest	City	8041	CO	Colorado	39.0608	-104.6752	14375
+Beulah Valley	Beulah Valley	City	8101	CO	Colorado	38.0709	-104.983	752
+Bethune	Bethune	City	8063	CO	Colorado	39.3038	-102.4234	188
+Berthoud	Berthoud	City	8069	CO	Colorado	40.3071	-105.0426	10188
+Berkley	Berkley	City	8001	CO	Colorado	39.8045	-105.0281	10920
+Bennett	Bennett	City	8001	CO	Colorado	39.7366	-104.4286	2964
+Bayfield	Bayfield	City	8067	CO	Colorado	37.234	-107.5952	2821
+Battlement Mesa	Battlement Mesa	City	8045	CO	Colorado	39.4506	-108.0063	5220
+Basalt	Basalt	City	8037	CO	Colorado	39.3663	-107.0413	3802
+Bark Ranch	Bark Ranch	City	8013	CO	Colorado	40.1156	-105.4417	116
+Avondale	Avondale	City	8101	CO	Colorado	38.2351	-104.3482	436
+Avon	Avon	City	8037	CO	Colorado	39.6442	-106.513	6209
+Aurora	Aurora	City	8005	CO	Colorado	39.7083	-104.7237	383496
+Ault	Ault	City	8123	CO	Colorado	40.5893	-104.7392	1785
+Atwood	Atwood	City	8075	CO	Colorado	40.5505	-103.2746	135
+Aspen Park	Aspen Park	City	8059	CO	Colorado	39.5423	-105.2967	962
+Aspen	Aspen	City	8097	CO	Colorado	39.1951	-106.8369	7019
+Arvada	Arvada	City	8059	CO	Colorado	39.832	-105.151	122903
+Arriba	Arriba	City	8073	CO	Colorado	39.2843	-103.274	229
+Aristocrat Ranchettes	Aristocrat Ranchettes	City	8123	CO	Colorado	40.1096	-104.7549	1830
+Arboles	Arboles	City	8007	CO	Colorado	37.0201	-107.4221	384
+Arapahoe	Arapahoe	City	8017	CO	Colorado	38.853	-102.1789	20
+Applewood	Applewood	City	8059	CO	Colorado	39.7523	-105.1604	8236
+Antonito	Antonito	City	8021	CO	Colorado	37.0762	-106.0104	612
+Amherst	Amherst	City	8095	CO	Colorado	40.6831	-102.1725	252
+Altona	Altona	City	8013	CO	Colorado	40.1254	-105.2924	557
+Alpine	Alpine	City	8105	CO	Colorado	37.6877	-106.586	265
+Alma	Alma	City	8093	CO	Colorado	39.286	-106.0672	323
+Allenspark	Allenspark	City	8013	CO	Colorado	40.2099	-105.5112	574
+Alamosa East	Alamosa East	City	8003	CO	Colorado	37.4766	-105.8397	1384
+Alamosa	Alamosa	City	8003	CO	Colorado	37.4752	-105.877	9704
+Akron	Akron	City	8121	CO	Colorado	40.1635	-103.2202	1793
+Air Force Academy	Air Force Academy	City	8041	CO	Colorado	38.9942	-104.8639	6170
+Aguilar	Aguilar	City	8071	CO	Colorado	37.4036	-104.655	477
+Aetna Estates	Aetna Estates	City	8005	CO	Colorado	39.7381	-104.6732	1255
+Acres Green	Acres Green	City	8035	CO	Colorado	39.5557	-104.8958	2732

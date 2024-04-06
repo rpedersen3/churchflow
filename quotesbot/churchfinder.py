@@ -2,19 +2,306 @@
 import os
 import json
 from googleapiclient.discovery import build
+import requests
+from bs4 import BeautifulSoup
+
+class ChurchInfo:
+    name = "churchinfo"
 
 
+    name: str
+    description: str
+    link: str
+
+    def __init__(self, name: str, description: str, link: str) -> None:
+        self.name = name
+        self.description = description
+        self.link = link
 
 class ChurchFinder:
     name = "churchfinder"
 
 
+    def findCities(self):
+        #data from https://www.gigasheet.com/sample-data/spreadsheet-list-of-all-cities-in-coloradocsv
+
+        cities_file_path = 'cities.txt'
+
+        frontRangeLatMin = 38.2
+        frontRangeLatMax = 40.7
+
+        frontRangeLonMin = -105.5
+        frontRangeLonMax = -104.5
+
+        # Read data from file
+        with open(cities_file_path, 'r') as file:
+            cityLines = file.readlines()
+
+
+            data = []
+            frontRangeData = []
+
+            for cityLine in cityLines:
+
+                cityLine = cityLine.rstrip('\r\n')
+                cityParts = cityLine.split('\t')
+
+                # Append parsed data to the list
+                city = {
+                    "name": cityParts[0],
+                    "fips": cityParts[3],
+                    "lat": float(cityParts[6]),
+                    "lon": float(cityParts[7]),
+                    "population": int(cityParts[8])
+                }
+                data.append(city)
+
+                if city["lat"] > frontRangeLatMin and city["lat"] < frontRangeLatMax and city["lon"] > frontRangeLonMin and city["lon"] < frontRangeLonMax:
+                    frontRangeData.append(city)
+
+
+
+            file_path = "coloradoCities.json"
+            citiesData = {}
+            citiesData["cities"] = data
+
+            with open(file_path, "w") as json_file:
+                json.dump(citiesData, json_file, indent=4)
+
+
+            file_path = "coloradoFrontRangeCities.json"
+            citiesData = {}
+            citiesData["cities"] = frontRangeData
+
+            with open(file_path, "w") as json_file:
+                json.dump(citiesData, json_file, indent=4)
+
+
+    def getValue(self, soup, type):
+
+        value = None
+        select = 'tr[data-mnemonic="' + type + '"]'
+        tr_elements = soup.select(select)
+        for row in tr_elements:
+            cells = row.select('td[data-isnumeric="1"]')
+            for cell in cells:
+                value = cell.get("data-value")
+
+        return value
+
+    def findCityDemographics(self):
+
+        # https://www.census.gov
+        service = build(
+            "customsearch", "v1", developerKey=""
+        )
+
+        file_path = "coloradoFrontRangeCities.json"
+        with open(file_path, "r") as file:
+            citiesData = json.load(file)
+
+        cities = citiesData["cities"]
+        selectedCity = None
+        for city in cities:
+
+            selectedCity = city
+
+            if "population2022" not in selectedCity:
+
+                query = "quickfacts " + selectedCity["name"] + " colorado"
+                print("google query for: ", query)
+                res = (
+                    service.cse()
+                    .list(
+                        q=query,
+                        cx="877445d005a4d4258"
+                    )
+                    .execute()
+                )
+
+                if "items" in res:
+
+                    for item in res["items"]:
+
+                        link = item["link"]
+                        if link.find("quickfacts") >= 0 and link.find("colorado") >= 0 and link.find("PST") >= 0:
+                            print("link: ", link)
+
+                            user_agent = {'User-agent': 'Mozilla/5.0'}
+                            response = requests.get(link, headers = user_agent)
+                            if response.status_code != 200:
+                                print("bad response: ", response.status_code)
+
+                            if response.status_code == 200:
+
+                                soup = BeautifulSoup(response.text, 'html.parser')
+
+                                population2022 = self.getValue(soup, "PST045222")
+                                population2020 = self.getValue(soup, "POP010220")
+                                population2010 = self.getValue(soup, "POP010210")
+
+                                under5 = self.getValue(soup, "AGE135222")
+                                under18 = self.getValue(soup, "AGE295222")
+                                over65 = self.getValue(soup, "AGE775222")
+                                female = self.getValue(soup, "SEX255222")
+
+                                white = self.getValue(soup, "RHI125222")
+                                black = self.getValue(soup, "RHI225222")
+                                indian = self.getValue(soup, "RHI325222")
+                                asian = self.getValue(soup, "RHI425222")
+                                hispanic = self.getValue(soup, "RHI725222")
+
+                                veterans = self.getValue(soup, "VET605222")
+
+                                households = self.getValue(soup, "HSD410222")
+                                personsPerHousehold = self.getValue(soup, "HSD310222")
+                                languageOtherThanEnglishPercent = self.getValue(soup, "POP815222")
+                                householdsWithComputerPercent = self.getValue(soup, "COM100222")
+                                householdsWithInternetPercent = self.getValue(soup, "INT100222")
+
+                                highSchoolPercent = self.getValue(soup, "EDU635222")
+                                bachelorsPercent = self.getValue(soup, "EDU685222")
+
+                                retailSalesPerCapita = self.getValue(soup, "RTN131217")
+                                householdIncome = self.getValue(soup, "INC110222")
+
+                                populationPerSquareMile = self.getValue(soup, "POP060220")
+
+                                fipsCode = self.getValue(soup, "fips")
+
+
+                                if population2022 == None:
+                                    print("no data")
+                                    break
+
+                                print("has data")
+                                if population2022 != None:
+                                    selectedCity["population2022"] = int(population2022)
+                                if population2020 != None:
+                                    selectedCity["population2020"] = int(population2020)
+                                if population2010 != None:
+                                    selectedCity["population2010"] = int(population2010)
+
+                                if under5 != None:
+                                    selectedCity["under5Percent"] = float(under5)
+                                if under18 != None:
+                                    selectedCity["under18Percent"] = float(under18)
+                                if over65 != None:
+                                    selectedCity["over65Percent"] = float(over65)
+                                if female != None:
+                                    selectedCity["femalePercent"] = float(female)
+
+                                if white != None:
+                                    selectedCity["whitePercent"] = float(white)
+                                if black != None:
+                                    selectedCity["blackPercent"] = float(black)
+                                if indian != None:
+                                    selectedCity["indianPercent"] = float(indian)
+                                if asian != None:
+                                    selectedCity["asianPercent"] = float(asian)
+                                if hispanic != None:
+                                    selectedCity["hispanicPercent"] = float(hispanic)
+
+                                if veterans != None:
+                                    selectedCity["veterans"] = int(veterans)
+                                if households != None:
+                                    selectedCity["households"] = int(households)
+                                if householdsWithComputerPercent != None:
+                                    selectedCity["householdsWithComputerPercent"] = float(householdsWithComputerPercent)
+                                if householdsWithInternetPercent != None:
+                                    selectedCity["householdsWithInternetPercent"] = float(householdsWithInternetPercent)
+                                if highSchoolPercent != None:
+                                    selectedCity["highSchoolPercent"] = float(highSchoolPercent)
+                                if bachelorsPercent != None:
+                                    selectedCity["bachelorsPercent"] = float(bachelorsPercent)
+                                if retailSalesPerCapita != None:
+                                    selectedCity["retailSalesPerCapita"] = float(retailSalesPerCapita)
+                                if householdIncome != None:
+                                    selectedCity["householdIncome"] = float(householdIncome)
+                                if populationPerSquareMile != None:
+                                    selectedCity["populationPerSquareMile"] = float(populationPerSquareMile)
+                                if fipsCode != None:
+                                    selectedCity["censusFips"] = fipsCode
+
+                                file_path = "coloradoFrontRangeCities.json"
+                                citiesData = {}
+                                citiesData["cities"] = cities
+
+                                with open(file_path, "w") as json_file:
+                                    json.dump(citiesData, json_file, indent=4)
+
+                            # process just first link
+                            break
+
+
     def findChurches(self):
 
-        api_key = ""
+        '''
+        service = build(
+            "customsearch", "v1", developerKey=""
+        )
+
+
+        res = (
+            service.cse()
+            .list(
+                q="websites of christian churches in erie colorado",
+                cx="d744719d644574dd7",
+                start=11
+                #cx="01757666212468239146:omuauf_lfve",
+            )
+            .execute()
+        )
+        print(res)
+        '''
+
+        # Specify the path to your JSON file
+        file_path = "churchscrape1.json"
+
+        churchesData = None
+        churches_file_path = "churches.json"
+        with open(churches_file_path, "r") as file:
+            churchesData = json.load(file)
+
+        churches = churchesData["churches"]
+        if churches == None:
+            churches = []
+
+        # Open the JSON file and read its contents
+        with open(file_path, "r") as file:
+            data = json.load(file)
+
+            for item in data["items"]:
+
+                link = item["link"]
+                if link.find('?') == -1 and link.find('&') == -1:
+
+                    name = item["displayLink"]
+                    name = name.replace('www.', '')
+                    name = name.replace('.com', '')
+                    name = name.replace('.org', '')
+                    name = name.replace('.net', '')
+                    name = name.replace('.church', '')
+
+                    church = {
+                        "link": link,
+                        "name": name
+                    }
+                    churches.append(church)
+
+                    print('link: ', item["link"])
+
+        churchesData["churches"] = churches
+        with open(churches_file_path, "w") as json_file:
+            json.dump(churchesData, json_file, indent=4)
+
+
+
+        '''
+        
         service = build("customsearch", "v1", developerKey=api_key)
 
-        search_engine_id = "YOUR_SEARCH_ENGINE_ID"
+        search_engine_id = "d744719d644574dd7"
         api_version = "v1"
         search_engine = service.cse().list(cx=search_engine_id, version=api_version)
 
@@ -24,3 +311,4 @@ class ChurchFinder:
         results = response["items"]
 
         print("results: ", results)
+        '''

@@ -1,0 +1,40 @@
+{
+    "churches": [
+        {
+            "link": "https://www.impactrock.com/",
+            "name": "impactrock"
+        },
+        {
+            "link": "https://www.stscholasticaerie.org/",
+            "name": "stscholasticaerie"
+        },
+        {
+            "link": "https://lfcf.net/",
+            "name": "lfcf"
+        },
+        {
+            "link": "https://calvarybible.com/",
+            "name": "calvarybible"
+        },
+        {
+            "link": "https://www.biblebaptisterie.com/",
+            "name": "biblebaptisterie"
+        },
+        {
+            "link": "https://calvarybible.com/erie/",
+            "name": "calvarybible"
+        },
+        {
+            "link": "https://www.rejoicelutheran.church/",
+            "name": "rejoicelutheran"
+        },
+        {
+            "link": "https://www.flatironschurch.com/",
+            "name": "flatironschurch"
+        },
+        {
+            "link": "https://rocky.church/",
+            "name": "rocky"
+        }
+    ]
+}

@@ -1,0 +1,455 @@
+{
+  "kind": "customsearch#search",
+  "url": {
+    "type": "application/json",
+    "template": "https://www.googleapis.com/customsearch/v1?q={searchTerms}&num={count?}&start={startIndex?}&lr={language?}&safe={safe?}&cx={cx?}&sort={sort?}&filter={filter?}&gl={gl?}&cr={cr?}&googlehost={googleHost?}&c2coff={disableCnTwTranslation?}&hq={hq?}&hl={hl?}&siteSearch={siteSearch?}&siteSearchFilter={siteSearchFilter?}&exactTerms={exactTerms?}&excludeTerms={excludeTerms?}&linkSite={linkSite?}&orTerms={orTerms?}&dateRestrict={dateRestrict?}&lowRange={lowRange?}&highRange={highRange?}&searchType={searchType}&fileType={fileType?}&rights={rights?}&imgSize={imgSize?}&imgType={imgType?}&imgColorType={imgColorType?}&imgDominantColor={imgDominantColor?}&alt=json"
+  },
+  "queries": {
+    "request": [
+      {
+        "title": "Google Custom Search - websites of christian churches in erie colorado",
+        "totalResults": "2330000",
+        "searchTerms": "websites of christian churches in erie colorado",
+        "count": 10,
+        "startIndex": 1,
+        "inputEncoding": "utf8",
+        "outputEncoding": "utf8",
+        "safe": "off",
+        "cx": "d744719d644574dd7"
+      }
+    ],
+    "nextPage": [
+      {
+        "title": "Google Custom Search - websites of christian churches in erie colorado",
+        "totalResults": "2330000",
+        "searchTerms": "websites of christian churches in erie colorado",
+        "count": 10,
+        "startIndex": 11,
+        "inputEncoding": "utf8",
+        "outputEncoding": "utf8",
+        "safe": "off",
+        "cx": "d744719d644574dd7"
+      }
+    ]
+  },
+  "context": {
+    "title": "RichCanvas"
+  },
+  "searchInformation": {
+    "searchTime": 0.360963,
+    "formattedSearchTime": "0.36",
+    "totalResults": "2330000",
+    "formattedTotalResults": "2,330,000"
+  },
+  "items": [
+    {
+      "kind": "customsearch#result",
+      "title": "IMPACT ROCK CHURCH - Erie",
+      "htmlTitle": "IMPACT ROCK <b>CHURCH</b> - <b>Erie</b>",
+      "link": "https://www.impactrock.com/",
+      "displayLink": "www.impactrock.com",
+      "snippet": "... Jesus SavesLittle Launch Christian Preschool Follow Follow Instagram Facebook YouTube Helpful Sites ... WORSHIP, AND BIBLICAL PREACHING. ... Erie, CO (303) 835-4214",
+      "htmlSnippet": "... <b>Jesus</b> SavesLittle Launch <b>Christian</b> Preschool Follow Follow Instagram Facebook YouTube Helpful <b>Sites</b> ... <b>WORSHIP</b>, AND <b>BIBLICAL</b> PREACHING. ... <b>Erie</b>, <b>CO</b> (303) 835-4214",
+      "cacheId": "vfmT-eh_YzIJ",
+      "formattedUrl": "https://www.impactrock.com/",
+      "htmlFormattedUrl": "https://www.impactrock.com/",
+      "pagemap": {
+        "cse_thumbnail": [
+          {
+            "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2FrvNgOjCvdwCuvBeX6D8lVv9wca3g1RAgkp4neQQg_PcBs57UgmgKuI&s",
+            "width": "199",
+            "height": "253"
+          }
+        ],
+        "metatags": [
+          {
+            "og:image": "http://static1.squarespace.com/static/5e963af184d8cf57546b7fd4/t/5f993cea33275461f6aff754/1603878126448/impactrock_stacked_logo.png?format=1500w",
+            "og:type": "website",
+            "og:image:width": "825",
+            "twitter:title": "IMPACT ROCK CHURCH",
+            "twitter:card": "summary",
+            "og:site_name": "IMPACT ROCK CHURCH",
+            "viewport": "initial-scale=1",
+            "twitter:url": "https://www.impactrock.com",
+            "og:title": "IMPACT ROCK CHURCH",
+            "og:image:height": "1050",
+            "og:url": "https://www.impactrock.com",
+            "twitter:image": "http://static1.squarespace.com/static/5e963af184d8cf57546b7fd4/t/5f993cea33275461f6aff754/1603878126448/impactrock_stacked_logo.png?format=1500w"
+          }
+        ],
+        "cse_image": [
+          {
+            "src": "http://static1.squarespace.com/static/5e963af184d8cf57546b7fd4/t/5f993cea33275461f6aff754/1603878126448/impactrock_stacked_logo.png?format=1500w"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "customsearch#result",
+      "title": "St. Scholastica Erie | Catholic Church",
+      "htmlTitle": "St. Scholastica <b>Erie</b> | <b>Catholic Church</b>",
+      "link": "https://www.stscholasticaerie.org/",
+      "displayLink": "www.stscholasticaerie.org",
+      "snippet": "Come to St. Scholastica Catholic Parish, a prayerful place in the heart of a growing community. Located on the corner of Wells and Main in the historic part ofxa0...",
+      "htmlSnippet": "Come to St. Scholastica <b>Catholic</b> Parish, a prayerful place in the heart of a growing community. Located on the corner of Wells and Main in the historic part of&nbsp;...",
+      "cacheId": "yLCErtD6S0QJ",
+      "formattedUrl": "https://www.stscholasticaerie.org/",
+      "htmlFormattedUrl": "https://www.stscholastica<b>erie</b>.org/",
+      "pagemap": {
+        "cse_thumbnail": [
+          {
+            "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQi-DJh1izXdHdf92L0vspeJxr5viSPFOtBrgacjTpvI8KuVFGyDhav7tD6&s",
+            "width": "290",
+            "height": "174"
+          }
+        ],
+        "metatags": [
+          {
+            "viewport": "width=device-width,initial-scale=1,user-scalable=no",
+            "msapplication-tileimage": "https://www.stscholasticaerie.org/wp-content/uploads/2016/12/cropped-st-scholastica-logo2-270x270.png"
+          }
+        ],
+        "webpage": [
+          {
+            "image": "https://www.stscholasticaerie.org/wp-content/uploads/2021/05/Website-Banner-Logo-5-18-21.png",
+            "url": "https://www.stscholasticaerie.org/"
+          }
+        ],
+        "cse_image": [
+          {
+            "src": "https://www.stscholasticaerie.org/wp-content/uploads/2021/05/website-Banner-Logo-Mobile.png"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "customsearch#result",
+      "title": "Living Faith Christian Fellowship – Engaging people to reach ...",
+      "htmlTitle": "Living <b>Faith Christian</b> Fellowship – Engaging people to reach ...",
+      "link": "https://lfcf.net/",
+      "displayLink": "lfcf.net",
+      "snippet": "... Faith Christian Fellowship. Engaging ... Christian church with contemporary worship ... Site View Mobile Site. © 2024 Living Faith Christian Fellowship, Erie, CO.",
+      "htmlSnippet": "... <b>Faith Christian</b> Fellowship. Engaging ... <b>Christian church</b> with contemporary <b>worship</b> ... <b>Site</b> View Mobile <b>Site</b>. © 2024 Living <b>Faith Christian</b> Fellowship, <b>Erie</b>, <b>CO</b>.",
+      "cacheId": "0oVEQ_d3JLAJ",
+      "formattedUrl": "https://lfcf.net/",
+      "htmlFormattedUrl": "https://lfcf.net/",
+      "pagemap": {
+        "cse_thumbnail": [
+          {
+            "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWFd3H4RHfOldxeesuf5INtso9lDvoaCpBocXJaRRmC-FLpHMaF4tw1Uk&s",
+            "width": "200",
+            "height": "200"
+          }
+        ],
+        "metatags": [
+          {
+            "twitter:text:title": "What’s Happening",
+            "og:image": "https://s0.wp.com/i/blank.jpg",
+            "og:type": "website",
+            "twitter:card": "summary",
+            "og:site_name": "Living Faith Christian Fellowship",
+            "og:title": "Living Faith Christian Fellowship",
+            "og:locale": "en_US",
+            "og:url": "https://lfcf.net/",
+            "og:description": "Engaging people to reach Upward to God, Inward to each other, and Outward to those who don't yet know God"
+          }
+        ],
+        "cse_image": [
+          {
+            "src": "https://s0.wp.com/i/blank.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "customsearch#result",
+      "title": "Calvary Bible Church: Home",
+      "htmlTitle": "Calvary <b>Bible Church</b>: Home",
+      "link": "https://calvarybible.com/",
+      "displayLink": "calvarybible.com",
+      "snippet": "Loving God. Loving others. One church, multiple communities in Boulder, Erie, Thornton, and online.",
+      "htmlSnippet": "Loving God. Loving others. One <b>church</b>, multiple communities in Boulder, <b>Erie</b>, Thornton, and <b>online</b>.",
+      "cacheId": "qVus0MYdn-0J",
+      "formattedUrl": "https://calvarybible.com/",
+      "htmlFormattedUrl": "https://calvarybible.com/",
+      "pagemap": {
+        "cse_thumbnail": [
+          {
+            "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFVkb-1cCeGhJgEwsMXhUycZQIgZ1mAR9dtjfGtrSvFrn2glsltlPfVlw&s",
+            "width": "442",
+            "height": "114"
+          }
+        ],
+        "metatags": [
+          {
+            "og:image": "https://calvarybible.com/wp-content/uploads/2020/07/lifeatcalvarynewsletter-new.png",
+            "og:type": "website",
+            "twitter:card": "summary_large_image",
+            "og:site_name": "Calvary Bible Church",
+            "og:title": "Home - Calvary Bible Church",
+            "msapplication-tileimage": "https://calvarybible.com/wp-content/uploads/2020/07/cropped-calvaryfavicon-270x270.jpg",
+            "og:description": "Loving God. Loving others. One church, multiple communities in Boulder, Erie, Thornton, and online.",
+            "article:publisher": "https://www.facebook.com/calvarybibledotcom",
+            "twitter:site": "@calvarybible",
+            "article:modified_time": "2024-04-01T17:10:09+00:00",
+            "viewport": "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0",
+            "og:locale": "en_US",
+            "og:url": "https://calvarybible.com/"
+          }
+        ],
+        "cse_image": [
+          {
+            "src": "https://calvarybible.com/wp-content/uploads/2020/07/lifeatcalvarynewsletter-new.png"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "customsearch#result",
+      "title": "Bible Baptist Church of Erie: Home",
+      "htmlTitle": "<b>Bible Baptist Church</b> of <b>Erie</b>: Home",
+      "link": "https://www.biblebaptisterie.com/",
+      "displayLink": "www.biblebaptisterie.com",
+      "snippet": "Sunday Worship - 11 AM ... August 2019 Pastor Duncan is starting his 45th year of pastoring Bible Baptist Church of Erie, CO. ... SOME ARE NOT SEEN ON OUR WEBSITE –xa0...",
+      "htmlSnippet": "Sunday <b>Worship</b> - 11 AM ... August 2019 Pastor Duncan is starting his 45th year of pastoring <b>Bible Baptist Church</b> of <b>Erie</b>, <b>CO</b>. ... SOME ARE NOT SEEN ON OUR <b>WEBSITE</b> –&nbsp;...",
+      "cacheId": "jCNfSmzdw74J",
+      "formattedUrl": "https://www.biblebaptisterie.com/",
+      "htmlFormattedUrl": "https://www.biblebaptist<b>erie</b>.com/",
+      "pagemap": {
+        "metatags": [
+          {
+            "og:type": "website",
+            "twitter:card": "summary_large_image",
+            "apple-mobile-web-app-status-bar-style": "black",
+            "og:site_name": "Bible Baptist Church of Erie",
+            "article:modified_time": "2017-11-30T03:47:53+00:00",
+            "viewport": "width=539px",
+            "apple-mobile-web-app-capable": "no",
+            "og:title": "Home - Bible Baptist Church of Erie",
+            "og:locale": "en_US",
+            "og:url": "https://www.biblebaptisterie.com/",
+            "og:description": "xa0 xa0"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "customsearch#result",
+      "title": "Calvary Bible Church - Erie Campus",
+      "htmlTitle": "Calvary <b>Bible Church</b> - <b>Erie</b> Campus",
+      "link": "https://calvarybible.com/erie/",
+      "displayLink": "calvarybible.com",
+      "snippet": "LOCATION & TIMES. 615 Evans St., Erie, CO. Sundays 8, 9:30, & 11am. GET DIRECTIONS.",
+      "htmlSnippet": "LOCATION &amp; TIMES. 615 Evans St., <b>Erie</b>, <b>CO</b>. Sundays 8, 9:30, &amp; 11am. GET DIRECTIONS.",
+      "cacheId": "abPb-7RMQWYJ",
+      "formattedUrl": "https://calvarybible.com/erie/",
+      "htmlFormattedUrl": "https://calvarybible.com/<b>erie</b>/",
+      "pagemap": {
+        "cse_thumbnail": [
+          {
+            "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFVkb-1cCeGhJgEwsMXhUycZQIgZ1mAR9dtjfGtrSvFrn2glsltlPfVlw&s",
+            "width": "442",
+            "height": "114"
+          }
+        ],
+        "metatags": [
+          {
+            "og:image": "https://calvarybible.com/wp-content/uploads/2020/07/lifeatcalvarynewsletter-new.png",
+            "og:type": "article",
+            "twitter:card": "summary_large_image",
+            "og:site_name": "Calvary Bible Church",
+            "og:title": "Calvary Bible Church - Erie Campus - Calvary Bible Church",
+            "twitter:label1": "Est. reading time",
+            "msapplication-tileimage": "https://calvarybible.com/wp-content/uploads/2020/07/cropped-calvaryfavicon-270x270.jpg",
+            "og:description": "boulder church, erie church",
+            "article:publisher": "https://www.facebook.com/calvarybibledotcom",
+            "twitter:data1": "6 minutes",
+            "twitter:site": "@calvarybible",
+            "article:modified_time": "2024-04-03T20:11:01+00:00",
+            "viewport": "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0",
+            "og:locale": "en_US",
+            "og:url": "https://calvarybible.com/erie/"
+          }
+        ],
+        "cse_image": [
+          {
+            "src": "https://calvarybible.com/wp-content/uploads/2020/07/lifeatcalvarynewsletter-new.png"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "customsearch#result",
+      "title": "Rejoice Lutheran Church",
+      "htmlTitle": "Rejoice Lutheran <b>Church</b>",
+      "link": "https://www.rejoicelutheran.church/",
+      "displayLink": "www.rejoicelutheran.church",
+      "snippet": "Contact. Rejoice Lutheran Church 3413 Lowell Lane Erie, CO 80516. Email office@rejoicelutheran.net. Phone (303) 828xa0...",
+      "htmlSnippet": "Contact. Rejoice Lutheran <b>Church</b> 3413 Lowell Lane <b>Erie</b>, <b>CO</b> 80516. Email office@rejoicelutheran.net. Phone (303) 828&nbsp;...",
+      "cacheId": "D9JIFZjevAoJ",
+      "formattedUrl": "https://www.rejoicelutheran.church/",
+      "htmlFormattedUrl": "https://www.rejoicelutheran.church/",
+      "pagemap": {
+        "cse_thumbnail": [
+          {
+            "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZr3qKYIbhgwyZ4J3P2fyAp4Fzfm2Ic-8VSTFUXygGEu_hKIfMQZELw8Q&s",
+            "width": "240",
+            "height": "80"
+          }
+        ],
+        "metatags": [
+          {
+            "og:image": "http://static1.squarespace.com/static/637bcb5ac02501287f623ad6/t/637bcbeb31a25031af06bac5/1669057515910/Logo_Rejoice_Final_Web-240+copy.png?format=1500w",
+            "og:type": "website",
+            "og:image:width": "240",
+            "twitter:title": "RejoiceLutheran.church",
+            "twitter:card": "summary",
+            "og:site_name": "RejoiceLutheran.church",
+            "viewport": "width=device-width, initial-scale=1",
+            "twitter:url": "https://www.rejoicelutheran.church",
+            "og:title": "RejoiceLutheran.church",
+            "og:image:height": "80",
+            "og:url": "https://www.rejoicelutheran.church",
+            "twitter:image": "http://static1.squarespace.com/static/637bcb5ac02501287f623ad6/t/637bcbeb31a25031af06bac5/1669057515910/Logo_Rejoice_Final_Web-240+copy.png?format=1500w"
+          }
+        ],
+        "cse_image": [
+          {
+            "src": "http://static1.squarespace.com/static/637bcb5ac02501287f623ad6/t/637bcbeb31a25031af06bac5/1669057515910/Logo_Rejoice_Final_Web-240+copy.png?format=1500w"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "customsearch#result",
+      "title": "Flatirons Community Church",
+      "htmlTitle": "Flatirons Community <b>Church</b>",
+      "link": "https://www.flatironschurch.com/",
+      "displayLink": "www.flatironschurch.com",
+      "snippet": "We're a church that meets at five locations around Denver, and online. Join us for an in-person service or online. ... CO 80026. 303-664-5524. © 2024 Flatironsxa0...",
+      "htmlSnippet": "We&#39;re a <b>church</b> that meets at five locations around Denver, and <b>online</b>. Join us for an in-person service or <b>online</b>. ... <b>CO</b> 80026. 303-664-5524. © 2024 Flatirons&nbsp;...",
+      "cacheId": "MCGtXkUDqZcJ",
+      "formattedUrl": "https://www.flatironschurch.com/",
+      "htmlFormattedUrl": "https://www.flatironschurch.com/",
+      "pagemap": {
+        "cse_thumbnail": [
+          {
+            "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_UDIherm3iRb71MskT8I0wJbW6q8YfljwXXO-sJTmb9NP_fDn6C5HdCk&s",
+            "width": "310",
+            "height": "163"
+          }
+        ],
+        "metatags": [
+          {
+            "msapplication-tilecolor": "#ed8b00",
+            "og:image": "https://cdn.monkplatform.com/image/czoyMjA6Imh0dHBzJTNBJTJGJTJGZTZiN2FlZjZmYzgyZjgzMzdjNDQtZDFhNDkyMmE3MzlmZGQzZGY2ZTliNzFmODFkMTljYTkuc3NsLmNmMi5yYWNrY2RuLmNvbSUyRnVwbG9hZGVkJTJGbCUyRjBlNzYyNTExN18xNTMyOTc0ODk1X2xvZ29jYXJkLnBuZyUzRnElM0Q5MCUyNnclM0QxMjAwJTI2aCUzRDYzMCUyNmZpdCUzRGNyb3AlMjZzJTNEODFhYmY3NTY1ODM3ODFjOWI3NjU3NDRkZjAyNDU5OTAiOw==/logocard.png",
+            "og:type": "website",
+            "twitter:title": "Flatirons Community Church",
+            "twitter:card": "summary",
+            "og:site_name": "Flatirons Community Church",
+            "twitter:url": "https://www.flatironschurch.com/",
+            "og:title": "Flatirons Community Church",
+            "msapplication-tileimage": "/_assets/img/favicons/favicon-144.png?v=1",
+            "og:description": "Flatirons Community Church",
+            "twitter:image": "https://cdn.monkplatform.com/image/czoyMjA6Imh0dHBzJTNBJTJGJTJGZTZiN2FlZjZmYzgyZjgzMzdjNDQtZDFhNDkyMmE3MzlmZGQzZGY2ZTliNzFmODFkMTljYTkuc3NsLmNmMi5yYWNrY2RuLmNvbSUyRnVwbG9hZGVkJTJGbCUyRjBlNzYyNTExN18xNTMyOTc0ODk1X2xvZ29jYXJkLnBuZyUzRnElM0Q5MCUyNnclM0QxMjAwJTI2aCUzRDYzMCUyNmZpdCUzRGNyb3AlMjZzJTNEODFhYmY3NTY1ODM3ODFjOWI3NjU3NDRkZjAyNDU5OTAiOw==/logocard.png",
+            "facebook-domain-verification": "opiyrpb1wabn446b2bdk71edpmewa0",
+            "twitter:site": "Flatirons Community Church",
+            "viewport": "initial-scale=1.0, maximum-scale=1.0, user-scalable=no",
+            "apple-mobile-web-app-capable": "yes",
+            "twitter:description": "Flatirons Community Church",
+            "og:url": "https://www.flatironschurch.com/"
+          }
+        ],
+        "cse_image": [
+          {
+            "src": "https://cdn.monkplatform.com/image/czoyMjA6Imh0dHBzJTNBJTJGJTJGZTZiN2FlZjZmYzgyZjgzMzdjNDQtZDFhNDkyMmE3MzlmZGQzZGY2ZTliNzFmODFkMTljYTkuc3NsLmNmMi5yYWNrY2RuLmNvbSUyRnVwbG9hZGVkJTJGbCUyRjBlNzYyNTExN18xNTMyOTc0ODk1X2xvZ29jYXJkLnBuZyUzRnElM0Q5MCUyNnclM0QxMjAwJTI2aCUzRDYzMCUyNmZpdCUzRGNyb3AlMjZzJTNEODFhYmY3NTY1ODM3ODFjOWI3NjU3NDRkZjAyNDU5OTAiOw==/logocard.png"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "customsearch#result",
+      "title": "Welcome to Rocky! | Church in Longmont & Frederick",
+      "htmlTitle": "Welcome to Rocky! | <b>Church</b> in Longmont &amp; Frederick",
+      "link": "https://rocky.church/",
+      "displayLink": "rocky.church",
+      "snippet": "You're welcome here. Join us on Sundays at 9:15 am or 10:45 am! We are a multi-site church in Longmont and Frederick, as well as online.",
+      "htmlSnippet": "You&#39;re welcome here. Join us on Sundays at 9:15 am or 10:45 am! We are a multi-<b>site church</b> in Longmont and Frederick, as well as <b>online</b>.",
+      "cacheId": "lq72kUzakiYJ",
+      "formattedUrl": "https://rocky.church/",
+      "htmlFormattedUrl": "https://rocky.church/",
+      "pagemap": {
+        "cse_thumbnail": [
+          {
+            "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeZKlE--x2WaTu7DzPBOv42sq1lKD6vRObk2uwBMJv34qGdUCa2mvIR9bL&s",
+            "width": "225",
+            "height": "225"
+          }
+        ],
+        "metatags": [
+          {
+            "og:image": "https://rocky.church/wp-content/uploads/2022/05/Logo_bug.png",
+            "og:type": "website",
+            "og:image:width": "800",
+            "twitter:card": "summary_large_image",
+            "og:site_name": "Rocky Mountain Christian Church",
+            "og:title": "Welcome to Rocky! | Church in Longmont & Frederick",
+            "og:image:height": "800",
+            "og:image:type": "image/png",
+            "msapplication-tileimage": "https://rocky.church/wp-content/uploads/2022/04/cropped-Logo_bug-e1650672354772-270x270.png",
+            "og:description": "You're welcome here. Join us on Sundays at 9:15 am or 10:45 am! We are a multi-site church in Longmont and Frederick, as well as online.",
+            "article:modified_time": "2024-04-03T17:36:30+00:00",
+            "viewport": "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0",
+            "og:locale": "en_US",
+            "og:url": "https://rocky.church/"
+          }
+        ],
+        "cse_image": [
+          {
+            "src": "https://rocky.church/wp-content/uploads/2022/05/Logo_bug.png"
+          }
+        ]
+      }
+    },
+    {
+      "kind": "customsearch#result",
+      "title": "THE BEST 10 Churches near ERIE, CO - Last Updated April 2024 ...",
+      "htmlTitle": "THE BEST 10 <b>Churches</b> near <b>ERIE</b>, <b>CO</b> - Last Updated April 2024 ...",
+      "link": "https://www.yelp.com/search?cflt=churches&find_loc=Erie%2C+CO",
+      "displayLink": "www.yelp.com",
+      "snippet": "Top 10 Best Churches in Erie, CO - April 2024 - Yelp - Flatirons Community Church, Calvary Bible Church - Erie, Crossroads Church, Orchard Community Church,xa0...",
+      "htmlSnippet": "Top 10 Best <b>Churches in Erie</b>, <b>CO</b> - April 2024 - Yelp - Flatirons Community <b>Church</b>, Calvary <b>Bible Church</b> - Erie, Crossroads <b>Church</b>, Orchard Community <b>Church</b>,&nbsp;...",
+      "formattedUrl": "https://www.yelp.com/search?cflt=churches&find_loc=Erie%2C+CO",
+      "htmlFormattedUrl": "https://www.yelp.com/search?cflt=<b>churches</b>&amp;find_loc=<b>Erie</b>%2C+CO",
+      "pagemap": {
+        "cse_thumbnail": [
+          {
+            "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqk3GrDehkhyx8aEh77E2_7WWiT48Jy6gvLVCsR6g8UxxDU0D1kwqye_RV&s",
+            "width": "300",
+            "height": "168"
+          }
+        ],
+        "metatags": [
+          {
+            "og:image": "https://s3-media0.fl.yelpcdn.com/assets/public/yelp_og_image.yji-c14b28215075e232a03e.png",
+            "og:type": "website",
+            "og:image:width": "1920",
+            "og:site_name": "Yelp",
+            "al:ios:app_name": "Yelp",
+            "viewport": "initial-scale=1",
+            "og:image:height": "1080",
+            "bingbot": "noarchive",
+            "al:ios:url": "https://www.yelp.com/search?cflt=churches&find_loc=Erie%2C+CO&utm_campaign=search&utm_medium=organic&utm_source=apple",
+            "al:ios:app_store_id": "284910350",
+            "format-detection": "telephone=no"
+          }
+        ],
+        "cse_image": [
+          {
+            "src": "https://s3-media0.fl.yelpcdn.com/assets/public/yelp_og_image.yji-c14b28215075e232a03e.png"
+          }
+        ]
+      }
+    }
+  ]
+}

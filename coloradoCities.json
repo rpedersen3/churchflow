@@ -1,0 +1,3350 @@
+{
+    "cities": [
+        {
+            "name": "Yuma",
+            "fips": "8125",
+            "lat": 40.1235,
+            "lon": -102.7161,
+            "population": 3451
+        },
+        {
+            "name": "Yampa",
+            "fips": "8107",
+            "lat": 40.153,
+            "lon": -106.9085,
+            "population": 447
+        },
+        {
+            "name": "Wray",
+            "fips": "8125",
+            "lat": 40.0802,
+            "lon": -102.2284,
+            "population": 2338
+        },
+        {
+            "name": "Woody Creek",
+            "fips": "8097",
+            "lat": 39.2708,
+            "lon": -106.8883,
+            "population": 113
+        },
+        {
+            "name": "Woodmoor",
+            "fips": "8041",
+            "lat": 39.1063,
+            "lon": -104.8456,
+            "population": 8840
+        },
+        {
+            "name": "Woodland Park",
+            "fips": "8119",
+            "lat": 38.9985,
+            "lon": -105.0594,
+            "population": 7854
+        },
+        {
+            "name": "Wolcott",
+            "fips": "8037",
+            "lat": 39.7035,
+            "lon": -106.6799,
+            "population": 0
+        },
+        {
+            "name": "Winter Park",
+            "fips": "8049",
+            "lat": 39.8785,
+            "lon": -105.7828,
+            "population": 785
+        },
+        {
+            "name": "Windsor",
+            "fips": "8123",
+            "lat": 40.469,
+            "lon": -104.9198,
+            "population": 31972
+        },
+        {
+            "name": "Williamsburg",
+            "fips": "8043",
+            "lat": 38.384,
+            "lon": -105.171,
+            "population": 709
+        },
+        {
+            "name": "Wiley",
+            "fips": "8099",
+            "lat": 38.1553,
+            "lon": -102.7193,
+            "population": 352
+        },
+        {
+            "name": "Wiggins",
+            "fips": "8087",
+            "lat": 40.2286,
+            "lon": -104.0724,
+            "population": 1137
+        },
+        {
+            "name": "Wheat Ridge",
+            "fips": "8059",
+            "lat": 39.7728,
+            "lon": -105.1028,
+            "population": 32340
+        },
+        {
+            "name": "Weston",
+            "fips": "8071",
+            "lat": 37.146,
+            "lon": -104.8683,
+            "population": 23
+        },
+        {
+            "name": "Westminster",
+            "fips": "8001",
+            "lat": 39.8837,
+            "lon": -105.0624,
+            "population": 115535
+        },
+        {
+            "name": "Westcreek",
+            "fips": "8035",
+            "lat": 39.1499,
+            "lon": -105.1626,
+            "population": 219
+        },
+        {
+            "name": "Westcliffe",
+            "fips": "8027",
+            "lat": 38.1339,
+            "lon": -105.4654,
+            "population": 403
+        },
+        {
+            "name": "West Pleasant View",
+            "fips": "8059",
+            "lat": 39.732,
+            "lon": -105.1785,
+            "population": 5140
+        },
+        {
+            "name": "Wellington",
+            "fips": "8069",
+            "lat": 40.7,
+            "lon": -105.0054,
+            "population": 10769
+        },
+        {
+            "name": "Weldona",
+            "fips": "8087",
+            "lat": 40.3484,
+            "lon": -103.9693,
+            "population": 171
+        },
+        {
+            "name": "Welby",
+            "fips": "8001",
+            "lat": 39.8403,
+            "lon": -104.9655,
+            "population": 16260
+        },
+        {
+            "name": "Watkins",
+            "fips": "8005",
+            "lat": 39.6984,
+            "lon": -104.5773,
+            "population": 977
+        },
+        {
+            "name": "Ward",
+            "fips": "8013",
+            "lat": 40.0722,
+            "lon": -105.5139,
+            "population": 70
+        },
+        {
+            "name": "Walsh",
+            "fips": "8009",
+            "lat": 37.386,
+            "lon": -102.2801,
+            "population": 551
+        },
+        {
+            "name": "Walsenburg",
+            "fips": "8055",
+            "lat": 37.6307,
+            "lon": -104.7818,
+            "population": 3034
+        },
+        {
+            "name": "Walden",
+            "fips": "8057",
+            "lat": 40.7316,
+            "lon": -106.2814,
+            "population": 622
+        },
+        {
+            "name": "Vona",
+            "fips": "8063",
+            "lat": 39.3021,
+            "lon": -102.7434,
+            "population": 122
+        },
+        {
+            "name": "Vineland",
+            "fips": "8101",
+            "lat": 38.2447,
+            "lon": -104.4599,
+            "population": 405
+        },
+        {
+            "name": "Vilas",
+            "fips": "8009",
+            "lat": 37.3737,
+            "lon": -102.4474,
+            "population": 149
+        },
+        {
+            "name": "Victor",
+            "fips": "8119",
+            "lat": 38.7088,
+            "lon": -105.1419,
+            "population": 315
+        },
+        {
+            "name": "Vernon",
+            "fips": "8125",
+            "lat": 39.9399,
+            "lon": -102.3073,
+            "population": 0
+        },
+        {
+            "name": "Valmont",
+            "fips": "8013",
+            "lat": 40.0341,
+            "lon": -105.2058,
+            "population": 93
+        },
+        {
+            "name": "Valdez",
+            "fips": "8071",
+            "lat": 37.1239,
+            "lon": -104.6793,
+            "population": 25
+        },
+        {
+            "name": "Vail",
+            "fips": "8037",
+            "lat": 39.6385,
+            "lon": -106.3613,
+            "population": 4900
+        },
+        {
+            "name": "Upper Witter Gulch",
+            "fips": "8019",
+            "lat": 39.661,
+            "lon": -105.4268,
+            "population": 725
+        },
+        {
+            "name": "Upper Bear Creek",
+            "fips": "8019",
+            "lat": 39.6319,
+            "lon": -105.4154,
+            "population": 787
+        },
+        {
+            "name": "Two Buttes",
+            "fips": "8009",
+            "lat": 37.5606,
+            "lon": -102.3965,
+            "population": 32
+        },
+        {
+            "name": "Twin Lakes",
+            "fips": "8001",
+            "lat": 39.8229,
+            "lon": -105.0036,
+            "population": 7635
+        },
+        {
+            "name": "Trinidad",
+            "fips": "8071",
+            "lat": 37.1751,
+            "lon": -104.4908,
+            "population": 8318
+        },
+        {
+            "name": "Trail Side",
+            "fips": "8087",
+            "lat": 40.249,
+            "lon": -103.8432,
+            "population": 136
+        },
+        {
+            "name": "Towner",
+            "fips": "8061",
+            "lat": 38.4705,
+            "lon": -102.0804,
+            "population": 20
+        },
+        {
+            "name": "Towaoc",
+            "fips": "8083",
+            "lat": 37.2126,
+            "lon": -108.7265,
+            "population": 1284
+        },
+        {
+            "name": "Todd Creek",
+            "fips": "8001",
+            "lat": 39.9797,
+            "lon": -104.8734,
+            "population": 5015
+        },
+        {
+            "name": "Timnath",
+            "fips": "8069",
+            "lat": 40.5338,
+            "lon": -104.9623,
+            "population": 6289
+        },
+        {
+            "name": "Thornton",
+            "fips": "8001",
+            "lat": 39.9197,
+            "lon": -104.9438,
+            "population": 140538
+        },
+        {
+            "name": "The Pinery",
+            "fips": "8035",
+            "lat": 39.4462,
+            "lon": -104.7591,
+            "population": 9847
+        },
+        {
+            "name": "Telluride",
+            "fips": "8113",
+            "lat": 37.9364,
+            "lon": -107.827,
+            "population": 2593
+        },
+        {
+            "name": "Tall Timber",
+            "fips": "8013",
+            "lat": 40.0151,
+            "lon": -105.3498,
+            "population": 457
+        },
+        {
+            "name": "Tabernash",
+            "fips": "8049",
+            "lat": 39.9788,
+            "lon": -105.8441,
+            "population": 721
+        },
+        {
+            "name": "Swink",
+            "fips": "8089",
+            "lat": 38.0141,
+            "lon": -103.6283,
+            "population": 617
+        },
+        {
+            "name": "Superior",
+            "fips": "8013",
+            "lat": 39.934,
+            "lon": -105.1588,
+            "population": 13283
+        },
+        {
+            "name": "Sunshine",
+            "fips": "8013",
+            "lat": 40.0636,
+            "lon": -105.3695,
+            "population": 210
+        },
+        {
+            "name": "Sugarloaf",
+            "fips": "8013",
+            "lat": 40.0189,
+            "lon": -105.4078,
+            "population": 465
+        },
+        {
+            "name": "Sugar City",
+            "fips": "8025",
+            "lat": 38.2328,
+            "lon": -103.6633,
+            "population": 644
+        },
+        {
+            "name": "Stratton",
+            "fips": "8063",
+            "lat": 39.3029,
+            "lon": -102.6034,
+            "population": 685
+        },
+        {
+            "name": "Stratmoor",
+            "fips": "8041",
+            "lat": 38.7731,
+            "lon": -104.7786,
+            "population": 6515
+        },
+        {
+            "name": "Strasburg",
+            "fips": "8005",
+            "lat": 39.7181,
+            "lon": -104.3195,
+            "population": 3369
+        },
+        {
+            "name": "Stonewall Gap",
+            "fips": "8071",
+            "lat": 37.1605,
+            "lon": -105.0342,
+            "population": 47
+        },
+        {
+            "name": "Stonegate",
+            "fips": "8035",
+            "lat": 39.5357,
+            "lon": -104.8032,
+            "population": 9822
+        },
+        {
+            "name": "Sterling Ranch",
+            "fips": "8035",
+            "lat": 39.4932,
+            "lon": -105.0475,
+            "population": 1171
+        },
+        {
+            "name": "Sterling",
+            "fips": "8075",
+            "lat": 40.6205,
+            "lon": -103.1925,
+            "population": 13976
+        },
+        {
+            "name": "Stepping Stone",
+            "fips": "8035",
+            "lat": 39.514,
+            "lon": -104.8217,
+            "population": 2191
+        },
+        {
+            "name": "Steamboat Springs",
+            "fips": "8107",
+            "lat": 40.4777,
+            "lon": -106.8243,
+            "population": 13193
+        },
+        {
+            "name": "Starkville",
+            "fips": "8071",
+            "lat": 37.1169,
+            "lon": -104.5231,
+            "population": 83
+        },
+        {
+            "name": "St. Mary's",
+            "fips": "8019",
+            "lat": 39.8163,
+            "lon": -105.6479,
+            "population": 267
+        },
+        {
+            "name": "St. Ann Highlands",
+            "fips": "8013",
+            "lat": 39.9873,
+            "lon": -105.4559,
+            "population": 550
+        },
+        {
+            "name": "Springfield",
+            "fips": "8009",
+            "lat": 37.405,
+            "lon": -102.6189,
+            "population": 1318
+        },
+        {
+            "name": "Southern Ute",
+            "fips": "8067",
+            "lat": 37.0749,
+            "lon": -107.5933,
+            "population": 178
+        },
+        {
+            "name": "South Fork",
+            "fips": "8105",
+            "lat": 37.6691,
+            "lon": -106.6417,
+            "population": 387
+        },
+        {
+            "name": "Somerset",
+            "fips": "8051",
+            "lat": 38.9268,
+            "lon": -107.4725,
+            "population": 61
+        },
+        {
+            "name": "Snyder",
+            "fips": "8087",
+            "lat": 40.3309,
+            "lon": -103.592,
+            "population": 135
+        },
+        {
+            "name": "Snowmass Village",
+            "fips": "8097",
+            "lat": 39.2212,
+            "lon": -106.9392,
+            "population": 3089
+        },
+        {
+            "name": "Smeltertown",
+            "fips": "8015",
+            "lat": 38.5524,
+            "lon": -106.0085,
+            "population": 108
+        },
+        {
+            "name": "Simla",
+            "fips": "8039",
+            "lat": 39.1408,
+            "lon": -104.0824,
+            "population": 534
+        },
+        {
+            "name": "Silverton",
+            "fips": "8111",
+            "lat": 37.8107,
+            "lon": -107.6649,
+            "population": 638
+        },
+        {
+            "name": "Silverthorne",
+            "fips": "8117",
+            "lat": 39.6562,
+            "lon": -106.0869,
+            "population": 4520
+        },
+        {
+            "name": "Silver Plume",
+            "fips": "8019",
+            "lat": 39.6957,
+            "lon": -105.7264,
+            "population": 183
+        },
+        {
+            "name": "Silver Cliff",
+            "fips": "8027",
+            "lat": 38.1204,
+            "lon": -105.4104,
+            "population": 683
+        },
+        {
+            "name": "Silt",
+            "fips": "8045",
+            "lat": 39.5483,
+            "lon": -107.6531,
+            "population": 3485
+        },
+        {
+            "name": "Sierra Ridge",
+            "fips": "8035",
+            "lat": 39.5286,
+            "lon": -104.8172,
+            "population": 2316
+        },
+        {
+            "name": "Sherrelwood",
+            "fips": "8001",
+            "lat": 39.839,
+            "lon": -105.0014,
+            "population": 20069
+        },
+        {
+            "name": "Sheridan Lake",
+            "fips": "8061",
+            "lat": 38.4667,
+            "lon": -102.2943,
+            "population": 56
+        },
+        {
+            "name": "Sheridan",
+            "fips": "8005",
+            "lat": 39.6468,
+            "lon": -105.0182,
+            "population": 6090
+        },
+        {
+            "name": "Shaw Heights",
+            "fips": "8001",
+            "lat": 39.8566,
+            "lon": -105.0391,
+            "population": 5648
+        },
+        {
+            "name": "Severance",
+            "fips": "8123",
+            "lat": 40.5265,
+            "lon": -104.865,
+            "population": 7691
+        },
+        {
+            "name": "Seven Hills",
+            "fips": "8013",
+            "lat": 40.0361,
+            "lon": -105.3323,
+            "population": 137
+        },
+        {
+            "name": "Seibert",
+            "fips": "8063",
+            "lat": 39.298,
+            "lon": -102.8695,
+            "population": 133
+        },
+        {
+            "name": "Segundo",
+            "fips": "8071",
+            "lat": 37.1225,
+            "lon": -104.7395,
+            "population": 138
+        },
+        {
+            "name": "Sedgwick",
+            "fips": "8115",
+            "lat": 40.9355,
+            "lon": -102.5256,
+            "population": 166
+        },
+        {
+            "name": "Sedalia",
+            "fips": "8035",
+            "lat": 39.4396,
+            "lon": -104.9699,
+            "population": 58
+        },
+        {
+            "name": "Security-Widefield",
+            "fips": "8041",
+            "lat": 38.7489,
+            "lon": -104.7142,
+            "population": 40158
+        },
+        {
+            "name": "Sawpit",
+            "fips": "8113",
+            "lat": 37.9947,
+            "lon": -108.0021,
+            "population": 17
+        },
+        {
+            "name": "Sanford",
+            "fips": "8021",
+            "lat": 37.2574,
+            "lon": -105.9007,
+            "population": 1359
+        },
+        {
+            "name": "San Luis",
+            "fips": "8023",
+            "lat": 37.2025,
+            "lon": -105.4225,
+            "population": 624
+        },
+        {
+            "name": "San Acacio",
+            "fips": "8023",
+            "lat": 37.2086,
+            "lon": -105.5667,
+            "population": 63
+        },
+        {
+            "name": "Salt Creek",
+            "fips": "8101",
+            "lat": 38.2407,
+            "lon": -104.5867,
+            "population": 771
+        },
+        {
+            "name": "Salida",
+            "fips": "8015",
+            "lat": 38.5298,
+            "lon": -105.9979,
+            "population": 5671
+        },
+        {
+            "name": "Saguache",
+            "fips": "8109",
+            "lat": 38.0865,
+            "lon": -106.141,
+            "population": 530
+        },
+        {
+            "name": "Saddle Ridge",
+            "fips": "8087",
+            "lat": 40.3134,
+            "lon": -103.8023,
+            "population": 111
+        },
+        {
+            "name": "Rye",
+            "fips": "8101",
+            "lat": 37.9212,
+            "lon": -104.9322,
+            "population": 189
+        },
+        {
+            "name": "Roxborough Park",
+            "fips": "8035",
+            "lat": 39.4492,
+            "lon": -105.0746,
+            "population": 8861
+        },
+        {
+            "name": "Romeo",
+            "fips": "8021",
+            "lat": 37.1718,
+            "lon": -105.9854,
+            "population": 313
+        },
+        {
+            "name": "Rollinsville",
+            "fips": "8047",
+            "lat": 39.9232,
+            "lon": -105.5136,
+            "population": 197
+        },
+        {
+            "name": "Rocky Ford",
+            "fips": "8089",
+            "lat": 38.0499,
+            "lon": -103.7225,
+            "population": 3876
+        },
+        {
+            "name": "Rockvale",
+            "fips": "8043",
+            "lat": 38.3644,
+            "lon": -105.1646,
+            "population": 632
+        },
+        {
+            "name": "Rock Creek Park",
+            "fips": "8041",
+            "lat": 38.7011,
+            "lon": -104.8347,
+            "population": 103
+        },
+        {
+            "name": "Rifle",
+            "fips": "8045",
+            "lat": 39.5362,
+            "lon": -107.7729,
+            "population": 10325
+        },
+        {
+            "name": "Ridgway",
+            "fips": "8091",
+            "lat": 38.1573,
+            "lon": -107.7545,
+            "population": 1033
+        },
+        {
+            "name": "Rico",
+            "fips": "8033",
+            "lat": 37.6891,
+            "lon": -108.0316,
+            "population": 335
+        },
+        {
+            "name": "Redvale",
+            "fips": "8085",
+            "lat": 38.1761,
+            "lon": -108.4125,
+            "population": 315
+        },
+        {
+            "name": "Redstone",
+            "fips": "8097",
+            "lat": 39.1839,
+            "lon": -107.2407,
+            "population": 167
+        },
+        {
+            "name": "Redlands",
+            "fips": "8077",
+            "lat": 39.0886,
+            "lon": -108.6582,
+            "population": 9092
+        },
+        {
+            "name": "Red Feather Lakes",
+            "fips": "8069",
+            "lat": 40.8071,
+            "lon": -105.5864,
+            "population": 562
+        },
+        {
+            "name": "Red Cliff",
+            "fips": "8037",
+            "lat": 39.5092,
+            "lon": -106.3699,
+            "population": 281
+        },
+        {
+            "name": "Raymer",
+            "fips": "8123",
+            "lat": 40.608,
+            "lon": -103.8434,
+            "population": 95
+        },
+        {
+            "name": "Rangely",
+            "fips": "8103",
+            "lat": 40.0861,
+            "lon": -108.7795,
+            "population": 2381
+        },
+        {
+            "name": "Ramah",
+            "fips": "8041",
+            "lat": 39.1222,
+            "lon": -104.1673,
+            "population": 114
+        },
+        {
+            "name": "Pueblo West",
+            "fips": "8101",
+            "lat": 38.3465,
+            "lon": -104.7246,
+            "population": 32991
+        },
+        {
+            "name": "Pueblo",
+            "fips": "8101",
+            "lat": 38.2701,
+            "lon": -104.6114,
+            "population": 142727
+        },
+        {
+            "name": "Pritchett",
+            "fips": "8009",
+            "lat": 37.3701,
+            "lon": -102.8588,
+            "population": 81
+        },
+        {
+            "name": "Portland",
+            "fips": "8091",
+            "lat": 38.0892,
+            "lon": -107.6952,
+            "population": 111
+        },
+        {
+            "name": "Ponderosa Park",
+            "fips": "8039",
+            "lat": 39.3987,
+            "lon": -104.6355,
+            "population": 3400
+        },
+        {
+            "name": "Poncha Springs",
+            "fips": "8015",
+            "lat": 38.514,
+            "lon": -106.0944,
+            "population": 1098
+        },
+        {
+            "name": "Platteville",
+            "fips": "8123",
+            "lat": 40.222,
+            "lon": -104.834,
+            "population": 2879
+        },
+        {
+            "name": "Placerville",
+            "fips": "8113",
+            "lat": 38.0054,
+            "lon": -108.04,
+            "population": 321
+        },
+        {
+            "name": "Pitkin",
+            "fips": "8051",
+            "lat": 38.6089,
+            "lon": -106.5144,
+            "population": 133
+        },
+        {
+            "name": "Pine Valley",
+            "fips": "8019",
+            "lat": 39.691,
+            "lon": -105.4132,
+            "population": 395
+        },
+        {
+            "name": "Pine Brook Hill",
+            "fips": "8013",
+            "lat": 40.0462,
+            "lon": -105.3097,
+            "population": 734
+        },
+        {
+            "name": "Pierce",
+            "fips": "8123",
+            "lat": 40.6411,
+            "lon": -104.7701,
+            "population": 1019
+        },
+        {
+            "name": "Piedra",
+            "fips": "8053",
+            "lat": 37.4418,
+            "lon": -107.1684,
+            "population": 35
+        },
+        {
+            "name": "Phippsburg",
+            "fips": "8107",
+            "lat": 40.2302,
+            "lon": -106.9508,
+            "population": 334
+        },
+        {
+            "name": "Peyton",
+            "fips": "8041",
+            "lat": 39.033,
+            "lon": -104.4904,
+            "population": 0
+        },
+        {
+            "name": "Perry Park",
+            "fips": "8035",
+            "lat": 39.2595,
+            "lon": -104.9825,
+            "population": 1854
+        },
+        {
+            "name": "Peoria",
+            "fips": "8005",
+            "lat": 39.6649,
+            "lon": -104.1456,
+            "population": 53
+        },
+        {
+            "name": "Penrose",
+            "fips": "8043",
+            "lat": 38.4213,
+            "lon": -105.0004,
+            "population": 3305
+        },
+        {
+            "name": "Peetz",
+            "fips": "8075",
+            "lat": 40.9617,
+            "lon": -103.1139,
+            "population": 246
+        },
+        {
+            "name": "Parshall",
+            "fips": "8049",
+            "lat": 40.0554,
+            "lon": -106.1757,
+            "population": 63
+        },
+        {
+            "name": "Parker",
+            "fips": "8035",
+            "lat": 39.5084,
+            "lon": -104.7753,
+            "population": 57311
+        },
+        {
+            "name": "Park Center",
+            "fips": "8043",
+            "lat": 38.4835,
+            "lon": -105.224,
+            "population": 2156
+        },
+        {
+            "name": "Paragon Estates",
+            "fips": "8013",
+            "lat": 39.9802,
+            "lon": -105.1812,
+            "population": 822
+        },
+        {
+            "name": "Parachute",
+            "fips": "8045",
+            "lat": 39.4508,
+            "lon": -108.0529,
+            "population": 1607
+        },
+        {
+            "name": "Paonia",
+            "fips": "8029",
+            "lat": 38.8698,
+            "lon": -107.592,
+            "population": 1542
+        },
+        {
+            "name": "Paoli",
+            "fips": "8095",
+            "lat": 40.6128,
+            "lon": -102.4718,
+            "population": 46
+        },
+        {
+            "name": "Palmer Lake",
+            "fips": "8041",
+            "lat": 39.1153,
+            "lon": -104.906,
+            "population": 2652
+        },
+        {
+            "name": "Palisade",
+            "fips": "8077",
+            "lat": 39.1084,
+            "lon": -108.3573,
+            "population": 2575
+        },
+        {
+            "name": "Pagosa Springs",
+            "fips": "8007",
+            "lat": 37.2675,
+            "lon": -107.0307,
+            "population": 1548
+        },
+        {
+            "name": "Padroni",
+            "fips": "8075",
+            "lat": 40.7818,
+            "lon": -103.1733,
+            "population": 30
+        },
+        {
+            "name": "Ovid",
+            "fips": "8115",
+            "lat": 40.9609,
+            "lon": -102.3883,
+            "population": 308
+        },
+        {
+            "name": "Ouray",
+            "fips": "8091",
+            "lat": 38.0276,
+            "lon": -107.6734,
+            "population": 1009
+        },
+        {
+            "name": "Otis",
+            "fips": "8121",
+            "lat": 40.1501,
+            "lon": -102.9622,
+            "population": 526
+        },
+        {
+            "name": "Ordway",
+            "fips": "8025",
+            "lat": 38.2208,
+            "lon": -103.7566,
+            "population": 2066
+        },
+        {
+            "name": "Orchard Mesa",
+            "fips": "8077",
+            "lat": 39.0363,
+            "lon": -108.5166,
+            "population": 6592
+        },
+        {
+            "name": "Orchard City",
+            "fips": "8029",
+            "lat": 38.8144,
+            "lon": -107.9705,
+            "population": 3144
+        },
+        {
+            "name": "Orchard",
+            "fips": "8087",
+            "lat": 40.3321,
+            "lon": -104.1178,
+            "population": 134
+        },
+        {
+            "name": "Ophir",
+            "fips": "8113",
+            "lat": 37.8568,
+            "lon": -107.8312,
+            "population": 198
+        },
+        {
+            "name": "Olney Springs",
+            "fips": "8025",
+            "lat": 38.1663,
+            "lon": -103.9445,
+            "population": 604
+        },
+        {
+            "name": "Olathe",
+            "fips": "8085",
+            "lat": 38.6083,
+            "lon": -107.9833,
+            "population": 1874
+        },
+        {
+            "name": "Oak Creek",
+            "fips": "8107",
+            "lat": 40.2741,
+            "lon": -106.9575,
+            "population": 722
+        },
+        {
+            "name": "Nunn",
+            "fips": "8123",
+            "lat": 40.7137,
+            "lon": -104.7889,
+            "population": 463
+        },
+        {
+            "name": "Nucla",
+            "fips": "8085",
+            "lat": 38.2668,
+            "lon": -108.5487,
+            "population": 578
+        },
+        {
+            "name": "Norwood",
+            "fips": "8113",
+            "lat": 38.129,
+            "lon": -108.2919,
+            "population": 551
+        },
+        {
+            "name": "Northglenn",
+            "fips": "8001",
+            "lat": 39.9108,
+            "lon": -104.9783,
+            "population": 37899
+        },
+        {
+            "name": "North Washington",
+            "fips": "8001",
+            "lat": 39.8084,
+            "lon": -104.9792,
+            "population": 435
+        },
+        {
+            "name": "North La Junta",
+            "fips": "8089",
+            "lat": 37.9986,
+            "lon": -103.5227,
+            "population": 478
+        },
+        {
+            "name": "Norrie",
+            "fips": "8097",
+            "lat": 39.328,
+            "lon": -106.6562,
+            "population": 0
+        },
+        {
+            "name": "No Name",
+            "fips": "8045",
+            "lat": 39.5597,
+            "lon": -107.293,
+            "population": 283
+        },
+        {
+            "name": "Niwot",
+            "fips": "8013",
+            "lat": 40.098,
+            "lon": -105.1552,
+            "population": 4216
+        },
+        {
+            "name": "New Castle",
+            "fips": "8045",
+            "lat": 39.5776,
+            "lon": -107.5267,
+            "population": 4883
+        },
+        {
+            "name": "Nederland",
+            "fips": "8013",
+            "lat": 39.9633,
+            "lon": -105.5071,
+            "population": 1392
+        },
+        {
+            "name": "Naturita",
+            "fips": "8085",
+            "lat": 38.2183,
+            "lon": -108.5665,
+            "population": 434
+        },
+        {
+            "name": "Nathrop",
+            "fips": "8015",
+            "lat": 38.7486,
+            "lon": -106.0764,
+            "population": 147
+        },
+        {
+            "name": "Mulford",
+            "fips": "8045",
+            "lat": 39.4063,
+            "lon": -107.1661,
+            "population": 609
+        },
+        {
+            "name": "Mountain Village",
+            "fips": "8113",
+            "lat": 37.9324,
+            "lon": -107.8577,
+            "population": 1577
+        },
+        {
+            "name": "Mountain View",
+            "fips": "8059",
+            "lat": 39.7748,
+            "lon": -105.0567,
+            "population": 648
+        },
+        {
+            "name": "Mountain Meadows",
+            "fips": "8013",
+            "lat": 40.027,
+            "lon": -105.3832,
+            "population": 160
+        },
+        {
+            "name": "Mount Crested Butte",
+            "fips": "8051",
+            "lat": 38.9083,
+            "lon": -106.9606,
+            "population": 906
+        },
+        {
+            "name": "Morrison",
+            "fips": "8059",
+            "lat": 39.6368,
+            "lon": -105.2006,
+            "population": 398
+        },
+        {
+            "name": "Morgan Heights",
+            "fips": "8087",
+            "lat": 40.2875,
+            "lon": -103.8275,
+            "population": 151
+        },
+        {
+            "name": "Monument",
+            "fips": "8041",
+            "lat": 39.0736,
+            "lon": -104.8467,
+            "population": 10026
+        },
+        {
+            "name": "Montrose",
+            "fips": "8085",
+            "lat": 38.4689,
+            "lon": -107.859,
+            "population": 20098
+        },
+        {
+            "name": "Montezuma",
+            "fips": "8117",
+            "lat": 39.5814,
+            "lon": -105.8678,
+            "population": 156
+        },
+        {
+            "name": "Monte Vista",
+            "fips": "8105",
+            "lat": 37.5789,
+            "lon": -106.1499,
+            "population": 4228
+        },
+        {
+            "name": "Moffat",
+            "fips": "8109",
+            "lat": 38.0027,
+            "lon": -105.9065,
+            "population": 83
+        },
+        {
+            "name": "Minturn",
+            "fips": "8037",
+            "lat": 39.5463,
+            "lon": -106.3871,
+            "population": 1084
+        },
+        {
+            "name": "Milliken",
+            "fips": "8123",
+            "lat": 40.3115,
+            "lon": -104.8561,
+            "population": 8122
+        },
+        {
+            "name": "Midland",
+            "fips": "8119",
+            "lat": 38.8468,
+            "lon": -105.1579,
+            "population": 258
+        },
+        {
+            "name": "Merino",
+            "fips": "8075",
+            "lat": 40.4835,
+            "lon": -103.3535,
+            "population": 272
+        },
+        {
+            "name": "Meridian Village",
+            "fips": "8035",
+            "lat": 39.528,
+            "lon": -104.8258,
+            "population": 2747
+        },
+        {
+            "name": "Meridian",
+            "fips": "8035",
+            "lat": 39.5458,
+            "lon": -104.8533,
+            "population": 4954
+        },
+        {
+            "name": "Meeker",
+            "fips": "8103",
+            "lat": 40.0499,
+            "lon": -107.8947,
+            "population": 2482
+        },
+        {
+            "name": "Mead",
+            "fips": "8123",
+            "lat": 40.2318,
+            "lon": -104.9911,
+            "population": 4716
+        },
+        {
+            "name": "McCoy",
+            "fips": "8037",
+            "lat": 39.9144,
+            "lon": -106.7257,
+            "population": 50
+        },
+        {
+            "name": "McClave",
+            "fips": "8011",
+            "lat": 38.1315,
+            "lon": -102.8504,
+            "population": 88
+        },
+        {
+            "name": "Maysville",
+            "fips": "8015",
+            "lat": 38.5305,
+            "lon": -106.2156,
+            "population": 141
+        },
+        {
+            "name": "Maybell",
+            "fips": "8081",
+            "lat": 40.5188,
+            "lon": -108.0885,
+            "population": 43
+        },
+        {
+            "name": "Matheson",
+            "fips": "8039",
+            "lat": 39.1683,
+            "lon": -103.977,
+            "population": 25
+        },
+        {
+            "name": "Marvel",
+            "fips": "8067",
+            "lat": 37.1112,
+            "lon": -108.1262,
+            "population": 95
+        },
+        {
+            "name": "Marble",
+            "fips": "8051",
+            "lat": 39.0716,
+            "lon": -107.1909,
+            "population": 180
+        },
+        {
+            "name": "Manzanola",
+            "fips": "8089",
+            "lat": 38.1088,
+            "lon": -103.8668,
+            "population": 497
+        },
+        {
+            "name": "Manitou Springs",
+            "fips": "8041",
+            "lat": 38.8575,
+            "lon": -104.9127,
+            "population": 4912
+        },
+        {
+            "name": "Mancos",
+            "fips": "8083",
+            "lat": 37.3466,
+            "lon": -108.2939,
+            "population": 1168
+        },
+        {
+            "name": "Manassa",
+            "fips": "8021",
+            "lat": 37.1738,
+            "lon": -105.9373,
+            "population": 981
+        },
+        {
+            "name": "Lyons",
+            "fips": "8013",
+            "lat": 40.223,
+            "lon": -105.2692,
+            "population": 2261
+        },
+        {
+            "name": "Lynn",
+            "fips": "8071",
+            "lat": 37.4219,
+            "lon": -104.6431,
+            "population": 49
+        },
+        {
+            "name": "Loveland",
+            "fips": "8069",
+            "lat": 40.4166,
+            "lon": -105.0623,
+            "population": 75938
+        },
+        {
+            "name": "Louviers",
+            "fips": "8035",
+            "lat": 39.4799,
+            "lon": -105.0033,
+            "population": 265
+        },
+        {
+            "name": "Louisville",
+            "fips": "8013",
+            "lat": 39.971,
+            "lon": -105.1441,
+            "population": 21091
+        },
+        {
+            "name": "Longmont",
+            "fips": "8013",
+            "lat": 40.1686,
+            "lon": -105.1005,
+            "population": 104035
+        },
+        {
+            "name": "Lone Tree",
+            "fips": "8035",
+            "lat": 39.5309,
+            "lon": -104.8709,
+            "population": 13701
+        },
+        {
+            "name": "Loma",
+            "fips": "8077",
+            "lat": 39.2075,
+            "lon": -108.805,
+            "population": 1471
+        },
+        {
+            "name": "Loghill Village",
+            "fips": "8091",
+            "lat": 38.1994,
+            "lon": -107.7754,
+            "population": 601
+        },
+        {
+            "name": "Log Lane Village",
+            "fips": "8087",
+            "lat": 40.2697,
+            "lon": -103.829,
+            "population": 960
+        },
+        {
+            "name": "Lochbuie",
+            "fips": "8123",
+            "lat": 40.0118,
+            "lon": -104.7271,
+            "population": 7730
+        },
+        {
+            "name": "Littleton",
+            "fips": "8005",
+            "lat": 39.5915,
+            "lon": -105.0188,
+            "population": 45465
+        },
+        {
+            "name": "Lincoln Park",
+            "fips": "8043",
+            "lat": 38.4255,
+            "lon": -105.2132,
+            "population": 3724
+        },
+        {
+            "name": "Limon",
+            "fips": "8073",
+            "lat": 39.2653,
+            "lon": -103.6857,
+            "population": 1167
+        },
+        {
+            "name": "Leyner",
+            "fips": "8013",
+            "lat": 40.0511,
+            "lon": -105.1074,
+            "population": 0
+        },
+        {
+            "name": "Lewis",
+            "fips": "8083",
+            "lat": 37.5017,
+            "lon": -108.66,
+            "population": 164
+        },
+        {
+            "name": "Leadville North",
+            "fips": "8065",
+            "lat": 39.26,
+            "lon": -106.3112,
+            "population": 1948
+        },
+        {
+            "name": "Leadville",
+            "fips": "8065",
+            "lat": 39.2473,
+            "lon": -106.2934,
+            "population": 2623
+        },
+        {
+            "name": "Lazy Acres",
+            "fips": "8013",
+            "lat": 40.0837,
+            "lon": -105.3313,
+            "population": 926
+        },
+        {
+            "name": "Lazear",
+            "fips": "8029",
+            "lat": 38.7788,
+            "lon": -107.7805,
+            "population": 165
+        },
+        {
+            "name": "Las Animas",
+            "fips": "8011",
+            "lat": 38.0695,
+            "lon": -103.2236,
+            "population": 2564
+        },
+        {
+            "name": "Larkspur",
+            "fips": "8035",
+            "lat": 39.2319,
+            "lon": -104.8924,
+            "population": 260
+        },
+        {
+            "name": "Laporte",
+            "fips": "8069",
+            "lat": 40.6385,
+            "lon": -105.1445,
+            "population": 2201
+        },
+        {
+            "name": "Lamar",
+            "fips": "8099",
+            "lat": 38.074,
+            "lon": -102.6154,
+            "population": 7636
+        },
+        {
+            "name": "Lakewood",
+            "fips": "8059",
+            "lat": 39.6977,
+            "lon": -105.1172,
+            "population": 155608
+        },
+        {
+            "name": "Lakeside",
+            "fips": "8059",
+            "lat": 39.7802,
+            "lon": -105.0579,
+            "population": 8
+        },
+        {
+            "name": "Lake City",
+            "fips": "8053",
+            "lat": 38.0303,
+            "lon": -107.3106,
+            "population": 485
+        },
+        {
+            "name": "Laird",
+            "fips": "8125",
+            "lat": 40.0819,
+            "lon": -102.102,
+            "population": 6
+        },
+        {
+            "name": "Lafayette",
+            "fips": "8013",
+            "lat": 39.9946,
+            "lon": -105.0998,
+            "population": 99475
+        },
+        {
+            "name": "La Veta",
+            "fips": "8055",
+            "lat": 37.5085,
+            "lon": -105.0085,
+            "population": 809
+        },
+        {
+            "name": "La Salle",
+            "fips": "8123",
+            "lat": 40.3484,
+            "lon": -104.7062,
+            "population": 2934
+        },
+        {
+            "name": "La Junta Gardens",
+            "fips": "8089",
+            "lat": 38.0014,
+            "lon": -103.5549,
+            "population": 246
+        },
+        {
+            "name": "La Junta",
+            "fips": "8089",
+            "lat": 37.9791,
+            "lon": -103.5471,
+            "population": 7282
+        },
+        {
+            "name": "La Jara",
+            "fips": "8021",
+            "lat": 37.2735,
+            "lon": -105.9597,
+            "population": 772
+        },
+        {
+            "name": "Kremmling",
+            "fips": "8049",
+            "lat": 40.0567,
+            "lon": -106.3784,
+            "population": 1697
+        },
+        {
+            "name": "Kittredge",
+            "fips": "8059",
+            "lat": 39.6593,
+            "lon": -105.3045,
+            "population": 1023
+        },
+        {
+            "name": "Kit Carson",
+            "fips": "8017",
+            "lat": 38.7628,
+            "lon": -102.7954,
+            "population": 254
+        },
+        {
+            "name": "Kirk",
+            "fips": "8125",
+            "lat": 39.6127,
+            "lon": -102.592,
+            "population": 79
+        },
+        {
+            "name": "Kiowa",
+            "fips": "8039",
+            "lat": 39.3436,
+            "lon": -104.458,
+            "population": 648
+        },
+        {
+            "name": "Kim",
+            "fips": "8071",
+            "lat": 37.247,
+            "lon": -103.3534,
+            "population": 53
+        },
+        {
+            "name": "Keystone",
+            "fips": "8117",
+            "lat": 39.5901,
+            "lon": -105.9383,
+            "population": 611
+        },
+        {
+            "name": "Kersey",
+            "fips": "8123",
+            "lat": 40.391,
+            "lon": -104.5794,
+            "population": 1533
+        },
+        {
+            "name": "Ken Caryl",
+            "fips": "8059",
+            "lat": 39.577,
+            "lon": -105.1144,
+            "population": 33889
+        },
+        {
+            "name": "Keenesburg",
+            "fips": "8123",
+            "lat": 40.1327,
+            "lon": -104.538,
+            "population": 1546
+        },
+        {
+            "name": "Julesburg",
+            "fips": "8115",
+            "lat": 40.9849,
+            "lon": -102.2627,
+            "population": 1226
+        },
+        {
+            "name": "Johnstown",
+            "fips": "8123",
+            "lat": 40.3499,
+            "lon": -104.9482,
+            "population": 16596
+        },
+        {
+            "name": "Johnson Village",
+            "fips": "8015",
+            "lat": 38.812,
+            "lon": -106.1071,
+            "population": 296
+        },
+        {
+            "name": "Joes",
+            "fips": "8125",
+            "lat": 39.6559,
+            "lon": -102.6786,
+            "population": 72
+        },
+        {
+            "name": "Jansen",
+            "fips": "8071",
+            "lat": 37.1581,
+            "lon": -104.5501,
+            "population": 202
+        },
+        {
+            "name": "Jamestown",
+            "fips": "8013",
+            "lat": 40.118,
+            "lon": -105.3914,
+            "population": 281
+        },
+        {
+            "name": "Jackson Lake",
+            "fips": "8087",
+            "lat": 40.3758,
+            "lon": -104.0712,
+            "population": 147
+        },
+        {
+            "name": "Inverness",
+            "fips": "8005",
+            "lat": 39.5758,
+            "lon": -104.8653,
+            "population": 2342
+        },
+        {
+            "name": "Indian Hills",
+            "fips": "8059",
+            "lat": 39.6294,
+            "lon": -105.2509,
+            "population": 1545
+        },
+        {
+            "name": "Iliff",
+            "fips": "8075",
+            "lat": 40.7592,
+            "lon": -103.0661,
+            "population": 338
+        },
+        {
+            "name": "Ignacio",
+            "fips": "8067",
+            "lat": 37.118,
+            "lon": -107.6376,
+            "population": 1319
+        },
+        {
+            "name": "Idledale",
+            "fips": "8059",
+            "lat": 39.6688,
+            "lon": -105.2432,
+            "population": 277
+        },
+        {
+            "name": "Idalia",
+            "fips": "8125",
+            "lat": 39.7029,
+            "lon": -102.2938,
+            "population": 54
+        },
+        {
+            "name": "Idaho Springs",
+            "fips": "8019",
+            "lat": 39.7444,
+            "lon": -105.5006,
+            "population": 2044
+        },
+        {
+            "name": "Hugo",
+            "fips": "8073",
+            "lat": 39.1362,
+            "lon": -103.4731,
+            "population": 951
+        },
+        {
+            "name": "Hudson",
+            "fips": "8123",
+            "lat": 40.0898,
+            "lon": -104.621,
+            "population": 2172
+        },
+        {
+            "name": "Howard",
+            "fips": "8043",
+            "lat": 38.4098,
+            "lon": -105.8424,
+            "population": 962
+        },
+        {
+            "name": "Hotchkiss",
+            "fips": "8029",
+            "lat": 38.799,
+            "lon": -107.7133,
+            "population": 1273
+        },
+        {
+            "name": "Hot Sulphur Springs",
+            "fips": "8049",
+            "lat": 40.0748,
+            "lon": -106.1032,
+            "population": 873
+        },
+        {
+            "name": "Hooper",
+            "fips": "8003",
+            "lat": 37.746,
+            "lon": -105.8777,
+            "population": 162
+        },
+        {
+            "name": "Holyoke",
+            "fips": "8095",
+            "lat": 40.582,
+            "lon": -102.2975,
+            "population": 2416
+        },
+        {
+            "name": "Holly Hills",
+            "fips": "8005",
+            "lat": 39.6678,
+            "lon": -104.9216,
+            "population": 2843
+        },
+        {
+            "name": "Holly",
+            "fips": "8099",
+            "lat": 38.0554,
+            "lon": -102.1247,
+            "population": 809
+        },
+        {
+            "name": "Hoehne",
+            "fips": "8071",
+            "lat": 37.2815,
+            "lon": -104.389,
+            "population": 134
+        },
+        {
+            "name": "Hillrose",
+            "fips": "8087",
+            "lat": 40.3245,
+            "lon": -103.5224,
+            "population": 240
+        },
+        {
+            "name": "Highlands Ranch",
+            "fips": "8035",
+            "lat": 39.5419,
+            "lon": -104.9708,
+            "population": 103238
+        },
+        {
+            "name": "Hidden Lake",
+            "fips": "8013",
+            "lat": 40.1055,
+            "lon": -105.4777,
+            "population": 30
+        },
+        {
+            "name": "Heeney",
+            "fips": "8117",
+            "lat": 39.8712,
+            "lon": -106.3002,
+            "population": 75
+        },
+        {
+            "name": "Hayden",
+            "fips": "8107",
+            "lat": 40.4851,
+            "lon": -107.239,
+            "population": 2116
+        },
+        {
+            "name": "Haxtun",
+            "fips": "8095",
+            "lat": 40.642,
+            "lon": -102.6297,
+            "population": 949
+        },
+        {
+            "name": "Haswell",
+            "fips": "8061",
+            "lat": 38.4525,
+            "lon": -103.1649,
+            "population": 73
+        },
+        {
+            "name": "Hasty",
+            "fips": "8011",
+            "lat": 38.0999,
+            "lon": -102.9639,
+            "population": 116
+        },
+        {
+            "name": "Hartsel",
+            "fips": "8093",
+            "lat": 39.0219,
+            "lon": -105.7976,
+            "population": 0
+        },
+        {
+            "name": "Hartman",
+            "fips": "8099",
+            "lat": 38.1212,
+            "lon": -102.2217,
+            "population": 72
+        },
+        {
+            "name": "Gypsum",
+            "fips": "8037",
+            "lat": 39.6287,
+            "lon": -106.9348,
+            "population": 8047
+        },
+        {
+            "name": "Gunnison",
+            "fips": "8051",
+            "lat": 38.548,
+            "lon": -106.9246,
+            "population": 6459
+        },
+        {
+            "name": "Gunbarrel",
+            "fips": "8013",
+            "lat": 40.0632,
+            "lon": -105.1713,
+            "population": 10199
+        },
+        {
+            "name": "Guffey",
+            "fips": "8093",
+            "lat": 38.7591,
+            "lon": -105.5024,
+            "population": 24
+        },
+        {
+            "name": "Grover",
+            "fips": "8123",
+            "lat": 40.8691,
+            "lon": -104.2259,
+            "population": 186
+        },
+        {
+            "name": "Greenwood Village",
+            "fips": "8005",
+            "lat": 39.6153,
+            "lon": -104.9131,
+            "population": 15548
+        },
+        {
+            "name": "Green Mountain Falls",
+            "fips": "8041",
+            "lat": 38.9344,
+            "lon": -105.0238,
+            "population": 615
+        },
+        {
+            "name": "Greeley",
+            "fips": "8123",
+            "lat": 40.4152,
+            "lon": -104.7706,
+            "population": 135270
+        },
+        {
+            "name": "Grand View Estates",
+            "fips": "8035",
+            "lat": 39.5439,
+            "lon": -104.8206,
+            "population": 830
+        },
+        {
+            "name": "Grand Lake",
+            "fips": "8049",
+            "lat": 40.2502,
+            "lon": -105.8232,
+            "population": 305
+        },
+        {
+            "name": "Grand Junction",
+            "fips": "8077",
+            "lat": 39.0877,
+            "lon": -108.5673,
+            "population": 134074
+        },
+        {
+            "name": "Granby",
+            "fips": "8049",
+            "lat": 40.0647,
+            "lon": -105.9194,
+            "population": 2229
+        },
+        {
+            "name": "Granada",
+            "fips": "8099",
+            "lat": 38.063,
+            "lon": -102.3115,
+            "population": 527
+        },
+        {
+            "name": "Goldfield",
+            "fips": "8119",
+            "lat": 38.7176,
+            "lon": -105.1253,
+            "population": 64
+        },
+        {
+            "name": "Golden",
+            "fips": "8059",
+            "lat": 39.7406,
+            "lon": -105.2118,
+            "population": 20041
+        },
+        {
+            "name": "Gold Hill",
+            "fips": "8013",
+            "lat": 40.0597,
+            "lon": -105.4189,
+            "population": 272
+        },
+        {
+            "name": "Glenwood Springs",
+            "fips": "8045",
+            "lat": 39.5455,
+            "lon": -107.3347,
+            "population": 10017
+        },
+        {
+            "name": "Gleneagle",
+            "fips": "8041",
+            "lat": 39.0453,
+            "lon": -104.8288,
+            "population": 6259
+        },
+        {
+            "name": "Glendale",
+            "fips": "8005",
+            "lat": 39.7036,
+            "lon": -104.9352,
+            "population": 4605
+        },
+        {
+            "name": "Gilcrest",
+            "fips": "8123",
+            "lat": 40.2841,
+            "lon": -104.782,
+            "population": 1171
+        },
+        {
+            "name": "Gerrard",
+            "fips": "8105",
+            "lat": 37.6783,
+            "lon": -106.5753,
+            "population": 314
+        },
+        {
+            "name": "Georgetown",
+            "fips": "8019",
+            "lat": 39.7179,
+            "lon": -105.6942,
+            "population": 1098
+        },
+        {
+            "name": "Genoa",
+            "fips": "8073",
+            "lat": 39.2782,
+            "lon": -103.4984,
+            "population": 131
+        },
+        {
+            "name": "Genesee",
+            "fips": "8059",
+            "lat": 39.6872,
+            "lon": -105.2718,
+            "population": 4241
+        },
+        {
+            "name": "Garfield",
+            "fips": "8015",
+            "lat": 38.5493,
+            "lon": -106.2893,
+            "population": 0
+        },
+        {
+            "name": "Gardner",
+            "fips": "8055",
+            "lat": 37.7889,
+            "lon": -105.1644,
+            "population": 68
+        },
+        {
+            "name": "Garden City",
+            "fips": "8123",
+            "lat": 40.3948,
+            "lon": -104.6893,
+            "population": 165
+        },
+        {
+            "name": "Fulford",
+            "fips": "8037",
+            "lat": 39.5166,
+            "lon": -106.6576,
+            "population": 0
+        },
+        {
+            "name": "Fruitvale",
+            "fips": "8077",
+            "lat": 39.0933,
+            "lon": -108.4789,
+            "population": 7883
+        },
+        {
+            "name": "Fruita",
+            "fips": "8077",
+            "lat": 39.1548,
+            "lon": -108.7305,
+            "population": 13296
+        },
+        {
+            "name": "Frisco",
+            "fips": "8117",
+            "lat": 39.5791,
+            "lon": -106.0915,
+            "population": 2952
+        },
+        {
+            "name": "Frederick",
+            "fips": "8123",
+            "lat": 40.1088,
+            "lon": -104.9701,
+            "population": 14127
+        },
+        {
+            "name": "Fraser",
+            "fips": "8049",
+            "lat": 39.9303,
+            "lon": -105.8029,
+            "population": 1334
+        },
+        {
+            "name": "Franktown",
+            "fips": "8035",
+            "lat": 39.3906,
+            "lon": -104.7486,
+            "population": 217
+        },
+        {
+            "name": "Foxfield",
+            "fips": "8005",
+            "lat": 39.5881,
+            "lon": -104.7857,
+            "population": 648
+        },
+        {
+            "name": "Fowler",
+            "fips": "8089",
+            "lat": 38.1304,
+            "lon": -104.0264,
+            "population": 1157
+        },
+        {
+            "name": "Four Square Mile",
+            "fips": "8005",
+            "lat": 39.6808,
+            "lon": -104.888,
+            "population": 21723
+        },
+        {
+            "name": "Fountain",
+            "fips": "8041",
+            "lat": 38.6886,
+            "lon": -104.6829,
+            "population": 29495
+        },
+        {
+            "name": "Fort Morgan",
+            "fips": "8087",
+            "lat": 40.2537,
+            "lon": -103.7903,
+            "population": 11483
+        },
+        {
+            "name": "Fort Lupton",
+            "fips": "8123",
+            "lat": 40.0827,
+            "lon": -104.8068,
+            "population": 7947
+        },
+        {
+            "name": "Fort Garland",
+            "fips": "8023",
+            "lat": 37.4279,
+            "lon": -105.4351,
+            "population": 589
+        },
+        {
+            "name": "Fort Collins",
+            "fips": "8069",
+            "lat": 40.5477,
+            "lon": -105.0656,
+            "population": 301596
+        },
+        {
+            "name": "Fort Carson",
+            "fips": "8041",
+            "lat": 38.7095,
+            "lon": -104.772,
+            "population": 16743
+        },
+        {
+            "name": "Floyd Hill",
+            "fips": "8019",
+            "lat": 39.7217,
+            "lon": -105.4313,
+            "population": 938
+        },
+        {
+            "name": "Florissant",
+            "fips": "8119",
+            "lat": 38.9445,
+            "lon": -105.29,
+            "population": 131
+        },
+        {
+            "name": "Florence",
+            "fips": "8043",
+            "lat": 38.3836,
+            "lon": -105.1114,
+            "population": 3857
+        },
+        {
+            "name": "Fleming",
+            "fips": "8075",
+            "lat": 40.6821,
+            "lon": -102.8396,
+            "population": 663
+        },
+        {
+            "name": "Flagler",
+            "fips": "8063",
+            "lat": 39.2948,
+            "lon": -103.0758,
+            "population": 504
+        },
+        {
+            "name": "Firestone",
+            "fips": "8123",
+            "lat": 40.1565,
+            "lon": -104.9494,
+            "population": 15949
+        },
+        {
+            "name": "Federal Heights",
+            "fips": "8001",
+            "lat": 39.8651,
+            "lon": -105.0154,
+            "population": 14111
+        },
+        {
+            "name": "Fairplay",
+            "fips": "8093",
+            "lat": 39.2245,
+            "lon": -105.9965,
+            "population": 718
+        },
+        {
+            "name": "Fairmount",
+            "fips": "8059",
+            "lat": 39.7931,
+            "lon": -105.1711,
+            "population": 9939
+        },
+        {
+            "name": "Evergreen",
+            "fips": "8059",
+            "lat": 39.6349,
+            "lon": -105.3356,
+            "population": 9338
+        },
+        {
+            "name": "Evans",
+            "fips": "8123",
+            "lat": 40.366,
+            "lon": -104.739,
+            "population": 21727
+        },
+        {
+            "name": "Estes Park",
+            "fips": "8069",
+            "lat": 40.3699,
+            "lon": -105.5217,
+            "population": 5942
+        },
+        {
+            "name": "Erie",
+            "fips": "8123",
+            "lat": 40.0404,
+            "lon": -105.0399,
+            "population": 29367
+        },
+        {
+            "name": "Englewood",
+            "fips": "8005",
+            "lat": 39.6468,
+            "lon": -104.9942,
+            "population": 33500
+        },
+        {
+            "name": "Empire",
+            "fips": "8019",
+            "lat": 39.7595,
+            "lon": -105.6825,
+            "population": 427
+        },
+        {
+            "name": "Ellicott",
+            "fips": "8041",
+            "lat": 38.8256,
+            "lon": -104.3829,
+            "population": 1282
+        },
+        {
+            "name": "Elizabeth",
+            "fips": "8039",
+            "lat": 39.3589,
+            "lon": -104.6196,
+            "population": 1792
+        },
+        {
+            "name": "Eldorado Springs",
+            "fips": "8013",
+            "lat": 39.9366,
+            "lon": -105.2626,
+            "population": 295
+        },
+        {
+            "name": "Eldora",
+            "fips": "8013",
+            "lat": 39.9536,
+            "lon": -105.578,
+            "population": 393
+        },
+        {
+            "name": "Elbert",
+            "fips": "8039",
+            "lat": 39.2189,
+            "lon": -104.5404,
+            "population": 236
+        },
+        {
+            "name": "El Moro",
+            "fips": "8071",
+            "lat": 37.2349,
+            "lon": -104.4491,
+            "population": 319
+        },
+        {
+            "name": "El Jebel",
+            "fips": "8037",
+            "lat": 39.405,
+            "lon": -107.0921,
+            "population": 4593
+        },
+        {
+            "name": "Edwards",
+            "fips": "8037",
+            "lat": 39.6215,
+            "lon": -106.6184,
+            "population": 10436
+        },
+        {
+            "name": "Edgewater",
+            "fips": "8059",
+            "lat": 39.7508,
+            "lon": -105.0627,
+            "population": 5047
+        },
+        {
+            "name": "Eckley",
+            "fips": "8125",
+            "lat": 40.1124,
+            "lon": -102.4883,
+            "population": 327
+        },
+        {
+            "name": "Echo Hills",
+            "fips": "8019",
+            "lat": 39.6748,
+            "lon": -105.4134,
+            "population": 396
+        },
+        {
+            "name": "Eaton",
+            "fips": "8123",
+            "lat": 40.5257,
+            "lon": -104.713,
+            "population": 5648
+        },
+        {
+            "name": "East Pleasant View",
+            "fips": "8059",
+            "lat": 39.7278,
+            "lon": -105.1572,
+            "population": 143
+        },
+        {
+            "name": "Eagle",
+            "fips": "8037",
+            "lat": 39.6366,
+            "lon": -106.8125,
+            "population": 7420
+        },
+        {
+            "name": "Eads",
+            "fips": "8061",
+            "lat": 38.4814,
+            "lon": -102.7797,
+            "population": 733
+        },
+        {
+            "name": "Durango",
+            "fips": "8067",
+            "lat": 37.2659,
+            "lon": -107.8781,
+            "population": 18953
+        },
+        {
+            "name": "Downieville-Lawson-Dumont",
+            "fips": "8019",
+            "lat": 39.7662,
+            "lon": -105.6125,
+            "population": 482
+        },
+        {
+            "name": "Dove Valley",
+            "fips": "8005",
+            "lat": 39.5752,
+            "lon": -104.8309,
+            "population": 5052
+        },
+        {
+            "name": "Dove Creek",
+            "fips": "8033",
+            "lat": 37.7668,
+            "lon": -108.9071,
+            "population": 705
+        },
+        {
+            "name": "Dotsero",
+            "fips": "8037",
+            "lat": 39.6463,
+            "lon": -107.054,
+            "population": 954
+        },
+        {
+            "name": "Dolores",
+            "fips": "8083",
+            "lat": 37.4741,
+            "lon": -108.4998,
+            "population": 865
+        },
+        {
+            "name": "Divide",
+            "fips": "8119",
+            "lat": 38.9449,
+            "lon": -105.1619,
+            "population": 162
+        },
+        {
+            "name": "Dinosaur",
+            "fips": "8081",
+            "lat": 40.2399,
+            "lon": -109.0066,
+            "population": 129
+        },
+        {
+            "name": "Dillon",
+            "fips": "8117",
+            "lat": 39.6213,
+            "lon": -106.0393,
+            "population": 1147
+        },
+        {
+            "name": "Derby",
+            "fips": "8001",
+            "lat": 39.84,
+            "lon": -104.9172,
+            "population": 8995
+        },
+        {
+            "name": "Denver",
+            "fips": "8031",
+            "lat": 39.762,
+            "lon": -104.8758,
+            "population": 2650725
+        },
+        {
+            "name": "Delta",
+            "fips": "8029",
+            "lat": 38.756,
+            "lon": -108.0772,
+            "population": 9036
+        },
+        {
+            "name": "Del Norte",
+            "fips": "8105",
+            "lat": 37.6786,
+            "lon": -106.3539,
+            "population": 1667
+        },
+        {
+            "name": "Deer Trail",
+            "fips": "8005",
+            "lat": 39.6154,
+            "lon": -104.0434,
+            "population": 599
+        },
+        {
+            "name": "De Beque",
+            "fips": "8077",
+            "lat": 39.3105,
+            "lon": -108.2049,
+            "population": 484
+        },
+        {
+            "name": "Dakota Ridge",
+            "fips": "8059",
+            "lat": 39.6192,
+            "lon": -105.1344,
+            "population": 34361
+        },
+        {
+            "name": "Dacono",
+            "fips": "8123",
+            "lat": 40.0623,
+            "lon": -104.9476,
+            "population": 6084
+        },
+        {
+            "name": "Crowley",
+            "fips": "8025",
+            "lat": 38.1935,
+            "lon": -103.8597,
+            "population": 306
+        },
+        {
+            "name": "Crook",
+            "fips": "8075",
+            "lat": 40.859,
+            "lon": -102.8013,
+            "population": 135
+        },
+        {
+            "name": "Crisman",
+            "fips": "8013",
+            "lat": 40.0416,
+            "lon": -105.3675,
+            "population": 163
+        },
+        {
+            "name": "Cripple Creek",
+            "fips": "8119",
+            "lat": 38.7467,
+            "lon": -105.1851,
+            "population": 992
+        },
+        {
+            "name": "Crestone",
+            "fips": "8109",
+            "lat": 37.9945,
+            "lon": -105.6962,
+            "population": 31
+        },
+        {
+            "name": "Crested Butte",
+            "fips": "8051",
+            "lat": 38.8676,
+            "lon": -106.9773,
+            "population": 1419
+        },
+        {
+            "name": "Crawford",
+            "fips": "8029",
+            "lat": 38.7051,
+            "lon": -107.6097,
+            "population": 373
+        },
+        {
+            "name": "Craig",
+            "fips": "8081",
+            "lat": 40.5171,
+            "lon": -107.5554,
+            "population": 9026
+        },
+        {
+            "name": "Cotopaxi",
+            "fips": "8043",
+            "lat": 38.3738,
+            "lon": -105.6912,
+            "population": 46
+        },
+        {
+            "name": "Cortez",
+            "fips": "8083",
+            "lat": 37.3503,
+            "lon": -108.5768,
+            "population": 8742
+        },
+        {
+            "name": "Copper Mountain",
+            "fips": "8117",
+            "lat": 39.4769,
+            "lon": -106.2011,
+            "population": 348
+        },
+        {
+            "name": "Cope",
+            "fips": "8121",
+            "lat": 39.6692,
+            "lon": -102.8501,
+            "population": 56
+        },
+        {
+            "name": "Conejos",
+            "fips": "8021",
+            "lat": 37.0872,
+            "lon": -106.016,
+            "population": 7
+        },
+        {
+            "name": "Commerce City",
+            "fips": "8001",
+            "lat": 39.8641,
+            "lon": -104.843,
+            "population": 61516
+        },
+        {
+            "name": "Comanche Creek",
+            "fips": "8005",
+            "lat": 39.615,
+            "lon": -104.3268,
+            "population": 401
+        },
+        {
+            "name": "Columbine Valley",
+            "fips": "8005",
+            "lat": 39.5993,
+            "lon": -105.0352,
+            "population": 1701
+        },
+        {
+            "name": "Columbine",
+            "fips": "8059",
+            "lat": 39.5879,
+            "lon": -105.0694,
+            "population": 25924
+        },
+        {
+            "name": "Colorado Springs",
+            "fips": "8041",
+            "lat": 38.8674,
+            "lon": -104.7605,
+            "population": 628808
+        },
+        {
+            "name": "Colorado City",
+            "fips": "8101",
+            "lat": 37.9381,
+            "lon": -104.8451,
+            "population": 2315
+        },
+        {
+            "name": "Colona",
+            "fips": "8091",
+            "lat": 38.3276,
+            "lon": -107.7793,
+            "population": 90
+        },
+        {
+            "name": "Collbran",
+            "fips": "8077",
+            "lat": 39.24,
+            "lon": -107.9635,
+            "population": 579
+        },
+        {
+            "name": "Cokedale",
+            "fips": "8071",
+            "lat": 37.1444,
+            "lon": -104.6216,
+            "population": 98
+        },
+        {
+            "name": "Coaldale",
+            "fips": "8043",
+            "lat": 38.3558,
+            "lon": -105.8131,
+            "population": 425
+        },
+        {
+            "name": "Coal Creek",
+            "fips": "8059",
+            "lat": 39.9071,
+            "lon": -105.3799,
+            "population": 2581
+        },
+        {
+            "name": "Clifton",
+            "fips": "8077",
+            "lat": 39.0764,
+            "lon": -108.4605,
+            "population": 20122
+        },
+        {
+            "name": "City of Creede",
+            "fips": "8079",
+            "lat": 37.8486,
+            "lon": -106.9253,
+            "population": 312
+        },
+        {
+            "name": "Cimarron Hills",
+            "fips": "8041",
+            "lat": 38.8597,
+            "lon": -104.6995,
+            "population": 18619
+        },
+        {
+            "name": "Cheyenne Wells",
+            "fips": "8017",
+            "lat": 38.8192,
+            "lon": -102.3521,
+            "population": 898
+        },
+        {
+            "name": "Cherry Hills Village",
+            "fips": "8005",
+            "lat": 39.6375,
+            "lon": -104.948,
+            "population": 6426
+        },
+        {
+            "name": "Cherry Creek",
+            "fips": "8005",
+            "lat": 39.6094,
+            "lon": -104.8645,
+            "population": 11389
+        },
+        {
+            "name": "Cheraw",
+            "fips": "8089",
+            "lat": 38.1076,
+            "lon": -103.511,
+            "population": 194
+        },
+        {
+            "name": "Chacra",
+            "fips": "8045",
+            "lat": 39.577,
+            "lon": -107.451,
+            "population": 321
+        },
+        {
+            "name": "Central City",
+            "fips": "8047",
+            "lat": 39.7945,
+            "lon": -105.512,
+            "population": 680
+        },
+        {
+            "name": "Center",
+            "fips": "8109",
+            "lat": 37.7512,
+            "lon": -106.1105,
+            "population": 2377
+        },
+        {
+            "name": "Centennial",
+            "fips": "8005",
+            "lat": 39.5926,
+            "lon": -104.8673,
+            "population": 107972
+        },
+        {
+            "name": "Cedaredge",
+            "fips": "8029",
+            "lat": 38.8941,
+            "lon": -107.9255,
+            "population": 2584
+        },
+        {
+            "name": "Ca\u00c4\u2020\u00c2\u00b1on City",
+            "fips": "8043",
+            "lat": 38.443,
+            "lon": -105.2203,
+            "population": 17157
+        },
+        {
+            "name": "Cattle Creek",
+            "fips": "8045",
+            "lat": 39.4667,
+            "lon": -107.2599,
+            "population": 733
+        },
+        {
+            "name": "Catherine",
+            "fips": "8045",
+            "lat": 39.4017,
+            "lon": -107.133,
+            "population": 214
+        },
+        {
+            "name": "Cathedral",
+            "fips": "8053",
+            "lat": 38.0836,
+            "lon": -107.0306,
+            "population": 30
+        },
+        {
+            "name": "Castle Rock",
+            "fips": "8035",
+            "lat": 39.3763,
+            "lon": -104.8535,
+            "population": 71037
+        },
+        {
+            "name": "Castle Pines Village",
+            "fips": "8035",
+            "lat": 39.4418,
+            "lon": -104.897,
+            "population": 4356
+        },
+        {
+            "name": "Castle Pines",
+            "fips": "8035",
+            "lat": 39.4625,
+            "lon": -104.8706,
+            "population": 11296
+        },
+        {
+            "name": "Cascade-Chipita Park",
+            "fips": "8041",
+            "lat": 38.9433,
+            "lon": -105.0023,
+            "population": 1256
+        },
+        {
+            "name": "Carbondale",
+            "fips": "8045",
+            "lat": 39.3949,
+            "lon": -107.2148,
+            "population": 6464
+        },
+        {
+            "name": "Capulin",
+            "fips": "8021",
+            "lat": 37.2819,
+            "lon": -106.105,
+            "population": 120
+        },
+        {
+            "name": "Campo",
+            "fips": "8009",
+            "lat": 37.1047,
+            "lon": -102.5786,
+            "population": 126
+        },
+        {
+            "name": "Calhan",
+            "fips": "8041",
+            "lat": 39.0345,
+            "lon": -104.2994,
+            "population": 394
+        },
+        {
+            "name": "Byers",
+            "fips": "8005",
+            "lat": 39.7101,
+            "lon": -104.219,
+            "population": 1433
+        },
+        {
+            "name": "Burlington",
+            "fips": "8063",
+            "lat": 39.3042,
+            "lon": -102.2712,
+            "population": 3212
+        },
+        {
+            "name": "Buena Vista",
+            "fips": "8015",
+            "lat": 38.8319,
+            "lon": -106.1387,
+            "population": 2859
+        },
+        {
+            "name": "Brush",
+            "fips": "8087",
+            "lat": 40.2598,
+            "lon": -103.6323,
+            "population": 5323
+        },
+        {
+            "name": "Broomfield",
+            "fips": "8014",
+            "lat": 39.9542,
+            "lon": -105.0526,
+            "population": 72697
+        },
+        {
+            "name": "Brookside",
+            "fips": "8043",
+            "lat": 38.4135,
+            "lon": -105.1909,
+            "population": 249
+        },
+        {
+            "name": "Brook Forest",
+            "fips": "8059",
+            "lat": 39.5739,
+            "lon": -105.3944,
+            "population": 434
+        },
+        {
+            "name": "Brighton",
+            "fips": "8001",
+            "lat": 39.9716,
+            "lon": -104.7963,
+            "population": 39895
+        },
+        {
+            "name": "Briggsdale",
+            "fips": "8123",
+            "lat": 40.6359,
+            "lon": -104.3284,
+            "population": 145
+        },
+        {
+            "name": "Brick Center",
+            "fips": "8005",
+            "lat": 39.6002,
+            "lon": -104.4579,
+            "population": 178
+        },
+        {
+            "name": "Breckenridge",
+            "fips": "8117",
+            "lat": 39.4995,
+            "lon": -106.0432,
+            "population": 5086
+        },
+        {
+            "name": "Branson",
+            "fips": "8071",
+            "lat": 37.0155,
+            "lon": -103.8838,
+            "population": 57
+        },
+        {
+            "name": "Brandon",
+            "fips": "8061",
+            "lat": 38.4464,
+            "lon": -102.4412,
+            "population": 0
+        },
+        {
+            "name": "Bow Mar",
+            "fips": "8005",
+            "lat": 39.6251,
+            "lon": -105.0511,
+            "population": 986
+        },
+        {
+            "name": "Boulder",
+            "fips": "8013",
+            "lat": 40.0248,
+            "lon": -105.2524,
+            "population": 120818
+        },
+        {
+            "name": "Boone",
+            "fips": "8101",
+            "lat": 38.2495,
+            "lon": -104.2583,
+            "population": 263
+        },
+        {
+            "name": "Bonanza Mountain Estates",
+            "fips": "8013",
+            "lat": 39.9768,
+            "lon": -105.4798,
+            "population": 148
+        },
+        {
+            "name": "Bonanza",
+            "fips": "8109",
+            "lat": 38.2966,
+            "lon": -106.1419,
+            "population": 12
+        },
+        {
+            "name": "Blue Valley",
+            "fips": "8019",
+            "lat": 39.6996,
+            "lon": -105.4921,
+            "population": 171
+        },
+        {
+            "name": "Blue Sky",
+            "fips": "8087",
+            "lat": 40.3002,
+            "lon": -103.8056,
+            "population": 156
+        },
+        {
+            "name": "Blue River",
+            "fips": "8117",
+            "lat": 39.4362,
+            "lon": -106.035,
+            "population": 947
+        },
+        {
+            "name": "Blende",
+            "fips": "8101",
+            "lat": 38.247,
+            "lon": -104.5714,
+            "population": 660
+        },
+        {
+            "name": "Blanca",
+            "fips": "8023",
+            "lat": 37.4393,
+            "lon": -105.5135,
+            "population": 344
+        },
+        {
+            "name": "Black Hawk",
+            "fips": "8047",
+            "lat": 39.8043,
+            "lon": -105.495,
+            "population": 85
+        },
+        {
+            "name": "Black Forest",
+            "fips": "8041",
+            "lat": 39.0608,
+            "lon": -104.6752,
+            "population": 14375
+        },
+        {
+            "name": "Beulah Valley",
+            "fips": "8101",
+            "lat": 38.0709,
+            "lon": -104.983,
+            "population": 752
+        },
+        {
+            "name": "Bethune",
+            "fips": "8063",
+            "lat": 39.3038,
+            "lon": -102.4234,
+            "population": 188
+        },
+        {
+            "name": "Berthoud",
+            "fips": "8069",
+            "lat": 40.3071,
+            "lon": -105.0426,
+            "population": 10188
+        },
+        {
+            "name": "Berkley",
+            "fips": "8001",
+            "lat": 39.8045,
+            "lon": -105.0281,
+            "population": 10920
+        },
+        {
+            "name": "Bennett",
+            "fips": "8001",
+            "lat": 39.7366,
+            "lon": -104.4286,
+            "population": 2964
+        },
+        {
+            "name": "Bayfield",
+            "fips": "8067",
+            "lat": 37.234,
+            "lon": -107.5952,
+            "population": 2821
+        },
+        {
+            "name": "Battlement Mesa",
+            "fips": "8045",
+            "lat": 39.4506,
+            "lon": -108.0063,
+            "population": 5220
+        },
+        {
+            "name": "Basalt",
+            "fips": "8037",
+            "lat": 39.3663,
+            "lon": -107.0413,
+            "population": 3802
+        },
+        {
+            "name": "Bark Ranch",
+            "fips": "8013",
+            "lat": 40.1156,
+            "lon": -105.4417,
+            "population": 116
+        },
+        {
+            "name": "Avondale",
+            "fips": "8101",
+            "lat": 38.2351,
+            "lon": -104.3482,
+            "population": 436
+        },
+        {
+            "name": "Avon",
+            "fips": "8037",
+            "lat": 39.6442,
+            "lon": -106.513,
+            "population": 6209
+        },
+        {
+            "name": "Aurora",
+            "fips": "8005",
+            "lat": 39.7083,
+            "lon": -104.7237,
+            "population": 383496
+        },
+        {
+            "name": "Ault",
+            "fips": "8123",
+            "lat": 40.5893,
+            "lon": -104.7392,
+            "population": 1785
+        },
+        {
+            "name": "Atwood",
+            "fips": "8075",
+            "lat": 40.5505,
+            "lon": -103.2746,
+            "population": 135
+        },
+        {
+            "name": "Aspen Park",
+            "fips": "8059",
+            "lat": 39.5423,
+            "lon": -105.2967,
+            "population": 962
+        },
+        {
+            "name": "Aspen",
+            "fips": "8097",
+            "lat": 39.1951,
+            "lon": -106.8369,
+            "population": 7019
+        },
+        {
+            "name": "Arvada",
+            "fips": "8059",
+            "lat": 39.832,
+            "lon": -105.151,
+            "population": 122903
+        },
+        {
+            "name": "Arriba",
+            "fips": "8073",
+            "lat": 39.2843,
+            "lon": -103.274,
+            "population": 229
+        },
+        {
+            "name": "Aristocrat Ranchettes",
+            "fips": "8123",
+            "lat": 40.1096,
+            "lon": -104.7549,
+            "population": 1830
+        },
+        {
+            "name": "Arboles",
+            "fips": "8007",
+            "lat": 37.0201,
+            "lon": -107.4221,
+            "population": 384
+        },
+        {
+            "name": "Arapahoe",
+            "fips": "8017",
+            "lat": 38.853,
+            "lon": -102.1789,
+            "population": 20
+        },
+        {
+            "name": "Applewood",
+            "fips": "8059",
+            "lat": 39.7523,
+            "lon": -105.1604,
+            "population": 8236
+        },
+        {
+            "name": "Antonito",
+            "fips": "8021",
+            "lat": 37.0762,
+            "lon": -106.0104,
+            "population": 612
+        },
+        {
+            "name": "Amherst",
+            "fips": "8095",
+            "lat": 40.6831,
+            "lon": -102.1725,
+            "population": 252
+        },
+        {
+            "name": "Altona",
+            "fips": "8013",
+            "lat": 40.1254,
+            "lon": -105.2924,
+            "population": 557
+        },
+        {
+            "name": "Alpine",
+            "fips": "8105",
+            "lat": 37.6877,
+            "lon": -106.586,
+            "population": 265
+        },
+        {
+            "name": "Alma",
+            "fips": "8093",
+            "lat": 39.286,
+            "lon": -106.0672,
+            "population": 323
+        },
+        {
+            "name": "Allenspark",
+            "fips": "8013",
+            "lat": 40.2099,
+            "lon": -105.5112,
+            "population": 574
+        },
+        {
+            "name": "Alamosa East",
+            "fips": "8003",
+            "lat": 37.4766,
+            "lon": -105.8397,
+            "population": 1384
+        },
+        {
+            "name": "Alamosa",
+            "fips": "8003",
+            "lat": 37.4752,
+            "lon": -105.877,
+            "population": 9704
+        },
+        {
+            "name": "Akron",
+            "fips": "8121",
+            "lat": 40.1635,
+            "lon": -103.2202,
+            "population": 1793
+        },
+        {
+            "name": "Air Force Academy",
+            "fips": "8041",
+            "lat": 38.9942,
+            "lon": -104.8639,
+            "population": 6170
+        },
+        {
+            "name": "Aguilar",
+            "fips": "8071",
+            "lat": 37.4036,
+            "lon": -104.655,
+            "population": 477
+        },
+        {
+            "name": "Aetna Estates",
+            "fips": "8005",
+            "lat": 39.7381,
+            "lon": -104.6732,
+            "population": 1255
+        },
+        {
+            "name": "Acres Green",
+            "fips": "8035",
+            "lat": 39.5557,
+            "lon": -104.8958,
+            "population": 2732
+        }
+    ]
+}
