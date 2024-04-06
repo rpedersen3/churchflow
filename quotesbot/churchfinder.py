@@ -106,132 +106,176 @@ class ChurchFinder:
 
             selectedCity = city
 
-            if "population2022" not in selectedCity:
+            html = ""
 
-                query = "quickfacts " + selectedCity["name"] + " colorado"
-                print("google query for: ", query)
-                res = (
-                    service.cse()
-                    .list(
-                        q=query,
-                        cx="877445d005a4d4258"
-                    )
-                    .execute()
+            # get HTML
+            firstPartOfName = selectedCity["name"].split()[0].lower()
+            query = "quickfacts " + selectedCity["name"] + " colorado"
+            print("google query for: ", query)
+            res = (
+                service.cse()
+                .list(
+                    q=query,
+                    cx="877445d005a4d4258"
                 )
+                .execute()
+            )
 
-                if "items" in res:
+            if "items" in res:
 
-                    for item in res["items"]:
+                for item in res["items"]:
 
-                        link = item["link"]
-                        if link.find("quickfacts") >= 0 and link.find("colorado") >= 0 and link.find("PST") >= 0:
-                            print("link: ", link)
-
-                            user_agent = {'User-agent': 'Mozilla/5.0'}
-                            response = requests.get(link, headers = user_agent)
-                            if response.status_code != 200:
-                                print("bad response: ", response.status_code)
-
-                            if response.status_code == 200:
-
-                                soup = BeautifulSoup(response.text, 'html.parser')
-
-                                population2022 = self.getValue(soup, "PST045222")
-                                population2020 = self.getValue(soup, "POP010220")
-                                population2010 = self.getValue(soup, "POP010210")
-
-                                under5 = self.getValue(soup, "AGE135222")
-                                under18 = self.getValue(soup, "AGE295222")
-                                over65 = self.getValue(soup, "AGE775222")
-                                female = self.getValue(soup, "SEX255222")
-
-                                white = self.getValue(soup, "RHI125222")
-                                black = self.getValue(soup, "RHI225222")
-                                indian = self.getValue(soup, "RHI325222")
-                                asian = self.getValue(soup, "RHI425222")
-                                hispanic = self.getValue(soup, "RHI725222")
-
-                                veterans = self.getValue(soup, "VET605222")
-
-                                households = self.getValue(soup, "HSD410222")
-                                personsPerHousehold = self.getValue(soup, "HSD310222")
-                                languageOtherThanEnglishPercent = self.getValue(soup, "POP815222")
-                                householdsWithComputerPercent = self.getValue(soup, "COM100222")
-                                householdsWithInternetPercent = self.getValue(soup, "INT100222")
-
-                                highSchoolPercent = self.getValue(soup, "EDU635222")
-                                bachelorsPercent = self.getValue(soup, "EDU685222")
-
-                                retailSalesPerCapita = self.getValue(soup, "RTN131217")
-                                householdIncome = self.getValue(soup, "INC110222")
-
-                                populationPerSquareMile = self.getValue(soup, "POP060220")
-
-                                fipsCode = self.getValue(soup, "fips")
+                    link = item["link"]
+                    if link.find("quickfacts") >= 0 and \
+                            link.find("colorado") >= 0 and \
+                            link.find("PST") >= 0 and \
+                            link.find(firstPartOfName) >= 0 and \
+                            link.find("denvercountycolorado") == -1:
+                        print("link: ", link)
 
 
-                                if population2022 == None:
-                                    print("no data")
-                                    break
+                        user_agent = {'User-agent': 'Mozilla/5.0'}
+                        response = requests.get(link, headers = user_agent, allow_redirects=True)
+                        if response.status_code != 200:
+                            print("bad response: ", response.status_code)
 
-                                print("has data")
-                                if population2022 != None:
-                                    selectedCity["population2022"] = int(population2022)
-                                if population2020 != None:
-                                    selectedCity["population2020"] = int(population2020)
-                                if population2010 != None:
-                                    selectedCity["population2010"] = int(population2010)
-
-                                if under5 != None:
-                                    selectedCity["under5Percent"] = float(under5)
-                                if under18 != None:
-                                    selectedCity["under18Percent"] = float(under18)
-                                if over65 != None:
-                                    selectedCity["over65Percent"] = float(over65)
-                                if female != None:
-                                    selectedCity["femalePercent"] = float(female)
-
-                                if white != None:
-                                    selectedCity["whitePercent"] = float(white)
-                                if black != None:
-                                    selectedCity["blackPercent"] = float(black)
-                                if indian != None:
-                                    selectedCity["indianPercent"] = float(indian)
-                                if asian != None:
-                                    selectedCity["asianPercent"] = float(asian)
-                                if hispanic != None:
-                                    selectedCity["hispanicPercent"] = float(hispanic)
-
-                                if veterans != None:
-                                    selectedCity["veterans"] = int(veterans)
-                                if households != None:
-                                    selectedCity["households"] = int(households)
-                                if householdsWithComputerPercent != None:
-                                    selectedCity["householdsWithComputerPercent"] = float(householdsWithComputerPercent)
-                                if householdsWithInternetPercent != None:
-                                    selectedCity["householdsWithInternetPercent"] = float(householdsWithInternetPercent)
-                                if highSchoolPercent != None:
-                                    selectedCity["highSchoolPercent"] = float(highSchoolPercent)
-                                if bachelorsPercent != None:
-                                    selectedCity["bachelorsPercent"] = float(bachelorsPercent)
-                                if retailSalesPerCapita != None:
-                                    selectedCity["retailSalesPerCapita"] = float(retailSalesPerCapita)
-                                if householdIncome != None:
-                                    selectedCity["householdIncome"] = float(householdIncome)
-                                if populationPerSquareMile != None:
-                                    selectedCity["populationPerSquareMile"] = float(populationPerSquareMile)
-                                if fipsCode != None:
-                                    selectedCity["censusFips"] = fipsCode
-
-                                file_path = "coloradoFrontRangeCities.json"
-                                citiesData = {}
-                                citiesData["cities"] = cities
-
-                                with open(file_path, "w") as json_file:
-                                    json.dump(citiesData, json_file, indent=4)
-
-                            # process just first link
+                        if response.status_code == 200:
+                            html = response.text
                             break
+
+                soup = BeautifulSoup(html, 'html.parser')
+
+                population2020 = self.getValue(soup, "POP010220")
+                population2010 = self.getValue(soup, "POP010210")
+
+                under5 = self.getValue(soup, "AGE135222")
+                under18 = self.getValue(soup, "AGE295222")
+                over65 = self.getValue(soup, "AGE775222")
+                female = self.getValue(soup, "SEX255222")
+
+                white = self.getValue(soup, "RHI125222")
+                black = self.getValue(soup, "RHI225222")
+                indian = self.getValue(soup, "RHI325222")
+                asian = self.getValue(soup, "RHI425222")
+                hispanic = self.getValue(soup, "RHI725222")
+
+                veterans = self.getValue(soup, "VET605222")
+
+                households = self.getValue(soup, "HSD410222")
+                personsPerHousehold = self.getValue(soup, "HSD310222")
+                languageOtherThanEnglishPercent = self.getValue(soup, "POP815222")
+                householdsWithComputerPercent = self.getValue(soup, "COM100222")
+                householdsWithInternetPercent = self.getValue(soup, "INT100222")
+
+                highSchoolPercent = self.getValue(soup, "EDU635222")
+                bachelorsPercent = self.getValue(soup, "EDU685222")
+
+                retailSalesPerCapita = self.getValue(soup, "RTN131217")
+                householdIncome = self.getValue(soup, "INC110222")
+
+                populationPerSquareMile = self.getValue(soup, "POP060220")
+
+                fipsCode = self.getValue(soup, "fips")
+
+
+                if population2020 != None:
+                    print("has 2020 population")
+                    selectedCity["population2020"] = int(population2020)
+                else:
+                    del selectedCity["population2020"]
+
+                if population2010 != None:
+                    selectedCity["population2010"] = int(population2010)
+                else:
+                    del selectedCity["population2010"]
+
+                if under5 != None:
+                    selectedCity["under5Percent"] = float(under5)
+                else:
+                    del selectedCity["under5Percent"]
+
+                if under18 != None:
+                    selectedCity["under18Percent"] = float(under18)
+                else:
+                    del selectedCity["under18Percent"]
+                if over65 != None:
+                    selectedCity["over65Percent"] = float(over65)
+                else:
+                    del selectedCity["over65Percent"]
+                if female != None:
+                    selectedCity["femalePercent"] = float(female)
+                else:
+                    del selectedCity["femalePercent"]
+
+                if white != None:
+                    selectedCity["whitePercent"] = float(white)
+                else:
+                    del selectedCity["whitePercent"]
+                if black != None:
+                    selectedCity["blackPercent"] = float(black)
+                else:
+                    del selectedCity["blackPercent"]
+                if indian != None:
+                    selectedCity["indianPercent"] = float(indian)
+                else:
+                    del selectedCity["indianPercent"]
+                if asian != None:
+                    selectedCity["asianPercent"] = float(asian)
+                else:
+                    del selectedCity["asianPercent"]
+                if hispanic != None:
+                    selectedCity["hispanicPercent"] = float(hispanic)
+                else:
+                    del selectedCity["hispanicPercent"]
+
+                if veterans != None:
+                    selectedCity["veterans"] = int(veterans)
+                else:
+                    del selectedCity["veterans"]
+                if households != None:
+                    selectedCity["households"] = int(households)
+                else:
+                    del selectedCity["households"]
+                if householdsWithComputerPercent != None:
+                    selectedCity["householdsWithComputerPercent"] = float(householdsWithComputerPercent)
+                else:
+                    del selectedCity["householdsWithComputerPercent"]
+                if householdsWithInternetPercent != None:
+                    selectedCity["householdsWithInternetPercent"] = float(householdsWithInternetPercent)
+                else:
+                    del selectedCity["householdsWithInternetPercent"]
+                if highSchoolPercent != None:
+                    selectedCity["highSchoolPercent"] = float(highSchoolPercent)
+                else:
+                    del selectedCity["highSchoolPercent"]
+                if bachelorsPercent != None:
+                    selectedCity["bachelorsPercent"] = float(bachelorsPercent)
+                else:
+                    del selectedCity["bachelorsPercent"]
+                if retailSalesPerCapita != None:
+                    selectedCity["retailSalesPerCapita"] = float(retailSalesPerCapita)
+                else:
+                    del selectedCity["retailSalesPerCapita"]
+                if householdIncome != None:
+                    selectedCity["householdIncome"] = float(householdIncome)
+                else:
+                    del selectedCity["householdIncome"]
+                if populationPerSquareMile != None:
+                    selectedCity["populationPerSquareMile"] = float(populationPerSquareMile)
+                else:
+                    del selectedCity["populationPerSquareMile"]
+                if fipsCode != None:
+                    selectedCity["censusFips"] = fipsCode
+                else:
+                    del selectedCity["censusFips"]
+
+                file_path = "coloradoFrontRangeCities.json"
+                citiesData = {}
+                citiesData["cities"] = cities
+
+                with open(file_path, "w") as json_file:
+                    json.dump(citiesData, json_file, indent=4)
+
 
 
     def findChurches(self):
