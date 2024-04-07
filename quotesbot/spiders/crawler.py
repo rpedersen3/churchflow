@@ -4,6 +4,7 @@ import re
 from quotesbot.profilecheck import ProfileCheck
 from quotesbot.groupcheck import GroupCheck
 from quotesbot.churchfinder import ChurchFinder
+import json
 
 class DivCount:
     def __init__(self, div, level, className, count):
@@ -16,7 +17,7 @@ class ChurchCrawler(scrapy.Spider):
     name = "crawler"
     #siteurl = 'https://www.calvarygolden.net'
 
-    siteurl = "https://www.missionhills.org"
+    #siteurl = "https://www.missionhills.org"
 
     #siteurl = "https://centcov.org"
 
@@ -35,9 +36,26 @@ class ChurchCrawler(scrapy.Spider):
     #siteurl = "https://longmontcalvary.org"
 
     #siteurl = "https://www.trinitylittleton.com"
+    '''
+    churches_file_path = "churches.json"
+    with open(churches_file_path, "r") as file:
+        churchesData = json.load(file)
 
+    start_urls = []
+    churches = churchesData["churches"]
 
+    i = 1
+    for church in churches:
+        url = church["link"]
+        start_urls.append(url)
 
+        if i > 3:
+            break
+        i = i + 1
+
+    print('urls: ', str(start_urls))
+
+    '''
     start_urls = [
         #'https://www.calvarygolden.net'
 
@@ -74,6 +92,7 @@ class ChurchCrawler(scrapy.Spider):
         #'https://calvarybible.com/staff/'
         #'https://www.missionhills.org/im-new/staff-elders/',
     ]
+
 
     def checkCommonDiv(self, el1, el2):
         s1 = str(el1)
@@ -227,8 +246,8 @@ class ChurchCrawler(scrapy.Spider):
             print("email: ", previousProfileEmail)
 
     def searchForContacts(self, response):
-
-        # print('**************** process page: ', response.url)
+        print('hello')
+        print('**************** process page: ', response.url)
         if response.url.find('staff') != -1 or \
                 response.url.find('team') != -1 or \
                 response.url.find('leadership') != -1 or \
@@ -312,7 +331,7 @@ class ChurchCrawler(scrapy.Spider):
                             img_src.startswith("https://s3.amazonaws.com/media.cloversites.com"):
                         isCDN = True
 
-                    if (isCDN or img_src.startswith(self.siteurl)) and \
+                    if (isCDN or img_src.startswith(response.url)) and \
                             profCheck.isProfilePhoto(img_src):
 
                         # print("photo found: ", img_src)
@@ -404,23 +423,27 @@ class ChurchCrawler(scrapy.Spider):
         churchFinder.findChurches()
 
         '''
-        #self.searchForContacts(response)
-        self.searchForGroups(response)
+        print("parse site: ", response.url)
+        self.searchForContacts(response)
+
+
+        #self.searchForGroups(response)
 
         links = response.xpath('//a/@href').extract()
         for link in links:
-            #print("link: ", link)
-            # Make sure the link is within the same domain to avoid crawling external sites
 
-            pageLink = link.replace(self.siteurl, "")
-            count = pageLink.count("/")
-            if pageLink != "" and \
-                    pageLink != "/" and  \
-                    pageLink.startswith('/') and  \
-                    pageLink.find('?') == -1 and \
-                    count < 5:
+            if link.find("https:") == -1 or link.find(response.url) >= 0:
 
-               yield scrapy.Request(response.urljoin(pageLink), callback=self.parse)
+                # Make sure the link is within the same domain to avoid crawling external sites
+                pageLink = link.replace(response.url, "")
+                count = pageLink.count("/")
+                if pageLink != "" and \
+                        pageLink != "/" and  \
+                        pageLink.startswith('/') and  \
+                        pageLink.find('?') == -1 and \
+                        count < 4:
+
+                    yield scrapy.Request(response.urljoin(pageLink), callback=self.parse)
 
         '''
 

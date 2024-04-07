@@ -437,6 +437,7 @@ class ChurchFinder:
 
     def findChurches(self):
 
+        #https://programmablesearchengine.google.com/controlpanel/overview?cx=d744719d644574dd7
         service = build(
             "customsearch", "v1", developerKey=""
         )
@@ -488,9 +489,9 @@ class ChurchFinder:
                         )
                         .execute()
                     )
-                    #print("--------------------------------------")
-                    #print(res)
-                    #print("--------------------------------------")
+                    print("--------------------------------------")
+                    print(res)
+                    print("--------------------------------------")
 
                     found = 0
                     for item in res["items"]:

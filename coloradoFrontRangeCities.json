@@ -3233,7 +3233,9 @@
             "blackPercent": 8.9,
             "indianPercent": 1.5,
             "asianPercent": 3.9,
-            "hispanicPercent": 27.9
+            "hispanicPercent": 27.9,
+            "crawled": "2024-04-07 06:01:24.269126",
+            "crawled-city": "Denver"
         },
         {
             "name": "Dakota Ridge",
@@ -3262,7 +3264,9 @@
             "populationPerSquareMile": 3609.4,
             "censusFips": "0819150",
             "malePercentage": 49.784609937448366,
-            "femalePercentage": 50.215390062551634
+            "femalePercentage": 50.215390062551634,
+            "crawled": "2024-04-07 06:01:32.519370",
+            "crawled-city": "Dakota Ridge"
         },
         {
             "name": "Dacono",
@@ -3280,7 +3284,9 @@
             "blackPercent": 1.0,
             "indianPercent": 1.7,
             "asianPercent": 2.9,
-            "hispanicPercent": 34.7
+            "hispanicPercent": 34.7,
+            "crawled": "2024-04-07 06:01:37.983147",
+            "crawled-city": "Dacono"
         },
         {
             "name": "Crisman",
@@ -3298,7 +3304,9 @@
             "blackPercent": 0.6,
             "indianPercent": 1.1,
             "asianPercent": 3.9,
-            "hispanicPercent": 5.0
+            "hispanicPercent": 5.0,
+            "crawled": "2024-04-07 06:01:43.273744",
+            "crawled-city": "Crisman"
         },
         {
             "name": "Cripple Creek",
@@ -3316,7 +3324,9 @@
             "blackPercent": 1.1,
             "indianPercent": 1.0,
             "asianPercent": 0.8,
-            "hispanicPercent": 7.5
+            "hispanicPercent": 7.5,
+            "crawled": "2024-04-07 06:01:48.698412",
+            "crawled-city": "Cripple Creek"
         },
         {
             "name": "Commerce City",
@@ -3346,7 +3356,9 @@
             "populationPerSquareMile": 1733.7,
             "censusFips": "0816495",
             "malePercentage": 50.58476721458553,
-            "femalePercentage": 49.41523278541447
+            "femalePercentage": 49.41523278541447,
+            "crawled": "2024-04-07 06:01:54.697378",
+            "crawled-city": "Commerce City"
         },
         {
             "name": "Columbine Valley",
@@ -3375,7 +3387,9 @@
             "populationPerSquareMile": 3804.7,
             "censusFips": "0816110",
             "malePercentage": 49.93342210386152,
-            "femalePercentage": 50.06657789613848
+            "femalePercentage": 50.06657789613848,
+            "crawled": "2024-04-07 06:02:00.737658",
+            "crawled-city": "Columbine Valley"
         },
         {
             "name": "Columbine",
@@ -3404,7 +3418,9 @@
             "populationPerSquareMile": 3804.7,
             "censusFips": "0816110",
             "malePercentage": 49.09825993895913,
-            "femalePercentage": 50.90174006104087
+            "femalePercentage": 50.90174006104087,
+            "crawled": "2024-04-07 06:02:06.479973",
+            "crawled-city": "Columbine"
         },
         {
             "name": "Colorado Springs",
@@ -3434,7 +3450,9 @@
             "populationPerSquareMile": 2451.2,
             "censusFips": "0816000",
             "malePercentage": 49.42594490991959,
-            "femalePercentage": 50.57405509008041
+            "femalePercentage": 50.57405509008041,
+            "crawled": "2024-04-07 06:02:12.404087",
+            "crawled-city": "Colorado Springs"
         },
         {
             "name": "Coal Creek",
@@ -3452,7 +3470,9 @@
             "blackPercent": 0.8,
             "indianPercent": 0.5,
             "asianPercent": 0.3,
-            "hispanicPercent": 5.5
+            "hispanicPercent": 5.5,
+            "crawled": "2024-04-07 06:02:20.643135",
+            "crawled-city": "Coal Creek"
         },
         {
             "name": "Cimarron Hills",
@@ -3470,7 +3490,9 @@
             "blackPercent": 7.5,
             "indianPercent": 1.5,
             "asianPercent": 3.3,
-            "hispanicPercent": 23.4
+            "hispanicPercent": 23.4,
+            "crawled": "2024-04-07 06:02:26.083178",
+            "crawled-city": "Cimarron Hills"
         },
         {
             "name": "Cherry Hills Village",
@@ -3499,7 +3521,9 @@
             "populationPerSquareMile": 1038.9,
             "censusFips": "0813845",
             "malePercentage": 50.1086619062403,
-            "femalePercentage": 49.8913380937597
+            "femalePercentage": 49.8913380937597,
+            "crawled": "2024-04-07 06:02:31.553348",
+            "crawled-city": "Cherry Hills Village"
         },
         {
             "name": "Cherry Creek",
@@ -3528,7 +3552,9 @@
             "populationPerSquareMile": 6883.2,
             "censusFips": "0813590",
             "malePercentage": 49.80849582172702,
-            "femalePercentage": 50.19150417827298
+            "femalePercentage": 50.19150417827298,
+            "crawled": "2024-04-07 06:02:37.086841",
+            "crawled-city": "Cherry Creek"
         },
         {
             "name": "Centennial",
@@ -3558,14 +3584,18 @@
             "populationPerSquareMile": 3647.9,
             "censusFips": "0812815",
             "malePercentage": 49.715914331568555,
-            "femalePercentage": 50.284085668431445
+            "femalePercentage": 50.284085668431445,
+            "crawled": "2024-04-07 06:02:42.560879",
+            "crawled-city": "Centennial"
         },
         {
             "name": "Canon City",
             "fips": "8043",
             "lat": 38.443,
             "lon": -105.2203,
-            "population": 17157
+            "population": 17157,
+            "crawled": "2024-04-07 06:02:49.582141",
+            "crawled-city": "Canon City"
         },
         {
             "name": "Castle Rock",
@@ -3595,7 +3625,9 @@
             "populationPerSquareMile": 2133.5,
             "censusFips": "0812415",
             "malePercentage": 49.94532381967796,
-            "femalePercentage": 50.05467618032204
+            "femalePercentage": 50.05467618032204,
+            "crawled": "2024-04-07 06:02:55.109635",
+            "crawled-city": "Castle Rock"
         },
         {
             "name": "Castle Pines Village",
@@ -3613,7 +3645,9 @@
             "blackPercent": 1.1,
             "indianPercent": 0.1,
             "asianPercent": 2.3,
-            "hispanicPercent": 4.5
+            "hispanicPercent": 4.5,
+            "crawled": "2024-04-07 06:03:02.070829",
+            "crawled-city": "Castle Pines Village"
         },
         {
             "name": "Castle Pines",
@@ -3643,7 +3677,9 @@
             "populationPerSquareMile": 1150.3,
             "censusFips": "0812387",
             "malePercentage": 49.356650960492935,
-            "femalePercentage": 50.643349039507065
+            "femalePercentage": 50.643349039507065,
+            "crawled": "2024-04-07 06:03:07.597693",
+            "crawled-city": "Castle Pines"
         },
         {
             "name": "Cascade-Chipita Park",
@@ -3661,7 +3697,9 @@
             "blackPercent": 0.6,
             "indianPercent": 0.4,
             "asianPercent": 0.7,
-            "hispanicPercent": 5.7
+            "hispanicPercent": 5.7,
+            "crawled": "2024-04-07 06:03:13.633809",
+            "crawled-city": "Cascade-Chipita Park"
         },
         {
             "name": "Broomfield",
@@ -3691,7 +3729,9 @@
             "populationPerSquareMile": 2248.0,
             "censusFips": "08014",
             "malePercentage": 49.92983592400691,
-            "femalePercentage": 50.07016407599309
+            "femalePercentage": 50.07016407599309,
+            "crawled": "2024-04-07 06:03:19.682433",
+            "crawled-city": "Broomfield"
         },
         {
             "name": "Brookside",
@@ -3709,7 +3749,9 @@
             "blackPercent": 0.0,
             "indianPercent": 0.4,
             "asianPercent": 0.0,
-            "hispanicPercent": 7.6
+            "hispanicPercent": 7.6,
+            "crawled": "2024-04-07 06:03:25.504642",
+            "crawled-city": "Brookside"
         },
         {
             "name": "Brook Forest",
@@ -3727,7 +3769,9 @@
             "blackPercent": 1.1,
             "indianPercent": 0.0,
             "asianPercent": 0.6,
-            "hispanicPercent": 2.7
+            "hispanicPercent": 2.7,
+            "crawled": "2024-04-07 06:03:30.923576",
+            "crawled-city": "Brook Forest"
         },
         {
             "name": "Brighton",
@@ -3757,7 +3801,9 @@
             "populationPerSquareMile": 1886.5,
             "censusFips": "0808675",
             "malePercentage": 50.22827632662226,
-            "femalePercentage": 49.77172367337774
+            "femalePercentage": 49.77172367337774,
+            "crawled": "2024-04-07 06:03:36.322968",
+            "crawled-city": "Brighton"
         },
         {
             "name": "Bow Mar",
@@ -3775,7 +3821,9 @@
             "blackPercent": 0.4,
             "indianPercent": 0.6,
             "asianPercent": 2.9,
-            "hispanicPercent": 5.6
+            "hispanicPercent": 5.6,
+            "crawled": "2024-04-07 06:03:42.328027",
+            "crawled-city": "Bow Mar"
         },
         {
             "name": "Boulder",
@@ -3805,7 +3853,9 @@
             "populationPerSquareMile": 455.3,
             "censusFips": "08013",
             "malePercentage": 51.71547344110854,
-            "femalePercentage": 48.28452655889146
+            "femalePercentage": 48.28452655889146,
+            "crawled": "2024-04-07 06:03:47.747990",
+            "crawled-city": "Boulder"
         },
         {
             "name": "Bonanza Mountain Estates",
@@ -3823,7 +3873,9 @@
             "blackPercent": 0.8,
             "indianPercent": 1.6,
             "asianPercent": 1.6,
-            "hispanicPercent": 6.3
+            "hispanicPercent": 6.3,
+            "crawled": "2024-04-07 06:03:53.792561",
+            "crawled-city": "Bonanza Mountain Estates"
         },
         {
             "name": "Blue Valley",
@@ -3841,7 +3893,9 @@
             "blackPercent": 0.0,
             "indianPercent": 0.0,
             "asianPercent": 1.7,
-            "hispanicPercent": 3.5
+            "hispanicPercent": 3.5,
+            "crawled": "2024-04-07 06:03:59.166425",
+            "crawled-city": "Blue Valley"
         },
         {
             "name": "Blende",
@@ -3859,7 +3913,9 @@
             "blackPercent": 1.0,
             "indianPercent": 2.5,
             "asianPercent": 0.1,
-            "hispanicPercent": 48.2
+            "hispanicPercent": 48.2,
+            "crawled": "2024-04-07 06:04:05.187891",
+            "crawled-city": "Blende"
         },
         {
             "name": "Black Hawk",
@@ -3877,7 +3933,9 @@
             "blackPercent": 2.4,
             "indianPercent": 3.9,
             "asianPercent": 1.6,
-            "hispanicPercent": 15.7
+            "hispanicPercent": 15.7,
+            "crawled": "2024-04-07 06:04:11.185426",
+            "crawled-city": "Black Hawk"
         },
         {
             "name": "Black Forest",
@@ -3906,7 +3964,9 @@
             "populationPerSquareMile": 150.0,
             "censusFips": "0806970",
             "malePercentage": 50.26826521825528,
-            "femalePercentage": 49.73173478174472
+            "femalePercentage": 49.73173478174472,
+            "crawled": "2024-04-07 06:04:16.679934",
+            "crawled-city": "Black Forest"
         },
         {
             "name": "Berthoud",
@@ -3936,7 +3996,9 @@
             "populationPerSquareMile": 798.9,
             "censusFips": "0806255",
             "malePercentage": 48.97406116918312,
-            "femalePercentage": 51.02593883081688
+            "femalePercentage": 51.02593883081688,
+            "crawled": "2024-04-07 06:04:22.191927",
+            "crawled-city": "Berthoud"
         },
         {
             "name": "Berkley",
@@ -3965,7 +4027,9 @@
             "populationPerSquareMile": 3482.2,
             "censusFips": "0806172",
             "malePercentage": 52.21761327377154,
-            "femalePercentage": 47.78238672622846
+            "femalePercentage": 47.78238672622846,
+            "crawled": "2024-04-07 06:04:27.988019",
+            "crawled-city": "Berkley"
         },
         {
             "name": "Bark Ranch",
@@ -3983,7 +4047,9 @@
             "blackPercent": 0.5,
             "indianPercent": 0.0,
             "asianPercent": 1.0,
-            "hispanicPercent": 2.5
+            "hispanicPercent": 2.5,
+            "crawled": "2024-04-07 06:04:33.823287",
+            "crawled-city": "Bark Ranch"
         },
         {
             "name": "Aurora",
@@ -4013,7 +4079,9 @@
             "populationPerSquareMile": 2412.2,
             "censusFips": "0804000",
             "malePercentage": 49.884663478839435,
-            "femalePercentage": 50.115336521160565
+            "femalePercentage": 50.115336521160565,
+            "crawled": "2024-04-07 06:04:39.313667",
+            "crawled-city": "Aurora"
         },
         {
             "name": "Ault",
@@ -4031,7 +4099,9 @@
             "blackPercent": 0.1,
             "indianPercent": 1.5,
             "asianPercent": 0.3,
-            "hispanicPercent": 26.9
+            "hispanicPercent": 26.9,
+            "crawled": "2024-04-07 06:04:45.190160",
+            "crawled-city": "Ault"
         },
         {
             "name": "Aspen Park",
@@ -4049,7 +4119,9 @@
             "blackPercent": 0.2,
             "indianPercent": 0.4,
             "asianPercent": 0.5,
-            "hispanicPercent": 7.8
+            "hispanicPercent": 7.8,
+            "crawled": "2024-04-07 06:04:50.595948",
+            "crawled-city": "Aspen Park"
         },
         {
             "name": "Arvada",
@@ -4079,7 +4151,9 @@
             "populationPerSquareMile": 3197.2,
             "censusFips": "0803455",
             "malePercentage": 49.269304352020065,
-            "femalePercentage": 50.730695647979935
+            "femalePercentage": 50.730695647979935,
+            "crawled": "2024-04-07 06:04:56.049739",
+            "crawled-city": "Arvada"
         },
         {
             "name": "Aristocrat Ranchettes",
@@ -4097,7 +4171,9 @@
             "blackPercent": 0.9,
             "indianPercent": 2.9,
             "asianPercent": 0.3,
-            "hispanicPercent": 59.0
+            "hispanicPercent": 59.0,
+            "crawled": "2024-04-07 06:05:03.520381",
+            "crawled-city": "Aristocrat Ranchettes"
         },
         {
             "name": "Applewood",
@@ -4115,7 +4191,9 @@
             "blackPercent": 0.8,
             "indianPercent": 0.8,
             "asianPercent": 1.9,
-            "hispanicPercent": 8.2
+            "hispanicPercent": 8.2,
+            "crawled": "2024-04-07 06:05:08.948474",
+            "crawled-city": "Applewood"
         },
         {
             "name": "Altona",
@@ -4133,7 +4211,9 @@
             "blackPercent": 0.2,
             "indianPercent": 0.2,
             "asianPercent": 2.9,
-            "hispanicPercent": 3.7
+            "hispanicPercent": 3.7,
+            "crawled": "2024-04-07 06:05:14.453112",
+            "crawled-city": "Altona"
         },
         {
             "name": "Air Force Academy",
@@ -4163,7 +4243,9 @@
             "populationPerSquareMile": 798.9,
             "censusFips": "0806255",
             "malePercentage": 65.8141646489104,
-            "femalePercentage": 34.185835351089594
+            "femalePercentage": 34.185835351089594,
+            "crawled": "2024-04-07 06:05:21.730007",
+            "crawled-city": "Air Force Academy"
         },
         {
             "name": "Aetna Estates",
@@ -4181,7 +4263,9 @@
             "blackPercent": 2.0,
             "indianPercent": 3.0,
             "asianPercent": 0.1,
-            "hispanicPercent": 76.7
+            "hispanicPercent": 76.7,
+            "crawled": "2024-04-07 06:05:27.233018",
+            "crawled-city": "Aetna Estates"
         },
         {
             "name": "Acres Green",
@@ -4199,7 +4283,9 @@
             "blackPercent": 1.1,
             "indianPercent": 1.5,
             "asianPercent": 2.7,
-            "hispanicPercent": 14.2
+            "hispanicPercent": 14.2,
+            "crawled": "2024-04-07 06:05:32.705465",
+            "crawled-city": "Acres Green"
         }
     ]
 }
