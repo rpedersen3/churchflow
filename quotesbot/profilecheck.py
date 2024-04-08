@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-
+import re
 import cv2
 import dlib
 import numpy as np
 import matplotlib.pyplot as plt
 import urllib.request
 from ethnicolr import census_ln
+import spacy
 from names_dataset import NameDataset, NameWrapper
 import math
 import requests
@@ -38,7 +39,8 @@ class ProfileCheck:
     #genderList = ['Male', 'Female']
     #model_mean = (78.4263377603, 87.7689143744, 114.895847746)
 
-
+    nlp = spacy.load("en_core_web_sm")
+    pd.set_option("display.max_rows", 200)
 
     def get_human_names(self, text):
         tokens = nltk.tokenize.word_tokenize(text)
@@ -189,9 +191,42 @@ class ProfileCheck:
 
         return
 
+    def isPersonName(self, name):
+        doc = self.nlp(name)
+        for ent in doc.ents:
+            #print("label: ", ent.label_, ", text: ", ent.text)
+            if ent.label_ == "GPE" or ent.label_ == "PERSON":
+                return ent.text
+
+        return None
+
+    def isPhoneNumber(self, string):
+        r = re.compile(r'(\d{3}[-\.\s]??\d{3}[-\.\s]??\d{4}|\(\d{3}\)\s*\d{3}[-\.\s]??\d{4}|\d{3}[-\.\s]??\d{4})')
+        phone_numbers = r.findall(string)
+
+        phoneNumber = None
+        if len(phone_numbers) > 0:
+            phoneNumber = phone_numbers[0]
+
+        return phoneNumber
+
+    def isEmailAddresses(self, string):
+        r = re.compile(r'[\w\.-]+@[\w\.-]+')
+        email = r.findall(string)
+
+        if len(email) == 0:
+            return None
+
+        return email
+
     def isProfileName(self, name):
         foundProfileLastname = False
 
+        doc = self.nlp(name)
+        print('---------------')
+        for ent in doc.ents:
+            print(ent.text, ent.start_char, ent.end_char, ent.label_)
+        print('---------------')
         parts = name.split()
 
         for part in parts:
@@ -200,8 +235,8 @@ class ProfileCheck:
 
             df = pd.DataFrame(names)
             predictions = census_ln(df, 'name')
-            #print("name: ", part)
-            #print("predictions: ", predictions)
+            print("name: ", part)
+            print("predictions: ", predictions)
 
             pctwhite = predictions['pctwhite'].iloc[0]
             pctblack = predictions['pctblack'].iloc[0]
@@ -250,7 +285,7 @@ class ProfileCheck:
 
         detector = dlib.get_frontal_face_detector()
 
-        if url.find(".jpg") != -1 or url.find(".jpeg") != -1 or url.find(".png") != -1:
+        if url.find(".jpg") != -1 or url.find(".jpeg") != -1 or url.find(".png") != -1 or url.find(".ashx") != -1:
 
             # sometimes they come in sets so need to split them
             url = url.split(", ")[0]
@@ -260,7 +295,7 @@ class ProfileCheck:
             response = urllib.request.urlopen(req)
             arr = np.asarray(bytearray(response.read()), dtype=np.uint8)
 
-            if url.find(".jpg") != -1 or url.find(".jpeg") != -1:
+            if url.find(".jpg") != -1 or url.find(".jpeg") != -1 or url.find(".jpeg") != -1 or url.find(".ashx") != -1:
                 frame = cv2.imdecode(arr, -1)
             if url.find(".png") != -1:
                 frame = cv2.imdecode(arr, cv2.IMREAD_COLOR)

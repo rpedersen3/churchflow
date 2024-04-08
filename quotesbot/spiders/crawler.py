@@ -5,6 +5,7 @@ from quotesbot.profilecheck import ProfileCheck
 from quotesbot.groupcheck import GroupCheck
 from quotesbot.churchfinder import ChurchFinder
 import json
+from urllib.parse import urlparse
 
 class DivCount:
     def __init__(self, div, level, className, count):
@@ -15,28 +16,7 @@ class DivCount:
 
 class ChurchCrawler(scrapy.Spider):
     name = "crawler"
-    #siteurl = 'https://www.calvarygolden.net'
 
-    #siteurl = "https://www.missionhills.org"
-
-    #siteurl = "https://centcov.org"
-
-    #siteurl = "https://calvarybible.com"
-
-    #siteurl = 'https://truelightonline.org'
-
-    #siteurl = 'https://www.houseofhopeaurora.org'
-
-    #siteurl = 'https://www.horizondenver.com'
-
-    #siteurl = "https://www.convergerockymountain.org"
-
-    #siteurl = "https://www.wellspring.thecalvary.org"
-
-    #siteurl = "https://longmontcalvary.org"
-
-    #siteurl = "https://www.trinitylittleton.com"
-    '''
     churches_file_path = "churches.json"
     with open(churches_file_path, "r") as file:
         churchesData = json.load(file)
@@ -49,7 +29,7 @@ class ChurchCrawler(scrapy.Spider):
         url = church["link"]
         start_urls.append(url)
 
-        if i > 3:
+        if i > 4:
             break
         i = i + 1
 
@@ -91,8 +71,9 @@ class ChurchCrawler(scrapy.Spider):
         #'https://centcov.org/staff-elders/'
         #'https://calvarybible.com/staff/'
         #'https://www.missionhills.org/im-new/staff-elders/',
+        
     ]
-
+    '''
 
     def checkCommonDiv(self, el1, el2):
         s1 = str(el1)
@@ -245,9 +226,15 @@ class ChurchCrawler(scrapy.Spider):
         else:
             print("email: ", previousProfileEmail)
 
+    def replace_multiple_spaces(self, text):
+        # Replace multiple spaces with just one space
+        cleaned_text = re.sub(r'\s+', ' ', text)
+        return cleaned_text
+
     def searchForContacts(self, response):
-        print('hello')
-        print('**************** process page: ', response.url)
+        #print('**************** process page: ', response.url)
+
+
         if response.url.find('staff') != -1 or \
                 response.url.find('team') != -1 or \
                 response.url.find('leadership') != -1 or \
@@ -272,17 +259,32 @@ class ChurchCrawler(scrapy.Spider):
             path = response.xpath(
                 '//div[not(descendant::div)] | //a[starts-with(@href, "mailto:")] | //img | //h1 | //h2 | //h3 | //strong | //p | //span ')
             for el in path:
-                # print("--------------- Look for Profile Info -----------------------")
 
+
+                #print("--------------- Look for Profile Info -----------------------")
+    
                 visible_text = el.xpath('.//text()[normalize-space()]').extract()
+
                 for text in visible_text:
-                    shortText = text.strip()[:40]
-                    # print("short text: ", shortText)
+                    text = self.replace_multiple_spaces(text)
+                    shortText = text.strip()[:60]
+                    #print("short text: ", shortText)
+                    personName = profCheck.isPersonName(shortText)
+                    if personName is not None:
+                        currentProfileName = personName
+                        print("found profile name ", currentProfileName)
+
+                    email = profCheck.isEmailAddresses(shortText)
+                    if email is not None:
+                        currentProfileEmail = email
+                        print("found email: ", email)
+
+                    '''
                     names = shortText.split()
                     for name in names:
-                        # print("name check: ", name)
+                        #print("name check: ", name)
                         if profCheck.isProfileName(name):
-                            # print("found name: ", name)
+                            print("found name: ", name)
                             l1 = len(currentProfileName.split())
                             if l1 == 0:
                                 currentProfileName = name
@@ -294,32 +296,30 @@ class ChurchCrawler(scrapy.Spider):
                             #    currentProfileName += " "
                             #    currentProfileName += name
 
-                            # print("found profile name ", currentProfileName)
+                            print("found profile name ", currentProfileName)
+                    '''
 
                     if profCheck.isProfileJobTitle(shortText):
                         if currentProfileTitle == "":
                             currentProfileTitle = shortText
-                        # print("found profile jobtitle ", shortText)
+                        print("found profile jobtitle ", shortText)
 
                     if profCheck.isProfileDepartment(shortText):
                         currentProfileDepartment = shortText
-                        # print("found profile department ", shortText)
+                        print("found profile department ", shortText)
 
-                # mailto_links = divEl.xpath('.//a[starts-with(@href, "mailto:")]')
                 # for link in mailto_links:
                 if el.xpath('@href').get():
                     email_address = el.xpath('@href').get().replace("mailto:", "")
-                    # print("found profile email ", email_address)
+
+                    print("found profile email ", email_address)
 
                     currentProfileEmail = email_address
                     currentProfileEmailEl = el
 
-                    yield {
-                        'email_address': email_address
-                    }
 
                 # Look for profile photo's
-
+                
                 # Extract image URLs from the page
                 if el.xpath('@src | @data-src | @srcset').get():
                     img_src = el.xpath('@src | @data-src | @srcset').get()
@@ -331,41 +331,44 @@ class ChurchCrawler(scrapy.Spider):
                             img_src.startswith("https://s3.amazonaws.com/media.cloversites.com"):
                         isCDN = True
 
-                    if (isCDN or img_src.startswith(response.url)) and \
-                            profCheck.isProfilePhoto(img_src):
+                    parsed_url = urlparse(response.url)
+                    domain = parsed_url.netloc
+                    if isCDN or img_src.find(domain) >= 0:
+                        #print("********** check photo ****** ", img_src)
+                        if profCheck.isProfilePhoto(img_src):
 
-                        # print("photo found: ", img_src)
-                        if currentProfilePhoto != "" and currentProfileName != "":
-                            self.saveContact(currentProfilePhoto,
-                                             currentProfileName,
+                            print("photo found: ", currentProfilePhoto)
+                            print("name: ", currentProfileName)
+                            print("name: ", currentProfileName)
+                            if currentProfilePhoto != "" and currentProfileName != "":
+                                self.saveContact(currentProfilePhoto,
+                                                 currentProfileName,#
 
-                                             currentProfileTitle,
-                                             currentProfileDepartment,
-                                             currentProfileEmail,
-                                             previousProfileEmail,
+                                                 currentProfileTitle,
+                                                 currentProfileDepartment,
+                                                 currentProfileEmail,
+                                                 previousProfileEmail,
 
-                                             currentProfilePhotoEl,
-                                             currentProfileNameEl,
+                                                 currentProfilePhotoEl,
+                                                 currentProfileNameEl,
 
-                                             currentProfileEmailEl,
-                                             previousProfileEmailEl)
+                                                 currentProfileEmailEl,
+                                                 previousProfileEmailEl)
 
-                        previousProfileEmail = currentProfileEmail
-                        previousProfileEmailEl = currentProfileEmailEl
+                            previousProfileEmail = currentProfileEmail
+                            previousProfileEmailEl = currentProfileEmailEl
 
-                        currentProfilePhoto = img_src
-                        currentProfileName = ""
-                        currentProfileTitle = ""
-                        currentProfileDepartment = ""
-                        currentProfileEmail = ""
+                            currentProfilePhoto = img_src
+                            currentProfileName = ""
+                            currentProfileTitle = ""
+                            currentProfileDepartment = ""
+                            currentProfileEmail = ""
 
-                        currentProfilePhotoEl = el
-                        currentProfileNameEl = ""
-                        currentProfileEmailEl = ""
+                            currentProfilePhotoEl = el
+                            currentProfileNameEl = ""
+                            currentProfileEmailEl = ""
 
-                        yield {
-                            'image_url': img_src
-                        }
+
 
             if currentProfilePhoto != "" and currentProfileName != "":
                 self.saveContact(currentProfilePhoto,
@@ -420,10 +423,10 @@ class ChurchCrawler(scrapy.Spider):
         #churchFinder.findCityDemographicsFromCensusData()
         #churchFinder.findCityDemographics()
         #churchFinder.findCities()
-        churchFinder.findChurches()
+        #churchFinder.findChurches()
 
-        '''
-        print("parse site: ", response.url)
+
+        #print("parse site: ", response.url)
         self.searchForContacts(response)
 
 
@@ -445,7 +448,7 @@ class ChurchCrawler(scrapy.Spider):
 
                     yield scrapy.Request(response.urljoin(pageLink), callback=self.parse)
 
-        '''
+
 
 
 
