@@ -26,11 +26,14 @@ class ChurchCrawler(scrapy.Spider):
 
     i = 1
     for church in churches:
-        url = church["link"]
-        start_urls.append(url)
 
-        if i > 4:
+        if i > 30:
+            url = church["link"]
+            start_urls.append(url)
+
+        if i > 60:
             break
+
         i = i + 1
 
     print('urls: ', str(start_urls))
@@ -259,6 +262,9 @@ class ChurchCrawler(scrapy.Spider):
     def searchForContacts(self, response):
         #print('**************** process page: ', response.url)
 
+        if response.url.find(".pdf") >= 0:
+            return
+
 
         if response.url.find('staff') != -1 or \
                 response.url.find('team') != -1 or \
@@ -457,6 +463,10 @@ class ChurchCrawler(scrapy.Spider):
                 groupCheck.lookForGroupNames(html, boundingClassName)
 
     def parse(self, response):
+
+        if response.url.find(".pdf") >= 0 or \
+           response.url.find(".zip") >= 0:
+                return
 
         churchFinder = ChurchFinder()
         #churchFinder.findCityDemographicsFromCensusData()

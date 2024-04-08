@@ -228,6 +228,9 @@ class ProfileCheck:
                 fullname.lower().find("clergy") >= 0 or \
                 fullname.lower().find("pastor") >= 0 or \
                 fullname.lower().find("director") >= 0 or \
+                fullname.lower().find("coordinator") >= 0 or \
+                fullname.lower().find("office") >= 0 or \
+                fullname.lower().find("campus") >= 0 or \
                 fullname.lower().find('lead') >= 0:
                     fullname = None
                     foundProfileLastname = False
