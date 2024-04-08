@@ -192,13 +192,48 @@ class ProfileCheck:
         return
 
     def isPersonName(self, name):
+
+        #print("check name: ", name)
+        fullname = None
+
         doc = self.nlp(name)
         for ent in doc.ents:
+            #print("check name: ", name)
             #print("label: ", ent.label_, ", text: ", ent.text)
             if ent.label_ == "GPE" or ent.label_ == "PERSON":
-                return ent.text
+                #print("person name: ", ent.text)
+                fullname = ent.text
 
-        return None
+        # remove some common names that pass
+        '''
+        if fullname is None or \
+                len(fullname.split()) < 2 or \
+                fullname.lower().find("staff") >= 0 or \
+                fullname.lower().find("clergy") >= 0 or \
+                fullname.lower().find("pastor") >= 0 or \
+                fullname.lower().find('lead') >= 0:
+                    fullname = None
+                    foundProfileLastname = False
+        '''
+
+        # lets try and parse name in pieces
+        if fullname is None:
+            fullname = self.isProfileName(name)
+
+
+        # remove some common names that pass
+        if fullname is None or \
+                len(fullname.split()) < 2 or \
+                fullname.lower().find("staff") >= 0 or \
+                fullname.lower().find("clergy") >= 0 or \
+                fullname.lower().find("pastor") >= 0 or \
+                fullname.lower().find("director") >= 0 or \
+                fullname.lower().find('lead') >= 0:
+                    fullname = None
+                    foundProfileLastname = False
+
+        #print('fullname: ', fullname)
+        return fullname
 
     def isPhoneNumber(self, string):
         r = re.compile(r'(\d{3}[-\.\s]??\d{3}[-\.\s]??\d{4}|\(\d{3}\)\s*\d{3}[-\.\s]??\d{4}|\d{3}[-\.\s]??\d{4})')
@@ -220,23 +255,20 @@ class ProfileCheck:
         return email
 
     def isProfileName(self, name):
-        foundProfileLastname = False
 
-        doc = self.nlp(name)
-        print('---------------')
-        for ent in doc.ents:
-            print(ent.text, ent.start_char, ent.end_char, ent.label_)
-        print('---------------')
+        # grab first two words that sound like real names
         parts = name.split()
 
+        fullname = None
+        foundProfileLastname = False
         for part in parts:
 
             names = [{'name': part}]
 
             df = pd.DataFrame(names)
             predictions = census_ln(df, 'name')
-            print("name: ", part)
-            print("predictions: ", predictions)
+            #print("name: ", part)
+            #print("predictions: ", predictions)
 
             pctwhite = predictions['pctwhite'].iloc[0]
             pctblack = predictions['pctblack'].iloc[0]
@@ -245,14 +277,19 @@ class ProfileCheck:
             pct2prace = predictions['pct2prace'].iloc[0]
             pcthispanic = predictions['pcthispanic'].iloc[0]
             if str(pctwhite) != 'nan':
-                foundProfileLastname = True
-            else:
-                foundProfileLastname = False
+                if fullname is None:
+                    fullname = part
+                else:
+                    fullname = fullname + " " + part
+                    foundProfileLastname = True
+
+            if foundProfileLastname:
                 break
 
 
 
-        return foundProfileLastname
+        #print("fullname: ", fullname)
+        return fullname
 
 
     def isProfileJobTitle(self, title):

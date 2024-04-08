@@ -36,10 +36,14 @@ class ChurchCrawler(scrapy.Spider):
     print('urls: ', str(start_urls))
 
     '''
+
     start_urls = [
         #'https://www.calvarygolden.net'
 
-        'https://www.missionhills.org/groupfinder/'
+        'https://www.petertherock.org/staff-directory.html'
+
+        #'https://www.missionhills.org/im-new/staff-elders/'
+        #'https://www.missionhills.org/groupfinder/'
         #'https://www.missionhills.org'
 
         #'https://centcov.org'
@@ -226,6 +230,27 @@ class ChurchCrawler(scrapy.Spider):
         else:
             print("email: ", previousProfileEmail)
 
+
+    def saveEmailContact(self,
+        currentProfileName,
+        currentProfileEmail
+    ):
+
+        # check that name is in email somewhere
+        foundPartInEmail = False
+        parts = currentProfileName.split()
+        for part in parts:
+            if currentProfileEmail.lower().find(part.lower()) >= 0:
+                foundPartInEmail = True
+
+
+        if foundPartInEmail:
+            print("")
+            print("contact record (email):")
+            print("name: ", currentProfileName)
+            print("email: ", currentProfileEmail)
+
+
     def replace_multiple_spaces(self, text):
         # Replace multiple spaces with just one space
         cleaned_text = re.sub(r'\s+', ' ', text)
@@ -243,6 +268,7 @@ class ChurchCrawler(scrapy.Spider):
             print("--------- parse page: ", response.url)
             profCheck = ProfileCheck()
 
+            # track using photo as reset element
             currentProfilePhoto = ""
             currentProfileName = ""
             currentProfileTitle = ""
@@ -256,70 +282,84 @@ class ChurchCrawler(scrapy.Spider):
             currentProfileEmailEl = ""
             previousProfileEmailEl = ""
 
-            path = response.xpath(
-                '//div[not(descendant::div)] | //a[starts-with(@href, "mailto:")] | //img | //h1 | //h2 | //h3 | //strong | //p | //span ')
-            for el in path:
+            # track using email as reset element
+            trackEmailCurrentName = ""
+            trackEmailCurrentEmail = ""
 
+            path = response.xpath(
+                '//p | //div[not(descendant::div)] | //a[starts-with(@href, "mailto:")] | //img | //h1 | //h2 | //h3 | //strong | //span ')
+            for el in path:
+                #print("el: ", el)
 
                 #print("--------------- Look for Profile Info -----------------------")
-    
-                visible_text = el.xpath('.//text()[normalize-space()]').extract()
 
-                for text in visible_text:
-                    text = self.replace_multiple_spaces(text)
-                    shortText = text.strip()[:60]
+                visible_text = el.xpath('.//text()[normalize-space()]').extract()
+                text = self.replace_multiple_spaces(' '.join(visible_text))
+
+                # text in visible_text:
+                #    text = self.replace_multiple_spaces(text)
+
+                shortText = text.strip()[:120]
+                if len(shortText) > 5:
                     #print("short text: ", shortText)
                     personName = profCheck.isPersonName(shortText)
                     if personName is not None:
                         currentProfileName = personName
-                        print("found profile name ", currentProfileName)
+                        trackEmailCurrentName = personName
+                        #print("found profile name ", currentProfileName)
 
+                    '''
                     email = profCheck.isEmailAddresses(shortText)
                     if email is not None:
                         currentProfileEmail = email
+
+                        trackEmailCurrentEmail = email
+                        if trackEmailCurrentName != "":
+                            self.saveEmailContact(
+                                trackEmailCurrentName,
+                                currentProfileTitle,
+                                currentProfileDepartment,
+                                trackEmailCurrentEmail
+                            )
+
                         print("found email: ", email)
-
-                    '''
-                    names = shortText.split()
-                    for name in names:
-                        #print("name check: ", name)
-                        if profCheck.isProfileName(name):
-                            print("found name: ", name)
-                            l1 = len(currentProfileName.split())
-                            if l1 == 0:
-                                currentProfileName = name
-                                currentProfileNameEl = el
-                            elif l1 == 1 and self.checkCommonDiv(currentProfileNameEl, el):
-                                currentProfileName += " "
-                                currentProfileName += name
-                            # elif l1 == 2  and self.checkCommonDiv(currentProfileNameEl, divEl):
-                            #    currentProfileName += " "
-                            #    currentProfileName += name
-
-                            print("found profile name ", currentProfileName)
                     '''
 
                     if profCheck.isProfileJobTitle(shortText):
                         if currentProfileTitle == "":
                             currentProfileTitle = shortText
-                        print("found profile jobtitle ", shortText)
+                        #print("found profile jobtitle ", shortText)
 
                     if profCheck.isProfileDepartment(shortText):
                         currentProfileDepartment = shortText
-                        print("found profile department ", shortText)
+                        #print("found profile department ", shortText)
 
                 # for link in mailto_links:
                 if el.xpath('@href').get():
                     email_address = el.xpath('@href').get().replace("mailto:", "")
 
-                    print("found profile email ", email_address)
+                    #print("found profile email ", email_address)
 
                     currentProfileEmail = email_address
                     currentProfileEmailEl = el
 
+                    trackEmailCurrentEmail = email_address
+                    if trackEmailCurrentName != "":
+                        self.saveEmailContact(
+                            trackEmailCurrentName,
+                            trackEmailCurrentEmail
+                        )
+
+                        trackEmailCurrentName = ""
+                        trackEmailCurrentName = ""
+
+
+
+
+
 
                 # Look for profile photo's
-                
+
                 # Extract image URLs from the page
                 if el.xpath('@src | @data-src | @srcset').get():
                     img_src = el.xpath('@src | @data-src | @srcset').get()
@@ -337,9 +377,8 @@ class ChurchCrawler(scrapy.Spider):
                         #print("********** check photo ****** ", img_src)
                         if profCheck.isProfilePhoto(img_src):
 
-                            print("photo found: ", currentProfilePhoto)
-                            print("name: ", currentProfileName)
-                            print("name: ", currentProfileName)
+                            #print("photo found: ", img_src)
+
                             if currentProfilePhoto != "" and currentProfileName != "":
                                 self.saveContact(currentProfilePhoto,
                                                  currentProfileName,#
@@ -432,6 +471,7 @@ class ChurchCrawler(scrapy.Spider):
 
         #self.searchForGroups(response)
 
+
         links = response.xpath('//a/@href').extract()
         for link in links:
 
@@ -447,7 +487,6 @@ class ChurchCrawler(scrapy.Spider):
                         count < 4:
 
                     yield scrapy.Request(response.urljoin(pageLink), callback=self.parse)
-
 
 
 
