@@ -66,19 +66,34 @@ class ProfileCheck:
 
     def get_job_titles(self, text):
 
+        text = text[:60]
         if "pastor" in text.lower():
             if "lead" in text.lower():
+                if "worship" in text.lower():
+                    return "Lead Worship Pastor"
+                if "student" in text.lower():
+                    return "Lead Student Pastor"
+                if "children's" in text.lower():
+                    return "Lead Children's Pastor"
                 return "Lead Pastor"
             if "executive" in text.lower():
                 return "Executive Pastor"
+            if "associate" in text.lower():
+                return "Associate Pastor"
+            if "worship" in text.lower():
+                return "Worship Pastor"
             if "care" in text.lower():
                 return "Care Pastor"
             if "next gen" in text.lower():
                 return "Kids Pastor"
             if "groups" in text.lower():
                 return "Groups Pastor"
+            if "residency" in text.lower():
+                return "Residency Pastor"
             return "Paster"
 
+        if "elder" in text.lower():
+            return "Elder"
 
         if "director" in text.lower():
             if "executive" in text.lower():
@@ -91,8 +106,14 @@ class ProfileCheck:
                 return "Associate Director"
             if "facilities" in text.lower():
                 return "Facilities Director"
+            if "connections" in text.lower():
+                return "Connections Director"
+            if "communications" in text.lower():
+                return "Communications Director"
             if "kids" in text.lower():
                 return "Kids Director"
+            if "high school" in text.lower():
+                return "High School Director"
             return "Director"
 
         if "manager" in text.lower():
@@ -111,6 +132,12 @@ class ProfileCheck:
                 return "Next Steps Coordinator"
             if "kids" in text.lower():
                 return "Kids Coordinator"
+            if "video" in text.lower():
+                return "Video Coordinator"
+            if "women's ministry" in text.lower():
+                return "Women's Ministry Coordinator"
+            if "men's ministry" in text.lower():
+                return "Men's Ministry Coordinator"
             return "Coordinator"
 
         if "staff" in text.lower():
@@ -131,6 +158,8 @@ class ProfileCheck:
         if "administrative" in text.lower():
             if "assistant" in text.lower():
                 return "Administrative Assistant"
+            if "front desk" in text.lower():
+                return "Front Desk Administrator"
             return "Administrative"
 
         if "administrator" in text.lower():
@@ -147,11 +176,12 @@ class ProfileCheck:
         if "resident" in text.lower():
             return "Resident"
 
-        return
+        return None
 
 
     def get_departments(self, text):
 
+        text = text[:120]
         if "ministry" in text.lower():
             if "services" in text.lower():
                 return "Ministry Services"
@@ -189,51 +219,47 @@ class ProfileCheck:
         if "weekend experience" in text.lower():
             return "Weekend Experience"
 
-        return
+        return None
 
     def isPersonName(self, name):
 
         #print("check name: ", name)
         fullname = None
 
+        # remove some common titles in front of name
+        name = name.lower()
+        name = name.replace("fr.", "")
+        name = name.replace("deacon", "")
+        name = name.replace("staff", "")
+        name = name.replace("clergy", "")
+        name = name.replace("elder", "")
+        name = name.replace("pastor", "")
+        name = name.replace("director", "")
+        name = name.replace("coordinator", "")
+        name = name.replace("office", "")
+        name = name.replace("campus", "")
+        name = name.replace("lead", "")
+        name = name.replace("associate", "")
+
+        #print("****** name: ", name)
+
         doc = self.nlp(name)
         for ent in doc.ents:
             #print("check name: ", name)
             #print("label: ", ent.label_, ", text: ", ent.text)
-            if ent.label_ == "GPE" or ent.label_ == "PERSON":
+            if ent.label_ == "PERSON":
                 #print("person name: ", ent.text)
                 fullname = ent.text
-
-        # remove some common names that pass
-        '''
-        if fullname is None or \
-                len(fullname.split()) < 2 or \
-                fullname.lower().find("staff") >= 0 or \
-                fullname.lower().find("clergy") >= 0 or \
-                fullname.lower().find("pastor") >= 0 or \
-                fullname.lower().find('lead') >= 0:
-                    fullname = None
-                    foundProfileLastname = False
-        '''
+                #print("fullname person: ", fullname)
 
         # lets try and parse name in pieces
         if fullname is None:
-            fullname = self.isProfileName(name)
+            #print("check full name parts: ", name)
+            fullname = self.isPersonNameUsingParts(name)
+            #print("fullname parts: ", fullname)
 
 
-        # remove some common names that pass
-        if fullname is None or \
-                len(fullname.split()) < 2 or \
-                fullname.lower().find("staff") >= 0 or \
-                fullname.lower().find("clergy") >= 0 or \
-                fullname.lower().find("pastor") >= 0 or \
-                fullname.lower().find("director") >= 0 or \
-                fullname.lower().find("coordinator") >= 0 or \
-                fullname.lower().find("office") >= 0 or \
-                fullname.lower().find("campus") >= 0 or \
-                fullname.lower().find('lead') >= 0:
-                    fullname = None
-                    foundProfileLastname = False
+
 
         #print('fullname: ', fullname)
         return fullname
@@ -257,39 +283,47 @@ class ProfileCheck:
 
         return email
 
-    def isProfileName(self, name):
+    def isPersonNameUsingParts(self, name):
 
         # grab first two words that sound like real names
         parts = name.split()
 
         fullname = None
         foundProfileLastname = False
+        skipNextPart = False
         for part in parts:
 
-            names = [{'name': part}]
+            if part.lower() != "and" and skipNextPart == False:
 
-            df = pd.DataFrame(names)
-            predictions = census_ln(df, 'name')
-            #print("name: ", part)
-            #print("predictions: ", predictions)
+                names = [{'name': part}]
 
-            pctwhite = predictions['pctwhite'].iloc[0]
-            pctblack = predictions['pctblack'].iloc[0]
-            pctapi = predictions['pctapi'].iloc[0]
-            pctaian = predictions['pctaian'].iloc[0]
-            pct2prace = predictions['pct2prace'].iloc[0]
-            pcthispanic = predictions['pcthispanic'].iloc[0]
-            if str(pctwhite) != 'nan':
-                if fullname is None:
-                    fullname = part
-                else:
-                    fullname = fullname + " " + part
-                    foundProfileLastname = True
+                df = pd.DataFrame(names)
+                predictions = census_ln(df, 'name')
+                #print("name: ", part)
+                #print("predictions: ", predictions)
 
-            if foundProfileLastname:
-                break
+                pctwhite = predictions['pctwhite'].iloc[0]
+                pctblack = predictions['pctblack'].iloc[0]
+                pctapi = predictions['pctapi'].iloc[0]
+                pctaian = predictions['pctaian'].iloc[0]
+                pct2prace = predictions['pct2prace'].iloc[0]
+                pcthispanic = predictions['pcthispanic'].iloc[0]
+                if str(pctwhite) != 'nan':
+                    if fullname is None:
+                        fullname = part
+                    else:
+                        fullname = fullname + " " + part
+                        foundProfileLastname = True
 
+                if foundProfileLastname:
+                    break
 
+            # adjust for two people like Jane and Joe Smith => Jane Smith
+            if skipNextPart:
+                skipNextPart = False
+
+            if part.lower() == "and":
+                skipNextPart = True
 
         #print("fullname: ", fullname)
         return fullname
@@ -299,28 +333,19 @@ class ProfileCheck:
         foundProfileTitle = False
 
         jobTitle = self.get_job_titles(title)
-        if jobTitle:
-            foundProfileTitle = True
 
-
-        return foundProfileTitle
+        return jobTitle
 
 
     def isProfileDepartment(self, department):
-        foundProfileDepartment = False
 
         department = self.get_departments(department)
-        if department:
-            foundProfileDepartment = True
-
-
-        return foundProfileDepartment
+        return department
 
 
     def isProfilePhoto(self, url):
 
         foundProfilePhoto = False
-
         #print("url: ", url)
 
         detector = dlib.get_frontal_face_detector()
@@ -335,73 +360,88 @@ class ProfileCheck:
             response = urllib.request.urlopen(req)
             arr = np.asarray(bytearray(response.read()), dtype=np.uint8)
 
+            frame = None
             if url.find(".jpg") != -1 or url.find(".jpeg") != -1 or url.find(".jpeg") != -1 or url.find(".ashx") != -1:
                 frame = cv2.imdecode(arr, -1)
             if url.find(".png") != -1:
                 frame = cv2.imdecode(arr, cv2.IMREAD_COLOR)
 
-            gray_image = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            if frame is not None:
+                try:
+                    gray_image = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-            height, width = gray_image.shape[:2]
-
-            #plt.imshow(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
-            #plt.axis('off')
-            #plt.show()
-
-            rects = detector(gray_image)
-            #print('rects: ', str(rects))
-
-
-
-            if len(rects) == 1:
-                for rect in rects:
-                    x, y, x2, y2, w, h = (rect.left(), rect.top(), rect.right(), rect.bottom(), rect.width(), rect.height())
-                    cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-                    #print('***************************')
-                    #print('image width: ', width, ',  image height: ', height)
-                    #print('face width: ', w, ',  face height: ', h)
-                    #print('x: ', x, ', ', 'y: ', y)
-
-                    percentOfHeight = (h / height) * 100
-                    percentFromTop = (y / height) * 100
-                    percentFromBottom = ((height-y2) / height) * 100
-
-                    #print("percentOfHeight: ", percentOfHeight)
-                    #print("percentFromTop: ", percentFromTop)
-                    #print("percentFromBottom: ", percentFromBottom)
+                    height, width = gray_image.shape[:2]
 
                     #plt.imshow(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
                     #plt.axis('off')
                     #plt.show()
 
-                    # check if face is in middle of picture and is percent of total size
-                    if percentOfHeight > 20 and percentFromTop < 40 and percentFromBottom < 65:
-
-                        #print("found photo")
+                    rects = detector(gray_image)
+                    #print('rects: ', str(rects))
 
 
-                        #face_img = frame[y:y+h, x:x+w].copy()
-                        #blob = cv2.dnn.blobFromImage(face_img, 1, (227, 227), model_mean, swapRB=False)
+                    # allow 2 faces
+                    numberOfFaces = len(rects)
+                    #print("********* number of faces: ", numberOfFaces)
+                    if numberOfFaces < 3:
+                        for rect in rects:
+                            x, y, x2, y2, w, h = (rect.left(), rect.top(), rect.right(), rect.bottom(), rect.width(), rect.height())
+                            cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+                            #print('***************************')
+                            #print('image width: ', width, ',  image height: ', height)
+                            #print('face width: ', w, ',  face height: ', h)
+                            #print('x: ', x, ', ', 'y: ', y)
+
+                            percentOfHeight = (h / height) * 100
+                            percentFromTop = (y / height) * 100
+                            percentFromBottom = ((height-y2) / height) * 100
+
+                            #print("percentOfHeight: ", percentOfHeight)
+                            #print("percentFromTop: ", percentFromTop)
+                            #print("percentFromBottom: ", percentFromBottom)
 
 
-                        #age_Net.setInput(blob)
-                        #age_preds = age_Net.forward()
-                        #age = ageList[age_preds[0].argmax()]
-                        #i = age_preds[0].argmax()
-                        #ageConfidence = age_preds[0][i]
 
-                        #print('age: ', age, ", confidence: ", ageConfidence)
+                            # check if face is in middle of picture and is percent of total size
+                            #if numberOfFaces == 1 and percentOfHeight > 20 and percentFromTop < 40 and percentFromBottom < 65:
+                            #    foundProfilePhoto = True
+                            #    print("found photo")
+                            if percentOfHeight > 20:
+                                foundProfilePhoto = True
+                                #print("found photo")
 
-                        #gender_Net.setInput(blob)
-                        #gender_preds = gender_Net.forward()
-                        #gender = genderList[gender_preds[0].argmax()]
-                        #j = gender_preds[0].argmax()
-                        #genderConfidence = gender_preds[0][j]
-                        ##print('gender: ', gender, ', confidence: ', genderConfidence)
+                            #plt.imshow(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+                            #plt.axis('off')
+                            #plt.show()
+
+                            #if foundProfilePhoto:
+
+                                #print("found photo")
 
 
+                                #face_img = frame[y:y+h, x:x+w].copy()
+                                #blob = cv2.dnn.blobFromImage(face_img, 1, (227, 227), model_mean, swapRB=False)
 
-                        foundProfilePhoto = True
+
+                                #age_Net.setInput(blob)
+                                #age_preds = age_Net.forward()
+                                #age = ageList[age_preds[0].argmax()]
+                                #i = age_preds[0].argmax()
+                                #ageConfidence = age_preds[0][i]
+
+                                #print('age: ', age, ", confidence: ", ageConfidence)
+
+                                #gender_Net.setInput(blob)
+                                #gender_preds = gender_Net.forward()
+                                #gender = genderList[gender_preds[0].argmax()]
+                                #j = gender_preds[0].argmax()
+                                #genderConfidence = gender_preds[0][j]
+                                ##print('gender: ', gender, ', confidence: ', genderConfidence)
+
+
+                except Exception as e:
+                        print("e")
+
 
 
             return foundProfilePhoto

@@ -23,7 +23,7 @@ class ChurchCrawler(scrapy.Spider):
 
     start_urls = []
     churches = churchesData["churches"]
-
+    '''
     i = 1
     for church in churches:
 
@@ -43,7 +43,13 @@ class ChurchCrawler(scrapy.Spider):
     start_urls = [
         #'https://www.calvarygolden.net'
 
-        'https://www.petertherock.org/staff-directory.html'
+        #'https://plumcreek.church/team'
+
+        #'https://www.petertherock.org/staff-directory.html'
+
+        'https://www.holyapostlescc.org/staff'
+        #'https://broadmoorchurch.org/our-team/'
+        #'https://mynorthlandchurch.org/about/our-team'
 
         #'https://www.missionhills.org/im-new/staff-elders/'
         #'https://www.missionhills.org/groupfinder/'
@@ -80,7 +86,7 @@ class ChurchCrawler(scrapy.Spider):
         #'https://www.missionhills.org/im-new/staff-elders/',
         
     ]
-    '''
+
 
     def checkCommonDiv(self, el1, el2):
         s1 = str(el1)
@@ -216,6 +222,22 @@ class ChurchCrawler(scrapy.Spider):
         if previousProfileEmailEl != "":
             previousEmailOffset = self.commonDivCount(currentProfilePhotoEl, previousProfileEmailEl)
 
+        # get email before or after photo
+        email = ""
+        if previousEmailOffset <= emailOffset:
+            email = currentProfileEmail
+        else:
+            email = previousProfileEmail
+
+        # check that name is in email somewhere
+        foundPart = False
+        parts = currentProfileName.split()
+        for part in parts:
+            if email.lower().find(part.lower()) >= 0:
+                foundPart = True
+        if foundPart == False:
+            email = ""
+
         # print("------- name offset: ", nameOffset)
         # print("------- email offset: ", emailOffset)
         # print("------- previous email offset: ", previousEmailOffset)
@@ -227,11 +249,8 @@ class ChurchCrawler(scrapy.Spider):
         print("department: ", currentProfileDepartment)
 
         print('photo: ', currentProfilePhoto)
+        print('email: ', email)
 
-        if previousEmailOffset <= emailOffset:
-            print("email: ", currentProfileEmail)
-        else:
-            print("email: ", previousProfileEmail)
 
 
     def saveEmailContact(self,
@@ -308,9 +327,13 @@ class ChurchCrawler(scrapy.Spider):
                 shortText = text.strip()[:120]
                 if len(shortText) > 5:
                     #print("short text: ", shortText)
+
                     personName = profCheck.isPersonName(shortText)
                     if personName is not None:
-                        currentProfileName = personName
+
+                        if currentProfileName == "":
+                            currentProfileName = personName
+
                         trackEmailCurrentName = personName
                         #print("found profile name ", currentProfileName)
 
@@ -331,14 +354,17 @@ class ChurchCrawler(scrapy.Spider):
                         print("found email: ", email)
                     '''
 
-                    if profCheck.isProfileJobTitle(shortText):
+                    jobTitle = profCheck.isProfileJobTitle(shortText)
+                    if jobTitle is not None:
                         if currentProfileTitle == "":
-                            currentProfileTitle = shortText
-                        #print("found profile jobtitle ", shortText)
+                            currentProfileTitle = jobTitle
+                            #print("found profile jobtitle ", jobTitle)
 
-                    if profCheck.isProfileDepartment(shortText):
-                        currentProfileDepartment = shortText
-                        #print("found profile department ", shortText)
+                    department = profCheck.isProfileDepartment(shortText)
+                    if department is not None:
+                        if currentProfileDepartment == "":
+                            currentProfileDepartment = department
+                            #print("found profile department ", department)
 
                 # for link in mailto_links:
                 if el.xpath('@href').get():
@@ -379,6 +405,12 @@ class ChurchCrawler(scrapy.Spider):
 
                     parsed_url = urlparse(response.url)
                     domain = parsed_url.netloc
+
+                    if img_src.startswith('/') == True and img_src.startswith('//') == False:
+                        print("add on domain: ", img_src)
+                        img_src = "https://" + domain + img_src
+
+
                     if isCDN or img_src.find(domain) >= 0:
                         #print("********** check photo ****** ", img_src)
                         if profCheck.isProfilePhoto(img_src):
@@ -481,7 +513,7 @@ class ChurchCrawler(scrapy.Spider):
 
         #self.searchForGroups(response)
 
-
+        '''
         links = response.xpath('//a/@href').extract()
         for link in links:
 
@@ -498,7 +530,7 @@ class ChurchCrawler(scrapy.Spider):
 
                     yield scrapy.Request(response.urljoin(pageLink), callback=self.parse)
 
-
+        '''
 
 
 
