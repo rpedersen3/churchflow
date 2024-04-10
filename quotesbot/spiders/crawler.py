@@ -23,33 +23,47 @@ class ChurchCrawler(scrapy.Spider):
     name = "crawler"
 
 
+    '''
     start_urls = []
 
 
     i = 1
     for church in churches:
 
-        if i > 100:
-            url = church["link"]
-            start_urls.append(url)
+        if "pages" not in church:
 
-        if i > 10000:
-            break
+            if i > 0:
+                url = church["link"]
+                start_urls.append(url)
+
+                print('urls: ', str(url))
+
+            if i > 10000:
+                break
 
         i = i + 1
 
-    print('urls: ', str(start_urls))
-
-
     '''
+
+
+
     start_urls = [
         #'https://www.calvarygolden.net'
 
         #'https://plumcreek.church/team'
-
+        'https://www.familyinchrist.com/about'
         #'https://www.petertherock.org/staff-directory.html'
+        #'https://flatironsacademy.org/staff'
+        #'https://gccdenver.org/leadership/'
+        #'https://bethlehemdenver.com/who-we-are/church-staff/'
+        #'https://pikespeakchristianchurch.com/about/'
+        #'https://www.windsorroad.org/our-team/'
+        #'https://christchurchcolorado.org/about-us/#Our%20Staff'
+        #'https://www.windsorcornerstone.org/about/staff/'
 
-        'https://www.holyapostlescc.org/staff'
+        #'https://www.applewood.church/leadership-and-staff/'
+        #'https://wrpres.org/our-staff'
+        #'https://www.holyapostlescc.org/staff'
         #'https://broadmoorchurch.org/our-team/'
         #'https://mynorthlandchurch.org/about/our-team'
 
@@ -88,7 +102,7 @@ class ChurchCrawler(scrapy.Spider):
         #'https://www.missionhills.org/im-new/staff-elders/',
         
     ]
-    '''
+
 
     def checkCommonDiv(self, el1, el2):
         s1 = str(el1)
@@ -200,9 +214,9 @@ class ChurchCrawler(scrapy.Spider):
     def getContact(self, contacts, name, email):
 
         for contact in contacts:
-            if name is not "" and contact["name"] == name:
+            if name != "" and contact["name"] == name:
                 return contact
-            if email is not "" and contact["email"] == email:
+            if email != "" and contact["email"] == email:
                 return contact
 
         return None
@@ -357,8 +371,10 @@ class ChurchCrawler(scrapy.Spider):
 
 
         if response.url.find('staff') != -1 or \
+                response.url.find('about') != -1 or \
+                response.url.find('leader') != -1 or \
                 response.url.find('team') != -1 or \
-                response.url.find('leadership') != -1 or \
+                response.url.find('leader') != -1 or \
                 response.url.find('pastor') != -1:
 
             pages = []
@@ -399,7 +415,7 @@ class ChurchCrawler(scrapy.Spider):
             trackEmailCurrentEmail = ""
 
             path = response.xpath(
-                '//p | //div[not(descendant::div)] | //a[starts-with(@href, "mailto:")] | //img | //h1 | //h2 | //h3 | //strong | //span ')
+                '//p | //div[not(descendant::div)] | //a[starts-with(@href, "mailto:")] | //img | //h1 | //h2 | //h3 | //h4 | //h5 | //h6 |  //strong | //span ')
             for el in path:
                 #print("el: ", el)
 
@@ -488,18 +504,21 @@ class ChurchCrawler(scrapy.Spider):
                     isCDN = False
                     if img_src.startswith("https://images.squarespace-cdn.com") or \
                             img_src.startswith("https://static.wixstatic.com") or \
-                            img_src.startswith("https://s3.amazonaws.com/media.cloversites.com"):
+                            img_src.startswith("https://thechurchco-production.s3.amazonaws.com") or \
+                            img_src.startswith("https://s3.amazonaws.com/media.cloversites.com") or \
+                            img_src.startswith("https://images.squarespace-cdn.com"):
                         isCDN = True
 
                     parsed_url = urlparse(response.url)
                     domain = parsed_url.netloc
 
+
                     if img_src.startswith('/') == True and img_src.startswith('//') == False:
-                        print("add on domain: ", img_src)
+                        #print("add on domain: ", img_src)
                         img_src = "https://" + domain + img_src
 
 
-                    if isCDN or img_src.find(domain) >= 0:
+                    if isCDN or img_src.find(domain.replace("www.", "")) >= 0:
                         #print("********** check photo ****** ", img_src)
                         if profCheck.isProfilePhoto(img_src):
 
@@ -624,7 +643,7 @@ class ChurchCrawler(scrapy.Spider):
 
         #self.searchForGroups(response)
 
-
+        '''
         links = response.xpath('//a/@href').extract()
         for link in links:
 
@@ -641,7 +660,7 @@ class ChurchCrawler(scrapy.Spider):
 
                     yield scrapy.Request(response.urljoin(pageLink), callback=self.parse)
 
-
+        '''
 
 
 

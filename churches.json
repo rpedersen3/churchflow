@@ -2,11 +2,161 @@
     "churches": [
         {
             "link": "https://www.thechurchatwoodmoor.com/",
-            "name": "thechurchatwoodmoor"
+            "name": "thechurchatwoodmoor",
+            "pages": [
+                {
+                    "type": "staff",
+                    "url": "https://www.thechurchatwoodmoor.com/staff"
+                }
+            ],
+            "contacts": [
+                {
+                    "name": "Michele Richardson",
+                    "title": "Pastor",
+                    "email": "thechurchatwoodmoor@gmail.com",
+                    "photo": "https://static.wixstatic.com/media/b5ceba_59b467ad91ca4cb0a2de6c41d65b9381~mv2.jpg/v1/fill/w_240,h_240,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/Pastor%20Michele%20Richardson.jpg"
+                }
+            ]
         },
         {
             "link": "https://pikespeakchristianchurch.com/",
-            "name": "pikespeakchristianchurch"
+            "name": "pikespeakchristianchurch",
+            "pages": [
+                {
+                    "type": "staff",
+                    "url": "https://pikespeakchristianchurch.com/about/"
+                }
+            ],
+            "contacts": [
+                {
+                    "name": "ross frisbie",
+                    "email": "RFrisbie@yes2God.org"
+                },
+                {
+                    "name": "matt ross",
+                    "email": "mross@yes2God.org",
+                    "title": "Executive Pastor",
+                    "department": "",
+                    "photo": "https://pikespeakchristianchurch.com/mt-content/uploads/2021/12/finals-10-of-46_2021-12-10-15-17-29.jpg"
+                },
+                {
+                    "name": "jesse bergeron",
+                    "email": "jbergeron@yes2God.org"
+                },
+                {
+                    "name": "rick dettling",
+                    "email": "",
+                    "title": "Care Pastor",
+                    "department": "",
+                    "photo": "https://pikespeakchristianchurch.com/mt-content/uploads/2023/09/finals-13-of-46.jpg"
+                },
+                {
+                    "name": "mangrich",
+                    "email": "smangrich@yes2God.org"
+                },
+                {
+                    "name": "keola lau",
+                    "email": "",
+                    "title": "Director",
+                    "department": "",
+                    "photo": "https://pikespeakchristianchurch.com/mt-content/uploads/2021/12/keola_staff_photo_2021-12-10-01-18-22.jpg"
+                },
+                {
+                    "name": "levi mcnamara",
+                    "email": "",
+                    "title": "Facilities Director",
+                    "department": "Ministry",
+                    "photo": "https://pikespeakchristianchurch.com/mt-content/uploads/2023/09/pikes-peak-christian-church-colorado-springs-colorado-facilities-director.jpg"
+                },
+                {
+                    "name": "cullinane",
+                    "email": "SCULLINANE@yes2God.org",
+                    "title": "Coordinator",
+                    "department": "",
+                    "photo": "https://pikespeakchristianchurch.com/mt-content/uploads/2024/03/1709935299325.jpeg"
+                },
+                {
+                    "name": "carolyn de",
+                    "email": "cDELAGARZA@yes2God.org",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://pikespeakchristianchurch.com/mt-content/uploads/2022/10/pikes-peak-christian-church-colorado-springs-co-elder-armando-and-wife-carolyn.jpg"
+                },
+                {
+                    "name": "jocelyn ferri",
+                    "email": "",
+                    "title": "Manager",
+                    "department": "",
+                    "photo": "https://pikespeakchristianchurch.com/mt-content/uploads/2022/05/jocelyn-photo.jpg"
+                },
+                {
+                    "name": "thomas garner",
+                    "email": "",
+                    "title": "Coordinator",
+                    "department": "",
+                    "photo": "https://pikespeakchristianchurch.com/mt-content/uploads/2022/05/thomas_garner.jpeg"
+                },
+                {
+                    "name": "eric hudson",
+                    "email": "ehudson@yes2god.org",
+                    "title": "Lead",
+                    "department": "",
+                    "photo": "https://pikespeakchristianchurch.com/mt-content/uploads/2023/09/pikes-peak-christian-church-worship-leader.jpg"
+                },
+                {
+                    "name": "cindy norton",
+                    "email": "CNORTON@yes2God.org"
+                },
+                {
+                    "name": "bonnie meaux",
+                    "email": "",
+                    "title": "Manager",
+                    "department": "Ministry",
+                    "photo": "https://pikespeakchristianchurch.com/mt-content/uploads/2022/05/160321003_10106270496552048_5987006049273028941_n.jpg"
+                },
+                {
+                    "name": "sanders",
+                    "email": "",
+                    "title": "Manager",
+                    "department": "",
+                    "photo": "https://pikespeakchristianchurch.com/mt-content/uploads/2023/09/rom.jpg"
+                },
+                {
+                    "name": "angelo valles",
+                    "email": "AValles@yes2God.org",
+                    "title": "Elder",
+                    "department": "",
+                    "photo": "https://pikespeakchristianchurch.com/mt-content/uploads/2023/11/pikes-peak-christian-church-colorado-springs-co-angelo_656654b1a98cf.jpg"
+                },
+                {
+                    "name": "mark on",
+                    "email": "",
+                    "title": "Elder",
+                    "department": "",
+                    "photo": "https://pikespeakchristianchurch.com/mt-content/uploads/2021/12/mark_n_asa_2021.jpg"
+                },
+                {
+                    "name": "barry susan",
+                    "email": "",
+                    "title": "Elder",
+                    "department": "",
+                    "photo": "https://pikespeakchristianchurch.com/mt-content/uploads/2021/12/barry_n_susan_2021.jpg"
+                },
+                {
+                    "name": "wayne",
+                    "email": "",
+                    "title": "Elder",
+                    "department": "",
+                    "photo": "https://pikespeakchristianchurch.com/mt-content/uploads/2021/12/wayne_hinkle.jpg"
+                },
+                {
+                    "name": "troy bea",
+                    "email": "",
+                    "title": "Elder",
+                    "department": "Ministry",
+                    "photo": "https://pikespeakchristianchurch.com/mt-content/uploads/2023/02/pikes-peak-christian-church-elder-troy-wife-bea.jpg"
+                }
+            ]
         },
         {
             "link": "https://www.petertherock.org/",
@@ -138,7 +288,7 @@
                 {
                     "name": "kirby",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://woodmenvalley.org:443/GetImage.ashx?guid=60b4b968-8dd9-4cb9-a66c-ffc3041a325e"
                 },
@@ -320,7 +470,7 @@
                 {
                     "name": "dave higgins",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://woodmenvalley.org:443/GetImage.ashx?guid=15d71944-d84f-4f94-9aa3-539bf5f03277"
                 },
@@ -334,7 +484,7 @@
                 {
                     "name": "kurt birky",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "Ministry",
                     "photo": "https://woodmenvalley.org:443/GetImage.ashx?guid=4cac04cd-1f79-4663-800a-1727ce7ed3f5"
                 },
@@ -586,7 +736,7 @@
                 {
                     "name": "andrew gearhart",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://woodmenvalley.org:443/GetImage.ashx?guid=66ab6937-d00b-497e-85bf-3327dd1eecd7"
                 },
@@ -691,7 +841,7 @@
                 {
                     "name": "matt ferrell",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://woodmenvalley.org:443/GetImage.ashx?guid=397b8898-4eb8-441c-81f9-ff58cdbc3003"
                 },
@@ -789,7 +939,7 @@
                 {
                     "name": "kevin",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://woodmenvalley.org:443/GetImage.ashx?guid=0251a756-4903-4ea2-a4d7-034692d7a7af"
                 },
@@ -824,7 +974,7 @@
                 {
                     "name": "andrew reichart",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://woodmenvalley.org:443/GetImage.ashx?guid=7aaa6208-595f-4494-9a4c-1172086a2ff9"
                 },
@@ -915,7 +1065,7 @@
                 {
                     "name": "howie close",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://woodmenvalley.org:443/GetImage.ashx?guid=80065402-aaea-4892-87ba-d957ee0506bd"
                 }
@@ -942,7 +1092,7 @@
                 {
                     "name": "monica l. banks",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "Ministry",
                     "photo": "https://www.firstchristiancos.org/uploads/1/3/4/3/134306809/published/mb-casual-pic-cropped.png?1712159955"
                 }
@@ -989,14 +1139,14 @@
                 {
                     "name": "ana griffitts",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://s3.amazonaws.com/media.cloversites.com/62/62f610f9-2573-4d72-baed-ea75af33f9b6/site-images/7e0bf48e-89ac-4263-93f6-3a415948463d.jpeg, https://s3.amazonaws.com/media.cloversites.com/62/62f610f9-2573-4d72-baed-ea75af33f9b6/site-images/7e0bf48e-89ac-4263-93f6-3a415948463d@2x.jpeg 2x"
                 },
                 {
                     "name": "joel trenkle",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://s3.amazonaws.com/media.cloversites.com/62/62f610f9-2573-4d72-baed-ea75af33f9b6/site-images/c61fd788-5e30-41c2-b8a6-18cea1fa7fe3.jpg, https://s3.amazonaws.com/media.cloversites.com/62/62f610f9-2573-4d72-baed-ea75af33f9b6/site-images/c61fd788-5e30-41c2-b8a6-18cea1fa7fe3@2x.jpg 2x"
                 }
@@ -1181,7 +1331,7 @@
                 {
                     "name": "molly mcfadden",
                     "email": "mmcfadden@plumcreek.church",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "Elementary",
                     "photo": "https://images.squarespace-cdn.com/content/v1/62dc4ea10283061e5b27a788/ff5e64a4-dc31-44a3-9d8d-a810f0a21947/mmcfadden-1.jpg"
                 },
@@ -1202,7 +1352,7 @@
                 {
                     "name": "bob seale",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://images.squarespace-cdn.com/content/v1/62dc4ea10283061e5b27a788/6fccf05f-3546-49a4-8049-150044d15ce7/bseale-1.jpg"
                 },
@@ -1223,7 +1373,7 @@
                 {
                     "name": "ryanne witt",
                     "email": "rwitt@plumcreek.church",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://images.squarespace-cdn.com/content/v1/62dc4ea10283061e5b27a788/75f69cfe-c6f0-41eb-9e46-938e37c16dfc/rwitt-1.jpg"
                 },
@@ -1564,7 +1714,7 @@
                 {
                     "name": "john goodale",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://www.firstprescos.org/GetImage.ashx?Guid=10d0bcca-3ae6-427b-a44f-6804c1a4cb98"
                 },
@@ -1585,14 +1735,14 @@
                 {
                     "name": "greg hartnett",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://www.firstprescos.org/GetImage.ashx?Guid=5e93e08f-a43e-46fa-81ce-9951016d2d46"
                 },
                 {
                     "name": "pat hartsock",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://www.firstprescos.org/GetImage.ashx?Guid=7523ebce-b07a-4153-9ede-86c73469cc5d"
                 },
@@ -1634,14 +1784,14 @@
                 {
                     "name": "matt",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://www.firstprescos.org/GetImage.ashx?Guid=2d8ed46b-9b25-49ee-95eb-ecac06c42258"
                 },
                 {
                     "name": "jennifer holz",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://www.firstprescos.org/GetImage.ashx?Guid=2d31dbdc-3626-4419-aeb6-3e4af661ac0d"
                 },
@@ -1669,7 +1819,7 @@
                 {
                     "name": "junior mcgarrahan",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://www.firstprescos.org/GetImage.ashx?Guid=63e2245e-a2e8-4575-ab25-dd7390f1debf"
                 },
@@ -1725,7 +1875,7 @@
                 {
                     "name": "michael thornton",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://www.firstprescos.org/GetImage.ashx?Guid=91603e24-5f1b-4018-ab4f-97f101bbcbac"
                 },
@@ -1870,14 +2020,14 @@
                 {
                     "name": "matt burnett",
                     "email": "matt@holytrinityanglicanchurch.org",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://images.squarespace-cdn.com/content/v1/594e8b53197aea120dad4886/1499884178895-6IEPN62Z73ED3IVCOEB5/image-asset.jpeg"
                 },
                 {
                     "name": "al",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://images.squarespace-cdn.com/content/v1/594e8b53197aea120dad4886/1570717589727-BR2DIE0F4087H6VZ50QC/al%252Band%252Bjo%252B2017.jpg"
                 },
@@ -1928,7 +2078,7 @@
                 {
                     "name": "debbie brook",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "Preschool",
                     "photo": "https://www.petertherockschool.org/uploads/8/3/1/5/83153454/tina-hatton_orig.jpg"
                 },
@@ -2027,7 +2177,7 @@
                 {
                     "name": "barbara",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "Ministry",
                     "photo": "https://www.charischristiancenter.com/wp-content/uploads/2022/07/pastors-lawson-and-barbara_1024x1024-for-web_7-25-22-1024x1024.jpg"
                 }
@@ -2174,7 +2324,7 @@
                 {
                     "name": "teri",
                     "email": "teri@flccs.net",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://s3.amazonaws.com/media.cloversites.com/0a/0af9e3ed-c683-4b13-ac1d-c58e3b6a5c10/site-images/f3571d6a-03ed-4225-882e-7917a20de5c3.jpg, https://s3.amazonaws.com/media.cloversites.com/0a/0af9e3ed-c683-4b13-ac1d-c58e3b6a5c10/site-images/f3571d6a-03ed-4225-882e-7917a20de5c3@2x.jpg 2x"
                 },
@@ -2220,7 +2370,7 @@
                 {
                     "name": "tom jamka",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://images.squarespace-cdn.com/content/v1/59f1fa03914e6b72b6e3c7ae/24f4be3a-33d1-476a-a18b-335baf307886/Fr.+Tom+2.0.jpg"
                 },
@@ -2744,7 +2894,232 @@
         },
         {
             "link": "https://www.windsorroad.org/",
-            "name": "windsorroad"
+            "name": "windsorroad",
+            "pages": [
+                {
+                    "type": "staff",
+                    "url": "https://www.windsorroad.org/our-team/"
+                }
+            ],
+            "contacts": [
+                {
+                    "name": "randy boltinghouse",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://thechurchco-production.s3.amazonaws.com/uploads/sites/7242/2023/07/d33d7a_aaf5471428a048c39ca48f00222c3493mv2-1-800x800.jpg"
+                },
+                {
+                    "name": "jenny amias",
+                    "email": "jamias@windsorroad.org",
+                    "title": "Administrative",
+                    "department": "",
+                    "photo": "https://thechurchco-production.s3.amazonaws.com/uploads/sites/7242/2023/07/fdbf18_4703b02cd7244a8f8aa90dc3b83c34f0mv2-800x800.jpg"
+                },
+                {
+                    "name": "rachel branson",
+                    "email": "rbranson@windsorroad.org",
+                    "title": "",
+                    "department": "Ministry",
+                    "photo": "https://thechurchco-production.s3.amazonaws.com/uploads/sites/7242/2024/02/Rachel-Branson-2023-400x400.png"
+                },
+                {
+                    "name": "carin brown",
+                    "email": "cbrown@windsorroad.org",
+                    "title": "Kids Director",
+                    "department": "Ministry",
+                    "photo": "https://thechurchco-production.s3.amazonaws.com/uploads/sites/7242/2023/07/d33d7a_d2217c53d3b64c3aaeff595480a3bcb1mv2-800x800.jpg"
+                },
+                {
+                    "name": "karen combs",
+                    "email": "kcombs@windsorroad.org",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://thechurchco-production.s3.amazonaws.com/uploads/sites/7242/2023/07/fdbf18_a040c946d45e42529d34eab622cc5252mv2-800x800.jpg"
+                },
+                {
+                    "name": "christine decker",
+                    "email": "cdecker@windsorroad.org",
+                    "title": "Receptionist",
+                    "department": "",
+                    "photo": "https://thechurchco-production.s3.amazonaws.com/uploads/sites/7242/2023/07/fdbf18_9d2798d3a3c74a76890a91ce9b670691mv2-800x800.jpg"
+                },
+                {
+                    "name": "amber esparza",
+                    "email": "aesparza@windsorroad.org",
+                    "title": "Director",
+                    "department": "Ministry",
+                    "photo": "https://thechurchco-production.s3.amazonaws.com/uploads/sites/7242/2023/07/869f89_cf77491154ca44b8a41be263a7df9396mv2-800x800.jpg"
+                },
+                {
+                    "name": "laura olthoff",
+                    "email": "lolthoff@windsorroad.org",
+                    "title": "Coordinator",
+                    "department": "Ministry",
+                    "photo": "https://thechurchco-production.s3.amazonaws.com/uploads/sites/7242/2023/07/fdbf18_aa35bf37aca54a91b42ea828c013eda5mv2-800x800.jpg"
+                },
+                {
+                    "name": "michelle santiago",
+                    "email": "msantiago@windsorroad.org",
+                    "title": "Director",
+                    "department": "Ministry",
+                    "photo": "https://thechurchco-production.s3.amazonaws.com/uploads/sites/7242/2023/07/869f89_dec4370bbc80440d925167f4f832d1afmv2-800x800.jpg"
+                },
+                {
+                    "name": "krystle shelton",
+                    "email": "kshelton@windsorroad.org",
+                    "title": "Director",
+                    "department": "",
+                    "photo": "https://thechurchco-production.s3.amazonaws.com/uploads/sites/7242/2024/02/Krystle-Shelton-2024-further-400x400.png"
+                },
+                {
+                    "name": "derrick summerville",
+                    "email": "dsummerville@windsorroad.org",
+                    "title": "Director",
+                    "department": "Ministry",
+                    "photo": "https://thechurchco-production.s3.amazonaws.com/uploads/sites/7242/2024/02/Derrick-Summerville-2022-400x400.png"
+                },
+                {
+                    "name": "brenda tennill",
+                    "email": "btennill@windsorroad.org",
+                    "title": "Receptionist",
+                    "department": "",
+                    "photo": "https://thechurchco-production.s3.amazonaws.com/uploads/sites/7242/2023/07/fdbf18_46d829017345470f9b0455e4374105a7mv2-800x800.jpg"
+                },
+                {
+                    "name": "sarah yeackley",
+                    "email": "syeackley@windsorroad.org",
+                    "title": "Coordinator",
+                    "department": "Ministry",
+                    "photo": "https://thechurchco-production.s3.amazonaws.com/uploads/sites/7242/2023/07/fdbf18_9eac7c32e897486994f6328a81e3570dmv2-800x800.jpg"
+                },
+                {
+                    "name": "azer",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://thechurchco-production.s3.amazonaws.com/uploads/sites/7242/2023/07/869f89_3745f1e4eeee4b60ac908f08f780c021mv2-800x800.jpg"
+                },
+                {
+                    "name": "leroy candler",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://thechurchco-production.s3.amazonaws.com/uploads/sites/7242/2023/07/fdbf18_b24de2bca6604f1388203974f58c79edmv2-800x800.jpg"
+                },
+                {
+                    "name": "tim combs",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://thechurchco-production.s3.amazonaws.com/uploads/sites/7242/2023/12/tim-combs-300x300.jpg"
+                },
+                {
+                    "name": "adam",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://thechurchco-production.s3.amazonaws.com/uploads/sites/7242/2023/12/adam.png"
+                },
+                {
+                    "name": "carl sather",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://thechurchco-production.s3.amazonaws.com/uploads/sites/7242/2023/07/d33d7a_56b379165d2d4354b2f5dfcfc0f94ef1mv2-800x800.jpg"
+                },
+                {
+                    "name": "carl wegel",
+                    "email": "",
+                    "title": "Elder",
+                    "department": "",
+                    "photo": "https://thechurchco-production.s3.amazonaws.com/uploads/sites/7242/2023/07/869f89_6653f023d30241f0b75ad0ff0e8f6102mv2-800x800.jpg"
+                },
+                {
+                    "name": "abiola afolabi",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://thechurchco-production.s3.amazonaws.com/uploads/sites/7242/2023/07/fdbf18_5a79d3ebcfad4ea4a3d7fd170e521fe6mv2-800x800.jpg"
+                },
+                {
+                    "name": "john foltz",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://thechurchco-production.s3.amazonaws.com/uploads/sites/7242/2023/07/869f89_326d3ddfe9b343e7a62314577271bf98mv2-800x800.jpg"
+                },
+                {
+                    "name": "tom grey",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://thechurchco-production.s3.amazonaws.com/uploads/sites/7242/2023/07/869f89_4d556d9dd7c446a5b9b9b582f3f7de5cmv2-1-800x800.jpg"
+                },
+                {
+                    "name": "debbie mcdermott",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://thechurchco-production.s3.amazonaws.com/uploads/sites/7242/2023/07/fdbf18_f54d4d0059a740f296ffd1852200a919mv2-800x800.jpg"
+                },
+                {
+                    "name": "gene mcdermott",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://thechurchco-production.s3.amazonaws.com/uploads/sites/7242/2023/07/869f89_86af551824004c3cb705d640540c92ecmv2-800x800.jpg"
+                },
+                {
+                    "name": "john schowalter",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://thechurchco-production.s3.amazonaws.com/uploads/sites/7242/2023/07/869f89_972488035e684fe897c3753c8b921c0amv2-800x800.jpg"
+                },
+                {
+                    "name": "steve shipley",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://thechurchco-production.s3.amazonaws.com/uploads/sites/7242/2023/07/869f89_2d00706839484d5b9e5088cc5fb8e735mv2-800x800.jpg"
+                },
+                {
+                    "name": "chuck simpson",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://thechurchco-production.s3.amazonaws.com/uploads/sites/7242/2023/07/d33d7a_57ab2d32a4394924afb54f665574355dmv2-800x800.jpg"
+                },
+                {
+                    "name": "snodgrass",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://thechurchco-production.s3.amazonaws.com/uploads/sites/7242/2023/07/fdbf18_88542903cfa8413b81949ef2eb0cbdeemv2-800x800.jpg"
+                },
+                {
+                    "name": "eric snodgrass",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://thechurchco-production.s3.amazonaws.com/uploads/sites/7242/2023/07/869f89_7b2cd937319e406f933e4ff74a180b74mv2-1-800x800.jpg"
+                },
+                {
+                    "name": "mona stevens",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://thechurchco-production.s3.amazonaws.com/uploads/sites/7242/2023/07/fdbf18_f3aebd22d7d04d08b2c5d0065b1b540dmv2-800x800.jpg"
+                },
+                {
+                    "name": "jim wilcoski",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://thechurchco-production.s3.amazonaws.com/uploads/sites/7242/2023/07/fdbf18_4ab018cd1a8c44459fcb12a2e1e965e8mv2-800x800.jpg"
+                }
+            ]
         },
         {
             "link": "https://www.flatironschurch.com/",
@@ -2788,7 +3163,43 @@
         },
         {
             "link": "https://christchurchcolorado.org/",
-            "name": "christchurchcolorado"
+            "name": "christchurchcolorado",
+            "pages": [
+                {
+                    "type": "staff",
+                    "url": "https://christchurchcolorado.org/about-us/"
+                }
+            ],
+            "contacts": [
+                {
+                    "name": "emily flemming",
+                    "email": "",
+                    "title": "Pastor",
+                    "department": "",
+                    "photo": "https://christchurchcolorado.org/mt-content/uploads/2022/09/flemming_em_re_088.jpg"
+                },
+                {
+                    "name": "dave ramsey",
+                    "email": "dramsey@christchurchcolorado.org",
+                    "title": "Director",
+                    "department": "",
+                    "photo": "https://christchurchcolorado.org/mt-content/uploads/2022/09/ramsey_da_011.jpg"
+                },
+                {
+                    "name": "lisa hawthorne",
+                    "email": "",
+                    "title": "Director",
+                    "department": "Ministry",
+                    "photo": "https://christchurchcolorado.org/mt-content/uploads/2022/09/hawthorne_li_009.jpg"
+                },
+                {
+                    "name": "rebecca bourgeois",
+                    "email": "",
+                    "title": "Administrator",
+                    "department": "",
+                    "photo": "https://christchurchcolorado.org/mt-content/uploads/2022/09/bourgeois_la_re_047.jpg"
+                }
+            ]
         },
         {
             "link": "http://windsorchurchofchrist.com/",
@@ -2857,7 +3268,33 @@
         },
         {
             "link": "https://www.windsorcornerstone.org/",
-            "name": "windsorcornerstone"
+            "name": "windsorcornerstone",
+            "pages": [
+                {
+                    "type": "staff",
+                    "url": "https://www.windsorcornerstone.org/about/staff/"
+                }
+            ],
+            "contacts": [
+                {
+                    "name": "jesse wyrick",
+                    "email": "",
+                    "title": "Pastor",
+                    "department": "",
+                    "photo": "https://www.windsorcornerstone.org/wp-content/uploads/53708070_2045854382150056_8309492602168672256_n-1-1.jpg"
+                },
+                {
+                    "name": "co sunda",
+                    "email": "office@windsorcornerstone.org"
+                },
+                {
+                    "name": "laura jackson children\u2019s",
+                    "email": "",
+                    "title": "Lead",
+                    "department": "Ministry",
+                    "photo": "https://www.windsorcornerstone.org/wp-content/uploads/Laura-1100x960.jpg"
+                }
+            ]
         },
         {
             "link": "https://christwindsor.org/",
@@ -2977,7 +3414,7 @@
                 {
                     "name": "leah senior",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://s3.amazonaws.com/media.cloversites.com/e3/e3e989aa-4306-4eed-95f2-3520bea1c1fd/site-images/13329090-d326-454d-9eb8-87238679a1e2.png, https://s3.amazonaws.com/media.cloversites.com/e3/e3e989aa-4306-4eed-95f2-3520bea1c1fd/site-images/13329090-d326-454d-9eb8-87238679a1e2@2x.png 2x"
                 },
@@ -3137,7 +3574,7 @@
                 {
                     "name": "art wright",
                     "email": "art.wright@williamsburgbaptist.com",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://www.williamsburgbaptist.com/uploads/5/8/2/3/58235347/editor/art-wright.jpg?1604590218"
                 },
@@ -3345,11 +3782,307 @@
         },
         {
             "link": "https://www.applewood.church/",
-            "name": "applewood"
+            "name": "applewood",
+            "pages": [
+                {
+                    "type": "staff",
+                    "url": "https://www.applewood.church/leadership-and-staff/"
+                }
+            ],
+            "contacts": [
+                {
+                    "name": "derek jones",
+                    "email": "djones@applewoodbaptist.com",
+                    "title": "Lead Pastor",
+                    "department": "",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2022/06/28102652/derek_2-300x286.jpg"
+                },
+                {
+                    "name": "matt brown",
+                    "email": "mbrown@applewoodbaptist.com",
+                    "title": "Lead Pastor",
+                    "department": "",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2022/06/28102650/Matt2-300x286.jpg"
+                },
+                {
+                    "name": "rich bornhoft",
+                    "email": "rbornhoft@applewoodbaptist.com",
+                    "title": "Pastor",
+                    "department": "",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2022/07/18071739/rich_web-300x286.jpg"
+                },
+                {
+                    "name": "tammy sadler",
+                    "email": "tsadler@applewoodbaptist.com",
+                    "title": "Director",
+                    "department": "Ministry",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2023/08/10201842/Tammy-pic.png"
+                },
+                {
+                    "name": "al simmons",
+                    "email": "asimmons@applewoodbaptist.com",
+                    "title": "Director",
+                    "department": "",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2022/06/29082938/all_updated-300x286.jpg"
+                },
+                {
+                    "name": "james williams",
+                    "email": "jwilliams@applewoodbaptist.com",
+                    "title": "Director",
+                    "department": "",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2024/02/08083413/james-300x286-1.png"
+                },
+                {
+                    "name": "lisa bates",
+                    "email": "lbates@applewoodbaptist.com",
+                    "title": "Director",
+                    "department": "Ministry",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2022/06/06132151/Website-staff-Lisa-300-pic.png"
+                },
+                {
+                    "name": "lori goode",
+                    "email": "lgoode@applewoodbaptist.com",
+                    "title": "Director",
+                    "department": "Ministry",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2022/07/14100246/lori_web-300x286.jpg"
+                },
+                {
+                    "name": "kiersten hawley",
+                    "email": "khawley@applewoodbaptist.com",
+                    "title": "Resident",
+                    "department": "Ministry",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2023/08/29073543/kirsten-web-300x286.jpg"
+                },
+                {
+                    "name": "zach enyart",
+                    "email": "zenyart@applewoodbaptist.com",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2022/07/14100520/zach_web-300x286.jpg"
+                },
+                {
+                    "name": "deanna gallop",
+                    "email": "dgallop@applewoodbaptist.com",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2022/07/19152616/deanna-web-300x286.jpg"
+                },
+                {
+                    "name": "mona ritter",
+                    "email": "mritter@applewoodbaptist.com",
+                    "title": "",
+                    "department": "Preschool",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2022/07/14100347/mona_web-300x286.jpg"
+                },
+                {
+                    "name": "jackie mcbride",
+                    "email": "jmcbride@applewoodbaptist.com",
+                    "title": "",
+                    "department": "Preschool",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2022/07/18071621/jackie_web-300x286.jpg"
+                },
+                {
+                    "name": "jason tuck",
+                    "email": "jtuck@applewoodbaptist.com",
+                    "title": "Director",
+                    "department": "",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2022/07/18071651/jason_Web-300x286.jpg"
+                },
+                {
+                    "name": "brie baker",
+                    "email": "bbaker@applewoodbaptist.com",
+                    "title": "Administrative Assistant",
+                    "department": "",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2022/07/14100535/brie-web-300x286.jpg"
+                },
+                {
+                    "name": "bob kuntz",
+                    "email": "bkuntz@applewoodbaptist.com",
+                    "title": "Coordinator",
+                    "department": "",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2022/07/18071532/bob_web-300x286.jpg"
+                },
+                {
+                    "name": "ed gardner",
+                    "email": "egardner@applewoodbaptist.com",
+                    "title": "Coordinator",
+                    "department": "",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2022/07/12062435/ed_web-300x286.png"
+                },
+                {
+                    "name": "jenny tuck",
+                    "email": "jentuck@applewoodbaptist.com",
+                    "title": "Administrator",
+                    "department": "",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2022/07/18071707/jenny_web-300x286.jpg"
+                },
+                {
+                    "name": "john darling",
+                    "email": "jdarling@applewoodbaptist.com",
+                    "title": "Worship Pastor",
+                    "department": "",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2022/06/11102410/john_3-300x286.jpg"
+                },
+                {
+                    "name": "brad herman",
+                    "email": "bherman@applewoodbaptist.com",
+                    "title": "Care Pastor",
+                    "department": "Ministry",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2022/06/28102650/brad-2-300x286.jpg"
+                },
+                {
+                    "name": "mary van horn",
+                    "email": "mvanhorn@applewoodbaptist.com",
+                    "title": "Pastor",
+                    "department": "",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2022/07/14100301/mary_web-300x286.jpg"
+                },
+                {
+                    "name": "sondra",
+                    "email": "",
+                    "title": "Receptionist",
+                    "department": "",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2022/07/14100505/sondra_web-300x286.jpg"
+                },
+                {
+                    "name": "randy gallop",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2022/07/14100449/randy_web-300x286.jpg"
+                },
+                {
+                    "name": "firdaus jones",
+                    "email": "fjones@applewoodbaptist.com",
+                    "title": "Coordinator",
+                    "department": "",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2022/07/24133951/firdaus_web_2-300x286.jpg"
+                },
+                {
+                    "name": "abby",
+                    "email": "",
+                    "title": "",
+                    "department": "Ministry",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2023/08/29073710/abby_web-300x286.jpg"
+                },
+                {
+                    "name": "cody hawley",
+                    "email": "chawley@applewoodbaptist.com",
+                    "title": "",
+                    "department": "Ministry",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2023/08/29073746/cody_web-300x286.jpg"
+                },
+                {
+                    "name": "ben hoppes",
+                    "email": "bhoppes@applewoodbaptist.com",
+                    "title": "Director",
+                    "department": "",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2023/08/29073634/ben_web-300x286.jpg"
+                },
+                {
+                    "name": "joel mathew",
+                    "email": "jmathew@applewoodbaptist.com",
+                    "title": "Director",
+                    "department": "Ministry",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2023/08/29073824/joel_web-300x286.jpg"
+                },
+                {
+                    "name": "josh bond",
+                    "email": "jbond@applewoodbaptist.com",
+                    "title": "High School Director",
+                    "department": "High School",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2022/07/29064100/josh_web-300x286.png"
+                },
+                {
+                    "name": "jason jenny",
+                    "email": "",
+                    "title": "Director",
+                    "department": "",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2022/07/18071636/jason_jenny_web-300x286.jpg"
+                },
+                {
+                    "name": "michael derosier",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2022/07/14100200/michael_web-300x286.jpg"
+                },
+                {
+                    "name": "jeremiah thornton",
+                    "email": "",
+                    "title": "Staff",
+                    "department": "Preschool",
+                    "photo": "https://cdn.applewood.church/jct/uploads/2022/07/18071435/jeremiah_web-300x286.jpg"
+                }
+            ]
         },
         {
             "link": "https://wrpres.org/",
-            "name": "wrpres"
+            "name": "wrpres",
+            "pages": [
+                {
+                    "type": "staff",
+                    "url": "https://wrpres.org/our-staff/"
+                }
+            ],
+            "contacts": [
+                {
+                    "name": "whitney dempsey",
+                    "email": "",
+                    "title": "Pastor",
+                    "department": "",
+                    "photo": "https://wrpres.org/wp-content/uploads/2021/11/downloadRev.-Whit-Dempsey.jpg"
+                },
+                {
+                    "name": "linda",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://wrpres.org/wp-content/uploads/2018/12/Linda-Valo-225.jpg"
+                },
+                {
+                    "name": "julie pulliam",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://wrpres.org/wp-content/uploads/2019/01/Julie-Pulliam-225.jpg"
+                },
+                {
+                    "name": "betty niquette",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://wrpres.org/wp-content/uploads/2019/01/Betty-Niquette-225.jpg"
+                },
+                {
+                    "name": "julie leyba",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://wrpres.org/wp-content/uploads/2019/01/juliell.jpg"
+                },
+                {
+                    "name": "eileen gardner",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://wrpres.org/wp-content/uploads/2019/01/Eileen-Gardner-225.jpg"
+                },
+                {
+                    "name": "betsy smith",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://wrpres.org/wp-content/uploads/2019/01/Betsy-Smith-225.jpg"
+                },
+                {
+                    "name": "tony domenick",
+                    "email": "",
+                    "title": "Director",
+                    "department": "",
+                    "photo": "https://wrpres.org/wp-content/uploads/2023/07/Tony-3-favorite-400x400.jpg"
+                }
+            ]
         },
         {
             "link": "https://harborchurch.life/",
@@ -3378,7 +4111,7 @@
                 {
                     "name": "maxey life",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://images.squarespace-cdn.com/content/v1/57b8c87646c3c47fea21188c/397e9a09-a656-41ab-935b-128fa769255e/Kayla.jpg"
                 },
@@ -3392,7 +4125,7 @@
                 {
                     "name": "stone hood",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://images.squarespace-cdn.com/content/v1/57b8c87646c3c47fea21188c/b173440d-d940-4ab8-922c-8ab6643d9887/Stone.jpg"
                 },
@@ -3420,12 +4153,135 @@
             ]
         },
         {
-            "link": "https://christiancounselingco.com/",
-            "name": "christiancounselingco"
-        },
-        {
             "link": "https://bethlehemdenver.com/",
-            "name": "bethlehemdenver"
+            "name": "bethlehemdenver",
+            "pages": [
+                {
+                    "type": "staff",
+                    "url": "https://bethlehemdenver.com/who-we-are/church-staff/"
+                }
+            ],
+            "contacts": [
+                {
+                    "name": "barb brubaker  ",
+                    "email": "",
+                    "title": "Director",
+                    "department": "",
+                    "photo": "https://bethlehemdenver.com/wp-content/uploads/2023/10/Church2.jpg"
+                },
+                {
+                    "name": "david dyer",
+                    "email": "",
+                    "title": "Pastor",
+                    "department": "",
+                    "photo": "https://bethlehemdenver.com/wp-content/uploads/2023/10/Church-Cont.jpg"
+                },
+                {
+                    "name": "scott fischer",
+                    "email": "",
+                    "title": "",
+                    "department": "Ministry",
+                    "photo": "https://bethlehemdenver.com/wp-content/uploads/2023/10/Church-Cont9.jpg"
+                },
+                {
+                    "name": "sherry glaubitz",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://bethlehemdenver.com/wp-content/uploads/2023/10/Church-Cont2.jpg"
+                },
+                {
+                    "name": "christian huerta",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://bethlehemdenver.com/wp-content/uploads/2023/10/Church-Cont7.jpg"
+                },
+                {
+                    "name": "mirah ingram",
+                    "email": "",
+                    "title": "Manager",
+                    "department": "",
+                    "photo": "https://bethlehemdenver.com/wp-content/uploads/2023/10/Church4.jpg"
+                },
+                {
+                    "name": "david langewisch",
+                    "email": "",
+                    "title": "Pastor",
+                    "department": "",
+                    "photo": "https://bethlehemdenver.com/wp-content/uploads/2023/10/Church6.jpg"
+                },
+                {
+                    "name": "langewisch coffee",
+                    "email": "",
+                    "title": "Coordinator",
+                    "department": "",
+                    "photo": "https://bethlehemdenver.com/wp-content/uploads/2023/10/Church-Cont4.jpg"
+                },
+                {
+                    "name": "peter lorenzen",
+                    "email": "",
+                    "title": "Coordinator",
+                    "department": "",
+                    "photo": "https://bethlehemdenver.com/wp-content/uploads/2023/10/Church-Cont5.jpg"
+                },
+                {
+                    "name": "martin maurer",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://bethlehemdenver.com/wp-content/uploads/2023/10/Church8.jpg"
+                },
+                {
+                    "name": "landon mills",
+                    "email": "",
+                    "title": "Lead",
+                    "department": "",
+                    "photo": "https://bethlehemdenver.com/wp-content/uploads/2023/10/Church9.jpg"
+                },
+                {
+                    "name": "chris naas",
+                    "email": "",
+                    "title": "Manager",
+                    "department": "",
+                    "photo": "https://bethlehemdenver.com/wp-content/uploads/2023/10/Church-Cont8.jpg"
+                },
+                {
+                    "name": "ben oesch",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://bethlehemdenver.com/wp-content/uploads/2023/10/Church10.jpg"
+                },
+                {
+                    "name": "mark rippetoe",
+                    "email": "",
+                    "title": "Executive Director",
+                    "department": "",
+                    "photo": "https://bethlehemdenver.com/wp-content/uploads/2023/10/Church-Cont10.jpg"
+                },
+                {
+                    "name": "sarah weishaar",
+                    "email": "",
+                    "title": "",
+                    "department": "Ministry",
+                    "photo": "https://bethlehemdenver.com/wp-content/uploads/2023/10/Church11.jpg"
+                },
+                {
+                    "name": "sandy wendelin",
+                    "email": "",
+                    "title": "Director",
+                    "department": "",
+                    "photo": "https://bethlehemdenver.com/wp-content/uploads/2023/10/Church12.jpg"
+                },
+                {
+                    "name": "tim wendelin",
+                    "email": "",
+                    "title": "Care Pastor",
+                    "department": "",
+                    "photo": "https://bethlehemdenver.com/wp-content/uploads/2023/10/Church-Cont6.jpg"
+                }
+            ]
         },
         {
             "link": "https://www.crossroadsdenver.org/",
@@ -3492,7 +4348,7 @@
                 {
                     "name": "matt stiveson",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "Ministry",
                     "photo": "https://s3.amazonaws.com/media.cloversites.com/a2/a2ee91b7-37fd-495e-88ec-65e3ac6a3279/site-images/6274e827-516b-4395-aaae-618b240cbaa2.jpg, https://s3.amazonaws.com/media.cloversites.com/a2/a2ee91b7-37fd-495e-88ec-65e3ac6a3279/site-images/6274e827-516b-4395-aaae-618b240cbaa2@2x.jpg 2x"
                 },
@@ -3611,7 +4467,71 @@
         },
         {
             "link": "https://gccdenver.org/",
-            "name": "gccdenver"
+            "name": "gccdenver",
+            "pages": [
+                {
+                    "type": "staff",
+                    "url": "https://gccdenver.org/leadership/"
+                }
+            ],
+            "contacts": [
+                {
+                    "name": "Tony Walsh",
+                    "email": "",
+                    "title": "Lead Pastor",
+                    "department": "",
+                    "photo": "https://gccdenver.org/wp-content/uploads/GCC_Leaders_Walsh.jpeg"
+                },
+                {
+                    "name": "pete part",
+                    "email": "",
+                    "title": "Pastor",
+                    "department": "",
+                    "photo": "https://gccdenver.org/wp-content/uploads/GCC_Leaders_Peter_Payne.jpeg"
+                },
+                {
+                    "name": "michael has",
+                    "email": "",
+                    "title": "Pastor",
+                    "department": "",
+                    "photo": "https://gccdenver.org/wp-content/uploads/GCC_Leaders_Robble.jpeg"
+                },
+                {
+                    "name": "josh was",
+                    "email": "",
+                    "title": "Pastor",
+                    "department": "",
+                    "photo": "https://gccdenver.org/wp-content/uploads/GCC_Leaders_Josh_Payne-1024x1024.jpeg"
+                },
+                {
+                    "name": "ted payne",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://gccdenver.org/wp-content/uploads/GCC_Leadership_Deacon_TedPayne.jpg"
+                },
+                {
+                    "name": "justin edwards",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://gccdenver.org/wp-content/uploads/GCC_Leadership_Deacon_JustinEdwards.jpg"
+                },
+                {
+                    "name": "jeff nickel",
+                    "email": "",
+                    "title": "Administrator",
+                    "department": "",
+                    "photo": "https://gccdenver.org/wp-content/uploads/NickelJeffMelissa-1-scaled.jpeg"
+                },
+                {
+                    "name": "louisa nickel",
+                    "email": "",
+                    "title": "Administrative Assistant",
+                    "department": "",
+                    "photo": "https://gccdenver.org/wp-content/uploads/Deacon_LouisaNickel-1024x683.jpg"
+                }
+            ]
         },
         {
             "link": "https://flatironsacademy.org/",
@@ -3620,6 +4540,50 @@
                 {
                     "type": "staff",
                     "url": "https://flatironsacademy.org/staff"
+                }
+            ],
+            "contacts": [
+                {
+                    "name": "liz liz",
+                    "email": "",
+                    "title": "Director",
+                    "department": "Elementary",
+                    "photo": "https://images.squarespace-cdn.com/content/v1/5711be90c2ea51df8fb9a818/1602001605930-IC8PMAXD1LLKFCL5EZIU/Web-01.jpg"
+                },
+                {
+                    "name": "leah mangel",
+                    "email": "",
+                    "title": "Director",
+                    "department": "Elementary",
+                    "photo": "https://images.squarespace-cdn.com/content/v1/5711be90c2ea51df8fb9a818/1659668877176-7JNZNBWJZFTRBP5VY3DN/Web-20%281%29.jpg"
+                },
+                {
+                    "name": "amanda fox",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://images.squarespace-cdn.com/content/v1/5711be90c2ea51df8fb9a818/1689961251156-O6WUVO07R3934T0X07Y7/Fox%2C+Amanda.jpg"
+                },
+                {
+                    "name": "rogene lowe",
+                    "email": "",
+                    "title": "",
+                    "department": "High School",
+                    "photo": "https://images.squarespace-cdn.com/content/v1/5711be90c2ea51df8fb9a818/1659633002190-DTBZ5ZZ89HKL43YYDBW9/Ms.+Rogene+Lowe.jpg"
+                },
+                {
+                    "name": "mitch doughty",
+                    "email": "",
+                    "title": "Director",
+                    "department": "",
+                    "photo": "https://images.squarespace-cdn.com/content/v1/5711be90c2ea51df8fb9a818/1601410505375-345D4I5G1A1ZVXBCXGIZ/Web-02.jpg"
+                },
+                {
+                    "name": "larry zimbelman",
+                    "email": "",
+                    "title": "Executive Director",
+                    "department": "Ministry",
+                    "photo": "https://images.squarespace-cdn.com/content/v1/5711be90c2ea51df8fb9a818/1601409917695-4K8R3MS85IAENKPCOUGT/Web-07.jpg"
                 }
             ]
         },
@@ -3681,7 +4645,85 @@
         },
         {
             "link": "https://www.familyinchrist.com/",
-            "name": "familyinchrist"
+            "name": "familyinchrist",
+            "pages": [
+                {
+                    "type": "staff",
+                    "url": "https://www.familyinchrist.com/about/"
+                }
+            ],
+            "contacts": [
+                {
+                    "name": "mike",
+                    "email": "",
+                    "title": "Pastor",
+                    "department": "",
+                    "photo": "https://www.familyinchrist.com/wp-content/uploads/2022/09/2.-Meet-Mike.jpg"
+                },
+                {
+                    "name": "james cox",
+                    "email": "",
+                    "title": "Worship Pastor",
+                    "department": "",
+                    "photo": "https://www.familyinchrist.com/wp-content/uploads/2022/01/james.jpg"
+                },
+                {
+                    "name": "regan archer",
+                    "email": "",
+                    "title": "Pastor",
+                    "department": "",
+                    "photo": "https://www.familyinchrist.com/wp-content/uploads/2021/03/regan.jpg"
+                },
+                {
+                    "name": "terry bessler",
+                    "email": "",
+                    "title": "Care Pastor",
+                    "department": "",
+                    "photo": "https://www.familyinchrist.com/wp-content/uploads/2021/03/terry.jpg"
+                },
+                {
+                    "name": "jones",
+                    "email": "",
+                    "title": "Pastor",
+                    "department": "",
+                    "photo": "https://www.familyinchrist.com/wp-content/uploads/2021/03/wes-300x300.jpg"
+                },
+                {
+                    "name": "laura griffy",
+                    "email": "",
+                    "title": "Director",
+                    "department": "",
+                    "photo": "https://www.familyinchrist.com/wp-content/uploads/2022/06/Laura-for-Web.jpg"
+                },
+                {
+                    "name": "char campbell",
+                    "email": "",
+                    "title": "Director",
+                    "department": "",
+                    "photo": "https://www.familyinchrist.com/wp-content/uploads/2023/01/Char-Campbell-scaled-e1673146490315.jpg"
+                },
+                {
+                    "name": "mary boggs",
+                    "email": "",
+                    "title": "Manager",
+                    "department": "",
+                    "photo": "https://www.familyinchrist.com/wp-content/uploads/2021/03/mary.jpg"
+                },
+                {
+                    "name": "randy borden",
+                    "email": "",
+                    "title": "Manager",
+                    "department": "",
+                    "photo": "https://www.familyinchrist.com/wp-content/uploads/2021/03/randy.jpg"
+                },
+                {
+                    "name": "paul jorden",
+                    "email": "",
+                    "title": "Pastor",
+                    "department": "",
+                    "photo": "https://www.familyinchrist.com/wp-content/uploads/2022/09/paul-300x300-1.jpg"
+                }
+            ]
         },
         {
             "link": "https://www.redemptioncitychurch.com/",
@@ -3782,21 +4824,21 @@
                 {
                     "name": "min read",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "Ministry",
                     "photo": "https://bravechurch.online/GetAvatar.ashx?PhotoId=149&AgeClassification=Adult&Gender=Male&RecordTypeId=1&Text=JS"
                 },
                 {
                     "name": "sermon content",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "Ministry",
                     "photo": "https://bravechurch.online/GetAvatar.ashx?PhotoId=149&AgeClassification=Adult&Gender=Male&RecordTypeId=1&Text=JS"
                 },
                 {
                     "name": "small group",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "Ministry",
                     "photo": "https://bravechurch.online/GetAvatar.ashx?PhotoId=149&AgeClassification=Adult&Gender=Male&RecordTypeId=1&Text=JS"
                 }
@@ -4115,7 +5157,7 @@
                 {
                     "name": "douglas moo",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://images.squarespace-cdn.com/content/v1/5ee11731cf55ff4280d6d7c2/1598024001305-V6RAJGKJJ7RDGZNXPQCA/moo-768x494.jpg"
                 }
@@ -4756,14 +5798,14 @@
                 {
                     "name": "scott downing",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://revivearvada.org/wp-content/uploads/2022/04/REVIVE.HEADSHOTS-06.jpg"
                 },
                 {
                     "name": "ben worley",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://revivearvada.org/wp-content/uploads/2022/10/Ben-Worley.jpg"
                 },
@@ -4877,7 +5919,7 @@
                 {
                     "name": "jakob brown",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://images.squarespace-cdn.com/content/v1/582f2f4df7e0ab15b67fc35d/1566772611887-W9FYWBK5LBT8AJL7UI1O/jake_brown_150.jpg"
                 },
@@ -4919,7 +5961,7 @@
                 {
                     "name": "daniel maxham",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "Ministry",
                     "photo": "https://images.squarespace-cdn.com/content/v1/582f2f4df7e0ab15b67fc35d/f7dff0bf-181a-4352-ad99-9c7840d601c4/RTM09224.jpg"
                 },
@@ -4947,7 +5989,7 @@
                 {
                     "name": "kelsey reed children",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "Ministry",
                     "photo": "https://images.squarespace-cdn.com/content/v1/582f2f4df7e0ab15b67fc35d/1565997589390-GKK8T5QG2S6C6PGEVM5B/kelsey_reed_150.jpg"
                 },
@@ -5029,7 +6071,7 @@
                 {
                     "name": "kieselhorst to",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://s3.amazonaws.com/media.cloversites.com/e8/e80049ef-b7de-41e4-a1f5-87a44ebbff3b/site-images/0adf26db-aff8-411e-b5be-0303caf01e8a.jpg, https://s3.amazonaws.com/media.cloversites.com/e8/e80049ef-b7de-41e4-a1f5-87a44ebbff3b/site-images/0adf26db-aff8-411e-b5be-0303caf01e8a@2x.jpg 2x"
                 }
@@ -5386,7 +6428,7 @@
                 {
                     "name": "scott bailey  ",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://risenchristchurch.org/wp-content/uploads/2021/10/staff.png"
                 },
@@ -5615,7 +6657,7 @@
                 {
                     "name": "tyler hart",
                     "email": "tyler.hart@orchard.church",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://images.squarespace-cdn.com/content/v1/607c531cb2a20e24b9ae978b/e14e5111-783b-4b88-b00e-ef0179012fe0/Tyler+Hart+-+Staff+Photo.jpg"
                 },
@@ -5747,7 +6789,7 @@
                 {
                     "name": "armanious bible",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "Ministry",
                     "photo": "https://images.squarespace-cdn.com/content/v1/5520899ee4b0c19f893fc740/1569645211706-I84TMKUWAMZD92GY7GOV/Erik%2BValenzuela.jpg"
                 },
@@ -5789,7 +6831,7 @@
                 {
                     "name": "erik valenzuela",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "Ministry",
                     "photo": "https://images.squarespace-cdn.com/content/v1/5520899ee4b0c19f893fc740/1569645211706-I84TMKUWAMZD92GY7GOV/Erik%2BValenzuela.jpg"
                 },
@@ -5803,7 +6845,7 @@
                 {
                     "name": "michelle granado",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "Ministry",
                     "photo": "https://images.squarespace-cdn.com/content/v1/5520899ee4b0c19f893fc740/1619047096262-HGMWRW3JR5VXV8NRCTXT/unnamed.jpg"
                 },
@@ -6145,7 +7187,7 @@
                 {
                     "name": "leann davis-colley",
                     "email": "\u200bleannk@northglenn.cc",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "Ministry",
                     "photo": "https://www.northglenn.cc/uploads/1/4/5/8/145876334/editor/6875515785690212931.jpg?1684877486"
                 },
@@ -6159,7 +7201,7 @@
                 {
                     "name": "andy pryor",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://www.northglenn.cc/uploads/1/4/5/8/145876334/published/img-3523.jpg?1702263101"
                 },
@@ -6340,7 +7382,7 @@
                 {
                     "name": "michelle",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://lifeatvictory.com/wp-content/uploads/2022/06/20220608-Pastor_John_Nuzzo-9rc-web.jpg"
                 },
@@ -6368,14 +7410,14 @@
                 {
                     "name": "chris palmer",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "Ministry",
                     "photo": "https://lifeatvictory.com/wp-content/uploads/2022/06/20220609-Pastor_Chris_Palmer-web-600x700-1.jpg"
                 },
                 {
                     "name": "ben archer",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://lifeatvictory.com/wp-content/uploads/2022/06/20220609-Pastor_Ben_Archer-web-600x700-1.jpg"
                 },
@@ -6389,7 +7431,7 @@
                 {
                     "name": "sean moore",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "Ministry",
                     "photo": "https://lifeatvictory.com/wp-content/uploads/2022/06/20220609-Pastor_Sean_Moore-web-600x700-1.jpg"
                 },
@@ -7337,7 +8379,7 @@
                 {
                     "name": "love love",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://images.squarespace-cdn.com/content/v1/63bdb2dd554f5251e715f0d4/80c10b38-13b5-43e2-a8aa-6445068b7ed8/alicemike.jpg"
                 }
@@ -7356,14 +8398,14 @@
                 {
                     "name": "jeremy jacoby",
                     "email": "",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "High School",
                     "photo": "https://s3.amazonaws.com/media.cloversites.com/ed/ed2fecf5-9f4c-41fe-b13e-2631efbc687c/site-images/72880524-5b96-4d14-9bbd-1ec359991915.jpg, https://s3.amazonaws.com/media.cloversites.com/ed/ed2fecf5-9f4c-41fe-b13e-2631efbc687c/site-images/72880524-5b96-4d14-9bbd-1ec359991915@2x.jpg 2x"
                 },
                 {
                     "name": "mark janzen al",
                     "email": "Mjanzen@summitofpeace.org",
-                    "title": "Paster",
+                    "title": "Pastor",
                     "department": "",
                     "photo": "https://s3.amazonaws.com/media.cloversites.com/ed/ed2fecf5-9f4c-41fe-b13e-2631efbc687c/site-images/a96fb2ac-ecc6-4c04-a7af-313a1e6bd876.jpg, https://s3.amazonaws.com/media.cloversites.com/ed/ed2fecf5-9f4c-41fe-b13e-2631efbc687c/site-images/a96fb2ac-ecc6-4c04-a7af-313a1e6bd876@2x.jpg 2x"
                 },
@@ -7524,11 +8566,109 @@
         },
         {
             "link": "https://www.harborlight.com/",
-            "name": "harborlight"
+            "name": "harborlight",
+            "pages": [
+                {
+                    "type": "staff",
+                    "url": "https://www.harborlight.com/prayerteam"
+                },
+                {
+                    "type": "staff",
+                    "url": "https://www.harborlight.com/serve-teams"
+                },
+                {
+                    "type": "staff",
+                    "url": "https://www.harborlight.com/pastors"
+                }
+            ],
+            "contacts": [
+                {
+                    "name": "harbor light",
+                    "email": "info@harborlight.com"
+                },
+                {
+                    "name": "tim",
+                    "email": "",
+                    "title": "Lead Pastor",
+                    "department": "",
+                    "photo": "https://images.squarespace-cdn.com/content/v1/573a588e8a65e224cc5731a0/b694cb35-2ac3-4f01-8ddf-7db8e9c6c599/Tim+and+Lauri.jpeg"
+                },
+                {
+                    "name": "terry",
+                    "email": "",
+                    "title": "Associate Pastor",
+                    "department": "Ministry",
+                    "photo": "https://images.squarespace-cdn.com/content/v1/573a588e8a65e224cc5731a0/dbba96fa-36de-447e-9cfd-e2fc7252bed2/DSC_9723-Edit.jpeg"
+                },
+                {
+                    "name": "dave chiolero",
+                    "email": "",
+                    "title": "Groups Pastor",
+                    "department": "",
+                    "photo": "https://images.squarespace-cdn.com/content/v1/573a588e8a65e224cc5731a0/1541792011618-XQ2E2XCQYQOQRHU4KY8I/Screen+Shot+2018-11-09+at+11.31.15+AM.png"
+                },
+                {
+                    "name": "amanda coffman",
+                    "email": "",
+                    "title": "Pastor",
+                    "department": "",
+                    "photo": "https://images.squarespace-cdn.com/content/v1/573a588e8a65e224cc5731a0/cc0b6d67-4b51-456b-9fda-f749367d762d/IMG_2116.jpeg"
+                },
+                {
+                    "name": "jesus",
+                    "email": "",
+                    "title": "Lead Worship Pastor",
+                    "department": "",
+                    "photo": "https://images.squarespace-cdn.com/content/v1/573a588e8a65e224cc5731a0/1531866344645-MLHQH0OV26WBV70MP9C0/Screen+Shot+2018-07-17+at+3.25.25+PM.png"
+                },
+                {
+                    "name": "lauri inman",
+                    "email": "",
+                    "title": "Pastor",
+                    "department": "",
+                    "photo": "https://images.squarespace-cdn.com/content/v1/573a588e8a65e224cc5731a0/45fb9f84-12b6-4146-bfde-5c080f5d1679/Lauri+Inman.jpg"
+                },
+                {
+                    "name": "will young",
+                    "email": "",
+                    "title": "Pastor",
+                    "department": "Young Adult",
+                    "photo": "https://images.squarespace-cdn.com/content/v1/573a588e8a65e224cc5731a0/24a4eac8-1aaa-48d6-a32e-d5cb3318d568/Nous.jpg"
+                }
+            ]
         },
         {
             "link": "https://www.wethrive.org/",
-            "name": "wethrive"
+            "name": "wethrive",
+            "pages": [
+                {
+                    "type": "staff",
+                    "url": "https://www.wethrive.org/connect/staff"
+                }
+            ],
+            "contacts": [
+                {
+                    "name": "bo teresa",
+                    "email": "",
+                    "title": "Lead Pastor",
+                    "department": "",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/a6/a654c304-26cc-4d5d-903f-5dd5a5b85b0c/site-images/d2ced4cc-a3d5-4c77-9493-52e8d6ed9601.jpg, https://s3.amazonaws.com/media.cloversites.com/a6/a654c304-26cc-4d5d-903f-5dd5a5b85b0c/site-images/d2ced4cc-a3d5-4c77-9493-52e8d6ed9601@2x.jpg 2x"
+                },
+                {
+                    "name": "art martinez",
+                    "email": "",
+                    "title": "Pastor",
+                    "department": "",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/a6/a654c304-26cc-4d5d-903f-5dd5a5b85b0c/site-images/e2be2945-8001-4d52-90cd-3b257216237f.png, https://s3.amazonaws.com/media.cloversites.com/a6/a654c304-26cc-4d5d-903f-5dd5a5b85b0c/site-images/e2be2945-8001-4d52-90cd-3b257216237f@2x.png 2x"
+                },
+                {
+                    "name": "young",
+                    "email": "",
+                    "title": "Pastor",
+                    "department": "Young Adult",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/a6/a654c304-26cc-4d5d-903f-5dd5a5b85b0c/site-images/9e6d9c1f-4ff7-49b1-9e1a-c780ad354013.png, https://s3.amazonaws.com/media.cloversites.com/a6/a654c304-26cc-4d5d-903f-5dd5a5b85b0c/site-images/9e6d9c1f-4ff7-49b1-9e1a-c780ad354013@2x.png 2x"
+                }
+            ]
         },
         {
             "link": "https://achildstouch.com/",
@@ -7536,7 +8676,31 @@
         },
         {
             "link": "https://www.southeastcc.org/",
-            "name": "southeastcc"
+            "name": "southeastcc",
+            "pages": [
+                {
+                    "type": "staff",
+                    "url": "https://www.southeastcc.org/staff-elders"
+                }
+            ],
+            "contacts": [
+                {
+                    "name": "in team",
+                    "email": "info@southeastcc.org"
+                },
+                {
+                    "name": "swoboda",
+                    "email": "chris.swoboda@southeastcc.org"
+                },
+                {
+                    "name": "sathoff",
+                    "email": "gavin.sathoff@southeastcc.org"
+                },
+                {
+                    "name": "stevenson",
+                    "email": "nancy.stevenson@southeastcc.org"
+                }
+            ]
         },
         {
             "link": "https://visitcrossroads.com/",
@@ -7560,19 +8724,681 @@
         },
         {
             "link": "https://waterstonechurch.org/",
-            "name": "waterstonechurch"
+            "name": "waterstonechurch",
+            "pages": [
+                {
+                    "type": "staff",
+                    "url": "https://waterstonechurch.org/practice-resurrection/tag/leadership/"
+                },
+                {
+                    "type": "staff",
+                    "url": "https://waterstonechurch.org/practice-resurrection/tag/team/"
+                },
+                {
+                    "type": "staff",
+                    "url": "https://waterstonechurch.org/about/staff/"
+                }
+            ]
         },
         {
             "link": "https://www.pinecrestonline.org/",
-            "name": "pinecrestonline"
+            "name": "pinecrestonline",
+            "pages": [
+                {
+                    "type": "staff",
+                    "url": "https://www.pinecrestonline.org/leadership-team/"
+                },
+                {
+                    "type": "staff",
+                    "url": "https://www.pinecrestonline.org/serving-teams/"
+                }
+            ],
+            "contacts": [
+                {
+                    "name": "david baumgartner",
+                    "email": "%20david@pinecrestonline.org"
+                },
+                {
+                    "name": "deb gardner",
+                    "email": "%20deb@pinecrestonline.org"
+                },
+                {
+                    "name": "david",
+                    "email": "",
+                    "title": "Lead Pastor",
+                    "department": "",
+                    "photo": "https://www.pinecrestonline.org/wp-content/uploads/2020/08/David-300x300-1.jpg"
+                },
+                {
+                    "name": "jake gard",
+                    "email": "",
+                    "title": "Associate Pastor",
+                    "department": "",
+                    "photo": "https://www.pinecrestonline.org/wp-content/uploads/2020/08/Jake-300x300-1.jpg"
+                },
+                {
+                    "name": "tanya mccrea tanya",
+                    "email": "",
+                    "title": "Director",
+                    "department": "",
+                    "photo": "https://www.pinecrestonline.org/wp-content/uploads/2020/11/Tanya-300x300-1.jpg"
+                }
+            ]
         },
         {
             "link": "https://www.welcometomosaic.com/",
-            "name": "welcometomosaic"
+            "name": "welcometomosaic",
+            "pages": [
+                {
+                    "type": "staff",
+                    "url": "https://www.welcometomosaic.com/pastor-search"
+                }
+            ],
+            "contacts": [
+                {
+                    "name": "group search",
+                    "email": "",
+                    "title": "Elder",
+                    "department": "Ministry",
+                    "photo": "https://images.squarespace-cdn.com/content/v1/5e68fa2bf32c512a10921c78/08110e5c-7f10-4034-be14-72befbd99e5b/todd-clark-768x768.jpg"
+                }
+            ]
         },
         {
             "link": "https://www.missionhills.org/",
-            "name": "missionhills"
+            "name": "missionhills",
+            "pages": [
+                {
+                    "type": "staff",
+                    "url": "https://www.missionhills.org/prayer-team-resources/"
+                },
+                {
+                    "type": "staff",
+                    "url": "https://www.missionhills.org/opportunities/prayer-teams-anytime/"
+                },
+                {
+                    "type": "staff",
+                    "url": "https://www.missionhills.org/opportunities/prayer-teams-weekend/"
+                },
+                {
+                    "type": "staff",
+                    "url": "https://www.missionhills.org/opportunities/apron-team/"
+                },
+                {
+                    "type": "staff",
+                    "url": "https://www.missionhills.org/im-new/staff-elders/"
+                }
+            ],
+            "contacts": [
+                {
+                    "name": "craig smith   contact",
+                    "email": "csmith@missionhills.org",
+                    "title": "Lead Pastor",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2018/04/craig_smith_2018.jpg"
+                },
+                {
+                    "name": "keith carson",
+                    "email": "kcarson@missionhills.org",
+                    "title": "Executive Pastor",
+                    "department": "Ministry Environments",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2018/04/keith_carson_2018.jpg"
+                },
+                {
+                    "name": "lopez",
+                    "email": "hslopez@missionhills.org",
+                    "title": "Executive Director",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2018/04/heidi_lopez_2018.jpg"
+                },
+                {
+                    "name": "danny oertli",
+                    "email": "doertli@missionhills.org",
+                    "title": "Executive Pastor",
+                    "department": "Weekend Experience",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2018/04/danny_oertli_2018.jpg"
+                },
+                {
+                    "name": "jon roberts",
+                    "email": "jroberts@missionhills.org",
+                    "title": "Executive Pastor",
+                    "department": "Ministry Services",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2018/04/jon_roberts_2018_2.jpg"
+                },
+                {
+                    "name": "brooke brock",
+                    "email": "bbrock@missionhills.org",
+                    "title": "Administrative Assistant",
+                    "department": "Ministry Environments",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2022/07/brooke_burk_2022.jpg"
+                },
+                {
+                    "name": "joel macfarland",
+                    "email": "jmacfarland@missionhills.org",
+                    "title": "Care Pastor",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2021/07/joel_macfarland_2021.jpg"
+                },
+                {
+                    "name": "leslie samson",
+                    "email": "lsamson@missionhills.org",
+                    "title": "Care Coordinator",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2023/07/leslie_samson_2023.jpg"
+                },
+                {
+                    "name": "lynne schlottman",
+                    "email": "lschlottman@missionhills.org",
+                    "title": "Care Counselor",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2018/04/lynne_schlottman_2018.jpg"
+                },
+                {
+                    "name": "lillian dehn",
+                    "email": "ldehn@missionhills.org",
+                    "title": "Biblical Counselor",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2023/02/lillian_dehn_2023.jpg"
+                },
+                {
+                    "name": "larry zirschky",
+                    "email": "lzirschky@missionhills.org",
+                    "title": "Biblical Counselor",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2018/04/larry_zirschky_2018.jpg"
+                },
+                {
+                    "name": "deb mitchell",
+                    "email": "dmitchell@missionhills.org",
+                    "title": "Director",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2018/04/deb_mitchell_2018.jpg"
+                },
+                {
+                    "name": "amy whitehouse",
+                    "email": "awhitehouse@missionhills.org",
+                    "title": "Director",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2018/04/amy_whitehouse_2018.jpg"
+                },
+                {
+                    "name": "chris",
+                    "email": "",
+                    "title": "Coordinator",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2022/09/chris_hines_2022.jpg"
+                },
+                {
+                    "name": "winter",
+                    "email": "mwinter@missionhills.org"
+                },
+                {
+                    "name": "lisa mundy",
+                    "email": "lmundy@missionhills.org"
+                },
+                {
+                    "name": "matt",
+                    "email": "",
+                    "title": "Associate Director",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2018/04/matt_rhodes_2018.jpg"
+                },
+                {
+                    "name": "heather fry",
+                    "email": "hfry@missionhills.org",
+                    "title": "Next Steps Coordinator",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2022/07/heather_fry_2022.jpg"
+                },
+                {
+                    "name": "janet carter",
+                    "email": "jcarter@missionhills.org",
+                    "title": "Executive Director",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2018/04/janet_carter_2018.jpg"
+                },
+                {
+                    "name": "jacque carlson",
+                    "email": "jcarlson@missionhills.org",
+                    "title": "Associate Director",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2018/04/jacque_carlson_2018.jpg"
+                },
+                {
+                    "name": "angela parks",
+                    "email": "aparks@missionhills.org",
+                    "title": "Coordinator",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2019/06/angela_parks_2019.jpg"
+                },
+                {
+                    "name": "erin marken",
+                    "email": "emarken@missionhills.org",
+                    "title": "Coordinator",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2021/06/erin_marken_2021.jpg"
+                },
+                {
+                    "name": "abbey davis",
+                    "email": "",
+                    "title": "Administrative Assistant",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2023/07/abbey_davis_2023.jpg"
+                },
+                {
+                    "name": "rasband",
+                    "email": "krasband@missionhills.org"
+                },
+                {
+                    "name": "jeff",
+                    "email": "",
+                    "title": "Kids Pastor",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2019/09/jeff_baxter_2019.jpg"
+                },
+                {
+                    "name": "will larsen",
+                    "email": "wlarsen@missionhills.org",
+                    "title": "Kids Director",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2020/11/will_larsen_2020.jpg"
+                },
+                {
+                    "name": "jenn shrader",
+                    "email": "jshrader@missionhills.org",
+                    "title": "Kids Associate Director",
+                    "department": "Creative Arts",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2018/04/jenn_shrader_2018.jpg"
+                },
+                {
+                    "name": "lindsy robinson",
+                    "email": "lrobinson@missionhills.org",
+                    "title": "Kids Coordinator",
+                    "department": "Preschool",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2023/09/lindsy_robinson_2023.jpg"
+                },
+                {
+                    "name": "johnson",
+                    "email": "njohnson@missionhills.org"
+                },
+                {
+                    "name": "cichon",
+                    "email": "ccichon@missionhills.org"
+                },
+                {
+                    "name": "nora johnson",
+                    "email": "",
+                    "title": "Kids Coordinator",
+                    "department": "Preschool",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2022/10/nora_johnson_2022.jpg"
+                },
+                {
+                    "name": "sarah kampmann kids",
+                    "email": "skampmann@missionhills.org",
+                    "title": "Kids Coordinator",
+                    "department": "Elementary",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2022/10/sarah_kampmann_2022.jpg"
+                },
+                {
+                    "name": "jane",
+                    "email": "",
+                    "title": "Kids Coordinator",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2022/07/jane_tolmen_2022.jpg"
+                },
+                {
+                    "name": "whitney sarnowski buddy",
+                    "email": "wsarnowski@missionhills.org",
+                    "title": "Coordinator",
+                    "department": "Ministry",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2023/09/whitney_sarnowski_2023.jpg"
+                },
+                {
+                    "name": "joey",
+                    "email": "",
+                    "title": "Pastor",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2023/09/joey_pepper_2023.jpg"
+                },
+                {
+                    "name": "stephen boyer",
+                    "email": "sboyer@missionhills.org",
+                    "title": "Pastor",
+                    "department": "High School",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2022/09/stephen_boyer_2022.jpg"
+                },
+                {
+                    "name": "carly lepard",
+                    "email": "clepard@missionhills.org",
+                    "title": "Associate Director",
+                    "department": "High School",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2022/03/carly_lepard_2022.jpg"
+                },
+                {
+                    "name": "mottice young",
+                    "email": "jgmottice@missionhills.org",
+                    "title": "Director",
+                    "department": "Young Adult",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2020/03/jg_mottice_2020.jpg"
+                },
+                {
+                    "name": "madi herring",
+                    "email": "mherring@missionhills.org",
+                    "title": "Lead",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2023/02/madi_fair_2023.jpg"
+                },
+                {
+                    "name": "mauricio carbone",
+                    "email": "mcarbone@missionhills.org",
+                    "title": "Pastor",
+                    "department": "Global Outreach",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2018/04/mauricio_carbone_2018.jpg"
+                },
+                {
+                    "name": "joni ann morella global",
+                    "email": " jmorella@missionhills.org",
+                    "title": "Manager",
+                    "department": "Global Outreach",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2018/04/joni-ann_morella_2018.jpg"
+                },
+                {
+                    "name": "leslie castagna",
+                    "email": "lcastagna@missionhills.org",
+                    "title": "Care Coordinator",
+                    "department": "Global Outreach",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2020/03/leslie_castagna_2020.jpg"
+                },
+                {
+                    "name": "julie scanlon",
+                    "email": "jscanlon@missionhills.org",
+                    "title": "Coordinator",
+                    "department": "Global Mobilization",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2022/07/julie_scanlon_2022.jpg"
+                },
+                {
+                    "name": "harrison life",
+                    "email": "mharrison@lifecenterlittleton.org",
+                    "title": "Director",
+                    "department": "Life Center",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2019/04/micah_harrison_2019.jpg"
+                },
+                {
+                    "name": "dianna fox",
+                    "email": "dfox@lifecenterlittleton.org",
+                    "title": "Coordinator",
+                    "department": "Life Center",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2019/04/dianna_fox_2019.jpg"
+                },
+                {
+                    "name": "jose vega",
+                    "email": "jvega@lifecenterlittleton.org",
+                    "title": "Coordinator",
+                    "department": "Life Center",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2021/03/jose_vega_2021.jpg"
+                },
+                {
+                    "name": "christa schaller",
+                    "email": "cschaller@lifecenterlittleton.org",
+                    "title": "Coordinator",
+                    "department": "Life Center",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2022/10/christa_schaller_2022.jpg"
+                },
+                {
+                    "name": "alex meade",
+                    "email": "ameade@lifecenterlittleton.org",
+                    "title": "Coordinator",
+                    "department": "Life Center",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2022/10/alex_meade_2022.jpg"
+                },
+                {
+                    "name": "troy baute",
+                    "email": "tbaute@missionhills.org",
+                    "title": "Facilities Director",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2022/10/troy_baute_2022.jpg"
+                },
+                {
+                    "name": "dave schmauder",
+                    "email": "",
+                    "title": "Facilities Coordinator",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2018/04/dave_schmauder_2018.jpg"
+                },
+                {
+                    "name": "mark sorley facilities",
+                    "email": "",
+                    "title": "Facilities Coordinator",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2023/02/mark_sorley_2023.jpg"
+                },
+                {
+                    "name": "bill gordon facilities",
+                    "email": "",
+                    "title": "Facilities Staff",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2018/04/bill_gordon_2018.jpg"
+                },
+                {
+                    "name": "kristy allen",
+                    "email": "kallen@missionhills.org",
+                    "title": "Receptionist",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2018/04/kristy_allen_2018.jpg"
+                },
+                {
+                    "name": "mooneyham",
+                    "email": "lmooneyham@missionhills.org"
+                },
+                {
+                    "name": "skinner",
+                    "email": "nskinner@missionhills.org"
+                },
+                {
+                    "name": "lisa mooneyham",
+                    "email": "",
+                    "title": "Manager",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2018/07/lisa_mooneyham_2018.jpg"
+                },
+                {
+                    "name": "grant doolittle",
+                    "email": "gdoolittle@missionhills.org",
+                    "title": "Coordinator",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2022/03/grant_doolittle_2022.jpg"
+                },
+                {
+                    "name": "katie rutledge",
+                    "email": "krutledge@missionhills.org",
+                    "title": "Coordinator",
+                    "department": "Ministry Services",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2019/09/katie_rutledge_2019.jpg"
+                },
+                {
+                    "name": "mary logan",
+                    "email": "mlogan@missionhills.org",
+                    "title": "Coordinator",
+                    "department": "Ministry Services",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2022/03/mary_logan_2022.jpg"
+                },
+                {
+                    "name": "anita jarvis",
+                    "email": "ajarvis@missionhills.org",
+                    "title": "Administrative Assistant",
+                    "department": "Ministry Services",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2018/07/anita_jarvis_2018.jpg"
+                },
+                {
+                    "name": "june moye",
+                    "email": "",
+                    "title": "Lead",
+                    "department": "Weekend Experience",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2018/04/june_moye_2018.jpg"
+                },
+                {
+                    "name": "kelly mcsparran",
+                    "email": "kmcsparran@missionhills.org",
+                    "title": "Communications Director",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2018/04/kelly_mcsparran_2018.jpg"
+                },
+                {
+                    "name": "rhodes",
+                    "email": "mrhodes@missionhills.org"
+                },
+                {
+                    "name": "colin mcfarland",
+                    "email": "cmcfarland@missionhills.org",
+                    "title": "Manager",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2018/04/colin_mcfarland_2018.jpg"
+                },
+                {
+                    "name": "laura sexson publications",
+                    "email": "lsexson@missionhills.org",
+                    "title": "Specialist",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2022/10/laura_sexson_2022.jpg"
+                },
+                {
+                    "name": "meadows",
+                    "email": "kmeadows@missionhills.org"
+                },
+                {
+                    "name": "kelly",
+                    "email": "",
+                    "title": "Coordinator",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2018/04/kelly_brown_2018.jpg"
+                },
+                {
+                    "name": "maddie brouwer",
+                    "email": "mbrouwer@missionhills.org",
+                    "title": "Coordinator",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2023/07/maddie_brouwer_2023.jpg"
+                },
+                {
+                    "name": "eric price",
+                    "email": "eprice@missionhills.org",
+                    "title": "Specialist",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2022/09/eric_price_2022.jpg"
+                },
+                {
+                    "name": "zac anderson video",
+                    "email": "zanderson@missionhills.org",
+                    "title": "Specialist",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2020/11/zac_anderson_2020.jpg"
+                },
+                {
+                    "name": "laina ludwig",
+                    "email": "lludwig@missionhills.org",
+                    "title": "Specialist",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2023/09/laina_ludwig_2023.jpg"
+                },
+                {
+                    "name": "cari allen guest",
+                    "email": "callen@missionhills.org",
+                    "title": "Director",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2018/04/cari_allen_2018.jpg"
+                },
+                {
+                    "name": "jessica hennig guest",
+                    "email": "jhennig@missionhills.org",
+                    "title": "Associate Director",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2019/06/jessica_hennig_2019.jpg"
+                },
+                {
+                    "name": "aaron miller",
+                    "email": "amiller@missionhills.org",
+                    "title": "Director",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2018/07/aaron_miller_2018.jpg"
+                },
+                {
+                    "name": "tyler wells",
+                    "email": "twells@missionhills.org",
+                    "title": "Director",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2018/04/tyler_wells_2018.jpg"
+                },
+                {
+                    "name": "stephen schoenfeld",
+                    "email": "sschoenfeld@missionhills.org",
+                    "title": "Coordinator",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2022/03/stephen_schoenfeld_2022.jpg"
+                },
+                {
+                    "name": "avl specialist contact",
+                    "email": "",
+                    "title": "Specialist",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2021/03/jessica_powell_2021.jpg"
+                },
+                {
+                    "name": "james leeper avl",
+                    "email": "jleeper@missionhills.org",
+                    "title": "Specialist",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2022/07/james_leeper_2022.jpg"
+                },
+                {
+                    "name": "jenny bishop",
+                    "email": "jbishop@missionhills.org",
+                    "title": "Coordinator",
+                    "department": "Weekend Experience",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2022/09/jenny_bishop_2022.jpg"
+                },
+                {
+                    "name": "ashlie reynoso  development",
+                    "email": "areynoso@missionhills.org",
+                    "title": "Associate Director",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2018/04/ashlie_reynoso_2018.jpg"
+                },
+                {
+                    "name": "steven allin",
+                    "email": "sallin@missionhills.org",
+                    "title": "Associate Director",
+                    "department": "Ministry",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2022/03/steven_allin_2022.jpg"
+                },
+                {
+                    "name": "beto",
+                    "email": "",
+                    "title": "Pastor",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2020/03/beto_bambaren_2020.jpg"
+                },
+                {
+                    "name": "tyler peterson north littleton",
+                    "email": "tpeterson@missionhills.org",
+                    "title": "Pastor",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2023/09/tyler_peterson_2023.jpg"
+                },
+                {
+                    "name": "amy hines",
+                    "email": "ahines@missionhills.org",
+                    "title": "Kids Coordinator",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2023/07/amy_hines_2023.jpg"
+                },
+                {
+                    "name": "tanner lowe",
+                    "email": "",
+                    "title": "Pastor",
+                    "department": "",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2022/07/tanner_lowe_2022.jpg"
+                }
+            ]
         },
         {
             "link": "https://greenwoodcc.com/",
@@ -7584,11 +9410,106 @@
         },
         {
             "link": "https://www.shepherdhillschurch.org/",
-            "name": "shepherdhillschurch"
+            "name": "shepherdhillschurch",
+            "pages": [
+                {
+                    "type": "staff",
+                    "url": "https://www.shepherdhillschurch.org/new-to-shepherd/staff"
+                }
+            ],
+            "contacts": [
+                {
+                    "name": "brad stoltenow",
+                    "email": "",
+                    "title": "Pastor",
+                    "department": "",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/98/98cb9d27-c793-46c9-bae7-7e8d4a35c017/site-images/034f3d7e-e19a-446d-9668-dbe78e909cfe.png, https://s3.amazonaws.com/media.cloversites.com/98/98cb9d27-c793-46c9-bae7-7e8d4a35c017/site-images/034f3d7e-e19a-446d-9668-dbe78e909cfe@2x.png 2x"
+                },
+                {
+                    "name": "gail",
+                    "email": "",
+                    "title": "Director",
+                    "department": "",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/98/98cb9d27-c793-46c9-bae7-7e8d4a35c017/site-images/48743a3c-865f-4f5a-ab2d-6786aa6f4f5c.jpg, https://s3.amazonaws.com/media.cloversites.com/98/98cb9d27-c793-46c9-bae7-7e8d4a35c017/site-images/48743a3c-865f-4f5a-ab2d-6786aa6f4f5c@2x.jpg 2x"
+                },
+                {
+                    "name": "kenny hong",
+                    "email": "",
+                    "title": "Administrator",
+                    "department": "",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/98/98cb9d27-c793-46c9-bae7-7e8d4a35c017/site-images/958d4b73-4bf8-4cb7-878d-07bbf419542e.jpg, https://s3.amazonaws.com/media.cloversites.com/98/98cb9d27-c793-46c9-bae7-7e8d4a35c017/site-images/958d4b73-4bf8-4cb7-878d-07bbf419542e@2x.jpg 2x"
+                },
+                {
+                    "name": "jodie stoltenow  of",
+                    "email": "",
+                    "title": "Director",
+                    "department": "Ministry",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/98/98cb9d27-c793-46c9-bae7-7e8d4a35c017/site-images/4a64c9c3-4b2c-4878-9ea8-1d8dfbbbeef9.jpg, https://s3.amazonaws.com/media.cloversites.com/98/98cb9d27-c793-46c9-bae7-7e8d4a35c017/site-images/4a64c9c3-4b2c-4878-9ea8-1d8dfbbbeef9@2x.jpg 2x"
+                },
+                {
+                    "name": "sina williams",
+                    "email": "",
+                    "title": "Director",
+                    "department": "",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/98/98cb9d27-c793-46c9-bae7-7e8d4a35c017/site-images/2a201e57-62d1-4dee-9690-1917ab38ea77.png, https://s3.amazonaws.com/media.cloversites.com/98/98cb9d27-c793-46c9-bae7-7e8d4a35c017/site-images/2a201e57-62d1-4dee-9690-1917ab38ea77@2x.png 2x"
+                },
+                {
+                    "name": "kristen hatton",
+                    "email": "",
+                    "title": "Director",
+                    "department": "",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/98/98cb9d27-c793-46c9-bae7-7e8d4a35c017/site-images/cff7c328-3bd7-406a-9d3c-fd1cbba3f704.png, https://s3.amazonaws.com/media.cloversites.com/98/98cb9d27-c793-46c9-bae7-7e8d4a35c017/site-images/cff7c328-3bd7-406a-9d3c-fd1cbba3f704@2x.png 2x"
+                },
+                {
+                    "name": "eric m",
+                    "email": "",
+                    "title": "Manager",
+                    "department": "",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/98/98cb9d27-c793-46c9-bae7-7e8d4a35c017/site-images/8f5bf9f0-f2ed-40f9-8f7a-5b308fa48412.jpg, https://s3.amazonaws.com/media.cloversites.com/98/98cb9d27-c793-46c9-bae7-7e8d4a35c017/site-images/8f5bf9f0-f2ed-40f9-8f7a-5b308fa48412@2x.jpg 2x"
+                },
+                {
+                    "name": "michael amidei contemporary music",
+                    "email": "",
+                    "title": "Lead",
+                    "department": "",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/98/98cb9d27-c793-46c9-bae7-7e8d4a35c017/site-images/b7fc9138-8a8f-41a2-b36e-d839af991905.png, https://s3.amazonaws.com/media.cloversites.com/98/98cb9d27-c793-46c9-bae7-7e8d4a35c017/site-images/b7fc9138-8a8f-41a2-b36e-d839af991905@2x.png 2x"
+                },
+                {
+                    "name": "ann thomas accountant",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/98/98cb9d27-c793-46c9-bae7-7e8d4a35c017/site-images/b6e11085-f9e4-4566-866e-2bc3ba032499.png, https://s3.amazonaws.com/media.cloversites.com/98/98cb9d27-c793-46c9-bae7-7e8d4a35c017/site-images/b6e11085-f9e4-4566-866e-2bc3ba032499@2x.png 2x"
+                },
+                {
+                    "name": "lauren ryan",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/98/98cb9d27-c793-46c9-bae7-7e8d4a35c017/site-images/6dd37272-01c4-4e69-b737-b8d01ae38ba6.jpg, https://s3.amazonaws.com/media.cloversites.com/98/98cb9d27-c793-46c9-bae7-7e8d4a35c017/site-images/6dd37272-01c4-4e69-b737-b8d01ae38ba6@2x.jpg 2x"
+                },
+                {
+                    "name": "angela renner",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/98/98cb9d27-c793-46c9-bae7-7e8d4a35c017/site-images/2c4635b3-57d2-427d-a707-5bac8cad1186.png, https://s3.amazonaws.com/media.cloversites.com/98/98cb9d27-c793-46c9-bae7-7e8d4a35c017/site-images/2c4635b3-57d2-427d-a707-5bac8cad1186@2x.png 2x"
+                }
+            ]
         },
         {
             "link": "https://journeycolorado.com/",
-            "name": "journeycolorado"
+            "name": "journeycolorado",
+            "pages": [
+                {
+                    "type": "staff",
+                    "url": "https://journeycolorado.com/about/team/jobs/"
+                },
+                {
+                    "type": "staff",
+                    "url": "https://journeycolorado.com/about/team/"
+                }
+            ]
         },
         {
             "link": "https://myconnections.church/",
@@ -7604,7 +9525,148 @@
         },
         {
             "link": "https://paxchristi.org/",
-            "name": "paxchristi"
+            "name": "paxchristi",
+            "pages": [
+                {
+                    "type": "staff",
+                    "url": "https://paxchristi.org/about-us/staff"
+                }
+            ],
+            "contacts": [
+                {
+                    "name": "can pasto",
+                    "email": "",
+                    "title": "Pastor",
+                    "department": "",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/b5d7f9c4-455a-4928-8029-3000e441121e.png, https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/b5d7f9c4-455a-4928-8029-3000e441121e@2x.png 2x"
+                },
+                {
+                    "name": "tom sandusky  ",
+                    "email": "tsandusky@paxchristi.org",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/88800725-2d13-4c56-8d49-f299f10c80df.jpeg, https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/88800725-2d13-4c56-8d49-f299f10c80df@2x.jpeg 2x"
+                },
+                {
+                    "name": "garrett christnacht  gchristnacht@paxchristi.org",
+                    "email": "gchristnacht@paxchristi.org",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/778212d6-b6ae-4202-b0d2-952280801f7f.png, https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/778212d6-b6ae-4202-b0d2-952280801f7f@2x.png 2x"
+                },
+                {
+                    "name": "lisa walker",
+                    "email": "lwalker@paxchristi.org",
+                    "title": "Manager",
+                    "department": "",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/9540f2b6-801b-4de8-bf9e-a3d3edae2295.png, https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/9540f2b6-801b-4de8-bf9e-a3d3edae2295@2x.png 2x"
+                },
+                {
+                    "name": "jennifer brummel  ",
+                    "email": "jbrummel@paxchristi.org",
+                    "title": "Director",
+                    "department": "Young Adult",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/484eb20a-14df-4edd-a531-2d8b8f7e84ce.jpeg, https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/484eb20a-14df-4edd-a531-2d8b8f7e84ce@2x.jpeg 2x"
+                },
+                {
+                    "name": "rachel brummel youth & young adult",
+                    "email": "rbrummel@paxchristi.org",
+                    "title": "",
+                    "department": "Young Adult",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/fd323032-57f4-4a02-907c-bae7b76ed392.jpeg, https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/fd323032-57f4-4a02-907c-bae7b76ed392@2x.jpeg 2x"
+                },
+                {
+                    "name": "rachel daugherty",
+                    "email": "rdaugherty@paxchristi.org",
+                    "title": "Director",
+                    "department": "",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/05ec8a92-01fd-43cd-a323-d1a6d6b63c3c.png, https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/05ec8a92-01fd-43cd-a323-d1a6d6b63c3c@2x.png 2x"
+                },
+                {
+                    "name": "christy felcyn  of music",
+                    "email": "cfelcyn@paxchristi.org",
+                    "title": "Director",
+                    "department": "Ministry",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/67786ae2-ef2a-4b2c-ac38-fd896679c0cd.jpeg, https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/67786ae2-ef2a-4b2c-ac38-fd896679c0cd@2x.jpeg 2x"
+                },
+                {
+                    "name": "dee hata hospitality",
+                    "email": "dhata@paxchristi.org",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/f8d380df-1a96-4076-9bb6-53994faf5955.jpeg, https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/f8d380df-1a96-4076-9bb6-53994faf5955@2x.jpeg 2x"
+                },
+                {
+                    "name": "devin harris",
+                    "email": "dharris@paxchristi.org",
+                    "title": "Facilities Director",
+                    "department": "",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/14057f4e-b20f-467a-9732-5c6cd564e449.jpeg, https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/14057f4e-b20f-467a-9732-5c6cd564e449@2x.jpeg 2x"
+                },
+                {
+                    "name": "laura luchini",
+                    "email": "lluchini@paxchristi.org",
+                    "title": "Coordinator",
+                    "department": "",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/a64d6669-beca-484e-9dfb-3c8abc9243f1.png, https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/a64d6669-beca-484e-9dfb-3c8abc9243f1@2x.png 2x"
+                },
+                {
+                    "name": "cali miodonski children's",
+                    "email": "cmiodonski@paxchristi.org",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/bb8531b2-a876-47ed-97dc-7719471f873f.png, https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/bb8531b2-a876-47ed-97dc-7719471f873f@2x.png 2x"
+                },
+                {
+                    "name": "jan morgan",
+                    "email": "jmorgan@paxchristi.org",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/4af88511-d42f-45e8-bd9e-672f87524735.jpg, https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/4af88511-d42f-45e8-bd9e-672f87524735@2x.jpg 2x"
+                },
+                {
+                    "name": "megan nagel",
+                    "email": "mnagel@paxchristi.org",
+                    "title": "",
+                    "department": "Ministry",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/9ee299ec-8c78-4f61-8dea-daa8cd8e5e50.jpg, https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/9ee299ec-8c78-4f61-8dea-daa8cd8e5e50@2x.jpg 2x"
+                },
+                {
+                    "name": "daniel quartararo",
+                    "email": "dquartararo@paxchristi.org",
+                    "title": "Lead",
+                    "department": "",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/10430ae3-8173-42e0-8ae4-16c261ab4ab7.jpeg, https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/10430ae3-8173-42e0-8ae4-16c261ab4ab7@2x.jpeg 2x"
+                },
+                {
+                    "name": "julie smith",
+                    "email": "jsmith@paxchristi.org",
+                    "title": "Director",
+                    "department": "",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/d011e8d0-264b-426a-a1f1-ef2496dbde87.png, https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/d011e8d0-264b-426a-a1f1-ef2496dbde87@2x.png 2x"
+                },
+                {
+                    "name": "phil strong  ",
+                    "email": "pstrong@paxchristi.org",
+                    "title": "Director",
+                    "department": "",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/2cdec9a4-0a8d-4599-a743-220c737a4fc1.png, https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/2cdec9a4-0a8d-4599-a743-220c737a4fc1@2x.png 2x"
+                },
+                {
+                    "name": "jennifer tucker",
+                    "email": "jennifertucker@paxchristi.org",
+                    "title": "Director",
+                    "department": "Preschool",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/82a63949-e629-44bd-bd24-105e97df922f.jpeg, https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/82a63949-e629-44bd-bd24-105e97df922f@2x.jpeg 2x"
+                },
+                {
+                    "name": "linda van matre",
+                    "email": "",
+                    "title": "Executive Pastor",
+                    "department": "",
+                    "photo": "https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/193ee72f-0177-4954-b5bf-085653267fc9.png, https://s3.amazonaws.com/media.cloversites.com/09/09c6a9c1-39bf-4da3-bf08-92d51186d95f/site-images/193ee72f-0177-4954-b5bf-085653267fc9@2x.png 2x"
+                }
+            ]
         },
         {
             "link": "https://christinthecity.org/",
@@ -7628,7 +9690,63 @@
         },
         {
             "link": "https://www.mullenhigh.com/",
-            "name": "mullenhigh"
+            "name": "mullenhigh",
+            "pages": [
+                {
+                    "type": "staff",
+                    "url": "https://www.mullenhigh.com/community-life/pastoral-life"
+                },
+                {
+                    "type": "staff",
+                    "url": "https://www.mullenhigh.com/athletics/mustang-athletic-teams/volleyball-boys"
+                },
+                {
+                    "type": "staff",
+                    "url": "https://www.mullenhigh.com/athletics/mustang-athletic-teams/track--field"
+                },
+                {
+                    "type": "staff",
+                    "url": "https://www.mullenhigh.com/athletics/mustang-athletic-teams/wrestling-girls"
+                },
+                {
+                    "type": "staff",
+                    "url": "https://www.mullenhigh.com/athletics/mustang-athletic-teams/wrestling"
+                },
+                {
+                    "type": "staff",
+                    "url": "https://www.mullenhigh.com/athletics/mustang-athletic-teams/tennis-girls"
+                },
+                {
+                    "type": "staff",
+                    "url": "https://www.mullenhigh.com/athletics/mustang-athletic-teams/tennis-boys"
+                },
+                {
+                    "type": "staff",
+                    "url": "https://www.mullenhigh.com/athletics/mustang-athletic-teams/volleyball-girls"
+                },
+                {
+                    "type": "staff",
+                    "url": "https://www.mullenhigh.com/athletics/mustang-athletic-teams/swim-and-dive-girls"
+                },
+                {
+                    "type": "staff",
+                    "url": "https://www.mullenhigh.com/athletics/mustang-athletic-teams/swim-and-dive-boys"
+                },
+                {
+                    "type": "staff",
+                    "url": "https://www.mullenhigh.com/athletics/mustang-athletic-teams/soccer-girls"
+                },
+                {
+                    "type": "staff",
+                    "url": "https://www.mullenhigh.com/athletics/mustang-athletic-teams/soccer-boys"
+                }
+            ],
+            "contacts": [
+                {
+                    "name": "al  doug.brummel@mullenhigh.com",
+                    "email": "doug.brummel@mullenhigh.com"
+                }
+            ]
         },
         {
             "link": "https://crosstimberschurch.org/",
@@ -7640,7 +9758,57 @@
         },
         {
             "link": "https://www.du.edu/",
-            "name": "du.edu"
+            "name": "du.edu",
+            "pages": [
+                {
+                    "type": "staff",
+                    "url": "https://www.du.edu/admission-aid/financial-aid-scholarships/meet-our-team"
+                }
+            ],
+            "contacts": [
+                {
+                    "name": "neighbors",
+                    "email": "",
+                    "title": "Director",
+                    "department": "",
+                    "photo": "https://www.du.edu/sites/default/files/info-for-families-button.jpg"
+                },
+                {
+                    "name": "home",
+                    "email": "",
+                    "title": "Staff",
+                    "department": "",
+                    "photo": "https://www.du.edu/sites/default/files/nav-img/campus-life-flyout-make-yourself-at-home.png"
+                },
+                {
+                    "name": "aid",
+                    "email": "",
+                    "title": "Director",
+                    "department": "",
+                    "photo": "https://www.du.edu/sites/default/files/jamie_esquibel22.jpg"
+                },
+                {
+                    "name": "senior aid",
+                    "email": "",
+                    "title": "",
+                    "department": "",
+                    "photo": "https://www.du.edu/sites/default/files/Lavierleon_Dinh_2.jpg"
+                },
+                {
+                    "name": "stephanie.epsteen@du.edu",
+                    "email": "Stephanie.Epsteen@du.edu",
+                    "title": "Director",
+                    "department": "",
+                    "photo": "https://www.du.edu/sites/default/files/stephanie_epsteen.jpg"
+                },
+                {
+                    "name": "kelly.graves@du.edu",
+                    "email": "",
+                    "title": "Director",
+                    "department": "",
+                    "photo": "https://www.du.edu/sites/default/files/cherlyn_foster22.jpg"
+                }
+            ]
         },
         {
             "link": "https://holyfamilydenver.com/",

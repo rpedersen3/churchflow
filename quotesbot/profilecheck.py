@@ -90,7 +90,7 @@ class ProfileCheck:
                 return "Groups Pastor"
             if "residency" in text.lower():
                 return "Residency Pastor"
-            return "Paster"
+            return "Pastor"
 
         if "elder" in text.lower():
             return "Elder"
@@ -229,10 +229,14 @@ class ProfileCheck:
         # remove some common titles in front of name
         name = name.lower()
         name = name.replace("fr.", "")
+        name = name.replace("rev.", "")
         name = name.replace("deacon", "")
         name = name.replace("staff", "")
         name = name.replace("clergy", "")
         name = name.replace("elder", "")
+        name = name.replace("care ", "")
+        name = name.replace("center", "")
+        name = name.replace("pastoral", "")
         name = name.replace("pastor", "")
         name = name.replace("director", "")
         name = name.replace("coordinator", "")
@@ -248,9 +252,10 @@ class ProfileCheck:
             #print("check name: ", name)
             #print("label: ", ent.label_, ", text: ", ent.text)
             if ent.label_ == "PERSON":
-                #print("person name: ", ent.text)
-                fullname = ent.text
-                #print("fullname person: ", fullname)
+                parts = ent.text.split()
+                if len(parts) == 2:
+                    fullname = ent.text
+                    #print("fullname person: ", fullname)
 
         # lets try and parse name in pieces
         if fullname is None:
