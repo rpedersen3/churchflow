@@ -7,6 +7,11 @@ from quotesbot.churchfinder import ChurchFinder
 import json
 from urllib.parse import urlparse
 
+churches_file_path = "churches.json"
+with open(churches_file_path, "r") as file:
+    churchesData = json.load(file)
+churches = churchesData["churches"]
+
 class DivCount:
     def __init__(self, div, level, className, count):
         self.div = div
@@ -20,26 +25,27 @@ class ChurchCrawler(scrapy.Spider):
     churches_file_path = "churches.json"
     with open(churches_file_path, "r") as file:
         churchesData = json.load(file)
+    churches = churchesData["churches"]
 
     start_urls = []
-    churches = churchesData["churches"]
-    '''
+
+
     i = 1
     for church in churches:
 
-        if i > 30:
+        if i > 60:
             url = church["link"]
             start_urls.append(url)
 
-        if i > 60:
+        if i > 90:
             break
 
         i = i + 1
 
     print('urls: ', str(start_urls))
 
-    '''
 
+    '''
     start_urls = [
         #'https://www.calvarygolden.net'
 
@@ -86,7 +92,7 @@ class ChurchCrawler(scrapy.Spider):
         #'https://www.missionhills.org/im-new/staff-elders/',
         
     ]
-
+    '''
 
     def checkCommonDiv(self, el1, el2):
         s1 = str(el1)
@@ -277,6 +283,14 @@ class ChurchCrawler(scrapy.Spider):
         # Replace multiple spaces with just one space
         cleaned_text = re.sub(r'\s+', ' ', text)
         return cleaned_text
+
+    def saveStaffPage(self):
+
+        # save to churches file
+        churchesData["churches"] = churches
+        with open(churches_file_path, "w") as json_file:
+            json.dump(churchesData, json_file, indent=4)
+
 
     def searchForContacts(self, response):
         #print('**************** process page: ', response.url)
@@ -513,7 +527,7 @@ class ChurchCrawler(scrapy.Spider):
 
         #self.searchForGroups(response)
 
-        '''
+
         links = response.xpath('//a/@href').extract()
         for link in links:
 
@@ -530,7 +544,7 @@ class ChurchCrawler(scrapy.Spider):
 
                     yield scrapy.Request(response.urljoin(pageLink), callback=self.parse)
 
-        '''
+
 
 
 
