@@ -22,10 +22,6 @@ class DivCount:
 class ChurchCrawler(scrapy.Spider):
     name = "crawler"
 
-    churches_file_path = "churches.json"
-    with open(churches_file_path, "r") as file:
-        churchesData = json.load(file)
-    churches = churchesData["churches"]
 
     start_urls = []
 
@@ -33,11 +29,11 @@ class ChurchCrawler(scrapy.Spider):
     i = 1
     for church in churches:
 
-        if i > 60:
+        if i > 100:
             url = church["link"]
             start_urls.append(url)
 
-        if i > 90:
+        if i > 10000:
             break
 
         i = i + 1
@@ -201,7 +197,17 @@ class ChurchCrawler(scrapy.Spider):
         return bestDiv, bestClassName
 
 
-    def saveContact(self,
+    def getContact(self, contacts, name, email):
+
+        for contact in contacts:
+            if name is not "" and contact["name"] == name:
+                return contact
+            if email is not "" and contact["email"] == email:
+                return contact
+
+        return None
+
+    def saveContact(self, currentChurch,
         currentProfilePhoto,
         currentProfileName,
 
@@ -248,6 +254,28 @@ class ChurchCrawler(scrapy.Spider):
         # print("------- email offset: ", emailOffset)
         # print("------- previous email offset: ", previousEmailOffset)
 
+        contacts = []
+        if "contacts" in currentChurch:
+            contacts = currentChurch["contacts"]
+
+        contact = self.getContact(contacts, currentProfileName, email)
+        if contact is None:
+            contact = {}
+            contacts.append(contact)
+
+        contact["name"] = currentProfileName
+        if email is not None:
+            contact["email"] = email
+        if currentProfileTitle is not None:
+            contact["title"] = currentProfileTitle
+        if currentProfileDepartment is not None:
+            contact["department"] = currentProfileDepartment
+        if currentProfilePhoto is not None:
+            contact["photo"] = currentProfilePhoto
+
+        currentChurch["contacts"] = contacts
+        self.saveChurch(currentChurch)
+
         print("")
         print("contact record:")
         print("name: ", currentProfileName)
@@ -259,7 +287,10 @@ class ChurchCrawler(scrapy.Spider):
 
 
 
+
+
     def saveEmailContact(self,
+        currentChurch,
         currentProfileName,
         currentProfileEmail
     ):
@@ -273,6 +304,24 @@ class ChurchCrawler(scrapy.Spider):
 
 
         if foundPartInEmail:
+
+            contacts = []
+            if "contacts" in currentChurch:
+                contacts = currentChurch["contacts"]
+
+            contact = self.getContact(contacts, currentProfileName, currentProfileEmail)
+            if contact is None:
+                contact = {}
+                contacts.append(contact)
+
+                contact["name"] = currentProfileName
+                if currentProfileEmail is not None:
+                    contact["email"] = currentProfileEmail
+
+
+                currentChurch["contacts"] = contacts
+                self.saveChurch(currentChurch)
+
             print("")
             print("contact record (email):")
             print("name: ", currentProfileName)
@@ -284,7 +333,7 @@ class ChurchCrawler(scrapy.Spider):
         cleaned_text = re.sub(r'\s+', ' ', text)
         return cleaned_text
 
-    def saveStaffPage(self):
+    def saveChurch(self, currentChurch):
 
         # save to churches file
         churchesData["churches"] = churches
@@ -292,7 +341,15 @@ class ChurchCrawler(scrapy.Spider):
             json.dump(churchesData, json_file, indent=4)
 
 
-    def searchForContacts(self, response):
+    def getPage(self, pages, type, url):
+
+        for page in pages:
+            if page["type"] == type and page["url"] == url:
+                return page
+
+        return None
+
+    def searchForContacts(self, currentChurch, response):
         #print('**************** process page: ', response.url)
 
         if response.url.find(".pdf") >= 0:
@@ -303,6 +360,22 @@ class ChurchCrawler(scrapy.Spider):
                 response.url.find('team') != -1 or \
                 response.url.find('leadership') != -1 or \
                 response.url.find('pastor') != -1:
+
+            pages = []
+            if "pages" in currentChurch:
+                pages = currentChurch["pages"]
+
+            page = self.getPage(pages, "staff", response.url)
+            if page is None:
+                page = {
+                    "type": "staff",
+                    "url": response.url
+                }
+                pages.append(page)
+
+            print("--------- save page: ", response.url)
+            currentChurch["pages"] = pages
+            self.saveChurch(currentChurch)
 
             print("--------- parse page: ", response.url)
             profCheck = ProfileCheck()
@@ -392,6 +465,7 @@ class ChurchCrawler(scrapy.Spider):
                     trackEmailCurrentEmail = email_address
                     if trackEmailCurrentName != "":
                         self.saveEmailContact(
+                            currentChurch,
                             trackEmailCurrentName,
                             trackEmailCurrentEmail
                         )
@@ -432,7 +506,8 @@ class ChurchCrawler(scrapy.Spider):
                             #print("photo found: ", img_src)
 
                             if currentProfilePhoto != "" and currentProfileName != "":
-                                self.saveContact(currentProfilePhoto,
+                                self.saveContact(currentChurch,
+                                                 currentProfilePhoto,
                                                  currentProfileName,#
 
                                                  currentProfileTitle,
@@ -462,7 +537,8 @@ class ChurchCrawler(scrapy.Spider):
 
 
             if currentProfilePhoto != "" and currentProfileName != "":
-                self.saveContact(currentProfilePhoto,
+                self.saveContact(currentChurch,
+                                 currentProfilePhoto,
                                  currentProfileName,
 
                                  currentProfileTitle,
@@ -508,6 +584,22 @@ class ChurchCrawler(scrapy.Spider):
                 print('div class name: ', boundingClassName)
                 groupCheck.lookForGroupNames(html, boundingClassName)
 
+    def findCurrentChurch(self, url):
+        currentChurch = None
+        for church in churches:
+
+            churchParse = urlparse(church["link"])
+            churchDomain = churchParse.netloc
+
+            urlParse = urlparse(url)
+            urlDomain = urlParse.netloc
+
+            if churchDomain == urlDomain:
+                currentChurch = church
+                break
+
+        return currentChurch
+
     def parse(self, response):
 
         if response.url.find(".pdf") >= 0 or \
@@ -522,7 +614,12 @@ class ChurchCrawler(scrapy.Spider):
 
 
         #print("parse site: ", response.url)
-        self.searchForContacts(response)
+        currentChurch = self.findCurrentChurch(response.url)
+        if currentChurch == None:
+            print("not found church for url: ", response.url)
+            return
+
+        self.searchForContacts(currentChurch, response)
 
 
         #self.searchForGroups(response)
