@@ -23,7 +23,7 @@ class ChurchCrawler(scrapy.Spider):
     name = "crawler"
 
 
-    '''
+
     start_urls = []
 
 
@@ -43,9 +43,9 @@ class ChurchCrawler(scrapy.Spider):
 
         i = i + 1
 
+
+
     '''
-
-
 
     start_urls = [
         #'https://www.calvarygolden.net'
@@ -102,7 +102,7 @@ class ChurchCrawler(scrapy.Spider):
         #'https://www.missionhills.org/im-new/staff-elders/',
         
     ]
-
+    '''
 
     def checkCommonDiv(self, el1, el2):
         s1 = str(el1)
@@ -643,7 +643,7 @@ class ChurchCrawler(scrapy.Spider):
 
         #self.searchForGroups(response)
 
-        '''
+
         links = response.xpath('//a/@href').extract()
         for link in links:
 
@@ -660,7 +660,7 @@ class ChurchCrawler(scrapy.Spider):
 
                     yield scrapy.Request(response.urljoin(pageLink), callback=self.parse)
 
-        '''
+
 
 
 
