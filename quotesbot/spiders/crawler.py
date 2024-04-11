@@ -22,10 +22,9 @@ class DivCount:
 class ChurchCrawler(scrapy.Spider):
     name = "crawler"
 
-
-
+    #crawl church sites
+    '''
     start_urls = []
-
 
     i = 1
     for church in churches:
@@ -43,66 +42,38 @@ class ChurchCrawler(scrapy.Spider):
 
         i = i + 1
 
-
-
     '''
 
+    '''
+    # crawl church reference sites
+    start_urls = []
+
+    i = 1
+    for church in churches:
+        if "references" in church:
+            references = church["references"]
+            for reference in references:
+
+                if i > 0:
+                    site = reference["site"]
+                    url = reference["url"]
+
+                    if site == "faithstreet":
+                        start_urls.append(url)
+                        print('urls: ', str(url))
+
+                if i > 100:
+                    break
+
+            i = i + 1
+
+    '''
+    #crawl specific url
     start_urls = [
-        #'https://www.calvarygolden.net'
-
-        #'https://plumcreek.church/team'
-        'https://www.familyinchrist.com/about'
-        #'https://www.petertherock.org/staff-directory.html'
-        #'https://flatironsacademy.org/staff'
-        #'https://gccdenver.org/leadership/'
-        #'https://bethlehemdenver.com/who-we-are/church-staff/'
-        #'https://pikespeakchristianchurch.com/about/'
-        #'https://www.windsorroad.org/our-team/'
-        #'https://christchurchcolorado.org/about-us/#Our%20Staff'
-        #'https://www.windsorcornerstone.org/about/staff/'
-
-        #'https://www.applewood.church/leadership-and-staff/'
-        #'https://wrpres.org/our-staff'
-        #'https://www.holyapostlescc.org/staff'
-        #'https://broadmoorchurch.org/our-team/'
-        #'https://mynorthlandchurch.org/about/our-team'
-
-        #'https://www.missionhills.org/im-new/staff-elders/'
-        #'https://www.missionhills.org/groupfinder/'
-        #'https://www.missionhills.org'
-
-        #'https://centcov.org'
-
-        #"https://calvarybible.com/adults-groups/"
-        #'https://calvarybible.com'
-
-        #'https://truelightonline.org'
-
-        #'https://www.houseofhopeaurora.org'
-
-        #'https://www.horizondenver.com/index.php/about-us/our-team/'
-
-        #'https://www.convergerockymountain.org'
-
-        #'https://www.wellspring.thecalvary.org'
-
-        #'https://longmontcalvary.org/about/our-staff'
-
-        #"https://www.trinitylittleton.com/staff"
-        #"https://www.trinitylittleton.com"
-
-
-        #'https://www.horizondenver.com/index.php/about-us/our-team/'
-        #'https://www.highlandsumc.com/staff/'
-        #'https://harborchurch.life/staff-oversight/'
-        #'https://www.convergerockymountain.org/staff/'
-        #'https://www.wellspring.thecalvary.org/leadership/'
-        #'https://centcov.org/staff-elders/'
-        #'https://calvarybible.com/staff/'
-        #'https://www.missionhills.org/im-new/staff-elders/',
-        
+        "https://www.faithstreet.com/church/impact-rock-church-erie-co",
     ]
-    '''
+
+
 
     def checkCommonDiv(self, el1, el2):
         s1 = str(el1)
@@ -363,6 +334,150 @@ class ChurchCrawler(scrapy.Spider):
 
         return None
 
+
+
+    def crawlFaithStreet(self, currentChurch, response):
+
+        print('**************** process page: ', response.url)
+        # itemtype="https://schema.org/Church"
+        non_visible_pattern = re.compile(
+            r'[\t\n\r\f\v]')  # matches tabs, newlines, carriage returns, form feeds, vertical tabs, and whitespace
+
+
+        churchName = response.xpath("//h1[@itemprop='name']/text()").extract()[0]
+        churchName = non_visible_pattern.sub('', churchName)
+        print("church name: ", churchName)
+
+        description = response.xpath(
+            "//div[@itemprop='description']//p/text()").extract()[0]
+        description = non_visible_pattern.sub('', description)
+        print("church description: ", description)
+
+        # https://schema.org/PostalAddress
+        streetAddress = response.xpath("//span[@itemprop='streetAddress']/text()").extract()[0]
+        print("church streetAddress: ", streetAddress)
+
+        addressLocality = response.xpath("//span[@itemprop='addressLocality']/text()").extract()[0]
+        print("church addressLocality: ", addressLocality)
+
+        addressRegion = response.xpath("//span[@itemprop='addressRegion']/text()").extract()[0]
+        print("church addressRegion: ", addressRegion)
+
+        postalCode = response.xpath("//span[@itemprop='postalCode']/text()").extract()[0]
+        print("church postalCode: ", postalCode)
+
+        latitude = response.xpath("//meta[@itemprop='latitude']/@content").extract()[0]
+        print("church latitude: ", latitude)
+
+        longitude = response.xpath("//meta[@itemprop='longitude']/@content").extract()[0]
+        print("church longitude: ", longitude)
+
+        vibes = response.xpath("//dt[text()='Vibe']/following-sibling::dd//a/text()").extract()
+        vibesStr = ""
+        for vibe in vibes:
+            if vibesStr == "":
+                vibesStr = vibesStr + vibe
+            else:
+                vibesStr = vibesStr + ", " + vibe
+        print("church vibe: ", vibesStr)
+
+        programs = response.xpath("//dt[text()='Programs']/following-sibling::dd//a/text()").extract()
+        programsStr = ""
+        for program in programs:
+            if programsStr == "":
+                programsStr = programsStr + program
+            else:
+                programsStr = programsStr + ", " + program
+        print("church programs: ", programsStr)
+
+        musics = response.xpath("//dt[text()='Music']/following-sibling::dd//a/text()").extract()
+        musicStr = ""
+        for music in musics:
+            if musicStr == "":
+                musicStr = musicStr + music
+            else:
+                musicStr = musicStr + ", " + music
+        print("church music: ", musicStr)
+
+        denominations = response.xpath("//dt[text()='Denomination']/following-sibling::dd//a/text()").extract()
+        denominationsStr = ""
+        for denomination in denominations:
+            if denominationsStr == "":
+                denominationsStr = denominationsStr + denomination
+            else:
+                denominationsStr = denominationsStr + ", " + denomination
+        print("church denomination: ", denominationsStr)
+
+        size = ""
+        sizes = response.xpath("//dt[text()='Size']/following-sibling::dd/text()").extract()
+        if len(sizes) > 0:
+            size = sizes[0]
+        print("church size: ", size)
+
+        languages = response.xpath("//dt[text()='Language']/following-sibling::dd//a/text()").extract()
+        languagesStr = ""
+        for language in languages:
+            if languagesStr == "":
+                languagesStr = languagesStr + language
+            else:
+                languagesStr = languagesStr + ", " + language
+        print("church language: ", languagesStr)
+
+
+
+        founded = ""
+        foundeds = response.xpath("//dt[text()='Founded']/following-sibling::dd/text()").extract()
+        if len(foundeds) > 0:
+            founded = foundeds[0]
+        print("church founded: ", founded)
+
+
+        siteUrl = ""
+        url_href = response.xpath("//div[contains(@class, 'church__description')]//a[@class='text-link' and @target='_blank']/@href").extract()
+        if url_href is not None and len(url_href) > 0:
+            siteUrl = url_href[0]
+            print('church site href: ', siteUrl)
+
+        phone = ""
+        phone_href = response.xpath(
+            "//div[contains(@class, 'church__description')]//a[@class='text-link' and not(@target='_blank')]/@href").extract()
+        if phone_href is not None and len(phone_href) > 0:
+            phone = phone_href[0].replace("tel:", "")
+            print('church phone href: ', phone)
+
+        currentChurch["name"] = churchName
+        if "description" not in currentChurch:
+            currentChurch["description"] = description
+        if "street" not in currentChurch:
+            currentChurch["street"] = streetAddress
+        if "city" not in currentChurch:
+            currentChurch["city"] = addressLocality
+        if "state" not in currentChurch:
+            currentChurch["state"] = addressRegion
+        if "zip" not in currentChurch:
+            currentChurch["zip"] = postalCode
+        if "latitude" not in currentChurch:
+            currentChurch["latitude"] = latitude
+        if "longitude" not in currentChurch:
+            currentChurch["longitude"] = longitude
+
+        currentChurch["vibe"] = vibesStr
+        currentChurch["programs"] = programsStr
+        currentChurch["music"] = musicStr
+        currentChurch["denomination"] = denominationsStr
+        currentChurch["size"] = size
+        currentChurch["language"] = languagesStr
+        currentChurch["founded"] = founded
+
+        if "link" not in currentChurch:
+            currentChurch["link"] = siteUrl
+        if "phone" not in currentChurch:
+            currentChurch["phone"] = phone
+
+        self.saveChurch(currentChurch)
+
+
+
     def searchForContacts(self, currentChurch, response):
         #print('**************** process page: ', response.url)
 
@@ -619,6 +734,20 @@ class ChurchCrawler(scrapy.Spider):
 
         return currentChurch
 
+    def findCurrentChurchReference(self, url):
+        currentChurch = None
+        for church in churches:
+
+            if "references" in church:
+                references = church["references"]
+                for reference in references:
+                    if "url" in reference:
+                        if reference["url"] == url:
+                            currentChurch = church
+                            break
+
+        return currentChurch
+
     def parse(self, response):
 
         if response.url.find(".pdf") >= 0 or \
@@ -626,12 +755,23 @@ class ChurchCrawler(scrapy.Spider):
                 return
 
         churchFinder = ChurchFinder()
+        churchFinder.findChurchesUsingNonProfitData()
         #churchFinder.findCityDemographicsFromCensusData()
         #churchFinder.findCityDemographics()
         #churchFinder.findCities()
         #churchFinder.findChurches()
 
+        #crawl reference urls
+        print("parse site: ", response.url)
+        currentChurch = self.findCurrentChurchReference(response.url)
+        if currentChurch == None:
+            print("not found church for url: ", response.url)
+            return
 
+        self.crawlFaithStreet(currentChurch, response)
+
+        '''
+        # crawl church urls
         #print("parse site: ", response.url)
         currentChurch = self.findCurrentChurch(response.url)
         if currentChurch == None:
@@ -660,7 +800,7 @@ class ChurchCrawler(scrapy.Spider):
 
                     yield scrapy.Request(response.urljoin(pageLink), callback=self.parse)
 
-
+        '''
 
 
 
