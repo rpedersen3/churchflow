@@ -63,13 +63,14 @@ class ChurchFinder:
 
 
 
+            '''
             file_path = "coloradoCities.json"
             citiesData = {}
             citiesData["cities"] = data
 
             with open(file_path, "w") as json_file:
                 json.dump(citiesData, json_file, indent=4)
-
+            '''
 
             file_path = "coloradoFrontRangeCities.json"
             citiesData = {}
@@ -464,6 +465,7 @@ class ChurchFinder:
         for city in cities:
 
             if "crawled" not in city:
+
                 city["crawled"] = str(datetime.now())
                 city["crawled-city"] = city["name"]
 
@@ -560,3 +562,143 @@ class ChurchFinder:
 
         print("results: ", results)
         '''
+
+        def findChurchesUsingNonProfitData(self):
+
+            # https://programmablesearchengine.google.com/controlpanel/overview?cx=d744719d644574dd7
+            service = build(
+                "customsearch", "v1", developerKey=""
+            )
+
+            # get churches
+            churchesData = None
+            churches_file_path = "churches.json"
+            with open(churches_file_path, "r") as file:
+                churchesData = json.load(file)
+
+            churches = churchesData["churches"]
+            if churches == None:
+                churches = []
+
+            # get cities
+            file_path = "coloradoFrontRangeCities.json"
+            with open(file_path, "r") as file:
+                citiesData = json.load(file)
+
+            # cycle through cities looking for church web sites
+            cities = citiesData["cities"]
+
+            # get non-profit data
+            non_profit_file_path = 'cities.txt'
+
+            # Read data from file
+            with open(non_profit_file_path, 'r') as file:
+                nonProfitLines = file.readlines()
+
+                data = []
+                frontRangeData = []
+
+                for nonProfitLine in nonProfitLines:
+                    nonProfitLine = nonProfitLine.rstrip('\r\n')
+                    nonProfitParts = nonProfitLine.split('\t')
+
+                    # description of codes  https://www.irs.gov/pub/irs-soi/eo-info.pdf
+                    ein = nonProfitParts[0]
+                    name = nonProfitParts[1]
+                    ico = nonProfitParts[2]
+                    street  = nonProfitParts[3]
+                    city = nonProfitParts[4]
+                    state = nonProfitParts[5]
+                    zip = nonProfitParts[6]
+                    group = nonProfitParts[7]           # Group Exemption Number, if affiliation is 9 then look for grouping of churches
+                    subsection = nonProfitParts[8]      # 3 for Charitable, Religious, Educational, Scientific, Literary, Testing for Public Safety, to Foster National or International Amateur Sports Competition, or Prevention of Cruelty to Children or Animals Organizations
+                    affiliation = nonProfitParts[9]     # Affiliation Code,  9 if under an umbrella group
+                    classification = nonProfitParts[10] # Classification Code(s), 7000
+                    ruling = nonProfitParts[11]         # Ruling Date
+                    deductibility = nonProfitParts[12]  # Deductibility Code
+                    foundation = nonProfitParts[13]     # Foundation Code, 10 Church,
+                    activity = nonProfitParts[14]       # 3, 10, 15, 17
+                    organization = nonProfitParts[15]
+                    status = nonProfitParts[16]
+                    taxPeriod = nonProfitParts[17]
+                    assetCD = nonProfitParts[18]
+                    incomeCD = nonProfitParts[19]
+                    filingReqCD = nonProfitParts[20]
+                    pfFilingReqCD = nonProfitParts[21]
+                    acctPD = nonProfitParts[22]
+                    assetAmt = nonProfitParts[23]
+                    incomeAmt = nonProfitParts[24]
+                    revenueAmt = nonProfitParts[25]
+                    nteeCD = nonProfitParts[26]
+                    sortName = nonProfitParts[27]
+
+                    if foundation == "10":
+                        selectedCity = self.getCity(cities, city)
+                        if selectedCity is not None:
+                            query = "'" + selectedCity["name"] + " " + name + " " + street
+                            print("query: ", query)
+                            res = (
+                                service.cse()
+                                .list(
+                                    q=query,
+                                    cx="d744719d644574dd7",
+                                    start=1
+                                    # cx="01757666212468239146:omuauf_lfve",
+                                )
+                                .execute()
+                            )
+                            print("--------------------------------------")
+                            print(res)
+                            print("--------------------------------------")
+
+                            found = 0
+                            for item in res["items"]:
+
+                                link = item["link"]
+                                dashCount = len(link.split("/"))
+                                print("link: ", link, ",  dashCount: ", dashCount)
+                                if link.find('?') == -1 and \
+                                        link.find('&') == -1 and \
+                                        dashCount <= 4 and \
+                                        link.find("linkedin") == -1 and \
+                                        link.find(".edu") == -1 and \
+                                        link.find(".gov") == -1:
+
+                                    found = found + 1
+
+                                    name = item["displayLink"]
+                                    name = name.replace('www.', '')
+                                    name = name.replace('.com', '')
+                                    name = name.replace('.org', '')
+                                    name = name.replace('.net', '')
+                                    name = name.replace('.church', '')
+
+                                    # looking for existing church with this link
+                                    selectedChurch = None
+                                    for church in churches:
+                                        if church["link"] == link:
+                                            selectedChurch = church
+                                            break
+
+                                    if selectedChurch == None:
+                                        print("add church: ", name)
+                                        church = {
+                                            "link": link,
+                                            "name": name
+                                        }
+                                        churches.append(church)
+
+                                        print('link: ', item["link"])
+
+                                    # save to churches file
+                                    churchesData["churches"] = churches
+                                    with open(churches_file_path, "w") as json_file:
+                                        json.dump(churchesData, json_file, indent=4)
+
+                                    # save cities crawled
+                                    citiesData["cities"] = cities
+                                    with open(file_path, "w") as json_file:
+                                        json.dump(citiesData, json_file, indent=4)
+
+                                    break
+
