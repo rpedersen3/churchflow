@@ -1,11 +1,24 @@
 # -*- coding: utf-8 -*-
 import scrapy
+from scrapy import Selector
+
+from scrapy.http import HtmlResponse
+from scrapy.selector import Selector
+from bs4 import BeautifulSoup
 import re
 from quotesbot.profilecheck import ProfileCheck
 from quotesbot.groupcheck import GroupCheck
 from quotesbot.churchfinder import ChurchFinder
 import json
 from urllib.parse import urlparse
+from lxml import etree
+import spacy
+import pandas as pd
+
+import locationtagger
+
+nlp = spacy.load("en_core_web_sm")
+pd.set_option("display.max_rows", 200)
 
 churches_file_path = "churches.json"
 with open(churches_file_path, "r") as file:
@@ -23,26 +36,26 @@ class ChurchCrawler(scrapy.Spider):
     name = "crawler"
 
     #crawl church sites
-    '''
+
     start_urls = []
+
 
     i = 1
     for church in churches:
 
-        if "pages" not in church:
+        #if "pages" not in church:
 
-            if i > 0:
-                url = church["link"]
-                start_urls.append(url)
+        if i > 0:
+            url = church["link"]
+            start_urls.append(url)
 
-                print('urls: ', str(url))
+            print('urls: ', str(url))
 
-            if i > 10000:
-                break
+        if i > 30:
+            break
 
         i = i + 1
 
-    '''
 
     '''
     # crawl church reference sites
@@ -68,11 +81,14 @@ class ChurchCrawler(scrapy.Spider):
             i = i + 1
 
     '''
+
+    '''
     #crawl specific url
     start_urls = [
-        "https://www.faithstreet.com/church/impact-rock-church-erie-co",
+        "https://www.petertherock.org/",
+        "https://www.stfranciscs.org/"
     ]
-
+    '''
 
 
     def checkCommonDiv(self, el1, el2):
@@ -334,7 +350,204 @@ class ChurchCrawler(scrapy.Spider):
 
         return None
 
+    def count_numbers(self, input_string):
+        count = 0
+        for char in input_string:
+            if char.isdigit():
+                count += 1
+        return count
 
+    def split_on_chars(self, input_string, split_chars):
+        pattern = '|'.join(re.escape(char) for char in split_chars)
+        return re.split(pattern, input_string)
+
+    def detectName(self, response):
+        titles = response.xpath("//title/text()").extract()
+        if len(titles) > 0:
+
+            title = titles[0]
+
+            split_chars = ["-", "|"]
+            parts = self.split_on_chars(title, split_chars)
+            for part in parts:
+
+                #print("part: ", part)
+                doc = nlp(part)
+                for ent in doc.ents:
+                    #print("label: ", ent.label_, ", text: ", ent.text)
+                    if ent.label_ == "ORG":
+                        name = ent.text
+                        return name
+
+
+        return None
+
+    def detectAddress(self, response):
+
+        invisible_chars_regex = r'[\x00-\x1F\x7F-\x9F\r\n]'
+
+        # detect address
+        txt = None
+        prevTxt = None
+
+        query = "//text()[contains(normalize-space(), ', CO 80')]"
+        if len(response.xpath(query)) == 0:
+            query = "//text()[contains(normalize-space(), ' CO, 80')]"
+            if len(response.xpath(query)) == 0:
+                query = "//text()[contains(normalize-space(), ' CO, 81')]"
+                if len(response.xpath(query)) == 0:
+                    query = "//text()[contains(normalize-space(), ' CO, 81')]"
+                    if len(response.xpath(query)) == 0:
+                        query = "//text()[contains(normalize-space(), ', CO')]"
+                        if len(response.xpath(query)) == 0:
+                            query = "//text()[contains(normalize-space(), ' CO, ')]"
+                            if len(response.xpath(query)) == 0:
+                                return None
+
+        for address in response.xpath(query):
+            priorElQuery = query + "/preceding-sibling::text()"
+            for prevEl in response.xpath(priorElQuery):
+                prevTxt = prevEl.extract().replace(",", "")
+                #print("prev :", prevTxt)
+
+            txt = address.extract()
+            txt = txt.strip()[:200]
+            txt = re.sub(invisible_chars_regex, '', txt)
+            txt = txt.replace("\n", " ")
+            txt = txt.replace("| ", ", ")
+
+
+            #print('txt 1: ', txt, ", prev: ", prevTxt)
+
+
+        if txt is not None:
+
+            #print("found address: ", txt)
+
+            split_chars = ["'", "-"]   # ["-", "|", "'", "\""]
+            parts = self.split_on_chars(txt, split_chars)
+
+            for part in parts:
+                part = re.sub(invisible_chars_regex, '', part)
+                if len(part) > 5:
+                    # if has city and has numbers and is less than 100 characters
+                    part = part[:200]
+                    place_entity = locationtagger.find_locations(text=part)
+                    if len(place_entity.city_mentions) > 0:
+                        numberOfNumbers = self.count_numbers(part)
+                        if numberOfNumbers > 0:
+                            addStr = part.strip()
+                            addStr = addStr.replace("\n", " ")
+
+                            # either starts with some knows letters like P.O.  or numbers
+                            if addStr.find("P.O.") >= 0:
+                                rtnAddress = addStr
+                                return rtnAddress
+
+                            # get part of string starting with number
+                            numbers = re.findall(r'\d+', addStr)
+                            #print("numbers: ", numbers)
+                            if (len(numbers) > 0):
+                                #print("numbers: ", numbers[0])
+                                offset = addStr.find(numbers[0])
+                                rtnAddress = addStr[offset:1000]
+
+                                # make sure it is not just a number
+                                if rtnAddress != numbers[0]:
+                                    return rtnAddress
+                                else:
+                                    # add previous section to
+                                    if prevTxt is not None:
+                                        rtnAddress = prevTxt + ", " + addStr
+                                        #print('just number 1 prev section: ', addStr)
+                                        return rtnAddress
+
+                                    #print('just number 1: ', addStr)
+
+
+
+        return None
+
+    def detectPhone(self, response, parts):
+
+        invisible_chars_regex = r'[\x00-\x1F\x7F-\x9F]'
+
+        for part in parts:
+
+            part = re.sub(invisible_chars_regex, '', part)
+
+            codeFind = "(" + part + ")"
+            code = "'" + codeFind + "'"
+            path = "//text()[starts-with(normalize-space(), " + code + ")]"
+            phoneNumbers = response.xpath(path).extract()
+            if len(phoneNumbers) == 0:
+                path = "//text()[contains(normalize-space(), " + code + ")]"
+                phoneNumbers = response.xpath(path).extract()
+            if len(phoneNumbers) > 0 and len(phoneNumbers[0]) < 300:
+                phoneNumber = phoneNumbers[0]
+                #print("ph1: ", phoneNumber)
+                offset = phoneNumber.find(codeFind)
+                #print("offset: ", offset)
+                if offset >= 0:
+                    phoneNumber = phoneNumber[offset:offset+14]
+                return phoneNumber
+
+            codeFind = part + "."
+            code = "'" + codeFind + "'"
+            path = "//text()[starts-with(normalize-space(), " + code + ")]"
+            phoneNumbers = response.xpath(path).extract()
+            if len(phoneNumbers) == 0:
+                path = "//text()[contains(normalize-space(), " + code + ")]"
+                phoneNumbers = response.xpath(path).extract()
+            if len(phoneNumbers) > 0 and len(phoneNumbers[0]) < 300:
+                phoneNumber = phoneNumbers[0]
+                offset = phoneNumber.find(codeFind)
+                #print("ph2: ", phoneNumber)
+                if offset >= 0:
+                    phoneNumber = phoneNumber[offset:offset+13]
+                return phoneNumber
+
+            codeFind = part + "-"
+            code = "'" + codeFind + "'"
+            path = "//text()[starts-with(normalize-space(), " + code + ")]"
+            phoneNumbers = response.xpath(path).extract()
+            if len(phoneNumbers) == 0:
+                path = "//text()[contains(normalize-space(), " + code + ")]"
+                phoneNumbers = response.xpath(path).extract()
+            phoneNumbers = response.xpath(path).extract()
+            if len(phoneNumbers) > 0 and len(phoneNumbers[0]) < 300:
+                phoneNumber = phoneNumbers[0]
+                offset = phoneNumber.find(codeFind)
+                #print("ph3: ", phoneNumber)
+                if offset >= 0:
+                    phoneNumber = phoneNumber[offset:offset+13]
+                return phoneNumber
+
+        return None
+
+    def detectEmail(self, response):
+
+        "//a[starts-with(@href, 'mailto')]/text()"
+        "//a[starts-with(@href, 'mailto')]/text()"
+        "//*[contains(text(), '@')]"
+        "//@href[starts-with(., 'mailto:')]"
+        emails = response.xpath("//a[starts-with(@href, 'mailto')]/text()").extract()
+        if len(emails) > 0:
+            #print("email 1:", emails)
+            if len(emails[0]) > 5:
+                email = emails[0].replace("mailto:", "").strip()
+                if len(email) > 0:
+                    return email
+
+        emails = response.xpath("//@href[starts-with(., 'mailto:')]").extract()
+        if len(emails) > 0:
+            #print("email 2:", emails)
+            if len(emails[0]) > 5:
+                email = emails[0].replace("mailto:", "").strip()
+                if len(email) > 0:
+                    return email
+
+        return None
 
     def crawlFaithStreet(self, currentChurch, response):
 
@@ -476,6 +689,45 @@ class ChurchCrawler(scrapy.Spider):
 
         self.saveChurch(currentChurch)
 
+
+    def searchForSiteProfileInfo(self, currentChurch, response):
+        #print('**************** process page: ', response.url)
+
+        # church name
+        # website link
+        # phone number
+        # address (street, city, state, zipcode)
+        # social links,  facebook, instagram, youtube, flickr
+
+        if response.url.find(".pdf") >= 0:
+            return
+
+        "//text()[starts-with(normalize-space(), '+49')]"
+
+        # detect phone number
+        phoneNumber = self.detectPhone(response, ["303", "720", "719"])
+        if phoneNumber is not None:
+            print('phone: ', phoneNumber)
+
+        # detect address
+        name = self.detectName(response)
+        if name is not None:
+            print("name: ", name)
+            currentChurch["address"] = name
+
+        # detect address
+        address = self.detectAddress(response)
+        if address is not None:
+            print("address: ", address)
+            currentChurch["address"] = address
+
+        # detect email address
+        email = self.detectEmail(response)
+        if email is not None:
+            print("email: ", email)
+            currentChurch["email"] = email
+
+        self.saveChurch(currentChurch)
 
 
     def searchForContacts(self, currentChurch, response):
@@ -755,12 +1007,13 @@ class ChurchCrawler(scrapy.Spider):
                 return
 
         churchFinder = ChurchFinder()
-        churchFinder.findChurchesUsingNonProfitData()
+        #churchFinder.findChurchesUsingNonProfitData()
         #churchFinder.findCityDemographicsFromCensusData()
         #churchFinder.findCityDemographics()
         #churchFinder.findCities()
         #churchFinder.findChurches()
 
+        '''
         #crawl reference urls
         print("parse site: ", response.url)
         currentChurch = self.findCurrentChurchReference(response.url)
@@ -768,22 +1021,25 @@ class ChurchCrawler(scrapy.Spider):
             print("not found church for url: ", response.url)
             return
 
-        self.crawlFaithStreet(currentChurch, response)
+        if "vibe" not in currentChurch:
+            self.crawlFaithStreet(currentChurch, response)
 
         '''
+
         # crawl church urls
-        #print("parse site: ", response.url)
+        print("")
+        print("parse site: ", response.url)
         currentChurch = self.findCurrentChurch(response.url)
         if currentChurch == None:
             print("not found church for url: ", response.url)
             return
 
-        self.searchForContacts(currentChurch, response)
-
-
+        self.searchForSiteProfileInfo(currentChurch, response)
+        #self.searchForContacts(currentChurch, response)
         #self.searchForGroups(response)
 
 
+        '''
         links = response.xpath('//a/@href').extract()
         for link in links:
 

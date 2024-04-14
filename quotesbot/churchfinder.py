@@ -604,9 +604,6 @@ class ChurchFinder:
             process = False
             for nonProfitLine in nonProfitLines:
 
-                if found > 30:
-                    break
-
                 nonProfitLine = nonProfitLine.rstrip('\r\n')
                 nonProfitParts = nonProfitLine.split('\t')
 
@@ -640,7 +637,7 @@ class ChurchFinder:
                 nteeCD = nonProfitParts[26]
                 sortName = nonProfitParts[27]
 
-                if street == "129 WALNUT ST":
+                if street == "4371 PLATTE AVE":
                     print("************** start processing ****************")
                     process = True
 
@@ -657,9 +654,6 @@ class ChurchFinder:
 
                     selectedCity = self.getCity(cities, city)
                     if selectedCity is not None:
-
-                        if found > 30:
-                            break
 
                         print("ein: ", ein, "city: ", city, ", name: ", churchName, ", foundation: ", foundation)
                         time.sleep(3)
