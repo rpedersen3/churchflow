@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import scrapy
 from scrapy import Selector
+import time
 
 from scrapy.http import HtmlResponse
 from scrapy.selector import Selector
@@ -14,6 +15,7 @@ from urllib.parse import urlparse
 from lxml import etree
 import spacy
 import pandas as pd
+import requests
 
 import locationtagger
 
@@ -51,7 +53,7 @@ class ChurchCrawler(scrapy.Spider):
                 start_urls.append(url)
                 print('urls: ', str(url))
 
-        if i > 300000:
+        if i > 30:
             break
 
         i = i + 1
@@ -82,14 +84,14 @@ class ChurchCrawler(scrapy.Spider):
 
     '''
 
-
+    '''
     #crawl specific url
     start_urls = [
-        "https://theascentchurch.com/"
-        #"https://christianservices.org/",
+        "https://www.missionhills.org/",
+        "https://christianservices.org/",
         #"https://christianservices.org/contact-us/"
     ]
-
+    '''
 
     def checkCommonDiv(self, el1, el2):
         s1 = str(el1)
@@ -381,6 +383,108 @@ class ChurchCrawler(scrapy.Spider):
 
 
         return None
+
+    def setAddressInfoWithGoogleAddressComponents(self, components, currentChurch):
+
+        addressInfo = {}
+        if "addressInfo" in currentChurch:
+            addressInfo = currentChurch["addressInfo"]
+
+        streetNumber = None
+        streetRoute = None
+        city = None
+        county = None
+        state = None
+        country = None
+        zipcode = None
+
+        for component in components:
+
+            if component["types"][0] == "street_number":
+                streetNumber =  component["longText"]
+            if component["types"][0] == "route":
+                streetRoute =  component["longText"]
+            if component["types"][0] == "locality":
+                city = component["longText"]
+            if component["types"][0] == "administrative_area_level_2":
+                county = component["longText"]
+            if component["types"][0] == "administrative_area_level_1":
+                state = component["shortText"]
+            if component["types"][0] == "country":
+                country = component["shortText"]
+            if component["types"][0] == "postal_code":
+                zipcode = component["shortText"]
+
+            if streetNumber is not None and streetRoute is not None:
+                addressInfo["street"] = streetNumber + " " + streetRoute
+            if city is not None:
+                addressInfo["city"] = city
+            if county is not None:
+                addressInfo["county"] = county
+            if state is not None:
+                addressInfo["state"] = state
+            if country is not None:
+                addressInfo["country"] = country
+            if zipcode is not None:
+                addressInfo["zipcode"] = zipcode
+
+        currentChurch["addressInfo"] = addressInfo
+
+    def setAddressInfoUsingGooglePlaces(self, address, currentChurch):
+
+        #print("address: ", address)
+
+        time.sleep(1)
+
+        api_key = ''
+        endpoint = 'https://maps.googleapis.com/maps/api/geocode/json'
+
+        params = {
+            'address': address,
+            'key': api_key
+        }
+
+        response = requests.get(endpoint, params=params)
+        data = response.json()
+
+        #print("************* json returned: ", data)
+
+        if "results" in data:
+            results = data["results"]
+            if len(results) > 0:
+                result = results[0]
+
+                if "place_id" in result:
+                    placeId = result["place_id"]
+                    #print("place id: ", placeId)
+
+                    endpoint = "https://places.googleapis.com/v1/places/" + placeId + "?fields=*&key=" + api_key
+                    response = requests.get(endpoint)
+                    data = response.json()
+
+
+                    #print("xxxxxxxxxxxxxxxxxxxxxx new place: ", data)
+
+                    currentChurch["googlePlaceId"] = placeId
+
+                    if "formattedAddress" in data:
+                        currentChurch["formattedAddress"] = data["formattedAddress"]
+
+                    if "primaryType" in data:
+                        print("primaryType: ", data["primaryType"])
+                        currentChurch["propertyType"] = data["primaryType"]
+                    elif "types" in data and len(data["types"]) > 0:
+                        propertyType = data["types"][0]
+                        currentChurch["propertyType"] = propertyType
+
+                    if "location" in data:
+                        currentChurch["latitude"] = str(data["location"]["latitude"])
+                        currentChurch["longitude"] = str(data["location"]["longitude"])
+
+                    if "addressComponents" in data:
+                        self.setAddressInfoWithGoogleAddressComponents(data["addressComponents"], currentChurch)
+
+
 
     def detectAddress(self, response):
 
@@ -710,30 +814,33 @@ class ChurchCrawler(scrapy.Spider):
         if foundTag == False:
             return
 
-
         # detect phone number
         phoneNumber = self.detectPhone(response, ["303", "720", "719"])
-        if phoneNumber is not None:
+        if phoneNumber is not None and "phone" not in currentChurch:
             print('phone: ', phoneNumber)
             currentChurch["phone"] = phoneNumber
 
         # detect address
         name = self.detectName(response)
-        if name is not None:
+        if name is not None and "name" not in currentChurch:
             print("name: ", name)
             currentChurch["name"] = name
 
+        # detect email address
+        email = self.detectEmail(response)
+        if email is not None and "email" not in currentChurch:
+            print("email: ", email)
+            currentChurch["email"] = email
+
         # detect address
         address = self.detectAddress(response)
-        if address is not None:
+        if address is not None and "address" not in currentChurch:
             print("address: ", address)
             currentChurch["address"] = address
 
-        # detect email address
-        email = self.detectEmail(response)
-        if email is not None:
-            print("email: ", email)
-            currentChurch["email"] = email
+        if "address" in currentChurch:
+            address = currentChurch["address"]
+            self.setAddressInfoUsingGooglePlaces(address, currentChurch)
 
         self.saveChurch(currentChurch)
 
@@ -993,7 +1100,7 @@ class ChurchCrawler(scrapy.Spider):
             if churchDomain == urlDomain:
                 currentChurch = church
 
-                print("path: ", urlParse.path)
+                #print("path: ", urlParse.path)
                 if urlParse.path == '' or urlParse.path == '/':
                     isHomePage = True
 
@@ -1056,7 +1163,7 @@ class ChurchCrawler(scrapy.Spider):
         #self.searchForGroups(response)
 
 
-
+        '''
         links = response.xpath('//a/@href').extract()
         for link in links:
 
@@ -1073,7 +1180,7 @@ class ChurchCrawler(scrapy.Spider):
 
                     yield scrapy.Request(response.urljoin(pageLink), callback=self.parse)
 
-
+        '''
 
 
 

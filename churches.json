@@ -161,7 +161,20 @@
             ],
             "address": "4955 Bradley Rd, Colorado Springs, CO\u00a080911",
             "email": "dfahey@yes2god.org",
-            "phone": "719-392-9061 "
+            "phone": "719-392-9061 ",
+            "googlePlaceId": "ChIJ73yGvW5BE4cRpW84VlBLAZs",
+            "formattedAddress": "4955 Bradley Rd, Colorado Springs, CO 80911, USA",
+            "propertyType": "premise",
+            "latitude": "38.768609399999995",
+            "longitude": "-104.73555189999999",
+            "addressInfo": {
+                "street": "4955 Bradley Road",
+                "city": "Colorado Springs",
+                "county": "El Paso County",
+                "state": "CO",
+                "country": "US",
+                "zipcode": "80911"
+            }
         },
         {
             "link": "https://www.petertherock.org/",
@@ -200,7 +213,20 @@
             ],
             "address": "55 Jefferson St., Monument, CO 80132",
             "email": "Lisa Hawthorne",
-            "phone": "719-481-3511"
+            "phone": "719-481-3511",
+            "googlePlaceId": "ChIJeUd_KsKtbIcRP_oXtAyD5-E",
+            "formattedAddress": "55 Jefferson St, Monument, CO 80132, USA",
+            "propertyType": "premise",
+            "latitude": "39.089472799999996",
+            "longitude": "-104.8715124",
+            "addressInfo": {
+                "street": "55 Jefferson Street",
+                "city": "Monument",
+                "county": "El Paso County",
+                "state": "CO",
+                "country": "US",
+                "zipcode": "80132"
+            }
         },
         {
             "link": "https://woodmenvalley.org/",
@@ -1090,7 +1116,20 @@
                 }
             ],
             "address": "11025 Voyager Parkway, Colorado Springs, CO 80921 , (719) 594",
-            "phone": "(719) 594-6602"
+            "phone": "(719) 594-6602",
+            "googlePlaceId": "ChIJieVWZP9ME4cRY_L1xKr4P30",
+            "formattedAddress": "11025 Voyager Pkwy, Colorado Springs, CO 80921, USA",
+            "propertyType": "premise",
+            "latitude": "38.9927487",
+            "longitude": "-104.7949415",
+            "addressInfo": {
+                "street": "11025 Voyager Parkway",
+                "city": "Colorado Springs",
+                "county": "El Paso County",
+                "state": "CO",
+                "country": "US",
+                "zipcode": "80921"
+            }
         },
         {
             "link": "https://www.firstchristiancos.org/",
@@ -1171,27 +1210,79 @@
             ],
             "address": "216 Jefferson Street, Monument, CO 80132)",
             "email": "jerry@mynorthlandchurch.org",
-            "phone": "719-487-8332"
+            "phone": "719-487-8332",
+            "googlePlaceId": "ChIJJzNeV8KtbIcR-HfKEDT_Pjk",
+            "formattedAddress": "216 Jefferson St, Monument, CO 80132, USA",
+            "propertyType": "premise",
+            "latitude": "39.091773499999995",
+            "longitude": "-104.8710272",
+            "addressInfo": {
+                "street": "216 Jefferson Street",
+                "city": "Monument",
+                "county": "El Paso County",
+                "state": "CO",
+                "country": "US",
+                "zipcode": "80132"
+            }
         },
         {
             "link": "https://christianservices.org/",
             "name": "Colorado Christian Services",
             "phone": "303.761.7236",
-            "address": "3959 East Arapahoe Road Suite 200, Centennial, CO 80122",
-            "email": "ccs@ChristianServices.org"
+            "address": "3959 E Arapahoe Rd #200, Centennial, CO 80122, USA",
+            "email": "ccs@ChristianServices.org",
+            "googlePlaceId": "ChIJ-z67WEyBbIcR9C8Xqk40xhA",
+            "latitude": "39.5961457",
+            "longitude": "-104.94185619999999",
+            "addressInfo": {
+                "street": "3959 East Arapahoe Road",
+                "city": "Centennial",
+                "county": "Arapahoe County",
+                "state": "CO",
+                "country": "US",
+                "zipcode": "80122"
+            },
+            "propertyType": "subpremise",
+            "formattedAddress": "3959 E Arapahoe Rd #200, Centennial, CO 80122, USA"
         },
         {
             "link": "https://theascentchurch.com/",
             "name": "The Ascent Church",
             "address": "1750 Deer Creek Road, Monument, CO 80132",
-            "phone": "(719) 481-3600"
+            "phone": "(719) 481-3600",
+            "googlePlaceId": "ChIJ175GJQiubIcR7T1AFusCsYw",
+            "formattedAddress": "1750 Deer Creek Rd, Monument, CO 80132, USA",
+            "propertyType": "premise",
+            "latitude": "39.1067398",
+            "longitude": "-104.85905869999999",
+            "addressInfo": {
+                "street": "1750 Deer Creek Road",
+                "city": "Monument",
+                "county": "El Paso County",
+                "state": "CO",
+                "country": "US",
+                "zipcode": "80132"
+            }
         },
         {
             "link": "https://monumenthillchurch.org/",
             "name": "Monument Hill Church",
             "address": "18725 Monument Hill Drive, Monument, CO\u00a0 80132",
             "email": "office@monumenthillchurch.org",
-            "phone": "719.481.2156 "
+            "phone": "719.481.2156 ",
+            "googlePlaceId": "ChIJf7LJKuKtbIcRc2iVvgCY0t4",
+            "formattedAddress": "18725 Monument Hill Rd, Monument, CO 80132, USA",
+            "propertyType": "premise",
+            "latitude": "39.1033751",
+            "longitude": "-104.8628886",
+            "addressInfo": {
+                "street": "18725 Monument Hill Road",
+                "city": "Monument",
+                "county": "El Paso County",
+                "state": "CO",
+                "country": "US",
+                "zipcode": "80132"
+            }
         },
         {
             "link": "https://www.academychristian.org/",
@@ -1271,7 +1362,20 @@
                     "photo": "https://www.academychristian.org/wp-content/uploads/staff/2020/Julie-Nilsen.1-240x240.jpg"
                 }
             ],
-            "address": "2024 Academy Christian Church, Colorado Springs, CO."
+            "address": "2024 Academy Christian Church, Colorado Springs, CO.",
+            "googlePlaceId": "ChIJAZ2qE01ME4cRnntyXFxlbEo",
+            "formattedAddress": "1635 Old Ranch Rd, Colorado Springs, CO 80908, USA",
+            "propertyType": "church",
+            "latitude": "38.9795823",
+            "longitude": "-104.7966265",
+            "addressInfo": {
+                "street": "1635 Old Ranch Road",
+                "city": "Colorado Springs",
+                "county": "El Paso County",
+                "state": "CO",
+                "country": "US",
+                "zipcode": "80908"
+            }
         },
         {
             "link": "https://www.calvary-umc.org/",
@@ -1284,7 +1388,20 @@
             "name": "Calvary Monument Church",
             "address": "1808 Woodmoor Drive, Monument, CO 80132, USA",
             "email": "admin.monument@thecalvary.org",
-            "phone": "719-888-5618"
+            "phone": "719-888-5618",
+            "googlePlaceId": "ChIJJxmhEeStbIcRh24lfzcOrVg",
+            "formattedAddress": "1808 Woodmoor Dr, Monument, CO 80132, USA",
+            "propertyType": "premise",
+            "latitude": "39.100136",
+            "longitude": "-104.8619751",
+            "addressInfo": {
+                "street": "1808 Woodmoor Drive",
+                "city": "Monument",
+                "county": "El Paso County",
+                "state": "CO",
+                "country": "US",
+                "zipcode": "80132"
+            }
         },
         {
             "link": "https://www.springsrescuemission.org/community-partners",
@@ -1651,7 +1768,20 @@
                     "photo": "https://images.squarespace-cdn.com/content/v1/62dc4ea10283061e5b27a788/1666031404567-ZMS3NNPTTQ16ROMLOG3O/220827DP_PCC_Edit-57.jpg"
                 }
             ],
-            "address": "960 South Interstate 25, Castle Rock, CO 80104"
+            "address": "960 South Interstate 25, Castle Rock, CO 80104",
+            "googlePlaceId": "Eiw5NjAgU291dGggU3QgIzI1LCBDYXN0bGUgUm9jaywgQ08gODAxMDQsIFVTQSI5GjcKMRIvChQKEgm3BjOrH5hshxHA2-eiztqDvRDAByoUChIJOS4GGR-YbIcRs9NklU438iMSAjI1",
+            "formattedAddress": "960 South St #25, Castle Rock, CO 80104, USA",
+            "propertyType": "subpremise",
+            "latitude": "39.3693842",
+            "longitude": "-104.8476405",
+            "addressInfo": {
+                "street": "960 South Street",
+                "city": "Castle Rock",
+                "county": "Douglas County",
+                "state": "CO",
+                "country": "US",
+                "zipcode": "80104"
+            }
         },
         {
             "link": "https://www.firstprescos.org/",
@@ -1959,7 +2089,20 @@
                 }
             ],
             "address": "219 E Bijou St, Colorado Springs, CO 80903",
-            "phone": "(719) 884-6100"
+            "phone": "(719) 884-6100",
+            "googlePlaceId": "ChIJAT5xY5ZFE4cRt7ERYEa0qjQ",
+            "formattedAddress": "219 E Bijou St, Colorado Springs, CO 80903, USA",
+            "propertyType": "street_address",
+            "latitude": "38.836446599999995",
+            "longitude": "-104.8199157",
+            "addressInfo": {
+                "street": "219 East Bijou Street",
+                "city": "Colorado Springs",
+                "county": "El Paso County",
+                "state": "CO",
+                "country": "US",
+                "zipcode": "80903"
+            }
         },
         {
             "link": "https://broadmoorchurch.org/",
@@ -2016,7 +2159,20 @@
             ],
             "address": "315 Lake Ave, Colorado Springs, CO 80906",
             "email": "nfo@broadmoorchurch.org",
-            "phone": "(719) 473-1807"
+            "phone": "(719) 473-1807",
+            "googlePlaceId": "ChIJkWjLGVZDE4cRKItKQ8PJma4",
+            "formattedAddress": "315 Lake Ave, Colorado Springs, CO 80906, USA",
+            "propertyType": "street_address",
+            "latitude": "38.781580999999996",
+            "longitude": "-104.83844700000002",
+            "addressInfo": {
+                "street": "315 Lake Avenue",
+                "city": "Colorado Springs",
+                "county": "El Paso County",
+                "state": "CO",
+                "country": "US",
+                "zipcode": "80906"
+            }
         },
         {
             "link": "https://www.charisbiblecollege.org/",
@@ -2033,7 +2189,20 @@
                 }
             ],
             "address": "2650 Parish View |\u00a0Colorado Springs, CO 80919 |",
-            "phone": "(719) 599-5031"
+            "phone": "(719) 599-5031",
+            "googlePlaceId": "ChIJxRdzeSRSE4cRpcqCY9gIQ1s",
+            "formattedAddress": "2650 Parish View, Colorado Springs, CO 80919, USA",
+            "propertyType": "street_address",
+            "latitude": "38.9482788",
+            "longitude": "-104.8749304",
+            "addressInfo": {
+                "street": "2650 Parish View",
+                "city": "Colorado Springs",
+                "county": "El Paso County",
+                "state": "CO",
+                "country": "US",
+                "zipcode": "80919"
+            }
         },
         {
             "link": "https://www.accncosprings.com/",
@@ -2108,7 +2277,20 @@
             ],
             "address": "13990 Gleneagle Dr, Colorado Springs, CO 80921",
             "email": "office@holytrinityanglicanchurch.org",
-            "phone": "719-505-8021"
+            "phone": "719-505-8021",
+            "googlePlaceId": "ChIJ_ce45LOybIcRaDmEs5I-puA",
+            "formattedAddress": "13990 Gleneagle Dr, Colorado Springs, CO 80921, USA",
+            "propertyType": "premise",
+            "latitude": "39.0334297",
+            "longitude": "-104.82873719999999",
+            "addressInfo": {
+                "street": "13990 Gleneagle Drive",
+                "city": "Colorado Springs",
+                "county": "El Paso County",
+                "state": "CO",
+                "country": "US",
+                "zipcode": "80921"
+            }
         },
         {
             "link": "https://www.petertherockschool.org/",
@@ -2208,7 +2390,20 @@
                 }
             ],
             "address": "124 First Street, Monument, CO 80132",
-            "phone": "719-481-1855."
+            "phone": "719-481-1855.",
+            "googlePlaceId": "ChIJfaob1sOtbIcRXRMPB-Iu8Sg",
+            "formattedAddress": "124 1st St, Monument, CO 80132, USA",
+            "propertyType": "premise",
+            "latitude": "39.0895825",
+            "longitude": "-104.87218779999999",
+            "addressInfo": {
+                "street": "124 1st Street",
+                "city": "Monument",
+                "county": "El Paso County",
+                "state": "CO",
+                "country": "US",
+                "zipcode": "80132"
+            }
         },
         {
             "link": "https://www.ocn.me/",
@@ -2244,19 +2439,58 @@
                 }
             ],
             "address": "10285 Federal Drive, Colorado Springs, CO 80908",
-            "phone": "(719) 227-0380"
+            "phone": "(719) 227-0380",
+            "googlePlaceId": "ChIJEaqRJFBME4cR6nG8_3Lynr0",
+            "formattedAddress": "10285 Federal Dr, Colorado Springs, CO 80908, USA",
+            "propertyType": "street_address",
+            "latitude": "38.9833713",
+            "longitude": "-104.78961299999999",
+            "addressInfo": {
+                "street": "10285 Federal Drive",
+                "city": "Colorado Springs",
+                "county": "El Paso County",
+                "state": "CO",
+                "country": "US",
+                "zipcode": "80908"
+            }
         },
         {
             "link": "https://www.pprbd.org/",
             "name": "Pikes Peak Regional Building Department",
             "address": "3939 Cordera Crest Avenue, Colorado Springs, CO, 80924.",
-            "phone": "719-327-2880"
+            "phone": "719-327-2880",
+            "googlePlaceId": "ChIJp4sANXtNE4cRIS8H_eZCgN4",
+            "formattedAddress": "3939 Cordera Crest Ave, Colorado Springs, CO 80924, USA",
+            "propertyType": "street_address",
+            "latitude": "38.978825",
+            "longitude": "-104.7548939",
+            "addressInfo": {
+                "street": "3939 Cordera Crest Avenue",
+                "city": "Colorado Springs",
+                "county": "El Paso County",
+                "state": "CO",
+                "country": "US",
+                "zipcode": "80924"
+            }
         },
         {
             "link": "https://thecscc.org/",
             "name": "Colorado Springs Christian Church",
             "address": "5080 List Drive, Colorado Springs, CO, 80919, United States",
-            "email": "thecscc@gmail.com"
+            "email": "thecscc@gmail.com",
+            "googlePlaceId": "ChIJAfZSy9JRE4cRYR5q94A1g44",
+            "formattedAddress": "5080 List Dr, Colorado Springs, CO 80919, USA",
+            "propertyType": "street_address",
+            "latitude": "38.902757",
+            "longitude": "-104.855351",
+            "addressInfo": {
+                "street": "5080 List Drive",
+                "city": "Colorado Springs",
+                "county": "El Paso County",
+                "state": "CO",
+                "country": "US",
+                "zipcode": "80919"
+            }
         },
         {
             "link": "https://flccs.net/",
@@ -2404,7 +2638,20 @@
                 }
             ],
             "address": "1515 N Cascade Ave, Colorado Springs, CO 80907",
-            "phone": "719-632-8836\u00a0"
+            "phone": "719-632-8836\u00a0",
+            "googlePlaceId": "ChIJW4YAykJFE4cRv2N_Fg8ir1s",
+            "formattedAddress": "1515 N Cascade Ave, Colorado Springs, CO 80907, USA",
+            "propertyType": "premise",
+            "latitude": "38.8553893",
+            "longitude": "-104.8235282",
+            "addressInfo": {
+                "street": "1515 North Cascade Avenue",
+                "city": "Colorado Springs",
+                "county": "El Paso County",
+                "state": "CO",
+                "country": "US",
+                "zipcode": "80907"
+            }
         },
         {
             "link": "https://www.blackforestcommunitychurch.org/",
@@ -2425,14 +2672,40 @@
                 }
             ],
             "address": "6845 Shoup Rd, Colorado Springs, CO 80908",
-            "phone": "719-495-2207"
+            "phone": "719-495-2207",
+            "googlePlaceId": "ChIJmTfNg_xKE4cRW8fv3N7AqZ4",
+            "formattedAddress": "6845 Shoup Rd, Colorado Springs, CO 80908, USA",
+            "propertyType": "premise",
+            "latitude": "39.012552199999995",
+            "longitude": "-104.6998041",
+            "addressInfo": {
+                "street": "6845 Shoup Road",
+                "city": "Colorado Springs",
+                "county": "El Paso County",
+                "state": "CO",
+                "country": "US",
+                "zipcode": "80908"
+            }
         },
         {
             "link": "https://envoy.church/",
             "name": "Envoy Church",
             "address": "2025 N. Murray Blvd., Colorado Springs, CO 80915",
             "email": "info@envoy.church",
-            "phone": "(719) 596-1659"
+            "phone": "(719) 596-1659",
+            "googlePlaceId": "ChIJy1x-KAlGE4cRmYyzbOMPeCk",
+            "formattedAddress": "2025 N Murray Blvd, Colorado Springs, CO 80915, USA",
+            "propertyType": "premise",
+            "latitude": "38.8629761",
+            "longitude": "-104.7471147",
+            "addressInfo": {
+                "street": "2025 North Murray Boulevard",
+                "city": "Colorado Springs",
+                "county": "El Paso County",
+                "state": "CO",
+                "country": "US",
+                "zipcode": "80915"
+            }
         },
         {
             "link": "https://ppmcc.org/",
@@ -9932,9 +10205,21 @@
                     "photo": "https://www.missionhills.org/wp-content/uploads/2022/07/tanner_lowe_2022.jpg"
                 }
             ],
-            "address": "5814 S Datura St., Littleton, CO 80120",
+            "address": "5814 S Datura St, Littleton, CO 80120, USA",
             "email": "info@missionhills.org",
-            "phone": "303.794.3564"
+            "phone": "303.794.3564",
+            "googlePlaceId": "ChIJR_XXDLSBbIcRdQPgqJdmN5U",
+            "propertyType": "premise",
+            "latitude": "39.6110926",
+            "longitude": "-105.00366629999999",
+            "addressInfo": {
+                "street": "5814 South Datura Street",
+                "city": "Littleton",
+                "county": "Arapahoe County",
+                "state": "CO",
+                "country": "US",
+                "zipcode": "80120"
+            }
         },
         {
             "link": "https://greenwoodcc.com/",
