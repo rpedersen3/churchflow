@@ -46,12 +46,12 @@ class ChurchCrawler(scrapy.Spider):
         #if "pages" not in church:
 
         if i > 0:
-            url = church["link"]
-            start_urls.append(url)
+            if "link" in church:
+                url = church["link"]
+                start_urls.append(url)
+                print('urls: ', str(url))
 
-            print('urls: ', str(url))
-
-        if i > 30:
+        if i > 300000:
             break
 
         i = i + 1
@@ -82,13 +82,13 @@ class ChurchCrawler(scrapy.Spider):
 
     '''
 
-    '''
+
     #crawl specific url
     start_urls = [
-        "https://www.petertherock.org/",
-        "https://www.stfranciscs.org/"
+        "https://theascentchurch.com/"
+        #"https://christianservices.org/",
+        #"https://christianservices.org/contact-us/"
     ]
-    '''
 
 
     def checkCommonDiv(self, el1, el2):
@@ -690,7 +690,7 @@ class ChurchCrawler(scrapy.Spider):
         self.saveChurch(currentChurch)
 
 
-    def searchForSiteProfileInfo(self, currentChurch, response):
+    def searchForSiteProfileInfo(self, currentChurch, response, isHomePage):
         #print('**************** process page: ', response.url)
 
         # church name
@@ -702,18 +702,26 @@ class ChurchCrawler(scrapy.Spider):
         if response.url.find(".pdf") >= 0:
             return
 
-        "//text()[starts-with(normalize-space(), '+49')]"
+        foundTag = False
+        if isHomePage or \
+                response.url.find("contact") >= 0:
+            foundTag = True
+
+        if foundTag == False:
+            return
+
 
         # detect phone number
         phoneNumber = self.detectPhone(response, ["303", "720", "719"])
         if phoneNumber is not None:
             print('phone: ', phoneNumber)
+            currentChurch["phone"] = phoneNumber
 
         # detect address
         name = self.detectName(response)
         if name is not None:
             print("name: ", name)
-            currentChurch["address"] = name
+            currentChurch["name"] = name
 
         # detect address
         address = self.detectAddress(response)
@@ -971,6 +979,8 @@ class ChurchCrawler(scrapy.Spider):
                 groupCheck.lookForGroupNames(html, boundingClassName)
 
     def findCurrentChurch(self, url):
+
+        isHomePage = False
         currentChurch = None
         for church in churches:
 
@@ -982,9 +992,15 @@ class ChurchCrawler(scrapy.Spider):
 
             if churchDomain == urlDomain:
                 currentChurch = church
+
+                print("path: ", urlParse.path)
+                if urlParse.path == '' or urlParse.path == '/':
+                    isHomePage = True
+
                 break
 
-        return currentChurch
+
+        return currentChurch, isHomePage
 
     def findCurrentChurchReference(self, url):
         currentChurch = None
@@ -1029,17 +1045,18 @@ class ChurchCrawler(scrapy.Spider):
         # crawl church urls
         print("")
         print("parse site: ", response.url)
-        currentChurch = self.findCurrentChurch(response.url)
+        currentChurch, isHomePage = self.findCurrentChurch(response.url)
         if currentChurch == None:
             print("not found church for url: ", response.url)
             return
 
-        self.searchForSiteProfileInfo(currentChurch, response)
+        self.searchForSiteProfileInfo(currentChurch, response, isHomePage)
+
         #self.searchForContacts(currentChurch, response)
         #self.searchForGroups(response)
 
 
-        '''
+
         links = response.xpath('//a/@href').extract()
         for link in links:
 
@@ -1056,7 +1073,7 @@ class ChurchCrawler(scrapy.Spider):
 
                     yield scrapy.Request(response.urljoin(pageLink), callback=self.parse)
 
-        '''
+
 
 
 

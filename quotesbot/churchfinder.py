@@ -553,7 +553,7 @@ class ChurchFinder:
 
         search_engine_id = "d744719d644574dd7"
         api_version = "v1"
-        search_engine = service.cse().list(cx=search_engine_id, version=api_version)
+        search_engine = service.cse().liste_(cx=search_enginid, version=api_version)
 
         query = "zenserp API tutorials"
         search_engine.q = query
