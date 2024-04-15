@@ -279,7 +279,7 @@ class ChurchCrawler(scrapy.Spider):
             contact["photo"] = currentProfilePhoto
 
         currentChurch["contacts"] = contacts
-        self.saveChurch(currentChurch)
+        self.saveChurches()
 
         print("")
         print("contact record:")
@@ -325,7 +325,7 @@ class ChurchCrawler(scrapy.Spider):
 
 
                 currentChurch["contacts"] = contacts
-                self.saveChurch(currentChurch)
+                self.saveChurches()
 
             print("")
             print("contact record (email):")
@@ -338,7 +338,7 @@ class ChurchCrawler(scrapy.Spider):
         cleaned_text = re.sub(r'\s+', ' ', text)
         return cleaned_text
 
-    def saveChurch(self, currentChurch):
+    def saveChurches(self, currentChurch):
 
         # save to churches file
         churchesData["churches"] = churches
@@ -910,14 +910,15 @@ class ChurchCrawler(scrapy.Spider):
         if "phone" not in currentChurch:
             currentChurch["phone"] = phone
 
-        self.saveChurch(currentChurch)
+        self.saveChurches()
 
     def searchForChurchProfileInfo(self, currentChurch):
 
         if "address" not in currentChurch and "street" in currentChurch and "city" in currentChurch:
             address = currentChurch["street"] + " " + currentChurch["city"] + ", Colorado"
             self.getAddressInfoUsingGooglePlaces(address, currentChurch)
-            self.saveChurch(currentChurch)
+            currentChurch["address"] = address
+            self.saveChurches()
 
 
     def searchForSiteProfileInfo(self, currentChurch, response, isHomePage):
@@ -971,7 +972,7 @@ class ChurchCrawler(scrapy.Spider):
                 self.getAddressInfoUsingGooglePlaces(address, currentChurch)
 
 
-            self.saveChurch(currentChurch)
+            self.saveChurches()
 
 
     def searchForContacts(self, currentChurch, response):
@@ -1002,7 +1003,7 @@ class ChurchCrawler(scrapy.Spider):
 
             print("--------- save page: ", response.url)
             currentChurch["pages"] = pages
-            self.saveChurch(currentChurch)
+            self.saveChurches()
 
             print("--------- parse page: ", response.url)
             profCheck = ProfileCheck()
@@ -1279,8 +1280,12 @@ class ChurchCrawler(scrapy.Spider):
 
         '''
 
+        # cycle through churches that don't have links and try to resolve them
+        
         for church in churches:
             self.searchForChurchProfileInfo(church)
+
+
 
         '''
         # crawl church urls

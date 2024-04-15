@@ -487,7 +487,7 @@ class ChurchFinder:
 
         currentChurch["addressInfo"] = addressInfo
 
-    def saveChurch(self, currentChurch):
+    def saveChurches(self):
 
         # save to churches file
         self.churchesData["churches"] = self.churches
@@ -554,16 +554,6 @@ class ChurchFinder:
         return None
     def findChurchesUsingGooglePlaces(self):
 
-        # get churches
-        churchesData = None
-        churches_file_path = "churches.json"
-        with open(churches_file_path, "r") as file:
-            churchesData = json.load(file)
-
-        churches = churchesData["churches"]
-        if churches == None:
-            churches = []
-
         # get cities
         file_path = "coloradoFrontRangeCities.json"
         with open(file_path, "r") as file:
@@ -583,8 +573,10 @@ class ChurchFinder:
 
                 api_key = 'abcdef'
                 endpoint = 'https://places.googleapis.com/v1/places:searchText' + "?fields=*&key=" + api_key
+
+                query = city["name"] + " Colorado, Church"
                 payload = {
-                    "textQuery": city + " Colorado, Church"
+                    "textQuery": query
                 }
                 if api_key == '':
                     print("api key is not set for getAddressInfoUsingGooglePlaces")
@@ -602,13 +594,16 @@ class ChurchFinder:
                     places = data["places"]
                     for place in places:
 
-                        id = data["id"]
+                        id = place["id"]
                         currentChurch = self.getChurchByGoogleId(id)
 
                         if currentChurch is None:
+                            print("add church")
                             currentChurch = {}
                             self.updateChurchWithGoogleResults(currentChurch, place)
-                            self.saveChurch(currentChurch)
+
+                            self.churches.append(currentChurch)
+                            self.saveChurches()
 
     def findChurches(self):
 
