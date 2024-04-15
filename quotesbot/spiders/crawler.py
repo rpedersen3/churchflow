@@ -53,7 +53,7 @@ class ChurchCrawler(scrapy.Spider):
                 start_urls.append(url)
                 print('urls: ', str(url))
 
-        if i > 10:
+        if i > 100000:
             break
 
         i = i + 1
@@ -87,9 +87,9 @@ class ChurchCrawler(scrapy.Spider):
 
     #crawl specific url
     start_urls = [
-        "https://www.accncosprings.com/"
+        #"https://www.accncosprings.com/"
         #"https://www.calvary-umc.org/"
-        #"https://www.missionhills.org/"
+        "https://www.missionhills.org/"
         #"https://christianservices.org/",
         #"https://christianservices.org/contact-us/"
     ]
@@ -480,19 +480,27 @@ class ChurchCrawler(scrapy.Spider):
 
     def getChurchProfileUsingGooglePlaces(self, currentChurch, isHomePage):
 
+        # needs to be home page url
         if isHomePage == False:
             return
 
+        # we use url to search google api
         if "link" not in currentChurch:
             return
+
+        # already called google api
+        if "addressInfo" in currentChurch:
+            return
+
 
         url = currentChurch["link"]
         url = url.replace("https://", "")
 
-
         #https://developers.google.com/maps/documentation/places/web-service/text-search?apix_params=%7B%22fields%22%3A%22*%22%2C%22resource%22%3A%7B%22textQuery%22%3A%22calvary-umc.org%22%7D%7D#try-it
+        # get google api usage
+        # https://console.cloud.google.com/google/maps-apis/quotas?hl=en&project=my-project-1712412027646
 
-        api_key = ''
+        api_key = 'abcdef'
         endpoint = 'https://places.googleapis.com/v1/places:searchText' + "?fields=*&key=" + api_key
         payload = {
             "textQuery": url
@@ -507,7 +515,7 @@ class ChurchCrawler(scrapy.Spider):
         response = requests.post(url=endpoint, json=payload)
         data = response.json()
 
-        #print("************* json returned: ", data)
+        print("************* json returned: ", data)
 
         if "places" in data:
             places = data["places"]
@@ -518,9 +526,13 @@ class ChurchCrawler(scrapy.Spider):
 
     def getAddressInfoUsingGooglePlaces(self, address, currentChurch):
 
+        # already called google api
+        if "addressInfo" in currentChurch:
+            return
+
         #print("address: ", address)
 
-        api_key = ''
+        api_key = 'abcdef'
         endpoint = 'https://maps.googleapis.com/maps/api/geocode/json'
 
         if api_key == '':
@@ -900,6 +912,13 @@ class ChurchCrawler(scrapy.Spider):
 
         self.saveChurch(currentChurch)
 
+    def searchForChurchProfileInfo(self, currentChurch):
+
+        if "address" not in currentChurch and "street" in currentChurch and "city" in currentChurch:
+            address = currentChurch["street"] + " " + currentChurch["city"] + ", Colorado"
+            self.getAddressInfoUsingGooglePlaces(address, currentChurch)
+            self.saveChurch(currentChurch)
+
 
     def searchForSiteProfileInfo(self, currentChurch, response, isHomePage):
 
@@ -914,46 +933,45 @@ class ChurchCrawler(scrapy.Spider):
         if response.url.find(".pdf") >= 0:
             return
 
-        foundTag = False
+        foundUrlTag = False
         if isHomePage or \
                 response.url.find("contact") >= 0:
-            foundTag = True
+            foundUrlTag = True
 
-        if foundTag == False:
-            print("dont process page")
-            return
+        if foundUrlTag:
 
-        self.getChurchProfileUsingGooglePlaces(currentChurch, isHomePage)
+            self.getChurchProfileUsingGooglePlaces(currentChurch, isHomePage)
 
-        # detect phone number
-        phoneNumber = self.detectPhone(response, ["303", "720", "719"])
-        if phoneNumber is not None and "phone" not in currentChurch:
-            print('phone: ', phoneNumber)
-            currentChurch["phone"] = phoneNumber
+            # detect phone number
+            phoneNumber = self.detectPhone(response, ["303", "720", "719"])
+            if phoneNumber is not None and "phone" not in currentChurch:
+                print('phone: ', phoneNumber)
+                currentChurch["phone"] = phoneNumber
 
-        # detect address
-        name = self.detectName(response)
-        if name is not None and "name" not in currentChurch:
-            print("name: ", name)
-            currentChurch["name"] = name
+            # detect address
+            name = self.detectName(response)
+            if name is not None and "name" not in currentChurch:
+                print("name: ", name)
+                currentChurch["name"] = name
 
-        # detect email address
-        email = self.detectEmail(response)
-        if email is not None and "email" not in currentChurch:
-            print("email: ", email)
-            currentChurch["email"] = email
+            # detect email address
+            email = self.detectEmail(response)
+            if email is not None and "email" not in currentChurch:
+                print("email: ", email)
+                currentChurch["email"] = email
 
-        # detect address
-        address = self.detectAddress(response)
-        if address is not None and "address" not in currentChurch:
-            print("address: ", address)
-            currentChurch["address"] = address
+            # detect address
+            address = self.detectAddress(response)
+            if address is not None and "address" not in currentChurch:
+                print("address: ", address)
+                currentChurch["address"] = address
 
-        if "address" in currentChurch:
-            address = currentChurch["address"]
-            self.getAddressInfoUsingGooglePlaces(address, currentChurch)
+            if "address" in currentChurch:
+                address = currentChurch["address"]
+                self.getAddressInfoUsingGooglePlaces(address, currentChurch)
 
-        self.saveChurch(currentChurch)
+
+            self.saveChurch(currentChurch)
 
 
     def searchForContacts(self, currentChurch, response):
@@ -1241,6 +1259,7 @@ class ChurchCrawler(scrapy.Spider):
                 return
 
         churchFinder = ChurchFinder()
+        #churchFinder.findChurchesUsingGooglePlaces()
         #churchFinder.findChurchesUsingNonProfitData()
         #churchFinder.findCityDemographicsFromCensusData()
         #churchFinder.findCityDemographics()
@@ -1260,6 +1279,10 @@ class ChurchCrawler(scrapy.Spider):
 
         '''
 
+        for church in churches:
+            self.searchForChurchProfileInfo(church)
+
+        '''
         # crawl church urls
         print("")
         print("parse site: ", response.url)
@@ -1272,7 +1295,7 @@ class ChurchCrawler(scrapy.Spider):
 
         #self.searchForContacts(currentChurch, response)
         #self.searchForGroups(response)
-
+        '''
 
         '''
         links = response.xpath('//a/@href').extract()
