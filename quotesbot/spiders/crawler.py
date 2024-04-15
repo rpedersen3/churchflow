@@ -53,7 +53,7 @@ class ChurchCrawler(scrapy.Spider):
                 start_urls.append(url)
                 print('urls: ', str(url))
 
-        if i > 30:
+        if i > 10:
             break
 
         i = i + 1
@@ -84,14 +84,16 @@ class ChurchCrawler(scrapy.Spider):
 
     '''
 
-    '''
+
     #crawl specific url
     start_urls = [
-        "https://www.missionhills.org/",
-        "https://christianservices.org/",
+        "https://www.accncosprings.com/"
+        #"https://www.calvary-umc.org/"
+        #"https://www.missionhills.org/"
+        #"https://christianservices.org/",
         #"https://christianservices.org/contact-us/"
     ]
-    '''
+
 
     def checkCommonDiv(self, el1, el2):
         s1 = str(el1)
@@ -430,14 +432,102 @@ class ChurchCrawler(scrapy.Spider):
 
         currentChurch["addressInfo"] = addressInfo
 
-    def setAddressInfoUsingGooglePlaces(self, address, currentChurch):
+    def updateChurchWithGoogleResults(self, currentChurch, data):
 
-        #print("address: ", address)
+        if "id" in data:
+            currentChurch["googlePlaceId"] = data["id"]
+            print("google place id: ", currentChurch["googlePlaceId"])
+
+        if "displayName" in data:
+            currentChurch["displayName"] = data["displayName"]["text"]
+            print("google display name: ", currentChurch["displayName"])
+
+        if "formattedAddress" in data:
+            currentChurch["formattedAddress"] = data["formattedAddress"]
+            print("google add: ", data["formattedAddress"])
+
+        if "primaryType" in data:
+            currentChurch["propertyType"] = data["primaryType"]
+            print("google primaryType: ", data["primaryType"])
+        elif "types" in data and len(data["types"]) > 0:
+            propertyType = data["types"][0]
+            currentChurch["propertyType"] = propertyType
+            print("google propertyType: ", propertyType)
+
+        if "location" in data:
+            currentChurch["latitude"] = str(data["location"]["latitude"])
+            currentChurch["longitude"] = str(data["location"]["longitude"])
+            print("google latitude: ", str(data["location"]["latitude"]))
+
+        if "rating" in data:
+            currentChurch["rating"] = str(data["rating"])
+            print("google rating: ", currentChurch["rating"])
+
+        if "addressComponents" in data:
+            self.setAddressInfoWithGoogleAddressComponents(data["addressComponents"], currentChurch)
+
+        if "websiteUri" in data:
+            currentChurch["websiteUri"] = data["websiteUri"]
+            print("google websiteUri: ", data["websiteUri"])
+
+        if "nationalPhoneNumber" in data:
+            currentChurch["nationalPhoneNumber"] = data["nationalPhoneNumber"]
+            print("google nationalPhoneNumber: ", data["nationalPhoneNumber"])
+
+        if "businessStatus" in data:
+            currentChurch["businessStatus"] = data["businessStatus"]
+            print("google businessStatus: ", data["businessStatus"])
+
+    def getChurchProfileUsingGooglePlaces(self, currentChurch, isHomePage):
+
+        if isHomePage == False:
+            return
+
+        if "link" not in currentChurch:
+            return
+
+        url = currentChurch["link"]
+        url = url.replace("https://", "")
+
+
+        #https://developers.google.com/maps/documentation/places/web-service/text-search?apix_params=%7B%22fields%22%3A%22*%22%2C%22resource%22%3A%7B%22textQuery%22%3A%22calvary-umc.org%22%7D%7D#try-it
+
+        api_key = ''
+        endpoint = 'https://places.googleapis.com/v1/places:searchText' + "?fields=*&key=" + api_key
+        payload = {
+            "textQuery": url
+        }
+        if api_key == '':
+            print("api key is not set for getAddressInfoUsingGooglePlaces")
+            return
 
         time.sleep(1)
 
+
+        response = requests.post(url=endpoint, json=payload)
+        data = response.json()
+
+        #print("************* json returned: ", data)
+
+        if "places" in data:
+            places = data["places"]
+            if len(places) > 0:
+                place = places[0]
+
+                self.updateChurchWithGoogleResults(currentChurch, place)
+
+    def getAddressInfoUsingGooglePlaces(self, address, currentChurch):
+
+        #print("address: ", address)
+
         api_key = ''
         endpoint = 'https://maps.googleapis.com/maps/api/geocode/json'
+
+        if api_key == '':
+            print("api key is not set for getAddressInfoUsingGooglePlaces")
+            return
+
+        time.sleep(1)
 
         params = {
             'address': address,
@@ -463,26 +553,43 @@ class ChurchCrawler(scrapy.Spider):
                     data = response.json()
 
 
-                    #print("xxxxxxxxxxxxxxxxxxxxxx new place: ", data)
+                    print("xxxxxxxxxxxxxxxxxxxxxx new place: ", data)
 
                     currentChurch["googlePlaceId"] = placeId
 
                     if "formattedAddress" in data:
                         currentChurch["formattedAddress"] = data["formattedAddress"]
+                        print("google add: ", data["formattedAddress"])
 
                     if "primaryType" in data:
-                        print("primaryType: ", data["primaryType"])
                         currentChurch["propertyType"] = data["primaryType"]
+                        print("google primaryType: ", data["primaryType"])
                     elif "types" in data and len(data["types"]) > 0:
                         propertyType = data["types"][0]
                         currentChurch["propertyType"] = propertyType
+                        print("google propertyType: ", propertyType)
 
                     if "location" in data:
                         currentChurch["latitude"] = str(data["location"]["latitude"])
                         currentChurch["longitude"] = str(data["location"]["longitude"])
+                        print("google latitude: ", str(data["location"]["latitude"]))
 
                     if "addressComponents" in data:
                         self.setAddressInfoWithGoogleAddressComponents(data["addressComponents"], currentChurch)
+
+                    if "websiteUri" in data:
+                        currentChurch["websiteUri"] = data["websiteUri"]
+                        print("google websiteUri: ", data["websiteUri"])
+
+                    if "nationalPhoneNumber" in data:
+                        currentChurch["nationalPhoneNumber"] = data["nationalPhoneNumber"]
+                        print("google nationalPhoneNumber: ", data["nationalPhoneNumber"])
+
+                    if "businessStatus" in data:
+                        currentChurch["businessStatus"] = data["businessStatus"]
+                        print("google businessStatus: ", data["businessStatus"])
+
+
 
 
 
@@ -516,7 +623,7 @@ class ChurchCrawler(scrapy.Spider):
 
             txt = address.extract()
             txt = txt.strip()[:200]
-            txt = re.sub(invisible_chars_regex, '', txt)
+            txt = re.sub(invisible_chars_regex, ' ', txt)
             txt = txt.replace("\n", " ")
             txt = txt.replace("| ", ", ")
 
@@ -795,7 +902,8 @@ class ChurchCrawler(scrapy.Spider):
 
 
     def searchForSiteProfileInfo(self, currentChurch, response, isHomePage):
-        #print('**************** process page: ', response.url)
+
+        print('**************** process page: ', response.url)
 
         # church name
         # website link
@@ -812,7 +920,10 @@ class ChurchCrawler(scrapy.Spider):
             foundTag = True
 
         if foundTag == False:
+            print("dont process page")
             return
+
+        self.getChurchProfileUsingGooglePlaces(currentChurch, isHomePage)
 
         # detect phone number
         phoneNumber = self.detectPhone(response, ["303", "720", "719"])
@@ -840,7 +951,7 @@ class ChurchCrawler(scrapy.Spider):
 
         if "address" in currentChurch:
             address = currentChurch["address"]
-            self.setAddressInfoUsingGooglePlaces(address, currentChurch)
+            self.getAddressInfoUsingGooglePlaces(address, currentChurch)
 
         self.saveChurch(currentChurch)
 

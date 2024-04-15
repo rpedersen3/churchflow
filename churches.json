@@ -1381,7 +1381,25 @@
             "link": "https://www.calvary-umc.org/",
             "name": "Calvary United Methodist Church",
             "email": "calvary@calvary-umc.org",
-            "phone": "(719) 599-7250"
+            "phone": "(719) 599-7250",
+            "googlePlaceId": "ChIJXVL368rZ2IgRQb4v4DHe2O4",
+            "displayName": "Calvary United Methodist Church",
+            "formattedAddress": "4210 Austin Bluffs Pkwy, Colorado Springs, CO 80918, USA",
+            "propertyType": "church",
+            "latitude": "38.8934709",
+            "longitude": "-104.7529862",
+            "rating": "4.8",
+            "addressInfo": {
+                "street": "4210 Austin Bluffs Parkway",
+                "city": "Colorado Springs",
+                "county": "El Paso County",
+                "state": "CO",
+                "country": "US",
+                "zipcode": "80918"
+            },
+            "websiteUri": "http://www.calvary-umc.org/default.asp?sec_id=180006283",
+            "nationalPhoneNumber": "(719) 599-7250",
+            "businessStatus": "OPERATIONAL"
         },
         {
             "link": "https://monument.thecalvary.org/",
@@ -2212,7 +2230,8 @@
                     "type": "staff",
                     "url": "https://www.accncosprings.com/about-us/"
                 }
-            ]
+            ],
+            "address": "1275 Old Ranch Road Colorado Springs, CO 80921"
         },
         {
             "link": "http://www.ccca.org/",
