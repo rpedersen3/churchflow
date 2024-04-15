@@ -1260,7 +1260,7 @@ class ChurchCrawler(scrapy.Spider):
                 return
 
         churchFinder = ChurchFinder()
-        #churchFinder.findChurchesUsingGooglePlaces()
+        churchFinder.findChurchesUsingGooglePlaces()
         #churchFinder.findChurchesUsingNonProfitData()
         #churchFinder.findCityDemographicsFromCensusData()
         #churchFinder.findCityDemographics()
@@ -1279,13 +1279,13 @@ class ChurchCrawler(scrapy.Spider):
             self.crawlFaithStreet(currentChurch, response)
 
         '''
-
+        '''
         # cycle through churches that don't have links and try to resolve them
         
         for church in churches:
             self.searchForChurchProfileInfo(church)
 
-
+        '''
 
         '''
         # crawl church urls
