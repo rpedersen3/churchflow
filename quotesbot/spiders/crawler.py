@@ -17,6 +17,17 @@ import spacy
 import pandas as pd
 import requests
 
+from googleapiclient.discovery import build
+
+import pathlib
+import textwrap
+
+import os
+from openai import AzureOpenAI
+from azure.identity import DefaultAzureCredential
+
+import google.generativeai as genai
+
 import locationtagger
 
 nlp = spacy.load("en_core_web_sm")
@@ -338,7 +349,7 @@ class ChurchCrawler(scrapy.Spider):
         cleaned_text = re.sub(r'\s+', ' ', text)
         return cleaned_text
 
-    def saveChurches(self, currentChurch):
+    def saveChurches(self):
 
         # save to churches file
         churchesData["churches"] = churches
@@ -523,6 +534,105 @@ class ChurchCrawler(scrapy.Spider):
                 place = places[0]
 
                 self.updateChurchWithGoogleResults(currentChurch, place)
+
+    def getLeadPastorInfoUsingAzureAI(self, currentChurch):
+
+        credential = DefaultAzureCredential()
+
+        endpoint = "https://docs-test-001.openai.azure.com/"
+        endpoint = "https://your-resource-name.openai.azure.com"
+        # Set the API type to `azure_ad`
+        os.environ["OPENAI_API_TYPE"] = "azure_ad"
+        # Set the API_KEY to the token from the Azure credential
+        os.environ["OPENAI_API_KEY"] = credential.get_token("https://cognitiveservices.azure.com/.default").token
+
+        client = AzureOpenAI(
+            azure_endpoint=endpoint,
+            api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+            api_version="2024-03-01-preview"
+        )
+
+        response = client.chat.completions.create(
+            model="gpt-4-0125-Preview",
+            # Model = should match the deployment name you chose for your 0125-Preview model deployment
+            response_format={"type": "json_object"},
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant designed to output JSON."},
+                {"role": "user", "content": "Who won the world series in 2020?"}
+            ]
+        )
+        print(response.choices[0].message.content)
+
+
+    def getLeadPastorInfoUsingGoogleGemini(self, currentChurch):
+
+        api_key = 'abcdef'
+
+        leadPastor = {}
+        #if "leadPastor" in currentChurch:
+        #    leadPastor = currentChurch["leadPastor"]
+
+        if "name" in currentChurch and "addressInfo" in currentChurch and "city" in currentChurch["addressInfo"]:
+
+            #innerQuery = "pastors from Salt and Light Reformed Presbyterian Church, Longmont, colorado"
+            innerQuery = "Mission Hills Church, Colorado  Pastors"
+            #innerQuery = "from church " + currentChurch["name"] + " in city " + currentChurch["addressInfo"]["city"] + " Colorado and website " + currentChurch["link"]
+            query = innerQuery # + " using this JSON schema: \{ \"type\": \"object\", \"properties\": \{ \"fullname\": \{ \"type\": \"string\" \}, \"title\": \{ \"type\": \"string\" \}, \"email\": \{ \"type\": \"string\" \}, \"phone-number\": \{ \"type\": \"string\" \}\}\}"
+
+            print("query: ", query)
+            #query = "Lead Pastor from " + currentChurch["name"] + ", " + currentChurch["addressInfo"]["city"] + " using this JSON schema: \{ \"type\": \"object\", \"properties\": \{ \"fullname\": \{ \"type\": \"string\" \}, \"title\": \{ \"type\": \"string\" \}, \"email\": \{ \"type\": \"string\" \}, \"phone-number\": \{ \"type\": \"string\" \}\}\}"
+            endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent?key=" + api_key
+            #endpoint = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.0-ultra:generateContent?key=" + api_key
+
+            payload = { "contents":[{
+                "parts":[{"text": query }] }],
+              "generationConfig": {
+                "response_mime_type": "application/json",
+              } }
+            if api_key == '':
+                print("api key is not set for getAddressInfoUsingGooglePlaces")
+                return
+
+            time.sleep(1)
+
+            response = requests.post(url=endpoint, json=payload)
+            data = response.json()
+
+            print("************* json returned: ", data)
+
+            if "candidates" in data:
+                for candidate in data["candidates"]:
+                    if "content" in candidate:
+                        if "parts" in candidate["content"]:
+                            for part in candidate["content"]["parts"]:
+                                if "text" in part:
+                                    text = part["text"]
+                                    print('text: ', text)
+                                    pastors = json.loads(text)
+                                    if (len(pastors) > 0):
+
+                                        pastor = pastors[0]
+
+
+
+                                        if "fullname" in pastor:
+                                            leadPastor["name"] = pastor["fullname"]
+                                        if "title" in pastor:
+                                            leadPastor["title"] = pastor["title"]
+                                        if "email" in pastor:
+                                            leadPastor["email"] = pastor["email"]
+                                        if "phone-number" in pastor:
+                                            leadPastor["phoneNumber"] = pastor["phone-number"]
+
+
+                                break
+                    break
+
+        currentChurch["leadPastor"] = leadPastor
+
+
+
+
 
     def getAddressInfoUsingGooglePlaces(self, address, currentChurch):
 
@@ -912,6 +1022,76 @@ class ChurchCrawler(scrapy.Spider):
 
         self.saveChurches()
 
+
+    def searchForChurchLeadPastorInfo(self, currentChurch):
+
+        '''
+        # and "leadPastor" not in currentChurch
+        if "name" in currentChurch and "addressInfo" in currentChurch:
+            print("search for lead pastor at: ", currentChurch["name"])
+            self.getLeadPastorInfoUsingGoogleGemini(currentChurch)
+            self.saveChurches()
+        '''
+
+        api_key = "abcdef"
+        service = build(
+            "customsearch", "v1", developerKey=api_key
+        )
+
+        if "link" in currentChurch:
+
+            link = currentChurch["link"]
+            if link == "" or link.find("facebook") >= 0:
+                return
+
+            pages = []
+            if "pages" in currentChurch:
+                pages = currentChurch["pages"]
+
+            time.sleep(0.2)
+
+            parsed_url = urlparse(link)
+            domain = parsed_url.netloc.replace("www.", "")
+
+            query = "'pastor' 'eldor' 'deacon' 'pastoral'"
+            print("query: ", query)
+            res = (
+                service.cse()
+                .list(
+                    q=query,
+                    cx="d744719d644574dd7",
+                    siteSearch=domain,
+                    start=1
+                    # cx="01757666212468239146:omuauf_lfve",
+                )
+                .execute()
+            )
+
+            #print("--------------------------------------")
+            #print(res)
+            #print("--------------------------------------")
+
+            if "items" in res:
+
+                for item in res["items"]:
+                    link = item["link"]
+
+                    count = link.count("/")
+                    #print("link: ", link, ", count: ", count)
+                    if count < 6:
+                        page = self.getPage(pages, "staff", link)
+                        if page is None:
+                            page = {
+                                "type": "staff",
+                                "url": link
+                            }
+                            pages.append(page)
+
+                        print("--------- save page: ", link)
+
+            currentChurch["pages"] = pages
+            self.saveChurches()
+
     def searchForChurchProfileInfo(self, currentChurch):
 
         if "address" not in currentChurch and "street" in currentChurch and "city" in currentChurch:
@@ -1260,7 +1440,7 @@ class ChurchCrawler(scrapy.Spider):
                 return
 
         churchFinder = ChurchFinder()
-        churchFinder.findChurchesUsingGooglePlaces()
+        #churchFinder.findChurchesUsingGooglePlaces()
         #churchFinder.findChurchesUsingNonProfitData()
         #churchFinder.findCityDemographicsFromCensusData()
         #churchFinder.findCityDemographics()
@@ -1281,11 +1461,20 @@ class ChurchCrawler(scrapy.Spider):
         '''
         '''
         # cycle through churches that don't have links and try to resolve them
-        
         for church in churches:
             self.searchForChurchProfileInfo(church)
 
         '''
+
+        # cycle through churches and update lead pastor information
+        i = 0
+        for church in churches:
+            #if church["name"] == "Calvary Bible Church - Boulder Campus":
+            self.searchForChurchLeadPastorInfo(church)
+
+            i = i+1
+            if i > 10000:
+                break
 
         '''
         # crawl church urls
