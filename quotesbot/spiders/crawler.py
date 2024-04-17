@@ -48,6 +48,7 @@ class DivCount:
 class ChurchCrawler(scrapy.Spider):
     name = "crawler"
 
+    '''
     #crawl church sites
 
     start_urls = []
@@ -68,7 +69,40 @@ class ChurchCrawler(scrapy.Spider):
             break
 
         i = i + 1
+    '''
 
+    # crawl church staff pages
+    start_urls = []
+
+    i = 1
+    for currentChurch in churches:
+        if "pages" in currentChurch and "contacts" not in currentChurch:
+            for page in currentChurch["pages"]:
+
+                if "url" in page and "type" in page:
+                    url = page["url"]
+                    typ = page["type"]
+
+                    if typ == "staff" and url.find(".pdf") == -1:
+
+                        if url.find('staff') >= 0 or \
+                                url.find('about') >= 0 or \
+                                url.find('leader') >= 0 or \
+                                url.find('contact') >= 0 or \
+                                url.find('team') >= 0 or \
+                                url.find('leader') >= 0 or \
+                                url.find('who-we-are') >= 0 or \
+                                url.find('pastor') >= 0:
+
+                            print('**************** process page: ', url)
+                            if i > 0:
+                                start_urls.append(url)
+                                print('urls: ', str(url))
+
+        if i > 1000000:
+            break
+
+        i = i + 1
 
     '''
     # crawl church reference sites
@@ -95,7 +129,7 @@ class ChurchCrawler(scrapy.Spider):
 
     '''
 
-
+    '''
     #crawl specific url
     start_urls = [
         #"https://www.accncosprings.com/"
@@ -104,7 +138,7 @@ class ChurchCrawler(scrapy.Spider):
         #"https://christianservices.org/",
         #"https://christianservices.org/contact-us/"
     ]
-
+    '''
 
     def checkCommonDiv(self, el1, el2):
         s1 = str(el1)
@@ -1156,212 +1190,186 @@ class ChurchCrawler(scrapy.Spider):
 
 
     def searchForContacts(self, currentChurch, response):
-        #print('**************** process page: ', response.url)
-
-        if response.url.find(".pdf") >= 0:
-            return
+        #print('**************** process staff page: ', response.url)
 
 
-        if response.url.find('staff') != -1 or \
-                response.url.find('about') != -1 or \
-                response.url.find('leader') != -1 or \
-                response.url.find('team') != -1 or \
-                response.url.find('leader') != -1 or \
-                response.url.find('pastor') != -1:
+        print("--------- parse page: ", response.url)
+        profCheck = ProfileCheck()
 
-            pages = []
-            if "pages" in currentChurch:
-                pages = currentChurch["pages"]
+        # track using photo as reset element
+        currentProfilePhoto = ""
+        currentProfileName = ""
+        currentProfileTitle = ""
+        currentProfileDepartment = ""
+        currentProfileEmail = ""
+        previousProfileEmail = ""
 
-            page = self.getPage(pages, "staff", response.url)
-            if page is None:
-                page = {
-                    "type": "staff",
-                    "url": response.url
-                }
-                pages.append(page)
+        currentProfilePhotoEl = ""
+        currentProfileNameEl = ""
 
-            print("--------- save page: ", response.url)
-            currentChurch["pages"] = pages
-            self.saveChurches()
+        currentProfileEmailEl = ""
+        previousProfileEmailEl = ""
 
-            print("--------- parse page: ", response.url)
-            profCheck = ProfileCheck()
+        # track using email as reset element
+        trackEmailCurrentName = ""
+        trackEmailCurrentEmail = ""
 
-            # track using photo as reset element
-            currentProfilePhoto = ""
-            currentProfileName = ""
-            currentProfileTitle = ""
-            currentProfileDepartment = ""
-            currentProfileEmail = ""
-            previousProfileEmail = ""
+        path = response.xpath(
+            '//p | //div[not(descendant::div)] | //a[starts-with(@href, "mailto:")] | //img | //h1 | //h2 | //h3 | //h4 | //h5 | //h6 |  //strong | //span ')
+        for el in path:
+            #print("el: ", el)
 
-            currentProfilePhotoEl = ""
-            currentProfileNameEl = ""
+            #print("--------------- Look for Profile Info -----------------------")
 
-            currentProfileEmailEl = ""
-            previousProfileEmailEl = ""
+            visible_text = el.xpath('.//text()[normalize-space()]').extract()
+            text = self.replace_multiple_spaces(' '.join(visible_text))
 
-            # track using email as reset element
-            trackEmailCurrentName = ""
-            trackEmailCurrentEmail = ""
+            # text in visible_text:
+            #    text = self.replace_multiple_spaces(text)
 
-            path = response.xpath(
-                '//p | //div[not(descendant::div)] | //a[starts-with(@href, "mailto:")] | //img | //h1 | //h2 | //h3 | //h4 | //h5 | //h6 |  //strong | //span ')
-            for el in path:
-                #print("el: ", el)
+            shortText = text.strip()[:120]
+            if len(shortText) > 5:
+                #print("short text: ", shortText)
 
-                #print("--------------- Look for Profile Info -----------------------")
+                personName = profCheck.isPersonName(shortText)
+                if personName is not None:
 
-                visible_text = el.xpath('.//text()[normalize-space()]').extract()
-                text = self.replace_multiple_spaces(' '.join(visible_text))
+                    if currentProfileName == "":
+                        currentProfileName = personName
 
-                # text in visible_text:
-                #    text = self.replace_multiple_spaces(text)
+                    trackEmailCurrentName = personName
+                    #print("found profile name ", currentProfileName)
 
-                shortText = text.strip()[:120]
-                if len(shortText) > 5:
-                    #print("short text: ", shortText)
+                '''
+                email = profCheck.isEmailAddresses(shortText)
+                if email is not None:
+                    currentProfileEmail = email
 
-                    personName = profCheck.isPersonName(shortText)
-                    if personName is not None:
-
-                        if currentProfileName == "":
-                            currentProfileName = personName
-
-                        trackEmailCurrentName = personName
-                        #print("found profile name ", currentProfileName)
-
-                    '''
-                    email = profCheck.isEmailAddresses(shortText)
-                    if email is not None:
-                        currentProfileEmail = email
-
-                        trackEmailCurrentEmail = email
-                        if trackEmailCurrentName != "":
-                            self.saveEmailContact(
-                                trackEmailCurrentName,
-                                currentProfileTitle,
-                                currentProfileDepartment,
-                                trackEmailCurrentEmail
-                            )
-
-                        print("found email: ", email)
-                    '''
-
-                    jobTitle = profCheck.isProfileJobTitle(shortText)
-                    if jobTitle is not None:
-                        if currentProfileTitle == "":
-                            currentProfileTitle = jobTitle
-                            #print("found profile jobtitle ", jobTitle)
-
-                    department = profCheck.isProfileDepartment(shortText)
-                    if department is not None:
-                        if currentProfileDepartment == "":
-                            currentProfileDepartment = department
-                            #print("found profile department ", department)
-
-                # for link in mailto_links:
-                if el.xpath('@href').get():
-                    email_address = el.xpath('@href').get().replace("mailto:", "")
-
-                    #print("found profile email ", email_address)
-
-                    currentProfileEmail = email_address
-                    currentProfileEmailEl = el
-
-                    trackEmailCurrentEmail = email_address
+                    trackEmailCurrentEmail = email
                     if trackEmailCurrentName != "":
                         self.saveEmailContact(
-                            currentChurch,
                             trackEmailCurrentName,
+                            currentProfileTitle,
+                            currentProfileDepartment,
                             trackEmailCurrentEmail
                         )
 
-                        trackEmailCurrentName = ""
-                        trackEmailCurrentName = ""
+                    print("found email: ", email)
+                '''
+
+                jobTitle = profCheck.isProfileJobTitle(shortText)
+                if jobTitle is not None:
+                    if currentProfileTitle == "":
+                        currentProfileTitle = jobTitle
+                        #print("found profile jobtitle ", jobTitle)
+
+                department = profCheck.isProfileDepartment(shortText)
+                if department is not None:
+                    if currentProfileDepartment == "":
+                        currentProfileDepartment = department
+                        #print("found profile department ", department)
+
+            # for link in mailto_links:
+            if el.xpath('@href').get():
+                email_address = el.xpath('@href').get().replace("mailto:", "")
+
+                #print("found profile email ", email_address)
+
+                currentProfileEmail = email_address
+                currentProfileEmailEl = el
+
+                trackEmailCurrentEmail = email_address
+                if trackEmailCurrentName != "":
+                    self.saveEmailContact(
+                        currentChurch,
+                        trackEmailCurrentName,
+                        trackEmailCurrentEmail
+                    )
+
+                    trackEmailCurrentName = ""
+                    trackEmailCurrentName = ""
 
 
 
 
 
 
-                # Look for profile photo's
+            # Look for profile photo's
 
-                # Extract image URLs from the page
-                if el.xpath('@src | @data-src | @srcset').get():
-                    img_src = el.xpath('@src | @data-src | @srcset').get()
-                    # print("***************************** img src found: ", img_src)
+            # Extract image URLs from the page
+            if el.xpath('@src | @data-src | @srcset').get():
+                img_src = el.xpath('@src | @data-src | @srcset').get()
+                # print("***************************** img src found: ", img_src)
 
-                    isCDN = False
-                    if img_src.startswith("https://images.squarespace-cdn.com") or \
-                            img_src.startswith("https://static.wixstatic.com") or \
-                            img_src.startswith("https://thechurchco-production.s3.amazonaws.com") or \
-                            img_src.startswith("https://s3.amazonaws.com/media.cloversites.com") or \
-                            img_src.startswith("https://images.squarespace-cdn.com"):
-                        isCDN = True
+                isCDN = False
+                if img_src.startswith("https://images.squarespace-cdn.com") or \
+                        img_src.startswith("https://static.wixstatic.com") or \
+                        img_src.startswith("https://thechurchco-production.s3.amazonaws.com") or \
+                        img_src.startswith("https://s3.amazonaws.com/media.cloversites.com") or \
+                        img_src.startswith("https://images.squarespace-cdn.com"):
+                    isCDN = True
 
-                    parsed_url = urlparse(response.url)
-                    domain = parsed_url.netloc
-
-
-                    if img_src.startswith('/') == True and img_src.startswith('//') == False:
-                        #print("add on domain: ", img_src)
-                        img_src = "https://" + domain + img_src
+                parsed_url = urlparse(response.url)
+                domain = parsed_url.netloc
 
 
-                    if isCDN or img_src.find(domain.replace("www.", "")) >= 0:
-                        #print("********** check photo ****** ", img_src)
-                        if profCheck.isProfilePhoto(img_src):
-
-                            #print("photo found: ", img_src)
-
-                            if currentProfilePhoto != "" and currentProfileName != "":
-                                self.saveContact(currentChurch,
-                                                 currentProfilePhoto,
-                                                 currentProfileName,#
-
-                                                 currentProfileTitle,
-                                                 currentProfileDepartment,
-                                                 currentProfileEmail,
-                                                 previousProfileEmail,
-
-                                                 currentProfilePhotoEl,
-                                                 currentProfileNameEl,
-
-                                                 currentProfileEmailEl,
-                                                 previousProfileEmailEl)
-
-                            previousProfileEmail = currentProfileEmail
-                            previousProfileEmailEl = currentProfileEmailEl
-
-                            currentProfilePhoto = img_src
-                            currentProfileName = ""
-                            currentProfileTitle = ""
-                            currentProfileDepartment = ""
-                            currentProfileEmail = ""
-
-                            currentProfilePhotoEl = el
-                            currentProfileNameEl = ""
-                            currentProfileEmailEl = ""
+                if img_src.startswith('/') == True and img_src.startswith('//') == False:
+                    #print("add on domain: ", img_src)
+                    img_src = "https://" + domain + img_src
 
 
+                if isCDN or img_src.find(domain.replace("www.", "")) >= 0:
+                    #print("********** check photo ****** ", img_src)
+                    if profCheck.isProfilePhoto(img_src):
 
-            if currentProfilePhoto != "" and currentProfileName != "":
-                self.saveContact(currentChurch,
-                                 currentProfilePhoto,
-                                 currentProfileName,
+                        #print("photo found: ", img_src)
 
-                                 currentProfileTitle,
-                                 currentProfileDepartment,
-                                 currentProfileEmail,
-                                 previousProfileEmail,
+                        if currentProfilePhoto != "" and currentProfileName != "":
+                            self.saveContact(currentChurch,
+                                             currentProfilePhoto,
+                                             currentProfileName,#
 
-                                 currentProfilePhotoEl,
-                                 currentProfileNameEl,
+                                             currentProfileTitle,
+                                             currentProfileDepartment,
+                                             currentProfileEmail,
+                                             previousProfileEmail,
 
-                                 currentProfileEmailEl,
-                                 previousProfileEmailEl)
+                                             currentProfilePhotoEl,
+                                             currentProfileNameEl,
+
+                                             currentProfileEmailEl,
+                                             previousProfileEmailEl)
+
+                        previousProfileEmail = currentProfileEmail
+                        previousProfileEmailEl = currentProfileEmailEl
+
+                        currentProfilePhoto = img_src
+                        currentProfileName = ""
+                        currentProfileTitle = ""
+                        currentProfileDepartment = ""
+                        currentProfileEmail = ""
+
+                        currentProfilePhotoEl = el
+                        currentProfileNameEl = ""
+                        currentProfileEmailEl = ""
+
+
+
+        if currentProfilePhoto != "" and currentProfileName != "":
+            self.saveContact(currentChurch,
+                             currentProfilePhoto,
+                             currentProfileName,
+
+                             currentProfileTitle,
+                             currentProfileDepartment,
+                             currentProfileEmail,
+                             previousProfileEmail,
+
+                             currentProfilePhotoEl,
+                             currentProfileNameEl,
+
+                             currentProfileEmailEl,
+                             previousProfileEmailEl)
 
 
     def searchForGroups(self, response):
@@ -1447,6 +1455,11 @@ class ChurchCrawler(scrapy.Spider):
         #churchFinder.findCities()
         #churchFinder.findChurches()
 
+        currentChurch, isHomePage = self.findCurrentChurch(response.url)
+        if currentChurch is not None and "name" in currentChurch:
+            self.searchForContacts(currentChurch, response)
+
+
         '''
         #crawl reference urls
         print("parse site: ", response.url)
@@ -1459,6 +1472,7 @@ class ChurchCrawler(scrapy.Spider):
             self.crawlFaithStreet(currentChurch, response)
 
         '''
+
         '''
         # cycle through churches that don't have links and try to resolve them
         for church in churches:
@@ -1466,6 +1480,8 @@ class ChurchCrawler(scrapy.Spider):
 
         '''
 
+
+        '''
         # cycle through churches and update lead pastor information
         i = 0
         for church in churches:
@@ -1475,11 +1491,15 @@ class ChurchCrawler(scrapy.Spider):
             i = i+1
             if i > 10000:
                 break
-
         '''
-        # crawl church urls
+
+
+
+
+        ''''
+        # crawl church home page urls
         print("")
-        print("parse site: ", response.url)
+        print("parse site urls: ", response.url)
         currentChurch, isHomePage = self.findCurrentChurch(response.url)
         if currentChurch == None:
             print("not found church for url: ", response.url)
@@ -1487,7 +1507,7 @@ class ChurchCrawler(scrapy.Spider):
 
         self.searchForSiteProfileInfo(currentChurch, response, isHomePage)
 
-        #self.searchForContacts(currentChurch, response)
+        
         #self.searchForGroups(response)
         '''
 
