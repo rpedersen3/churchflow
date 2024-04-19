@@ -140,7 +140,12 @@ class ChurchCrawler(scrapy.Spider):
     start_urls = [
         #"https://www.accncosprings.com/"
         #"https://www.calvary-umc.org/"
-        "https://www.missionhills.org/im-new/staff-elders/"
+        #"https://flccs.net/about-us/staff/"
+        "https://www.harborlight.com/pastors/"
+        #"https://www.cccgreeley.org/staff-directory/"
+        #"https://victory.com/team-pastors/"
+        #"https://calvarybible.com/staff/"
+        #"https://www.missionhills.org/im-new/staff-elders/"
         #"https://www.missionhills.org/"
         #"https://christianservices.org/",
         #"https://christianservices.org/contact-us/"
@@ -1493,7 +1498,7 @@ class ChurchCrawler(scrapy.Spider):
 
         currentChurch, isHomePage = self.findCurrentChurch(response.url)
         if currentChurch is not None and "name" in currentChurch:
-            profileExtractor.extractProfilesFromWebPage(currentChurch, response, 9, "et_pb_column")
+            profileExtractor.extractProfilesFromWebPage(currentChurch, response, None, None, None, None)
             # self.getLeadPastorInfoUsingAzureAI(currentChurch)
             #self.searchForContacts(currentChurch, response)
 

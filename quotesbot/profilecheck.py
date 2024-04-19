@@ -236,12 +236,29 @@ class ProfileCheck:
         name = name.replace("rev.", "")
         name = name.replace("deacon", "")
         name = name.replace("staff", "")
+        name = name.replace("worship", "")
+        name = name.replace("arts", "")
+        name = name.replace("women", "")
+        name = name.replace("bible", "")
+        name = name.replace("young", "")
+        name = name.replace("adult", "")
+        name = name.replace("music", "")
+        name = name.replace("player", "")
+        name = name.replace("welcome", "")
+        name = name.replace("about", "")
+        name = name.replace("home", "")
         name = name.replace("clergy", "")
+        name = name.replace("student", "")
         name = name.replace("elder", "")
         name = name.replace("care ", "")
+        name = name.replace("ministries ", "")
         name = name.replace("center", "")
+        name = name.replace("select", "")
         name = name.replace("pastoral", "")
         name = name.replace("pastor", "")
+        name = name.replace("school", "")
+        name = name.replace("volunteers", "")
+        name = name.replace("growth", "")
         name = name.replace("director", "")
         name = name.replace("coordinator", "")
         name = name.replace("office", "")
@@ -254,7 +271,8 @@ class ProfileCheck:
         #print("****** name: ", name)
 
 
-        nlpFoundAName = False
+        nlpFoundAName = True
+        '''
         doc = self.nlp(name)
         for ent in doc.ents:
             #print("check name: ", name)
@@ -264,13 +282,14 @@ class ProfileCheck:
                 parts = ent.text.split()
                 if len(parts) == 2:
                     fullname = ent.text
-                    #print("nlp fullname person: ", fullname)
-
+                    print("nlp fullname person: ", fullname)
+        '''
         # lets try and parse name in pieces
         if nlpFoundAName:
             #print("check full name parts: ", name)
             fullname = self.isPersonNameUsingParts(name)
-            #print("fullname parts: ", fullname)
+            #if fullname is not None:
+            #    print("fullname parts: ", fullname)
 
 
 
@@ -307,8 +326,33 @@ class ProfileCheck:
         skipNextPart = False
         for part in parts:
 
-            if part.lower() != "and" and skipNextPart == False:
+            if      part == "is" or \
+                    part == "us" or \
+                    part == "next" or \
+                    part == "of" or \
+                    part == "ask" or \
+                    part == "we" or \
+                    part == "in" or \
+                    part == "all" or \
+                    part == "new" or \
+                    part == "has" or \
+                    part == "back" or \
+                    part == "to" or \
+                    part == "her":
 
+                break
+
+            pattern = re.compile(r'[^a-zA-Z\s]')  # Matches any character that is not a letter or whitespace
+
+            # Use the search method to check if the string contains any non-character characters
+            match = pattern.search(part)
+            if match:
+                break
+
+
+
+            if part.lower() != "and" and skipNextPart == False:
+                #print("part: ", part)
                 names = [{'name': part}]
 
                 df = pd.DataFrame(names)
@@ -322,15 +366,19 @@ class ProfileCheck:
                 pctaian = predictions['pctaian'].iloc[0]
                 pct2prace = predictions['pct2prace'].iloc[0]
                 pcthispanic = predictions['pcthispanic'].iloc[0]
-                if str(pctwhite) != 'nan':
-                    if fullname is None:
-                        fullname = part
-                    else:
-                        fullname = fullname + " " + part
+
+
+                if fullname is None:
+                    fullname = part
+                else:
+                    fullname = fullname + " " + part
+
+                    # check that lastname is a valid name
+                    if str(pctwhite) != 'nan':
                         foundProfileLastname = True
 
-                if foundProfileLastname:
                     break
+
 
             # adjust for two people like Jane and Joe Smith => Jane Smith
             if skipNextPart:
@@ -341,6 +389,7 @@ class ProfileCheck:
 
         #print("fullname: ", fullname)
         if foundProfileLastname:
+            print("return fullname: ", fullname)
             return fullname
 
         return None
@@ -371,6 +420,7 @@ class ProfileCheck:
 
             # sometimes they come in sets so need to split them
             url = url.split(", ")[0]
+            url = url.split(" ")[0]
             #print("process image: >>", url, "<<")
 
             req = urllib.request.Request(url, headers={'User-Agent': 'XY'})
