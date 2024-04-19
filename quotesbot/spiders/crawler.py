@@ -576,7 +576,7 @@ class ChurchCrawler(scrapy.Spider):
 
     def getLeadPastorInfoUsingAzureAI(self, currentChurch):
 
-        subscriptionKey = '9b2a68309f0b4f3887ee49f31f3e8d18'
+        subscriptionKey = ''
         host = 'api.bing.microsoft.com'
         #path = '/v7.0/entities'
         path = '/v7.0/search'
@@ -630,7 +630,7 @@ class ChurchCrawler(scrapy.Spider):
 
     def getLeadPastorInfoUsingGoogleGemini(self, currentChurch):
 
-        api_key = 'abcdef'
+        api_key = ''
 
         leadPastor = {}
         #if "leadPastor" in currentChurch:
@@ -639,7 +639,7 @@ class ChurchCrawler(scrapy.Spider):
         if "name" in currentChurch and "addressInfo" in currentChurch and "city" in currentChurch["addressInfo"]:
 
             #innerQuery = "pastors from Salt and Light Reformed Presbyterian Church, Longmont, colorado"
-            innerQuery = "Mission Hills Church, Colorado  Pastors"
+            innerQuery = "Pikes Peak Christian Church information including pastors"
             #innerQuery = "from church " + currentChurch["name"] + " in city " + currentChurch["addressInfo"]["city"] + " Colorado and website " + currentChurch["link"]
             query = innerQuery # + " using this JSON schema: \{ \"type\": \"object\", \"properties\": \{ \"fullname\": \{ \"type\": \"string\" \}, \"title\": \{ \"type\": \"string\" \}, \"email\": \{ \"type\": \"string\" \}, \"phone-number\": \{ \"type\": \"string\" \}\}\}"
 
@@ -1089,14 +1089,14 @@ class ChurchCrawler(scrapy.Spider):
 
     def searchForChurchLeadPastorInfo(self, currentChurch):
 
-        '''
+
         # and "leadPastor" not in currentChurch
         if "name" in currentChurch and "addressInfo" in currentChurch:
             print("search for lead pastor at: ", currentChurch["name"])
             self.getLeadPastorInfoUsingGoogleGemini(currentChurch)
-            self.saveChurches()
-        '''
+            #self.saveChurches()
 
+        '''
         api_key = "abcdef"
         service = build(
             "customsearch", "v1", developerKey=api_key
@@ -1155,6 +1155,7 @@ class ChurchCrawler(scrapy.Spider):
 
             currentChurch["pages"] = pages
             self.saveChurches()
+    '''
 
     def searchForChurchProfileInfo(self, currentChurch):
 
@@ -1513,17 +1514,17 @@ class ChurchCrawler(scrapy.Spider):
         '''
 
 
-        '''
+
         # cycle through churches and update lead pastor information
         i = 0
         for church in churches:
-            #if church["name"] == "Calvary Bible Church - Boulder Campus":
-            self.searchForChurchLeadPastorInfo(church)
+            if church["name"] == "Mission Hills Church Littleton Campus":
+                self.searchForChurchLeadPastorInfo(church)
 
-            i = i+1
-            if i > 10000:
-                break
-        '''
+                i = i+1
+                if i > 1:
+                    break
+
 
 
 
