@@ -248,21 +248,26 @@ class ProfileCheck:
         name = name.replace("campus", "")
         name = name.replace("lead", "")
         name = name.replace("associate", "")
+        name = name.replace("contact", "")
+        name = name.replace("team", "")
 
         #print("****** name: ", name)
 
+
+        nlpFoundAName = False
         doc = self.nlp(name)
         for ent in doc.ents:
             #print("check name: ", name)
             #print("label: ", ent.label_, ", text: ", ent.text)
             if ent.label_ == "PERSON":
+                nlpFoundAName = True
                 parts = ent.text.split()
                 if len(parts) == 2:
                     fullname = ent.text
-                    #print("fullname person: ", fullname)
+                    #print("nlp fullname person: ", fullname)
 
         # lets try and parse name in pieces
-        if fullname is None:
+        if nlpFoundAName:
             #print("check full name parts: ", name)
             fullname = self.isPersonNameUsingParts(name)
             #print("fullname parts: ", fullname)
@@ -335,7 +340,10 @@ class ProfileCheck:
                 skipNextPart = True
 
         #print("fullname: ", fullname)
-        return fullname
+        if foundProfileLastname:
+            return fullname
+
+        return None
 
 
     def isProfileJobTitle(self, title):

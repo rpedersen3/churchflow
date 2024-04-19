@@ -7,6 +7,7 @@ from scrapy.http import HtmlResponse
 from scrapy.selector import Selector
 from bs4 import BeautifulSoup
 import re
+from quotesbot.profileextractor import ProfileExtractor
 from quotesbot.profilecheck import ProfileCheck
 from quotesbot.groupcheck import GroupCheck
 from quotesbot.churchfinder import ChurchFinder
@@ -139,7 +140,8 @@ class ChurchCrawler(scrapy.Spider):
     start_urls = [
         #"https://www.accncosprings.com/"
         #"https://www.calvary-umc.org/"
-        "https://www.missionhills.org/"
+        "https://www.missionhills.org/im-new/staff-elders/"
+        #"https://www.missionhills.org/"
         #"https://christianservices.org/",
         #"https://christianservices.org/contact-us/"
     ]
@@ -1478,20 +1480,23 @@ class ChurchCrawler(scrapy.Spider):
            response.url.find(".zip") >= 0:
                 return
 
+        profileExtractor = ProfileExtractor()
+
         churchFinder = ChurchFinder()
         #churchFinder.findChurchesUsingGooglePlaces()
-        churchFinder.findChurchesUsingNonProfitData()
+        #churchFinder.findChurchesUsingNonProfitData()
         #churchFinder.findCityDemographicsFromCensusData()
         #churchFinder.findCityDemographics()
         #churchFinder.findCities()
         #churchFinder.findChurches()
 
-        '''
+
         currentChurch, isHomePage = self.findCurrentChurch(response.url)
         if currentChurch is not None and "name" in currentChurch:
-            self.getLeadPastorInfoUsingAzureAI(currentChurch)
+            profileExtractor.extractProfilesFromWebPage(currentChurch, response, 9, "et_pb_column")
+            # self.getLeadPastorInfoUsingAzureAI(currentChurch)
             #self.searchForContacts(currentChurch, response)
-        '''
+
 
         '''
         #crawl reference urls
@@ -1514,7 +1519,7 @@ class ChurchCrawler(scrapy.Spider):
         '''
 
 
-
+        '''
         # cycle through churches and update lead pastor information
         i = 0
         for church in churches:
@@ -1524,7 +1529,7 @@ class ChurchCrawler(scrapy.Spider):
                 i = i+1
                 if i > 1:
                     break
-
+        '''
 
 
 
