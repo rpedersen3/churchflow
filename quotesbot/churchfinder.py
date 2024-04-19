@@ -806,25 +806,52 @@ class ChurchFinder:
                 nteeCD = nonProfitParts[26]
                 sortName = nonProfitParts[27]
 
-                if street == "4371 PLATTE AVE":
+                '''
+                if street == "620 SOUTHPARK DR":
                     print("************** start processing ****************")
                     process = True
+                '''
+
+                process = True
 
                 # looking for existing church with this link
                 selectedChurch = None
                 for church in churches:
-                    if church["name"] == churchName:
-                        selectedChurch = church
-                        break
+                    '''
+                    if church["name"].lower().find(churchName.lower()) >= 0:
+                        if "addressInfo" in church and \
+                                "zipcode" in church["addressInfo"] and \
+                                zip.lower().find(church["addressInfo"]["zipcode"].lower()) >= 0:
 
-                if process and selectedChurch is None and \
+                            selectedChurch = church
+                        break
+                    '''
+
+                    if "ein" not in church and \
+                            "addressInfo" in church and "street" in church["addressInfo"] and \
+                            street.lower() == church["addressInfo"]["street"].lower() and \
+                            "zipcode" in church["addressInfo"] and \
+                            zip.lower().find(church["addressInfo"]["zipcode"].lower()) >= 0:
+                        selectedChurch = church
+
+                if process and selectedChurch is not None and \
                         foundation == "10" and \
                         classification.startswith("7"):
 
                     selectedCity = self.getCity(cities, city)
                     if selectedCity is not None:
-
+                        print("church: ", selectedChurch["name"])
                         print("ein: ", ein, "city: ", city, ", name: ", churchName, ", foundation: ", foundation)
+
+                        selectedChurch["ein"] = ein
+
+                        churchesData["churches"] = churches
+                        with open(churches_file_path, "w") as json_file:
+                            json.dump(churchesData, json_file, indent=4)
+
+                        # get 501c information from https://projects.propublica.org/nonprofits/api/v2/organizations/846023484.json
+
+                        '''
                         time.sleep(3)
                         query = "'" + selectedCity["name"] + " " + street
                         print("query: ", query)
@@ -895,4 +922,5 @@ class ChurchFinder:
                                             json.dump(citiesData, json_file, indent=4)
 
                                     break
+                        '''
 

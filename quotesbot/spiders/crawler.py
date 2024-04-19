@@ -17,6 +17,9 @@ import spacy
 import pandas as pd
 import requests
 
+import http.client, urllib.parse
+import json
+
 from googleapiclient.discovery import build
 
 import pathlib
@@ -71,6 +74,7 @@ class ChurchCrawler(scrapy.Spider):
         i = i + 1
     '''
 
+    '''
     # crawl church staff pages
     start_urls = []
 
@@ -103,6 +107,7 @@ class ChurchCrawler(scrapy.Spider):
             break
 
         i = i + 1
+    '''
 
     '''
     # crawl church reference sites
@@ -129,7 +134,7 @@ class ChurchCrawler(scrapy.Spider):
 
     '''
 
-    '''
+
     #crawl specific url
     start_urls = [
         #"https://www.accncosprings.com/"
@@ -138,7 +143,7 @@ class ChurchCrawler(scrapy.Spider):
         #"https://christianservices.org/",
         #"https://christianservices.org/contact-us/"
     ]
-    '''
+
 
     def checkCommonDiv(self, el1, el2):
         s1 = str(el1)
@@ -571,31 +576,56 @@ class ChurchCrawler(scrapy.Spider):
 
     def getLeadPastorInfoUsingAzureAI(self, currentChurch):
 
+        subscriptionKey = '9b2a68309f0b4f3887ee49f31f3e8d18'
+        host = 'api.bing.microsoft.com'
+        #path = '/v7.0/entities'
+        path = '/v7.0/search'
+        mkt = 'en-US'
+        query = 'lead pastor of mission hills church+site:missionhills.org'
+
+        quote = urllib.parse.quote(query)
+        print("quote: ", quote)
+        params = '?mkt=' + mkt + '&q=' + urllib.parse.quote(query)
+
+        #params = '?mkt=' + mkt + '&q=Lead Pastor of Mission &responseFilter=entities'
+
+        headers = {'Ocp-Apim-Subscription-Key': subscriptionKey}
+        conn = http.client.HTTPSConnection(host)
+        conn.request("GET", path + params, None, headers)
+        response = conn.getresponse()
+        result =  response.read()
+
+        print(json.dumps(json.loads(result), indent=4))
+
+        '''
+
         credential = DefaultAzureCredential()
 
-        endpoint = "https://docs-test-001.openai.azure.com/"
-        endpoint = "https://your-resource-name.openai.azure.com"
+        #endpoint = "https://docs-test-001.openai.azure.com/"
+        endpoint = "https://richcanvas.openai.azure.com/"
         # Set the API type to `azure_ad`
         os.environ["OPENAI_API_TYPE"] = "azure_ad"
         # Set the API_KEY to the token from the Azure credential
-        os.environ["OPENAI_API_KEY"] = credential.get_token("https://cognitiveservices.azure.com/.default").token
+        os.environ["OPENAI_API_KEY"] = ""
 
         client = AzureOpenAI(
             azure_endpoint=endpoint,
-            api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+            api_key="abcdef",
             api_version="2024-03-01-preview"
         )
 
         response = client.chat.completions.create(
-            model="gpt-4-0125-Preview",
+            #model="gpt-35-turbo",
+            model="gpt-4-0125-preview",
             # Model = should match the deployment name you chose for your 0125-Preview model deployment
             response_format={"type": "json_object"},
             messages=[
                 {"role": "system", "content": "You are a helpful assistant designed to output JSON."},
-                {"role": "user", "content": "Who won the world series in 2020?"}
+                {"role": "user", "content": "Who is the Pastor for Calvary Bible Church Erie Campus"}
             ]
         )
         print(response.choices[0].message.content)
+        '''
 
 
     def getLeadPastorInfoUsingGoogleGemini(self, currentChurch):
@@ -1449,16 +1479,18 @@ class ChurchCrawler(scrapy.Spider):
 
         churchFinder = ChurchFinder()
         #churchFinder.findChurchesUsingGooglePlaces()
-        #churchFinder.findChurchesUsingNonProfitData()
+        churchFinder.findChurchesUsingNonProfitData()
         #churchFinder.findCityDemographicsFromCensusData()
         #churchFinder.findCityDemographics()
         #churchFinder.findCities()
         #churchFinder.findChurches()
 
+        '''
         currentChurch, isHomePage = self.findCurrentChurch(response.url)
         if currentChurch is not None and "name" in currentChurch:
-            self.searchForContacts(currentChurch, response)
-
+            self.getLeadPastorInfoUsingAzureAI(currentChurch)
+            #self.searchForContacts(currentChurch, response)
+        '''
 
         '''
         #crawl reference urls
