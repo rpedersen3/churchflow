@@ -285,6 +285,24 @@ class ProfileExtractor:
         print('email: ', email)
         print("****************************")
 
+    def isSmallerThan(self, el, maxSize):
+
+        heightStr = el.xpath('@height').get()
+        widthStr = el.xpath('@width').get()
+
+        try:
+            height = int(heightStr)
+            width = int(widthStr)
+
+            if height < maxSize and width < maxSize:
+                return True
+            else:
+                return False
+        except Exception:
+            return False
+
+        return False
+
 
     def extractProfilesFromWebPage(self, currentChurch, response, boundaryAttribute, boundaryTag, boundaryClass, boundaryLevel):
 
@@ -313,6 +331,7 @@ class ProfileExtractor:
         }
 
         photoFirst_el = None
+        requirePhotoCheck = None
 
         hasHitBoundaryBefore = False
         profilePhoto = None
@@ -353,6 +372,7 @@ class ProfileExtractor:
 
 
                     # if we hit boundary marker then set church contact
+                    #print("check boundary: tag: ", tagName, " == ", boundaryTag, ", class: ", className, " == ", className, ", level ", ancestorLevel, " == ", boundaryLevel)
                     if (tagName == boundaryTag and className != "" and className.split()[0] == boundaryClass and ancestorLevel == boundaryLevel):
                         evaluateBoundary = True
                         print("hit div boundary: ------------------------------------------------------ ", className.split()[0], ", level: ", ancestorLevel)
@@ -381,6 +401,7 @@ class ProfileExtractor:
                         if (boundaryAttribute == "photo"):
                             if (profilePhoto is not None and profileName is not None) or \
                                     (profileEmail is not None and  profileName is not None):
+
                                 self.setChurchContact(currentChurch, profileName, profileTitle, profileDepartment, profileEmail, profilePhoto)
 
                     hasHitBoundaryBefore = True
@@ -413,12 +434,27 @@ class ProfileExtractor:
 
                         if hasHitBoundaryBefore is not None and photoFirst_el is not None:
 
-                            cDiv, cDivLevel, cClassName = self.commonDiv(photoFirst_el, el)
-                            self.addFirst(schemaStructure, "photo", "div", cClassName, cDivLevel)
+                            # if we didn't find a person in photo then check that name is in photo url
+                            validMatch = False
+                            if requirePhotoCheck == None:
+                                #print("found profile photo so not check required")
+                                validMatch = True
+                            else:
+                                #print("check the parts: ", personName, ", in ", requirePhotoCheck)
+                                for part in personName.lower().split():
+                                    if len(part) > 2 and requirePhotoCheck.lower().find(part) >= 0:
+                                        #print("image url matches name: ", part)
+                                        validMatch = True
+                                        break
 
-                            cLi, cClassName = self.commonLi(photoFirst_el, el)
-                            if cLi is not None:
-                                self.addFirst(schemaStructure, "photo", "li", cClassName, None)
+                            if validMatch:
+
+                                cDiv, cDivLevel, cClassName = self.commonDiv(photoFirst_el, el)
+                                self.addFirst(schemaStructure, "photo", "div", cClassName, cDivLevel)
+
+                                cLi, cClassName = self.commonLi(photoFirst_el, el)
+                                if cLi is not None:
+                                    self.addFirst(schemaStructure, "photo", "li", cClassName, None)
 
 
 
@@ -430,6 +466,7 @@ class ProfileExtractor:
                             profileTitle = jobTitle
                         self.addToElement(schemaStructure, "title", tagName, className, styleName)
 
+                        '''
                         if hasHitBoundaryBefore is not None and photoFirst_el is not None:
 
                             cDiv, cDivLevel, cClassName = self.commonDiv(photoFirst_el, el)
@@ -438,6 +475,7 @@ class ProfileExtractor:
                             cLi, cClassName = self.commonLi(photoFirst_el, el)
                             if cLi is not None:
                                 self.addFirst(schemaStructure, "photo", "li", cClassName, None)
+                        '''
 
                     department = profCheck.isProfileDepartment(shortText)
                     if department is not None:
@@ -447,6 +485,7 @@ class ProfileExtractor:
                             profileDepartment = department
                         self.addToElement(schemaStructure, "department", tagName, className, styleName)
 
+                        '''
                         if hasHitBoundaryBefore is not None and photoFirst_el is not None:
 
                             cDiv, cDivLevel, cClassName = self.commonDiv(photoFirst_el, el)
@@ -455,6 +494,7 @@ class ProfileExtractor:
                             cLi, cClassName = self.commonLi(photoFirst_el, el)
                             if cLi is not None:
                                 self.addFirst(schemaStructure, "photo", "li", cClassName, None)
+                        '''
 
                 # get mailto inside elements
                 if el.xpath('@href').get():
@@ -467,6 +507,7 @@ class ProfileExtractor:
                             profileEmail = email_address
                         self.addToElement(schemaStructure, "email", tagName, className, styleName)
 
+                        '''
                         if  hasHitBoundaryBefore is not None and photoFirst_el is not None:
 
                             cDiv, cDivLevel, cClassName = self.commonDiv(photoFirst_el, el)
@@ -475,16 +516,22 @@ class ProfileExtractor:
                             cLi, cClassName = self.commonLi(photoFirst_el, el)
                             if cLi is not None:
                                 self.addFirst(schemaStructure, "photo", "li", cClassName, None)
-
+                        '''
 
                 # get photo inside elements
                 if el.xpath('@src | @data-src | @srcset').get():
 
                     img_src = el.xpath('@src | @data-src | @srcset').get()
-                    # print("***************************** img src found: ", img_src)
+
+                    if self.isSmallerThan(el, 100) == True:
+                        continue
+
+
+                   # print("***************************** img src found: ", img_src)
 
                     isCDN = False
                     if img_src.startswith("https://images.squarespace-cdn.com") or \
+                            img_src.startswith("https://cdn.monkplatform.com") or \
                             img_src.startswith("https://static.wixstatic.com") or \
                             img_src.startswith("https://thechurchco-production.s3.amazonaws.com") or \
                             img_src.startswith("https://s3.amazonaws.com/media.cloversites.com") or \
@@ -503,16 +550,24 @@ class ProfileExtractor:
 
                     if isCDN or img_src.find(domain.replace("www.", "")) >= 0:
                         #print("********** check photo ****** ", img_src)
-                        if profCheck.isProfilePhoto(img_src):
+                        foundPhoto, foundProfilePhoto = profCheck.isProfilePhoto(img_src)
+                        if foundPhoto:
 
                             tagName = el.xpath('name()').extract()[0]
+
+                            requirePhotoCheck = None
+                            if foundProfilePhoto == False:
+                                requirePhotoCheck = img_src
+
 
                             #print(">> photo: ", img_src)
                             if  hasHitBoundaryBefore is not None and profilePhoto is None:
                                 profilePhoto = img_src
+
                             self.addToElement(schemaStructure, "photo", tagName, className, styleName)
 
                             photoFirst_el = el
+
 
 
         if hasHitBoundaryBefore is not None:
@@ -533,6 +588,14 @@ class ProfileExtractor:
 
                 # process the top two tags
 
+                # remove higher level tags
+                '''
+                routes = []
+                for baseTag in schemaStructure["photo"]["first"]:
+                    for routeTag in routes:
+                        if routeTag["tag"] == baseTag["tag"]
+                '''
+
                 cls = None
                 level = None
                 for tagData in schemaStructure["photo"]["first"]:
@@ -542,7 +605,7 @@ class ProfileExtractor:
                     cls = tagData["class"]
                     level = tagData["level"]
 
-                    if count > 5:
+                    if count > 1:
                         print(">>>>>>>>  call for boundary tag: ", tag, ", and class: ", cls)
                         self.extractProfilesFromWebPage(currentChurch, response, "photo", tag, cls, level)
 

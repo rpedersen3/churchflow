@@ -140,7 +140,6 @@ class GroupCheck:
                 "fathers",
                 "mothers",
                 "middle",
-                "young",
                 "infant",
                 "infants",
                 "preschooler",

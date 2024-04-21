@@ -141,7 +141,7 @@ class ChurchCrawler(scrapy.Spider):
         #"https://www.accncosprings.com/"
         #"https://www.calvary-umc.org/"
         #"https://flccs.net/about-us/staff/"
-        "https://www.harborlight.com/pastors/"
+        "https://www.flatironschurch.com/leadership/"
         #"https://www.cccgreeley.org/staff-directory/"
         #"https://victory.com/team-pastors/"
         #"https://calvarybible.com/staff/"
@@ -1337,10 +1337,11 @@ class ChurchCrawler(scrapy.Spider):
             # Extract image URLs from the page
             if el.xpath('@src | @data-src | @srcset').get():
                 img_src = el.xpath('@src | @data-src | @srcset').get()
-                # print("***************************** img src found: ", img_src)
+                print("***************************** img src found: ", img_src)
 
                 isCDN = False
                 if img_src.startswith("https://images.squarespace-cdn.com") or \
+                        img_src.startswith("https://cdn.monkplatform.com") or \
                         img_src.startswith("https://static.wixstatic.com") or \
                         img_src.startswith("https://thechurchco-production.s3.amazonaws.com") or \
                         img_src.startswith("https://s3.amazonaws.com/media.cloversites.com") or \
@@ -1357,8 +1358,9 @@ class ChurchCrawler(scrapy.Spider):
 
 
                 if isCDN or img_src.find(domain.replace("www.", "")) >= 0:
-                    #print("********** check photo ****** ", img_src)
-                    if profCheck.isProfilePhoto(img_src):
+                    print("********** check photo ****** ", img_src)
+                    foundPhoto, foundProfilePhoto = profCheck.isProfilePhoto(img_src)
+                    if foundProfilePhoto:
 
                         #print("photo found: ", img_src)
 

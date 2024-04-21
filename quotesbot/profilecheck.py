@@ -389,7 +389,7 @@ class ProfileCheck:
 
         #print("fullname: ", fullname)
         if foundProfileLastname:
-            print("return fullname: ", fullname)
+            #print("return fullname: ", fullname)
             return fullname
 
         return None
@@ -411,7 +411,9 @@ class ProfileCheck:
 
     def isProfilePhoto(self, url):
 
+        foundPhoto = False
         foundProfilePhoto = False
+
         #print("url: ", url)
 
         detector = dlib.get_frontal_face_detector()
@@ -423,18 +425,38 @@ class ProfileCheck:
             url = url.split(" ")[0]
             #print("process image: >>", url, "<<")
 
-            req = urllib.request.Request(url, headers={'User-Agent': 'XY'})
-            response = urllib.request.urlopen(req)
-            arr = np.asarray(bytearray(response.read()), dtype=np.uint8)
+            '''
+            hdrs = {
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.9999.99 Safari/537.36",
+                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+                "Accept-Encoding": "gzip, deflate, br, zstd",
+                'Connection': 'keep-alive',
+                "Accept-Language": "en-US,en;q=0.9"
+            }
+            '''
+            hdrs = {
+                "User-Agent": "XY"
+            }
 
-            frame = None
-            if url.find(".jpg") != -1 or url.find(".jpeg") != -1 or url.find(".jpeg") != -1 or url.find(".ashx") != -1:
-                frame = cv2.imdecode(arr, -1)
-            if url.find(".png") != -1:
-                frame = cv2.imdecode(arr, cv2.IMREAD_COLOR)
+            foundPhoto = True
 
-            if frame is not None:
-                try:
+            try:
+                req = urllib.request.Request(url, headers=hdrs)
+                response = urllib.request.urlopen(req)
+                arr = np.asarray(bytearray(response.read()), dtype=np.uint8)
+            except Exception as e:
+                i = 1
+                #print("---------------  Problem connecting to source: ", url)
+
+            try:
+                frame = None
+                if url.find(".jpg") != -1 or url.find(".jpeg") != -1 or url.find(".jpeg") != -1 or url.find(".ashx") != -1:
+                    frame = cv2.imdecode(arr, -1)
+                if url.find(".png") != -1:
+                    frame = cv2.imdecode(arr, cv2.IMREAD_COLOR)
+
+                if frame is not None:
+
                     gray_image = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
                     height, width = gray_image.shape[:2]
@@ -506,10 +528,11 @@ class ProfileCheck:
                                 ##print('gender: ', gender, ', confidence: ', genderConfidence)
 
 
-                except Exception as e:
-                        print("e")
+            except Exception as e:
+                i = 1
+                #print("---------------  Problem reading photo: ")
 
 
 
-            return foundProfilePhoto
+            return foundPhoto, foundProfilePhoto
 
