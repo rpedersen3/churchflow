@@ -256,6 +256,9 @@ class ProfileCheck:
         name = name.replace("select", "")
         name = name.replace("pastoral", "")
         name = name.replace("pastor", "")
+        name = name.replace("apostle", "")
+        name = name.replace("church", "")
+        name = name.replace("emeritus", "")
         name = name.replace("school", "")
         name = name.replace("volunteers", "")
         name = name.replace("growth", "")
@@ -264,6 +267,7 @@ class ProfileCheck:
         name = name.replace("office", "")
         name = name.replace("campus", "")
         name = name.replace("lead", "")
+        name = name.replace("strategic", "")
         name = name.replace("associate", "")
         name = name.replace("contact", "")
         name = name.replace("team", "")
@@ -326,7 +330,13 @@ class ProfileCheck:
         skipNextPart = False
         for part in parts:
 
+            part = part.replace(".", "")
+            part = part.strip()
+            if (len(part) < 2):
+                continue
+
             if      part == "is" or \
+                    part == "the" or \
                     part == "us" or \
                     part == "next" or \
                     part == "of" or \
@@ -336,6 +346,7 @@ class ProfileCheck:
                     part == "all" or \
                     part == "new" or \
                     part == "has" or \
+                    part == "email" or \
                     part == "back" or \
                     part == "to" or \
                     part == "her":
@@ -534,5 +545,5 @@ class ProfileCheck:
 
 
 
-            return foundPhoto, foundProfilePhoto
+        return foundPhoto, foundProfilePhoto
 

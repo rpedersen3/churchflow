@@ -313,7 +313,8 @@ class ProfileExtractor:
 
         schemaStructure = {
             "name": {
-                "tags": []
+                "tags": [],
+                "first": []
             },
             "photo": {
                 "tags": [],
@@ -332,6 +333,9 @@ class ProfileExtractor:
 
         photoFirst_el = None
         requirePhotoCheck = None
+
+        nameFirst_el = None
+        requireNameCheck = None
 
         hasHitBoundaryBefore = False
         profilePhoto = None
@@ -404,6 +408,11 @@ class ProfileExtractor:
 
                                 self.setChurchContact(currentChurch, profileName, profileTitle, profileDepartment, profileEmail, profilePhoto)
 
+                        if (boundaryAttribute == "name"):
+                            if (profileName is not None and profileEmail is not None):
+
+                                self.setChurchContact(currentChurch, profileName, profileTitle, profileDepartment, profileEmail, profilePhoto)
+
                     hasHitBoundaryBefore = True
 
                     profilePhoto = None
@@ -432,7 +441,7 @@ class ProfileExtractor:
 
                         self.addToElement(schemaStructure, "name", tagName, className, styleName)
 
-                        if hasHitBoundaryBefore is not None and photoFirst_el is not None:
+                        if photoFirst_el is not None:
 
                             # if we didn't find a person in photo then check that name is in photo url
                             validMatch = False
@@ -457,6 +466,8 @@ class ProfileExtractor:
                                     self.addFirst(schemaStructure, "photo", "li", cClassName, None)
 
 
+                        # setup check for name first boundary
+                        nameFirst_el = el
 
                     jobTitle = profCheck.isProfileJobTitle(shortText)
                     if jobTitle is not None:
@@ -466,16 +477,6 @@ class ProfileExtractor:
                             profileTitle = jobTitle
                         self.addToElement(schemaStructure, "title", tagName, className, styleName)
 
-                        '''
-                        if hasHitBoundaryBefore is not None and photoFirst_el is not None:
-
-                            cDiv, cDivLevel, cClassName = self.commonDiv(photoFirst_el, el)
-                            self.addFirst(schemaStructure, "photo", "div", cClassName, cDivLevel)
-
-                            cLi, cClassName = self.commonLi(photoFirst_el, el)
-                            if cLi is not None:
-                                self.addFirst(schemaStructure, "photo", "li", cClassName, None)
-                        '''
 
                     department = profCheck.isProfileDepartment(shortText)
                     if department is not None:
@@ -485,16 +486,6 @@ class ProfileExtractor:
                             profileDepartment = department
                         self.addToElement(schemaStructure, "department", tagName, className, styleName)
 
-                        '''
-                        if hasHitBoundaryBefore is not None and photoFirst_el is not None:
-
-                            cDiv, cDivLevel, cClassName = self.commonDiv(photoFirst_el, el)
-                            self.addFirst(schemaStructure, "photo", "div", cClassName, cDivLevel)
-
-                            cLi, cClassName = self.commonLi(photoFirst_el, el)
-                            if cLi is not None:
-                                self.addFirst(schemaStructure, "photo", "li", cClassName, None)
-                        '''
 
                 # get mailto inside elements
                 if el.xpath('@href').get():
@@ -507,16 +498,16 @@ class ProfileExtractor:
                             profileEmail = email_address
                         self.addToElement(schemaStructure, "email", tagName, className, styleName)
 
-                        '''
-                        if  hasHitBoundaryBefore is not None and photoFirst_el is not None:
 
-                            cDiv, cDivLevel, cClassName = self.commonDiv(photoFirst_el, el)
-                            self.addFirst(schemaStructure, "photo", "div", cClassName, cDivLevel)
+                        if nameFirst_el is not None:
 
-                            cLi, cClassName = self.commonLi(photoFirst_el, el)
+                            cDiv, cDivLevel, cClassName = self.commonDiv(nameFirst_el, el)
+                            self.addFirst(schemaStructure, "name", "div", cClassName, cDivLevel)
+
+                            cLi, cClassName = self.commonLi(nameFirst_el, el)
                             if cLi is not None:
-                                self.addFirst(schemaStructure, "photo", "li", cClassName, None)
-                        '''
+                                self.addFirst(schemaStructure, "name", "li", cClassName, None)
+
 
                 # get photo inside elements
                 if el.xpath('@src | @data-src | @srcset').get():
@@ -531,6 +522,7 @@ class ProfileExtractor:
 
                     isCDN = False
                     if img_src.startswith("https://images.squarespace-cdn.com") or \
+                            img_src.startswith("https://storage2.snappages.site") or \
                             img_src.startswith("https://cdn.monkplatform.com") or \
                             img_src.startswith("https://static.wixstatic.com") or \
                             img_src.startswith("https://thechurchco-production.s3.amazonaws.com") or \
@@ -572,7 +564,14 @@ class ProfileExtractor:
 
         if hasHitBoundaryBefore is not None:
             if (boundaryAttribute == "photo" and \
-                    (profilePhoto is not None or profileName is not None or profileEmail is not None)):
+                    ((profilePhoto is not None and profileName is not None) or \
+                     (profileName is not None and profileEmail is not None))):
+
+                self.setChurchContact(currentChurch, profileName, profileTitle, profileDepartment,
+                                      profileEmail, profilePhoto)
+
+            if (boundaryAttribute == "name" and \
+                    (profileName is not None and profileEmail is not None)):
 
                 self.setChurchContact(currentChurch, profileName, profileTitle, profileDepartment,
                                       profileEmail, profilePhoto)
@@ -584,17 +583,7 @@ class ProfileExtractor:
             print("+++++++++++++++++++++++++++++++++++++++++")
             print("+++++++++++++++++++++++++++++++++++++++++")
             print("schema", schemaStructure)
-            if "first" in schemaStructure["photo"]:
-
-                # process the top two tags
-
-                # remove higher level tags
-                '''
-                routes = []
-                for baseTag in schemaStructure["photo"]["first"]:
-                    for routeTag in routes:
-                        if routeTag["tag"] == baseTag["tag"]
-                '''
+            if "first" in schemaStructure["photo"] and len(schemaStructure["photo"]["first"]) > 0:
 
                 cls = None
                 level = None
@@ -606,7 +595,22 @@ class ProfileExtractor:
                     level = tagData["level"]
 
                     if count > 1:
-                        print(">>>>>>>>  call for boundary tag: ", tag, ", and class: ", cls)
+                        print(">>>>>>>>  call photo for boundary tag: ", tag, ", and class: ", cls)
                         self.extractProfilesFromWebPage(currentChurch, response, "photo", tag, cls, level)
+
+            if "first" in schemaStructure["name"] and len(schemaStructure["name"]["first"]) > 0:
+
+                cls = None
+                level = None
+                for tagData in schemaStructure["name"]["first"]:
+
+                    count = tagData["count"]
+                    tag = tagData["tag"]
+                    cls = tagData["class"]
+                    level = tagData["level"]
+
+                    if count > 1:
+                        print(">>>>>>>>  call name for boundary tag: ", tag, ", and class: ", cls)
+                        self.extractProfilesFromWebPage(currentChurch, response, "name", tag, cls, level)
 
 
