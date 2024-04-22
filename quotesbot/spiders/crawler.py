@@ -55,13 +55,13 @@ class ChurchCrawler(scrapy.Spider):
     name = "crawler"
 
 
+
+
+    '''
     #crawl church sites
 
     start_urls = []
 
-
-
-    '''
     for church in churches:
 
         #if "pages" not in church:
@@ -140,9 +140,10 @@ class ChurchCrawler(scrapy.Spider):
 
 
 
-
+    '''
     #crawl specific url
     start_urls = [
+        "https://www.windsorca.org/faculty-and-staff"
         #"https://mcleanbible.org/montgomery-county/leadership/"
         #"https://mynorthlandchurch.org/about/our-team"
         #"https://pikespeakchristianchurch.com/about/"
@@ -162,13 +163,14 @@ class ChurchCrawler(scrapy.Spider):
         #"https://www.flatironschurch.com/leadership/"
         #"https://www.cccgreeley.org/staff-directory/"
         #"https://victory.com/team-pastors/"
-        "https://calvarybible.com/staff/"
+        #"https://calvarybible.com/staff/"
         #"https://www.missionhills.org/im-new/staff-elders/"
         #"https://www.missionhills.org/"
         #"https://christianservices.org/",
         #"https://christianservices.org/contact-us/"
     ]
 
+    '''
 
     def checkCommonDiv(self, el1, el2):
         s1 = str(el1)
@@ -1217,7 +1219,7 @@ class ChurchCrawler(scrapy.Spider):
 
                                 break
 
-                    needsToBeProcessed = self.markedAsProcessed(currentChurch, processor, link)
+                    needsToBeProcessed = self.markAsProcessed(currentChurch, processor, link)
                 self.saveChurches()
 
     def searchForChurchLeadPastorInfo(self, currentChurch):
@@ -1255,8 +1257,7 @@ class ChurchCrawler(scrapy.Spider):
             return
 
         foundUrlTag = False
-        if isHomePage or \
-                response.url.find("contact") >= 0:
+        if isHomePage or response.url.find("contact") >= 0:
             foundUrlTag = True
 
         if foundUrlTag:
@@ -1290,9 +1291,6 @@ class ChurchCrawler(scrapy.Spider):
             if "address" in currentChurch:
                 address = currentChurch["address"]
                 self.getAddressInfoUsingGooglePlaces(address, currentChurch)
-
-
-            self.saveChurches()
 
 
     def searchForContacts(self, currentChurch, response):
@@ -1517,20 +1515,22 @@ class ChurchCrawler(scrapy.Spider):
         currentChurch = None
         for church in churches:
 
-            churchParse = urlparse(church["link"])
-            churchDomain = churchParse.netloc
+            if "link" in church:
 
-            urlParse = urlparse(url)
-            urlDomain = urlParse.netloc
+                churchParse = urlparse(church["link"])
+                churchDomain = churchParse.netloc
 
-            if churchDomain == urlDomain:
-                currentChurch = church
+                urlParse = urlparse(url)
+                urlDomain = urlParse.netloc
 
-                #print("path: ", urlParse.path)
-                if urlParse.path == '' or urlParse.path == '/':
-                    isHomePage = True
+                if churchDomain == urlDomain:
+                    currentChurch = church
 
-                break
+                    #print("path: ", urlParse.path)
+                    if urlParse.path == '' or urlParse.path == '/':
+                        isHomePage = True
+
+                    break
 
 
         return currentChurch, isHomePage
@@ -1569,7 +1569,7 @@ class ChurchCrawler(scrapy.Spider):
 
         return needsToBeProcessed
 
-    def markedAsProcessed(self, currentChurch, processor, url):
+    def markAsProcessed(self, currentChurch, processor, url):
 
         processed = {
                     "page": url,
@@ -1596,7 +1596,9 @@ class ChurchCrawler(scrapy.Spider):
 
         #print("body: ", response.body)
 
+
         '''
+        # extract contacts from staff web pages
         currentChurch, isHomePage = self.findCurrentChurch(response.url)
         if currentChurch is not None and "name" in currentChurch:
 
@@ -1636,11 +1638,12 @@ class ChurchCrawler(scrapy.Spider):
         '''
 
 
-
+        '''
         # cycle through churches and add staff pages
         print("............  add church staff pages ...............")
         for church in churches:
             self.addChurchStaffPages(church)
+        '''
 
         '''
         # cycle through churches and update lead pastor information
@@ -1657,18 +1660,25 @@ class ChurchCrawler(scrapy.Spider):
 
 
 
-        ''''
+
         # crawl church home page urls
         print("")
         print("parse site urls: ", response.url)
         currentChurch, isHomePage = self.findCurrentChurch(response.url)
-        if currentChurch == None:
-            print("not found church for url: ", response.url)
-            return
+        if currentChurch is not None and isHomePage:
 
-        self.searchForSiteProfileInfo(currentChurch, response, isHomePage)
+            processor = "extract-location-information-from-webpage"
+            needsToBeProcessed = self.checkIfNeedsProcessing(currentChurch, processor, response.url)
 
-        
+            if needsToBeProcessed == True:
+
+                self.searchForSiteProfileInfo(currentChurch, response, isHomePage)
+
+                needsToBeProcessed = self.markAsProcessed(currentChurch, processor, link)
+                self.saveChurches()
+
+
+        '''
         #self.searchForGroups(response)
         '''
 

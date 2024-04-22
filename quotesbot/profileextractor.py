@@ -591,6 +591,10 @@ class ProfileExtractor:
                         parts = re.findall(r'\((.*?)\)', st)
                         if len(parts) > 0:
                             img_src = parts[0]
+                    elif st.find("background-image:url") >= 0:
+                        parts = re.findall(r'\((.*?)\)', st)
+                        if len(parts) > 0:
+                            img_src = parts[0]
 
                 # get photo inside elements
                 if el.xpath('@src | @data-src | @srcset').get():

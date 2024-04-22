@@ -370,6 +370,7 @@ class ProfileCheck:
 
             if      part == "is" or \
                     part == "one" or \
+                    part == "for" or \
                     part == "our" or \
                     part == "while" or \
                     part == "who" or \
@@ -382,6 +383,7 @@ class ProfileCheck:
                     part == "next" or \
                     part == "of" or \
                     part == "ask" or \
+                    part == "you" or \
                     part == "we" or \
                     part == "in" or \
                     part == "all" or \
