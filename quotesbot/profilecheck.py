@@ -71,6 +71,11 @@ class ProfileCheck:
             if "leader" in text.lower():
                 return "Worship Leader"
 
+        if "minister" in text.lower():
+            return "Minister"
+
+
+
         if "pastor" in text.lower():
             if "lead" in text.lower():
                 if "worship" in text.lower():
@@ -82,6 +87,8 @@ class ProfileCheck:
                 return "Lead Pastor"
             if "executive" in text.lower():
                 return "Executive Pastor"
+            if "senior" in text.lower():
+                return "Senior Pastor"
             if "associate" in text.lower():
                 return "Associate Pastor"
             if "worship" in text.lower():
@@ -98,6 +105,7 @@ class ProfileCheck:
 
         if "elder" in text.lower():
             return "Elder"
+
 
         if "director" in text.lower():
             if "executive" in text.lower():
@@ -119,6 +127,12 @@ class ProfileCheck:
             if "high school" in text.lower():
                 return "High School Director"
             return "Director"
+
+        if "rector" in text.lower():
+            return "Rector"
+
+        if "associate" in text.lower():
+            return "Associate"
 
         if "manager" in text.lower():
             if "financial" in text.lower():
@@ -230,12 +244,30 @@ class ProfileCheck:
         #print("check name: ", name)
         fullname = None
 
-        # remove some common titles in front of name
+        #  replace the name beginning with
         name = name.lower()
+        if name.startswith("the "):
+            name = name.replace("the ", "")
+
+        # remove some common titles in front of name
         name = name.replace("fr.", "")
+        name = name.replace("dr.", "")
         name = name.replace("rev.", "")
         name = name.replace("deacon", "")
+        name = name.replace("board", "")
         name = name.replace("staff", "")
+        name = name.replace("africa", "")
+        name = name.replace("asia", "")
+        name = name.replace("takes", "")
+        name = name.replace("father", "")
+        name = name.replace("teach", "")
+        name = name.replace("agenda", "")
+        name = name.replace("weekend", "")
+        name = name.replace("council", "")
+        name = name.replace("members", "")
+        name = name.replace("creed", "")
+        name = name.replace("nicene", "")
+        name = name.replace("minister", "")
         name = name.replace("worship", "")
         name = name.replace("arts", "")
         name = name.replace("women", "")
@@ -250,6 +282,7 @@ class ProfileCheck:
         name = name.replace("clergy", "")
         name = name.replace("student", "")
         name = name.replace("elder", "")
+        name = name.replace("community", "")
         name = name.replace("care ", "")
         name = name.replace("ministries ", "")
         name = name.replace("center", "")
@@ -336,7 +369,15 @@ class ProfileCheck:
                 continue
 
             if      part == "is" or \
+                    part == "one" or \
+                    part == "our" or \
+                    part == "while" or \
+                    part == "who" or \
                     part == "the" or \
+                    part == "st" or \
+                    part == "was" or \
+                    part == "my" or \
+                    part == "if" or \
                     part == "us" or \
                     part == "next" or \
                     part == "of" or \
@@ -344,9 +385,11 @@ class ProfileCheck:
                     part == "we" or \
                     part == "in" or \
                     part == "all" or \
+                    part == "mass" or \
                     part == "new" or \
                     part == "has" or \
                     part == "email" or \
+                    part == "life" or \
                     part == "back" or \
                     part == "to" or \
                     part == "her":

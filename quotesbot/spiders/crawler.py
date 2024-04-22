@@ -21,6 +21,8 @@ import requests
 import http.client, urllib.parse
 import json
 
+from datetime import datetime
+
 from googleapiclient.discovery import build
 
 import pathlib
@@ -75,14 +77,15 @@ class ChurchCrawler(scrapy.Spider):
         i = i + 1
     '''
 
-    '''
+
     # crawl church staff pages
     start_urls = []
 
     i = 1
     for currentChurch in churches:
-        if "pages" in currentChurch and "contacts" not in currentChurch:
-            for page in currentChurch["pages"]:
+        #if "pages" in currentChurch and "contacts" not in currentChurch:
+        if "pages" in currentChurch:
+            for page in currentChurch["pages"][:3]:
 
                 if "url" in page and "type" in page:
                     url = page["url"]
@@ -104,11 +107,11 @@ class ChurchCrawler(scrapy.Spider):
                                 start_urls.append(url)
                                 print('urls: ', str(url))
 
-        if i > 1000000:
+        if i > 50000:
             break
 
         i = i + 1
-    '''
+
 
     '''
     # crawl church reference sites
@@ -136,11 +139,20 @@ class ChurchCrawler(scrapy.Spider):
     '''
 
 
+    '''
     #crawl specific url
     start_urls = [
+        "https://pikespeakchristianchurch.com/about/"
+        #"https://mynorthlandchurch.org/about/our-team"
+        #"https://pikespeakchristianchurch.com/about/"
+        #"https://www.thechurchatwoodmoor.com/staff/"
         #"https://www.accncosprings.com/"
         #"https://www.calvary-umc.org/"
-        "https://nowfaithdenver.com/about-now-faith/leadership/"
+        #"https://www.christthekingdenver.org/"
+        #"https://calvaryco.church/staff/"
+        #"https://www.christchurchdenver.org/staff/"
+        #"https://southeast-church.org/about-us/leadership/"
+        #"https://nowfaithdenver.com/about-now-faith/leadership/"
         #"https://www.westyrpc.org/our-leadership/"
         #"https://www.redemptioncitychurch.com/about-us/"
         #"https://crossingchurch.org/staff/"
@@ -155,7 +167,7 @@ class ChurchCrawler(scrapy.Spider):
         #"https://christianservices.org/",
         #"https://christianservices.org/contact-us/"
     ]
-
+    '''
 
     def checkCommonDiv(self, el1, el2):
         s1 = str(el1)
@@ -1505,7 +1517,31 @@ class ChurchCrawler(scrapy.Spider):
 
         currentChurch, isHomePage = self.findCurrentChurch(response.url)
         if currentChurch is not None and "name" in currentChurch:
-            profileExtractor.extractProfilesFromWebPage(currentChurch, response, None, None, None, None)
+
+            if "processed" not in currentChurch:
+                currentChurch["processed"] = {}
+
+            if "extract-profile-contacts-from-webpage" not in currentChurch["processed"]:
+                currentChurch["processed"]["extract-profile-contacts-from-webpage"] = []
+
+            processed = False
+            for processed in currentChurch["processed"]["extract-profile-contacts-from-webpage"]:
+                if processed["page"] == response.url:
+                    processed = True
+
+            if processed == False:
+                profileExtractor.extractProfilesFromWebPage(currentChurch, response, None, None, None, None)
+
+                processed = {
+                    "page": response.url,
+                    "datetime": str(datetime.now())
+                }
+                currentChurch["processed"]["extract-profile-contacts-from-webpage"].append(processed)
+
+                self.saveChurches()
+
+
+
             # self.getLeadPastorInfoUsingAzureAI(currentChurch)
             #self.searchForContacts(currentChurch, response)
 
