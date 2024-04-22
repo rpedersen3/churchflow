@@ -54,27 +54,26 @@ class DivCount:
 class ChurchCrawler(scrapy.Spider):
     name = "crawler"
 
-    '''
+
     #crawl church sites
 
     start_urls = []
 
 
-    i = 1
+
+    '''
     for church in churches:
 
         #if "pages" not in church:
+        link = None
+        if "link" in church:
+            link = church["link"]
 
-        if i > 0:
-            if "link" in church:
-                url = church["link"]
-                start_urls.append(url)
-                print('urls: ', str(url))
+        if link is None and "websiteUri" in church:
+            link = church["websiteUri"]
 
-        if i > 100000:
-            break
-
-        i = i + 1
+        if link is not None:
+            start_urls.append(link)
     '''
 
 
@@ -111,6 +110,7 @@ class ChurchCrawler(scrapy.Spider):
             break
 
         i = i + 1
+
 
 
     '''
@@ -1120,75 +1120,104 @@ class ChurchCrawler(scrapy.Spider):
         elif "websiteUri" in currentChurch:
             link = currentChurch["websiteUri"]
 
+        #if link != "https://calvarycherrycreek.org/":
+        #    return
+
+        print(' process link: ', link)
         if link is not None:
 
             if link.startswith("http://"):
                 link = link.replace("http://", "https://")
 
+                currentChurch["link"] = link
+                currentChurch["websiteUri"] = link
+                self.saveChurches()
+
+
             processor = "extract-staff-pages-from-webpage"
             needsToBeProcessed = self.checkIfNeedsProcessing(currentChurch, processor, link)
 
+            print("needs: ", needsToBeProcessed)
+
             if needsToBeProcessed:
 
+                print("process: ", link)
+                if link != "" and link.find("facebook") == -1:
 
 
-                api_key = "abcdef"
-                service = build(
-                    "customsearch", "v1", developerKey=api_key
-                )
+                    pages = []
+                    if "pages" in currentChurch:
+                        pages = currentChurch["pages"]
 
+                    if len(pages) == 0:
 
-                if link == "" or link.find("facebook") >= 0:
-                    return
-
-                pages = []
-                if "pages" in currentChurch:
-                    pages = currentChurch["pages"]
-
-                if len(pages) == 0:
-
-                    time.sleep(0.2)
-
-                    parsed_url = urlparse(link)
-                    domain = parsed_url.netloc.replace("www.", "")
-
-                    query = "'pastor' 'eldor' 'deacon' 'pastoral' 'minister'"
-                    res = (
-                        service.cse()
-                        .list(
-                            q=query,
-                            cx="d744719d644574dd7",
-                            siteSearch=domain,
-                            start=1
+                        time.sleep(1)
+                        api_key = "abcdef"
+                        service = build(
+                            "customsearch", "v1", developerKey=api_key
                         )
-                        .execute()
-                    )
 
-                    #print("--------------------------------------")
-                    #print(res)
-                    #print("--------------------------------------")
+                        parsed_url = urlparse(link)
+                        domain = parsed_url.netloc.replace("www.", "")
 
-                    if "items" in res:
+                        names = "pastor", "elder", "deacon", "minister"
 
-                        for item in res["items"]:
-                            link = item["link"]
+                        for name in names:
 
-                            count = link.count("/")
-                            if count < 6:
-                                page = self.getPage(pages, "staff", link)
-                                if page is None:
-                                    page = {
-                                        "type": "staff",
-                                        "url": link
-                                    }
-                                    pages.append(page)
+                            print("query for: ", name)
 
-                    if len(pages) > 0:
-                        print("found pages: ", pages)
+                            query = name
+                            res = (
+                                service.cse()
+                                .list(
+                                    q=query,
+                                    cx="d744719d644574dd7",
+                                    siteSearch=domain,
+                                    start=1
+                                )
+                                .execute()
+                            )
 
-                    currentChurch["pages"] = pages
+                            #print("--------------------------------------")
+                            #print(res)
+                            #print("--------------------------------------")
 
-                needsToBeProcessed = self.markedAsProcessed(currentChurch, processor, link)
+                            if "items" in res:
+
+                                for item in res["items"]:
+
+                                    link = item["link"]
+
+                                    # check for lots of down pages
+                                    count = link.count("/")
+                                    if count < 6:
+
+                                        # check for name part
+                                        if link.find('staff') >= 0 or \
+                                                link.find('about') >= 0 or \
+                                                link.find('leader') >= 0 or \
+                                                link.find('contact') >= 0 or \
+                                                link.find('team') >= 0 or \
+                                                link.find('leader') >= 0 or \
+                                                link.find('who-we-are') >= 0 or \
+                                                link.find('pastor') >= 0:
+
+
+                                            page = self.getPage(pages, "staff", link)
+                                            if page is None:
+                                                page = {
+                                                    "type": "staff",
+                                                    "url": link
+                                                }
+                                                pages.append(page)
+
+                            if len(pages) > 0:
+                                print("found pages: ", pages)
+                                currentChurch["pages"] = pages
+
+                                break
+
+                    needsToBeProcessed = self.markedAsProcessed(currentChurch, processor, link)
                 self.saveChurches()
 
     def searchForChurchLeadPastorInfo(self, currentChurch):
@@ -1525,20 +1554,18 @@ class ChurchCrawler(scrapy.Spider):
         if "processed" not in currentChurch:
             currentChurch["processed"] = {}
 
-        if "extract-profile-contacts-from-webpage" not in currentChurch["processed"]:
+        if processor not in currentChurch["processed"]:
             currentChurch["processed"][processor] = []
 
-        needsToBeProcessed = False
+        needsToBeProcessed = True
         for processed in currentChurch["processed"][processor]:
             if processed["page"] == url:
                 if "datetime" in processed:
+
                     datetimeStr = processed["datetime"]
                     dt = datetime.strptime(datetimeStr, "%Y-%m-%d %H:%M:%S.%f")
-
-                    print("check date: dt: ", dt.date(), ", today: ", datetime.today().date())
                     if dt.date() >= datetime.today().date():
-                        print("has been processed today")
-                        needsToBeProcessed = True
+                        needsToBeProcessed = False
 
         return needsToBeProcessed
 
@@ -1548,7 +1575,7 @@ class ChurchCrawler(scrapy.Spider):
                     "page": url,
                     "datetime": str(datetime.now())
                 }
-        currentChurch["processed"]["extract-profile-contacts-from-webpage"].append(processed)
+        currentChurch["processed"][processor].append(processed)
 
 
     def parse(self, response):
@@ -1611,6 +1638,7 @@ class ChurchCrawler(scrapy.Spider):
 
 
         # cycle through churches and add staff pages
+        print("............  add church staff pages ...............")
         for church in churches:
             self.addChurchStaffPages(church)
 
