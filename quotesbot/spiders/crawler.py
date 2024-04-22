@@ -107,7 +107,7 @@ class ChurchCrawler(scrapy.Spider):
                                 start_urls.append(url)
                                 print('urls: ', str(url))
 
-        if i > 50000:
+        if i > 5000000:
             break
 
         i = i + 1
@@ -139,10 +139,11 @@ class ChurchCrawler(scrapy.Spider):
     '''
 
 
-    '''
+
+
     #crawl specific url
     start_urls = [
-        "https://pikespeakchristianchurch.com/about/"
+        #"https://mcleanbible.org/montgomery-county/leadership/"
         #"https://mynorthlandchurch.org/about/our-team"
         #"https://pikespeakchristianchurch.com/about/"
         #"https://www.thechurchatwoodmoor.com/staff/"
@@ -161,13 +162,13 @@ class ChurchCrawler(scrapy.Spider):
         #"https://www.flatironschurch.com/leadership/"
         #"https://www.cccgreeley.org/staff-directory/"
         #"https://victory.com/team-pastors/"
-        #"https://calvarybible.com/staff/"
+        "https://calvarybible.com/staff/"
         #"https://www.missionhills.org/im-new/staff-elders/"
         #"https://www.missionhills.org/"
         #"https://christianservices.org/",
         #"https://christianservices.org/contact-us/"
     ]
-    '''
+
 
     def checkCommonDiv(self, el1, el2):
         s1 = str(el1)
@@ -1111,7 +1112,87 @@ class ChurchCrawler(scrapy.Spider):
         self.saveChurches()
 
 
+    def addChurchStaffPages(self, currentChurch):
+
+        link = None
+        if "link" in currentChurch:
+            link = currentChurch["link"]
+        elif "websiteUri" in currentChurch:
+            link = currentChurch["websiteUri"]
+
+        if link is not None:
+
+            if link.startswith("http://"):
+                link = link.replace("http://", "https://")
+
+            processor = "extract-staff-pages-from-webpage"
+            needsToBeProcessed = self.checkIfNeedsProcessing(currentChurch, processor, link)
+
+            if needsToBeProcessed:
+
+
+
+                api_key = "abcdef"
+                service = build(
+                    "customsearch", "v1", developerKey=api_key
+                )
+
+
+                if link == "" or link.find("facebook") >= 0:
+                    return
+
+                pages = []
+                if "pages" in currentChurch:
+                    pages = currentChurch["pages"]
+
+                if len(pages) == 0:
+
+                    time.sleep(0.2)
+
+                    parsed_url = urlparse(link)
+                    domain = parsed_url.netloc.replace("www.", "")
+
+                    query = "'pastor' 'eldor' 'deacon' 'pastoral' 'minister'"
+                    res = (
+                        service.cse()
+                        .list(
+                            q=query,
+                            cx="d744719d644574dd7",
+                            siteSearch=domain,
+                            start=1
+                        )
+                        .execute()
+                    )
+
+                    #print("--------------------------------------")
+                    #print(res)
+                    #print("--------------------------------------")
+
+                    if "items" in res:
+
+                        for item in res["items"]:
+                            link = item["link"]
+
+                            count = link.count("/")
+                            if count < 6:
+                                page = self.getPage(pages, "staff", link)
+                                if page is None:
+                                    page = {
+                                        "type": "staff",
+                                        "url": link
+                                    }
+                                    pages.append(page)
+
+                    if len(pages) > 0:
+                        print("found pages: ", pages)
+
+                    currentChurch["pages"] = pages
+
+                needsToBeProcessed = self.markedAsProcessed(currentChurch, processor, link)
+                self.saveChurches()
+
     def searchForChurchLeadPastorInfo(self, currentChurch):
+
 
 
         # and "leadPastor" not in currentChurch
@@ -1120,66 +1201,7 @@ class ChurchCrawler(scrapy.Spider):
             self.getLeadPastorInfoUsingGoogleGemini(currentChurch)
             #self.saveChurches()
 
-        '''
-        api_key = "abcdef"
-        service = build(
-            "customsearch", "v1", developerKey=api_key
-        )
 
-        if "link" in currentChurch:
-
-            link = currentChurch["link"]
-            if link == "" or link.find("facebook") >= 0:
-                return
-
-            pages = []
-            if "pages" in currentChurch:
-                pages = currentChurch["pages"]
-
-            time.sleep(0.2)
-
-            parsed_url = urlparse(link)
-            domain = parsed_url.netloc.replace("www.", "")
-
-            query = "'pastor' 'eldor' 'deacon' 'pastoral'"
-            print("query: ", query)
-            res = (
-                service.cse()
-                .list(
-                    q=query,
-                    cx="d744719d644574dd7",
-                    siteSearch=domain,
-                    start=1
-                    # cx="01757666212468239146:omuauf_lfve",
-                )
-                .execute()
-            )
-
-            #print("--------------------------------------")
-            #print(res)
-            #print("--------------------------------------")
-
-            if "items" in res:
-
-                for item in res["items"]:
-                    link = item["link"]
-
-                    count = link.count("/")
-                    #print("link: ", link, ", count: ", count)
-                    if count < 6:
-                        page = self.getPage(pages, "staff", link)
-                        if page is None:
-                            page = {
-                                "type": "staff",
-                                "url": link
-                            }
-                            pages.append(page)
-
-                        print("--------- save page: ", link)
-
-            currentChurch["pages"] = pages
-            self.saveChurches()
-    '''
 
     def searchForChurchProfileInfo(self, currentChurch):
 
@@ -1498,6 +1520,37 @@ class ChurchCrawler(scrapy.Spider):
 
         return currentChurch
 
+    def checkIfNeedsProcessing(self, currentChurch, processor, url):
+
+        if "processed" not in currentChurch:
+            currentChurch["processed"] = {}
+
+        if "extract-profile-contacts-from-webpage" not in currentChurch["processed"]:
+            currentChurch["processed"][processor] = []
+
+        needsToBeProcessed = False
+        for processed in currentChurch["processed"][processor]:
+            if processed["page"] == url:
+                if "datetime" in processed:
+                    datetimeStr = processed["datetime"]
+                    dt = datetime.strptime(datetimeStr, "%Y-%m-%d %H:%M:%S.%f")
+
+                    print("check date: dt: ", dt.date(), ", today: ", datetime.today().date())
+                    if dt.date() >= datetime.today().date():
+                        print("has been processed today")
+                        needsToBeProcessed = True
+
+        return needsToBeProcessed
+
+    def markedAsProcessed(self, currentChurch, processor, url):
+
+        processed = {
+                    "page": url,
+                    "datetime": str(datetime.now())
+                }
+        currentChurch["processed"]["extract-profile-contacts-from-webpage"].append(processed)
+
+
     def parse(self, response):
 
         if response.url.find(".pdf") >= 0 or \
@@ -1514,37 +1567,27 @@ class ChurchCrawler(scrapy.Spider):
         #churchFinder.findCities()
         #churchFinder.findChurches()
 
+        #print("body: ", response.body)
 
+        '''
         currentChurch, isHomePage = self.findCurrentChurch(response.url)
         if currentChurch is not None and "name" in currentChurch:
 
-            if "processed" not in currentChurch:
-                currentChurch["processed"] = {}
+            processor = "extract-profile-contacts-from-webpage"
+            needsToBeProcessed = self.checkIfNeedsProcessing(currentChurch, processor, response.url)
 
-            if "extract-profile-contacts-from-webpage" not in currentChurch["processed"]:
-                currentChurch["processed"]["extract-profile-contacts-from-webpage"] = []
+            if needsToBeProcessed == True:
 
-            processed = False
-            for processed in currentChurch["processed"]["extract-profile-contacts-from-webpage"]:
-                if processed["page"] == response.url:
-                    processed = True
-
-            if processed == False:
                 profileExtractor.extractProfilesFromWebPage(currentChurch, response, None, None, None, None)
 
-                processed = {
-                    "page": response.url,
-                    "datetime": str(datetime.now())
-                }
-                currentChurch["processed"]["extract-profile-contacts-from-webpage"].append(processed)
-
+                self.markAsProcessed(currentChurch, processor, response.url)
                 self.saveChurches()
 
 
 
             # self.getLeadPastorInfoUsingAzureAI(currentChurch)
             #self.searchForContacts(currentChurch, response)
-
+        '''
 
         '''
         #crawl reference urls
@@ -1563,9 +1606,13 @@ class ChurchCrawler(scrapy.Spider):
         # cycle through churches that don't have links and try to resolve them
         for church in churches:
             self.searchForChurchProfileInfo(church)
-
         '''
 
+
+
+        # cycle through churches and add staff pages
+        for church in churches:
+            self.addChurchStaffPages(church)
 
         '''
         # cycle through churches and update lead pastor information

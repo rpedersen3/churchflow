@@ -279,6 +279,8 @@ class ProfileExtractor:
         if photo is not None:
             contact["photo"] = photo
 
+        currentChurch["contacts"] = contacts
+
 
         print("****************************")
         print("contact record:")
@@ -356,6 +358,8 @@ class ProfileExtractor:
 
         hasHitBoundaryBefore = False
 
+
+
         #path = response.xpath(
         #    '//p | //div[not(descendant::div)] | //a[starts-with(@href, "mailto:")] | //img | //h1 | //h2 | //h3 | //h4 | //h5 | //h6 |  //strong | //span ')
         path = response.xpath(
@@ -387,6 +391,8 @@ class ProfileExtractor:
 
                     ancestorLevel = len(ancestors)
                     descendantLevel = len(descendants)
+
+
 
                     #print("className: ", className, ", level an: ", ancestorLevel, ", level desc: ", descendantLevel)
 
@@ -575,10 +581,22 @@ class ProfileExtractor:
                                 self.addFirst(schemaStructure, "name", "li", cClassName, None)
 
 
+
+
+                # get image source
+                img_src = None
+                if el.xpath('@style').get():
+                    st = el.xpath('@style').get()
+                    if st.find("background:url") >= 0:
+                        parts = re.findall(r'\((.*?)\)', st)
+                        if len(parts) > 0:
+                            img_src = parts[0]
+
                 # get photo inside elements
                 if el.xpath('@src | @data-src | @srcset').get():
-
                     img_src = el.xpath('@src | @data-src | @srcset').get()
+
+                if img_src is not None:
 
                     if self.isSmallerThan(el, 100) == True:
                         continue
