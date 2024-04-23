@@ -76,6 +76,7 @@ class ChurchCrawler(scrapy.Spider):
 
 
 
+    '''
     #crawl church sites
 
     start_urls = []
@@ -99,9 +100,9 @@ class ChurchCrawler(scrapy.Spider):
                 if "addressInfo" not in church:
                     print("bad site: ", link)
                     #start_urls.append(link)
-
-
     '''
+
+
     # crawl church staff pages
     start_urls = []
 
@@ -136,7 +137,7 @@ class ChurchCrawler(scrapy.Spider):
 
         i = i + 1
 
-    '''
+
 
     '''
     # crawl church reference sites
