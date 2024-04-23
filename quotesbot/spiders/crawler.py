@@ -1619,7 +1619,7 @@ class ChurchCrawler(scrapy.Spider):
         profileExtractor = ProfileExtractor()
 
         churchFinder = ChurchFinder()
-        churchFinder.findChurchesUsingSpreadsheet()
+        #churchFinder.findChurchesUsingSpreadsheet()
         #churchFinder.findChurchesUsingGooglePlaces()
         #churchFinder.findChurchesUsingNonProfitData()
         #churchFinder.findCityDemographicsFromCensusData()
@@ -1690,7 +1690,7 @@ class ChurchCrawler(scrapy.Spider):
                     break
         '''
 
-        '''
+
         # get google places associated with websites
         for church in churches:
             link = None
@@ -1711,7 +1711,7 @@ class ChurchCrawler(scrapy.Spider):
 
                         needsToBeProcessed = self.markAsProcessed(church, processor, link)
                         self.saveChurches()
-        '''
+
 
         '''
 

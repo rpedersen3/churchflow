@@ -32,11 +32,7 @@ class ChurchFinder:
 
     def findCurrentChurch(self, churches, url, street, zipcode):
 
-        if url.find("https://") == -1:
-            url = "https://" + url
 
-        url = url.strip()
-        url = re.sub(r'\s+', ' ', url)
 
         urlParse = urlparse(url)
         urlDomain = urlParse.netloc.replace("www.", "")
@@ -136,6 +132,15 @@ class ChurchFinder:
 
                 if url != "" and active == "1":
 
+                    if url.find("https://") == -1:
+                        url = "https://" + url
+
+                    url = url.strip()
+                    url = re.sub(r'\s+', ' ', url)
+
+
+                    match = False
+
                     print("url: ", url)
                     selectedChurch = self.findCurrentChurch(churches, url, street, zipcode)
                     if (selectedChurch is not None):
@@ -150,8 +155,8 @@ class ChurchFinder:
                             print("")
 
                             leadPastor = {
-                                "name", pastor,
-                                "listId", id
+                                "name": pastor,
+                                "listId": id
                             }
 
                             if email != "":
@@ -161,6 +166,37 @@ class ChurchFinder:
                                 leadPastor["linkedin"] = linkedin
 
                             selectedChurch["leadPastor"] = leadPastor
+                            selectedChurch["listId"] = id
+
+                            match = True
+
+                    if match == False:
+
+                        # create new record
+                        church = {
+                            "name": name,
+                            "link": url
+                        }
+
+                        leadPastor = {
+                            "name": pastor,
+                            "listId": id
+                        }
+
+                        if street != "":
+                            church["address"] = street + ", " + city + ", " + state + ", " + zipcode
+
+                        if email != "":
+                            leadPastor["email"] = email
+
+                        if linkedin != "":
+                            leadPastor["linkedin"] = linkedin
+
+                        church["leadPastor"] = leadPastor
+                        church["listId"] = id
+
+                        churches.append(church)
+
 
         self.saveChurches()
 
