@@ -54,7 +54,25 @@ class DivCount:
 class ChurchCrawler(scrapy.Spider):
     name = "crawler"
 
+    def checkIfNeedsProcessing(currentChurch, processor, url):
 
+        if "processed" not in currentChurch:
+            currentChurch["processed"] = {}
+
+        if processor not in currentChurch["processed"]:
+            currentChurch["processed"][processor] = []
+
+        needsToBeProcessed = True
+        for processed in currentChurch["processed"][processor]:
+            if processed["page"] == url:
+                if "datetime" in processed:
+
+                    datetimeStr = processed["datetime"]
+                    dt = datetime.strptime(datetimeStr, "%Y-%m-%d %H:%M:%S.%f")
+                    if dt.date() >= datetime.today().date():
+                        needsToBeProcessed = False
+
+        return needsToBeProcessed
 
 
     '''
@@ -73,10 +91,17 @@ class ChurchCrawler(scrapy.Spider):
             link = church["websiteUri"]
 
         if link is not None:
-            start_urls.append(link)
+
+            processor = "extract-location-information-from-webpage"
+            needsToBeProcessed = checkIfNeedsProcessing(church, processor, link)
+
+            if needsToBeProcessed:
+                if "addressInfo" not in church:
+                    print("bad site: ", link)
+                    #start_urls.append(link)
     '''
 
-
+    '''
     # crawl church staff pages
     start_urls = []
 
@@ -111,7 +136,7 @@ class ChurchCrawler(scrapy.Spider):
 
         i = i + 1
 
-
+    '''
 
     '''
     # crawl church reference sites
@@ -140,7 +165,7 @@ class ChurchCrawler(scrapy.Spider):
 
 
 
-    '''
+
     #crawl specific url
     start_urls = [
         "https://www.windsorca.org/faculty-and-staff"
@@ -170,7 +195,7 @@ class ChurchCrawler(scrapy.Spider):
         #"https://christianservices.org/contact-us/"
     ]
 
-    '''
+
 
     def checkCommonDiv(self, el1, el2):
         s1 = str(el1)
@@ -592,7 +617,7 @@ class ChurchCrawler(scrapy.Spider):
         response = requests.post(url=endpoint, json=payload)
         data = response.json()
 
-        print("************* json returned: ", data)
+        #print("************* json returned: ", data)
 
         if "places" in data:
             places = data["places"]
@@ -1243,9 +1268,9 @@ class ChurchCrawler(scrapy.Spider):
             self.saveChurches()
 
 
-    def searchForSiteProfileInfo(self, currentChurch, response, isHomePage):
+    def searchForSiteProfileInfo(self, currentChurch, url, response, isHomePage):
 
-        print('**************** process page: ', response.url)
+        print('**************** process page: ', url)
 
         # church name
         # website link
@@ -1253,44 +1278,52 @@ class ChurchCrawler(scrapy.Spider):
         # address (street, city, state, zipcode)
         # social links,  facebook, instagram, youtube, flickr
 
-        if response.url.find(".pdf") >= 0:
+        if "addressInfo" in currentChurch:
+            return
+
+        if url.find(".pdf") >= 0:
             return
 
         foundUrlTag = False
-        if isHomePage or response.url.find("contact") >= 0:
+        if isHomePage or url.find("contact") >= 0:
             foundUrlTag = True
 
         if foundUrlTag:
 
             self.getChurchProfileUsingGooglePlaces(currentChurch, isHomePage)
 
-            # detect phone number
-            phoneNumber = self.detectPhone(response, ["303", "720", "719"])
-            if phoneNumber is not None and "phone" not in currentChurch:
-                print('phone: ', phoneNumber)
-                currentChurch["phone"] = phoneNumber
+            if response is not None:
+                try:
+                    # detect phone number
+                    phoneNumber = self.detectPhone(response, ["303", "720", "719"])
+                    if phoneNumber is not None and "phone" not in currentChurch:
+                        print('phone: ', phoneNumber)
+                        currentChurch["phone"] = phoneNumber
 
-            # detect address
-            name = self.detectName(response)
-            if name is not None and "name" not in currentChurch:
-                print("name: ", name)
-                currentChurch["name"] = name
+                    # detect address
+                    name = self.detectName(response)
+                    if name is not None and "name" not in currentChurch:
+                        print("name: ", name)
+                        currentChurch["name"] = name
 
-            # detect email address
-            email = self.detectEmail(response)
-            if email is not None and "email" not in currentChurch:
-                print("email: ", email)
-                currentChurch["email"] = email
+                    # detect email address
+                    email = self.detectEmail(response)
+                    if email is not None and "email" not in currentChurch:
+                        print("email: ", email)
+                        currentChurch["email"] = email
 
-            # detect address
-            address = self.detectAddress(response)
-            if address is not None and "address" not in currentChurch:
-                print("address: ", address)
-                currentChurch["address"] = address
+                    # detect address
+                    address = self.detectAddress(response)
+                    if address is not None and "address" not in currentChurch:
+                        print("address: ", address)
+                        currentChurch["address"] = address
 
-            if "address" in currentChurch:
-                address = currentChurch["address"]
-                self.getAddressInfoUsingGooglePlaces(address, currentChurch)
+                    if "address" in currentChurch:
+                        address = currentChurch["address"]
+                        self.getAddressInfoUsingGooglePlaces(address, currentChurch)
+
+                except Exception as e:
+                    print("error getting address for ", response.url, ", error: ", e)
 
 
     def searchForContacts(self, currentChurch, response):
@@ -1516,7 +1549,6 @@ class ChurchCrawler(scrapy.Spider):
         for church in churches:
 
             if "link" in church:
-
                 churchParse = urlparse(church["link"])
                 churchDomain = churchParse.netloc
 
@@ -1587,6 +1619,7 @@ class ChurchCrawler(scrapy.Spider):
         profileExtractor = ProfileExtractor()
 
         churchFinder = ChurchFinder()
+        churchFinder.findChurchesUsingSpreadsheet()
         #churchFinder.findChurchesUsingGooglePlaces()
         #churchFinder.findChurchesUsingNonProfitData()
         #churchFinder.findCityDemographicsFromCensusData()
@@ -1657,26 +1690,50 @@ class ChurchCrawler(scrapy.Spider):
                     break
         '''
 
+        '''
+        # get google places associated with websites
+        for church in churches:
+            link = None
+            if "link" in church:
+                link = church["link"]
+            if link is None and "websiteUrl" in church:
+                link = church["websiteUrl"]
 
+            if link is not None:
 
+                processor = "extract-location-information-from-webpage"
+                needsToBeProcessed = self.checkIfNeedsProcessing(church, processor, link)
 
+                if needsToBeProcessed == True:
+                    if "addressInfo" not in church:
+                        print("search for site location info")
+                        self.searchForSiteProfileInfo(church, link, None, True)
 
-        # crawl church home page urls
+                        needsToBeProcessed = self.markAsProcessed(church, processor, link)
+                        self.saveChurches()
+        '''
+
+        '''
+
+        # crawl church home page urls for location info
         print("")
         print("parse site urls: ", response.url)
         currentChurch, isHomePage = self.findCurrentChurch(response.url)
+        print("done looking")
         if currentChurch is not None and isHomePage:
 
             processor = "extract-location-information-from-webpage"
             needsToBeProcessed = self.checkIfNeedsProcessing(currentChurch, processor, response.url)
 
             if needsToBeProcessed == True:
+                if "addressInfo" not in currentChurch:
+                    print("search for site location info")
+                    self.searchForSiteProfileInfo(currentChurch, response.url, response, isHomePage)
 
-                self.searchForSiteProfileInfo(currentChurch, response, isHomePage)
-
-                needsToBeProcessed = self.markAsProcessed(currentChurch, processor, link)
+                needsToBeProcessed = self.markAsProcessed(currentChurch, processor, response.url)
                 self.saveChurches()
 
+        '''
 
         '''
         #self.searchForGroups(response)

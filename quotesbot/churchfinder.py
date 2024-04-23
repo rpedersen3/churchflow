@@ -6,6 +6,8 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import datetime
 import time
+from urllib.parse import urlparse
+import re
 
 class ChurchInfo:
     name = "churchinfo"
@@ -27,6 +29,142 @@ class ChurchFinder:
     with open(churches_file_path, "r") as file:
         churchesData = json.load(file)
     churches = churchesData["churches"]
+
+    def findCurrentChurch(self, churches, url, street, zipcode):
+
+        if url.find("https://") == -1:
+            url = "https://" + url
+
+        url = url.strip()
+        url = re.sub(r'\s+', ' ', url)
+
+        urlParse = urlparse(url)
+        urlDomain = urlParse.netloc.replace("www.", "")
+
+        isHomePage = False
+        currentChurch = None
+        for church in churches:
+
+            if "link" in church:
+                churchParse = urlparse(church["link"])
+                churchDomain = churchParse.netloc.replace("www.", "")
+
+                if churchDomain == urlDomain:
+                    currentChurch = church
+
+                    return currentChurch
+
+        #street match
+        for church in churches:
+
+            if "addressInfo" in church and "street" in church["addressInfo"] and \
+                    street is not None and street != "" and \
+                    zipcode is not None and zipcode != "":
+
+                churchStreetParts = church["addressInfo"]["street"].split()
+                streetParts = street.split()
+
+                if len(churchStreetParts) > 0 and len(streetParts) > 0:
+
+                    if churchStreetParts[0].lower() == streetParts[0].lower():
+
+                        if church["addressInfo"]["zipcode"] == zipcode:
+
+                            print("*** street match: ", church["addressInfo"]["street"], ", to list: ", street)
+                            currentChurch = church
+
+                            return currentChurch
+
+
+
+        return currentChurch
+
+    def findChurchesUsingSpreadsheet(self):
+
+        # get churches
+        churches = self.churches
+
+        # get cities
+        file_path = "coloradoFrontRangeCities.json"
+        with open(file_path, "r") as file:
+            citiesData = json.load(file)
+
+        # cycle through cities looking for church web sites
+        cities = citiesData["cities"]
+
+        # get spreadsheet
+        spreadsheet_path = 'ChurchListExportv20.txt'
+
+
+        # Read data from file
+        with open(spreadsheet_path, 'r') as file:
+            spreadsheetLines = file.readlines()
+
+            data = []
+            frontRangeData = []
+
+            found = 0
+            process = False
+            for spreadsheetLine in spreadsheetLines:
+
+                spreadsheetLine = spreadsheetLine.rstrip('\r\n')
+                spreadsheetParts = spreadsheetLine.split('\t')
+
+                id = spreadsheetParts[0]
+                active = spreadsheetParts[2]
+                name = spreadsheetParts[4]
+                url = spreadsheetParts[5]
+                attendance = spreadsheetParts[6]
+                size = spreadsheetParts[7]
+                denomination = spreadsheetParts[8]
+                location = spreadsheetParts[9]
+                pastor = spreadsheetParts[15]
+                email = spreadsheetParts[16]
+                phone = spreadsheetParts[17]
+                linkedin = spreadsheetParts[19]
+                firstname = spreadsheetParts[23]
+                lastname = spreadsheetParts[24]
+
+                churchname = spreadsheetParts[26]
+                street = spreadsheetParts[27]
+                city = spreadsheetParts[28]
+                state = spreadsheetParts[29]
+                zipcode = spreadsheetParts[30]
+
+                process = True
+
+
+                if url != "" and active == "1":
+
+                    print("url: ", url)
+                    selectedChurch = self.findCurrentChurch(churches, url, street, zipcode)
+                    if (selectedChurch is not None):
+                        if "name" in selectedChurch:
+                            link = ""
+                            if "link" in selectedChurch:
+                                link = selectedChurch["link"]
+                            print("MATCH name: ", selectedChurch["name"], ", list name: ", name, ", active: ", active)
+                            print("pastor: ", pastor, ", email: ", email)
+                            #print("url     : ", link)
+                            #print("list url: ", url)
+                            print("")
+
+                            leadPastor = {
+                                "name", pastor,
+                                "listId", id
+                            }
+
+                            if email != "":
+                                leadPastor["email"] = email
+
+                            if linkedin != "":
+                                leadPastor["linkedin"] = linkedin
+
+                            selectedChurch["leadPastor"] = leadPastor
+
+        self.saveChurches()
+
+
 
 
     def findCities(self):
