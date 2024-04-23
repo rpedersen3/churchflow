@@ -75,7 +75,7 @@ class ChurchCrawler(scrapy.Spider):
         return needsToBeProcessed
 
 
-    '''
+
     #crawl church sites
 
     start_urls = []
@@ -99,7 +99,7 @@ class ChurchCrawler(scrapy.Spider):
                 if "addressInfo" not in church:
                     print("bad site: ", link)
                     #start_urls.append(link)
-    '''
+
 
     '''
     # crawl church staff pages
@@ -165,7 +165,7 @@ class ChurchCrawler(scrapy.Spider):
 
 
 
-
+    '''
     #crawl specific url
     start_urls = [
         "https://www.windsorca.org/faculty-and-staff"
@@ -194,7 +194,7 @@ class ChurchCrawler(scrapy.Spider):
         #"https://christianservices.org/",
         #"https://christianservices.org/contact-us/"
     ]
-
+    '''
 
 
     def checkCommonDiv(self, el1, el2):
@@ -1187,11 +1187,12 @@ class ChurchCrawler(scrapy.Spider):
                         parsed_url = urlparse(link)
                         domain = parsed_url.netloc.replace("www.", "")
 
-                        names = "pastor", "elder", "deacon", "minister"
+                        names = "pastor", "elder"; #, "deacon", "minister"
 
                         for name in names:
 
                             print("query for: ", name)
+                            time.sleep(0.5)
 
                             query = name
                             res = (
@@ -1630,7 +1631,7 @@ class ChurchCrawler(scrapy.Spider):
         #print("body: ", response.body)
 
 
-        '''
+
         # extract contacts from staff web pages
         currentChurch, isHomePage = self.findCurrentChurch(response.url)
         if currentChurch is not None and "name" in currentChurch:
@@ -1649,7 +1650,7 @@ class ChurchCrawler(scrapy.Spider):
 
             # self.getLeadPastorInfoUsingAzureAI(currentChurch)
             #self.searchForContacts(currentChurch, response)
-        '''
+
 
         '''
         #crawl reference urls
@@ -1674,8 +1675,15 @@ class ChurchCrawler(scrapy.Spider):
         '''
         # cycle through churches and add staff pages
         print("............  add church staff pages ...............")
+        start = False
         for church in churches:
-            self.addChurchStaffPages(church)
+
+            if "link" in church:
+                if church["link"] == "https://calvaryberthoud.com/":
+                    start = True
+
+            if start == True:
+                self.addChurchStaffPages(church)
         '''
 
         '''
@@ -1691,6 +1699,7 @@ class ChurchCrawler(scrapy.Spider):
         '''
 
 
+        '''
         # get google places associated with websites
         for church in churches:
             link = None
@@ -1711,7 +1720,7 @@ class ChurchCrawler(scrapy.Spider):
 
                         needsToBeProcessed = self.markAsProcessed(church, processor, link)
                         self.saveChurches()
-
+        '''
 
         '''
 
