@@ -174,7 +174,9 @@ class ChurchCrawler(scrapy.Spider):
 
     #crawl specific url
     startURLs = [
-        "https://www.ststephensaurora.org/clergy-staff"
+        "https://www.valleyfellowship.church/leadership"
+        #"https://www.ziontemplechurch.org/aboutus"
+        #"https://www.ststephensaurora.org/clergy-staff"
         #"https://www.agapeoutpost.org/about"
         #"https://www.valleylifefraser.org/about-us"
         #"https://www.resiliencechurch.org/our-team"

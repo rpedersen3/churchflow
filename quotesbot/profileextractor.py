@@ -724,6 +724,7 @@ class ProfileExtractor:
                 # get photo inside elements
                 if el.xpath('@src | @data-src | @srcset').get():
                     img_src = el.xpath('@src | @data-src | @srcset').get()
+                    print('.................  img_src: ', img_src)
 
                 if img_src is not None:
 
@@ -771,8 +772,15 @@ class ProfileExtractor:
 
 
                             print(">> photo: ", img_src)
-                            if  hasHitBoundaryBefore is not None and profilePhoto is None:
-                                profilePhoto = img_src
+                            # if boundary has been hit and this is a photo boundary then clear everything
+                            if  hasHitBoundaryBefore is not None:
+                                if profilePhoto is None:
+                                    profilePhoto = img_src
+
+                                profileName = None
+                                profileTitle = None
+                                profileDepartment = None
+                                profileEmail = None
 
                             # if we are building schema then do this part
                             if boundaryAttribute is None:
