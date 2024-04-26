@@ -174,7 +174,8 @@ class ChurchCrawler(scrapy.Spider):
 
     #crawl specific url
     startURLs = [
-        "https://www.resiliencechurch.org/our-team"
+        "https://www.valleylifefraser.org/about-us"
+        #"https://www.resiliencechurch.org/our-team"
         #"https://www.fellowshipdenver.org/leadership"
         #"https://www.fellowshipdenver.org/leadership/" # blocked 404 error
         #"https://www.windsorca.org/faculty-and-staff"
@@ -1623,16 +1624,41 @@ class ChurchCrawler(scrapy.Spider):
     def start_requests(self):
 
 
+        print("............ start_requests ..........")
 
-        lua_script = """
+
+        lua_script_template = """
             function main(splash, args)  
-              splash:go(args.url)
+            
+                print("url: ", args.url)
+                
+                splash:on_request(function(request)
+                    print("request: ", request.url)
+                    
+                    if request.url ~= 'PAGE_URL' then
+                        local start, _ = request.url:find("%wixpress%")
+                        print("start", start)
+                        if start == nil then
+                            print("pg: ", request.url)
+                            request.abort()
+                            return { status = 404, }
+                        end
+                    end
 
-              -- custom rendering script logic...
+                    
+                end)
+                
+                print("go to url", args.url)
+                splash:go(args.url)
+    
+                -- custom rendering script logic...
 
-              return splash:html()
+                return splash:html()
             end
             """
+
+
+
 
 
 
@@ -1640,6 +1666,15 @@ class ChurchCrawler(scrapy.Spider):
             #yield SplashRequest(startUrl, callback=self.parse)
             #yield SplashRequest(startUrl, callback=self.parse, args={'wait': 0.5})
 
+            print(" request URL: ", startUrl)
+
+
+            '''
+            yield SplashRequest(startUrl, self.parse)
+
+            '''
+
+            lua_script = lua_script_template.replace("PAGE_URL", startUrl)
             yield SplashRequest(startUrl, self.parse, endpoint='execute',
                                 args={
                                     'wait': 0.1,
@@ -1647,11 +1682,20 @@ class ChurchCrawler(scrapy.Spider):
                                     'lua_source': lua_script,
                                 })
 
+            '''
+            yield SplashRequest(
+                url=startUrl,
+                callback=self.parse,
+                endpoint='execute',
+                args={'engine': 'chromium', 'lua_source': lua_script}
+            )
+            '''
 
     def parse(self, response):
 
 
         print("response: ", response.url)
+        print("body: ", response.body)
         '''
         photo = Photo()
         photo.text()
@@ -1691,7 +1735,9 @@ class ChurchCrawler(scrapy.Spider):
 
             if needsToBeProcessed == True:
 
+                # crawl page and get schema
                 schema = profileExtractor.extractProfilesFromWebPage(currentChurch, response, None, None, None, None)
+                profileExtractor.extractProfilesUsingSchema(currentChurch, response, schema)
 
                 self.markAsProcessed(currentChurch, processor, response.url)
                 self.saveChurches()

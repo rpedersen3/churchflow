@@ -274,7 +274,6 @@ class ProfileCheck:
         name = name.replace("arts", "")
         name = name.replace("women", "")
         name = name.replace("bible", "")
-        name = name.replace("young", "")
         name = name.replace("adult", "")
         name = name.replace("music", "")
         name = name.replace("player", "")
@@ -481,6 +480,18 @@ class ProfileCheck:
 
         if url.find(".jpg") != -1 or url.find(".jpeg") != -1 or url.find(".png") != -1 or url.find(".ashx") != -1:
 
+            if url.find(".jpg") != -1:
+                url = url.split(".jpg")[0] + ".jpg"
+
+            if url.find(".jpeg") != -1:
+                url = url.split(".jpeg")[0] + ".jpeg"
+
+            if url.find(".png") != -1:
+                url = url.split(".png")[0] + ".png"
+
+            if url.find(".ashx") != -1:
+                url = url.split(".ashx")[0] + ".ashx"
+
             # sometimes they come in sets so need to split them
             url = url.split(", ")[0]
             url = url.split(" ")[0]
@@ -533,7 +544,7 @@ class ProfileCheck:
 
                     # allow 2 faces
                     numberOfFaces = len(rects)
-                    print("********* number of faces: ", numberOfFaces)
+                    #print("********* number of faces: ", numberOfFaces)
                     if numberOfFaces < 3:
                         for rect in rects:
                             x, y, x2, y2, w, h = (rect.left(), rect.top(), rect.right(), rect.bottom(), rect.width(), rect.height())

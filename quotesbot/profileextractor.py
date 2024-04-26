@@ -16,7 +16,7 @@ class ProfileExtractor:
 
     def addToElement(self, schemaStruct, attribute, elTagName, elClassName, elStyleName):
 
-        print("att: ", attribute, ", tag: ", elTagName, ", class: ", elClassName)
+        #print("att: ", attribute, ", tag: ", elTagName, ", class: ", elClassName)
 
         #check if tag name is present and update count if it is
         elTag = None
@@ -87,7 +87,7 @@ class ProfileExtractor:
         if tag == "" or cClassName == "":
             return
 
-        print("first ----- att: ", attribute, ", level: ", cLevel, ", class: ", cClassName)
+        #print("first ----- att: ", attribute, ", level: ", cLevel, ", class: ", cClassName)
 
 
         #check if tag name is present and update count if it is
@@ -150,7 +150,7 @@ class ProfileExtractor:
                             common_ancestor_class = ancestor2.attrib.get("data-mesh-id", "")
 
                         common_ancestor_class = common_ancestor_class.split()[0]
-                        print("common ancestor class: ", common_ancestor_class)
+                        #print("common ancestor class: ", common_ancestor_class)
 
                         break
 
@@ -323,13 +323,145 @@ class ProfileExtractor:
         return False
 
 
-    def extractProfilesUsingSchema(self, schemaStructure):
-        print("a")
+    def extractProfilesUsingSchema(self, currentChurch, response, schemaStructure):
+
+        print("+++++++++++++++++++++++++++++++++++++++++")
+        print("+++++++++++++++++++++++++++++++++++++++++")
+        print("+++++++++++++++++++++++++++++++++++++++++")
+        print("schema", schemaStructure)
+        if "first" in schemaStructure["photo"] and len(schemaStructure["photo"]["first"]) > 0:
+
+            cls = None
+            level = None
+
+            sorted_data = sorted(schemaStructure["photo"]["first"], key=lambda x: x['count'], reverse=True)
+            #sorted_data = sorted(schemaStructure["photo"]["first"], key=lambda x: (x['class'], x['level']), reverse=True)
+
+            processed = 1
+            lastTag = None
+            lastCls = None
+            for tagData in sorted_data:
+
+                count = tagData["count"]
+                tag = tagData["tag"]
+                cls = tagData["class"]
+                level = tagData["level"]
+
+                #if lastTag is not None and lastCls is not None and \
+                #    lastTag == tag and lastCls == cls:
+                #    print("continue ....... ")
+                #    continue
+
+                if level is not None and level > 2 and count > 1:
+                    #print(">>>>>>>>  call photo for boundary tag: ", tag, ", and class: ", cls)
+                    self.extractProfilesFromWebPage(currentChurch, response, "photo", tag, cls, level)
+
+                if processed >= 2:
+                    break
+
+                processed = processed + 1
+                lastTag = tag
+                lastCls = cls
+
+
+
+
+        elif "first" in schemaStructure["name"] and len(schemaStructure["name"]["first"]) > 0:
+
+            processed = 1
+            cls = None
+            level = None
+
+            #sorted_data = sorted(schemaStructure["name"]["first"], key=lambda x: (x['class'], x['level']), reverse=True)
+            sorted_data = sorted(schemaStructure["name"]["first"], key=lambda x: x['count'], reverse=True)
+
+
+            lastTag = None
+            lastCls = None
+            for tagData in sorted_data:
+
+                count = tagData["count"]
+                tag = tagData["tag"]
+                cls = tagData["class"]
+                level = tagData["level"]
+
+                #if lastTag is not None and lastCls is not None and \
+                #        lastTag == tag and lastCls == cls:
+                #    print("continue ....... ")
+                #    continue
+
+                if count > 1:
+                    print(">>>>>>>>  call name for boundary tag: ", tag, ", and class: ", cls)
+                    self.extractProfilesFromWebPage(currentChurch, response, "name", tag, cls, level)
+
+                if processed >= 2:
+                    break
+
+                processed = processed + 1
+                lastTag = tag
+                lastCls = cls
+
+    def evaluateToSetChurchContacts(self, currentChurch, boundaryAttribute, profilePhoto, requirePhotoCheck, profileName, profileTitle, profileDepartment, profileEmail):
+
+        if (boundaryAttribute == "photo" and profilePhoto is not None and profileName is not None):
+            print("-------------- boundary found")
+
+            # if we didn't find a person in photo then check that name is in photo url
+            validMatch = False
+            if requirePhotoCheck == None:
+                #print("found profile photo so not check required")
+                validMatch = True
+            else:
+                #print("check the parts: ", profileName, ", in ", requirePhotoCheck)
+                for part in profileName.lower().split():
+                    if len(part) > 2 and requirePhotoCheck.lower().find(part) >= 0:
+                        print("image url matches name: ", part)
+                        validMatch = True
+                        break
+
+            if validMatch:
+                #print("set because of photo a: ", profileName)
+                self.setChurchContact(currentChurch, profileName, profileTitle, profileDepartment,
+                                      profileEmail, profilePhoto)
+
+        if (boundaryAttribute == "photo" and profileName is not None and profileEmail is not None):
+
+            # check that name is in email somewhere
+            validMatch = False
+            if profileEmail is not None:
+                foundPart = False
+                parts = profileName.split()
+                for part in parts:
+                    if profileEmail.lower().find(part.lower()) >= 0:
+                        validMatch = True
+
+            if validMatch:
+                # print("set because of profileName and email 1 a: name = ", profileName, ", email = ", profileEmail)
+                self.setChurchContact(currentChurch, profileName, profileTitle, profileDepartment,
+                                      profileEmail, profilePhoto)
+
+        if (boundaryAttribute == "name" and (profileName is not None and profileEmail is not None)):
+
+            # check that name is in email somewhere
+            validMatch = False
+            if profileEmail is not None:
+                foundPart = False
+                parts = profileName.split()
+                for part in parts:
+                    if profileEmail.lower().find(part.lower()) >= 0:
+                        validMatch = True
+
+            if validMatch:
+                # print("set because of profileName and email 2 a: ", profileName)
+                self.setChurchContact(currentChurch, profileName, profileTitle, profileDepartment,
+                                      profileEmail, profilePhoto)
+
+
     def extractProfilesFromWebPage(self, currentChurch, response, boundaryAttribute, boundaryTag, boundaryClass, boundaryLevel):
 
         print('**************** extract profiles from webpage: ', response.url)
-        if boundaryClass is not None:
-            print("  we are looking for class: ", boundaryClass, ", and level: ", boundaryLevel)
+        #if boundaryClass is not None:
+        #    print("we are looking for class: ", boundaryClass, ", and level: ", boundaryLevel)
 
 
         print("--------- parse page: ", response.url)
@@ -404,6 +536,7 @@ class ProfileExtractor:
                 processBoundarySection = False
 
 
+            # look boundary marker hit then evaluate adding church
             if tagName == "div" or tagName == "li":
 
                 if tagName == "div":
@@ -430,8 +563,6 @@ class ProfileExtractor:
                     if descendantLevel > 1:
                         processBoundarySection = False
 
-
-
                 if tagName == "li":
 
                     if (tagName == boundaryTag and className != "" and className.split()[0] == boundaryClass):
@@ -444,67 +575,17 @@ class ProfileExtractor:
                     processBoundarySection = False
 
 
+                #check boundary condition and process
                 if evaluateBoundary:
 
                     # make sure we are past first boundary before setting contact
                     if hasHitBoundaryBefore is not None:
 
-                        if (boundaryAttribute == "photo" and profilePhoto is not None and profileName is not None):
-                            print("-------------- boundary found")
+                        self.evaluateToSetChurchContacts(currentChurch, boundaryAttribute, profilePhoto,
+                                                        requirePhotoCheck, profileName, profileTitle, profileDepartment,
+                                                        profileEmail)
 
-                            # if we didn't find a person in photo then check that name is in photo url
-                            validMatch = False
-                            if requirePhotoCheck == None:
-                                print("found profile photo so not check required")
-                                validMatch = True
-                            else:
-                                print("check the parts: ", personName, ", in ", requirePhotoCheck)
-                                for part in profileName.lower().split():
-                                    if len(part) > 2 and requirePhotoCheck.lower().find(part) >= 0:
-                                        print("image url matches name: ", part)
-                                        validMatch = True
-                                        break
-
-                            if validMatch:
-                                print("set because of photo a: ", profileName)
-                                self.setChurchContact(currentChurch, profileName, profileTitle, profileDepartment,
-                                                      profileEmail, profilePhoto)
-
-                        if (boundaryAttribute == "photo" and profileName is not None and profileEmail is not None):
-
-                            # check that name is in email somewhere
-                            validMatch = False
-                            if profileEmail is not None:
-                                foundPart = False
-                                parts = profileName.split()
-                                for part in parts:
-                                    if profileEmail.lower().find(part.lower()) >= 0:
-                                        validMatch = True
-
-                            if validMatch:
-                                #print("set because of profileName and email 1 a: name = ", profileName, ", email = ", profileEmail)
-                                self.setChurchContact(currentChurch, profileName, profileTitle, profileDepartment,
-                                                      profileEmail, profilePhoto)
-
-                        if (boundaryAttribute == "name" and (profileName is not None and profileEmail is not None)):
-
-                            # check that name is in email somewhere
-                            validMatch = False
-                            if profileEmail is not None:
-                                foundPart = False
-                                parts = profileName.split()
-                                for part in parts:
-                                    if profileEmail.lower().find(part.lower()) >= 0:
-                                        validMatch = True
-
-
-                            if validMatch:
-                                #print("set because of profileName and email 2 a: ", profileName)
-                                self.setChurchContact(currentChurch, profileName, profileTitle, profileDepartment,
-                                                      profileEmail, profilePhoto)
-
-
-                    print("----------  hit boundary before *************")
+                    #print("----------  hit boundary before *************")
                     hasHitBoundaryBefore = True
 
                     profilePhoto = None
@@ -537,38 +618,45 @@ class ProfileExtractor:
                         if profileName is None:
                             profileName = personName
 
-                        self.addToElement(schemaStructure, "name", tagName, className, styleName)
+                        # if we are building schema then do this part
+                        if boundaryAttribute is None:
+                            self.addToElement(schemaStructure, "name", tagName, className, styleName)
 
-                        if photoFirst_el is not None:
+                            if photoFirst_el is not None:
 
-                            print("look for match")
-                            # if we didn't find a person in photo then check that name is in photo url
-                            validMatch = False
-                            if requirePhotoCheck == None:
-                                print("found profile photo so not check required")
-                                validMatch = True
-                            else:
-                                print("check the parts: ", personName, ", in ", requirePhotoCheck)
-                                for part in personName.lower().split():
-                                    if len(part) > 2 and requirePhotoCheck.lower().find(part) >= 0:
-                                        print("image url matches name: ", part)
-                                        validMatch = True
-                                        break
+                                # if we didn't find a person in photo then check that name is in photo url
+                                validMatch = False
+                                if requirePhotoCheck == None:
+                                    #print("found profile photo so not check required")
+                                    validMatch = True
+                                else:
+                                    #print("check the parts: ", personName, ", in ", requirePhotoCheck)
+                                    for part in personName.lower().split():
+                                        if len(part) > 2 and requirePhotoCheck.lower().find(part) >= 0:
+                                            print("image url matches name: ", part)
+                                            validMatch = True
+                                            break
 
-                            if validMatch:
+                                if validMatch:
 
-                                print("found match............")
+                                    #print("found match............")
 
-                                cDiv, cDivLevel, cClassName = self.commonDiv(photoFirst_el, el)
-                                self.addFirst(schemaStructure, "photo", "div", cClassName, cDivLevel)
+                                    cDiv, cDivLevel, cClassName = self.commonDiv(photoFirst_el, el)
+                                    self.addFirst(schemaStructure, "photo", "div", cClassName, cDivLevel)
 
-                                cLi, cClassName = self.commonLi(photoFirst_el, el)
-                                if cLi is not None:
-                                    self.addFirst(schemaStructure, "photo", "li", cClassName, None)
+                                    cLi, cClassName = self.commonLi(photoFirst_el, el)
+                                    if cLi is not None:
+                                        self.addFirst(schemaStructure, "photo", "li", cClassName, None)
 
 
-                        # setup check for name first boundary
-                        nameFirst_el = el
+                            # setup check for name first boundary
+                            nameFirst_el = el
+
+                        if hasHitBoundaryBefore is not None:
+                            self.evaluateToSetChurchContacts(currentChurch, boundaryAttribute, profilePhoto,
+                                                             requirePhotoCheck, profileName, profileTitle,
+                                                             profileDepartment,
+                                                             profileEmail)
 
                     jobTitle = profCheck.isProfileJobTitle(shortText)
                     if jobTitle is not None:
@@ -576,7 +664,10 @@ class ProfileExtractor:
                         #print(">> title: ", jobTitle)
                         if profileTitle is None:
                             profileTitle = jobTitle
-                        self.addToElement(schemaStructure, "title", tagName, className, styleName)
+
+                        # if we are building schema then do this part
+                        if boundaryAttribute is None:
+                            self.addToElement(schemaStructure, "title", tagName, className, styleName)
 
 
                     department = profCheck.isProfileDepartment(shortText)
@@ -585,7 +676,10 @@ class ProfileExtractor:
                         #print(">> department: ", department)
                         if profileDepartment is None:
                             profileDepartment = department
-                        self.addToElement(schemaStructure, "department", tagName, className, styleName)
+
+                        # if we are building schema then do this part
+                        if boundaryAttribute is None:
+                            self.addToElement(schemaStructure, "department", tagName, className, styleName)
 
 
                 # get mailto inside elements
@@ -597,17 +691,19 @@ class ProfileExtractor:
                         #print(">> email: ", email_address)
                         if profileEmail is None:
                             profileEmail = email_address
-                        self.addToElement(schemaStructure, "email", tagName, className, styleName)
 
+                        # if we are building schema then do this part
+                        if boundaryAttribute is None:
+                            self.addToElement(schemaStructure, "email", tagName, className, styleName)
 
-                        if nameFirst_el is not None:
+                            if nameFirst_el is not None:
 
-                            cDiv, cDivLevel, cClassName = self.commonDiv(nameFirst_el, el)
-                            self.addFirst(schemaStructure, "name", "div", cClassName, cDivLevel)
+                                cDiv, cDivLevel, cClassName = self.commonDiv(nameFirst_el, el)
+                                self.addFirst(schemaStructure, "name", "div", cClassName, cDivLevel)
 
-                            cLi, cClassName = self.commonLi(nameFirst_el, el)
-                            if cLi is not None:
-                                self.addFirst(schemaStructure, "name", "li", cClassName, None)
+                                cLi, cClassName = self.commonLi(nameFirst_el, el)
+                                if cLi is not None:
+                                    self.addFirst(schemaStructure, "name", "li", cClassName, None)
 
 
 
@@ -669,152 +765,30 @@ class ProfileExtractor:
                             if foundProfilePhoto == False:
                                 requirePhotoCheck = os.path.basename(img_src)
                                 #requirePhotoCheck = img_src
-                                #print("did not find person in photo: ", requirePhotoCheck)
-                            #else:
-                            #    print("found person in photo: ", img_src )
+                                print("did not find person in photo: ", requirePhotoCheck)
+                            else:
+                                print("found person in photo: ", img_src )
 
 
                             print(">> photo: ", img_src)
-                            print(" foundProfilePhoto: ", foundProfilePhoto)
                             if  hasHitBoundaryBefore is not None and profilePhoto is None:
                                 profilePhoto = img_src
 
-                            self.addToElement(schemaStructure, "photo", tagName, className, styleName)
+                            # if we are building schema then do this part
+                            if boundaryAttribute is None:
+                                self.addToElement(schemaStructure, "photo", tagName, className, styleName)
 
-                            photoFirst_el = el
+                                photoFirst_el = el
 
 
 
         if hasHitBoundaryBefore is not None:
 
-            if (boundaryAttribute == "photo" and profilePhoto is not None and profileName is not None):
+            self.evaluateToSetChurchContacts(currentChurch, boundaryAttribute, profilePhoto,
+                                             requirePhotoCheck, profileName, profileTitle, profileDepartment,
+                                             profileEmail)
 
-                # if we didn't find a person in photo then check that name is in photo url
-                validMatch = False
-                if requirePhotoCheck == None:
-                    #print("found profile photo so not check required")
-                    validMatch = True
-                else:
-                    #print("check the parts: ", personName, ", in ", requirePhotoCheck)
-                    for part in profileName.lower().split():
-                        if len(part) > 2 and requirePhotoCheck.lower().find(part) >= 0:
-                            #print("image url matches name: ", part)
-                            validMatch = True
-                            break
 
-                if validMatch:
-                    #print("set because of photo b")
-                    self.setChurchContact(currentChurch, profileName, profileTitle, profileDepartment,
-                                          profileEmail, profilePhoto)
-
-            if (boundaryAttribute == "photo" and profileName is not None and profileEmail is not None):
-
-                # check that name is in email somewhere
-                validMatch = False
-                if profileEmail is not None:
-                    foundPart = False
-                    parts = profileName.split()
-                    for part in parts:
-                        if profileEmail.lower().find(part.lower()) >= 0:
-                            validMatch = True
-
-                if validMatch:
-                    #print("set because name and email b")
-                    self.setChurchContact(currentChurch, profileName, profileTitle, profileDepartment, profileEmail, profilePhoto)
-
-            if (boundaryAttribute == "name" and (profileName is not None and profileEmail is not None)):
-
-                # check that name is in email somewhere
-                validMatch = False
-                if profileEmail is not None:
-                    foundPart = False
-                    parts = profileName.split()
-                    for part in parts:
-                        if profileEmail.lower().find(part.lower()) >= 0:
-                            validMatch = True
-
-                if validMatch:
-                    #print("set because name and email 2 b")
-                    self.setChurchContact(currentChurch, profileName, profileTitle, profileDepartment,
-                                          profileEmail, profilePhoto)
 
 
         return schemaStructure
-
-        # if this is the first time through and we have collected stats then determine boundary and run again
-        if boundaryAttribute is None:
-            print("+++++++++++++++++++++++++++++++++++++++++")
-            print("+++++++++++++++++++++++++++++++++++++++++")
-            print("+++++++++++++++++++++++++++++++++++++++++")
-            print("schema", schemaStructure)
-            if "first" in schemaStructure["photo"] and len(schemaStructure["photo"]["first"]) > 0:
-
-                cls = None
-                level = None
-
-                sorted_data = sorted(schemaStructure["photo"]["first"], key=lambda x: x['count'], reverse=True)
-                #sorted_data = sorted(schemaStructure["photo"]["first"], key=lambda x: (x['class'], x['level']), reverse=True)
-
-                processed = 1
-                lastTag = None
-                lastCls = None
-                for tagData in sorted_data:
-
-                    count = tagData["count"]
-                    tag = tagData["tag"]
-                    cls = tagData["class"]
-                    level = tagData["level"]
-
-                    #if lastTag is not None and lastCls is not None and \
-                    #    lastTag == tag and lastCls == cls:
-                    #    print("continue ....... ")
-                    #    continue
-
-                    if level is not None and level > 2 and count > 1:
-                        print(">>>>>>>>  call photo for boundary tag: ", tag, ", and class: ", cls)
-                        self.extractProfilesFromWebPage(currentChurch, response, "photo", tag, cls, level)
-
-                    if processed >= 2:
-                        break
-
-                    processed = processed + 1
-                    lastTag = tag
-                    lastCls = cls
-
-
-
-
-            elif "first" in schemaStructure["name"] and len(schemaStructure["name"]["first"]) > 0:
-
-                processed = 1
-                cls = None
-                level = None
-
-                #sorted_data = sorted(schemaStructure["name"]["first"], key=lambda x: (x['class'], x['level']), reverse=True)
-                sorted_data = sorted(schemaStructure["name"]["first"], key=lambda x: x['count'], reverse=True)
-
-
-                lastTag = None
-                lastCls = None
-                for tagData in sorted_data:
-
-                    count = tagData["count"]
-                    tag = tagData["tag"]
-                    cls = tagData["class"]
-                    level = tagData["level"]
-
-                    #if lastTag is not None and lastCls is not None and \
-                    #        lastTag == tag and lastCls == cls:
-                    #    print("continue ....... ")
-                    #    continue
-
-                    if count > 1:
-                        print(">>>>>>>>  call name for boundary tag: ", tag, ", and class: ", cls)
-                        self.extractProfilesFromWebPage(currentChurch, response, "name", tag, cls, level)
-
-                    if processed >= 2:
-                        break
-
-                    processed = processed + 1
-                    lastTag = tag
-                    lastCls = cls
