@@ -9,6 +9,32 @@
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 
+
+
+# Splash Server Endpoint
+SPLASH_URL = 'http://localhost:8050'
+
+
+# Enable Splash downloader middleware and change HttpCompressionMiddleware priority
+DOWNLOADER_MIDDLEWARES = {
+    'scrapy_splash.SplashCookiesMiddleware': 723,
+    'scrapy_splash.SplashMiddleware': 725,
+    'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+}
+
+# Enable Splash Deduplicate Args Filter
+SPIDER_MIDDLEWARES = {
+    'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
+}
+
+# Define the Splash DupeFilter
+DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
+
+
+
+
+
+
 BOT_NAME = 'quotesbot'
 
 SPIDER_MODULES = ['quotesbot.spiders']
@@ -17,7 +43,7 @@ NEWSPIDER_MODULE = 'quotesbot.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'quotesbot (+http://www.yourdomain.com)'
-#USER_AGENT = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1'
+#USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.52 Safari/537.36'
 USER_AGENT = "XY"
 
 # Obey robots.txt rules

@@ -11,6 +11,8 @@ from quotesbot.profileextractor import ProfileExtractor
 from quotesbot.profilecheck import ProfileCheck
 from quotesbot.groupcheck import GroupCheck
 from quotesbot.churchfinder import ChurchFinder
+from quotesbot.photo import Photo
+
 import json
 from urllib.parse import urlparse
 from lxml import etree
@@ -24,6 +26,8 @@ import json
 from datetime import datetime
 
 from googleapiclient.discovery import build
+
+from scrapy_splash import SplashRequest
 
 import pathlib
 import textwrap
@@ -79,7 +83,7 @@ class ChurchCrawler(scrapy.Spider):
     '''
     #crawl church sites
 
-    start_urls = []
+    startURLs = []
 
     for church in churches:
 
@@ -99,12 +103,13 @@ class ChurchCrawler(scrapy.Spider):
             if needsToBeProcessed:
                 if "addressInfo" not in church:
                     print("bad site: ", link)
-                    #start_urls.append(link)
+                    #startURLs.append(link)
     '''
 
 
+    '''
     # crawl church staff pages
-    start_urls = []
+    startURLs = []
 
     i = 1
     for currentChurch in churches:
@@ -129,19 +134,19 @@ class ChurchCrawler(scrapy.Spider):
 
                             print('**************** process page: ', url)
                             if i > 0:
-                                start_urls.append(url)
+                                startURLs.append(url)
                                 print('urls: ', str(url))
 
         if i > 5000000:
             break
 
         i = i + 1
-
+    '''
 
 
     '''
     # crawl church reference sites
-    start_urls = []
+    startURLs = []
 
     i = 1
     for church in churches:
@@ -154,7 +159,7 @@ class ChurchCrawler(scrapy.Spider):
                     url = reference["url"]
 
                     if site == "faithstreet":
-                        start_urls.append(url)
+                        startURLs.append(url)
                         print('urls: ', str(url))
 
                 if i > 100:
@@ -166,10 +171,13 @@ class ChurchCrawler(scrapy.Spider):
 
 
 
-    '''
+
     #crawl specific url
-    start_urls = [
-        "https://www.windsorca.org/faculty-and-staff"
+    startURLs = [
+        "https://www.resiliencechurch.org/our-team"
+        #"https://www.fellowshipdenver.org/leadership"
+        #"https://www.fellowshipdenver.org/leadership/" # blocked 404 error
+        #"https://www.windsorca.org/faculty-and-staff"
         #"https://mcleanbible.org/montgomery-county/leadership/"
         #"https://mynorthlandchurch.org/about/our-team"
         #"https://pikespeakchristianchurch.com/about/"
@@ -195,7 +203,7 @@ class ChurchCrawler(scrapy.Spider):
         #"https://christianservices.org/",
         #"https://christianservices.org/contact-us/"
     ]
-    '''
+
 
 
     def checkCommonDiv(self, el1, el2):
@@ -1331,8 +1339,6 @@ class ChurchCrawler(scrapy.Spider):
     def searchForContacts(self, currentChurch, response):
         #print('**************** process staff page: ', response.url)
 
-
-        print("--------- parse page: ", response.url)
         profCheck = ProfileCheck()
 
         # track using photo as reset element
@@ -1442,6 +1448,7 @@ class ChurchCrawler(scrapy.Spider):
 
                 isCDN = False
                 if img_src.startswith("https://images.squarespace-cdn.com") or \
+                        img_src.startswith("https://storage2.snappages.site") or \
                         img_src.startswith("https://cdn.monkplatform.com") or \
                         img_src.startswith("https://static.wixstatic.com") or \
                         img_src.startswith("https://thechurchco-production.s3.amazonaws.com") or \
@@ -1612,10 +1619,48 @@ class ChurchCrawler(scrapy.Spider):
         currentChurch["processed"][processor].append(processed)
 
 
+
+    def start_requests(self):
+
+
+
+        lua_script = """
+            function main(splash, args)  
+              splash:go(args.url)
+
+              -- custom rendering script logic...
+
+              return splash:html()
+            end
+            """
+
+
+
+        for startUrl in self.startURLs:
+            #yield SplashRequest(startUrl, callback=self.parse)
+            #yield SplashRequest(startUrl, callback=self.parse, args={'wait': 0.5})
+
+            yield SplashRequest(startUrl, self.parse, endpoint='execute',
+                                args={
+                                    'wait': 0.1,
+                                    'images': 0,
+                                    'lua_source': lua_script,
+                                })
+
+
     def parse(self, response):
+
+
+        print("response: ", response.url)
+        '''
+        photo = Photo()
+        photo.text()
+        return
+        '''
 
         if response.url.find(".pdf") >= 0 or \
            response.url.find(".zip") >= 0:
+                print("pdf or zip file so return")
                 return
 
         profileExtractor = ProfileExtractor()
@@ -1633,24 +1678,33 @@ class ChurchCrawler(scrapy.Spider):
 
 
 
+
+
         # extract contacts from staff web pages
         currentChurch, isHomePage = self.findCurrentChurch(response.url)
         if currentChurch is not None and "name" in currentChurch:
+
+            print("process church: ", currentChurch["name"])
 
             processor = "extract-profile-contacts-from-webpage"
             needsToBeProcessed = self.checkIfNeedsProcessing(currentChurch, processor, response.url)
 
             if needsToBeProcessed == True:
 
-                profileExtractor.extractProfilesFromWebPage(currentChurch, response, None, None, None, None)
+                schema = profileExtractor.extractProfilesFromWebPage(currentChurch, response, None, None, None, None)
 
                 self.markAsProcessed(currentChurch, processor, response.url)
                 self.saveChurches()
+
+            else:
+                print("processing not needed")
 
 
 
             # self.getLeadPastorInfoUsingAzureAI(currentChurch)
             #self.searchForContacts(currentChurch, response)
+            
+
 
 
         '''

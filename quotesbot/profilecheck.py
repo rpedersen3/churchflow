@@ -21,6 +21,8 @@ nltk.download('stopwords')
 import pandas as pd
 
 
+
+
 class ProfileCheck:
     name = "profilecheck"
 
@@ -364,11 +366,14 @@ class ProfileCheck:
         for part in parts:
 
             part = part.replace(".", "")
+            part = part.replace(",", "")
             part = part.strip()
             if (len(part) < 2):
                 continue
 
             if      part == "is" or \
+                    part == "from" or \
+                    part == "left" or \
                     part == "one" or \
                     part == "for" or \
                     part == "our" or \
@@ -407,7 +412,7 @@ class ProfileCheck:
 
 
 
-            if part.lower() != "and" and skipNextPart == False:
+            if (part.lower() != " and " or part.lower() != " & ") and skipNextPart == False:
                 #print("part: ", part)
                 names = [{'name': part}]
 
@@ -506,6 +511,7 @@ class ProfileCheck:
 
             try:
                 frame = None
+                #print("encode and detect: ", url)
                 if url.find(".jpg") != -1 or url.find(".jpeg") != -1 or url.find(".jpeg") != -1 or url.find(".ashx") != -1:
                     frame = cv2.imdecode(arr, -1)
                 if url.find(".png") != -1:
@@ -527,7 +533,7 @@ class ProfileCheck:
 
                     # allow 2 faces
                     numberOfFaces = len(rects)
-                    #print("********* number of faces: ", numberOfFaces)
+                    print("********* number of faces: ", numberOfFaces)
                     if numberOfFaces < 3:
                         for rect in rects:
                             x, y, x2, y2, w, h = (rect.left(), rect.top(), rect.right(), rect.bottom(), rect.width(), rect.height())
@@ -551,13 +557,11 @@ class ProfileCheck:
                             #if numberOfFaces == 1 and percentOfHeight > 20 and percentFromTop < 40 and percentFromBottom < 65:
                             #    foundProfilePhoto = True
                             #    print("found photo")
-                            if percentOfHeight > 20:
+                            if percentOfHeight > 15:
                                 foundProfilePhoto = True
-                                #print("found photo")
 
-                            #plt.imshow(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
-                            #plt.axis('off')
-                            #plt.show()
+
+
 
                             #if foundProfilePhoto:
 
