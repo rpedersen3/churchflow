@@ -5,7 +5,7 @@ import dlib
 import numpy as np
 import matplotlib.pyplot as plt
 import urllib.request
-from ethnicolr import census_ln
+from ethnicolr import  pred_census_ln, census_ln, pred_wiki_ln
 import spacy
 from names_dataset import NameDataset, NameWrapper
 import math
@@ -257,6 +257,7 @@ class ProfileCheck:
         name = name.replace("rev.", "")
         name = name.replace("deacon", "")
         name = name.replace("board", "")
+        name = name.replace("reverend", "")
         name = name.replace("staff", "")
         name = name.replace("africa", "")
         name = name.replace("asia", "")
@@ -372,6 +373,8 @@ class ProfileCheck:
 
             if      part == "is" or \
                     part == "from" or \
+                    part == "po" or \
+                    part == "box" or \
                     part == "left" or \
                     part == "one" or \
                     part == "for" or \
@@ -400,6 +403,7 @@ class ProfileCheck:
                     part == "to" or \
                     part == "her":
 
+                #print("break on part: ", part)
                 break
 
             pattern = re.compile(r'[^a-zA-Z\s]')  # Matches any character that is not a letter or whitespace
@@ -407,6 +411,7 @@ class ProfileCheck:
             # Use the search method to check if the string contains any non-character characters
             match = pattern.search(part)
             if match:
+                #print("break on non visible character: ", part)
                 break
 
 
@@ -431,10 +436,15 @@ class ProfileCheck:
                 if fullname is None:
                     fullname = part
                 else:
+                    #lastname check
+                    lastnamePred = pred_census_ln(df, 'name')
+                    white = lastnamePred['white'].iloc[0]
+
                     fullname = fullname + " " + part
 
                     # check that lastname is a valid name
-                    if str(pctwhite) != 'nan':
+                    if str(white) != 'nan':
+                        #print("found lastname: ", fullname)
                         foundProfileLastname = True
 
                     break

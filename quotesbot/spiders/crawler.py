@@ -174,7 +174,9 @@ class ChurchCrawler(scrapy.Spider):
 
     #crawl specific url
     startURLs = [
-        "https://www.valleylifefraser.org/about-us"
+        "https://www.ststephensaurora.org/clergy-staff"
+        #"https://www.agapeoutpost.org/about"
+        #"https://www.valleylifefraser.org/about-us"
         #"https://www.resiliencechurch.org/our-team"
         #"https://www.fellowshipdenver.org/leadership"
         #"https://www.fellowshipdenver.org/leadership/" # blocked 404 error
