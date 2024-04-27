@@ -243,7 +243,7 @@ class ProfileCheck:
 
     def isPersonName(self, name):
 
-        #print("check name: ", name)
+        print("check name: ", name)
         fullname = None
 
         #  replace the name beginning with
@@ -331,7 +331,7 @@ class ProfileCheck:
         '''
         # lets try and parse name in pieces
         if nlpFoundAName:
-            #print("check full name parts: ", name)
+            print("check full name parts: ", name)
             fullname = self.isPersonNameUsingParts(name)
             #if fullname is not None:
             #    print("fullname parts: ", fullname)
@@ -442,7 +442,12 @@ class ProfileCheck:
                 if fullname is None:
                     fullname = part
                 else:
-                    #lastname check
+
+                    # firstname is repeated, sometimes happends then just ignor it
+                    if part == fullname:
+                        continue
+
+                    # lastname check
                     lastnamePred = pred_census_ln(df, 'name')
                     white = lastnamePred['white'].iloc[0]
 

@@ -174,7 +174,9 @@ class ChurchCrawler(scrapy.Spider):
 
     #crawl specific url
     startURLs = [
-        "https://www.valleyfellowship.church/leadership"
+        "https://www.agapeoutpost.org/about"
+        #"https://newdenver.org/about/"
+        #"https://www.valleyfellowship.church/leadership"
         #"https://www.ziontemplechurch.org/aboutus"
         #"https://www.ststephensaurora.org/clergy-staff"
         #"https://www.agapeoutpost.org/about"
@@ -1699,7 +1701,7 @@ class ChurchCrawler(scrapy.Spider):
 
 
         print("response: ", response.url)
-        print("body: ", response.body)
+        #print("body: ", response.body)
         '''
         photo = Photo()
         photo.text()

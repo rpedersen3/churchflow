@@ -353,7 +353,7 @@ class ProfileExtractor:
                 #    continue
 
                 if level is not None and level > 2 and count > 1:
-                    #print(">>>>>>>>  call photo for boundary tag: ", tag, ", and class: ", cls)
+                    print(">>>>>>>>>>>>>>>>>>>>>>>>  call photo for boundary tag: ", tag, ", and class: ", cls)
                     self.extractProfilesFromWebPage(currentChurch, response, "photo", tag, cls, level)
 
                 if processed >= 2:
@@ -506,10 +506,9 @@ class ProfileExtractor:
         hasHitBoundaryBefore = False
 
 
-        #path = response.xpath(
-        #    '//p | //div[not(descendant::div)] | //a[starts-with(@href, "mailto:")] | //img | //h1 | //h2 | //h3 | //h4 | //h5 | //h6 |  //strong | //span ')
         path = response.xpath(
-            '//p | //div | //li | //a[starts-with(@href, "mailto:")] | //img | //h1 | //h2 | //h3 | //h4 | //h5 | //h6 |  //strong | //span ')
+            '//p | //div | //a | //img | //h1 | //h2 | //h3 | //h4 | //h5 | //h6 |  //strong | //span ')
+
         for el in path:
 
             tagName = el.xpath('name()').extract()[0]
@@ -602,19 +601,18 @@ class ProfileExtractor:
             if processBoundarySection:
 
                 # get text inside element
-                visible_text = el.xpath('.//text()[normalize-space()]').extract()
+                visible_text = el.xpath('.//text()').extract()
+                print('visible_text: ', visible_text)
                 text = self.replace_multiple_spaces(' '.join(visible_text))
 
                 shortText = text.strip()[:120]
                 if len(shortText) > 5:
                     #print("short text: ", shortText)
-                    #if shortText.lower().find("luke mathewson") >= 0:
-                    #    print("*******************  found luke ***********")
 
                     personName = profCheck.isPersonName(shortText)
                     if personName is not None:
 
-                        print(">> name: ", personName)
+                        #print(">> name: ", personName)
                         if profileName is None:
                             profileName = personName
 
@@ -652,11 +650,6 @@ class ProfileExtractor:
                             # setup check for name first boundary
                             nameFirst_el = el
 
-                        if hasHitBoundaryBefore is not None:
-                            self.evaluateToSetChurchContacts(currentChurch, boundaryAttribute, profilePhoto,
-                                                             requirePhotoCheck, profileName, profileTitle,
-                                                             profileDepartment,
-                                                             profileEmail)
 
                     jobTitle = profCheck.isProfileJobTitle(shortText)
                     if jobTitle is not None:
@@ -683,34 +676,48 @@ class ProfileExtractor:
 
 
                 # get mailto inside elements
+
                 if el.xpath('@href').get():
 
-                    email_address = el.xpath('@href').get().replace("mailto:", "")
-                    if email_address != "":
+                    href = el.xpath('@href').get()
+                    #print("href: ", href)
+                    if href.find("mailto:") >= 0:
 
-                        #print(">> email: ", email_address)
-                        if profileEmail is None:
-                            profileEmail = email_address
+                        email_address = href.replace("mailto:", "")
+                        #print("add: ", email_address)
+                        if email_address != "":
 
-                        # if we are building schema then do this part
-                        if boundaryAttribute is None:
-                            self.addToElement(schemaStructure, "email", tagName, className, styleName)
+                            #print(">> email: ", email_address)
+                            if profileEmail is None:
+                                profileEmail = email_address
 
-                            if nameFirst_el is not None:
+                            # if we are building schema then do this part
+                            if boundaryAttribute is None:
+                                self.addToElement(schemaStructure, "email", tagName, className, styleName)
 
-                                cDiv, cDivLevel, cClassName = self.commonDiv(nameFirst_el, el)
-                                self.addFirst(schemaStructure, "name", "div", cClassName, cDivLevel)
+                                if nameFirst_el is not None:
 
-                                cLi, cClassName = self.commonLi(nameFirst_el, el)
-                                if cLi is not None:
-                                    self.addFirst(schemaStructure, "name", "li", cClassName, None)
+                                    cDiv, cDivLevel, cClassName = self.commonDiv(nameFirst_el, el)
+                                    self.addFirst(schemaStructure, "name", "div", cClassName, cDivLevel)
+
+                                    cLi, cClassName = self.commonLi(nameFirst_el, el)
+                                    if cLi is not None:
+                                        self.addFirst(schemaStructure, "name", "li", cClassName, None)
 
 
 
 
                 # get image source
                 img_src = None
-                if el.xpath('@style').get():
+                # get photo inside elements
+                if el.xpath('@src').get():
+                    img_src = el.xpath('@src').get()
+
+                    # if this is an svg thing like popupbox then set to None
+                    if img_src.find("data:image/svg+xml") >= 0:
+                        img_src = None
+
+                if img_src is None and el.xpath('@style').get():
                     st = el.xpath('@style').get()
                     if st.find("background:url") >= 0:
                         parts = re.findall(r'\((.*?)\)', st)
@@ -721,12 +728,14 @@ class ProfileExtractor:
                         if len(parts) > 0:
                             img_src = parts[0]
 
-                # get photo inside elements
-                if el.xpath('@src | @data-src | @srcset').get():
-                    img_src = el.xpath('@src | @data-src | @srcset').get()
-                    print('.................  img_src: ', img_src)
+
+                if img_src is None and el.xpath('@data-src | @srcset').get():
+                    img_src = el.xpath('@data-src | @srcset').get()
+
 
                 if img_src is not None:
+
+                    #print('.................  img_src: ', img_src)
 
                     if self.isSmallerThan(el, 100) == True:
                         continue
@@ -766,21 +775,16 @@ class ProfileExtractor:
                             if foundProfilePhoto == False:
                                 requirePhotoCheck = os.path.basename(img_src)
                                 #requirePhotoCheck = img_src
-                                print("did not find person in photo: ", requirePhotoCheck)
-                            else:
-                                print("found person in photo: ", img_src )
+                                #print("did not find person in photo: ", requirePhotoCheck)
+                            #else:
+                                #print("found person in photo: ", img_src )
 
 
-                            print(">> photo: ", img_src)
+                            #print(">> photo: ", img_src)
                             # if boundary has been hit and this is a photo boundary then clear everything
                             if  hasHitBoundaryBefore is not None:
                                 if profilePhoto is None:
                                     profilePhoto = img_src
-
-                                profileName = None
-                                profileTitle = None
-                                profileDepartment = None
-                                profileEmail = None
 
                             # if we are building schema then do this part
                             if boundaryAttribute is None:
