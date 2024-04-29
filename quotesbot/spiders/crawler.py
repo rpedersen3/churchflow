@@ -174,7 +174,10 @@ class ChurchCrawler(scrapy.Spider):
 
     #crawl specific url
     startURLs = [
-        "https://www.agapeoutpost.org/about"
+        "https://www.v7pc.org/staff"
+        #"https://www.towercommunity.church/who-we-are/"
+        #"https://www.ziontemplechurch.org/aboutus"
+        #"https://www.agapeoutpost.org/about"
         #"https://newdenver.org/about/"
         #"https://www.valleyfellowship.church/leadership"
         #"https://www.ziontemplechurch.org/aboutus"
@@ -1451,7 +1454,7 @@ class ChurchCrawler(scrapy.Spider):
             # Extract image URLs from the page
             if el.xpath('@src | @data-src | @srcset').get():
                 img_src = el.xpath('@src | @data-src | @srcset').get()
-                print("***************************** img src found: ", img_src)
+                #print("***************************** img src found: ", img_src)
 
                 isCDN = False
                 if img_src.startswith("https://images.squarespace-cdn.com") or \

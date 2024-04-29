@@ -149,7 +149,7 @@ class ProfileExtractor:
                         if common_ancestor_class is None or common_ancestor_class == "":
                             common_ancestor_class = ancestor2.attrib.get("data-mesh-id", "")
 
-                        common_ancestor_class = common_ancestor_class.split()[0]
+                        common_ancestor_class = common_ancestor_class.split()[0].strip()
                         #print("common ancestor class: ", common_ancestor_class)
 
                         break
@@ -197,7 +197,7 @@ class ProfileExtractor:
                         common_ancestor_class = ancestor2.attrib.get("data-mesh-id", "")
 
                     if len(common_ancestor_class.split()) > 0:
-                        common_ancestor_class = common_ancestor_class.split()[0]
+                        common_ancestor_class = common_ancestor_class.split()[0].strip()
                     break
 
                 #previousClassName = ancestor2.attrib.get("class", "")
@@ -266,6 +266,7 @@ class ProfileExtractor:
             foundPart = False
             parts = name.split()
             for part in parts:
+                part = part.strip()
                 if email.lower().find(part.lower()) >= 0:
                     foundPart = True
             if foundPart == False:
@@ -343,20 +344,26 @@ class ProfileExtractor:
             for tagData in sorted_data:
 
                 count = tagData["count"]
-                tag = tagData["tag"]
-                cls = tagData["class"]
+                tag = tagData["tag"].strip()
+                cls = tagData["class"].strip()
                 level = tagData["level"]
+
+                print("tag: >", tag, "<, cls: >", cls, "<, level: ", level, ", count, ", count)
 
                 #if lastTag is not None and lastCls is not None and \
                 #    lastTag == tag and lastCls == cls:
                 #    print("continue ....... ")
                 #    continue
 
-                if level is not None and level > 2 and count > 1:
+                if tag == "div" and level is not None and level > 2 and count > 1:
                     print(">>>>>>>>>>>>>>>>>>>>>>>>  call photo for boundary tag: ", tag, ", and class: ", cls)
                     self.extractProfilesFromWebPage(currentChurch, response, "photo", tag, cls, level)
 
-                if processed >= 2:
+                if tag == "li" and count > 1:
+                    print(">>>>>>>>>>>>>>>>>>>>>>>>  call photo for boundary tag: ", tag, ", and class: ", cls)
+                    self.extractProfilesFromWebPage(currentChurch, response, "photo", tag, cls, level)
+
+                if processed >= 4:
                     break
 
                 processed = processed + 1
@@ -401,7 +408,7 @@ class ProfileExtractor:
                 lastTag = tag
                 lastCls = cls
 
-    def evaluateToSetChurchContacts(self, currentChurch, boundaryAttribute, profilePhoto, requirePhotoCheck, profileName, profileTitle, profileDepartment, profileEmail):
+    def evaluateToSetChurchContacts(self, currentChurch, boundaryAttribute, profilePhoto, requirePhotoCheck, profileName, profileTitle, profileDepartment, profileEmail, imageUrls):
 
         if (boundaryAttribute == "photo" and profilePhoto is not None and profileName is not None):
             print("-------------- boundary found")
@@ -414,10 +421,13 @@ class ProfileExtractor:
             else:
                 #print("check the parts: ", profileName, ", in ", requirePhotoCheck)
                 for part in profileName.lower().split():
+                    part = part.strip()
                     if len(part) > 2 and requirePhotoCheck.lower().find(part) >= 0:
                         print("image url matches name: ", part)
                         validMatch = True
                         break
+
+
 
             if validMatch:
                 #print("set because of photo a: ", profileName)
@@ -432,6 +442,7 @@ class ProfileExtractor:
                 foundPart = False
                 parts = profileName.split()
                 for part in parts:
+                    part = part.strip()
                     if profileEmail.lower().find(part.lower()) >= 0:
                         validMatch = True
 
@@ -448,8 +459,27 @@ class ProfileExtractor:
                 foundPart = False
                 parts = profileName.split()
                 for part in parts:
+                    part = part.strip()
                     if profileEmail.lower().find(part.lower()) >= 0:
+                        print("found email match")
                         validMatch = True
+
+
+
+            # look for photo in style sheets
+            if profilePhoto is None:
+                #print("look for with name: ", profileName)
+                for part in profileName.lower().split():
+                    part = part.strip()
+                    #print("look for photo for >", part, "<")
+                    for imageUrl in imageUrls:
+                        if len(part) > 2 and imageUrl.lower().find(part) >= 0:
+                            #print("image url in list matches name: ", part)
+                            profilePhoto = imageUrl
+                            break
+
+                    if profilePhoto is not None:
+                        break
 
             if validMatch:
                 # print("set because of profileName and email 2 a: ", profileName)
@@ -506,8 +536,15 @@ class ProfileExtractor:
         hasHitBoundaryBefore = False
 
 
+        # Get the text content of the style element
+        css_lines = str(response.body)
+        imageUrls = re.findall(r"url\(['\"]?([^'\")]+)", css_lines)
+        for url in imageUrls:
+            print("url: ", url)
+
+
         path = response.xpath(
-            '//p | //div | //a | //img | //h1 | //h2 | //h3 | //h4 | //h5 | //h6 |  //strong | //span ')
+            '//p | //div | //li | //a | //img | //h1 | //h2 | //h3 | //h4 | //h5 | //h6 |  //strong | //span ')
 
         for el in path:
 
@@ -515,7 +552,8 @@ class ProfileExtractor:
 
             className = el.attrib.get('class', '')
             if className is not None and className != "":
-                className = className.split()[0]
+                className = className.split()[0].strip()
+                className = className.strip()
 
             if className is None or className == "":
                 className = el.attrib.get('id', '')
@@ -553,9 +591,9 @@ class ProfileExtractor:
 
                     # if we hit boundary marker then set church contact
                     #print("check boundary: tag: ", tagName, " == ", boundaryTag, ", class: ", className, " == ", className, ", level ", ancestorLevel, " == ", boundaryLevel)
-                    if (tagName == boundaryTag and className != "" and className.split()[0] == boundaryClass and ancestorLevel == boundaryLevel):
+                    if (tagName == boundaryTag and className != "" and className.split()[0].strip() == boundaryClass and ancestorLevel == boundaryLevel):
                         evaluateBoundary = True
-                        print("hit div boundary 1: ------------------------------------------------------ ", className.split()[0], ", level: ", ancestorLevel)
+                        print("hit div boundary 1: ------------------------------------------------------ ", className.split()[0].strip(), ", level: ", ancestorLevel)
 
 
                     # if  div has no children div then process this div
@@ -564,11 +602,11 @@ class ProfileExtractor:
 
                 if tagName == "li":
 
-                    if (tagName == boundaryTag and className != "" and className.split()[0] == boundaryClass):
+                    if (tagName == boundaryTag and className != "" and className.split()[0].strip() == boundaryClass):
                         evaluateBoundary = True
 
                         print("hit li boundary 2: ------------------------------------------------------ ",
-                              className.split()[0])
+                              className.split()[0].strip())
 
                     # don't process "li" sections
                     processBoundarySection = False
@@ -582,7 +620,7 @@ class ProfileExtractor:
 
                         self.evaluateToSetChurchContacts(currentChurch, boundaryAttribute, profilePhoto,
                                                         requirePhotoCheck, profileName, profileTitle, profileDepartment,
-                                                        profileEmail)
+                                                        profileEmail, imageUrls)
 
                     #print("----------  hit boundary before *************")
                     hasHitBoundaryBefore = True
@@ -601,9 +639,17 @@ class ProfileExtractor:
             if processBoundarySection:
 
                 # get text inside element
-                visible_text = el.xpath('.//text()').extract()
-                print('visible_text: ', visible_text)
-                text = self.replace_multiple_spaces(' '.join(visible_text))
+                visible_text = [text.strip() for text in el.xpath('.//text()').extract()]
+
+                text = ""
+                for p in visible_text:
+                    if p == '':
+                        text = text + ' '
+                    else:
+                        text = text + p
+
+                #text = self.replace_multiple_spaces(' '.join(visible_text)).strip()
+                #print('visible_text: ', text)
 
                 shortText = text.strip()[:120]
                 if len(shortText) > 5:
@@ -630,6 +676,7 @@ class ProfileExtractor:
                                 else:
                                     #print("check the parts: ", personName, ", in ", requirePhotoCheck)
                                     for part in personName.lower().split():
+                                        part = part.strip()
                                         if len(part) > 2 and requirePhotoCheck.lower().find(part) >= 0:
                                             print("image url matches name: ", part)
                                             validMatch = True
@@ -683,26 +730,32 @@ class ProfileExtractor:
                     #print("href: ", href)
                     if href.find("mailto:") >= 0:
 
-                        email_address = href.replace("mailto:", "")
-                        #print("add: ", email_address)
-                        if email_address != "":
+                        email_text = ''
+                        email_texts = el.xpath('.//text()').extract()
+                        if len(email_texts) > 0:
+                            email_text = email_texts[0].strip();
 
-                            #print(">> email: ", email_address)
-                            if profileEmail is None:
-                                profileEmail = email_address
+                        if email_text != '':
+                            email_address = href.replace("mailto:", "")
+                            #print("add: ", email_address)
+                            if email_address != "":
 
-                            # if we are building schema then do this part
-                            if boundaryAttribute is None:
-                                self.addToElement(schemaStructure, "email", tagName, className, styleName)
+                                print(">> email: ", email_address)
+                                if profileEmail is None:
+                                    profileEmail = email_address
 
-                                if nameFirst_el is not None:
+                                # if we are building schema then do this part
+                                if boundaryAttribute is None:
+                                    self.addToElement(schemaStructure, "email", tagName, className, styleName)
 
-                                    cDiv, cDivLevel, cClassName = self.commonDiv(nameFirst_el, el)
-                                    self.addFirst(schemaStructure, "name", "div", cClassName, cDivLevel)
+                                    if nameFirst_el is not None:
 
-                                    cLi, cClassName = self.commonLi(nameFirst_el, el)
-                                    if cLi is not None:
-                                        self.addFirst(schemaStructure, "name", "li", cClassName, None)
+                                        cDiv, cDivLevel, cClassName = self.commonDiv(nameFirst_el, el)
+                                        self.addFirst(schemaStructure, "name", "div", cClassName, cDivLevel)
+
+                                        cLi, cClassName = self.commonLi(nameFirst_el, el)
+                                        if cLi is not None:
+                                            self.addFirst(schemaStructure, "name", "li", cClassName, None)
 
 
 
@@ -798,7 +851,7 @@ class ProfileExtractor:
 
             self.evaluateToSetChurchContacts(currentChurch, boundaryAttribute, profilePhoto,
                                              requirePhotoCheck, profileName, profileTitle, profileDepartment,
-                                             profileEmail)
+                                             profileEmail, imageUrls)
 
 
 

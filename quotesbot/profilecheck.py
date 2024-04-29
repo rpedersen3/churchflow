@@ -77,6 +77,10 @@ class ProfileCheck:
             return "Minister"
 
 
+        if "bishop" in text.lower():
+            if "suffragan" in text.lower():
+                return "Suffragan Bishop"
+            return "Bishop"
 
         if "pastor" in text.lower():
             if "lead" in text.lower():
@@ -105,8 +109,25 @@ class ProfileCheck:
                 return "Residency Pastor"
             return "Pastor"
 
+        if "executive" in text.lower():
+            if "assistant" in text.lower():
+                return "Executive Assistant"
+            return "Executive"
+
+
         if "elder" in text.lower():
             return "Elder"
+
+        if "deacon" in text.lower():
+            return "Deacon"
+
+        if "chairman" in text.lower():
+            return "Chairman"
+
+        if "treasurer" in text.lower():
+            if "assistant" in text.lower():
+                return "Assistant Treasurer"
+            return "Treasurer"
 
 
         if "director" in text.lower():
@@ -243,13 +264,15 @@ class ProfileCheck:
 
     def isPersonName(self, name):
 
-        print("check name: ", name)
+        #print("check name: ", name)
         fullname = None
 
         #  replace the name beginning with
         name = name.lower()
         if name.startswith("the "):
             name = name.replace("the ", "")
+
+        name = name.replace("&", "and")
 
         # remove some common titles in front of name
         name = name.replace("fr.", "")
@@ -331,7 +354,7 @@ class ProfileCheck:
         '''
         # lets try and parse name in pieces
         if nlpFoundAName:
-            print("check full name parts: ", name)
+            #print("check full name parts: ", name)
             fullname = self.isPersonNameUsingParts(name)
             #if fullname is not None:
             #    print("fullname parts: ", fullname)
@@ -422,7 +445,8 @@ class ProfileCheck:
 
 
 
-            if (part.lower() != " and " or part.lower() != " & ") and skipNextPart == False:
+            #print("part: ", part)
+            if part.lower() != "and" and skipNextPart == False:
                 #print("part: ", part)
                 names = [{'name': part}]
 
@@ -452,6 +476,7 @@ class ProfileCheck:
                     white = lastnamePred['white'].iloc[0]
 
                     fullname = fullname + " " + part
+                    #print("fullname: ", fullname)
 
                     # check that lastname is a valid name
                     if str(white) != 'nan':
@@ -512,6 +537,7 @@ class ProfileCheck:
 
             if url.find(".ashx") != -1:
                 url = url.split(".ashx")[0] + ".ashx"
+
 
             # sometimes they come in sets so need to split them
             url = url.split(", ")[0]
