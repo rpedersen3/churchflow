@@ -69,13 +69,12 @@ class ProfileCheck:
     def get_job_titles(self, text):
 
         text = text[:60]
-        if "worship " in text.lower():
-            if "leader" in text.lower():
-                return "Worship Leader"
+
 
         if "minister" in text.lower():
+            if "worship" in text.lower():
+                return "Worship Minister"
             return "Minister"
-
 
         if "bishop" in text.lower():
             if "suffragan" in text.lower():
@@ -108,6 +107,10 @@ class ProfileCheck:
             if "residency" in text.lower():
                 return "Residency Pastor"
             return "Pastor"
+
+        if "worship " in text.lower():
+            if "leader" in text.lower():
+                return "Worship Leader"
 
         if "executive" in text.lower():
             if "assistant" in text.lower():

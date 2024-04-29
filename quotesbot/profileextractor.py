@@ -799,13 +799,16 @@ class ProfileExtractor:
                     isCDN = False
                     if img_src.startswith("https://images.squarespace-cdn.com") or \
                             img_src.startswith("https://storage2.snappages.site") or \
+                            img_src.startswith("https://cdn.monkplatform.com") or \
                             img_src.startswith("https://static.wixstatic.com") or \
                             img_src.startswith("https://cdn.monkplatform.com") or \
+                            img_src.startswith("https://eaqmp884dxd.exactdn.com") or \
                             img_src.startswith("https://static.wixstatic.com") or \
                             img_src.startswith("https://thechurchco-production.s3.amazonaws.com") or \
                             img_src.startswith("https://s3.amazonaws.com/media.cloversites.com") or \
                             img_src.startswith("https://images.squarespace-cdn.com"):
                         isCDN = True
+
 
                     parsed_url = urlparse(response.url)
                     domain = parsed_url.netloc

@@ -107,7 +107,7 @@ class ChurchCrawler(scrapy.Spider):
     '''
 
 
-    '''
+
     # crawl church staff pages
     startURLs = []
 
@@ -141,7 +141,7 @@ class ChurchCrawler(scrapy.Spider):
             break
 
         i = i + 1
-    '''
+
 
 
     '''
@@ -170,7 +170,7 @@ class ChurchCrawler(scrapy.Spider):
     '''
 
 
-
+    '''
 
     #crawl specific url
     startURLs = [
@@ -213,7 +213,7 @@ class ChurchCrawler(scrapy.Spider):
         #"https://christianservices.org/",
         #"https://christianservices.org/contact-us/"
     ]
-
+    '''
 
 
     def checkCommonDiv(self, el1, el2):
