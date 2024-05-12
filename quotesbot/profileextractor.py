@@ -79,37 +79,58 @@ class ProfileExtractor:
 
     def addFirst(self, schemaStruct, attribute, tag, cClassName, cLevel):
 
-        if tag is None or cClassName is None:
+        if tag is None:
             return
 
         tag = tag.strip()
-        cClassName = cClassName.strip()
-        if tag == "" or cClassName == "":
-            return
+
+        if cClassName is not None:
+            cClassName = cClassName.strip()
+
 
         #print("first ----- att: ", attribute, ", level: ", cLevel, ", class: ", cClassName)
 
 
         #check if tag name is present and update count if it is
-        elFirst = None
-        for first in schemaStruct[attribute]["first"]:
-            if "level" in first and first["level"] == cLevel and \
-                    "class" in first and first["class"] == cClassName and \
-                    "tag" in first and first["tag"] == tag:
+        if cClassName is not None:
+            elFirst = None
+            for first in schemaStruct[attribute]["first"]:
+                if "level" in first and first["level"] == cLevel and \
+                        "class" in first and first["class"] == cClassName and \
+                        "tag" in first and first["tag"] == tag:
 
-                first["count"] = first["count"] + 1
-                elFirst = first
-                break
+                    first["count"] = first["count"] + 1
+                    elFirst = first
+                    break
 
-        # add tag if not present
-        if elFirst == None:
-            elFirst = {
-                "tag": tag,
-                "level": cLevel,
-                "class": cClassName,
-                "count": 1
-            }
-            schemaStruct[attribute]["first"].append(elFirst)
+            # add tag if not present
+            if elFirst == None:
+                elFirst = {
+                    "tag": tag,
+                    "level": cLevel,
+                    "class": cClassName,
+                    "count": 1
+                }
+                schemaStruct[attribute]["first"].append(elFirst)
+
+        else:
+            elFirst = None
+            for first in schemaStruct[attribute]["first"]:
+                if "level" in first and first["level"] == cLevel and \
+                        "tag" in first and first["tag"] == tag:
+                    first["count"] = first["count"] + 1
+                    elFirst = first
+                    break
+
+            # add tag if not present
+            if elFirst == None:
+                elFirst = {
+                    "tag": tag,
+                    "level": cLevel,
+                    "class": "",
+                    "count": 1
+                }
+                schemaStruct[attribute]["first"].append(elFirst)
 
 
 
@@ -165,9 +186,6 @@ class ProfileExtractor:
 
         return common_ancestor_div, common_ancestor_count, common_ancestor_class
 
-
-
-
     def commonLi(self, el1, el2):
 
         ancestors1 = el1.xpath('ancestor::li')
@@ -187,8 +205,8 @@ class ProfileExtractor:
                 # print('look for common li 2: ', s2)
 
                 if s1 == s2:
-                    #print('s1: ', s1)
-                    #print('class ', previousClassName.split()[0])
+                    # print('s1: ', s1)
+                    # print('class ', previousClassName.split()[0])
                     common_ancestor_li = ancestor1
                     common_ancestor_class = ancestor2.attrib.get("class", "")
                     if common_ancestor_class is None or common_ancestor_class == "":
@@ -200,12 +218,67 @@ class ProfileExtractor:
                         common_ancestor_class = common_ancestor_class.split()[0].strip()
                     break
 
-                #previousClassName = ancestor2.attrib.get("class", "")
+                # previousClassName = ancestor2.attrib.get("class", "")
             if common_ancestor_li:
                 break
 
-        #print('classname: ', common_ancestor_class)
+        # print('classname: ', common_ancestor_class)
         return common_ancestor_li, common_ancestor_class
+
+    def commonArticle(self, el1, el2):
+
+        ancestors1 = el1.xpath('ancestor::article')
+        ancestors2 = el2.xpath('ancestor::article')
+
+        #print('look for common article 1: ', ancestors1)
+        #print('look for common article 2: ', ancestors2)
+
+        common_ancestor_article = None
+
+        for ancestor1 in ancestors1[::-1]:
+            s1 = str(ancestor1)
+            #print('look for common article 1: ', s1)
+            for ancestor2 in ancestors2[::-1]:
+                s2 = str(ancestor2)
+                #print('look for common article 2: ', s2)
+
+                if s1 == s2:
+                    common_ancestor_article = ancestor1
+                    #print('*********************** found common article ')
+                    break
+
+            if common_ancestor_article:
+                break
+
+        return common_ancestor_article
+
+
+    def commonSection(self, el1, el2):
+
+        ancestors1 = el1.xpath('ancestor::section')
+        ancestors2 = el2.xpath('ancestor::section')
+
+        #print('look for common section 1: ', ancestors1)
+        #print('look for common section 2: ', ancestors2)
+
+        common_ancestor_section = None
+
+        for ancestor1 in ancestors1[::-1]:
+            s1 = str(ancestor1)
+            #print('look for common section 1: ', s1)
+            for ancestor2 in ancestors2[::-1]:
+                s2 = str(ancestor2)
+                #print('look for common section 2: ', s2)
+
+                if s1 == s2:
+                    common_ancestor_section = ancestor1
+                    #print('*********************** found common section ')
+                    break
+
+            if common_ancestor_section:
+                break
+
+        return common_ancestor_section
 
     def getBoundingDiv(self, els):
         #print("look for lowest common div")
@@ -363,6 +436,14 @@ class ProfileExtractor:
                     print(">>>>>>>>>>>>>>>>>>>>>>>>  call photo for boundary tag: ", tag, ", and class: ", cls)
                     self.extractProfilesFromWebPage(currentChurch, response, "photo", tag, cls, level)
 
+                if tag == "article" and count > 1:
+                    print(">>>>>>>>>>>>>>>>>>>>>>>>  call photo for boundary tag: ", tag, ", and class: ", cls)
+                    self.extractProfilesFromWebPage(currentChurch, response, "photo", tag, cls, level)
+
+                if tag == "section" and count > 1:
+                    print(">>>>>>>>>>>>>>>>>>>>>>>>  call photo for boundary tag: ", tag, ", and class: ", cls)
+                    self.extractProfilesFromWebPage(currentChurch, response, "photo", tag, cls, level)
+
                 if processed >= 4:
                     break
 
@@ -494,6 +575,13 @@ class ProfileExtractor:
         #    print("we are looking for class: ", boundaryClass, ", and level: ", boundaryLevel)
 
 
+        # remove svg and replace strong with the internal text
+        svg_elements = response.xpath("//svg")
+        svg_elements.drop()
+
+
+
+
         print("--------- parse page: ", response.url)
         #print("body: ", response.body)
         profCheck = ProfileCheck()
@@ -544,7 +632,7 @@ class ProfileExtractor:
 
 
         path = response.xpath(
-            '//p | //div | //li | //a | //img | //h1 | //h2 | //h3 | //h4 | //h5 | //h6 |  //strong | //span ')
+            '//p | //div | //li | //article | //section | //a | //img | //h1 | //h2 | //h3 | //h4 | //h5 | //h6 | //strong | //span ')
 
         for el in path:
 
@@ -574,7 +662,7 @@ class ProfileExtractor:
 
 
             # look boundary marker hit then evaluate adding church
-            if tagName == "div" or tagName == "li":
+            if tagName == "div" or tagName == "li" or tagName == "article" or tagName == "section":
 
                 if tagName == "div":
 
@@ -611,6 +699,26 @@ class ProfileExtractor:
                     # don't process "li" sections
                     processBoundarySection = False
 
+                if tagName == "article":
+
+                    if (tagName == boundaryTag):
+                        evaluateBoundary = True
+
+                        print("hit article boundary 3: ------------------------------------------------------ ")
+
+                    # don't process "article" sections
+                    processBoundarySection = False
+
+                if tagName == "section":
+
+                    if (tagName == boundaryTag):
+                        evaluateBoundary = True
+
+                        print("hit section boundary 4: ------------------------------------------------------ ")
+
+                    # don't process "section" sections
+                    processBoundarySection = False
+
 
                 #check boundary condition and process
                 if evaluateBoundary:
@@ -638,27 +746,43 @@ class ProfileExtractor:
 
             if processBoundarySection:
 
-                # get text inside element
-                visible_text = [text.strip() for text in el.xpath('.//text()').extract()]
+                # get strong elements, so we can not add spaces between those elements
+                strongTxts = []
+                strong_elements = response.xpath("//strong")
+                for strong in strong_elements:
+                    strong_text = ''.join(strong.xpath('.//text()').extract())
+                    strongTxts.append(strong_text)
 
-                text = ""
-                for p in visible_text:
-                    if p == '':
-                        text = text + ' '
+                # extract text from elements and put spaces between pieces
+                txts = el.xpath('.//text()').extract()
+                #print("txts: ", txts)
+
+                visible_text = ""
+                for text in txts:
+                    if visible_text == "":
+                        visible_text = text.strip()
                     else:
-                        text = text + p
+
+                        if visible_text in strongTxts:
+                            #don't add space if element is a strong type
+                            visible_text = visible_text + text.strip()
+                        else:
+                            visible_text = visible_text + " " + text.strip()
+
+                #print("vis text: ", visible_text)
+
 
                 #text = self.replace_multiple_spaces(' '.join(visible_text)).strip()
                 #print('visible_text: ', text)
 
-                shortText = text.strip()[:120]
+                shortText = visible_text.strip()[:120]
                 if len(shortText) > 5:
                     #print("short text: ", shortText)
 
                     personName = profCheck.isPersonName(shortText)
                     if personName is not None:
 
-                        #print(">> name: ", personName)
+                        print(">> name: ", personName)
                         if profileName is None:
                             profileName = personName
 
@@ -692,6 +816,16 @@ class ProfileExtractor:
                                     cLi, cClassName = self.commonLi(photoFirst_el, el)
                                     if cLi is not None:
                                         self.addFirst(schemaStructure, "photo", "li", cClassName, None)
+
+                                    cArticle  = self.commonArticle(photoFirst_el, el)
+                                    if cArticle is not None:
+                                        #print("-------------------  add first article ----------------")
+                                        self.addFirst(schemaStructure, "photo", "article", None, None)
+
+                                    cSection = self.commonSection(photoFirst_el, el)
+                                    if cSection is not None:
+                                        #print("-------------------  add first section ----------------")
+                                        self.addFirst(schemaStructure, "photo", "section", None, None)
 
 
                             # setup check for name first boundary
@@ -727,17 +861,21 @@ class ProfileExtractor:
                 if el.xpath('@href').get():
 
                     href = el.xpath('@href').get()
-                    #print("href: ", href)
+                    print("href: ", href)
                     if href.find("mailto:") >= 0:
 
+                        print('tttttttttxt: ', str(el))
                         email_text = ''
-                        email_texts = el.xpath('.//text()').extract()
+                        email_texts = el.xpath('text()').extract()
                         if len(email_texts) > 0:
                             email_text = email_texts[0].strip();
 
+                        if email_text == '':
+                            print("----------- no email text")
+
                         if email_text != '':
                             email_address = href.replace("mailto:", "")
-                            #print("add: ", email_address)
+                            print("add: ", email_address)
                             if email_address != "":
 
                                 print(">> email: ", email_address)
@@ -757,6 +895,16 @@ class ProfileExtractor:
                                         if cLi is not None:
                                             self.addFirst(schemaStructure, "name", "li", cClassName, None)
 
+                                        cArticle = self.commonArticle(nameFirst_el, el)
+                                        if cArticle is not None:
+                                            print("-------------------  add first article ----------------")
+                                            self.addFirst(schemaStructure, "name", "article", None, None)
+
+                                        cSection = self.commonSection(nameFirst_el, el)
+                                        if cSection is not None:
+                                            #print("-------------------  add first section ----------------")
+                                            self.addFirst(schemaStructure, "name", "section", None, None)
+
 
 
 
@@ -765,6 +913,13 @@ class ProfileExtractor:
                 # get photo inside elements
                 if el.xpath('@src').get():
                     img_src = el.xpath('@src').get()
+
+                    # if this is an svg thing like popupbox then set to None
+                    if img_src.find("data:image/svg+xml") >= 0:
+                        img_src = None
+
+                if img_src is None and el.xpath('@data-src').get():
+                    img_src = el.xpath('@data-src').get()
 
                     # if this is an svg thing like popupbox then set to None
                     if img_src.find("data:image/svg+xml") >= 0:
@@ -798,15 +953,15 @@ class ProfileExtractor:
 
                     isCDN = False
                     if img_src.startswith("https://images.squarespace-cdn.com") or \
+                            img_src.find("cloudfront.net") > 0 or \
                             img_src.startswith("https://storage2.snappages.site") or \
                             img_src.startswith("https://cdn.monkplatform.com") or \
                             img_src.startswith("https://static.wixstatic.com") or \
                             img_src.startswith("https://cdn.monkplatform.com") or \
-                            img_src.startswith("https://eaqmp884dxd.exactdn.com") or \
+                            img_src.find("exactdn.com") > 0 or \
                             img_src.startswith("https://static.wixstatic.com") or \
-                            img_src.startswith("https://thechurchco-production.s3.amazonaws.com") or \
-                            img_src.startswith("https://s3.amazonaws.com/media.cloversites.com") or \
-                            img_src.startswith("https://images.squarespace-cdn.com"):
+                            img_src.find("s3.amazonaws.com") > 0 or \
+                            img_src.startswith("https://s3.amazonaws.com/media.cloversites.com"):
                         isCDN = True
 
 
@@ -822,7 +977,7 @@ class ProfileExtractor:
 
                     if isCDN or img_src.find(domain.replace("www.", "")) >= 0:
                         #print("********** check photo ****** ", img_src)
-                        foundPhoto, foundProfilePhoto = profCheck.isProfilePhoto(img_src)
+                        foundPhoto, foundProfilePhoto = profCheck.isProfilePhoto(response, img_src)
                         if foundPhoto:
 
                             tagName = el.xpath('name()').extract()[0]
@@ -836,7 +991,9 @@ class ProfileExtractor:
                                 #print("found person in photo: ", img_src )
 
 
-                            #print(">> photo: ", img_src)
+                            print(">> photo: ", img_src)
+                            print(">> requirePhotoCheck: ", requirePhotoCheck)
+
                             # if boundary has been hit and this is a photo boundary then clear everything
                             if  hasHitBoundaryBefore is not None:
                                 if profilePhoto is None:

@@ -29,6 +29,13 @@ from googleapiclient.discovery import build
 
 from scrapy_splash import SplashRequest
 
+
+import json
+import base64
+from io import BytesIO
+from PIL import Image
+
+
 import pathlib
 import textwrap
 
@@ -170,11 +177,19 @@ class ChurchCrawler(scrapy.Spider):
     '''
 
 
-    '''
+
 
     #crawl specific url
     startURLs = [
-        "https://www.v7pc.org/staff"
+        "https://www.pwclc.org/meet-the-staff/"
+        #"https://southeast-church.org/about-us/leadership"
+        #"https://gccdenver.org/leadership" # boundary issues,  name before picture and switching with boundaries
+        #"https://www.agapeoutpost.org/about"
+        #"https://www.fcucc.org/about/our-team"
+        #"https://www.foccs.net/about-foc/our-staff/"
+        #"https://monumenthillchurch.org/our-team/"
+        #"https://www.blackforestcommunitychurch.org/about-us#ministryteam"
+        #"https://www.v7pc.org/staff"
         #"https://www.towercommunity.church/who-we-are/"
         #"https://www.ziontemplechurch.org/aboutus"
         #"https://www.agapeoutpost.org/about"
@@ -213,7 +228,7 @@ class ChurchCrawler(scrapy.Spider):
         #"https://christianservices.org/",
         #"https://christianservices.org/contact-us/"
     ]
-    '''
+
 
 
     def checkCommonDiv(self, el1, el2):
@@ -1477,7 +1492,7 @@ class ChurchCrawler(scrapy.Spider):
 
                 if isCDN or img_src.find(domain.replace("www.", "")) >= 0:
                     print("********** check photo ****** ", img_src)
-                    foundPhoto, foundProfilePhoto = profCheck.isProfilePhoto(img_src)
+                    foundPhoto, foundProfilePhoto = profCheck.isProfilePhoto(response, img_src)
                     if foundProfilePhoto:
 
                         #print("photo found: ", img_src)
@@ -1646,6 +1661,13 @@ class ChurchCrawler(scrapy.Spider):
                     
                     if request.url ~= 'PAGE_URL' then
                         local start, _ = request.url:find("%wixpress%")
+                        if start == nil then
+                            start, _ = request.url:find("%jpg%")
+                        end
+                        if start == nil then
+                            start, _ = request.url:find("%png%")
+                        end
+                        
                         print("start", start)
                         if start == nil then
                             print("pg: ", request.url)
@@ -1687,7 +1709,9 @@ class ChurchCrawler(scrapy.Spider):
             yield SplashRequest(startUrl, self.parse, endpoint='execute',
                                 args={
                                     'wait': 0.1,
-                                    'images': 0,
+                                    'images': 1,
+                                    'response_body': 1,
+                                    'har': 1,
                                     'lua_source': lua_script,
                                 })
 
@@ -1699,6 +1723,33 @@ class ChurchCrawler(scrapy.Spider):
                 args={'engine': 'chromium', 'lua_source': lua_script}
             )
             '''
+
+    def save_image(self, response):
+
+        # Extract the image name from the URL
+        image_name = response.url.split('/')[-1]
+
+        destination_folder = "imagefiles"
+        os.makedirs(destination_folder, exist_ok=True)
+        destination_file_path = os.path.join(destination_folder, os.path.basename(image_name)) + ".png"
+
+        imgdata = base64.b64decode(response.data['png'])
+        image = Image.open(BytesIO(imgdata))
+        image.save(destination_file_path)
+
+        print(destination_file_path)
+        print('screenshot done...')
+
+
+        '''
+        # Save the image to a file
+        with open(destination_file_path, 'wb') as f:
+            print("image body: ", destination_file_path)
+            f.write(response.body)
+
+        self.log(f'Saved file {image_name}')
+
+        '''
 
     def parse(self, response):
 
@@ -1876,7 +1927,85 @@ class ChurchCrawler(scrapy.Spider):
                     yield scrapy.Request(response.urljoin(pageLink), callback=self.parse)
 
         '''
+        '''
+        lua_script_template = """
+                    function main(splash, args)  
+
+                        print("url: ", args.url)
+
+                        splash:on_request(function(request)
+                            print("request: ", request.url)
+
+                            if request.url ~= 'PAGE_URL' then
+                                local start, _ = request.url:find("%wixpress%")
+                                if start == nil then
+                                    start, _ = request.url:find("%jpg%")
+                                end
+                                if start == nil then
+                                    start, _ = request.url:find("%png%")
+                                end
+
+                                print("start", start)
+                                if start == nil then
+                                    print("pg: ", request.url)
+                                    request.abort()
+                                    return { status = 404, }
+                                end
+                            end
 
 
+                        end)
+
+                        print("go to url", args.url)
+                        splash:go(args.url)
+
+                        -- custom rendering script logic...
+
+                        return splash:html()
+                    end
+                    """
+        '''
+
+        lua_script_template = """
+                            function main(splash, args)  
+
+                                
+
+                                  splash.private_mode_enabled = false
+                                  splash.images_enabled = true
+                                  splash:set_user_agent("Different User Agent")
+                                  splash.plugins_enabled = true
+                                  splash.html5_media_enabled = true
+                                  assert(splash:go(args.url))
+                                  assert(splash:wait(3.5))
+                                  width, height = splash:set_viewport_full()
+                                  assert(splash:wait(3.5))
+                                
+                                print("urla cccccc: ", args.url)
+                                  return {
+                                    png = splash:png()
+                                  }
+
+
+                            end
+                            """
+
+
+
+
+        image_urls = response.xpath('//img/@src').getall()
+
+        # Process each image URL
+        for img_url in image_urls:
+
+            lua_script = lua_script_template.replace("PAGE_URL", img_url)
+            yield SplashRequest(img_url, self.save_image, endpoint='execute',
+                                args={
+                                    'wait': 0.1,
+                                    'images': 1,
+                                    'har': 1,
+                                    "png": 1,
+                                    'lua_source': lua_script
+                                })
 
 

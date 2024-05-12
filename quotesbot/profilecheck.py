@@ -7,6 +7,10 @@ import matplotlib.pyplot as plt
 import urllib.request
 from ethnicolr import  pred_census_ln, census_ln, pred_wiki_ln
 import spacy
+import scrapy
+from scrapy_splash import SplashRequest
+import os
+
 from names_dataset import NameDataset, NameWrapper
 import math
 import requests
@@ -282,6 +286,7 @@ class ProfileCheck:
         name = name.replace("dr.", "")
         name = name.replace("rev.", "")
         name = name.replace("deacon", "")
+        name = name.replace("associate", "")
         name = name.replace("board", "")
         name = name.replace("reverend", "")
         name = name.replace("staff", "")
@@ -297,7 +302,9 @@ class ProfileCheck:
         name = name.replace("creed", "")
         name = name.replace("nicene", "")
         name = name.replace("evangelist", "")
+        name = name.replace("ministerial", "")
         name = name.replace("minister", "")
+        name = name.replace("read more", "")
         name = name.replace("suffragan", "")
         name = name.replace("zion", "")
         name = name.replace("lady", "")
@@ -338,6 +345,7 @@ class ProfileCheck:
         name = name.replace("associate", "")
         name = name.replace("contact", "")
         name = name.replace("team", "")
+        name = name.replace("lay ", "")
 
         #print("****** name: ", name)
 
@@ -357,7 +365,7 @@ class ProfileCheck:
         '''
         # lets try and parse name in pieces
         if nlpFoundAName:
-            #print("check full name parts: ", name)
+            #print("************  check full name parts: ", name)
             fullname = self.isPersonNameUsingParts(name)
             #if fullname is not None:
             #    print("fullname parts: ", fullname)
@@ -404,6 +412,8 @@ class ProfileCheck:
                 continue
 
             if      part == "is" or \
+                    part == "his" or \
+                    part == "wife" or \
                     part == "from" or \
                     part == "po" or \
                     part == "box" or \
@@ -518,7 +528,47 @@ class ProfileCheck:
         return department
 
 
-    def isProfilePhoto(self, url):
+
+    def isProfilePhoto(self, response, url):
+
+        lua_script_template = """
+            function main(splash, args)  
+
+                print("url: ", args.url)
+
+                splash:on_request(function(request)
+                    print("request: ", request.url)
+
+                    if request.url ~= 'PAGE_URL' then
+                        local start, _ = request.url:find("%wixpress%")
+                        if start == nil then
+                            start, _ = request.url:find("%jpg%")
+                        end
+                        if start == nil then
+                            start, _ = request.url:find("%png%")
+                        end
+
+                        print("start", start)
+                        if start == nil then
+                            print("pg: ", request.url)
+                            request.abort()
+                            return { status = 404, }
+                        end
+                    end
+
+
+                end)
+
+                print("go to url", args.url)
+                splash:go(args.url)
+
+                -- custom rendering script logic...
+
+                return splash:html()
+            end
+            """
+
+
 
         foundPhoto = False
         foundProfilePhoto = False
@@ -527,6 +577,9 @@ class ProfileCheck:
 
         detector = dlib.get_frontal_face_detector()
 
+        originalUrl = url
+
+        url = url.lower()
         if url.find(".jpg") != -1 or url.find(".jpeg") != -1 or url.find(".png") != -1 or url.find(".ashx") != -1:
 
             if url.find(".jpg") != -1:
@@ -545,22 +598,20 @@ class ProfileCheck:
             # sometimes they come in sets so need to split them
             url = url.split(", ")[0]
             url = url.split(" ")[0]
-            #print("process image: >>", url, "<<")
+            print("process image: >>", url, "<<")
 
-            '''
-            hdrs = {
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.9999.99 Safari/537.36",
-                "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-                "Accept-Encoding": "gzip, deflate, br, zstd",
-                'Connection': 'keep-alive',
-                "Accept-Language": "en-US,en;q=0.9"
-            }
-            '''
+            foundPhoto = True
+
             hdrs = {
                 "User-Agent": "XY"
             }
+            hdrs = {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36',
+                'Accept': 'text / html, application / xhtml + xml, application / xml;q = 0.9, image / webp, image / apng, * / *;q = 0.8'
+            }
 
-            foundPhoto = True
+
 
             try:
                 req = urllib.request.Request(url, headers=hdrs)
@@ -568,7 +619,9 @@ class ProfileCheck:
                 arr = np.asarray(bytearray(response.read()), dtype=np.uint8)
             except Exception as e:
                 i = 1
-                #print("---------------  Problem connecting to source: ", url)
+                print("---------------  Problem connecting to source: ", url)
+                
+
 
             try:
                 frame = None
@@ -651,7 +704,7 @@ class ProfileCheck:
 
             except Exception as e:
                 i = 1
-                #print("---------------  Problem reading photo: ")
+                print("---------------  Problem reading photo: ", e)
 
 
 
