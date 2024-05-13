@@ -121,10 +121,10 @@ class Photo:
                     rect.left(), rect.top(), rect.right(), rect.bottom(), rect.width(), rect.height())
                     cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
-                    print('***************************')
-                    print('image width: ', width, ',  image height: ', height)
-                    print('face width: ', w, ',  face height: ', h)
-                    print('x: ', x, ', ', 'y: ', y)
+                    #print('***************************')
+                    #print('image width: ', width, ',  image height: ', height)
+                    #print('face width: ', w, ',  face height: ', h)
+                    #print('x: ', x, ', ', 'y: ', y)
 
                     percentOfHeight = (h / height) * 100
                     percentFromTop = (y / height) * 100

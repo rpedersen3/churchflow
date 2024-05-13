@@ -331,6 +331,15 @@ class ProfileCheck:
         name = name.replace("select", "")
         name = name.replace("pastoral", "")
         name = name.replace("pastor", "")
+        name = name.replace("founder", "")
+        name = name.replace("standard", "")
+        name = name.replace("celebration", "")
+        name = name.replace("peace", "")
+        name = name.replace("ministry", "")
+        name = name.replace("early", "")
+        name = name.replace("learning", "")
+        name = name.replace("pathways", "")
+        name = name.replace("connected", "")
         name = name.replace("apostle", "")
         name = name.replace("church", "")
         name = name.replace("emeritus", "")
@@ -415,6 +424,9 @@ class ProfileCheck:
             if      part == "is" or \
                     part == "his" or \
                     part == "wife" or \
+                    part == "with" or \
+                    part == "stay" or \
+                    part == "site" or \
                     part == "from" or \
                     part == "po" or \
                     part == "box" or \
@@ -441,6 +453,10 @@ class ProfileCheck:
                     part == "new" or \
                     part == "has" or \
                     part == "email" or \
+                    part == "food" or \
+                    part == "bank" or \
+                    part == "member" or \
+                    part == "portal" or \
                     part == "life" or \
                     part == "back" or \
                     part == "to" or \
@@ -532,45 +548,6 @@ class ProfileCheck:
 
     def isProfilePhoto(self, response, url):
 
-        lua_script_template = """
-            function main(splash, args)  
-
-                print("url: ", args.url)
-
-                splash:on_request(function(request)
-                    print("request: ", request.url)
-
-                    if request.url ~= 'PAGE_URL' then
-                        local start, _ = request.url:find("%wixpress%")
-                        if start == nil then
-                            start, _ = request.url:find("%jpg%")
-                        end
-                        if start == nil then
-                            start, _ = request.url:find("%png%")
-                        end
-
-                        print("start", start)
-                        if start == nil then
-                            print("pg: ", request.url)
-                            request.abort()
-                            return { status = 404, }
-                        end
-                    end
-
-
-                end)
-
-                print("go to url", args.url)
-                splash:go(args.url)
-
-                -- custom rendering script logic...
-
-                return splash:html()
-            end
-            """
-
-
-
         foundPhoto = False
         foundProfilePhoto = False
 
@@ -580,26 +557,30 @@ class ProfileCheck:
 
         originalUrl = url
 
-        url = url.lower()
-        if url.find(".jpg") != -1 or url.find(".jpeg") != -1 or url.find(".png") != -1 or url.find(".ashx") != -1:
+        urlLower = url.lower()
+        if urlLower.find(".jpg") != -1 or urlLower.find(".jpeg") != -1 or urlLower.find(".png") != -1 or urlLower.find(".ashx") != -1:
 
-            if url.find(".jpg") != -1:
-                url = url.split(".jpg")[0] + ".jpg"
+            if urlLower.find(".jpg") != -1:
+                offset = urlLower.find(".jpg")
+                url = url[:offset] + ".jpg"
 
-            if url.find(".jpeg") != -1:
-                url = url.split(".jpeg")[0] + ".jpeg"
+            if urlLower.find(".jpeg") != -1:
+                offset = urlLower.find(".jpeg")
+                url = url[:offset] + ".jpeg"
 
-            if url.find(".png") != -1:
-                url = url.split(".png")[0] + ".png"
+            if urlLower.find(".png") != -1:
+                offset = urlLower.find(".png")
+                url = url[:offset] + ".png"
 
-            if url.find(".ashx") != -1:
-                url = url.split(".ashx")[0] + ".ashx"
+            if urlLower.find(".ashx") != -1:
+                offset = urlLower.find(".ashx")
+                url = url[:offset] + ".ashx"
 
 
             # sometimes they come in sets so need to split them
             url = url.split(", ")[0]
             url = url.split(" ")[0]
-            print("process image: >>", url, "<<")
+            #print("process image: >>", url, "<<")
 
             foundPhoto = True
 
@@ -607,10 +588,12 @@ class ProfileCheck:
                 "User-Agent": "XY"
             }
 
-            frame = None
+
             gray_image = None
 
             try:
+
+                #print("get photo arr")
                 req = urllib.request.Request(url, headers=hdrs)
                 response = urllib.request.urlopen(req)
                 arr = np.asarray(bytearray(response.read()), dtype=np.uint8)
@@ -618,113 +601,116 @@ class ProfileCheck:
                 #print("encode and detect: ", url)
                 if url.find(".jpg") != -1 or url.find(".jpeg") != -1 or url.find(".jpeg") != -1 or url.find(".ashx") != -1:
                     frame = cv2.imdecode(arr, -1)
+                    #print("found image 1 ")
+                    gray_image = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
                 if url.find(".png") != -1:
                     frame = cv2.imdecode(arr, cv2.IMREAD_COLOR)
-
-                if frame is not None:
+                    #print("found image 2 ")
                     gray_image = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
 
             except Exception as e:
 
-                print("---------------  Problem connecting to source: ", url)
-
+                # problem getting image so lets see if we already have this file
                 # read response from file if it exists
+                print("---------------  Problem connecting to source: ", url)
+                print("e: ", e)
+
                 image_name = url.split('/')[-1]
                 destination_folder = ".scrapy/imagefiles"
                 os.makedirs(destination_folder, exist_ok=True)
                 destination_file_path = os.path.join(destination_folder, os.path.basename(image_name)) + ".png"
 
-
-
-
-                print("-------- check if file exists: ", destination_file_path)
+                #print("-------- check if file exists: ", destination_file_path)
                 if os.path.exists(destination_file_path):
                     img = Image.open(destination_file_path)
                     contrast_enhancer = ImageEnhance.Contrast(img)
                     enh = contrast_enhancer.enhance(2)
                     enhanced_image = np.asarray(enh)
-
-                    print("print done open")
-                    print(img.format)
-                    print(img.size)
-                    print(img.mode)
-
                     gray_image = cv2.cvtColor(enhanced_image, cv2.COLOR_BGR2GRAY)
 
-            try:
-
-
-                height, width = gray_image.shape[:2]
-
-                #plt.imshow(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
-                #plt.axis('off')
-                #plt.show()
-
-                rects = detector(gray_image)
-                #print('rects: ', str(rects))
-
-
-                # allow 2 faces
-                numberOfFaces = len(rects)
-                print("********* number of faces: ", numberOfFaces)
-                if numberOfFaces < 3:
-                    for rect in rects:
-                        x, y, x2, y2, w, h = (rect.left(), rect.top(), rect.right(), rect.bottom(), rect.width(), rect.height())
-                        #cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-                        #print('***************************')
-                        #print('image width: ', width, ',  image height: ', height)
-                        #print('face width: ', w, ',  face height: ', h)
-                        #print('x: ', x, ', ', 'y: ', y)
-
-                        percentOfHeight = (h / height) * 100
-                        percentFromTop = (y / height) * 100
-                        percentFromBottom = ((height-y2) / height) * 100
-
-                        print("percentOfHeight: ", percentOfHeight)
-                        #print("percentFromTop: ", percentFromTop)
-                        #print("percentFromBottom: ", percentFromBottom)
-
-
-
-                        # check if face is in middle of picture and is percent of total size
-                        #if numberOfFaces == 1 and percentOfHeight > 20 and percentFromTop < 40 and percentFromBottom < 65:
-                        #    foundProfilePhoto = True
-                        #    print("found photo")
-                        if percentOfHeight > 5:
-                            foundProfilePhoto = True
+                    #print("print done open")
+                    #print(img.format)
+                    #print(img.size)
+                    #print(img.mode)
 
 
 
 
-                        #if foundProfilePhoto:
+            if gray_image is not None:
 
-                            #print("found photo")
+                try:
+                    #print("try to get faces .............")
+                    height, width = gray_image.shape[:2]
 
+                    #plt.imshow(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+                    #plt.axis('off')
+                    #plt.show()
 
-                            #face_img = frame[y:y+h, x:x+w].copy()
-                            #blob = cv2.dnn.blobFromImage(face_img, 1, (227, 227), model_mean, swapRB=False)
-
-
-                            #age_Net.setInput(blob)
-                            #age_preds = age_Net.forward()
-                            #age = ageList[age_preds[0].argmax()]
-                            #i = age_preds[0].argmax()
-                            #ageConfidence = age_preds[0][i]
-
-                            #print('age: ', age, ", confidence: ", ageConfidence)
-
-                            #gender_Net.setInput(blob)
-                            #gender_preds = gender_Net.forward()
-                            #gender = genderList[gender_preds[0].argmax()]
-                            #j = gender_preds[0].argmax()
-                            #genderConfidence = gender_preds[0][j]
-                            ##print('gender: ', gender, ', confidence: ', genderConfidence)
+                    rects = detector(gray_image)
+                    #print('rects: ', str(rects))
 
 
-            except Exception as e:
-                i = 1
-                print("---------------  Problem reading photo: ", e)
+                    # allow 2 faces
+                    numberOfFaces = len(rects)
+                    #print("********* number of faces: ", numberOfFaces)
+                    if numberOfFaces < 3:
+                        for rect in rects:
+                            x, y, x2, y2, w, h = (rect.left(), rect.top(), rect.right(), rect.bottom(), rect.width(), rect.height())
+                            #cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+                            #print('***************************')
+                            #print('image width: ', width, ',  image height: ', height)
+                            #print('face width: ', w, ',  face height: ', h)
+                            #print('x: ', x, ', ', 'y: ', y)
+
+                            percentOfHeight = (h / height) * 100
+                            percentFromTop = (y / height) * 100
+                            percentFromBottom = ((height-y2) / height) * 100
+
+                            #print("percentOfHeight: ", percentOfHeight)
+                            #print("percentFromTop: ", percentFromTop)
+                            #print("percentFromBottom: ", percentFromBottom)
+
+
+
+                            # check if face is in middle of picture and is percent of total size
+                            #if numberOfFaces == 1 and percentOfHeight > 20 and percentFromTop < 40 and percentFromBottom < 65:
+                            #    foundProfilePhoto = True
+                            #    print("found photo")
+                            if percentOfHeight > 15:
+                                foundProfilePhoto = True
+
+
+
+
+                            #if foundProfilePhoto:
+
+                                #print("found photo")
+
+
+                                #face_img = frame[y:y+h, x:x+w].copy()
+                                #blob = cv2.dnn.blobFromImage(face_img, 1, (227, 227), model_mean, swapRB=False)
+
+
+                                #age_Net.setInput(blob)
+                                #age_preds = age_Net.forward()
+                                #age = ageList[age_preds[0].argmax()]
+                                #i = age_preds[0].argmax()
+                                #ageConfidence = age_preds[0][i]
+
+                                #print('age: ', age, ", confidence: ", ageConfidence)
+
+                                #gender_Net.setInput(blob)
+                                #gender_preds = gender_Net.forward()
+                                #gender = genderList[gender_preds[0].argmax()]
+                                #j = gender_preds[0].argmax()
+                                #genderConfidence = gender_preds[0][j]
+                                ##print('gender: ', gender, ', confidence: ', genderConfidence)
+
+
+                except Exception as e:
+                    print("---------------  Problem reading photo: ", e)
 
 
 

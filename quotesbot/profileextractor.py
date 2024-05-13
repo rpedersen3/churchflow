@@ -421,7 +421,7 @@ class ProfileExtractor:
                 cls = tagData["class"].strip()
                 level = tagData["level"]
 
-                print("tag: >", tag, "<, cls: >", cls, "<, level: ", level, ", count, ", count)
+                print("photo first boundary ===> tag: >", tag, "<, cls: >", cls, "<, level: ", level, ", count, ", count)
 
                 #if lastTag is not None and lastCls is not None and \
                 #    lastTag == tag and lastCls == cls:
@@ -456,6 +456,7 @@ class ProfileExtractor:
 
         elif "first" in schemaStructure["name"] and len(schemaStructure["name"]["first"]) > 0:
 
+
             processed = 1
             cls = None
             level = None
@@ -472,6 +473,8 @@ class ProfileExtractor:
                 tag = tagData["tag"]
                 cls = tagData["class"]
                 level = tagData["level"]
+
+                print("name first boundary ===> tag: >", tag, "<, cls: >", cls, "<, level: ", level, ", count, ", count)
 
                 #if lastTag is not None and lastCls is not None and \
                 #        lastTag == tag and lastCls == cls:
@@ -627,8 +630,6 @@ class ProfileExtractor:
         # Get the text content of the style element
         css_lines = str(response.body)
         imageUrls = re.findall(r"url\(['\"]?([^'\")]+)", css_lines)
-        for url in imageUrls:
-            print("url: ", url)
 
 
         path = response.xpath(
@@ -856,61 +857,82 @@ class ProfileExtractor:
                             self.addToElement(schemaStructure, "department", tagName, className, styleName)
 
 
-                # get mailto inside elements
-                email_elements = el.xpath('//text()[contains(., "@")]')
-                for emailEl in email_elements:
-                    email_address = emailEl.strip()
-
-                    # set email but don't use this to define a schema element
-                    profileEmail = email_address
 
 
+                email_address = None
                 if el.xpath('@href').get():
 
                     href = el.xpath('@href').get()
                     #print("href: ", href)
                     if href.find("mailto:") >= 0:
 
-                        #print('tttttttttxt: ', str(el))
+                        #print('................... tttttttttxt: ', str(el))
+                        email = href.replace("mailto:", "")
+                        if email != "" and email_address is None:
+                            email_address = email
+                            #print("add: ", email_address)
+
+                        '''
+                        # check if there is text displayed,  problem is something there is just a mail symbol
                         email_text = ''
                         email_texts = el.xpath('text()').extract()
                         if len(email_texts) > 0:
-                            email_text = email_texts[0].strip();
+                            email_text = email_texts[0].strip()
 
                         if email_text == '':
                             print("----------- no email text")
 
                         if email_text != '':
-                            email_address = href.replace("mailto:", "")
-                            #print("add: ", email_address)
-                            if email_address != "":
+                            email = href.replace("mailto:", "")
+                            if email != "" and email_address is None:
+                                print("add: ", email_address)
+                                email_address = email
+                                break
+                        '''
 
-                                print(">> email: ", email_address)
-                                if profileEmail is None:
-                                    profileEmail = email_address
 
-                                # if we are building schema then do this part
-                                if boundaryAttribute is None:
-                                    self.addToElement(schemaStructure, "email", tagName, className, styleName)
+                # get mailto inside elements
+                if email_address is None:
+                    email_elements = el.xpath('.//text()[contains(., "@")]')
+                    for emailEl in email_elements:
+                        email = emailEl.get().strip()
+                        #print("email text: ", email)
+                        email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+                        emails = re.findall(email_pattern, email)
+                        if len(emails) > 0:
+                            # set email but don't use this to define a schema element
+                            email_address = emails[0]
+                            #print("******** found email from text: ", email_address)
 
-                                    if nameFirst_el is not None:
 
-                                        cDiv, cDivLevel, cClassName = self.commonDiv(nameFirst_el, el)
-                                        self.addFirst(schemaStructure, "name", "div", cClassName, cDivLevel)
+                if email_address != None:
 
-                                        cLi, cClassName = self.commonLi(nameFirst_el, el)
-                                        if cLi is not None:
-                                            self.addFirst(schemaStructure, "name", "li", cClassName, None)
+                    print(">> email: ", email_address)
+                    if profileEmail is None:
+                        profileEmail = email_address
 
-                                        cArticle = self.commonArticle(nameFirst_el, el)
-                                        if cArticle is not None:
-                                            print("-------------------  add first article ----------------")
-                                            self.addFirst(schemaStructure, "name", "article", None, None)
+                        # if we are building schema then do this part
+                        if boundaryAttribute is None:
+                            self.addToElement(schemaStructure, "email", tagName, className, styleName)
 
-                                        cSection = self.commonSection(nameFirst_el, el)
-                                        if cSection is not None:
-                                            #print("-------------------  add first section ----------------")
-                                            self.addFirst(schemaStructure, "name", "section", None, None)
+                            if nameFirst_el is not None:
+
+                                cDiv, cDivLevel, cClassName = self.commonDiv(nameFirst_el, el)
+                                self.addFirst(schemaStructure, "name", "div", cClassName, cDivLevel)
+
+                                cLi, cClassName = self.commonLi(nameFirst_el, el)
+                                if cLi is not None:
+                                    self.addFirst(schemaStructure, "name", "li", cClassName, None)
+
+                                cArticle = self.commonArticle(nameFirst_el, el)
+                                if cArticle is not None:
+                                    print("-------------------  add first article ----------------")
+                                    self.addFirst(schemaStructure, "name", "article", None, None)
+
+                                cSection = self.commonSection(nameFirst_el, el)
+                                if cSection is not None:
+                                    # print("-------------------  add first section ----------------")
+                                    self.addFirst(schemaStructure, "name", "section", None, None)
 
 
 
@@ -1019,6 +1041,26 @@ class ProfileExtractor:
                                 self.addToElement(schemaStructure, "photo", tagName, className, styleName)
 
                                 photoFirst_el = el
+
+                                # if we are building schema then do this part
+                                if nameFirst_el is not None:
+
+                                    cDiv, cDivLevel, cClassName = self.commonDiv(nameFirst_el, el)
+                                    self.addFirst(schemaStructure, "name", "div", cClassName, cDivLevel)
+
+                                    cLi, cClassName = self.commonLi(nameFirst_el, el)
+                                    if cLi is not None:
+                                        self.addFirst(schemaStructure, "name", "li", cClassName, None)
+
+                                    cArticle = self.commonArticle(nameFirst_el, el)
+                                    if cArticle is not None:
+                                        print("-------------------  add first article ----------------")
+                                        self.addFirst(schemaStructure, "name", "article", None, None)
+
+                                    cSection = self.commonSection(nameFirst_el, el)
+                                    if cSection is not None:
+                                        # print("-------------------  add first section ----------------")
+                                        self.addFirst(schemaStructure, "name", "section", None, None)
 
 
 

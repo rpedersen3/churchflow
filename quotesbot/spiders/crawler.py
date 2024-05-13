@@ -181,7 +181,10 @@ class ChurchCrawler(scrapy.Spider):
 
     #crawl specific url
     startURLs = [
-        "https://www.pwclc.org/meet-the-staff/"
+        "https://reclamationdenver.com/about"
+        #"https://sgcco.org/about/leadership/"
+        #"https://www.stphilip-co.org/meet-the-staff/"
+        #"https://www.pwclc.org/meet-the-staff/"
         #"https://southeast-church.org/about-us/leadership"
         #"https://gccdenver.org/leadership" # boundary issues,  name before picture and switching with boundaries
         #"https://www.agapeoutpost.org/about"
@@ -1491,7 +1494,7 @@ class ChurchCrawler(scrapy.Spider):
 
 
                 if isCDN or img_src.find(domain.replace("www.", "")) >= 0:
-                    print("********** check photo ****** ", img_src)
+                    #print("********** check photo ****** ", img_src)
                     foundPhoto, foundProfilePhoto = profCheck.isProfilePhoto(response, img_src)
                     if foundProfilePhoto:
 
@@ -1739,19 +1742,9 @@ class ChurchCrawler(scrapy.Spider):
         image = Image.open(BytesIO(imgdata))
         image.save(destination_file_path)
 
-        print(destination_file_path)
-        print('screenshot done...')
+        #print(destination_file_path)
+        #print('screenshot done...')
 
-
-        '''
-        # Save the image to a file
-        with open(destination_file_path, 'wb') as f:
-            print("image body: ", destination_file_path)
-            f.write(response.body)
-
-        self.log(f'Saved file {image_name}')
-
-        '''
 
     def parse(self, response):
 
@@ -2031,11 +2024,10 @@ class ChurchCrawler(scrapy.Spider):
                 img_src = el.xpath('@srcset').get()
                 imgEls = img_src.split(",")
                 img_src = imgEls[-1].split()[0]
-                print("img src from source source set: ", img_src)
 
 
             if img_src is not None:
-                print("splash request ............. ", img_src)
+                #print("splash request ............. ", img_src)
                 lua_script = lua_script_template.replace("PAGE_URL", img_src)
                 yield SplashRequest(img_src, self.save_image, endpoint='execute',
                                     args={
