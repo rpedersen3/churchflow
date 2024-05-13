@@ -10,6 +10,7 @@ import spacy
 import scrapy
 from scrapy_splash import SplashRequest
 import os
+from PIL import Image, ImageEnhance
 
 from names_dataset import NameDataset, NameWrapper
 import math
@@ -605,26 +606,15 @@ class ProfileCheck:
             hdrs = {
                 "User-Agent": "XY"
             }
-            hdrs = {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.101 Safari/537.36',
-                'Accept': 'text / html, application / xhtml + xml, application / xml;q = 0.9, image / webp, image / apng, * / *;q = 0.8'
-            }
 
-
+            frame = None
+            gray_image = None
 
             try:
                 req = urllib.request.Request(url, headers=hdrs)
                 response = urllib.request.urlopen(req)
                 arr = np.asarray(bytearray(response.read()), dtype=np.uint8)
-            except Exception as e:
-                i = 1
-                print("---------------  Problem connecting to source: ", url)
-                
 
-
-            try:
-                frame = None
                 #print("encode and detect: ", url)
                 if url.find(".jpg") != -1 or url.find(".jpeg") != -1 or url.find(".jpeg") != -1 or url.find(".ashx") != -1:
                     frame = cv2.imdecode(arr, -1)
@@ -632,74 +622,104 @@ class ProfileCheck:
                     frame = cv2.imdecode(arr, cv2.IMREAD_COLOR)
 
                 if frame is not None:
-
                     gray_image = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-                    height, width = gray_image.shape[:2]
 
-                    #plt.imshow(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
-                    #plt.axis('off')
-                    #plt.show()
+            except Exception as e:
 
-                    rects = detector(gray_image)
-                    #print('rects: ', str(rects))
+                print("---------------  Problem connecting to source: ", url)
 
-
-                    # allow 2 faces
-                    numberOfFaces = len(rects)
-                    #print("********* number of faces: ", numberOfFaces)
-                    if numberOfFaces < 3:
-                        for rect in rects:
-                            x, y, x2, y2, w, h = (rect.left(), rect.top(), rect.right(), rect.bottom(), rect.width(), rect.height())
-                            cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
-                            #print('***************************')
-                            #print('image width: ', width, ',  image height: ', height)
-                            #print('face width: ', w, ',  face height: ', h)
-                            #print('x: ', x, ', ', 'y: ', y)
-
-                            percentOfHeight = (h / height) * 100
-                            percentFromTop = (y / height) * 100
-                            percentFromBottom = ((height-y2) / height) * 100
-
-                            #print("percentOfHeight: ", percentOfHeight)
-                            #print("percentFromTop: ", percentFromTop)
-                            #print("percentFromBottom: ", percentFromBottom)
-
-
-
-                            # check if face is in middle of picture and is percent of total size
-                            #if numberOfFaces == 1 and percentOfHeight > 20 and percentFromTop < 40 and percentFromBottom < 65:
-                            #    foundProfilePhoto = True
-                            #    print("found photo")
-                            if percentOfHeight > 15:
-                                foundProfilePhoto = True
+                # read response from file if it exists
+                image_name = url.split('/')[-1]
+                destination_folder = ".scrapy/imagefiles"
+                os.makedirs(destination_folder, exist_ok=True)
+                destination_file_path = os.path.join(destination_folder, os.path.basename(image_name)) + ".png"
 
 
 
 
-                            #if foundProfilePhoto:
+                print("-------- check if file exists: ", destination_file_path)
+                if os.path.exists(destination_file_path):
+                    img = Image.open(destination_file_path)
+                    contrast_enhancer = ImageEnhance.Contrast(img)
+                    enh = contrast_enhancer.enhance(2)
+                    enhanced_image = np.asarray(enh)
 
-                                #print("found photo")
+                    print("print done open")
+                    print(img.format)
+                    print(img.size)
+                    print(img.mode)
+
+                    gray_image = cv2.cvtColor(enhanced_image, cv2.COLOR_BGR2GRAY)
+
+            try:
 
 
-                                #face_img = frame[y:y+h, x:x+w].copy()
-                                #blob = cv2.dnn.blobFromImage(face_img, 1, (227, 227), model_mean, swapRB=False)
+                height, width = gray_image.shape[:2]
+
+                #plt.imshow(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
+                #plt.axis('off')
+                #plt.show()
+
+                rects = detector(gray_image)
+                #print('rects: ', str(rects))
 
 
-                                #age_Net.setInput(blob)
-                                #age_preds = age_Net.forward()
-                                #age = ageList[age_preds[0].argmax()]
-                                #i = age_preds[0].argmax()
-                                #ageConfidence = age_preds[0][i]
+                # allow 2 faces
+                numberOfFaces = len(rects)
+                print("********* number of faces: ", numberOfFaces)
+                if numberOfFaces < 3:
+                    for rect in rects:
+                        x, y, x2, y2, w, h = (rect.left(), rect.top(), rect.right(), rect.bottom(), rect.width(), rect.height())
+                        #cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+                        #print('***************************')
+                        #print('image width: ', width, ',  image height: ', height)
+                        #print('face width: ', w, ',  face height: ', h)
+                        #print('x: ', x, ', ', 'y: ', y)
 
-                                #print('age: ', age, ", confidence: ", ageConfidence)
+                        percentOfHeight = (h / height) * 100
+                        percentFromTop = (y / height) * 100
+                        percentFromBottom = ((height-y2) / height) * 100
 
-                                #gender_Net.setInput(blob)
-                                #gender_preds = gender_Net.forward()
-                                #gender = genderList[gender_preds[0].argmax()]
-                                #j = gender_preds[0].argmax()
-                                #genderConfidence = gender_preds[0][j]
-                                ##print('gender: ', gender, ', confidence: ', genderConfidence)
+                        print("percentOfHeight: ", percentOfHeight)
+                        #print("percentFromTop: ", percentFromTop)
+                        #print("percentFromBottom: ", percentFromBottom)
+
+
+
+                        # check if face is in middle of picture and is percent of total size
+                        #if numberOfFaces == 1 and percentOfHeight > 20 and percentFromTop < 40 and percentFromBottom < 65:
+                        #    foundProfilePhoto = True
+                        #    print("found photo")
+                        if percentOfHeight > 5:
+                            foundProfilePhoto = True
+
+
+
+
+                        #if foundProfilePhoto:
+
+                            #print("found photo")
+
+
+                            #face_img = frame[y:y+h, x:x+w].copy()
+                            #blob = cv2.dnn.blobFromImage(face_img, 1, (227, 227), model_mean, swapRB=False)
+
+
+                            #age_Net.setInput(blob)
+                            #age_preds = age_Net.forward()
+                            #age = ageList[age_preds[0].argmax()]
+                            #i = age_preds[0].argmax()
+                            #ageConfidence = age_preds[0][i]
+
+                            #print('age: ', age, ", confidence: ", ageConfidence)
+
+                            #gender_Net.setInput(blob)
+                            #gender_preds = gender_Net.forward()
+                            #gender = genderList[gender_preds[0].argmax()]
+                            #j = gender_preds[0].argmax()
+                            #genderConfidence = gender_preds[0][j]
+                            ##print('gender: ', gender, ', confidence: ', genderConfidence)
 
 
             except Exception as e:

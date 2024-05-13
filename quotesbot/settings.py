@@ -96,7 +96,7 @@ ROBOTSTXT_OBEY = False
 #    'quotesbot.pipelines.SomePipeline': 300,
 #}
 ITEM_PIPELINES = {"scrapy.pipelines.images.ImagesPipeline": 1}
-IMAGES_STORE = "/imagefiles"
+IMAGES_STORE = "/.scrapy/imagefiles"
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html

@@ -857,14 +857,21 @@ class ProfileExtractor:
 
 
                 # get mailto inside elements
+                email_elements = el.xpath('//text()[contains(., "@")]')
+                for emailEl in email_elements:
+                    email_address = emailEl.strip()
+
+                    # set email but don't use this to define a schema element
+                    profileEmail = email_address
+
 
                 if el.xpath('@href').get():
 
                     href = el.xpath('@href').get()
-                    print("href: ", href)
+                    #print("href: ", href)
                     if href.find("mailto:") >= 0:
 
-                        print('tttttttttxt: ', str(el))
+                        #print('tttttttttxt: ', str(el))
                         email_text = ''
                         email_texts = el.xpath('text()').extract()
                         if len(email_texts) > 0:
@@ -875,7 +882,7 @@ class ProfileExtractor:
 
                         if email_text != '':
                             email_address = href.replace("mailto:", "")
-                            print("add: ", email_address)
+                            #print("add: ", email_address)
                             if email_address != "":
 
                                 print(">> email: ", email_address)
@@ -937,8 +944,15 @@ class ProfileExtractor:
                             img_src = parts[0]
 
 
-                if img_src is None and el.xpath('@data-src | @srcset').get():
+                if el.xpath('@data-src').get():
                     img_src = el.xpath('@data-src | @srcset').get()
+
+                if el.xpath('@srcset').get():
+                    # get highest resolution image if one exists
+                    img_src = el.xpath('@srcset').get()
+                    imgEls = img_src.split(",")
+                    img_src = imgEls[-1].split()[0]
+                    print("img src from source source set: ", img_src)
 
 
                 if img_src is not None:
@@ -976,6 +990,7 @@ class ProfileExtractor:
                     #print("img src: ", img_src)
 
                     if isCDN or img_src.find(domain.replace("www.", "")) >= 0:
+
                         #print("********** check photo ****** ", img_src)
                         foundPhoto, foundProfilePhoto = profCheck.isProfilePhoto(response, img_src)
                         if foundPhoto:

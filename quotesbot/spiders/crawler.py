@@ -1727,9 +1727,11 @@ class ChurchCrawler(scrapy.Spider):
     def save_image(self, response):
 
         # Extract the image name from the URL
-        image_name = response.url.split('/')[-1]
 
-        destination_folder = "imagefiles"
+        urlValue = response.url.split('/')[-1]
+        image_name = urlValue.split('/')[-1]
+
+        destination_folder = ".scrapy/imagefiles"
         os.makedirs(destination_folder, exist_ok=True)
         destination_file_path = os.path.join(destination_folder, os.path.basename(image_name)) + ".png"
 
@@ -1969,17 +1971,12 @@ class ChurchCrawler(scrapy.Spider):
         lua_script_template = """
                             function main(splash, args)  
 
-                                
-
                                   splash.private_mode_enabled = false
                                   splash.images_enabled = true
                                   splash:set_user_agent("Different User Agent")
                                   splash.plugins_enabled = true
                                   splash.html5_media_enabled = true
                                   assert(splash:go(args.url))
-                                  assert(splash:wait(3.5))
-                                  width, height = splash:set_viewport_full()
-                                  assert(splash:wait(3.5))
                                 
                                 print("urla cccccc: ", args.url)
                                   return {
@@ -1993,19 +1990,59 @@ class ChurchCrawler(scrapy.Spider):
 
 
 
-        image_urls = response.xpath('//img/@src').getall()
+        image_urls = response.xpath('//img')
 
         # Process each image URL
-        for img_url in image_urls:
+        for el in image_urls:
 
-            lua_script = lua_script_template.replace("PAGE_URL", img_url)
-            yield SplashRequest(img_url, self.save_image, endpoint='execute',
-                                args={
-                                    'wait': 0.1,
-                                    'images': 1,
-                                    'har': 1,
-                                    "png": 1,
-                                    'lua_source': lua_script
-                                })
+            # get image source
+            img_src = None
+            # get photo inside elements
+            if el.xpath('@src').get():
+                img_src = el.xpath('@src').get()
+
+                # if this is an svg thing like popupbox then set to None
+                if img_src.find("data:image/svg+xml") >= 0:
+                    img_src = None
+
+            if img_src is None and el.xpath('@data-src').get():
+                img_src = el.xpath('@data-src').get()
+
+                # if this is an svg thing like popupbox then set to None
+                if img_src.find("data:image/svg+xml") >= 0:
+                    img_src = None
+
+            if img_src is None and el.xpath('@style').get():
+                st = el.xpath('@style').get()
+                if st.find("background:url") >= 0:
+                    parts = re.findall(r'\((.*?)\)', st)
+                    if len(parts) > 0:
+                        img_src = parts[0]
+                elif st.find("background-image:url") >= 0:
+                    parts = re.findall(r'\((.*?)\)', st)
+                    if len(parts) > 0:
+                        img_src = parts[0]
+
+            if el.xpath('@data-src').get():
+                img_src = el.xpath('@data-src | @srcset').get()
+
+            if el.xpath('@srcset').get():
+                # get highest resolution image if one exists
+                img_src = el.xpath('@srcset').get()
+                imgEls = img_src.split(",")
+                img_src = imgEls[-1].split()[0]
+                print("img src from source source set: ", img_src)
+
+
+            if img_src is not None:
+                print("splash request ............. ", img_src)
+                lua_script = lua_script_template.replace("PAGE_URL", img_src)
+                yield SplashRequest(img_src, self.save_image, endpoint='execute',
+                                    args={
+                                        "render_all": 1,
+                                        "wait": 5,
+                                        "png": 1,
+                                        'lua_source': lua_script
+                                    })
 
 
