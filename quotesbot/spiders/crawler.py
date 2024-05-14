@@ -181,7 +181,14 @@ class ChurchCrawler(scrapy.Spider):
 
     #crawl specific url
     startURLs = [
-        "https://hotschurch.org/our-leadership/"
+        #"https://www.cmpc.church/about-us"
+        #"https://christchurchcc.org/our-staff-and-leadership"
+        #"https://cclongmont.com/church-staff"
+        #"https://www.crosscrownchurch.org/our-pastors"
+        #"https://www.dwelldenver.org/our-leaders"
+        #"https://firstbaptistlafayette.org/team/"
+        #"https://www.gracemountainco.org/who-our-leaders-are"
+        #"https://hotschurch.org/our-leadership/"
         #"https://hillsidedenver.org/leadership"
         #"https://hopechurchdenver.org/staff/"
         #"https://www.journeyoflongmont.org/staff"
@@ -239,7 +246,7 @@ class ChurchCrawler(scrapy.Spider):
         #"https://www.cccgreeley.org/staff-directory/"
         #"https://victory.com/team-pastors/"
         #"https://calvarybible.com/staff/"
-        #"https://www.missionhills.org/im-new/staff-elders/"
+        "https://www.missionhills.org/im-new/staff-elders/"
         #"https://www.missionhills.org/"
         #"https://christianservices.org/",
         #"https://christianservices.org/contact-us/"

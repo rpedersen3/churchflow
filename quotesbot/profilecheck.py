@@ -337,6 +337,7 @@ class ProfileCheck:
         name = name.replace("administrator", "")
         name = name.replace("senior", "")
         name = name.replace("peace", "")
+        name = name.replace("gathering", "")
         name = name.replace("building", "")
         name = name.replace("bookkeeper", "")
         name = name.replace("trusting", "")
@@ -465,6 +466,7 @@ class ProfileCheck:
                     part == "check" or \
                     part == "out" or \
                     part == "at" or \
+                    part == "info" or \
                     part == "came" or \
                     part == "plan" or \
                     part == "your" or \
@@ -478,7 +480,8 @@ class ProfileCheck:
                     part == "next" or \
                     part == "of" or \
                     part == "as" or \
-                    part == "at" or \
+                    part == "learn" or \
+                    part == "more" or \
                     part == "ask" or \
                     part == "you" or \
                     part == "we" or \

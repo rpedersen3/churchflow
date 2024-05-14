@@ -412,7 +412,7 @@ class ProfileExtractor:
             sorted_data = sorted(schemaStructure["photo"]["first"], key=lambda x: x['count'], reverse=True)
             #sorted_data = sorted(schemaStructure["photo"]["first"], key=lambda x: (x['class'], x['level']), reverse=True)
 
-            processed = 1
+            processed = 0
             lastTag = None
             lastCls = None
             for tagData in sorted_data:
@@ -430,31 +430,52 @@ class ProfileExtractor:
                 #    continue
 
                 if tag == "div" and level is not None and level > 2 and count > 1:
-                    print(">>>>>>>>>>>>>>>>>>>>>>>>  call photo for boundary tag: ", tag, ", and class: ", cls)
-                    self.extractProfilesFromWebPage(currentChurch, response, "photo", tag, cls, level)
+                    # get different article counts
+                    pathQuery = '//div[contains(@class, "' + cls + '")]'
+                    path = response.xpath(pathQuery)
+                    pathCount = len(path)
+                    print("photo div path count: ", pathCount, ", count: ", count)
+                    if pathCount >= count/4:
+                        processed = processed + 1
+                        print(">>>>>>>>>>>>>>>>>>>>>>>>  call photo for boundary tag: ", tag, ", and class: ", cls)
+                        self.extractProfilesFromWebPage(currentChurch, response, "photo", tag, cls, level)
 
                 if tag == "li" and count > 1:
+                    processed = processed + 1
                     print(">>>>>>>>>>>>>>>>>>>>>>>>  call photo for boundary tag: ", tag, ", and class: ", cls)
                     self.extractProfilesFromWebPage(currentChurch, response, "photo", tag, cls, level)
 
                 if tag == "article" and count > 1:
-                    print(">>>>>>>>>>>>>>>>>>>>>>>>  call photo for boundary tag: ", tag, ", and class: ", cls)
-                    self.extractProfilesFromWebPage(currentChurch, response, "photo", tag, cls, level)
+                    # get different article counts
+                    path = response.xpath('//article')
+                    pathCount = len(path)
+                    print("photo article path count: ", pathCount, ", count: ", count)
+                    if pathCount >= count/4:
+                        processed = processed + 1
+                        print(">>>>>>>>>>>>>>>>>>>>>>>>  call photo for boundary tag: ", tag, ", and class: ", cls)
+                        self.extractProfilesFromWebPage(currentChurch, response, "photo", tag, cls, level)
 
                 if tag == "section" and count > 1:
-                    print(">>>>>>>>>>>>>>>>>>>>>>>>  call photo for boundary tag: ", tag, ", and class: ", cls)
-                    self.extractProfilesFromWebPage(currentChurch, response, "photo", tag, cls, level)
+                    # get different section counts
+                    path = response.xpath('//section')
+                    pathCount = len(path)
+                    print("photo section path count: ", pathCount, ", count: ", count)
+                    if pathCount >= count/4:
+                        processed = processed + 1
+                        print(">>>>>>>>>>>>>>>>>>>>>>>>  call photo for boundary tag: ", tag, ", and class: ", cls)
+                        self.extractProfilesFromWebPage(currentChurch, response, "photo", tag, cls, level)
 
+                print("processed: ", processed)
                 if processed >= 2:
                     break
 
-                processed = processed + 1
+
                 lastTag = tag
                 lastCls = cls
 
         if "first" in schemaStructure["name"] and len(schemaStructure["name"]["first"]) > 0:
 
-            processed = 1
+            processed = 0
             cls = None
             level = None
 
@@ -479,13 +500,24 @@ class ProfileExtractor:
                 #    continue
 
                 if count > 1:
-                    print(">>>>>>>>  call name for boundary tag: ", tag, ", and class: ", cls)
-                    self.extractProfilesFromWebPage(currentChurch, response, "name", tag, cls, level)
+
+                    pathQuery = '//' + tag
+                    if cls != None and cls != '':
+                        pathQuery = '//div[contains(@class, "' + cls + '")]'
+
+                    print("path query: ", pathQuery)
+                    path = response.xpath(pathQuery)
+                    pathCount = len(path)
+                    print("name path count: ", pathCount, ", count: ", count)
+                    if pathCount >= count/4:
+                        processed = processed + 1
+                        print(">>>>>>>>  call name for boundary tag: ", tag, ", and class: ", cls)
+                        self.extractProfilesFromWebPage(currentChurch, response, "name", tag, cls, level)
 
                 if processed >= 2:
                     break
 
-                processed = processed + 1
+
                 lastTag = tag
                 lastCls = cls
 
@@ -764,17 +796,17 @@ class ProfileExtractor:
                     for text in txts:
                         if len(text) < 120:
                             if visible_text == "":
-                                visible_text = text.strip()
+                                visible_text = text
                             else:
 
                                 #if visible_text in strongTxts:
-                                if text.strip() in strongTxts:
+                                if text in strongTxts:
                                     #don't add space if element is a strong type
                                     #print("dont add spaces: >", text, "<")
-                                    visible_text = visible_text + text.strip()
+                                    visible_text = visible_text + text
                                 else:
                                     #print("add spaces: >", text, "<")
-                                    visible_text = visible_text + " " + text.strip()
+                                    visible_text = visible_text + " " + text
 
                 #print("vis text: ", visible_text)
 
@@ -932,7 +964,7 @@ class ProfileExtractor:
 
                                 cArticle = self.commonArticle(nameFirst_el, el)
                                 if cArticle is not None:
-                                    print("-------------------  add first article ----------------")
+                                    # print("-------------------  add first article ----------------")
                                     self.addFirst(schemaStructure, "name", "article", None, None)
 
                                 cSection = self.commonSection(nameFirst_el, el)
@@ -1061,7 +1093,7 @@ class ProfileExtractor:
 
                                     cArticle = self.commonArticle(nameFirst_el, el)
                                     if cArticle is not None:
-                                        print("-------------------  add first article ----------------")
+                                        # print("-------------------  add first article ----------------")
                                         self.addFirst(schemaStructure, "name", "article", None, None)
 
                                     cSection = self.commonSection(nameFirst_el, el)
