@@ -334,7 +334,22 @@ class ProfileCheck:
         name = name.replace("founder", "")
         name = name.replace("standard", "")
         name = name.replace("celebration", "")
+        name = name.replace("administrator", "")
+        name = name.replace("senior", "")
         name = name.replace("peace", "")
+        name = name.replace("building", "")
+        name = name.replace("bookkeeper", "")
+        name = name.replace("trusting", "")
+        name = name.replace("benefited", "")
+        name = name.replace("raised", "")
+        name = name.replace("business", "")
+        name = name.replace("personally", "")
+        name = name.replace("event", "")
+        name = name.replace("registration", "")
+        name = name.replace("social", "")
+        name = name.replace("scheduler", "")
+        name = name.replace("sermons", "")
+        name = name.replace("feature", "")
         name = name.replace("programs", "")
         name = name.replace("prayer", "")
         name = name.replace("reuests", "")
@@ -439,7 +454,20 @@ class ProfileCheck:
                     part == "for" or \
                     part == "our" or \
                     part == "small" or \
+                    part == "sing" or \
+                    part == "god" or \
+                    part == "live" or \
+                    part == "she" or \
+                    part == "he" or \
                     part == "while" or \
+                    part == "first" or \
+                    part == "time" or \
+                    part == "check" or \
+                    part == "out" or \
+                    part == "at" or \
+                    part == "came" or \
+                    part == "plan" or \
+                    part == "your" or \
                     part == "who" or \
                     part == "the" or \
                     part == "st" or \
@@ -449,6 +477,8 @@ class ProfileCheck:
                     part == "us" or \
                     part == "next" or \
                     part == "of" or \
+                    part == "as" or \
+                    part == "at" or \
                     part == "ask" or \
                     part == "you" or \
                     part == "we" or \

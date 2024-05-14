@@ -181,7 +181,15 @@ class ChurchCrawler(scrapy.Spider):
 
     #crawl specific url
     startURLs = [
-        "https://www.lpumc.org/leadership/"
+        "https://hotschurch.org/our-leadership/"
+        #"https://hillsidedenver.org/leadership"
+        #"https://hopechurchdenver.org/staff/"
+        #"https://www.journeyoflongmont.org/staff"
+        #"https://kogaz.org/about/our-team/"
+        #"https://lifeicm.org/who-we-are"
+        #"https://www.littletonsdachurch.org/about-us/leadership/"
+        #"https://livinghopecov.com/leadership"
+        #"https://www.lpumc.org/leadership/"
         #"https://www.newhopeaurora.org/about-us"
         #"https://newspringcos.org/team"
         #"https://www.odmdenver.org/meet-team"
@@ -1734,21 +1742,26 @@ class ChurchCrawler(scrapy.Spider):
 
     def save_image(self, response):
 
-        # Extract the image name from the URL
+        try:
 
-        urlValue = response.url.split('/')[-1]
-        image_name = urlValue.split('/')[-1]
+            # Extract the image name from the URL
 
-        destination_folder = ".scrapy/imagefiles"
-        os.makedirs(destination_folder, exist_ok=True)
-        destination_file_path = os.path.join(destination_folder, os.path.basename(image_name)) + ".png"
+            urlValue = response.url.split('/')[-1]
+            image_name = urlValue.split('/')[-1]
 
-        imgdata = base64.b64decode(response.data['png'])
-        image = Image.open(BytesIO(imgdata))
-        image.save(destination_file_path)
+            destination_folder = ".scrapy/imagefiles"
+            os.makedirs(destination_folder, exist_ok=True)
+            destination_file_path = os.path.join(destination_folder, os.path.basename(image_name)) + ".png"
 
-        #print(destination_file_path)
-        #print('screenshot done...')
+            imgdata = base64.b64decode(response.data['png'])
+            image = Image.open(BytesIO(imgdata))
+            image.save(destination_file_path)
+
+            #print(destination_file_path)
+            #print('screenshot done...')
+
+        except:
+            print('..')
 
 
     def parse(self, response):
@@ -2028,14 +2041,17 @@ class ChurchCrawler(scrapy.Spider):
 
 
             if img_src is not None:
-                #print("splash request ............. ", img_src)
-                lua_script = lua_script_template.replace("PAGE_URL", img_src)
-                yield SplashRequest(img_src, self.save_image, endpoint='execute',
-                                    args={
-                                        "render_all": 1,
-                                        "wait": 5,
-                                        "png": 1,
-                                        'lua_source': lua_script
-                                    })
+                print("splash request ............. ", img_src)
+                try:
+                    lua_script = lua_script_template.replace("PAGE_URL", img_src)
+                    yield SplashRequest(img_src, self.save_image, endpoint='execute',
+                                        args={
+                                            "render_all": 1,
+                                            "wait": 5,
+                                            "png": 1,
+                                            'lua_source': lua_script
+                                        })
 
+                except Exception as e:
+                    print(".")
 

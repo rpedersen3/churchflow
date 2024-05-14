@@ -403,6 +403,7 @@ class ProfileExtractor:
         print("+++++++++++++++++++++++++++++++++++++++++")
         print("+++++++++++++++++++++++++++++++++++++++++")
         print("schema", schemaStructure)
+
         if "first" in schemaStructure["photo"] and len(schemaStructure["photo"]["first"]) > 0:
 
             cls = None
@@ -421,7 +422,7 @@ class ProfileExtractor:
                 cls = tagData["class"].strip()
                 level = tagData["level"]
 
-                print("photo first boundary ===> tag: >", tag, "<, cls: >", cls, "<, level: ", level, ", count, ", count)
+                print("PHOTO first boundary ===> tag: >", tag, "<, cls: >", cls, "<, level: ", level, ", count, ", count)
 
                 #if lastTag is not None and lastCls is not None and \
                 #    lastTag == tag and lastCls == cls:
@@ -444,18 +445,14 @@ class ProfileExtractor:
                     print(">>>>>>>>>>>>>>>>>>>>>>>>  call photo for boundary tag: ", tag, ", and class: ", cls)
                     self.extractProfilesFromWebPage(currentChurch, response, "photo", tag, cls, level)
 
-                if processed >= 4:
+                if processed >= 2:
                     break
 
                 processed = processed + 1
                 lastTag = tag
                 lastCls = cls
 
-
-
-
-        elif "first" in schemaStructure["name"] and len(schemaStructure["name"]["first"]) > 0:
-
+        if "first" in schemaStructure["name"] and len(schemaStructure["name"]["first"]) > 0:
 
             processed = 1
             cls = None
@@ -474,7 +471,7 @@ class ProfileExtractor:
                 cls = tagData["class"]
                 level = tagData["level"]
 
-                print("name first boundary ===> tag: >", tag, "<, cls: >", cls, "<, level: ", level, ", count, ", count)
+                print("NAME first boundary ===> tag: >", tag, "<, cls: >", cls, "<, level: ", level, ", count, ", count)
 
                 #if lastTag is not None and lastCls is not None and \
                 #        lastTag == tag and lastCls == cls:
@@ -633,7 +630,7 @@ class ProfileExtractor:
 
 
         path = response.xpath(
-            '//p | //div | //li | //article | //section | //a | //img | //h1 | //h2 | //h3 | //h4 | //h5 | //h6 | //strong | //span ')
+            '//p | //div | //li | //article | //section | //a | //img | //h1 | //h2 | //h3 | //h4 | //h5 | //h6 ')
 
         for el in path:
 
@@ -747,30 +744,37 @@ class ProfileExtractor:
 
             if processBoundarySection:
 
-                # get strong elements, so we can not add spaces between those elements
+                # get strong and span elements, so we can not add spaces between those elements
                 strongTxts = []
-                strong_elements = response.xpath("//strong")
+                strong_elements = response.xpath(".//strong")
                 for strong in strong_elements:
                     strong_text = ''.join(strong.xpath('.//text()').extract())
                     strongTxts.append(strong_text)
 
+                span_elements = response.xpath(".//span")
+                for span in span_elements:
+                    span_text = ''.join(span.xpath('.//text()').extract())
+                    strongTxts.append(span_text)
+
                 # extract text from elements and put spaces between pieces
                 txts = el.xpath('.//text()').extract()
-                #print("txts: ", txts)
 
                 visible_text = ""
-                for text in txts:
-                    if visible_text == "":
-                        visible_text = text.strip()
-                    else:
+                if len(txts) < 8:
+                    for text in txts:
+                        if len(text) < 120:
+                            if visible_text == "":
+                                visible_text = text.strip()
+                            else:
 
-                        #if visible_text in strongTxts:
-                        if text.strip() in strongTxts:
-                            #don't add space if element is a strong type
-                            #print("dont add spaces: >", text, "<")
-                            visible_text = visible_text + text.strip()
-                        else:
-                            visible_text = visible_text + " " + text.strip()
+                                #if visible_text in strongTxts:
+                                if text.strip() in strongTxts:
+                                    #don't add space if element is a strong type
+                                    #print("dont add spaces: >", text, "<")
+                                    visible_text = visible_text + text.strip()
+                                else:
+                                    #print("add spaces: >", text, "<")
+                                    visible_text = visible_text + " " + text.strip()
 
                 #print("vis text: ", visible_text)
 
@@ -976,7 +980,7 @@ class ProfileExtractor:
                     img_src = el.xpath('@srcset').get()
                     imgEls = img_src.split(",")
                     img_src = imgEls[-1].split()[0]
-                    print("img src from source source set: ", img_src)
+                    #print("img src from source source set: ", img_src)
 
 
                 if img_src is not None:
@@ -992,6 +996,7 @@ class ProfileExtractor:
                     isCDN = False
                     if img_src.startswith("https://images.squarespace-cdn.com") or \
                             img_src.find("cloudfront.net") > 0 or \
+                            img_src.find("smushcdn.com") > 0 or \
                             img_src.startswith("https://storage2.snappages.site") or \
                             img_src.startswith("https://cdn.monkplatform.com") or \
                             img_src.startswith("https://static.wixstatic.com") or \
