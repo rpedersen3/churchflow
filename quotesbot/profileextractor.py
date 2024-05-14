@@ -764,8 +764,10 @@ class ProfileExtractor:
                         visible_text = text.strip()
                     else:
 
-                        if visible_text in strongTxts:
+                        #if visible_text in strongTxts:
+                        if text.strip() in strongTxts:
                             #don't add space if element is a strong type
+                            #print("dont add spaces: >", text, "<")
                             visible_text = visible_text + text.strip()
                         else:
                             visible_text = visible_text + " " + text.strip()

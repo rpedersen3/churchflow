@@ -335,6 +335,10 @@ class ProfileCheck:
         name = name.replace("standard", "")
         name = name.replace("celebration", "")
         name = name.replace("peace", "")
+        name = name.replace("programs", "")
+        name = name.replace("prayer", "")
+        name = name.replace("reuests", "")
+        name = name.replace("groups", "")
         name = name.replace("ministry", "")
         name = name.replace("early", "")
         name = name.replace("learning", "")
@@ -434,6 +438,7 @@ class ProfileCheck:
                     part == "one" or \
                     part == "for" or \
                     part == "our" or \
+                    part == "small" or \
                     part == "while" or \
                     part == "who" or \
                     part == "the" or \

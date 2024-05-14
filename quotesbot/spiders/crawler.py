@@ -181,7 +181,12 @@ class ChurchCrawler(scrapy.Spider):
 
     #crawl specific url
     startURLs = [
-        "https://reclamationdenver.com/about"
+        "https://www.lpumc.org/leadership/"
+        #"https://www.newhopeaurora.org/about-us"
+        #"https://newspringcos.org/team"
+        #"https://www.odmdenver.org/meet-team"
+        #"https://www.peacecolorado.com/our-pastor"
+        #"https://reclamationdenver.com/about"
         #"https://sgcco.org/about/leadership/"
         #"https://www.stphilip-co.org/meet-the-staff/"
         #"https://www.pwclc.org/meet-the-staff/"
@@ -1751,11 +1756,7 @@ class ChurchCrawler(scrapy.Spider):
 
         print("response: ", response.url)
         #print("body: ", response.body)
-        '''
-        photo = Photo()
-        photo.text()
-        return
-        '''
+
 
         if response.url.find(".pdf") >= 0 or \
            response.url.find(".zip") >= 0:
