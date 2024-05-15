@@ -178,9 +178,16 @@ class ChurchCrawler(scrapy.Spider):
 
 
 
-
+    '''
     #crawl specific url
     startURLs = [
+        "https://www.kog-arvada.org/staff"
+        #"https://rimrockchurch.org/contact-us"
+        #"https://www.stjohnsbreck.org/parish-leadership"
+        #"https://emmausanglican.org/leadership"
+        #"https://www.harvestdowntown.org/staff"
+        #"https://yourawakening.org/leadership"
+        #"https://bethelmennonite.org/about/"
         #"https://www.cmpc.church/about-us"
         #"https://christchurchcc.org/our-staff-and-leadership"
         #"https://cclongmont.com/church-staff"
@@ -246,12 +253,12 @@ class ChurchCrawler(scrapy.Spider):
         #"https://www.cccgreeley.org/staff-directory/"
         #"https://victory.com/team-pastors/"
         #"https://calvarybible.com/staff/"
-        "https://www.missionhills.org/im-new/staff-elders/"
+        #"https://www.missionhills.org/im-new/staff-elders/"
         #"https://www.missionhills.org/"
         #"https://christianservices.org/",
         #"https://christianservices.org/contact-us/"
     ]
-
+    '''
 
 
     def checkCommonDiv(self, el1, el2):

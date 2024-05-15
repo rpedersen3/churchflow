@@ -429,7 +429,7 @@ class ProfileExtractor:
                 #    print("continue ....... ")
                 #    continue
 
-                if tag == "div" and level is not None and level > 2 and count > 1:
+                if tag == "div" and level is not None and level > 2 and count >= 1:
                     # get different article counts
                     pathQuery = '//div[contains(@class, "' + cls + '")]'
                     path = response.xpath(pathQuery)
@@ -499,7 +499,7 @@ class ProfileExtractor:
                 #    print("continue ....... ")
                 #    continue
 
-                if count > 1:
+                if count >= 1:
 
                     pathQuery = '//' + tag
                     if cls != None and cls != '':
@@ -565,7 +565,7 @@ class ProfileExtractor:
                                       profileEmail, profilePhoto)
 
         if (boundaryAttribute == "name" and (profileName is not None and profileEmail is not None)):
-
+            print("................. name and email found: ", profileName, ", email: ", profileEmail)
             # check that name is in email somewhere
             validMatch = False
             if profileEmail is not None:
@@ -595,7 +595,7 @@ class ProfileExtractor:
                         break
 
             if validMatch:
-                # print("set because of profileName and email 2 a: ", profileName)
+                print("set because of profileName and email 2 a: ", profileName)
                 self.setChurchContact(currentChurch, profileName, profileTitle, profileDepartment,
                                       profileEmail, profilePhoto)
 

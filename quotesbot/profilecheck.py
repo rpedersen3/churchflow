@@ -337,6 +337,8 @@ class ProfileCheck:
         name = name.replace("administrator", "")
         name = name.replace("senior", "")
         name = name.replace("peace", "")
+        name = name.replace("street", "")
+        name = name.replace("together", "")
         name = name.replace("gathering", "")
         name = name.replace("building", "")
         name = name.replace("bookkeeper", "")
@@ -431,6 +433,9 @@ class ProfileCheck:
         parts = name.split()
 
         fullname = None
+        validFirstname = False
+        validLastname = False
+
         foundProfileLastname = False
         skipNextPart = False
         for part in parts:
@@ -444,7 +449,16 @@ class ProfileCheck:
             if      part == "is" or \
                     part == "his" or \
                     part == "wife" or \
+                    part == "on" or \
                     part == "with" or \
+                    part == "mountain" or \
+                    part == "states" or \
+                    part == "forward" or \
+                    part == "world" or \
+                    part == "which" or \
+                    part == "not" or \
+                    part == "what" or \
+                    part == "do" or \
                     part == "stay" or \
                     part == "site" or \
                     part == "from" or \
@@ -515,40 +529,76 @@ class ProfileCheck:
 
             #print("part: ", part)
             if part.lower() != "and" and skipNextPart == False:
-                #print("part: ", part)
-                names = [{'name': part}]
-
-                df = pd.DataFrame(names)
-                predictions = census_ln(df, 'name')
-                #print("name: ", part)
-                #print("predictions: ", predictions)
-
-                pctwhite = predictions['pctwhite'].iloc[0]
-                pctblack = predictions['pctblack'].iloc[0]
-                pctapi = predictions['pctapi'].iloc[0]
-                pctaian = predictions['pctaian'].iloc[0]
-                pct2prace = predictions['pct2prace'].iloc[0]
-                pcthispanic = predictions['pcthispanic'].iloc[0]
-
 
                 if fullname is None:
+
+                    # firstname
                     fullname = part
+
+                    # see if firstname is valid name
+                    # print("part: ", part)
+                    names = [{'name': part}]
+                    df = pd.DataFrame(names)
+                    predictions = census_ln(df, 'name')
+
+                    #print("name: ", part)
+                    #print("predictions: ", predictions)
+
+                    pctwhite = predictions['pctwhite'].iloc[0]
+                    pctblack = predictions['pctblack'].iloc[0]
+                    pctapi = predictions['pctapi'].iloc[0]
+                    pctaian = predictions['pctaian'].iloc[0]
+                    pct2prace = predictions['pct2prace'].iloc[0]
+                    pcthispanic = predictions['pcthispanic'].iloc[0]
+
+                    # check that lastname is a valid name
+                    if str(pctwhite) != 'nan':
+                        #print("valid firstname: ", part)
+                        validFirstname = True
+
+
+
+
+
                 else:
 
                     # firstname is repeated, sometimes happends then just ignor it
                     if part == fullname:
                         continue
 
-                    # lastname check
-                    lastnamePred = pred_census_ln(df, 'name')
-                    white = lastnamePred['white'].iloc[0]
-
                     fullname = fullname + " " + part
-                    #print("fullname: ", fullname)
+                    # print("fullname: ", fullname)
+
+
+                    # lastname check
+
+                    # print("part: ", part)
+                    names = [{'name': part}]
+                    df = pd.DataFrame(names)
+                    predictions = census_ln(df, 'name')
+
+                    #print("name: ", part)
+                    #print("predictions: ", predictions)
+
+                    pctwhite = predictions['pctwhite'].iloc[0]
+                    pctblack = predictions['pctblack'].iloc[0]
+                    pctapi = predictions['pctapi'].iloc[0]
+                    pctaian = predictions['pctaian'].iloc[0]
+                    pct2prace = predictions['pct2prace'].iloc[0]
+                    pcthispanic = predictions['pcthispanic'].iloc[0]
+
+                    #lastnamePred = pred_census_ln(df, 'name')
+                    #race = lastnamePred['race'].iloc[0]
+                    #racePercent = lastnamePred[race].iloc[0]
+
 
                     # check that lastname is a valid name
-                    if str(white) != 'nan':
-                        #print("found lastname: ", fullname)
+                    if str(pctwhite) != 'nan':
+                        #print("valid lastname: ", part)
+                        validLastname = True
+
+                    if validFirstname or validLastname:
+                        #print("found fullname: ", fullname)
                         foundProfileLastname = True
 
                     break
