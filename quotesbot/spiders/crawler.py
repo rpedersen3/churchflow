@@ -118,6 +118,8 @@ class ChurchCrawler(scrapy.Spider):
     # crawl church staff pages
     startURLs = []
 
+    foundFirstUrl = False
+    firstUrl = "https://creeksidebible.com/leadership-team/"
     i = 1
     for currentChurch in churches:
         #if "pages" in currentChurch and "contacts" not in currentChurch:
@@ -140,7 +142,11 @@ class ChurchCrawler(scrapy.Spider):
                                 url.find('pastor') >= 0:
 
                             print('**************** process page: ', url)
-                            if i > 0:
+
+                            if url == firstUrl:
+                                foundFirstUrl = True
+
+                            if foundFirstUrl and i > 0:
                                 startURLs.append(url)
                                 print('urls: ', str(url))
 
@@ -181,7 +187,8 @@ class ChurchCrawler(scrapy.Spider):
     '''
     #crawl specific url
     startURLs = [
-        "https://www.kog-arvada.org/staff"
+        "https://www.greeleymosaic.com/who-we-are"
+        #"https://www.kog-arvada.org/staff"
         #"https://rimrockchurch.org/contact-us"
         #"https://www.stjohnsbreck.org/parish-leadership"
         #"https://emmausanglican.org/leadership"
@@ -1680,7 +1687,7 @@ class ChurchCrawler(scrapy.Spider):
 
         print("............ start_requests ..........")
 
-
+        '''
         lua_script_template = """
             function main(splash, args)  
             
@@ -1697,6 +1704,57 @@ class ChurchCrawler(scrapy.Spider):
                         if start == nil then
                             start, _ = request.url:find("%png%")
                         end
+                        if start == nil then
+                            start, _ = request.url:find("%woff%")
+                        end
+                        
+                        print("start", start)
+                        if start == nil then
+                            print("pg: ", request.url)
+                            request.abort()
+                            return { status = 404, }
+                        end
+                    end
+
+                    
+                end)
+                
+                print("go to url", args.url)
+                splash:go(args.url)
+    
+                -- custom rendering script logic...
+
+                return splash:html()
+            end
+            """
+        '''
+
+
+        lua_script_template = """
+            function main(splash, args)  
+            
+                print("url: ", args.url)
+                
+                splash:on_request(function(request)
+                    print("request: ", request.url)
+
+                    if request.url ~= 'PAGE_URL' then
+                    
+                        local aa, _ = request.url:find("%%")
+                        if aa ~= nil then
+                            print("............ has % in it: ", request.url)
+                            request.abort()
+                            return { status = 404, }
+                        end
+                    
+                        local start, _ = request.url:find("%wixpress%")
+                        if start == nil then
+                            start, _ = request.url:find("%jpg%")
+                        end
+                        if start == nil then
+                            start, _ = request.url:find("%png%")
+                        end
+
                         
                         print("start", start)
                         if start == nil then
@@ -1824,6 +1882,86 @@ class ChurchCrawler(scrapy.Spider):
 
                 self.markAsProcessed(currentChurch, processor, response.url)
                 self.saveChurches()
+
+
+
+                # save images to directory
+                lua_script_template = """
+                                    function main(splash, args)  
+
+                                          splash.private_mode_enabled = false
+                                          splash.images_enabled = true
+                                          splash:set_user_agent("Different User Agent")
+                                          splash.plugins_enabled = true
+                                          splash.html5_media_enabled = true
+                                          assert(splash:go(args.url))
+
+                                        print("urla cccccc: ", args.url)
+                                          return {
+                                            png = splash:png()
+                                          }
+
+
+                                    end
+                                    """
+
+                image_urls = response.xpath('//img')
+
+                # Process each image URL
+                for el in image_urls:
+
+                    # get image source
+                    img_src = None
+                    # get photo inside elements
+                    if el.xpath('@src').get():
+                        img_src = el.xpath('@src').get()
+
+                        # if this is an svg thing like popupbox then set to None
+                        if img_src.find("data:image/svg+xml") >= 0:
+                            img_src = None
+
+                    if img_src is None and el.xpath('@data-src').get():
+                        img_src = el.xpath('@data-src').get()
+
+                        # if this is an svg thing like popupbox then set to None
+                        if img_src.find("data:image/svg+xml") >= 0:
+                            img_src = None
+
+                    if img_src is None and el.xpath('@style').get():
+                        st = el.xpath('@style').get()
+                        if st.find("background:url") >= 0:
+                            parts = re.findall(r'\((.*?)\)', st)
+                            if len(parts) > 0:
+                                img_src = parts[0]
+                        elif st.find("background-image:url") >= 0:
+                            parts = re.findall(r'\((.*?)\)', st)
+                            if len(parts) > 0:
+                                img_src = parts[0]
+
+                    if el.xpath('@data-src').get():
+                        img_src = el.xpath('@data-src | @srcset').get()
+
+                    if el.xpath('@srcset').get():
+                        # get highest resolution image if one exists
+                        img_src = el.xpath('@srcset').get()
+                        imgEls = img_src.split(",")
+                        img_src = imgEls[-1].split()[0]
+
+                    if img_src is not None:
+                        print("splash request ............. ", img_src)
+                        try:
+                            lua_script = lua_script_template.replace("PAGE_URL", img_src)
+                            yield SplashRequest(img_src, self.save_image, endpoint='execute',
+                                                args={
+                                                    "render_all": 1,
+                                                    "wait": 5,
+                                                    "png": 1,
+                                                    'lua_source': lua_script
+                                                })
+
+                        except Exception as e:
+                            print(".")
+
 
             else:
                 print("processing not needed")
@@ -1989,83 +2127,4 @@ class ChurchCrawler(scrapy.Spider):
                     """
         '''
 
-        lua_script_template = """
-                            function main(splash, args)  
-
-                                  splash.private_mode_enabled = false
-                                  splash.images_enabled = true
-                                  splash:set_user_agent("Different User Agent")
-                                  splash.plugins_enabled = true
-                                  splash.html5_media_enabled = true
-                                  assert(splash:go(args.url))
-                                
-                                print("urla cccccc: ", args.url)
-                                  return {
-                                    png = splash:png()
-                                  }
-
-
-                            end
-                            """
-
-
-
-
-        image_urls = response.xpath('//img')
-
-        # Process each image URL
-        for el in image_urls:
-
-            # get image source
-            img_src = None
-            # get photo inside elements
-            if el.xpath('@src').get():
-                img_src = el.xpath('@src').get()
-
-                # if this is an svg thing like popupbox then set to None
-                if img_src.find("data:image/svg+xml") >= 0:
-                    img_src = None
-
-            if img_src is None and el.xpath('@data-src').get():
-                img_src = el.xpath('@data-src').get()
-
-                # if this is an svg thing like popupbox then set to None
-                if img_src.find("data:image/svg+xml") >= 0:
-                    img_src = None
-
-            if img_src is None and el.xpath('@style').get():
-                st = el.xpath('@style').get()
-                if st.find("background:url") >= 0:
-                    parts = re.findall(r'\((.*?)\)', st)
-                    if len(parts) > 0:
-                        img_src = parts[0]
-                elif st.find("background-image:url") >= 0:
-                    parts = re.findall(r'\((.*?)\)', st)
-                    if len(parts) > 0:
-                        img_src = parts[0]
-
-            if el.xpath('@data-src').get():
-                img_src = el.xpath('@data-src | @srcset').get()
-
-            if el.xpath('@srcset').get():
-                # get highest resolution image if one exists
-                img_src = el.xpath('@srcset').get()
-                imgEls = img_src.split(",")
-                img_src = imgEls[-1].split()[0]
-
-
-            if img_src is not None:
-                print("splash request ............. ", img_src)
-                try:
-                    lua_script = lua_script_template.replace("PAGE_URL", img_src)
-                    yield SplashRequest(img_src, self.save_image, endpoint='execute',
-                                        args={
-                                            "render_all": 1,
-                                            "wait": 5,
-                                            "png": 1,
-                                            'lua_source': lua_script
-                                        })
-
-                except Exception as e:
-                    print(".")
 
