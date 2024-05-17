@@ -119,7 +119,7 @@ class ChurchCrawler(scrapy.Spider):
     startURLs = []
 
     foundFirstUrl = False
-    firstUrl = "https://creeksidebible.com/leadership-team/"
+    firstUrl = "https://www.pinewood.church/ourteam"
     i = 1
     for currentChurch in churches:
         #if "pages" in currentChurch and "contacts" not in currentChurch:
