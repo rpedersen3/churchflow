@@ -88,7 +88,7 @@ class ChurchCrawler(scrapy.Spider):
 
 
 
-    '''
+
     #crawl church sites
 
     startURLs = []
@@ -111,10 +111,10 @@ class ChurchCrawler(scrapy.Spider):
 
             if needsToBeProcessed:
                 #if "addressInfo" not in church:
-                if "chmsInfo" not in church:
-                    startURLs.append(link)
-    '''
+                startURLs.append(link)
 
+
+    '''
     #crawl church center sites
 
     startURLs = []
@@ -135,7 +135,7 @@ class ChurchCrawler(scrapy.Spider):
                     homeUrl = "https://" + churchCenterName + ".churchcenter.com/home"
                     #if churchCenterName == 'yes2god':
                     startURLs.append(homeUrl)
-
+    '''
 
     '''
     # crawl church staff pages
@@ -1234,6 +1234,15 @@ class ChurchCrawler(scrapy.Spider):
             props = response.xpath('//div/@data-react-props').extract()
             print("props: ", props)
 
+            churchCenter = None
+            for chms in currentChurch["chmss"]:
+                if chms["type"] == "churchcenter":
+                    churchCenter = chms
+                    break
+
+
+
+
             if len(props) > 0:
                 js = json.loads(props[0])
 
@@ -1243,20 +1252,65 @@ class ChurchCrawler(scrapy.Spider):
                         if "path" in item:
                             print("path: ", item["path"])
 
+                            foundPage = False
+                            href = response.url.replace("/home", item["path"])
+                            churchCenterPage = {
+                                "url": href,
+                                "type": "churchcenter"
+                            }
+                            for page in churchCenter["pages"]:
+                                if page["url"] == href:
+                                    foundPage = True
+                                    churchCenterPage = page
+                                    break
+
+                            if foundPage == False:
+                                churchCenter["pages"].append(churchCenterPage)
+
+
 
                 if "layout" in js:
                     layout = js["layout"]
                     if "organization_name" in layout:
+                        churchCenter["name"] = layout["organization_name"]
                         print("organization_name: ", layout["organization_name"])
                     if "organization_contact_email" in layout:
+                        churchCenter["email"] = layout["organization_contact_email"]
                         print("organization_contact_email: ", layout["organization_contact_email"])
                     if "organization_contact_phone" in layout:
+                        churchCenter["phone"] = layout["organization_contact_phone"]
                         print("organization_contact_phone: ", layout["organization_contact_phone"])
 
             # needsToBeProcessed = self.markAsProcessed(currentChurch, processor, link)
             self.saveChurches()
 
-    def addChmsInfo(self, currentChurch, processor, response):
+
+
+    def addSubsplashChmsInfo(self, currentChurch, processor, response):
+
+        name = None
+        if "name" in currentChurch:
+            print("--------------------------")
+            print("name: ", currentChurch["name"])
+            name = currentChurch["name"]
+
+
+
+        link = None
+        if "link" in currentChurch:
+            link = currentChurch["link"]
+        elif "websiteUri" in currentChurch:
+            link = currentChurch["websiteUri"]
+
+        if link is not None and name is not None:
+            dataTypes = response.xpath('//div/@data-type').extract()
+            for dataType in dataTypes:
+                if dataType.find("subsplash_media") >= 0:
+                    print("found subsplash: ", link)
+
+            #needsToBeProcessed = self.markAsProcessed(currentChurch, processor, link)
+            self.saveChurches()
+    def addChurchCenterChmsInfo(self, currentChurch, processor, response):
 
         name = None
         if "name" in currentChurch:
@@ -1780,6 +1834,17 @@ class ChurchCrawler(scrapy.Spider):
         '''
 
 
+        # crawl church center urls
+        print("parse site subsplash: ", response.url)
+        currentChurch, isHomePage = self.findCurrentChurch(response.url)
+        if currentChurch == None or isHomePage == False:
+            print("not found church for url: ", response.url)
+            return
+
+        processor = "extract-chms-information-from-webpage"
+        self.addSubsplashChmsInfo(currentChurch, processor, response)
+
+
         '''
         # crawl church center urls
         print("parse site chms: ", response.url)
@@ -1789,9 +1854,10 @@ class ChurchCrawler(scrapy.Spider):
             return
 
         processor = "extract-chms-information-from-webpage"
-        self.addChmsInfo(currentChurch, processor, response)
+        self.addChurchCenterChmsInfo(currentChurch, processor, response)
         '''
 
+        '''
         print("parse site church center site: ", response.url)
         currentChurch = self.findCurrentChurchFromChmsPages(response.url)
         if currentChurch == None:
@@ -1799,6 +1865,7 @@ class ChurchCrawler(scrapy.Spider):
             return
 
         self.addChurchCenterInfo(currentChurch, response)
+        '''
 
         '''
         # cycle through churches and add staff pages
