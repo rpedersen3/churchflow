@@ -3,6 +3,7 @@ import scrapy
 from scrapy import Selector
 import time
 
+
 from scrapy.http import HtmlResponse
 from scrapy.selector import Selector
 from bs4 import BeautifulSoup
@@ -104,17 +105,39 @@ class ChurchCrawler(scrapy.Spider):
 
         if link is not None:
 
-            processor = "extract-location-information-from-webpage"
+            #processor = "extract-location-information-from-webpage"
+            processor = "extract-chms-information-from-webpage"
             needsToBeProcessed = checkIfNeedsProcessing(church, processor, link)
 
             if needsToBeProcessed:
-                if "addressInfo" not in church:
-                    print("bad site: ", link)
-                    #startURLs.append(link)
+                #if "addressInfo" not in church:
+                if "chmsInfo" not in church:
+                    startURLs.append(link)
     '''
 
+    #crawl church center sites
+
+    startURLs = []
+
+    for church in churches:
+
+        chmss = None
+        if "chmss" in church:
+            chmss = church["chmss"]
+
+            for chms in chmss:
+                if chms["type"] == "churchcenter":
+
+                    pageUrl =  chms["pages"][0]["url"]
+                    pageUrl = pageUrl.replace("https://", "")
+                    churchCenterName = pageUrl.split(".")[0]
+
+                    homeUrl = "https://" + churchCenterName + ".churchcenter.com/home"
+                    #if churchCenterName == 'yes2god':
+                    startURLs.append(homeUrl)
 
 
+    '''
     # crawl church staff pages
     startURLs = []
 
@@ -154,7 +177,7 @@ class ChurchCrawler(scrapy.Spider):
             break
 
         i = i + 1
-
+    '''
 
 
     '''
@@ -187,7 +210,8 @@ class ChurchCrawler(scrapy.Spider):
     '''
     #crawl specific url
     startURLs = [
-        "https://www.greeleymosaic.com/who-we-are"
+        "https://avivadenver.org/"
+        #"https://www.greeleymosaic.com/who-we-are"
         #"https://www.kog-arvada.org/staff"
         #"https://rimrockchurch.org/contact-us"
         #"https://www.stjohnsbreck.org/parish-leadership"
@@ -375,135 +399,7 @@ class ChurchCrawler(scrapy.Spider):
         return bestDiv, bestClassName
 
 
-    def getContact(self, contacts, name, email):
 
-        for contact in contacts:
-            if name != "" and contact["name"] == name:
-                return contact
-            if email != "" and contact["email"] == email:
-                return contact
-
-        return None
-
-    def saveContact(self, currentChurch,
-        currentProfilePhoto,
-        currentProfileName,
-
-        currentProfileTitle,
-        currentProfileDepartment,
-        currentProfileEmail,
-        previousProfileEmail,
-
-        currentProfilePhotoEl,
-        currentProfileNameEl,
-
-        currentProfileEmailEl,
-        previousProfileEmailEl
-    ):
-        nameOffset = 0
-        if currentProfileNameEl != "":
-            nameOffset = self.commonDivCount(currentProfilePhotoEl, currentProfileNameEl)
-
-        emailOffset = 0
-        if currentProfileEmailEl != "":
-            emailOffset = self.commonDivCount(currentProfilePhotoEl, currentProfileEmailEl)
-
-        previousEmailOffset = 0
-        if previousProfileEmailEl != "":
-            previousEmailOffset = self.commonDivCount(currentProfilePhotoEl, previousProfileEmailEl)
-
-        # get email before or after photo
-        email = ""
-        if previousEmailOffset <= emailOffset:
-            email = currentProfileEmail
-        else:
-            email = previousProfileEmail
-
-        # check that name is in email somewhere
-        foundPart = False
-        parts = currentProfileName.split()
-        for part in parts:
-            if email.lower().find(part.lower()) >= 0:
-                foundPart = True
-        if foundPart == False:
-            email = ""
-
-        # print("------- name offset: ", nameOffset)
-        # print("------- email offset: ", emailOffset)
-        # print("------- previous email offset: ", previousEmailOffset)
-
-        contacts = []
-        if "contacts" in currentChurch:
-            contacts = currentChurch["contacts"]
-
-        contact = self.getContact(contacts, currentProfileName, email)
-        if contact is None:
-            contact = {}
-            contacts.append(contact)
-
-        contact["name"] = currentProfileName
-        if email is not None:
-            contact["email"] = email
-        if currentProfileTitle is not None:
-            contact["title"] = currentProfileTitle
-        if currentProfileDepartment is not None:
-            contact["department"] = currentProfileDepartment
-        if currentProfilePhoto is not None:
-            contact["photo"] = currentProfilePhoto
-
-        currentChurch["contacts"] = contacts
-        self.saveChurches()
-
-        print("")
-        print("contact record:")
-        print("name: ", currentProfileName)
-        print("title: ", currentProfileTitle)
-        print("department: ", currentProfileDepartment)
-
-        print('photo: ', currentProfilePhoto)
-        print('email: ', email)
-
-
-
-
-
-    def saveEmailContact(self,
-        currentChurch,
-        currentProfileName,
-        currentProfileEmail
-    ):
-
-        # check that name is in email somewhere
-        foundPartInEmail = False
-        parts = currentProfileName.split()
-        for part in parts:
-            if currentProfileEmail.lower().find(part.lower()) >= 0:
-                foundPartInEmail = True
-
-
-        if foundPartInEmail:
-
-            contacts = []
-            if "contacts" in currentChurch:
-                contacts = currentChurch["contacts"]
-
-            contact = self.getContact(contacts, currentProfileName, currentProfileEmail)
-            if contact is None:
-                contact = {}
-                contacts.append(contact)
-
-                contact["name"] = currentProfileName
-                if currentProfileEmail is not None:
-                    contact["email"] = currentProfileEmail
-
-
-                currentChurch["contacts"] = contacts
-                self.saveChurches()
-
-            print("")
-            print("contact record (email):")
-            print("name: ", currentProfileName)
-            print("email: ", currentProfileEmail)
 
 
     def replace_multiple_spaces(self, text):
@@ -1319,6 +1215,119 @@ class ChurchCrawler(scrapy.Spider):
                     needsToBeProcessed = self.markAsProcessed(currentChurch, processor, link)
                 self.saveChurches()
 
+
+    def addChurchCenterInfo(self, currentChurch, response):
+
+        name = None
+        if "name" in currentChurch:
+            print("--------------------------")
+            print("name: ", currentChurch["name"])
+            name = currentChurch["name"]
+
+        link = None
+        if "link" in currentChurch:
+            link = currentChurch["link"]
+        elif "websiteUri" in currentChurch:
+            link = currentChurch["websiteUri"]
+
+        if link is not None and name is not None:
+            props = response.xpath('//div/@data-react-props').extract()
+            print("props: ", props)
+
+            if len(props) > 0:
+                js = json.loads(props[0])
+
+                if "home" in js and "navigation_items" in js["home"]:
+                    items = js["home"]["navigation_items"]
+                    for item in items:
+                        if "path" in item:
+                            print("path: ", item["path"])
+
+
+                if "layout" in js:
+                    layout = js["layout"]
+                    if "organization_name" in layout:
+                        print("organization_name: ", layout["organization_name"])
+                    if "organization_contact_email" in layout:
+                        print("organization_contact_email: ", layout["organization_contact_email"])
+                    if "organization_contact_phone" in layout:
+                        print("organization_contact_phone: ", layout["organization_contact_phone"])
+
+            # needsToBeProcessed = self.markAsProcessed(currentChurch, processor, link)
+            self.saveChurches()
+
+    def addChmsInfo(self, currentChurch, processor, response):
+
+        name = None
+        if "name" in currentChurch:
+            print("--------------------------")
+            print("name: ", currentChurch["name"])
+            name = currentChurch["name"]
+
+
+
+        link = None
+        if "link" in currentChurch:
+            link = currentChurch["link"]
+        elif "websiteUri" in currentChurch:
+            link = currentChurch["websiteUri"]
+
+        if link is not None and name is not None:
+            hrefs = response.xpath('//a/@href').extract()
+            for href in hrefs:
+                if href.find("churchcenter.com") >= 0:
+
+                    chmss = []
+                    if "chmss" in currentChurch:
+                        chmss = currentChurch["chmss"]
+
+                    churchCenter = {
+                        "name": name,
+                        "type": "churchcenter"
+                    }
+
+                    found = False
+                    for chms in chmss:
+                        if chms["type"] == "churchcenter":
+                            found = True
+                            churchCenter = chms
+                            break
+
+                    if found == False:
+                        chmss.append(churchCenter)
+
+
+                    # set page in pages
+                    churchCenterPages = []
+                    if "pages" in churchCenter:
+                        churchCenterPages = churchCenter["pages"]
+
+
+                    foundPage = False
+                    churchCenterPage = {
+                        "url": href,
+                        "type": "churchcenter"
+                    }
+                    for page in churchCenterPages:
+                        if page["url"] == href:
+                            foundPage = True
+                            churchCenterPage = page
+                            break
+
+                    if foundPage == False:
+                        churchCenterPages.append(churchCenterPage)
+
+                    churchCenter["pages"] = churchCenterPages
+
+
+
+                    currentChurch["chmss"] = chmss
+
+                    print("found church center link: ", link)
+
+            #needsToBeProcessed = self.markAsProcessed(currentChurch, processor, link)
+            self.saveChurches()
+
     def searchForChurchLeadPastorInfo(self, currentChurch):
 
 
@@ -1398,189 +1407,6 @@ class ChurchCrawler(scrapy.Spider):
                     print("error getting address for ", response.url, ", error: ", e)
 
 
-    def searchForContacts(self, currentChurch, response):
-        #print('**************** process staff page: ', response.url)
-
-        profCheck = ProfileCheck()
-
-        # track using photo as reset element
-        currentProfilePhoto = ""
-        currentProfileName = ""
-        currentProfileTitle = ""
-        currentProfileDepartment = ""
-        currentProfileEmail = ""
-        previousProfileEmail = ""
-
-        currentProfilePhotoEl = ""
-        currentProfileNameEl = ""
-
-        currentProfileEmailEl = ""
-        previousProfileEmailEl = ""
-
-        # track using email as reset element
-        trackEmailCurrentName = ""
-        trackEmailCurrentEmail = ""
-
-        path = response.xpath(
-            '//p | //div[not(descendant::div)] | //a[starts-with(@href, "mailto:")] | //img | //h1 | //h2 | //h3 | //h4 | //h5 | //h6 |  //strong | //span ')
-        for el in path:
-            #print("el: ", el)
-
-            #print("--------------- Look for Profile Info -----------------------")
-
-            visible_text = el.xpath('.//text()[normalize-space()]').extract()
-            text = self.replace_multiple_spaces(' '.join(visible_text))
-
-            # text in visible_text:
-            #    text = self.replace_multiple_spaces(text)
-
-            shortText = text.strip()[:120]
-            if len(shortText) > 5:
-                #print("short text: ", shortText)
-
-                personName = profCheck.isPersonName(shortText)
-                if personName is not None:
-
-                    if currentProfileName == "":
-                        currentProfileName = personName
-
-                    trackEmailCurrentName = personName
-                    #print("found profile name ", currentProfileName)
-
-                '''
-                email = profCheck.isEmailAddresses(shortText)
-                if email is not None:
-                    currentProfileEmail = email
-
-                    trackEmailCurrentEmail = email
-                    if trackEmailCurrentName != "":
-                        self.saveEmailContact(
-                            trackEmailCurrentName,
-                            currentProfileTitle,
-                            currentProfileDepartment,
-                            trackEmailCurrentEmail
-                        )
-
-                    print("found email: ", email)
-                '''
-
-                jobTitle = profCheck.isProfileJobTitle(shortText)
-                if jobTitle is not None:
-                    if currentProfileTitle == "":
-                        currentProfileTitle = jobTitle
-                        #print("found profile jobtitle ", jobTitle)
-
-                department = profCheck.isProfileDepartment(shortText)
-                if department is not None:
-                    if currentProfileDepartment == "":
-                        currentProfileDepartment = department
-                        #print("found profile department ", department)
-
-            # for link in mailto_links:
-            if el.xpath('@href').get():
-                email_address = el.xpath('@href').get().replace("mailto:", "")
-
-                #print("found profile email ", email_address)
-
-                currentProfileEmail = email_address
-                currentProfileEmailEl = el
-
-                trackEmailCurrentEmail = email_address
-                if trackEmailCurrentName != "":
-                    self.saveEmailContact(
-                        currentChurch,
-                        trackEmailCurrentName,
-                        trackEmailCurrentEmail
-                    )
-
-                    trackEmailCurrentName = ""
-                    trackEmailCurrentName = ""
-
-
-
-
-
-
-            # Look for profile photo's
-
-            # Extract image URLs from the page
-            if el.xpath('@src | @data-src | @srcset').get():
-                img_src = el.xpath('@src | @data-src | @srcset').get()
-                #print("***************************** img src found: ", img_src)
-
-                isCDN = False
-                if img_src.startswith("https://images.squarespace-cdn.com") or \
-                        img_src.startswith("https://storage2.snappages.site") or \
-                        img_src.startswith("https://cdn.monkplatform.com") or \
-                        img_src.startswith("https://static.wixstatic.com") or \
-                        img_src.startswith("https://thechurchco-production.s3.amazonaws.com") or \
-                        img_src.startswith("https://s3.amazonaws.com/media.cloversites.com") or \
-                        img_src.startswith("https://images.squarespace-cdn.com"):
-                    isCDN = True
-
-                parsed_url = urlparse(response.url)
-                domain = parsed_url.netloc
-
-
-                if img_src.startswith('/') == True and img_src.startswith('//') == False:
-                    #print("add on domain: ", img_src)
-                    img_src = "https://" + domain + img_src
-
-
-                if isCDN or img_src.find(domain.replace("www.", "")) >= 0:
-                    #print("********** check photo ****** ", img_src)
-                    foundPhoto, foundProfilePhoto = profCheck.isProfilePhoto(response, img_src)
-                    if foundProfilePhoto:
-
-                        #print("photo found: ", img_src)
-
-                        if currentProfilePhoto != "" and currentProfileName != "":
-                            self.saveContact(currentChurch,
-                                             currentProfilePhoto,
-                                             currentProfileName,#
-
-                                             currentProfileTitle,
-                                             currentProfileDepartment,
-                                             currentProfileEmail,
-                                             previousProfileEmail,
-
-                                             currentProfilePhotoEl,
-                                             currentProfileNameEl,
-
-                                             currentProfileEmailEl,
-                                             previousProfileEmailEl)
-
-                        previousProfileEmail = currentProfileEmail
-                        previousProfileEmailEl = currentProfileEmailEl
-
-                        currentProfilePhoto = img_src
-                        currentProfileName = ""
-                        currentProfileTitle = ""
-                        currentProfileDepartment = ""
-                        currentProfileEmail = ""
-
-                        currentProfilePhotoEl = el
-                        currentProfileNameEl = ""
-                        currentProfileEmailEl = ""
-
-
-
-        if currentProfilePhoto != "" and currentProfileName != "":
-            self.saveContact(currentChurch,
-                             currentProfilePhoto,
-                             currentProfileName,
-
-                             currentProfileTitle,
-                             currentProfileDepartment,
-                             currentProfileEmail,
-                             previousProfileEmail,
-
-                             currentProfilePhotoEl,
-                             currentProfileNameEl,
-
-                             currentProfileEmailEl,
-                             previousProfileEmailEl)
-
 
     def searchForGroups(self, response):
 
@@ -1652,6 +1478,26 @@ class ChurchCrawler(scrapy.Spider):
 
         return currentChurch
 
+    def findCurrentChurchFromChmsPages(self, url):
+        url = url.replace("/home", "")
+        currentChurch = None
+        for church in churches:
+
+            if "chmss" in church:
+                chmss = church["chmss"]
+                for chms in chmss:
+                    if "pages" in chms:
+                        pages = chms["pages"]
+                        for page in pages:
+                            if page["url"].startswith(url):
+                                currentChurch = church
+                                break
+
+        return currentChurch
+
+
+
+
     def checkIfNeedsProcessing(self, currentChurch, processor, url):
 
         if "processed" not in currentChurch:
@@ -1687,47 +1533,6 @@ class ChurchCrawler(scrapy.Spider):
 
         print("............ start_requests ..........")
 
-        '''
-        lua_script_template = """
-            function main(splash, args)  
-            
-                print("url: ", args.url)
-                
-                splash:on_request(function(request)
-                    print("request: ", request.url)
-                    
-                    if request.url ~= 'PAGE_URL' then
-                        local start, _ = request.url:find("%wixpress%")
-                        if start == nil then
-                            start, _ = request.url:find("%jpg%")
-                        end
-                        if start == nil then
-                            start, _ = request.url:find("%png%")
-                        end
-                        if start == nil then
-                            start, _ = request.url:find("%woff%")
-                        end
-                        
-                        print("start", start)
-                        if start == nil then
-                            print("pg: ", request.url)
-                            request.abort()
-                            return { status = 404, }
-                        end
-                    end
-
-                    
-                end)
-                
-                print("go to url", args.url)
-                splash:go(args.url)
-    
-                -- custom rendering script logic...
-
-                return splash:html()
-            end
-            """
-        '''
 
 
         lua_script_template = """
@@ -1756,7 +1561,6 @@ class ChurchCrawler(scrapy.Spider):
                         end
 
                         
-                        print("start", start)
                         if start == nil then
                             print("pg: ", request.url)
                             request.abort()
@@ -1782,17 +1586,8 @@ class ChurchCrawler(scrapy.Spider):
 
 
         for startUrl in self.startURLs:
-            #yield SplashRequest(startUrl, callback=self.parse)
-            #yield SplashRequest(startUrl, callback=self.parse, args={'wait': 0.5})
 
             print(" request URL: ", startUrl)
-
-
-            '''
-            yield SplashRequest(startUrl, self.parse)
-
-            '''
-
             lua_script = lua_script_template.replace("PAGE_URL", startUrl)
             yield SplashRequest(startUrl, self.parse, endpoint='execute',
                                 args={
@@ -1803,14 +1598,7 @@ class ChurchCrawler(scrapy.Spider):
                                     'lua_source': lua_script,
                                 })
 
-            '''
-            yield SplashRequest(
-                url=startUrl,
-                callback=self.parse,
-                endpoint='execute',
-                args={'engine': 'chromium', 'lua_source': lua_script}
-            )
-            '''
+
 
     def save_image(self, response):
 
@@ -1840,7 +1628,7 @@ class ChurchCrawler(scrapy.Spider):
 
 
         print("response: ", response.url)
-        #print("body: ", response.body)
+        print("body: ", response.body)
 
 
         if response.url.find(".pdf") >= 0 or \
@@ -1862,9 +1650,7 @@ class ChurchCrawler(scrapy.Spider):
         #print("body: ", response.body)
 
 
-
-
-
+        '''
         # extract contacts from staff web pages
         currentChurch, isHomePage = self.findCurrentChurch(response.url)
         if currentChurch is not None and "name" in currentChurch:
@@ -1972,7 +1758,7 @@ class ChurchCrawler(scrapy.Spider):
             #self.searchForContacts(currentChurch, response)
             
 
-
+        '''
 
         '''
         #crawl reference urls
@@ -1993,6 +1779,26 @@ class ChurchCrawler(scrapy.Spider):
             self.searchForChurchProfileInfo(church)
         '''
 
+
+        '''
+        # crawl church center urls
+        print("parse site chms: ", response.url)
+        currentChurch, isHomePage = self.findCurrentChurch(response.url)
+        if currentChurch == None or isHomePage == False:
+            print("not found church for url: ", response.url)
+            return
+
+        processor = "extract-chms-information-from-webpage"
+        self.addChmsInfo(currentChurch, processor, response)
+        '''
+
+        print("parse site church center site: ", response.url)
+        currentChurch = self.findCurrentChurchFromChmsPages(response.url)
+        if currentChurch == None:
+            print("not found church for url: ", response.url)
+            return
+
+        self.addChurchCenterInfo(currentChurch, response)
 
         '''
         # cycle through churches and add staff pages
