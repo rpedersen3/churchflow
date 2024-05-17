@@ -105,6 +105,8 @@ class ChurchCrawler(scrapy.Spider):
 
         if link is not None:
 
+            #if link.find("cathedralrockchurch.org") >= 0:
+
             #processor = "extract-location-information-from-webpage"
             processor = "extract-chms-information-from-webpage"
             needsToBeProcessed = checkIfNeedsProcessing(church, processor, link)
@@ -207,10 +209,11 @@ class ChurchCrawler(scrapy.Spider):
 
 
 
-    '''
+
     #crawl specific url
     startURLs = [
-        "https://avivadenver.org/"
+        "https://www.fuelchurch.org/"
+        #"https://avivadenver.org/"
         #"https://www.greeleymosaic.com/who-we-are"
         #"https://www.kog-arvada.org/staff"
         #"https://rimrockchurch.org/contact-us"
@@ -289,7 +292,7 @@ class ChurchCrawler(scrapy.Spider):
         #"https://christianservices.org/",
         #"https://christianservices.org/contact-us/"
     ]
-    '''
+
 
 
     def checkCommonDiv(self, el1, el2):
@@ -1106,6 +1109,99 @@ class ChurchCrawler(scrapy.Spider):
         self.saveChurches()
 
 
+    def addChurchSearchTerm(self, currentChurch, searchTerm):
+
+        link = None
+        if "link" in currentChurch:
+            link = currentChurch["link"]
+        elif "websiteUri" in currentChurch:
+            link = currentChurch["websiteUri"]
+
+        pages = []
+
+        chmss = []
+        if "chmss" in currentChurch:
+            chmss = currentChurch["chmss"]
+
+        currentChms = {
+            "type": searchTerm
+        }
+
+        foundChms = False
+        for chms in chmss:
+            if chms["type"] == searchTerm:
+                currentChms = chms
+                foundChms = True
+                break
+
+        if foundChms == False:
+            chmss.append(currentChms)
+
+        currentChurch["chmss"] = chmss
+
+        pages = []
+        if "pages" in currentChms:
+            pages = currentChms["pages"]
+
+        print(' query: ', link, ", for search term: ", searchTerm)
+        if link is not None:
+
+            processor = "extract-" + searchTerm + "-from-site"
+            needsToBeProcessed = self.checkIfNeedsProcessing(currentChurch, processor, link)
+
+            print("needs: ", needsToBeProcessed)
+
+            if needsToBeProcessed:
+
+                if link != "" and link.find("facebook") == -1:
+
+                    time.sleep(1)
+                    api_key = "abcdef"
+                    service = build(
+                        "customsearch", "v1", developerKey=api_key
+                    )
+
+                    parsed_url = urlparse(link)
+                    domain = parsed_url.netloc.replace("www.", "")
+
+                    time.sleep(0.5)
+
+                    query = searchTerm
+                    res = (
+                        service.cse()
+                        .list(
+                            q=query,
+                            cx="d744719d644574dd7",
+                            siteSearch=domain,
+                            start=1
+                        )
+                        .execute()
+                    )
+
+                    #print("--------------------------------------")
+                    #print(res)
+                    #print("--------------------------------------")
+
+                    if "items" in res:
+
+                        for item in res["items"]:
+
+                            link = item["link"]
+                            page = self.getPage(pages, searchTerm, link)
+                            if page is None:
+                                page = {
+                                    "type": "staff",
+                                    "url": link
+                                }
+                                pages.append(page)
+
+                    if len(pages) > 0:
+                        print("found pages: ", pages)
+                        currentChurch["pages"] = pages
+
+                needsToBeProcessed = self.markAsProcessed(currentChurch, processor, link)
+            self.saveChurches()
+
     def addChurchStaffPages(self, currentChurch):
 
         link = None
@@ -1290,8 +1386,8 @@ class ChurchCrawler(scrapy.Spider):
 
         name = None
         if "name" in currentChurch:
-            print("--------------------------")
-            print("name: ", currentChurch["name"])
+            #print("--------------------------")
+            #print("name: ", currentChurch["name"])
             name = currentChurch["name"]
 
 
@@ -1681,8 +1777,8 @@ class ChurchCrawler(scrapy.Spider):
     def parse(self, response):
 
 
-        print("response: ", response.url)
-        print("body: ", response.body)
+        #print("response: ", response.url)
+        #print("body: ", response.body)
 
 
         if response.url.find(".pdf") >= 0 or \
@@ -1835,15 +1931,14 @@ class ChurchCrawler(scrapy.Spider):
 
 
         # crawl church center urls
-        print("parse site subsplash: ", response.url)
+        #print("parse site subsplash: ", response.url)
         currentChurch, isHomePage = self.findCurrentChurch(response.url)
         if currentChurch == None or isHomePage == False:
             print("not found church for url: ", response.url)
             return
 
         processor = "extract-chms-information-from-webpage"
-        self.addSubsplashChmsInfo(currentChurch, processor, response)
-
+        self.addChurchSearchTerm(currentChurch, "subsplash")
 
         '''
         # crawl church center urls
