@@ -95,6 +95,7 @@ class ChurchCrawler(scrapy.Spider):
 
     for church in churches:
 
+        i = 0
         #if "pages" not in church:
         link = None
         if "link" in church:
@@ -114,6 +115,10 @@ class ChurchCrawler(scrapy.Spider):
             if needsToBeProcessed:
                 #if "addressInfo" not in church:
                 startURLs.append(link)
+
+        i = i + 1
+        if i > 50:
+            break
 
 
     '''
@@ -209,10 +214,10 @@ class ChurchCrawler(scrapy.Spider):
 
 
 
-
     #crawl specific url
     startURLs = [
-        "https://www.fuelchurch.org/"
+        "https://theascentchurch.com"
+        #"https://woodmenvalley.org"
         #"https://avivadenver.org/"
         #"https://www.greeleymosaic.com/who-we-are"
         #"https://www.kog-arvada.org/staff"
@@ -1119,29 +1124,24 @@ class ChurchCrawler(scrapy.Spider):
 
         pages = []
 
-        chmss = []
+        currentChurch["chmss"] = []
         if "chmss" in currentChurch:
-            chmss = currentChurch["chmss"]
+            currentChurch["chmss"] = currentChurch["chmss"]
 
-        currentChms = {
-            "type": searchTerm
-        }
 
         foundChms = False
-        for chms in chmss:
+        for chms in currentChurch["chmss"]:
             if chms["type"] == searchTerm:
                 currentChms = chms
                 foundChms = True
                 break
 
-        if foundChms == False:
-            chmss.append(currentChms)
-
-        currentChurch["chmss"] = chmss
+        if foundChms:
+            currentChurch["chmss"].remove(currentChms)
 
         pages = []
-        if "pages" in currentChms:
-            pages = currentChms["pages"]
+        #if "pages" in currentChms:
+        #    pages = currentChms["pages"]
 
         print(' query: ', link, ", for search term: ", searchTerm)
         if link is not None:
@@ -1166,7 +1166,7 @@ class ChurchCrawler(scrapy.Spider):
 
                     time.sleep(0.5)
 
-                    query = searchTerm
+                    query = '"' + searchTerm + '"'
                     res = (
                         service.cse()
                         .list(
@@ -1187,19 +1187,31 @@ class ChurchCrawler(scrapy.Spider):
                         for item in res["items"]:
 
                             link = item["link"]
-                            page = self.getPage(pages, searchTerm, link)
-                            if page is None:
+
+                            foundPage = False
+                            for page in pages:
+                                if page["type"] == searchTerm and page["url"] == link:
+                                    foundPage = True
+                                    break
+
+                            if foundPage == False:
                                 page = {
-                                    "type": "staff",
+                                    "type": searchTerm,
                                     "url": link
                                 }
+                                print("add subsplash page: ", link)
                                 pages.append(page)
 
-                    if len(pages) > 0:
-                        print("found pages: ", pages)
-                        currentChurch["pages"] = pages
+                # if no pages then remove chms splash from list
+                if len(pages) > 0:
+                    currentChms = {
+                        "type": searchTerm
+                    }
+                    currentChms["pages"] = pages
+                    currentChurch["chmss"].append(currentChms)
 
                 needsToBeProcessed = self.markAsProcessed(currentChurch, processor, link)
+
             self.saveChurches()
 
     def addChurchStaffPages(self, currentChurch):
@@ -1382,7 +1394,7 @@ class ChurchCrawler(scrapy.Spider):
 
 
 
-    def addSubsplashChmsInfo(self, currentChurch, processor, response):
+    def addChmsInfo(self, currentChurch, response, type, path, term):
 
         name = None
         if "name" in currentChurch:
@@ -1399,10 +1411,54 @@ class ChurchCrawler(scrapy.Spider):
             link = currentChurch["websiteUri"]
 
         if link is not None and name is not None:
-            dataTypes = response.xpath('//div/@data-type').extract()
+            dataTypes = response.xpath(path).extract()
             for dataType in dataTypes:
-                if dataType.find("subsplash_media") >= 0:
-                    print("found subsplash: ", link)
+                if dataType.find(term) >= 0:
+                    print("found : ", type, ", link: ", link)
+
+                    # add page to list
+                    chmss = []
+                    if "chmss" in currentChurch:
+                        chmss = currentChurch["chmss"]
+
+                    currentCms = {
+                        "name": name,
+                        "type": type
+                    }
+
+                    found = False
+                    for chms in chmss:
+                        if chms["type"] == type:
+                            found = True
+                            currentCms = chms
+                            break
+
+                    if found == False:
+                        chmss.append(currentCms)
+
+                    # set page in pages
+                    currentPages = []
+                    if "pages" in currentPages:
+                        currentPages = currentCms["pages"]
+
+                    foundPage = False
+                    currentPage = {
+                        "url": link,
+                        "type": type
+                    }
+                    for page in currentPages:
+                        if page["url"] == link:
+                            foundPage = True
+                            currentPage = page
+                            break
+
+                    if foundPage == False:
+                        currentPages.append(currentPage)
+
+                    currentCms["pages"] = currentPages
+                    currentChurch["chmss"] = chmss
+
+
 
             #needsToBeProcessed = self.markAsProcessed(currentChurch, processor, link)
             self.saveChurches()
@@ -1468,8 +1524,6 @@ class ChurchCrawler(scrapy.Spider):
                         churchCenterPages.append(churchCenterPage)
 
                     churchCenter["pages"] = churchCenterPages
-
-
 
                     currentChurch["chmss"] = chmss
 
@@ -1938,7 +1992,12 @@ class ChurchCrawler(scrapy.Spider):
             return
 
         processor = "extract-chms-information-from-webpage"
-        self.addChurchSearchTerm(currentChurch, "subsplash")
+        #self.addChurchSearchTerm(currentChurch, 'subsplash')
+
+        #self.addChmsInfo(currentChurch, response, 'subsplash', '//div/@data-type', 'subsplash_media')
+        self.addChmsInfo(currentChurch, response, 'wordpress', '//style/text()', '.wp-block')
+
+
 
         '''
         # crawl church center urls
