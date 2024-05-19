@@ -216,15 +216,15 @@ class ChurchCrawler(scrapy.Spider):
 
     #crawl specific url
     startURLs = [
-        "https://theascentchurch.com"
+        "https://www.missionhills.org"
         #"https://woodmenvalley.org"
-        #"https://avivadenver.org/"
+        #"https://missionhills.org/"
         #"https://www.greeleymosaic.com/who-we-are"
         #"https://www.kog-arvada.org/staff"
         #"https://rimrockchurch.org/contact-us"
         #"https://www.stjohnsbreck.org/parish-leadership"
-        #"https://emmausanglican.org/leadership"
-        #"https://www.harvestdowntown.org/staff"
+        #"https://emmausanglican.org"
+        #"https://avivadenver.org/"
         #"https://yourawakening.org/leadership"
         #"https://bethelmennonite.org/about/"
         #"https://www.cmpc.church/about-us"
@@ -253,7 +253,7 @@ class ChurchCrawler(scrapy.Spider):
         #"https://www.pwclc.org/meet-the-staff/"
         #"https://southeast-church.org/about-us/leadership"
         #"https://gccdenver.org/leadership" # boundary issues,  name before picture and switching with boundaries
-        #"https://www.agapeoutpost.org/about"
+        #"https://www.agapeoutpost.org"
         #"https://www.fcucc.org/about/our-team"
         #"https://www.foccs.net/about-foc/our-staff/"
         #"https://monumenthillchurch.org/our-team/"
@@ -1411,8 +1411,11 @@ class ChurchCrawler(scrapy.Spider):
             link = currentChurch["websiteUri"]
 
         if link is not None and name is not None:
-            dataTypes = response.xpath(path).extract()
+            print("look for path: ", path)
+            print("body: ", response.body)
+            dataTypes = response.xpath('//style/@id').extract()
             for dataType in dataTypes:
+                print("found: ", dataType)
                 if dataType.find(term) >= 0:
                     print("found : ", type, ", link: ", link)
 
@@ -1784,8 +1787,32 @@ class ChurchCrawler(scrapy.Spider):
             end
             """
 
+        lua_script_template = """
+                function main(splash, args)  
+
+                    print("url: ", args.url)
+                    
+                    splash:on_request(function(request)
+                    print("request: ", request.url)
+
+                    if request.url ~= 'PAGE_URL' then
+                            print("pg: ", request.url)
+                            request.abort()
+                            return { status = 404, }
+                    end
+
+                    
+                end)
 
 
+                    print("go to url", args.url)
+                    splash:go(args.url)
+
+                    -- custom rendering script logic...
+
+                    return splash:html()
+                end
+                """
 
 
 
@@ -1831,8 +1858,8 @@ class ChurchCrawler(scrapy.Spider):
     def parse(self, response):
 
 
-        #print("response: ", response.url)
-        #print("body: ", response.body)
+        print("response: ", response.url)
+        print("body: ", response.body)
 
 
         if response.url.find(".pdf") >= 0 or \
@@ -1995,7 +2022,8 @@ class ChurchCrawler(scrapy.Spider):
         #self.addChurchSearchTerm(currentChurch, 'subsplash')
 
         #self.addChmsInfo(currentChurch, response, 'subsplash', '//div/@data-type', 'subsplash_media')
-        self.addChmsInfo(currentChurch, response, 'wordpress', '//style/text()', '.wp-block')
+        print(" add chms info")
+        self.addChmsInfo(currentChurch, response, 'wordpress', '//style/@id', 'wp-block')
 
 
 
