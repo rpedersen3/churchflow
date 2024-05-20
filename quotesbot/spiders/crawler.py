@@ -220,7 +220,7 @@ class ChurchCrawler(scrapy.Spider):
 
     #crawl specific url
     startURLs = [
-        "https://www.redrockschurch.com"
+        "https://www.thehillsdenver.com"
         #"https://woodmenvalley.org"
         #"https://missionhills.org/"
         #"https://www.greeleymosaic.com/who-we-are"
@@ -1131,14 +1131,16 @@ class ChurchCrawler(scrapy.Spider):
         chmss = []
         if "chmss" in currentChurch:
             chmss = currentChurch["chmss"]
+        else:
+            currentChurch["chmss"] = chmss
 
         pages = []
-        currentCms = None
+        currentChms = None
         for chms in chmss:
             if chms["type"] == searchTerm:
                 currentChms = chms
-                if "pages" in currentCms:
-                    pages = currentCms["pages"]
+                if "pages" in currentChms:
+                    pages = currentChms["pages"]
 
                 break
 
@@ -1156,7 +1158,6 @@ class ChurchCrawler(scrapy.Spider):
 
                 if link != "" and link.find("facebook") == -1:
 
-                    time.sleep(1)
                     api_key = "abcdef"
                     service = build(
                         "customsearch", "v1", developerKey=api_key
@@ -1165,7 +1166,7 @@ class ChurchCrawler(scrapy.Spider):
                     parsed_url = urlparse(link)
                     domain = parsed_url.netloc.replace("www.", "")
 
-                    time.sleep(0.5)
+                    time.sleep(0.2)
 
                     query = '"' + searchTerm + '"'
                     res = (
@@ -1200,13 +1201,15 @@ class ChurchCrawler(scrapy.Spider):
                                     "type": searchTerm,
                                     "url": link
                                 }
-                                print("add page: ", link)
+                                print("************************ add page: ", link, ', search term: ', searchTerm)
                                 pages.append(page)
+
+                            break
 
                 # if no pages then remove chms splash from list
                 if len(pages) > 0:
 
-                    if currentCms is None:
+                    if currentChms is None:
 
                         currentChms = {
                             "type": searchTerm
@@ -1258,7 +1261,7 @@ class ChurchCrawler(scrapy.Spider):
                     if len(pages) == 0:
 
                         time.sleep(1)
-                        api_key = "abcdef"
+                        api_key = "abcdefg"
                         service = build(
                             "customsearch", "v1", developerKey=api_key
                         )
@@ -2012,21 +2015,21 @@ class ChurchCrawler(scrapy.Spider):
         '''
 
 
+        '''
         # crawl church center urls
         #print("parse site subsplash: ", response.url)
         currentChurch, isHomePage = self.findCurrentChurch(response.url)
-        if currentChurch == None or isHomePage == False:
-            print("not found church for url: ", response.url)
-            return
-
-        processor = "extract-chms-information-from-webpage"
-        self.addChurchSearchTerm(currentChurch, 'pushpay')
-
+        if currentChurch != None and isHomePage == True:
+            #self.addChurchSearchTerm(currentChurch, 'pushpay')
+            self.addChurchSearchTerm(currentChurch, 'tithe.ly')
+            self.addChurchSearchTerm(currentChurch, 'ccbchurch')
         '''
+
+        currentChurch, isHomePage = self.findCurrentChurch(response.url)
         if currentChurch != None and isHomePage == True:
             print("process url: ", response.url)
 
-
+            '''
             self.addChmsInfo(currentChurch, response, 'wordpress', '//style/@id', 'wp-block')
             self.addChmsInfo(currentChurch, response, 'wordpress', '//link/@id', 'wp-block')
             self.addChmsInfo(currentChurch, response, 'wordpress', '//link/@href', 'wp-content')
@@ -2059,10 +2062,13 @@ class ChurchCrawler(scrapy.Spider):
             self.addChmsInfo(currentChurch, response, 'subsplash', '//div/@data-type', 'subsplash_media')
 
             self.addChmsInfo(currentChurch, response, 'gloo', '//script/text()', "gloo.us")
+            '''
+
+            self.addChmsInfo(currentChurch, response, 'schema', '//script/type', "application/ld+json")
 
             self.saveChurches()
 
-        '''
+
 
         '''
         # crawl church center urls
