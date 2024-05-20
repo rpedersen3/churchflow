@@ -216,8 +216,7 @@ class ChurchCrawler(scrapy.Spider):
 
     '''
 
-
-
+    '''
     #crawl specific url
     startURLs = [
         "https://www.thehillsdenver.com"
@@ -301,7 +300,7 @@ class ChurchCrawler(scrapy.Spider):
         #"https://christianservices.org/",
         #"https://christianservices.org/contact-us/"
     ]
-
+    '''
 
 
     def checkCommonDiv(self, el1, el2):
@@ -1401,6 +1400,34 @@ class ChurchCrawler(scrapy.Spider):
 
 
 
+    def addSchemaInfo(self, currentChurch, response):
+
+        datas = response.xpath("//script[@type='application/ld+json']/text()").extract()
+        for data in datas:
+            jsonData = json.loads(data)
+            if "@type" in jsonData:
+
+                type = jsonData["@type"]
+
+
+                # add page to list
+                schemaTypes = []
+                if "schemaTypes" in currentChurch:
+                    schemaTypes = currentChurch["schemaTypes"]
+
+                found = False
+                for schemaType in schemaTypes:
+                    if schemaType == type:
+                        found = True
+                        break
+
+                if found == False:
+                    schemaTypes.append(type)
+
+                currentChurch["schemaTypes"] = schemaTypes
+
+
+
     def addChmsInfo(self, currentChurch, response, type, path, term):
 
         name = None
@@ -1464,6 +1491,9 @@ class ChurchCrawler(scrapy.Spider):
 
                     currentCms["pages"] = currentPages
                     currentChurch["chmss"] = chmss
+
+
+
 
 
 
@@ -2064,7 +2094,7 @@ class ChurchCrawler(scrapy.Spider):
             self.addChmsInfo(currentChurch, response, 'gloo', '//script/text()', "gloo.us")
             '''
 
-            self.addChmsInfo(currentChurch, response, 'schema', '//script/type', "application/ld+json")
+            self.addSchemaInfo(currentChurch, response)
 
             self.saveChurches()
 
