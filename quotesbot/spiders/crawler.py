@@ -93,9 +93,10 @@ class ChurchCrawler(scrapy.Spider):
 
     startURLs = []
 
+    i = 0
+    foundlink = True
     for church in churches:
 
-        i = 0
         #if "pages" not in church:
         link = None
         if "link" in church:
@@ -106,18 +107,21 @@ class ChurchCrawler(scrapy.Spider):
 
         if link is not None:
 
-            #if link.find("cathedralrockchurch.org") >= 0:
+            if link == 'https://www.fs.church/':
+                foundlink = True
 
-            #processor = "extract-location-information-from-webpage"
-            processor = "extract-chms-information-from-webpage"
-            needsToBeProcessed = checkIfNeedsProcessing(church, processor, link)
+            if foundlink:
 
-            if needsToBeProcessed:
-                #if "addressInfo" not in church:
-                startURLs.append(link)
+                #processor = "extract-location-information-from-webpage"
+                processor = "extract-chms-information-from-webpage"
+                needsToBeProcessed = checkIfNeedsProcessing(church, processor, link)
+
+                if needsToBeProcessed:
+                    #if "addressInfo" not in church:
+                    startURLs.append(link)
 
         i = i + 1
-        if i > 50:
+        if i > 50000:
             break
 
 
@@ -213,10 +217,10 @@ class ChurchCrawler(scrapy.Spider):
     '''
 
 
-
+    '''
     #crawl specific url
     startURLs = [
-        "https://www.missionhills.org"
+        "https://www.firstprescos.org/"
         #"https://woodmenvalley.org"
         #"https://missionhills.org/"
         #"https://www.greeleymosaic.com/who-we-are"
@@ -297,7 +301,7 @@ class ChurchCrawler(scrapy.Spider):
         #"https://christianservices.org/",
         #"https://christianservices.org/contact-us/"
     ]
-
+    '''
 
 
     def checkCommonDiv(self, el1, el2):
@@ -1411,13 +1415,10 @@ class ChurchCrawler(scrapy.Spider):
             link = currentChurch["websiteUri"]
 
         if link is not None and name is not None:
-            print("look for path: ", path)
-            print("body: ", response.body)
-            dataTypes = response.xpath('//style/@id').extract()
+            dataTypes = response.xpath(path).extract()
             for dataType in dataTypes:
-                print("found: ", dataType)
                 if dataType.find(term) >= 0:
-                    print("found : ", type, ", link: ", link)
+                    print("found: ", type, ", link: ", link)
 
                     # add page to list
                     chmss = []
@@ -1464,7 +1465,7 @@ class ChurchCrawler(scrapy.Spider):
 
 
             #needsToBeProcessed = self.markAsProcessed(currentChurch, processor, link)
-            self.saveChurches()
+
     def addChurchCenterChmsInfo(self, currentChurch, processor, response):
 
         name = None
@@ -1859,7 +1860,7 @@ class ChurchCrawler(scrapy.Spider):
 
 
         print("response: ", response.url)
-        print("body: ", response.body)
+        #print("body: ", response.body)
 
 
         if response.url.find(".pdf") >= 0 or \
@@ -2022,10 +2023,40 @@ class ChurchCrawler(scrapy.Spider):
         #self.addChurchSearchTerm(currentChurch, 'subsplash')
 
         #self.addChmsInfo(currentChurch, response, 'subsplash', '//div/@data-type', 'subsplash_media')
-        print(" add chms info")
-        self.addChmsInfo(currentChurch, response, 'wordpress', '//style/@id', 'wp-block')
+        if currentChurch != None and isHomePage == True:
+            print("process url: ", response.url)
+            self.addChmsInfo(currentChurch, response, 'wordpress', '//style/@id', 'wp-block')
+            self.addChmsInfo(currentChurch, response, 'wordpress', '//link/@id', 'wp-block')
+            self.addChmsInfo(currentChurch, response, 'wordpress', '//link/@href', 'wp-content')
+            self.addChmsInfo(currentChurch, response, 'wordpress', '//meta/@content', 'wp-content')
+            self.addChmsInfo(currentChurch, response, 'squarespace', '//link/@href', 'squarespace')
+            self.addChmsInfo(currentChurch, response, 'moto', '//link/@id', "moto-website-style")
+            self.addChmsInfo(currentChurch, response, 'joomla', '//meta/@content', "Joomla")
+            self.addChmsInfo(currentChurch, response, 'clover', '//meta/@content', "clover")
+            self.addChmsInfo(currentChurch, response, 'woocommerce', '//link/@id', "woocommerce-layout-css")
+            self.addChmsInfo(currentChurch, response, 'wix', '//meta/@content', "Wix")
+            self.addChmsInfo(currentChurch, response, 'weebly', '//link/@href', "weebly")
 
 
+            self.addChmsInfo(currentChurch, response, 'finalweb', '//div/@id', 'finalweb')  # https://www.finalweb.com/
+            self.addChmsInfo(currentChurch, response, 'thechurchco', '//link/@id', "thechurchco-theme-css")
+            self.addChmsInfo(currentChurch, response, 'churchcenter', '//a/@href', "churchcenter")
+            self.addChmsInfo(currentChurch, response, 'churchcenter', '//link/@href', "churchcenter")
+            self.addChmsInfo(currentChurch, response, 'rockrms', '//meta/@content', "Rock v")  ## triggering on Rock in the name
+            self.addChmsInfo(currentChurch, response, 'breeze', '//a/@href', "breeze")
+            self.addChmsInfo(currentChurch, response, 'breeze', '//div/@id', "breeze")
+            self.addChmsInfo(currentChurch, response, 'breeze', '//script/@src', "breeze")
+            self.addChmsInfo(currentChurch, response, 'ecatholic', '//link/@href', "ecatholic")
+            self.addChmsInfo(currentChurch, response, 'ekklesia', '//a/@href', "ekklesia")
+            self.addChmsInfo(currentChurch, response, 'ekklesia', '//script/@src', "ekklesia")
+            self.addChmsInfo(currentChurch, response, 'pushpay', '//a/@href', "pushpay")
+            self.addChmsInfo(currentChurch, response, 'tithely', '//a/@href', "tithe.ly")
+            self.addChmsInfo(currentChurch, response, 'givelify', '//a/@href', "givelify")
+            self.addChmsInfo(currentChurch, response, 'faithdirect', '//a/@href', "faithdirect")
+            self.addChmsInfo(currentChurch, response, 'ccbchurch', '//a/@href', "ccbchurch")
+
+
+            self.saveChurches()
 
         '''
         # crawl church center urls
