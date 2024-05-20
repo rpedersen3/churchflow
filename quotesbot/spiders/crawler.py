@@ -217,10 +217,10 @@ class ChurchCrawler(scrapy.Spider):
     '''
 
 
-    '''
+
     #crawl specific url
     startURLs = [
-        "https://www.firstprescos.org/"
+        "https://www.redrockschurch.com"
         #"https://woodmenvalley.org"
         #"https://missionhills.org/"
         #"https://www.greeleymosaic.com/who-we-are"
@@ -301,7 +301,7 @@ class ChurchCrawler(scrapy.Spider):
         #"https://christianservices.org/",
         #"https://christianservices.org/contact-us/"
     ]
-    '''
+
 
 
     def checkCommonDiv(self, el1, el2):
@@ -1128,24 +1128,21 @@ class ChurchCrawler(scrapy.Spider):
 
         pages = []
 
-        currentChurch["chmss"] = []
+        chmss = []
         if "chmss" in currentChurch:
-            currentChurch["chmss"] = currentChurch["chmss"]
-
-
-        foundChms = False
-        for chms in currentChurch["chmss"]:
-            if chms["type"] == searchTerm:
-                currentChms = chms
-                foundChms = True
-                break
-
-        if foundChms:
-            currentChurch["chmss"].remove(currentChms)
+            chmss = currentChurch["chmss"]
 
         pages = []
-        #if "pages" in currentChms:
-        #    pages = currentChms["pages"]
+        currentCms = None
+        for chms in chmss:
+            if chms["type"] == searchTerm:
+                currentChms = chms
+                if "pages" in currentCms:
+                    pages = currentCms["pages"]
+
+                break
+
+
 
         print(' query: ', link, ", for search term: ", searchTerm)
         if link is not None:
@@ -1203,16 +1200,19 @@ class ChurchCrawler(scrapy.Spider):
                                     "type": searchTerm,
                                     "url": link
                                 }
-                                print("add subsplash page: ", link)
+                                print("add page: ", link)
                                 pages.append(page)
 
                 # if no pages then remove chms splash from list
                 if len(pages) > 0:
-                    currentChms = {
-                        "type": searchTerm
-                    }
-                    currentChms["pages"] = pages
-                    currentChurch["chmss"].append(currentChms)
+
+                    if currentCms is None:
+
+                        currentChms = {
+                            "type": searchTerm
+                        }
+                        currentChms["pages"] = pages
+                        currentChurch["chmss"].append(currentChms)
 
                 needsToBeProcessed = self.markAsProcessed(currentChurch, processor, link)
 
@@ -2020,11 +2020,13 @@ class ChurchCrawler(scrapy.Spider):
             return
 
         processor = "extract-chms-information-from-webpage"
-        #self.addChurchSearchTerm(currentChurch, 'subsplash')
+        self.addChurchSearchTerm(currentChurch, 'pushpay')
 
-        #self.addChmsInfo(currentChurch, response, 'subsplash', '//div/@data-type', 'subsplash_media')
+        '''
         if currentChurch != None and isHomePage == True:
             print("process url: ", response.url)
+
+
             self.addChmsInfo(currentChurch, response, 'wordpress', '//style/@id', 'wp-block')
             self.addChmsInfo(currentChurch, response, 'wordpress', '//link/@id', 'wp-block')
             self.addChmsInfo(currentChurch, response, 'wordpress', '//link/@href', 'wp-content')
@@ -2054,9 +2056,13 @@ class ChurchCrawler(scrapy.Spider):
             self.addChmsInfo(currentChurch, response, 'givelify', '//a/@href', "givelify")
             self.addChmsInfo(currentChurch, response, 'faithdirect', '//a/@href', "faithdirect")
             self.addChmsInfo(currentChurch, response, 'ccbchurch', '//a/@href', "ccbchurch")
+            self.addChmsInfo(currentChurch, response, 'subsplash', '//div/@data-type', 'subsplash_media')
 
+            self.addChmsInfo(currentChurch, response, 'gloo', '//script/text()', "gloo.us")
 
             self.saveChurches()
+
+        '''
 
         '''
         # crawl church center urls
