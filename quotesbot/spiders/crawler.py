@@ -107,7 +107,7 @@ class ChurchCrawler(scrapy.Spider):
 
         if link is not None:
 
-            if link == 'https://www.fs.church/':
+            if link == 'https://www.ststephensaurora.org/':
                 foundlink = True
 
             if foundlink:
@@ -219,7 +219,7 @@ class ChurchCrawler(scrapy.Spider):
     '''
     #crawl specific url
     startURLs = [
-        "https://www.thehillsdenver.com"
+        "https://www.springsjourney.com/"
         #"https://woodmenvalley.org"
         #"https://missionhills.org/"
         #"https://www.greeleymosaic.com/who-we-are"
@@ -1688,10 +1688,10 @@ class ChurchCrawler(scrapy.Spider):
 
             if "link" in church:
                 churchParse = urlparse(church["link"])
-                churchDomain = churchParse.netloc
+                churchDomain = churchParse.netloc.replace("www.", "")
 
                 urlParse = urlparse(url)
-                urlDomain = urlParse.netloc
+                urlDomain = urlParse.netloc.replace("www.", "")
 
                 if churchDomain == urlDomain:
                     currentChurch = church
@@ -2051,15 +2051,18 @@ class ChurchCrawler(scrapy.Spider):
         currentChurch, isHomePage = self.findCurrentChurch(response.url)
         if currentChurch != None and isHomePage == True:
             #self.addChurchSearchTerm(currentChurch, 'pushpay')
-            self.addChurchSearchTerm(currentChurch, 'tithe.ly')
-            self.addChurchSearchTerm(currentChurch, 'ccbchurch')
+            self.addChurchSearchTerm(currentChurch, 'onrealm.org')
+            #self.addChurchSearchTerm(currentChurch, 'tithe.ly')
+            #self.addChurchSearchTerm(currentChurch, 'ccbchurch')
         '''
 
+
         currentChurch, isHomePage = self.findCurrentChurch(response.url)
-        if currentChurch != None and isHomePage == True:
+        #if currentChurch != None and isHomePage == True:
+        if currentChurch != None:
             print("process url: ", response.url)
 
-            '''
+
             self.addChmsInfo(currentChurch, response, 'wordpress', '//style/@id', 'wp-block')
             self.addChmsInfo(currentChurch, response, 'wordpress', '//link/@id', 'wp-block')
             self.addChmsInfo(currentChurch, response, 'wordpress', '//link/@href', 'wp-content')
@@ -2090,14 +2093,19 @@ class ChurchCrawler(scrapy.Spider):
             self.addChmsInfo(currentChurch, response, 'faithdirect', '//a/@href', "faithdirect")
             self.addChmsInfo(currentChurch, response, 'ccbchurch', '//a/@href', "ccbchurch")
             self.addChmsInfo(currentChurch, response, 'subsplash', '//div/@data-type', 'subsplash_media')
-
+            self.addChmsInfo(currentChurch, response, 'onrealm', '//a/@href', "onrealm.org")
+            self.addChmsInfo(currentChurch, response, 'sharefaith', '//a/@href', "sharefaith")
+            self.addChmsInfo(currentChurch, response, 'easytithe', '//a/@href', "easytithe")
+            self.addChmsInfo(currentChurch, response, 'vancopayments', '//iframe/@src', "myvanco")
+            self.addChmsInfo(currentChurch, response, 'vancopayments', '//a/@href', "eservicepayments")
+            self.addChmsInfo(currentChurch, response, 'subsplash', '//iframe/@src', "subsplash")
             self.addChmsInfo(currentChurch, response, 'gloo', '//script/text()', "gloo.us")
-            '''
 
             self.addSchemaInfo(currentChurch, response)
 
             self.saveChurches()
-
+        else:
+            print("not a church url: ", response.url)
 
 
         '''
@@ -2198,61 +2206,29 @@ class ChurchCrawler(scrapy.Spider):
         #self.searchForGroups(response)
         '''
 
-        '''
-        links = response.xpath('//a/@href').extract()
-        for link in links:
 
-            if link.find("https:") == -1 or link.find(response.url) >= 0:
+        if isHomePage:
+            links = response.xpath('//a/@href').extract()
+            for link in links:
 
-                # Make sure the link is within the same domain to avoid crawling external sites
-                pageLink = link.replace(response.url, "")
-                count = pageLink.count("/")
-                if pageLink != "" and \
-                        pageLink != "/" and  \
-                        pageLink.startswith('/') and  \
-                        pageLink.find('?') == -1 and \
-                        count < 4:
+                #if link.find("https:") == -1 or link.find(response.url) >= 0:
+                if link.find(response.url) >= 0 or (link.find("https:") == -1 and link.find("http:") == -1):
 
-                    yield scrapy.Request(response.urljoin(pageLink), callback=self.parse)
+                    # Make sure the link is within the same domain to avoid crawling external sites
+                    pageLink = link.replace(response.url, "")
+                    count = pageLink.count("/")
 
-        '''
-        '''
-        lua_script_template = """
-                    function main(splash, args)  
+                    # pageLink.startswith('/') and  \
+                    if pageLink != "" and \
+                            pageLink != "/" and  \
+                            pageLink.find('?') == -1 and \
+                            pageLink.find('mailto:') == -1 and \
+                            pageLink.find('javascript:') == -1 and \
+                            pageLink.find('tel:') == -1 and \
+                            pageLink.startswith('#') == False and \
+                            count < 4:
 
-                        print("url: ", args.url)
+                        yield scrapy.Request(response.urljoin(pageLink), callback=self.parse)
 
-                        splash:on_request(function(request)
-                            print("request: ", request.url)
-
-                            if request.url ~= 'PAGE_URL' then
-                                local start, _ = request.url:find("%wixpress%")
-                                if start == nil then
-                                    start, _ = request.url:find("%jpg%")
-                                end
-                                if start == nil then
-                                    start, _ = request.url:find("%png%")
-                                end
-
-                                print("start", start)
-                                if start == nil then
-                                    print("pg: ", request.url)
-                                    request.abort()
-                                    return { status = 404, }
-                                end
-                            end
-
-
-                        end)
-
-                        print("go to url", args.url)
-                        splash:go(args.url)
-
-                        -- custom rendering script logic...
-
-                        return splash:html()
-                    end
-                    """
-        '''
 
 
