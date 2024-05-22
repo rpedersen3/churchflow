@@ -221,7 +221,7 @@ class ChurchCrawler(scrapy.Spider):
 
     #crawl specific url
     startURLs = [
-        "https://www.springsjourney.com/"
+        "https://www.thehillsdenver.com/"
         #"https://woodmenvalley.org"
         #"https://missionhills.org/"
         #"https://www.greeleymosaic.com/who-we-are"

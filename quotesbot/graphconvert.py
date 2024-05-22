@@ -45,28 +45,121 @@ class GraphConvert:
 
         n = URIRef("http://churchcore.io/frontrange#")
 
-        churchName = church["name"]
-        churchId = churchName.replace(" ", "").lower()
-        ch = n + churchId
+        glooOrgName = "gloo"
+        glooOrgId = glooOrgName.replace(" ", "").lower()
+        glooOrg = n + glooOrgId
 
-        churchPlaceName = church["name"] + " Place"
-        chPlaceId = n + churchPlaceName.replace(" ", "").lower()
+        g2.add((glooOrg, RDF.type, OWL.NamedIndividual))
+        g2.add((glooOrg, RDF.type, CC.MinistryOrganization))
+        g2.add((glooOrg, RC.name, Literal(glooOrgName)))
+
+        squarespaceBusinessSystemName = "squarespace"
+        squarespaceBusinessSystemId = squarespaceBusinessSystemName.replace(" ", "").lower()
+        squarespaceBusinessSystem = n + squarespaceBusinessSystemId
+
+        g2.add((squarespaceBusinessSystem, RDF.type, OWL.NamedIndividual))
+        g2.add((squarespaceBusinessSystem, RDF.type, RC.BusinessSystem))
+        g2.add((squarespaceBusinessSystem, RC.name, Literal(squarespaceBusinessSystemName)))
 
 
-        g2.add((chPlaceId, RDF.type, OWL.NamedIndividual))
-        g2.add((chPlaceId, RDF.type, CC.ChurchPlace))
-        g2.add((chPlaceId, RC.name, Literal(churchPlaceName)))
+        churchCenterBusinessSystemName = "churchcenter"
+        churchCenterBusinessSystemId = churchCenterBusinessSystemName.replace(" ", "").lower()
+        churchCenterBusinessSystem = n + churchCenterBusinessSystemId
 
-        g2.add((ch, RDF.type, OWL.NamedIndividual))
-        g2.add((ch, RDF.type, CC.ReligiousOrganization))
-        g2.add((ch, RC.name, Literal(churchName)))
-        g2.add((ch, RC.name, chPlaceId))
+        g2.add((churchCenterBusinessSystem, RDF.type, OWL.NamedIndividual))
+        g2.add((churchCenterBusinessSystem, RDF.type, RC.ChurchManagementSystem))
+        g2.add((churchCenterBusinessSystem, RC.name, Literal(churchCenterBusinessSystemName)))
 
-        ontology.add((URIRef(subject), URIRef(property), URIRef(object)))
+
+        churchOrgName = church["name"]
+        churchOrgId = churchOrgName.replace(" ", "").lower()
+        chOrg = n + churchOrgId
+
+        churchSiteName = church["name"] + " Site"
+        churchSiteId = n + churchSiteName.replace(" ", "").lower()
+        chSite = n + churchSiteId
+
+
+        g2.add((chSite, RDF.type, OWL.NamedIndividual))
+        g2.add((chSite, RDF.type, CC.ChurchSite))
+        g2.add((chSite, RC.name, Literal(churchSiteName)))
+
+        g2.add((chOrg, RDF.type, OWL.NamedIndividual))
+        g2.add((chOrg, RDF.type, CC.ChurchOrganization))
+        g2.add((chOrg, RC.name, Literal(churchOrgName)))
+        g2.add((chOrg, RC.hasSite, chSite))
+
+        if "chmss" in church:
+            for chms in church["chmss"]:
+                if chms["type"] == "gloo":
+                    # add gloo as a ministry partner
+                    g2.add((chOrg, RC.isPartnerOf, glooOrg))
+
+                if chms["type"] == "squarespace":
+                    # add business system
+                    g2.add((chOrg, RC.hasBusinessSystem, squarespaceBusinessSystem))
+
+                if chms["type"] == "churchcenter":
+                    # add business system
+                    g2.add((chOrg, RC.hasChurchManagementSystem, churchCenterBusinessSystem))
+
+        if "leadPastor" in church:
+            leadPastor = church["leadPastor"]
+            if "name" in leadPastor:
+                name = leadPastor["name"]
+
+                personName = name
+                personId = personName.replace(" ", "").lower()
+                person = n + personId
+
+                g2.add((person, RDF.type, OWL.NamedIndividual))
+                g2.add((person, RDF.type, RC.Person))
+                g2.add((person, RC.name, Literal(personName)))
+
+                g2.add((chOrg, RC.hasMember, person))
+
+
+                postName = churchOrgName + " Lead Pastor"
+                postId = postName.replace(" ", "").lower()
+                post = n + postId
+
+                g2.add((post, RDF.type, OWL.NamedIndividual))
+                g2.add((post, RDF.type, RC.Post))
+                g2.add((post, RC.name, Literal(postName)))
+                g2.add((post, RC.heldBy, person))
+
+                g2.add((chOrg, RC.hasPost, post))
+
+        if "contacts" in church:
+            contacts = church["contacts"]
+            for contact in contacts:
+                if "name" in contact:
+                    
+                    name = contact["name"]
+
+                    query = """select ?person where { ?person rc:name ?name . 
+                            FILTER(?name = \"""" + name + """\") }
+                            """
+                    results = g2.query(query)
+
+                    if len(results) == 0:
+                        personName = name
+                        personId = personName.replace(" ", "").lower()
+                        person = n + personId
+
+                        g2.add((person, RDF.type, OWL.NamedIndividual))
+                        g2.add((person, RDF.type, RC.Person))
+                        g2.add((person, RC.name, Literal(personName)))
+
+                        g2.add((chOrg, RC.hasMember, person))
+                    else:
+                        print("person already in knowledge base: ", name)
+
+
 
         print(g2.serialize(format="pretty-xml"))
 
-        print(f"Graph has {len(g)} triples.\n")
+        print(f"Graph has {len(g2)} triples.\n")
     def initKnowledgeBase(self):
 
         file = open("richcanvas1.1.0.ttl")
