@@ -2115,6 +2115,7 @@ class ChurchCrawler(scrapy.Spider):
             self.addChmsInfo(currentChurch, response, 'subsplash', '//meta/@content', "snappages")
             self.addChmsInfo(currentChurch, response, 'bboxdonation', '//div/@id', "bboxdonation")
             self.addChmsInfo(currentChurch, response, 'paypal', '//a/@href', "paypal")
+            self.addChmsInfo(currentChurch, response, 'paypal', '//form/@action', "paypal")
             self.addChmsInfo(currentChurch, response, 'gloo', '//script/text()', "gloo.us")
             self.addChmsInfo(currentChurch, response, 'clover', '//a/@href', "clovergive")
 
