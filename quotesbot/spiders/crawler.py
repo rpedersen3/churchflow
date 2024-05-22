@@ -13,6 +13,7 @@ from quotesbot.profilecheck import ProfileCheck
 from quotesbot.groupcheck import GroupCheck
 from quotesbot.churchfinder import ChurchFinder
 from quotesbot.photo import Photo
+from quotesbot.graphconvert import GraphConvert
 
 import json
 from urllib.parse import urlparse
@@ -47,6 +48,7 @@ from azure.identity import DefaultAzureCredential
 import google.generativeai as genai
 
 import locationtagger
+
 
 nlp = spacy.load("en_core_web_sm")
 pd.set_option("display.max_rows", 200)
@@ -216,7 +218,7 @@ class ChurchCrawler(scrapy.Spider):
 
     '''
 
-    '''
+
     #crawl specific url
     startURLs = [
         "https://www.springsjourney.com/"
@@ -300,7 +302,7 @@ class ChurchCrawler(scrapy.Spider):
         #"https://christianservices.org/",
         #"https://christianservices.org/contact-us/"
     ]
-    '''
+
 
 
     def checkCommonDiv(self, el1, el2):
@@ -1914,6 +1916,15 @@ class ChurchCrawler(scrapy.Spider):
 
         #print("body: ", response.body)
 
+        currentChurch, isHomePage = self.findCurrentChurch(response.url)
+        if currentChurch is not None and isHomePage:
+
+            converter = GraphConvert()
+            converter.addChurch(currentChurch)
+
+
+
+
 
         '''
         # extract contacts from staff web pages
@@ -2057,6 +2068,7 @@ class ChurchCrawler(scrapy.Spider):
         '''
 
 
+        '''
         currentChurch, isHomePage = self.findCurrentChurch(response.url)
         #if currentChurch != None and isHomePage == True:
         if currentChurch != None:
@@ -2097,9 +2109,14 @@ class ChurchCrawler(scrapy.Spider):
             self.addChmsInfo(currentChurch, response, 'sharefaith', '//a/@href', "sharefaith")
             self.addChmsInfo(currentChurch, response, 'easytithe', '//a/@href', "easytithe")
             self.addChmsInfo(currentChurch, response, 'vancopayments', '//iframe/@src', "myvanco")
+            self.addChmsInfo(currentChurch, response, 'vancopayments', '//a/@href', "myvanco")
             self.addChmsInfo(currentChurch, response, 'vancopayments', '//a/@href', "eservicepayments")
             self.addChmsInfo(currentChurch, response, 'subsplash', '//iframe/@src', "subsplash")
+            self.addChmsInfo(currentChurch, response, 'subsplash', '//meta/@content', "snappages")
+            self.addChmsInfo(currentChurch, response, 'bboxdonation', '//div/@id', "bboxdonation")
+            self.addChmsInfo(currentChurch, response, 'paypal', '//a/@href', "paypal")
             self.addChmsInfo(currentChurch, response, 'gloo', '//script/text()', "gloo.us")
+            self.addChmsInfo(currentChurch, response, 'clover', '//a/@href', "clovergive")
 
             self.addSchemaInfo(currentChurch, response)
 
@@ -2107,6 +2124,7 @@ class ChurchCrawler(scrapy.Spider):
         else:
             print("not a church url: ", response.url)
 
+        '''
 
         '''
         # crawl church center urls
@@ -2206,7 +2224,7 @@ class ChurchCrawler(scrapy.Spider):
         #self.searchForGroups(response)
         '''
 
-
+        '''
         if isHomePage:
             links = response.xpath('//a/@href').extract()
             for link in links:
@@ -2230,5 +2248,5 @@ class ChurchCrawler(scrapy.Spider):
 
                         yield scrapy.Request(response.urljoin(pageLink), callback=self.parse)
 
-
+        '''
 
