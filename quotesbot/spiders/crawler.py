@@ -95,9 +95,15 @@ class ChurchCrawler(scrapy.Spider):
 
     startURLs = []
 
+    converter = GraphConvert()
+    g2 = converter.setupRDFFile()
+
     i = 0
     foundlink = True
     for church in churches:
+
+        print("...... church: ", church["name"])
+        converter.addChurch(church, g2)
 
         #if "pages" not in church:
         link = None
@@ -123,9 +129,10 @@ class ChurchCrawler(scrapy.Spider):
                     startURLs.append(link)
 
         i = i + 1
-        if i > 50000:
+        if i > 1000000:
             break
 
+    converter.saveRDFFile(g2)
 
     '''
     #crawl church center sites
@@ -221,6 +228,7 @@ class ChurchCrawler(scrapy.Spider):
 
     #crawl specific url
     startURLs = [
+        #"https://calvarybible.com"
         "https://www.thehillsdenver.com/"
         #"https://woodmenvalley.org"
         #"https://missionhills.org/"
@@ -1915,12 +1923,6 @@ class ChurchCrawler(scrapy.Spider):
         #churchFinder.findChurches()
 
         #print("body: ", response.body)
-
-        currentChurch, isHomePage = self.findCurrentChurch(response.url)
-        if currentChurch is not None and isHomePage:
-
-            converter = GraphConvert()
-            converter.addChurch(currentChurch)
 
 
 
