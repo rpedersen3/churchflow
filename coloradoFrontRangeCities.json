@@ -29,7 +29,9 @@
             "malePercentage": 50.10486577181208,
             "femalePercentage": 49.89513422818792,
             "crawled": "2024-04-06 15:56:12.221406",
-            "crawled-city": "Woodmoor"
+            "crawled-city": "Woodmoor",
+            "countyName": "El Paso",
+            "numberOfChurches": 0
         },
         {
             "name": "Woodland Park",
@@ -62,7 +64,9 @@
             "malePercentage": 49.06565656565657,
             "femalePercentage": 50.93434343434343,
             "crawled": "2024-04-06 15:56:13.541719",
-            "crawled-city": "Woodland Park"
+            "crawled-city": "Woodland Park",
+            "countyName": "Teller",
+            "numberOfChurches": 32
         },
         {
             "name": "Windsor",
@@ -95,7 +99,9 @@
             "malePercentage": 49.21750825284265,
             "femalePercentage": 50.78249174715735,
             "crawled": "2024-04-06 15:56:14.872637",
-            "crawled-city": "Windsor"
+            "crawled-city": "Windsor",
+            "countyName": "Weld",
+            "numberOfChurches": 36
         },
         {
             "name": "Williamsburg",
@@ -115,7 +121,9 @@
             "asianPercent": 0.7,
             "hispanicPercent": 9.7,
             "crawled": "2024-04-06 15:56:16.614501",
-            "crawled-city": "Williamsburg"
+            "crawled-city": "Williamsburg",
+            "countyName": "Fremont",
+            "numberOfChurches": 4
         },
         {
             "name": "Wheat Ridge",
@@ -148,7 +156,9 @@
             "malePercentage": 48.77461571701957,
             "femalePercentage": 51.22538428298043,
             "crawled": "2024-04-06 15:56:17.023841",
-            "crawled-city": "Wheat Ridge"
+            "crawled-city": "Wheat Ridge",
+            "countyName": "Jefferson",
+            "numberOfChurches": 30
         },
         {
             "name": "Westminster",
@@ -181,7 +191,9 @@
             "malePercentage": 49.7734638960771,
             "femalePercentage": 50.2265361039229,
             "crawled": "2024-04-06 15:56:17.880914",
-            "crawled-city": "Westminster"
+            "crawled-city": "Westminster",
+            "countyName": "Adams",
+            "numberOfChurches": 60
         },
         {
             "name": "Westcreek",
@@ -201,7 +213,9 @@
             "asianPercent": 4.2,
             "hispanicPercent": 6.7,
             "crawled": "2024-04-06 15:56:20.063192",
-            "crawled-city": "Westcreek"
+            "crawled-city": "Westcreek",
+            "countyName": "Douglas",
+            "numberOfChurches": 0
         },
         {
             "name": "West Pleasant View",
@@ -221,7 +235,9 @@
             "asianPercent": 2.7,
             "hispanicPercent": 14.8,
             "crawled": "2024-04-06 15:56:21.111972",
-            "crawled-city": "West Pleasant View"
+            "crawled-city": "West Pleasant View",
+            "countyName": "Jefferson",
+            "numberOfChurches": 1
         },
         {
             "name": "Welby",
@@ -241,7 +257,9 @@
             "asianPercent": 2.0,
             "hispanicPercent": 59.4,
             "crawled": "2024-04-06 15:56:21.486213",
-            "crawled-city": "Welby"
+            "crawled-city": "Welby",
+            "countyName": "Adams",
+            "numberOfChurches": 0
         },
         {
             "name": "Watkins",
@@ -261,7 +279,9 @@
             "asianPercent": 0.3,
             "hispanicPercent": 16.9,
             "crawled": "2024-04-06 15:57:26.692247",
-            "crawled-city": "Watkins"
+            "crawled-city": "Watkins",
+            "countyName": "Arapahoe",
+            "numberOfChurches": 2
         },
         {
             "name": "Victor",
@@ -281,7 +301,9 @@
             "asianPercent": 0.3,
             "hispanicPercent": 2.4,
             "crawled": "2024-04-06 15:57:27.593566",
-            "crawled-city": "Victor"
+            "crawled-city": "Victor",
+            "countyName": "Teller",
+            "numberOfChurches": 2
         },
         {
             "name": "Valmont",
@@ -301,7 +323,9 @@
             "asianPercent": 3.1,
             "hispanicPercent": 4.7,
             "crawled": "2024-04-06 15:57:28.602228",
-            "crawled-city": "Valmont"
+            "crawled-city": "Valmont",
+            "countyName": "Boulder",
+            "numberOfChurches": 0
         },
         {
             "name": "Upper Witter Gulch",
@@ -321,7 +345,9 @@
             "asianPercent": 1.1,
             "hispanicPercent": 6.8,
             "crawled": "2024-04-06 15:57:29.014562",
-            "crawled-city": "Upper Witter Gulch"
+            "crawled-city": "Upper Witter Gulch",
+            "countyName": "Clear Creek",
+            "numberOfChurches": 0
         },
         {
             "name": "Upper Bear Creek",
@@ -341,7 +367,9 @@
             "asianPercent": 0.2,
             "hispanicPercent": 5.1,
             "crawled": "2024-04-06 15:57:29.378600",
-            "crawled-city": "Upper Bear Creek"
+            "crawled-city": "Upper Bear Creek",
+            "countyName": "Clear Creek",
+            "numberOfChurches": 1
         },
         {
             "name": "Twin Lakes",
@@ -372,7 +400,9 @@
             "malePercentage": 51.470588235294116,
             "femalePercentage": 48.529411764705884,
             "crawled": "2024-04-06 15:57:29.815316",
-            "crawled-city": "Twin Lakes"
+            "crawled-city": "Twin Lakes",
+            "countyName": "Adams",
+            "numberOfChurches": 1
         },
         {
             "name": "Todd Creek",
@@ -392,7 +422,9 @@
             "asianPercent": 3.0,
             "hispanicPercent": 15.5,
             "crawled": "2024-04-06 15:57:30.550638",
-            "crawled-city": "Todd Creek"
+            "crawled-city": "Todd Creek",
+            "countyName": "Adams",
+            "numberOfChurches": 0
         },
         {
             "name": "Timnath",
@@ -424,7 +456,9 @@
             "malePercentage": 49.77647602898104,
             "femalePercentage": 50.22352397101896,
             "crawled": "2024-04-06 15:57:31.049270",
-            "crawled-city": "Timnath"
+            "crawled-city": "Timnath",
+            "countyName": "Larimer",
+            "numberOfChurches": 2
         },
         {
             "name": "Thornton",
@@ -457,7 +491,9 @@
             "malePercentage": 49.65495851748469,
             "femalePercentage": 50.34504148251531,
             "crawled": "2024-04-06 15:57:31.871291",
-            "crawled-city": "Thornton"
+            "crawled-city": "Thornton",
+            "countyName": "Adams",
+            "numberOfChurches": 55
         },
         {
             "name": "The Pinery",
@@ -477,7 +513,9 @@
             "asianPercent": 1.8,
             "hispanicPercent": 7.3,
             "crawled": "2024-04-06 15:59:38.873983",
-            "crawled-city": "The Pinery"
+            "crawled-city": "The Pinery",
+            "countyName": "Douglas",
+            "numberOfChurches": 1
         },
         {
             "name": "Tall Timber",
@@ -497,7 +535,9 @@
             "asianPercent": 1.6,
             "hispanicPercent": 3.2,
             "crawled": "2024-04-06 15:59:41.516716",
-            "crawled-city": "Tall Timber"
+            "crawled-city": "Tall Timber",
+            "countyName": "Boulder",
+            "numberOfChurches": 0
         },
         {
             "name": "Superior",
@@ -517,7 +557,9 @@
             "asianPercent": 13.7,
             "hispanicPercent": 8.1,
             "crawled": "2024-04-06 15:59:43.846328",
-            "crawled-city": "Superior"
+            "crawled-city": "Superior",
+            "countyName": "Boulder",
+            "numberOfChurches": 1
         },
         {
             "name": "Sunshine",
@@ -537,7 +579,9 @@
             "asianPercent": 1.0,
             "hispanicPercent": 1.0,
             "crawled": "2024-04-06 15:59:44.265205",
-            "crawled-city": "Sunshine"
+            "crawled-city": "Sunshine",
+            "countyName": "Boulder",
+            "numberOfChurches": 0
         },
         {
             "name": "Sugarloaf",
@@ -557,7 +601,9 @@
             "asianPercent": 0.7,
             "hispanicPercent": 3.3,
             "crawled": "2024-04-06 15:59:46.408879",
-            "crawled-city": "Sugarloaf"
+            "crawled-city": "Sugarloaf",
+            "countyName": "Boulder",
+            "numberOfChurches": 0
         },
         {
             "name": "Stratmoor",
@@ -578,7 +624,9 @@
             "asianPercent": 2.4,
             "hispanicPercent": 32.0,
             "crawled": "2024-04-06 15:59:47.288032",
-            "crawled-city": "Stratmoor"
+            "crawled-city": "Stratmoor",
+            "countyName": "El Paso",
+            "numberOfChurches": 0
         },
         {
             "name": "Stonegate",
@@ -598,7 +646,9 @@
             "asianPercent": 4.6,
             "hispanicPercent": 8.9,
             "crawled": "2024-04-06 15:59:48.065062",
-            "crawled-city": "Stonegate"
+            "crawled-city": "Stonegate",
+            "countyName": "Douglas",
+            "numberOfChurches": 0
         },
         {
             "name": "Sterling Ranch",
@@ -618,7 +668,9 @@
             "asianPercent": 5.6,
             "hispanicPercent": 10.3,
             "crawled": "2024-04-06 15:59:50.772390",
-            "crawled-city": "Sterling Ranch"
+            "crawled-city": "Sterling Ranch",
+            "countyName": "Douglas",
+            "numberOfChurches": 0
         },
         {
             "name": "Stepping Stone",
@@ -638,7 +690,9 @@
             "asianPercent": 20.7,
             "hispanicPercent": 6.3,
             "crawled": "2024-04-06 15:59:51.222237",
-            "crawled-city": "Stepping Stone"
+            "crawled-city": "Stepping Stone",
+            "countyName": "Douglas",
+            "numberOfChurches": 0
         },
         {
             "name": "St. Ann Highlands",
@@ -658,7 +712,9 @@
             "asianPercent": 1.2,
             "hispanicPercent": 3.1,
             "crawled": "2024-04-06 16:00:36.992433",
-            "crawled-city": "St. Ann Highlands"
+            "crawled-city": "St. Ann Highlands",
+            "countyName": "Boulder",
+            "numberOfChurches": 0
         },
         {
             "name": "Sierra Ridge",
@@ -678,7 +734,9 @@
             "asianPercent": 27.5,
             "hispanicPercent": 9.8,
             "crawled": "2024-04-06 16:00:37.553661",
-            "crawled-city": "Sierra Ridge"
+            "crawled-city": "Sierra Ridge",
+            "countyName": "Douglas",
+            "numberOfChurches": 0
         },
         {
             "name": "Sherrelwood",
@@ -709,7 +767,9 @@
             "malePercentage": 51.20657374661951,
             "femalePercentage": 48.79342625338049,
             "crawled": "2024-04-06 16:00:38.040735",
-            "crawled-city": "Sherrelwood"
+            "crawled-city": "Sherrelwood",
+            "countyName": "Adams",
+            "numberOfChurches": 0
         },
         {
             "name": "Sheridan",
@@ -742,7 +802,9 @@
             "malePercentage": 58.18181818181818,
             "femalePercentage": 41.81818181818182,
             "crawled": "2024-04-06 16:00:38.448354",
-            "crawled-city": "Sheridan"
+            "crawled-city": "Sheridan",
+            "countyName": "Arapahoe",
+            "numberOfChurches": 3
         },
         {
             "name": "Shaw Heights",
@@ -762,7 +824,9 @@
             "asianPercent": 5.7,
             "hispanicPercent": 39.5,
             "crawled": "2024-04-06 16:00:38.863906",
-            "crawled-city": "Shaw Heights"
+            "crawled-city": "Shaw Heights",
+            "countyName": "Adams",
+            "numberOfChurches": 0
         },
         {
             "name": "Severance",
@@ -782,7 +846,9 @@
             "asianPercent": 1.0,
             "hispanicPercent": 14.1,
             "crawled": "2024-04-06 16:00:39.245606",
-            "crawled-city": "Severance"
+            "crawled-city": "Severance",
+            "countyName": "Weld",
+            "numberOfChurches": 1
         },
         {
             "name": "Seven Hills",
@@ -802,7 +868,9 @@
             "asianPercent": 2.3,
             "hispanicPercent": 1.6,
             "crawled": "2024-04-06 16:00:39.685208",
-            "crawled-city": "Seven Hills"
+            "crawled-city": "Seven Hills",
+            "countyName": "Boulder",
+            "numberOfChurches": 1
         },
         {
             "name": "Sedalia",
@@ -822,7 +890,9 @@
             "asianPercent": 0.0,
             "hispanicPercent": 11.9,
             "crawled": "2024-04-06 16:00:40.110685",
-            "crawled-city": "Sedalia"
+            "crawled-city": "Sedalia",
+            "countyName": "Douglas",
+            "numberOfChurches": 6
         },
         {
             "name": "Security-Widefield",
@@ -842,7 +912,9 @@
             "asianPercent": 2.9,
             "hispanicPercent": 21.1,
             "crawled": "2024-04-06 16:00:40.470196",
-            "crawled-city": "Security-Widefield"
+            "crawled-city": "Security-Widefield",
+            "countyName": "El Paso",
+            "numberOfChurches": 0
         },
         {
             "name": "Salt Creek",
@@ -863,7 +935,9 @@
             "asianPercent": 0.2,
             "hispanicPercent": 80.9,
             "crawled": "2024-04-06 16:01:28.756810",
-            "crawled-city": "Salt Creek"
+            "crawled-city": "Salt Creek",
+            "countyName": "Pueblo",
+            "numberOfChurches": 1
         },
         {
             "name": "Roxborough Park",
@@ -883,7 +957,9 @@
             "asianPercent": 2.1,
             "hispanicPercent": 9.7,
             "crawled": "2024-04-06 16:01:29.541920",
-            "crawled-city": "Roxborough Park"
+            "crawled-city": "Roxborough Park",
+            "countyName": "Douglas",
+            "numberOfChurches": 1
         },
         {
             "name": "Rockvale",
@@ -903,7 +979,9 @@
             "asianPercent": 0.2,
             "hispanicPercent": 10.8,
             "crawled": "2024-04-06 16:01:30.365133",
-            "crawled-city": "Rockvale"
+            "crawled-city": "Rockvale",
+            "countyName": "Fremont",
+            "numberOfChurches": 1
         },
         {
             "name": "Rock Creek Park",
@@ -924,7 +1002,9 @@
             "asianPercent": 1.5,
             "hispanicPercent": 8.8,
             "crawled": "2024-04-06 16:01:30.779201",
-            "crawled-city": "Rock Creek Park"
+            "crawled-city": "Rock Creek Park",
+            "countyName": "El Paso",
+            "numberOfChurches": 0
         },
         {
             "name": "Pueblo West",
@@ -944,7 +1024,9 @@
             "asianPercent": 1.3,
             "hispanicPercent": 25.4,
             "crawled": "2024-04-06 16:01:31.272707",
-            "crawled-city": "Pueblo West"
+            "crawled-city": "Pueblo West",
+            "countyName": "Pueblo",
+            "numberOfChurches": 19
         },
         {
             "name": "Pueblo",
@@ -977,7 +1059,9 @@
             "malePercentage": 48.89699309950302,
             "femalePercentage": 51.10300690049698,
             "crawled": "2024-04-06 16:01:32.300565",
-            "crawled-city": "Pueblo"
+            "crawled-city": "Pueblo",
+            "countyName": "Pueblo",
+            "numberOfChurches": 69
         },
         {
             "name": "Ponderosa Park",
@@ -997,7 +1081,9 @@
             "asianPercent": 0.8,
             "hispanicPercent": 7.4,
             "crawled": "2024-04-06 16:01:33.266574",
-            "crawled-city": "Ponderosa Park"
+            "crawled-city": "Ponderosa Park",
+            "countyName": "Elbert",
+            "numberOfChurches": 0
         },
         {
             "name": "Platteville",
@@ -1018,7 +1104,9 @@
             "asianPercent": 0.6,
             "hispanicPercent": 43.3,
             "crawled": "2024-04-06 16:01:34.685943",
-            "crawled-city": "Platteville"
+            "crawled-city": "Platteville",
+            "countyName": "Weld",
+            "numberOfChurches": 6
         },
         {
             "name": "Pine Valley",
@@ -1038,7 +1126,9 @@
             "asianPercent": 0.6,
             "hispanicPercent": 2.2,
             "crawled": "2024-04-06 16:01:35.073676",
-            "crawled-city": "Pine Valley"
+            "crawled-city": "Pine Valley",
+            "countyName": "Clear Creek",
+            "numberOfChurches": 0
         },
         {
             "name": "Pine Brook Hill",
@@ -1058,7 +1148,9 @@
             "asianPercent": 1.7,
             "hispanicPercent": 4.5,
             "crawled": "2024-04-06 16:01:35.491004",
-            "crawled-city": "Pine Brook Hill"
+            "crawled-city": "Pine Brook Hill",
+            "countyName": "Boulder",
+            "numberOfChurches": 1
         },
         {
             "name": "Pierce",
@@ -1079,7 +1171,9 @@
             "asianPercent": 0.5,
             "hispanicPercent": 25.6,
             "crawled": "2024-04-06 16:01:36.105060",
-            "crawled-city": "Pierce"
+            "crawled-city": "Pierce",
+            "countyName": "Weld",
+            "numberOfChurches": 2
         },
         {
             "name": "Perry Park",
@@ -1100,7 +1194,9 @@
             "asianPercent": 1.2,
             "hispanicPercent": 5.5,
             "crawled": "2024-04-06 16:01:36.601666",
-            "crawled-city": "Perry Park"
+            "crawled-city": "Perry Park",
+            "countyName": "Douglas",
+            "numberOfChurches": 0
         },
         {
             "name": "Penrose",
@@ -1121,7 +1217,9 @@
             "asianPercent": 0.8,
             "hispanicPercent": 9.5,
             "crawled": "2024-04-06 16:01:37.195630",
-            "crawled-city": "Penrose"
+            "crawled-city": "Penrose",
+            "countyName": "Fremont",
+            "numberOfChurches": 6
         },
         {
             "name": "Parker",
@@ -1154,7 +1252,9 @@
             "malePercentage": 49.63597210828548,
             "femalePercentage": 50.36402789171452,
             "crawled": "2024-04-06 16:01:37.616062",
-            "crawled-city": "Parker"
+            "crawled-city": "Parker",
+            "countyName": "Douglas",
+            "numberOfChurches": 64
         },
         {
             "name": "Park Center",
@@ -1174,7 +1274,9 @@
             "asianPercent": 0.2,
             "hispanicPercent": 11.0,
             "crawled": "2024-04-06 16:01:39.583170",
-            "crawled-city": "Park Center"
+            "crawled-city": "Park Center",
+            "countyName": "Fremont",
+            "numberOfChurches": 0
         },
         {
             "name": "Paragon Estates",
@@ -1194,7 +1296,9 @@
             "asianPercent": 2.7,
             "hispanicPercent": 6.2,
             "crawled": "2024-04-06 16:01:40.436029",
-            "crawled-city": "Paragon Estates"
+            "crawled-city": "Paragon Estates",
+            "countyName": "Boulder",
+            "numberOfChurches": 0
         },
         {
             "name": "Palmer Lake",
@@ -1214,7 +1318,9 @@
             "asianPercent": 1.0,
             "hispanicPercent": 9.1,
             "crawled": "2024-04-06 16:01:40.812911",
-            "crawled-city": "Palmer Lake"
+            "crawled-city": "Palmer Lake",
+            "countyName": "El Paso",
+            "numberOfChurches": 6
         },
         {
             "name": "Northglenn",
@@ -1247,7 +1353,9 @@
             "malePercentage": 50.20586924025071,
             "femalePercentage": 49.79413075974929,
             "crawled": "2024-04-06 16:01:41.201488",
-            "crawled-city": "Northglenn"
+            "crawled-city": "Northglenn",
+            "countyName": "Adams",
+            "numberOfChurches": 31
         },
         {
             "name": "North Washington",
@@ -1267,7 +1375,9 @@
             "asianPercent": 1.9,
             "hispanicPercent": 55.4,
             "crawled": "2024-04-06 16:01:41.596045",
-            "crawled-city": "North Washington"
+            "crawled-city": "North Washington",
+            "countyName": "Adams",
+            "numberOfChurches": 0
         },
         {
             "name": "Niwot",
@@ -1287,7 +1397,9 @@
             "asianPercent": 4.2,
             "hispanicPercent": 5.1,
             "crawled": "2024-04-06 16:01:42.991323",
-            "crawled-city": "Niwot"
+            "crawled-city": "Niwot",
+            "countyName": "Boulder",
+            "numberOfChurches": 4
         },
         {
             "name": "Mountain View",
@@ -1307,7 +1419,9 @@
             "asianPercent": 2.0,
             "hispanicPercent": 25.0,
             "crawled": "2024-04-06 16:01:43.483683",
-            "crawled-city": "Mountain View"
+            "crawled-city": "Mountain View",
+            "countyName": "Jefferson",
+            "numberOfChurches": 0
         },
         {
             "name": "Mountain Meadows",
@@ -1327,7 +1441,9 @@
             "asianPercent": 0.8,
             "hispanicPercent": 5.5,
             "crawled": "2024-04-06 16:01:45.966780",
-            "crawled-city": "Mountain Meadows"
+            "crawled-city": "Mountain Meadows",
+            "countyName": "Boulder",
+            "numberOfChurches": 0
         },
         {
             "name": "Morrison",
@@ -1347,7 +1463,9 @@
             "asianPercent": 0.8,
             "hispanicPercent": 6.6,
             "crawled": "2024-04-06 16:01:46.517916",
-            "crawled-city": "Morrison"
+            "crawled-city": "Morrison",
+            "countyName": "Jefferson",
+            "numberOfChurches": 6
         },
         {
             "name": "Monument",
@@ -1368,7 +1486,9 @@
             "asianPercent": 2.4,
             "hispanicPercent": 9.0,
             "crawled": "2024-04-06 16:01:46.963098",
-            "crawled-city": "Monument"
+            "crawled-city": "Monument",
+            "countyName": "El Paso",
+            "numberOfChurches": 32
         },
         {
             "name": "Milliken",
@@ -1389,7 +1509,9 @@
             "asianPercent": 0.5,
             "hispanicPercent": 27.5,
             "crawled": "2024-04-06 16:01:48.505699",
-            "crawled-city": "Milliken"
+            "crawled-city": "Milliken",
+            "countyName": "Weld",
+            "numberOfChurches": 8
         },
         {
             "name": "Midland",
@@ -1409,7 +1531,9 @@
             "asianPercent": 0.0,
             "hispanicPercent": 8.8,
             "crawled": "2024-04-06 16:01:49.210152",
-            "crawled-city": "Midland"
+            "crawled-city": "Midland",
+            "countyName": "Teller",
+            "numberOfChurches": 5
         },
         {
             "name": "Meridian Village",
@@ -1429,7 +1553,9 @@
             "asianPercent": 16.4,
             "hispanicPercent": 7.1,
             "crawled": "2024-04-06 16:01:50.663960",
-            "crawled-city": "Meridian Village"
+            "crawled-city": "Meridian Village",
+            "countyName": "Douglas",
+            "numberOfChurches": 0
         },
         {
             "name": "Meridian",
@@ -1449,7 +1575,9 @@
             "asianPercent": 17.4,
             "hispanicPercent": 11.2,
             "crawled": "2024-04-06 16:01:51.166962",
-            "crawled-city": "Meridian"
+            "crawled-city": "Meridian",
+            "countyName": "Douglas",
+            "numberOfChurches": 1
         },
         {
             "name": "Mead",
@@ -1469,7 +1597,9 @@
             "asianPercent": 1.2,
             "hispanicPercent": 13.1,
             "crawled": "2024-04-06 16:01:51.658680",
-            "crawled-city": "Mead"
+            "crawled-city": "Mead",
+            "countyName": "Weld",
+            "numberOfChurches": 6
         },
         {
             "name": "Manitou Springs",
@@ -1489,7 +1619,9 @@
             "asianPercent": 1.1,
             "hispanicPercent": 6.9,
             "crawled": "2024-04-06 16:01:52.158785",
-            "crawled-city": "Manitou Springs"
+            "crawled-city": "Manitou Springs",
+            "countyName": "El Paso",
+            "numberOfChurches": 11
         },
         {
             "name": "Lyons",
@@ -1509,7 +1641,9 @@
             "asianPercent": 1.0,
             "hispanicPercent": 5.3,
             "crawled": "2024-04-06 16:01:52.584941",
-            "crawled-city": "Lyons"
+            "crawled-city": "Lyons",
+            "countyName": "Boulder",
+            "numberOfChurches": 8
         },
         {
             "name": "Loveland",
@@ -1541,7 +1675,9 @@
             "malePercentage": 48.554557595119014,
             "femalePercentage": 51.445442404880986,
             "crawled": "2024-04-06 16:01:53.006421",
-            "crawled-city": "Loveland"
+            "crawled-city": "Loveland",
+            "countyName": "Larimer",
+            "numberOfChurches": 65
         },
         {
             "name": "Louviers",
@@ -1561,7 +1697,9 @@
             "asianPercent": 1.4,
             "hispanicPercent": 8.9,
             "crawled": "2024-04-06 16:01:55.148549",
-            "crawled-city": "Louviers"
+            "crawled-city": "Louviers",
+            "countyName": "Douglas",
+            "numberOfChurches": 3
         },
         {
             "name": "Louisville",
@@ -1593,7 +1731,9 @@
             "malePercentage": 48.94469047394705,
             "femalePercentage": 51.05530952605295,
             "crawled": "2024-04-06 16:01:55.611754",
-            "crawled-city": "Louisville"
+            "crawled-city": "Louisville",
+            "countyName": "Boulder",
+            "numberOfChurches": 15
         },
         {
             "name": "Longmont",
@@ -1625,7 +1765,9 @@
             "malePercentage": 49.60711938109926,
             "femalePercentage": 50.39288061890074,
             "crawled": "2024-04-06 16:01:56.689642",
-            "crawled-city": "Longmont"
+            "crawled-city": "Longmont",
+            "countyName": "Boulder",
+            "numberOfChurches": 61
         },
         {
             "name": "Lone Tree",
@@ -1657,7 +1799,9 @@
             "malePercentage": 49.36504595523749,
             "femalePercentage": 50.63495404476251,
             "crawled": "2024-04-06 16:01:57.747400",
-            "crawled-city": "Lone Tree"
+            "crawled-city": "Lone Tree",
+            "countyName": "Douglas",
+            "numberOfChurches": 11
         },
         {
             "name": "Lochbuie",
@@ -1677,7 +1821,9 @@
             "asianPercent": 1.4,
             "hispanicPercent": 45.5,
             "crawled": "2024-04-06 16:01:58.888401",
-            "crawled-city": "Lochbuie"
+            "crawled-city": "Lochbuie",
+            "countyName": "Weld",
+            "numberOfChurches": 1
         },
         {
             "name": "Littleton",
@@ -1709,7 +1855,9 @@
             "malePercentage": 48.38561289757294,
             "femalePercentage": 51.61438710242706,
             "crawled": "2024-04-06 16:01:59.548457",
-            "crawled-city": "Littleton"
+            "crawled-city": "Littleton",
+            "countyName": "Arapahoe",
+            "numberOfChurches": 116
         },
         {
             "name": "Lincoln Park",
@@ -1729,7 +1877,9 @@
             "asianPercent": 0.3,
             "hispanicPercent": 7.9,
             "crawled": "2024-04-06 16:02:01.666740",
-            "crawled-city": "Lincoln Park"
+            "crawled-city": "Lincoln Park",
+            "countyName": "Fremont",
+            "numberOfChurches": 0
         },
         {
             "name": "Leyner",
@@ -1749,7 +1899,9 @@
             "asianPercent": 5.0,
             "hispanicPercent": 10.0,
             "crawled": "2024-04-06 16:02:02.138728",
-            "crawled-city": "Leyner"
+            "crawled-city": "Leyner",
+            "countyName": "Boulder",
+            "numberOfChurches": 0
         },
         {
             "name": "Lazy Acres",
@@ -1769,7 +1921,9 @@
             "asianPercent": 0.6,
             "hispanicPercent": 3.3,
             "crawled": "2024-04-06 16:02:02.457542",
-            "crawled-city": "Lazy Acres"
+            "crawled-city": "Lazy Acres",
+            "countyName": "Boulder",
+            "numberOfChurches": 1
         },
         {
             "name": "Larkspur",
@@ -1789,7 +1943,9 @@
             "asianPercent": 0.0,
             "hispanicPercent": 12.1,
             "crawled": "2024-04-06 16:02:02.865413",
-            "crawled-city": "Larkspur"
+            "crawled-city": "Larkspur",
+            "countyName": "Douglas",
+            "numberOfChurches": 7
         },
         {
             "name": "Laporte",
@@ -1809,7 +1965,9 @@
             "asianPercent": 0.8,
             "hispanicPercent": 10.1,
             "crawled": "2024-04-06 16:02:03.656927",
-            "crawled-city": "Laporte"
+            "crawled-city": "Laporte",
+            "countyName": "Larimer",
+            "numberOfChurches": 3
         },
         {
             "name": "Lakewood",
@@ -1841,7 +1999,9 @@
             "malePercentage": 49.51084726638629,
             "femalePercentage": 50.48915273361371,
             "crawled": "2024-04-06 16:02:04.018894",
-            "crawled-city": "Lakewood"
+            "crawled-city": "Lakewood",
+            "countyName": "Jefferson",
+            "numberOfChurches": 57
         },
         {
             "name": "Lakeside",
@@ -1861,7 +2021,9 @@
             "asianPercent": 6.3,
             "hispanicPercent": 18.8,
             "crawled": "2024-04-06 16:02:05.027591",
-            "crawled-city": "Lakeside"
+            "crawled-city": "Lakeside",
+            "countyName": "Jefferson",
+            "numberOfChurches": 3
         },
         {
             "name": "Lafayette",
@@ -1893,7 +2055,9 @@
             "malePercentage": 49.06448324619381,
             "femalePercentage": 50.93551675380619,
             "crawled": "2024-04-06 16:02:06.523534",
-            "crawled-city": "Lafayette"
+            "crawled-city": "Lafayette",
+            "countyName": "Boulder",
+            "numberOfChurches": 40
         },
         {
             "name": "La Salle",
@@ -1913,7 +2077,9 @@
             "asianPercent": 0.3,
             "hispanicPercent": 36.6,
             "crawled": "2024-04-06 16:02:07.555505",
-            "crawled-city": "La Salle"
+            "crawled-city": "La Salle",
+            "countyName": "Weld",
+            "numberOfChurches": 4
         },
         {
             "name": "Kittredge",
@@ -1933,7 +2099,9 @@
             "asianPercent": 0.4,
             "hispanicPercent": 4.8,
             "crawled": "2024-04-06 16:02:09.589482",
-            "crawled-city": "Kittredge"
+            "crawled-city": "Kittredge",
+            "countyName": "Jefferson",
+            "numberOfChurches": 0
         },
         {
             "name": "Kersey",
@@ -1953,7 +2121,9 @@
             "asianPercent": 0.1,
             "hispanicPercent": 30.6,
             "crawled": "2024-04-06 16:02:09.984088",
-            "crawled-city": "Kersey"
+            "crawled-city": "Kersey",
+            "countyName": "Weld",
+            "numberOfChurches": 1
         },
         {
             "name": "Ken Caryl",
@@ -1984,7 +2154,9 @@
             "malePercentage": 49.22658306468309,
             "femalePercentage": 50.77341693531691,
             "crawled": "2024-04-06 16:02:10.403872",
-            "crawled-city": "Ken Caryl"
+            "crawled-city": "Ken Caryl",
+            "countyName": "Jefferson",
+            "numberOfChurches": 0
         },
         {
             "name": "Keenesburg",
@@ -2004,7 +2176,9 @@
             "asianPercent": 0.1,
             "hispanicPercent": 13.2,
             "crawled": "2024-04-06 16:02:10.816699",
-            "crawled-city": "Keenesburg"
+            "crawled-city": "Keenesburg",
+            "countyName": "Weld",
+            "numberOfChurches": 7
         },
         {
             "name": "Johnstown",
@@ -2036,7 +2210,9 @@
             "malePercentage": 50.32653297116107,
             "femalePercentage": 49.67346702883893,
             "crawled": "2024-04-06 16:02:11.214525",
-            "crawled-city": "Johnstown"
+            "crawled-city": "Johnstown",
+            "countyName": "Weld",
+            "numberOfChurches": 13
         },
         {
             "name": "Jamestown",
@@ -2056,7 +2232,9 @@
             "asianPercent": 0.0,
             "hispanicPercent": 2.0,
             "crawled": "2024-04-06 16:02:12.158819",
-            "crawled-city": "Jamestown"
+            "crawled-city": "Jamestown",
+            "countyName": "Boulder",
+            "numberOfChurches": 2
         },
         {
             "name": "Inverness",
@@ -2076,7 +2254,9 @@
             "asianPercent": 14.2,
             "hispanicPercent": 11.7,
             "crawled": "2024-04-06 16:02:13.186819",
-            "crawled-city": "Inverness"
+            "crawled-city": "Inverness",
+            "countyName": "Arapahoe",
+            "numberOfChurches": 2
         },
         {
             "name": "Indian Hills",
@@ -2096,7 +2276,9 @@
             "asianPercent": 1.1,
             "hispanicPercent": 5.0,
             "crawled": "2024-04-06 16:02:14.002452",
-            "crawled-city": "Indian Hills"
+            "crawled-city": "Indian Hills",
+            "countyName": "Jefferson",
+            "numberOfChurches": 2
         },
         {
             "name": "Idledale",
@@ -2116,7 +2298,9 @@
             "asianPercent": 0.4,
             "hispanicPercent": 4.5,
             "crawled": "2024-04-06 16:02:14.486201",
-            "crawled-city": "Idledale"
+            "crawled-city": "Idledale",
+            "countyName": "Jefferson",
+            "numberOfChurches": 1
         },
         {
             "name": "Hudson",
@@ -2136,7 +2320,9 @@
             "asianPercent": 0.6,
             "hispanicPercent": 33.3,
             "crawled": "2024-04-06 16:02:14.922323",
-            "crawled-city": "Hudson"
+            "crawled-city": "Hudson",
+            "countyName": "Weld",
+            "numberOfChurches": 5
         },
         {
             "name": "Holly Hills",
@@ -2156,7 +2342,9 @@
             "asianPercent": 3.7,
             "hispanicPercent": 8.2,
             "crawled": "2024-04-06 16:02:15.456783",
-            "crawled-city": "Holly Hills"
+            "crawled-city": "Holly Hills",
+            "countyName": "Arapahoe",
+            "numberOfChurches": 0
         },
         {
             "name": "Highlands Ranch",
@@ -2187,7 +2375,9 @@
             "malePercentage": 48.99365840454739,
             "femalePercentage": 51.00634159545261,
             "crawled": "2024-04-06 16:02:18.412183",
-            "crawled-city": "Highlands Ranch"
+            "crawled-city": "Highlands Ranch",
+            "countyName": "Douglas",
+            "numberOfChurches": 25
         },
         {
             "name": "Hidden Lake",
@@ -2207,7 +2397,9 @@
             "asianPercent": 0.0,
             "hispanicPercent": 8.3,
             "crawled": "2024-04-06 16:02:19.324111",
-            "crawled-city": "Hidden Lake"
+            "crawled-city": "Hidden Lake",
+            "countyName": "Boulder",
+            "numberOfChurches": 0
         },
         {
             "name": "Gunbarrel",
@@ -2227,7 +2419,9 @@
             "asianPercent": 3.3,
             "hispanicPercent": 6.1,
             "crawled": "2024-04-06 16:02:19.784586",
-            "crawled-city": "Gunbarrel"
+            "crawled-city": "Gunbarrel",
+            "countyName": "Boulder",
+            "numberOfChurches": 0
         },
         {
             "name": "Greenwood Village",
@@ -2259,7 +2453,9 @@
             "malePercentage": 49.42960933018928,
             "femalePercentage": 50.57039066981072,
             "crawled": "2024-04-06 16:02:20.643065",
-            "crawled-city": "Greenwood Village"
+            "crawled-city": "Greenwood Village",
+            "countyName": "Arapahoe",
+            "numberOfChurches": 11
         },
         {
             "name": "Green Mountain Falls",
@@ -2279,7 +2475,9 @@
             "asianPercent": 1.5,
             "hispanicPercent": 5.0,
             "crawled": "2024-04-06 16:02:21.157757",
-            "crawled-city": "Green Mountain Falls"
+            "crawled-city": "Green Mountain Falls",
+            "countyName": "El Paso",
+            "numberOfChurches": 4
         },
         {
             "name": "Greeley",
@@ -2311,7 +2509,9 @@
             "malePercentage": 49.49492164161956,
             "femalePercentage": 50.50507835838044,
             "crawled": "2024-04-06 16:02:21.658430",
-            "crawled-city": "Greeley"
+            "crawled-city": "Greeley",
+            "countyName": "Weld",
+            "numberOfChurches": 68
         },
         {
             "name": "Grand View Estates",
@@ -2331,7 +2531,9 @@
             "asianPercent": 1.3,
             "hispanicPercent": 9.3,
             "crawled": "2024-04-06 16:02:23.825422",
-            "crawled-city": "Grand View Estates"
+            "crawled-city": "Grand View Estates",
+            "countyName": "Douglas",
+            "numberOfChurches": 0
         },
         {
             "name": "Goldfield",
@@ -2351,7 +2553,9 @@
             "asianPercent": 0.0,
             "hispanicPercent": 11.1,
             "crawled": "2024-04-06 16:02:25.221957",
-            "crawled-city": "Goldfield"
+            "crawled-city": "Goldfield",
+            "countyName": "Teller",
+            "numberOfChurches": 1
         },
         {
             "name": "Golden",
@@ -2383,7 +2587,9 @@
             "malePercentage": 53.94382077552821,
             "femalePercentage": 46.05617922447179,
             "crawled": "2024-04-06 16:02:26.080137",
-            "crawled-city": "Golden"
+            "crawled-city": "Golden",
+            "countyName": "Jefferson",
+            "numberOfChurches": 36
         },
         {
             "name": "Gold Hill",
@@ -2415,7 +2621,9 @@
             "malePercentage": 61.92660550458716,
             "femalePercentage": 38.07339449541284,
             "crawled": "2024-04-06 16:02:26.907484",
-            "crawled-city": "Gold Hill"
+            "crawled-city": "Gold Hill",
+            "countyName": "Boulder",
+            "numberOfChurches": 0
         },
         {
             "name": "Gleneagle",
@@ -2435,7 +2643,9 @@
             "asianPercent": 3.9,
             "hispanicPercent": 8.1,
             "crawled": "2024-04-06 16:02:27.922776",
-            "crawled-city": "Gleneagle"
+            "crawled-city": "Gleneagle",
+            "countyName": "El Paso",
+            "numberOfChurches": 0
         },
         {
             "name": "Glendale",
@@ -2455,7 +2665,9 @@
             "asianPercent": 0.0,
             "hispanicPercent": 4.7,
             "crawled": "2024-04-06 16:02:30.629740",
-            "crawled-city": "Glendale"
+            "crawled-city": "Glendale",
+            "countyName": "Arapahoe",
+            "numberOfChurches": 3
         },
         {
             "name": "Gilcrest",
@@ -2475,7 +2687,9 @@
             "asianPercent": 0.5,
             "hispanicPercent": 52.4,
             "crawled": "2024-04-06 16:02:33.387072",
-            "crawled-city": "Gilcrest"
+            "crawled-city": "Gilcrest",
+            "countyName": "Weld",
+            "numberOfChurches": 2
         },
         {
             "name": "Genesee",
@@ -2495,7 +2709,9 @@
             "asianPercent": 2.7,
             "hispanicPercent": 4.3,
             "crawled": "2024-04-06 16:02:33.865119",
-            "crawled-city": "Genesee"
+            "crawled-city": "Genesee",
+            "countyName": "Jefferson",
+            "numberOfChurches": 0
         },
         {
             "name": "Garden City",
@@ -2515,7 +2731,9 @@
             "asianPercent": 0.8,
             "hispanicPercent": 71.7,
             "crawled": "2024-04-06 16:02:34.379620",
-            "crawled-city": "Garden City"
+            "crawled-city": "Garden City",
+            "countyName": "Weld",
+            "numberOfChurches": 0
         },
         {
             "name": "Frederick",
@@ -2535,7 +2753,9 @@
             "asianPercent": 3.5,
             "hispanicPercent": 16.4,
             "crawled": "2024-04-06 16:02:34.761807",
-            "crawled-city": "Frederick"
+            "crawled-city": "Frederick",
+            "countyName": "Weld",
+            "numberOfChurches": 10
         },
         {
             "name": "Franktown",
@@ -2555,7 +2775,9 @@
             "asianPercent": 1.2,
             "hispanicPercent": 6.6,
             "crawled": "2024-04-06 16:02:35.268367",
-            "crawled-city": "Franktown"
+            "crawled-city": "Franktown",
+            "countyName": "Douglas",
+            "numberOfChurches": 12
         },
         {
             "name": "Foxfield",
@@ -2575,7 +2797,9 @@
             "asianPercent": 8.8,
             "hispanicPercent": 7.2,
             "crawled": "2024-04-06 16:02:37.188359",
-            "crawled-city": "Foxfield"
+            "crawled-city": "Foxfield",
+            "countyName": "Arapahoe",
+            "numberOfChurches": 1
         },
         {
             "name": "Four Square Mile",
@@ -2605,7 +2829,9 @@
             "malePercentage": 49.44036376355369,
             "femalePercentage": 50.55963623644631,
             "crawled": "2024-04-06 16:02:38.876502",
-            "crawled-city": "Four Square Mile"
+            "crawled-city": "Four Square Mile",
+            "countyName": "Arapahoe",
+            "numberOfChurches": 0
         },
         {
             "name": "Fountain",
@@ -2637,7 +2863,9 @@
             "malePercentage": 50.07717602845447,
             "femalePercentage": 49.92282397154553,
             "crawled": "2024-04-06 16:02:39.370582",
-            "crawled-city": "Fountain"
+            "crawled-city": "Fountain",
+            "countyName": "El Paso",
+            "numberOfChurches": 21
         },
         {
             "name": "Fort Lupton",
@@ -2669,7 +2897,9 @@
             "malePercentage": 49.7171590194846,
             "femalePercentage": 50.2828409805154,
             "crawled": "2024-04-06 16:02:40.727705",
-            "crawled-city": "Fort Lupton"
+            "crawled-city": "Fort Lupton",
+            "countyName": "Weld",
+            "numberOfChurches": 14
         },
         {
             "name": "Fort Collins",
@@ -2701,7 +2931,9 @@
             "malePercentage": 49.59484129321006,
             "femalePercentage": 50.40515870678994,
             "crawled": "2024-04-06 16:02:41.216969",
-            "crawled-city": "Fort Collins"
+            "crawled-city": "Fort Collins",
+            "countyName": "Larimer",
+            "numberOfChurches": 41
         },
         {
             "name": "Fort Carson",
@@ -2732,7 +2964,9 @@
             "malePercentage": 65.26875035324704,
             "femalePercentage": 34.73124964675296,
             "crawled": "2024-04-06 16:02:42.271611",
-            "crawled-city": "Fort Carson"
+            "crawled-city": "Fort Carson",
+            "countyName": "El Paso",
+            "numberOfChurches": 6
         },
         {
             "name": "Floyd Hill",
@@ -2752,7 +2986,9 @@
             "asianPercent": 1.7,
             "hispanicPercent": 6.2,
             "crawled": "2024-04-06 16:02:42.717348",
-            "crawled-city": "Floyd Hill"
+            "crawled-city": "Floyd Hill",
+            "countyName": "Clear Creek",
+            "numberOfChurches": 0
         },
         {
             "name": "Florissant",
@@ -2772,7 +3008,9 @@
             "asianPercent": 2.3,
             "hispanicPercent": 6.3,
             "crawled": "2024-04-06 16:02:43.170790",
-            "crawled-city": "Florissant"
+            "crawled-city": "Florissant",
+            "countyName": "Teller",
+            "numberOfChurches": 8
         },
         {
             "name": "Florence",
@@ -2792,7 +3030,9 @@
             "asianPercent": 0.6,
             "hispanicPercent": 13.9,
             "crawled": "2024-04-06 16:02:44.910911",
-            "crawled-city": "Florence"
+            "crawled-city": "Florence",
+            "countyName": "Fremont",
+            "numberOfChurches": 25
         },
         {
             "name": "Firestone",
@@ -2824,7 +3064,9 @@
             "malePercentage": 50.05799401745925,
             "femalePercentage": 49.94200598254075,
             "crawled": "2024-04-06 16:02:45.330647",
-            "crawled-city": "Firestone"
+            "crawled-city": "Firestone",
+            "countyName": "Weld",
+            "numberOfChurches": 2
         },
         {
             "name": "Federal Heights",
@@ -2856,7 +3098,9 @@
             "malePercentage": 50.792657488527325,
             "femalePercentage": 49.207342511472675,
             "crawled": "2024-04-06 16:02:45.706543",
-            "crawled-city": "Federal Heights"
+            "crawled-city": "Federal Heights",
+            "countyName": "Adams",
+            "numberOfChurches": 3
         },
         {
             "name": "Fairmount",
@@ -2876,7 +3120,9 @@
             "asianPercent": 2.3,
             "hispanicPercent": 6.8,
             "crawled": "2024-04-06 16:02:46.138446",
-            "crawled-city": "Fairmount"
+            "crawled-city": "Fairmount",
+            "countyName": "Jefferson",
+            "numberOfChurches": 0
         },
         {
             "name": "Evergreen",
@@ -2907,7 +3153,9 @@
             "malePercentage": 49.54335446438165,
             "femalePercentage": 50.45664553561835,
             "crawled": "2024-04-06 16:02:46.491433",
-            "crawled-city": "Evergreen"
+            "crawled-city": "Evergreen",
+            "countyName": "Jefferson",
+            "numberOfChurches": 27
         },
         {
             "name": "Evans",
@@ -2927,7 +3175,9 @@
             "asianPercent": 2.2,
             "hispanicPercent": 46.5,
             "crawled": "2024-04-06 16:02:47.578202",
-            "crawled-city": "Evans"
+            "crawled-city": "Evans",
+            "countyName": "Weld",
+            "numberOfChurches": 9
         },
         {
             "name": "Erie",
@@ -2960,7 +3210,9 @@
             "malePercentage": 49.53059458019842,
             "femalePercentage": 50.46940541980158,
             "crawled": "2024-04-06 16:02:48.108415",
-            "crawled-city": "Erie"
+            "crawled-city": "Erie",
+            "countyName": "Weld",
+            "numberOfChurches": 30
         },
         {
             "name": "Englewood",
@@ -2992,7 +3244,9 @@
             "malePercentage": 50.880893668855286,
             "femalePercentage": 49.119106331144714,
             "crawled": "2024-04-06 16:02:49.360425",
-            "crawled-city": "Englewood"
+            "crawled-city": "Englewood",
+            "countyName": "Arapahoe",
+            "numberOfChurches": 37
         },
         {
             "name": "Elizabeth",
@@ -3012,7 +3266,9 @@
             "asianPercent": 0.6,
             "hispanicPercent": 11.0,
             "crawled": "2024-04-06 16:02:50.363849",
-            "crawled-city": "Elizabeth"
+            "crawled-city": "Elizabeth",
+            "countyName": "Elbert",
+            "numberOfChurches": 21
         },
         {
             "name": "Eldorado Springs",
@@ -3032,7 +3288,9 @@
             "asianPercent": 2.1,
             "hispanicPercent": 8.4,
             "crawled": "2024-04-06 16:02:51.944915",
-            "crawled-city": "Eldorado Springs"
+            "crawled-city": "Eldorado Springs",
+            "countyName": "Boulder",
+            "numberOfChurches": 1
         },
         {
             "name": "Elbert",
@@ -3064,7 +3322,9 @@
             "malePercentage": 59.57446808510638,
             "femalePercentage": 40.42553191489362,
             "crawled": "2024-04-06 16:02:52.909706",
-            "crawled-city": "Elbert"
+            "crawled-city": "Elbert",
+            "countyName": "Elbert",
+            "numberOfChurches": 4
         },
         {
             "name": "Edgewater",
@@ -3084,7 +3344,9 @@
             "asianPercent": 1.8,
             "hispanicPercent": 35.2,
             "crawled": "2024-04-06 16:02:53.262972",
-            "crawled-city": "Edgewater"
+            "crawled-city": "Edgewater",
+            "countyName": "Jefferson",
+            "numberOfChurches": 7
         },
         {
             "name": "Echo Hills",
@@ -3104,7 +3366,9 @@
             "asianPercent": 1.9,
             "hispanicPercent": 4.2,
             "crawled": "2024-04-06 16:02:53.741390",
-            "crawled-city": "Echo Hills"
+            "crawled-city": "Echo Hills",
+            "countyName": "Clear Creek",
+            "numberOfChurches": 0
         },
         {
             "name": "Eaton",
@@ -3124,7 +3388,9 @@
             "asianPercent": 1.1,
             "hispanicPercent": 16.6,
             "crawled": "2024-04-06 16:02:54.269199",
-            "crawled-city": "Eaton"
+            "crawled-city": "Eaton",
+            "countyName": "Weld",
+            "numberOfChurches": 18
         },
         {
             "name": "East Pleasant View",
@@ -3144,7 +3410,9 @@
             "asianPercent": 1.8,
             "hispanicPercent": 7.8,
             "crawled": "2024-04-06 16:02:55.173680",
-            "crawled-city": "East Pleasant View"
+            "crawled-city": "East Pleasant View",
+            "countyName": "Jefferson",
+            "numberOfChurches": 1
         },
         {
             "name": "Dove Valley",
@@ -3175,7 +3443,9 @@
             "malePercentage": 49.184397163120565,
             "femalePercentage": 50.815602836879435,
             "crawled": "2024-04-06 16:02:55.690326",
-            "crawled-city": "Dove Valley"
+            "crawled-city": "Dove Valley",
+            "countyName": "Arapahoe",
+            "numberOfChurches": 1
         },
         {
             "name": "Divide",
@@ -3195,7 +3465,9 @@
             "asianPercent": 2.1,
             "hispanicPercent": 4.2,
             "crawled": "2024-04-06 16:05:49.905934",
-            "crawled-city": "Divide"
+            "crawled-city": "Divide",
+            "countyName": "Teller",
+            "numberOfChurches": 10
         },
         {
             "name": "Derby",
@@ -3215,7 +3487,9 @@
             "asianPercent": 0.6,
             "hispanicPercent": 72.0,
             "crawled": "2024-04-06 16:08:00.196786",
-            "crawled-city": "Derby"
+            "crawled-city": "Derby",
+            "countyName": "Adams",
+            "numberOfChurches": 0
         },
         {
             "name": "Denver",
@@ -3235,7 +3509,9 @@
             "asianPercent": 3.9,
             "hispanicPercent": 27.9,
             "crawled": "2024-04-07 06:01:24.269126",
-            "crawled-city": "Denver"
+            "crawled-city": "Denver",
+            "countyName": "Denver",
+            "numberOfChurches": 323
         },
         {
             "name": "Dakota Ridge",
@@ -3266,7 +3542,9 @@
             "malePercentage": 49.784609937448366,
             "femalePercentage": 50.215390062551634,
             "crawled": "2024-04-07 06:01:32.519370",
-            "crawled-city": "Dakota Ridge"
+            "crawled-city": "Dakota Ridge",
+            "countyName": "Jefferson",
+            "numberOfChurches": 0
         },
         {
             "name": "Dacono",
@@ -3286,7 +3564,9 @@
             "asianPercent": 2.9,
             "hispanicPercent": 34.7,
             "crawled": "2024-04-07 06:01:37.983147",
-            "crawled-city": "Dacono"
+            "crawled-city": "Dacono",
+            "countyName": "Weld",
+            "numberOfChurches": 6
         },
         {
             "name": "Crisman",
@@ -3306,7 +3586,9 @@
             "asianPercent": 3.9,
             "hispanicPercent": 5.0,
             "crawled": "2024-04-07 06:01:43.273744",
-            "crawled-city": "Crisman"
+            "crawled-city": "Crisman",
+            "countyName": "Boulder",
+            "numberOfChurches": 0
         },
         {
             "name": "Cripple Creek",
@@ -3326,7 +3608,9 @@
             "asianPercent": 0.8,
             "hispanicPercent": 7.5,
             "crawled": "2024-04-07 06:01:48.698412",
-            "crawled-city": "Cripple Creek"
+            "crawled-city": "Cripple Creek",
+            "countyName": "Teller",
+            "numberOfChurches": 7
         },
         {
             "name": "Commerce City",
@@ -3358,7 +3642,9 @@
             "malePercentage": 50.58476721458553,
             "femalePercentage": 49.41523278541447,
             "crawled": "2024-04-07 06:01:54.697378",
-            "crawled-city": "Commerce City"
+            "crawled-city": "Commerce City",
+            "countyName": "Adams",
+            "numberOfChurches": 27
         },
         {
             "name": "Columbine Valley",
@@ -3389,7 +3675,9 @@
             "malePercentage": 49.93342210386152,
             "femalePercentage": 50.06657789613848,
             "crawled": "2024-04-07 06:02:00.737658",
-            "crawled-city": "Columbine Valley"
+            "crawled-city": "Columbine Valley",
+            "countyName": "Arapahoe",
+            "numberOfChurches": 0
         },
         {
             "name": "Columbine",
@@ -3420,7 +3708,9 @@
             "malePercentage": 49.09825993895913,
             "femalePercentage": 50.90174006104087,
             "crawled": "2024-04-07 06:02:06.479973",
-            "crawled-city": "Columbine"
+            "crawled-city": "Columbine",
+            "countyName": "Jefferson",
+            "numberOfChurches": 0
         },
         {
             "name": "Colorado Springs",
@@ -3452,7 +3742,9 @@
             "malePercentage": 49.42594490991959,
             "femalePercentage": 50.57405509008041,
             "crawled": "2024-04-07 06:02:12.404087",
-            "crawled-city": "Colorado Springs"
+            "crawled-city": "Colorado Springs",
+            "countyName": "El Paso",
+            "numberOfChurches": 173
         },
         {
             "name": "Coal Creek",
@@ -3472,7 +3764,9 @@
             "asianPercent": 0.3,
             "hispanicPercent": 5.5,
             "crawled": "2024-04-07 06:02:20.643135",
-            "crawled-city": "Coal Creek"
+            "crawled-city": "Coal Creek",
+            "countyName": "Jefferson",
+            "numberOfChurches": 0
         },
         {
             "name": "Cimarron Hills",
@@ -3492,7 +3786,9 @@
             "asianPercent": 3.3,
             "hispanicPercent": 23.4,
             "crawled": "2024-04-07 06:02:26.083178",
-            "crawled-city": "Cimarron Hills"
+            "crawled-city": "Cimarron Hills",
+            "countyName": "El Paso",
+            "numberOfChurches": 0
         },
         {
             "name": "Cherry Hills Village",
@@ -3523,7 +3819,9 @@
             "malePercentage": 50.1086619062403,
             "femalePercentage": 49.8913380937597,
             "crawled": "2024-04-07 06:02:31.553348",
-            "crawled-city": "Cherry Hills Village"
+            "crawled-city": "Cherry Hills Village",
+            "countyName": "Arapahoe",
+            "numberOfChurches": 6
         },
         {
             "name": "Cherry Creek",
@@ -3554,7 +3852,9 @@
             "malePercentage": 49.80849582172702,
             "femalePercentage": 50.19150417827298,
             "crawled": "2024-04-07 06:02:37.086841",
-            "crawled-city": "Cherry Creek"
+            "crawled-city": "Cherry Creek",
+            "countyName": "Arapahoe",
+            "numberOfChurches": 0
         },
         {
             "name": "Centennial",
@@ -3586,7 +3886,9 @@
             "malePercentage": 49.715914331568555,
             "femalePercentage": 50.284085668431445,
             "crawled": "2024-04-07 06:02:42.560879",
-            "crawled-city": "Centennial"
+            "crawled-city": "Centennial",
+            "countyName": "Arapahoe",
+            "numberOfChurches": 58
         },
         {
             "name": "Canon City",
@@ -3595,7 +3897,9 @@
             "lon": -105.2203,
             "population": 17157,
             "crawled": "2024-04-07 06:02:49.582141",
-            "crawled-city": "Canon City"
+            "crawled-city": "Canon City",
+            "countyName": "Fremont",
+            "numberOfChurches": 0
         },
         {
             "name": "Castle Rock",
@@ -3627,7 +3931,9 @@
             "malePercentage": 49.94532381967796,
             "femalePercentage": 50.05467618032204,
             "crawled": "2024-04-07 06:02:55.109635",
-            "crawled-city": "Castle Rock"
+            "crawled-city": "Castle Rock",
+            "countyName": "Douglas",
+            "numberOfChurches": 49
         },
         {
             "name": "Castle Pines Village",
@@ -3647,7 +3953,9 @@
             "asianPercent": 2.3,
             "hispanicPercent": 4.5,
             "crawled": "2024-04-07 06:03:02.070829",
-            "crawled-city": "Castle Pines Village"
+            "crawled-city": "Castle Pines Village",
+            "countyName": "Douglas",
+            "numberOfChurches": 0
         },
         {
             "name": "Castle Pines",
@@ -3679,7 +3987,9 @@
             "malePercentage": 49.356650960492935,
             "femalePercentage": 50.643349039507065,
             "crawled": "2024-04-07 06:03:07.597693",
-            "crawled-city": "Castle Pines"
+            "crawled-city": "Castle Pines",
+            "countyName": "Douglas",
+            "numberOfChurches": 2
         },
         {
             "name": "Cascade-Chipita Park",
@@ -3699,7 +4009,9 @@
             "asianPercent": 0.7,
             "hispanicPercent": 5.7,
             "crawled": "2024-04-07 06:03:13.633809",
-            "crawled-city": "Cascade-Chipita Park"
+            "crawled-city": "Cascade-Chipita Park",
+            "countyName": "El Paso",
+            "numberOfChurches": 1
         },
         {
             "name": "Broomfield",
@@ -3731,7 +4043,9 @@
             "malePercentage": 49.92983592400691,
             "femalePercentage": 50.07016407599309,
             "crawled": "2024-04-07 06:03:19.682433",
-            "crawled-city": "Broomfield"
+            "crawled-city": "Broomfield",
+            "countyName": "Broomfield",
+            "numberOfChurches": 40
         },
         {
             "name": "Brookside",
@@ -3751,7 +4065,9 @@
             "asianPercent": 0.0,
             "hispanicPercent": 7.6,
             "crawled": "2024-04-07 06:03:25.504642",
-            "crawled-city": "Brookside"
+            "crawled-city": "Brookside",
+            "countyName": "Fremont",
+            "numberOfChurches": 0
         },
         {
             "name": "Brook Forest",
@@ -3771,7 +4087,9 @@
             "asianPercent": 0.6,
             "hispanicPercent": 2.7,
             "crawled": "2024-04-07 06:03:30.923576",
-            "crawled-city": "Brook Forest"
+            "crawled-city": "Brook Forest",
+            "countyName": "Jefferson",
+            "numberOfChurches": 0
         },
         {
             "name": "Brighton",
@@ -3803,7 +4121,9 @@
             "malePercentage": 50.22827632662226,
             "femalePercentage": 49.77172367337774,
             "crawled": "2024-04-07 06:03:36.322968",
-            "crawled-city": "Brighton"
+            "crawled-city": "Brighton",
+            "countyName": "Adams",
+            "numberOfChurches": 33
         },
         {
             "name": "Bow Mar",
@@ -3823,7 +4143,9 @@
             "asianPercent": 2.9,
             "hispanicPercent": 5.6,
             "crawled": "2024-04-07 06:03:42.328027",
-            "crawled-city": "Bow Mar"
+            "crawled-city": "Bow Mar",
+            "countyName": "Arapahoe",
+            "numberOfChurches": 0
         },
         {
             "name": "Boulder",
@@ -3855,7 +4177,9 @@
             "malePercentage": 51.71547344110854,
             "femalePercentage": 48.28452655889146,
             "crawled": "2024-04-07 06:03:47.747990",
-            "crawled-city": "Boulder"
+            "crawled-city": "Boulder",
+            "countyName": "Boulder",
+            "numberOfChurches": 108
         },
         {
             "name": "Bonanza Mountain Estates",
@@ -3875,7 +4199,9 @@
             "asianPercent": 1.6,
             "hispanicPercent": 6.3,
             "crawled": "2024-04-07 06:03:53.792561",
-            "crawled-city": "Bonanza Mountain Estates"
+            "crawled-city": "Bonanza Mountain Estates",
+            "countyName": "Boulder",
+            "numberOfChurches": 0
         },
         {
             "name": "Blue Valley",
@@ -3895,7 +4221,9 @@
             "asianPercent": 1.7,
             "hispanicPercent": 3.5,
             "crawled": "2024-04-07 06:03:59.166425",
-            "crawled-city": "Blue Valley"
+            "crawled-city": "Blue Valley",
+            "countyName": "Clear Creek",
+            "numberOfChurches": 0
         },
         {
             "name": "Blende",
@@ -3915,7 +4243,9 @@
             "asianPercent": 0.1,
             "hispanicPercent": 48.2,
             "crawled": "2024-04-07 06:04:05.187891",
-            "crawled-city": "Blende"
+            "crawled-city": "Blende",
+            "countyName": "Pueblo",
+            "numberOfChurches": 0
         },
         {
             "name": "Black Hawk",
@@ -3935,7 +4265,9 @@
             "asianPercent": 1.6,
             "hispanicPercent": 15.7,
             "crawled": "2024-04-07 06:04:11.185426",
-            "crawled-city": "Black Hawk"
+            "crawled-city": "Black Hawk",
+            "countyName": "Gilpin",
+            "numberOfChurches": 7
         },
         {
             "name": "Black Forest",
@@ -3966,7 +4298,9 @@
             "malePercentage": 50.26826521825528,
             "femalePercentage": 49.73173478174472,
             "crawled": "2024-04-07 06:04:16.679934",
-            "crawled-city": "Black Forest"
+            "crawled-city": "Black Forest",
+            "countyName": "El Paso",
+            "numberOfChurches": 1
         },
         {
             "name": "Berthoud",
@@ -3998,7 +4332,9 @@
             "malePercentage": 48.97406116918312,
             "femalePercentage": 51.02593883081688,
             "crawled": "2024-04-07 06:04:22.191927",
-            "crawled-city": "Berthoud"
+            "crawled-city": "Berthoud",
+            "countyName": "Larimer",
+            "numberOfChurches": 11
         },
         {
             "name": "Berkley",
@@ -4029,7 +4365,9 @@
             "malePercentage": 52.21761327377154,
             "femalePercentage": 47.78238672622846,
             "crawled": "2024-04-07 06:04:27.988019",
-            "crawled-city": "Berkley"
+            "crawled-city": "Berkley",
+            "countyName": "Adams",
+            "numberOfChurches": 0
         },
         {
             "name": "Bark Ranch",
@@ -4049,7 +4387,9 @@
             "asianPercent": 1.0,
             "hispanicPercent": 2.5,
             "crawled": "2024-04-07 06:04:33.823287",
-            "crawled-city": "Bark Ranch"
+            "crawled-city": "Bark Ranch",
+            "countyName": "Boulder",
+            "numberOfChurches": 1
         },
         {
             "name": "Aurora",
@@ -4081,7 +4421,9 @@
             "malePercentage": 49.884663478839435,
             "femalePercentage": 50.115336521160565,
             "crawled": "2024-04-07 06:04:39.313667",
-            "crawled-city": "Aurora"
+            "crawled-city": "Aurora",
+            "countyName": "Arapahoe",
+            "numberOfChurches": 117
         },
         {
             "name": "Ault",
@@ -4101,7 +4443,9 @@
             "asianPercent": 0.3,
             "hispanicPercent": 26.9,
             "crawled": "2024-04-07 06:04:45.190160",
-            "crawled-city": "Ault"
+            "crawled-city": "Ault",
+            "countyName": "Weld",
+            "numberOfChurches": 7
         },
         {
             "name": "Aspen Park",
@@ -4121,7 +4465,9 @@
             "asianPercent": 0.5,
             "hispanicPercent": 7.8,
             "crawled": "2024-04-07 06:04:50.595948",
-            "crawled-city": "Aspen Park"
+            "crawled-city": "Aspen Park",
+            "countyName": "Jefferson",
+            "numberOfChurches": 0
         },
         {
             "name": "Arvada",
@@ -4153,7 +4499,9 @@
             "malePercentage": 49.269304352020065,
             "femalePercentage": 50.730695647979935,
             "crawled": "2024-04-07 06:04:56.049739",
-            "crawled-city": "Arvada"
+            "crawled-city": "Arvada",
+            "countyName": "Jefferson",
+            "numberOfChurches": 75
         },
         {
             "name": "Aristocrat Ranchettes",
@@ -4173,7 +4521,9 @@
             "asianPercent": 0.3,
             "hispanicPercent": 59.0,
             "crawled": "2024-04-07 06:05:03.520381",
-            "crawled-city": "Aristocrat Ranchettes"
+            "crawled-city": "Aristocrat Ranchettes",
+            "countyName": "Weld",
+            "numberOfChurches": 0
         },
         {
             "name": "Applewood",
@@ -4193,7 +4543,9 @@
             "asianPercent": 1.9,
             "hispanicPercent": 8.2,
             "crawled": "2024-04-07 06:05:08.948474",
-            "crawled-city": "Applewood"
+            "crawled-city": "Applewood",
+            "countyName": "Jefferson",
+            "numberOfChurches": 0
         },
         {
             "name": "Altona",
@@ -4213,7 +4565,9 @@
             "asianPercent": 2.9,
             "hispanicPercent": 3.7,
             "crawled": "2024-04-07 06:05:14.453112",
-            "crawled-city": "Altona"
+            "crawled-city": "Altona",
+            "countyName": "Boulder",
+            "numberOfChurches": 1
         },
         {
             "name": "Air Force Academy",
@@ -4245,7 +4599,9 @@
             "malePercentage": 65.8141646489104,
             "femalePercentage": 34.185835351089594,
             "crawled": "2024-04-07 06:05:21.730007",
-            "crawled-city": "Air Force Academy"
+            "crawled-city": "Air Force Academy",
+            "countyName": "El Paso",
+            "numberOfChurches": 1
         },
         {
             "name": "Aetna Estates",
@@ -4265,7 +4621,9 @@
             "asianPercent": 0.1,
             "hispanicPercent": 76.7,
             "crawled": "2024-04-07 06:05:27.233018",
-            "crawled-city": "Aetna Estates"
+            "crawled-city": "Aetna Estates",
+            "countyName": "Arapahoe",
+            "numberOfChurches": 0
         },
         {
             "name": "Acres Green",
@@ -4285,7 +4643,9 @@
             "asianPercent": 2.7,
             "hispanicPercent": 14.2,
             "crawled": "2024-04-07 06:05:32.705465",
-            "crawled-city": "Acres Green"
+            "crawled-city": "Acres Green",
+            "countyName": "Douglas",
+            "numberOfChurches": 0
         }
     ]
 }

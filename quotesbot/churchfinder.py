@@ -201,7 +201,76 @@ class ChurchFinder:
         self.saveChurches()
 
 
+    def findCounties(self):
+        #data from https://www.gigasheet.com/sample-data/spreadsheet-list-of-all-cities-in-coloradocsv
 
+        fips_codes_file_path = 'US_FIPS_Codes.txt'
+
+        file_path = "coloradoFrontRangeCities.json"
+        with open(file_path, "r") as file:
+            citiesData = json.load(file)
+
+        cities = citiesData["cities"]
+
+        churches_file_path = "churches.json"
+        with open(churches_file_path, "r") as file:
+            churchesData = json.load(file)
+
+        churches = churchesData["churches"]
+
+        # Read data from file
+        with open(fips_codes_file_path, 'r') as file:
+            fipsLines = file.readlines()
+
+
+
+        for fipsLine in fipsLines:
+
+            fipsLine = fipsLine.rstrip('\r\n')
+            fipsParts = fipsLine.split('\t')
+
+            # Append parsed data to the list
+            fipsCounty = {
+                "state": fipsParts[0],
+                "countyName": fipsParts[1],
+                "fipsStateNumber": fipsParts[2],
+                "fipsCountyNumber": fipsParts[3],
+            }
+
+            for city in cities:
+
+                fipsNumber = fipsCounty["fipsStateNumber"] + fipsCounty["fipsCountyNumber"]
+                cityFipsNumber = "0" + city["fips"]
+                #print("city fips: ", city["fips"], ", fipsNumber: ", fipsNumber)
+                if cityFipsNumber == fipsNumber:
+                    print("set county name: ", fipsCounty["countyName"])
+                    city["countyName"] = fipsCounty["countyName"]
+
+                    #count churches
+                    count = 0
+                    for church in churches:
+                        if "addressInfo" in church and "city" in church["addressInfo"]:
+                            churchCityName = church["addressInfo"]["city"]
+                            if churchCityName.lower() == city["name"].lower():
+                                print("found")
+                                count = count + 1
+
+                    city["numberOfChurches"] = count
+
+
+            '''
+            file_path = "coloradoCities.json"
+            citiesData = {}
+            citiesData["cities"] = data
+
+            with open(file_path, "w") as json_file:
+                json.dump(citiesData, json_file, indent=4)
+            '''
+
+        citiesData["cities"] = cities
+
+        with open(file_path, "w") as json_file:
+            json.dump(citiesData, json_file, indent=4)
 
     def findCities(self):
         #data from https://www.gigasheet.com/sample-data/spreadsheet-list-of-all-cities-in-coloradocsv

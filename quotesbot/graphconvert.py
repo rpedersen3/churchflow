@@ -1,4 +1,5 @@
 from rdflib import Graph, URIRef, Literal, Namespace, RDF, RDFS
+import json
 
 class GraphConvert:
     name = "graphconvert"
@@ -89,6 +90,50 @@ class GraphConvert:
 
         return g2
 
+    def addCities(self, g2):
+
+        n = URIRef("http://churchcore.io/frontrange#")
+        OWL = Namespace("http://www.w3.org/2002/07/owl#")
+        FOAF = Namespace("http://xmlns.com/foaf/0.1/")
+        GEO = Namespace("http://www.w3.org/2003/01/geo/wgs84_pos#")
+        VCARD = Namespace("http://www.w3.org/2006/vcard/ns#")
+        RC = Namespace("http://richcanvas.io/ns#")
+        CC = Namespace("http://churchcore.io/ns#")
+        FR = Namespace("http://churchcore.io/frontrange#")
+
+
+        # get cities
+        file_path = "coloradoFrontRangeCities.json"
+        with open(file_path, "r") as file:
+            citiesData = json.load(file)
+
+        # cycle through cities looking for church web sites
+        cities = citiesData["cities"]
+        selectedCity = None
+        count = 1
+        for cy in cities:
+
+            cityName = self.clean(cy["name"])
+            cityId = cityName.replace(" ", "").lower()
+            city = n + cityId
+
+            lat = cy["lat"]
+            long = cy["lon"]
+            population = cy["population"]
+            numberOfChurches = cy["numberOfChurches"]
+
+            g2.add((city, RDF.type, OWL.NamedIndividual))
+            g2.add((city, RDF.type, RC.City))
+            g2.add((city, RC.name, Literal(cityName)))
+            g2.add((city, VCARD.locality, Literal(cityName)))
+            g2.add((city, GEO.lat, Literal(lat)))
+            g2.add((city, GEO.long, Literal(long)))
+            g2.add((city, RC.population, Literal(population)))
+            g2.add((city, RC.numberOfChurches, Literal(numberOfChurches)))
+
+            print("city: ", cityName)
+            print(f"Graph has {len(g2)} triples.\n")
+
     def addChurch(self, church, g2):
 
         if "name" not in church:
@@ -115,81 +160,11 @@ class GraphConvert:
         churchCenterBusinessSystemId = churchCenterBusinessSystemName.replace(" ", "").lower()
         churchCenterBusinessSystem = n + churchCenterBusinessSystemId
 
-
-
-        '''
-        richcanvasFilename = r"C:\RichCanvasOntology\richcanvas\richcanvas1.1.0.ttl"
-        richcanvasFile = open(richcanvasFilename)
-
-        churchcoreFilename = r"C:\RichCanvasOntology\richcanvas\churchcore.1.1.0.rdf"
-        churchcoreFile = open(churchcoreFilename)
-
-
-        frontRangeFile = open('frontrange_out.rdf', errors="ignore")
-
-        g = Graph()
-        #g.parse(richcanvasFile, format="ttl")
-        #g.parse(frontRangeFile, format="xml")
-
-        g2 = Graph()
-        g2.parse(frontRangeFile, format="xml")
-
-        OWL = Namespace("http://www.w3.org/2002/07/owl#")
-        g2.bind("owl", OWL)
-
-        FOAF = Namespace("http://xmlns.com/foaf/0.1/")
-        g2.bind("foaf", FOAF)
-
-        GEO = Namespace("http://www.w3.org/2003/01/geo/wgs84_pos#")
-        g2.bind("geo", GEO)
-
-        RC = Namespace("http://richcanvas.io/ns#")
-        g2.bind("rc", RC)
-
-        CC = Namespace("http://churchcore.io/ns#")
-        g2.bind("cc", CC)
-
-        FR = Namespace("http://churchcore.io/frontrange#")
-        g2.bind("fr", FR)
-
-
-        
-
-        glooOrgName = "gloo"
-        glooOrgId = glooOrgName.replace(" ", "").lower()
-        glooOrg = n + glooOrgId
-
-        g2.add((glooOrg, RDF.type, OWL.NamedIndividual))
-        g2.add((glooOrg, RDF.type, CC.MinistryOrganization))
-        g2.add((glooOrg, RC.name, Literal(glooOrgName)))
-
-        squarespaceBusinessSystemName = "squarespace"
-        squarespaceBusinessSystemId = squarespaceBusinessSystemName.replace(" ", "").lower()
-        squarespaceBusinessSystem = n + squarespaceBusinessSystemId
-
-        g2.add((squarespaceBusinessSystem, RDF.type, OWL.NamedIndividual))
-        g2.add((squarespaceBusinessSystem, RDF.type, RC.BusinessSystem))
-        g2.add((squarespaceBusinessSystem, RC.name, Literal(squarespaceBusinessSystemName)))
-
-        
-        
-        churchCenterBusinessSystemName = "churchcenter"
-        churchCenterBusinessSystemId = churchCenterBusinessSystemName.replace(" ", "").lower()
-        churchCenterBusinessSystem = n + churchCenterBusinessSystemId
-
-        g2.add((churchCenterBusinessSystem, RDF.type, OWL.NamedIndividual))
-        g2.add((churchCenterBusinessSystem, RDF.type, RC.ChurchManagementSystem))
-        g2.add((churchCenterBusinessSystem, RC.name, Literal(churchCenterBusinessSystemName)))
-
-
-        '''
-
-
         if "name" in church and "latitude" in church and "longitude" in church:
 
             churchOrgName = self.clean(church["name"])
             query = """select ?person where { ?churchName rc:name ?name . 
-                                        FILTER(?name = \"""" + churchOrgName + """\") }
+                                        FILTER(LCASE(?name) = \"""" + churchOrgName.lower() + """\") }
                                         """
             results = g2.query(query)
             if len(results) == 0:

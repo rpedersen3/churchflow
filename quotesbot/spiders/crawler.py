@@ -68,6 +68,7 @@ class DivCount:
 class ChurchCrawler(scrapy.Spider):
     name = "crawler"
 
+
     def checkIfNeedsProcessing(currentChurch, processor, url):
 
         if "processed" not in currentChurch:
@@ -90,7 +91,12 @@ class ChurchCrawler(scrapy.Spider):
 
 
 
+    converter = GraphConvert()
+    g2 = converter.setupRDFFile()
+    converter.addCities(g2)
+    converter.saveRDFFile(g2)
 
+    '''
     #crawl church sites
 
     startURLs = []
@@ -133,6 +139,8 @@ class ChurchCrawler(scrapy.Spider):
             break
 
     converter.saveRDFFile(g2)
+
+    '''
 
     '''
     #crawl church center sites
@@ -1921,6 +1929,7 @@ class ChurchCrawler(scrapy.Spider):
         #churchFinder.findCityDemographics()
         #churchFinder.findCities()
         #churchFinder.findChurches()
+        churchFinder.findCounties()
 
         #print("body: ", response.body)
 
