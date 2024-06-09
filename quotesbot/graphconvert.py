@@ -131,6 +131,79 @@ class GraphConvert:
             g2.add((city, RC.population, Literal(population)))
             g2.add((city, RC.numberOfChurches, Literal(numberOfChurches)))
 
+            raceThreshold = 4.0
+            if "whitePercent" in cy and cy["whitePercent"] > raceThreshold:
+
+                cityRaceName = cityName + " White"
+                cityRaceId = cityRaceName.replace(" ", "").lower()
+                cityRace = n + cityRaceId
+
+                cityRacePercent = cy["whitePercent"]
+                cityRacePopulation = round(cityRacePercent * population / 100.0)
+
+                g2.add((cityRace, RDF.type, OWL.NamedIndividual))
+                g2.add((cityRace, RDF.type, RC.CityRace))
+                g2.add((cityRace, RC.name, Literal(cityRaceName)))
+                g2.add((cityRace, RC.population, Literal(cityRacePopulation)))
+                g2.add((cityRace, RC.percent, Literal(cityRacePercent)))
+                g2.add((cityRace, RC.raceName, Literal("white")))
+
+                g2.add((city, RC.cityRace, cityRace))
+
+            if "blackPercent" in cy and cy["blackPercent"] > raceThreshold:
+
+                cityRaceName = cityName + " Black"
+                cityRaceId = cityRaceName.replace(" ", "").lower()
+                cityRace = n + cityRaceId
+
+                cityRacePercent = cy["blackPercent"]
+                cityRacePopulation = round(cityRacePercent * population / 100.0)
+
+                g2.add((cityRace, RDF.type, OWL.NamedIndividual))
+                g2.add((cityRace, RDF.type, RC.CityRace))
+                g2.add((cityRace, RC.name, Literal(cityRaceName)))
+                g2.add((cityRace, RC.population, Literal(cityRacePopulation)))
+                g2.add((cityRace, RC.percent, Literal(cityRacePercent)))
+                g2.add((cityRace, RC.raceName, Literal("black")))
+
+                g2.add((city, RC.cityRace, cityRace))
+
+            if "hispanicPercent" in cy and cy["hispanicPercent"] > raceThreshold:
+
+                cityRaceName = cityName + " Hispanic"
+                cityRaceId = cityRaceName.replace(" ", "").lower()
+                cityRace = n + cityRaceId
+
+                cityRacePercent = cy["hispanicPercent"]
+                cityRacePopulation = round(cityRacePercent * population / 100.0)
+
+                g2.add((cityRace, RDF.type, OWL.NamedIndividual))
+                g2.add((cityRace, RDF.type, RC.CityRace))
+                g2.add((cityRace, RC.name, Literal(cityRaceName)))
+                g2.add((cityRace, RC.population, Literal(cityRacePopulation)))
+                g2.add((cityRace, RC.percent, Literal(cityRacePercent)))
+                g2.add((cityRace, RC.raceName, Literal("hispanic")))
+
+                g2.add((city, RC.cityRace, cityRace))
+
+            if "asianPercent" in cy and cy["asianPercent"] > raceThreshold:
+
+                cityRaceName = cityName + " Asian"
+                cityRaceId = cityRaceName.replace(" ", "").lower()
+                cityRace = n + cityRaceId
+
+                cityRacePercent = cy["asianPercent"]
+                cityRacePopulation = round(cityRacePercent * population / 100.0)
+
+                g2.add((cityRace, RDF.type, OWL.NamedIndividual))
+                g2.add((cityRace, RDF.type, RC.CityRace))
+                g2.add((cityRace, RC.name, Literal(cityRaceName)))
+                g2.add((cityRace, RC.population, Literal(cityRacePopulation)))
+                g2.add((cityRace, RC.percent, Literal(cityRacePercent)))
+                g2.add((cityRace, RC.raceName, Literal("asian")))
+
+                g2.add((city, RC.cityRace, cityRace))
+
             print("city: ", cityName)
             print(f"Graph has {len(g2)} triples.\n")
 
@@ -216,6 +289,15 @@ class GraphConvert:
                             g2.add((chSiteAddress, VCARD.longitude, Literal(chSiteAddressLong)))
 
                         g2.add((chSite, RC.hasSiteAddress, chSiteAddress))
+
+                        # link church to city
+                        query = """select ?city, ?name where { ?city rc:type "City" .  ?city rc:name ?name . 
+                                                            FILTER(?name = \"""" + chSiteCity + """\") }
+                                                            """
+                        results = g2.query(query)
+
+                        if len(results) > 0:
+                            print("city match result: ", results[0])
 
 
                 g2.add((chOrg, RDF.type, OWL.NamedIndividual))

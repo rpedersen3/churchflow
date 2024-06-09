@@ -1929,7 +1929,7 @@ class ChurchCrawler(scrapy.Spider):
         #churchFinder.findCityDemographics()
         #churchFinder.findCities()
         #churchFinder.findChurches()
-        churchFinder.findCounties()
+        #churchFinder.findCounties()
 
         #print("body: ", response.body)
 
