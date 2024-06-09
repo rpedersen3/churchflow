@@ -96,7 +96,7 @@ class ChurchCrawler(scrapy.Spider):
     converter.addCities(g2)
     converter.saveRDFFile(g2)
 
-    '''
+
     #crawl church sites
 
     startURLs = []
@@ -140,7 +140,7 @@ class ChurchCrawler(scrapy.Spider):
 
     converter.saveRDFFile(g2)
 
-    '''
+
 
     '''
     #crawl church center sites

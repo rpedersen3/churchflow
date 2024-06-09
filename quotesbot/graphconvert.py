@@ -236,7 +236,7 @@ class GraphConvert:
         if "name" in church and "latitude" in church and "longitude" in church:
 
             churchOrgName = self.clean(church["name"])
-            query = """select ?person where { ?churchName rc:name ?name . 
+            query = """select ?churchName where { ?churchName rc:name ?name .
                                         FILTER(LCASE(?name) = \"""" + churchOrgName.lower() + """\") }
                                         """
             results = g2.query(query)
@@ -291,13 +291,16 @@ class GraphConvert:
                         g2.add((chSite, RC.hasSiteAddress, chSiteAddress))
 
                         # link church to city
-                        query = """select ?city, ?name where { ?city rc:type "City" .  ?city rc:name ?name . 
+                        query = """select ?city ?name where { ?city rdf:type rc:City .  ?city rc:name ?name . 
                                                             FILTER(?name = \"""" + chSiteCity + """\") }
                                                             """
                         results = g2.query(query)
 
+                        print(".......... query for city: ", query)
                         if len(results) > 0:
-                            print("city match result: ", results[0])
+                            for row in results:
+                                print("row: ", row["city"])
+                                g2.add((chSite, RC.city, row["city"]))
 
 
                 g2.add((chOrg, RDF.type, OWL.NamedIndividual))
