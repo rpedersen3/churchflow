@@ -11,7 +11,9 @@
             "asianPercent": 0.0,
             "hispanicPercent": 10.5,
             "countyName": "El Paso",
-            "numberOfChurches": 5
+            "numberOfChurches": 5,
+            "crawled": "2024-06-10 21:48:02.800229",
+            "crawled-city": "Wellington"
         },
         {
             "name": "Woodmoor",

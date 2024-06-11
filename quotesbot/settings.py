@@ -119,4 +119,4 @@ IMAGES_STORE = "/.scrapy/imagefiles"
 # HTTPCACHE_IGNORE_HTTP_CODES = []
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-LOG_LEVEL = 'WARNING'  # or 'WARNING', 'ERROR', 'CRITICAL', 'INFO'
+LOG_LEVEL = 'ERROR'  # or 'WARNING', 'ERROR', 'CRITICAL', 'INFO'

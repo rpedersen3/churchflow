@@ -2,7 +2,7 @@
 import scrapy
 
 
-class ToScrapeSpiderXPath(scrapy.Spider):
+class ToScrapeSpiderXPath():
     name = 'toscrape-xpath'
     start_urls = [
         'http://quotes.toscrape.com/',

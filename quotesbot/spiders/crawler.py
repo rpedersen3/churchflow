@@ -65,9 +65,9 @@ class DivCount:
         self.className = className
         self.count = count
 
-class ChurchCrawler(scrapy.Spider):
+#class crawler(scrapy.Spider):
+class crawler(scrapy.Spider):
     name = "crawler"
-
 
     def checkIfNeedsProcessing(currentChurch, processor, url):
 
@@ -90,6 +90,7 @@ class ChurchCrawler(scrapy.Spider):
         return needsToBeProcessed
 
 
+    '''
 
     converter = GraphConvert()
     g2 = converter.setupRDFFile()
@@ -140,7 +141,7 @@ class ChurchCrawler(scrapy.Spider):
             break
 
     converter.saveRDFFile(g2)
-
+    '''
 
 
     '''
@@ -238,7 +239,7 @@ class ChurchCrawler(scrapy.Spider):
     #crawl specific url
     startURLs = [
         #"https://calvarybible.com"
-        "https://www.thehillsdenver.com/"
+        #"https://www.thehillsdenver.com/"
         #"https://woodmenvalley.org"
         #"https://missionhills.org/"
         #"https://www.greeleymosaic.com/who-we-are"
