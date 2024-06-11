@@ -1,8 +1,11 @@
 import scrapy
 from scrapy_splash import SplashRequest
 
-from quotesbot.findChurchesGoogleSearch import FindChurchesGoogleSearch
-from quotesbot.findChurchesGooglePlaces import FindChurchesGooglePlaces
+from quotesbot.processors.findChurchesGoogleSearch import FindChurchesGoogleSearch
+from quotesbot.processors.findChurchesGooglePlaces import FindChurchesGooglePlaces
+
+from quotesbot.processors.updateRDFWithCities import UpdateRDFWithCities
+from quotesbot.processors.updateRDFWithChurches import UpdateRDFWithChurches
 
 class chcrawlerSpider(scrapy.Spider):
 
@@ -12,11 +15,22 @@ class chcrawlerSpider(scrapy.Spider):
         "https://calvarybible.com"
     ]
 
+    # add churches based on cities
     churchFinder = FindChurchesGoogleSearch()
     churchFinder.findChurches()
 
     churchFinder = FindChurchesGooglePlaces()
     churchFinder.findChurches()
+
+
+    # update rdf file with church data
+    updateRDF = UpdateRDFWithCities()
+    updateRDF.updateWithCities()
+
+    updateRDF = UpdateRDFWithChurches()
+    #updateRDF.updateWithChurches()
+
+
 
     # churchFinder.findChurchesUsingSpreadsheet()
     # churchFinder.findChurchesUsingGooglePlaces()
