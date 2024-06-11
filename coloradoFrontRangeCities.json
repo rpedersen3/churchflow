@@ -1,6 +1,19 @@
 {
     "cities": [
         {
+            "name": "Wellington",
+            "fips": "8069",
+            "lat": 40.7,
+            "lon": -105.0054,
+            "population": 10769,
+            "blackPercent": 0.0,
+            "indianPercent": 0.0,
+            "asianPercent": 0.0,
+            "hispanicPercent": 10.5,
+            "countyName": "El Paso",
+            "numberOfChurches": 5
+        },
+        {
             "name": "Woodmoor",
             "fips": "8041",
             "lat": 39.1063,

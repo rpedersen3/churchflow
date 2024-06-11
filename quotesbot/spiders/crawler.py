@@ -111,6 +111,7 @@ class ChurchCrawler(scrapy.Spider):
         print("...... church: ", church["name"])
         converter.addChurch(church, g2)
 
+
         #if "pages" not in church:
         link = None
         if "link" in church:

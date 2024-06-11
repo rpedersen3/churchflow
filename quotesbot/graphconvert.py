@@ -236,16 +236,33 @@ class GraphConvert:
         if "name" in church and "latitude" in church and "longitude" in church:
 
             churchOrgName = self.clean(church["name"])
-            query = """select ?churchName where { ?churchName rc:name ?name .
-                                        FILTER(LCASE(?name) = \"""" + churchOrgName.lower() + """\") }
+            churchOrgId = churchOrgName.replace(" ", "").lower()
+            chOrg = n + churchOrgId
+            query = """select ?church where { ?church rc:name ?churchName .
+                                        FILTER(?church = <""" + str(chOrg) + """>) }
                                         """
+
             results = g2.query(query)
+
             if len(results) == 0:
 
-                print("***************** parse church: ", churchOrgName)
+                g2.add((chOrg, RDF.type, OWL.NamedIndividual))
+                g2.add((chOrg, RDF.type, CC.ChurchOrganization))
+                g2.add((chOrg, RC.name, Literal(churchOrgName)))
 
-                churchOrgId = churchOrgName.replace(" ", "").lower()
-                chOrg = n + churchOrgId
+                if "org" in church:
+                    orgName = church["org"]
+
+                    orgChurchOrgName = self.clean(orgName)
+                    orgChurchOrgId = orgChurchOrgName.replace(" ", "").lower()
+                    orgChOrg = n + orgChurchOrgId
+
+                    g2.add((orgChOrg, RDF.type, OWL.NamedIndividual))
+                    g2.add((orgChOrg, RDF.type, CC.ChurchOrganization))
+                    g2.add((orgChOrg, RC.name, Literal(orgChurchOrgName)))
+
+                    g2.add((orgChOrg, RC.hasSubOrganization, chOrg))
+
 
                 churchSiteName = self.clean(church["name"]) + " Site"
                 churchSiteId = churchSiteName.replace(" ", "").lower()
@@ -254,6 +271,10 @@ class GraphConvert:
                 g2.add((chSite, RDF.type, OWL.NamedIndividual))
                 g2.add((chSite, RDF.type, CC.ChurchSite))
                 g2.add((chSite, RC.name, Literal(churchSiteName)))
+                g2.add((chOrg, RC.hasSite, chSite))
+
+
+
 
                 if "latitude" in church and "longitude" in church:
                     chSiteLat = church["latitude"]
@@ -303,10 +324,8 @@ class GraphConvert:
                                 g2.add((chSite, RC.city, row["city"]))
 
 
-                g2.add((chOrg, RDF.type, OWL.NamedIndividual))
-                g2.add((chOrg, RDF.type, CC.ChurchOrganization))
-                g2.add((chOrg, RC.name, Literal(churchOrgName)))
-                g2.add((chOrg, RC.hasSite, chSite))
+
+
 
                 if "chmss" in church:
                     for chms in church["chmss"]:
@@ -348,6 +367,19 @@ class GraphConvert:
                         g2.add((post, RC.heldBy, person))
 
                         g2.add((chOrg, RC.hasPost, post))
+
+                if "websiteUri" in church:
+
+                    websiteUri = church["websiteUri"];
+                    websiteId = self.clean(websiteUri.replace(" ", "").lower())
+                    website = n + websiteId
+
+                    g2.add((website, RDF.type, OWL.NamedIndividual))
+                    g2.add((website, RC.type, RC.Website))
+                    g2.add((website, RC.uri, Literal(websiteUri)))
+
+                    g2.add((chOrg, RC.hasWebsite, website))
+
 
                 '''
                 if "contacts" in church:
