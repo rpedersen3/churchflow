@@ -152,7 +152,7 @@ class FindChurchesGooglePlaces:
 
                 time.sleep(1)
 
-                api_key = 'AIzaSyBuniKisfcO3RmwH7Yd5Gx-jPX4rzvm2CQ'
+                api_key = ''
                 endpoint = 'https://places.googleapis.com/v1/places:searchText' + "?fields=*&key=" + api_key
 
                 query = city["name"] + " Colorado, Church"

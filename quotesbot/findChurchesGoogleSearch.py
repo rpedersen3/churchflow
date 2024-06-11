@@ -8,7 +8,7 @@ class FindChurchesGoogleSearch:
 
         # https://programmablesearchengine.google.com/controlpanel/overview?cx=d744719d644574dd7
         service = build(
-            "customsearch", "v1", developerKey="AIzaSyBuniKisfcO3RmwH7Yd5Gx-jPX4rzvm2CQ"
+            "customsearch", "v1", developerKey=""
         )
 
         # get churches
