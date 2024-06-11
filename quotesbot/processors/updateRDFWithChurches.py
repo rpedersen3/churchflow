@@ -2,7 +2,7 @@ from rdflib import Graph, URIRef, Literal, Namespace, RDF, RDFS
 import json
 
 
-class UpdateRDFWithCities:
+class UpdateRDFWithChurches:
 
     OWL = Namespace("http://www.w3.org/2002/07/owl#")
     FOAF = Namespace("http://xmlns.com/foaf/0.1/")
@@ -18,55 +18,49 @@ class UpdateRDFWithCities:
         churchesData = json.load(file)
     churches = churchesData["churches"]
 
-    def setupRDF(self):
-        def setupRDFFile(self):
-            richcanvasFilename = r"C:\RichCanvasOntology\richcanvas\richcanvas1.1.0.ttl"
-            richcanvasFile = open(richcanvasFilename)
 
-            churchcoreFilename = r"C:\RichCanvasOntology\richcanvas\churchcore.1.1.0.rdf"
-            churchcoreFile = open(churchcoreFilename)
+    def setupRDFFile(self):
 
-            frontRangeFile = open('frontrange_out.rdf', errors="ignore")
+        g2 = Graph()
 
-            g = Graph()
+        frontRangeFile = open('frontrange_out.rdf', errors="ignore")
+        g2.parse(frontRangeFile, format="xml")
 
-            g2 = Graph()
-            g2.parse(frontRangeFile, format="xml")
-            g2.bind("owl", self.OWL)
-            g2.bind("foaf", self.FOAF)
-            g2.bind("geo", self.GEO)
-            g2.bind("vcard", self.VCARD)
-            g2.bind("rc", self.RC)
-            g2.bind("cc", self.CC)
-            g2.bind("fr", self.FR)
+        g2.bind("owl", self.OWL)
+        g2.bind("foaf", self.FOAF)
+        g2.bind("geo", self.GEO)
+        g2.bind("vcard", self.VCARD)
+        g2.bind("rc", self.RC)
+        g2.bind("cc", self.CC)
+        g2.bind("fr", self.FR)
 
 
+        glooOrgName = "gloo"
+        glooOrgId = glooOrgName.replace(" ", "").lower()
+        glooOrg = self.n + glooOrgId
 
-            glooOrgName = "gloo"
-            glooOrgId = glooOrgName.replace(" ", "").lower()
-            glooOrg = n + glooOrgId
+        g2.add((glooOrg, RDF.type, self.OWL.NamedIndividual))
+        g2.add((glooOrg, RDF.type, self.CC.MinistryOrganization))
+        g2.add((glooOrg, self.RC.name, Literal(glooOrgName)))
 
-            g2.add((glooOrg, RDF.type, self.OWL.NamedIndividual))
-            g2.add((glooOrg, RDF.type, self.CC.MinistryOrganization))
-            g2.add((glooOrg, self.RC.name, Literal(glooOrgName)))
+        squarespaceBusinessSystemName = "squarespace"
+        squarespaceBusinessSystemId = squarespaceBusinessSystemName.replace(" ", "").lower()
+        squarespaceBusinessSystem = self.n + squarespaceBusinessSystemId
 
-            squarespaceBusinessSystemName = "squarespace"
-            squarespaceBusinessSystemId = squarespaceBusinessSystemName.replace(" ", "").lower()
-            squarespaceBusinessSystem = self.n + squarespaceBusinessSystemId
+        g2.add((squarespaceBusinessSystem, RDF.type, self.OWL.NamedIndividual))
+        g2.add((squarespaceBusinessSystem, RDF.type, self.RC.BusinessSystem))
+        g2.add((squarespaceBusinessSystem, self.RC.name, Literal(squarespaceBusinessSystemName)))
 
-            g2.add((squarespaceBusinessSystem, RDF.type, self.OWL.NamedIndividual))
-            g2.add((squarespaceBusinessSystem, RDF.type, self.RC.BusinessSystem))
-            g2.add((squarespaceBusinessSystem, self.RC.name, Literal(squarespaceBusinessSystemName)))
+        churchCenterBusinessSystemName = "churchcenter"
+        churchCenterBusinessSystemId = churchCenterBusinessSystemName.replace(" ", "").lower()
+        churchCenterBusinessSystem = self.n + churchCenterBusinessSystemId
 
-            churchCenterBusinessSystemName = "churchcenter"
-            churchCenterBusinessSystemId = churchCenterBusinessSystemName.replace(" ", "").lower()
-            churchCenterBusinessSystem = n + churchCenterBusinessSystemId
+        g2.add((churchCenterBusinessSystem, RDF.type, self.OWL.NamedIndividual))
+        g2.add((churchCenterBusinessSystem, RDF.type, self.RC.ChurchManagementSystem))
+        g2.add((churchCenterBusinessSystem, self.RC.name, Literal(churchCenterBusinessSystemName)))
 
-            g2.add((churchCenterBusinessSystem, RDF.type, self.OWL.NamedIndividual))
-            g2.add((churchCenterBusinessSystem, RDF.type, self.RC.ChurchManagementSystem))
-            g2.add((churchCenterBusinessSystem, self.RC.name, Literal(churchCenterBusinessSystemName)))
+        return g2
 
-            return g2
 
     def saveRDFFile(self, g2):
 
@@ -92,7 +86,6 @@ class UpdateRDFWithCities:
 
         g2 = self.setupRDFFile()
 
-
         for church in self.churches:
 
             if "name" not in church:
@@ -100,15 +93,15 @@ class UpdateRDFWithCities:
 
             glooOrgName = "gloo"
             glooOrgId = glooOrgName.replace(" ", "").lower()
-            glooOrg = n + glooOrgId
+            glooOrg = self.n + glooOrgId
 
             squarespaceBusinessSystemName = "squarespace"
             squarespaceBusinessSystemId = squarespaceBusinessSystemName.replace(" ", "").lower()
-            squarespaceBusinessSystem = n + squarespaceBusinessSystemId
+            squarespaceBusinessSystem = self.n + squarespaceBusinessSystemId
 
             churchCenterBusinessSystemName = "churchcenter"
             churchCenterBusinessSystemId = churchCenterBusinessSystemName.replace(" ", "").lower()
-            churchCenterBusinessSystem = n + churchCenterBusinessSystemId
+            churchCenterBusinessSystem = self.n + churchCenterBusinessSystemId
 
             if "name" in church and "latitude" in church and "longitude" in church:
 
@@ -132,7 +125,7 @@ class UpdateRDFWithCities:
 
                         orgChurchOrgName = self.clean(orgName)
                         orgChurchOrgId = orgChurchOrgName.replace(" ", "").lower()
-                        orgChOrg = n + orgChurchOrgId
+                        orgChOrg = self.n + orgChurchOrgId
 
                         g2.add((orgChOrg, RDF.type, self.OWL.NamedIndividual))
                         g2.add((orgChOrg, RDF.type, self.CC.ChurchOrganization))
@@ -142,7 +135,7 @@ class UpdateRDFWithCities:
 
                     churchSiteName = self.clean(church["name"]) + " Site"
                     churchSiteId = churchSiteName.replace(" ", "").lower()
-                    chSite = n + churchSiteId
+                    chSite = self.n + churchSiteId
 
                     g2.add((chSite, RDF.type, self.OWL.NamedIndividual))
                     g2.add((chSite, RDF.type, self.CC.ChurchSite))
@@ -163,7 +156,7 @@ class UpdateRDFWithCities:
 
                             churchSiteAddressName = self.clean(church["name"]) + " Site Address"
                             churchSiteAddressId = churchSiteAddressName.replace(" ", "").lower()
-                            chSiteAddress = n + churchSiteAddressId
+                            chSiteAddress = self.n + churchSiteAddressId
 
                             g2.add((chSiteAddress, RDF.type, self.OWL.NamedIndividual))
                             g2.add((chSiteAddress, RDF.type, self.RC.PostalAddress))
@@ -217,7 +210,7 @@ class UpdateRDFWithCities:
 
                             personName = name
                             personId = personName.replace(" ", "").lower()
-                            person = n + personId
+                            person = self.n + personId
 
                             g2.add((person, RDF.type, self.OWL.NamedIndividual))
                             g2.add((person, RDF.type, self.RC.Person))
@@ -227,7 +220,7 @@ class UpdateRDFWithCities:
 
                             postName = churchOrgName + " Lead Pastor"
                             postId = postName.replace(" ", "").lower()
-                            post = n + postId
+                            post = self.n + postId
 
                             g2.add((post, RDF.type, self.OWL.NamedIndividual))
                             g2.add((post, RDF.type, self.RC.Post))
@@ -282,6 +275,7 @@ class UpdateRDFWithCities:
 
                     '''
 
-            print(f"Graph has {len(g2)} triples.\n")
+            #print(f"Graph has {len(g2)} triples.\n")
+            print(".")
 
         self.saveRDFFile(g2)

@@ -277,11 +277,11 @@ class ChurchFinder:
 
         cities_file_path = 'cities.txt'
 
-        frontRangeLatMin = 38.2
-        frontRangeLatMax = 40.7
+        frontRangeLatMin = 38.0
+        frontRangeLatMax = 41.0
 
-        frontRangeLonMin = -105.5
-        frontRangeLonMax = -104.5
+        frontRangeLonMin = -106.0
+        frontRangeLonMax = -104.0
 
         # Read data from file
         with open(cities_file_path, 'r') as file:

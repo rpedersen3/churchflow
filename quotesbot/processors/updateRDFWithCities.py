@@ -12,31 +12,23 @@ class UpdateRDFWithCities:
     FR = Namespace("http://churchcore.io/frontrange#")
     n = URIRef("http://churchcore.io/frontrange#")
 
-    def setupRDF(self):
-
-        def setupRDFFile(self):
-            richcanvasFilename = r"C:\RichCanvasOntology\richcanvas\richcanvas1.1.0.ttl"
-            richcanvasFile = open(richcanvasFilename)
-
-            churchcoreFilename = r"C:\RichCanvasOntology\richcanvas\churchcore.1.1.0.rdf"
-            churchcoreFile = open(churchcoreFilename)
-
-            frontRangeFile = open('frontrange_out.rdf', errors="ignore")
-
-            g = Graph()
+    def setupRDFFile(self):
 
 
-            g2 = Graph()
-            g2.parse(frontRangeFile, format="xml")
-            g2.bind("owl", self.OWL)
-            g2.bind("foaf", self.FOAF)
-            g2.bind("geo", self.GEO)
-            g2.bind("vcard", self.VCARD)
-            g2.bind("rc", self.RC)
-            g2.bind("cc", self.CC)
-            g2.bind("fr", self.FR)
+        g2 = Graph()
 
-            return g2
+        frontRangeFile = open('frontrange_out.rdf', errors="ignore")
+        g2.parse(frontRangeFile, format="xml")
+
+        g2.bind("owl", self.OWL)
+        g2.bind("foaf", self.FOAF)
+        g2.bind("geo", self.GEO)
+        g2.bind("vcard", self.VCARD)
+        g2.bind("rc", self.RC)
+        g2.bind("cc", self.CC)
+        g2.bind("fr", self.FR)
+
+        return g2
 
     def saveRDFFile(self, g2):
 
@@ -45,6 +37,18 @@ class UpdateRDFWithCities:
 
         with open('frontrange_out.rdf', "w", encoding="utf-8") as f:
             f.write(data)
+
+    def clean(self, txt):
+
+        import re
+        pattern = re.compile(r'[^\x00-\x7F]+')
+        d1 = pattern.sub('', txt)
+        d2 = re.sub(r'&#\d+;', '', d1)
+        d3 = d2.replace('"', '').replace(',', '').replace('#', '')
+        d4 = d3.replace('\n', '').replace('\r', '').replace('\t', '')
+
+
+        return d3
 
     def updateWithCities(self):
 
@@ -63,7 +67,7 @@ class UpdateRDFWithCities:
 
             cityName = self.clean(cy["name"])
             cityId = cityName.replace(" ", "").lower()
-            city = n + cityId
+            city = self.n + cityId
 
             lat = cy["lat"]
             long = cy["lon"]
@@ -83,7 +87,7 @@ class UpdateRDFWithCities:
             if "whitePercent" in cy and cy["whitePercent"] > raceThreshold:
                 cityRaceName = cityName + " White"
                 cityRaceId = cityRaceName.replace(" ", "").lower()
-                cityRace = n + cityRaceId
+                cityRace = self.n + cityRaceId
 
                 cityRacePercent = cy["whitePercent"]
                 cityRacePopulation = round(cityRacePercent * population / 100.0)
@@ -100,7 +104,7 @@ class UpdateRDFWithCities:
             if "blackPercent" in cy and cy["blackPercent"] > raceThreshold:
                 cityRaceName = cityName + " Black"
                 cityRaceId = cityRaceName.replace(" ", "").lower()
-                cityRace = n + cityRaceId
+                cityRace = self.n + cityRaceId
 
                 cityRacePercent = cy["blackPercent"]
                 cityRacePopulation = round(cityRacePercent * population / 100.0)
@@ -134,7 +138,7 @@ class UpdateRDFWithCities:
             if "asianPercent" in cy and cy["asianPercent"] > raceThreshold:
                 cityRaceName = cityName + " Asian"
                 cityRaceId = cityRaceName.replace(" ", "").lower()
-                cityRace = n + cityRaceId
+                cityRace = self.n + cityRaceId
 
                 cityRacePercent = cy["asianPercent"]
                 cityRacePopulation = round(cityRacePercent * population / 100.0)

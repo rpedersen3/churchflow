@@ -1,3 +1,5 @@
+import json
+
 import scrapy
 from scrapy_splash import SplashRequest
 
@@ -7,28 +9,53 @@ from quotesbot.processors.findChurchesGooglePlaces import FindChurchesGooglePlac
 from quotesbot.processors.updateRDFWithCities import UpdateRDFWithCities
 from quotesbot.processors.updateRDFWithChurches import UpdateRDFWithChurches
 
+
+from quotesbot.processors.findChurchStaffWebPagesUsingSearch import FindChurchStaffWebPagesUsingSearch
+
 class chcrawlerSpider(scrapy.Spider):
 
     name = "chcrawler"
+
+    googleKey = 'abc'
 
     startURLs = [
         "https://calvarybible.com"
     ]
 
-    # add churches based on cities
-    churchFinder = FindChurchesGoogleSearch()
-    churchFinder.findChurches()
-
-    churchFinder = FindChurchesGooglePlaces()
-    churchFinder.findChurches()
-
-
     # update rdf file with church data
+    '''
     updateRDF = UpdateRDFWithCities()
     updateRDF.updateWithCities()
 
     updateRDF = UpdateRDFWithChurches()
-    #updateRDF.updateWithChurches()
+    updateRDF.updateWithChurches()
+    '''
+
+    # add churches based on cities
+    '''
+    churchFinder = FindChurchesGoogleSearch(googleKey)
+    churchFinder.findChurches()
+
+    churchFinder = FindChurchesGooglePlaces(googleKey)
+    churchFinder.findChurches()
+    '''
+
+    # process church info
+    churches_file_path = "churches.json"
+    with open(churches_file_path, "r") as file:
+        churchesData = json.load(file)
+    churches = churchesData["churches"]
+
+    for church in churches:
+
+        changed = FindChurchStaffWebPagesUsingSearch.findStaffWebPages(church, googleKey)
+
+        if changed:
+            
+            # save to churches file
+            churchesData["churches"] = churches
+            with open(churches_file_path, "w") as json_file:
+                json.dump(churchesData, json_file, indent=4)
 
 
 

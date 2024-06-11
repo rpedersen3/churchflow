@@ -1,29 +1,18 @@
 # -*- coding: utf-8 -*-
 import scrapy
-from scrapy import Selector
 import time
 
-
-from scrapy.http import HtmlResponse
-from scrapy.selector import Selector
-from bs4 import BeautifulSoup
 import re
-from quotesbot.profileextractor import ProfileExtractor
-from quotesbot.profilecheck import ProfileCheck
+from quotesbot.utilities.profileextractor import ProfileExtractor
 from quotesbot.groupcheck import GroupCheck
 from quotesbot.churchfinder import ChurchFinder
-from quotesbot.photo import Photo
-from quotesbot.graphconvert import GraphConvert
 
-import json
 from urllib.parse import urlparse
-from lxml import etree
 import spacy
 import pandas as pd
 import requests
 
 import http.client, urllib.parse
-import json
 
 from datetime import datetime
 
@@ -37,15 +26,7 @@ import base64
 from io import BytesIO
 from PIL import Image
 
-
-import pathlib
-import textwrap
-
 import os
-from openai import AzureOpenAI
-from azure.identity import DefaultAzureCredential
-
-import google.generativeai as genai
 
 import locationtagger
 

@@ -4,11 +4,11 @@ import json
 import time
 
 class FindChurchesGoogleSearch:
-    def findChurches(self):
+    def findChurches(self, googleKey):
 
         # https://programmablesearchengine.google.com/controlpanel/overview?cx=d744719d644574dd7
         service = build(
-            "customsearch", "v1", developerKey=""
+            "customsearch", "v1", developerKey=googleKey
         )
 
         # get churches
