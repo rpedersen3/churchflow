@@ -146,7 +146,7 @@ class FindChurchesGooglePlaces:
 
             cityName = city["name"]
 
-            if "crawled-google-places" not in city and cityName == "Wellington":
+            if "crawled-google-places" not in city:
 
                 city["crawled-google-places"] = str(datetime.now())
 
