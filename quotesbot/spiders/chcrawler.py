@@ -12,11 +12,13 @@ from quotesbot.processors.updateRDFWithChurches import UpdateRDFWithChurches
 
 from quotesbot.processors.findChurchStaffWebPagesUsingSearch import FindChurchStaffWebPagesUsingSearch
 
+from quotesbot.processors.updateChurchWithStaffFromStaffWebPages import UpdateChurchWithStaffFromWebPages
+
 class chcrawlerSpider(scrapy.Spider):
 
     name = "chcrawler"
 
-    googleKey = 'abc'
+    googleKey = ""
 
     startURLs = [
         "https://calvarybible.com"
@@ -33,11 +35,11 @@ class chcrawlerSpider(scrapy.Spider):
 
     # add churches based on cities
     '''
-    churchFinder = FindChurchesGoogleSearch(googleKey)
-    churchFinder.findChurches()
+    churchFinder = FindChurchesGoogleSearch()
+    churchFinder.findChurches(googleKey)
 
-    churchFinder = FindChurchesGooglePlaces(googleKey)
-    churchFinder.findChurches()
+    churchFinder = FindChurchesGooglePlaces()
+    churchFinder.findChurches(googleKey)
     '''
 
     # process church info
@@ -48,10 +50,16 @@ class chcrawlerSpider(scrapy.Spider):
 
     for church in churches:
 
-        changed = FindChurchStaffWebPagesUsingSearch.findStaffWebPages(church, googleKey)
+        changed = False
+
+        #find = FindChurchStaffWebPagesUsingSearch()
+        #changed = find.findStaffWebPages(church, googleKey)
+
+        updateWIthStaff = UpdateChurchWithStaffFromWebPages()
+        updateWIthStaff.appendWebPagesBasedOnStaff(church, startURLs)
 
         if changed:
-            
+
             # save to churches file
             churchesData["churches"] = churches
             with open(churches_file_path, "w") as json_file:
@@ -113,6 +121,20 @@ class chcrawlerSpider(scrapy.Spider):
                                 })
 
     def parse(self, response):
-        print("parse response")
+
+        church, isHomePage = self.findCurrentChurch(self.churches, response.url)
+        if church is not None and "name" in church:
+
+            changed = False
+
+            updateWithStaff = UpdateChurchWithStaffFromWebPages()
+            changed = updateWithStaff.updateChurchWithStaffFromWebPages(church)
+
+            if changed:
+                # save to churches file
+                self.churchesData["churches"] = self.churches
+                with open(self.churches_file_path, "w") as json_file:
+                    json.dump(self.churchesData, json_file, indent=4)
+
         pass
 

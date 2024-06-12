@@ -3,7 +3,11 @@ from urllib.parse import urlparse
 
 from googleapiclient.discovery import build
 
+from quotesbot.utilities.helpers import Helpers
+
 class FindChurchStaffWebPagesUsingSearch:
+
+    helpers = Helpers()
 
     def findStaffWebPages(self, church, googleKey):
 
@@ -14,9 +18,9 @@ class FindChurchStaffWebPagesUsingSearch:
             link = church["link"]
 
             processor = "extract-staff-pages-from-webpage"
-            needsToBeProcessed = self.checkIfNeedsProcessing(church, processor, link)
+            needsToBeProcessed = self.helpers.checkIfNeedsProcessing(church, processor, link)
 
-            print("needs: ", needsToBeProcessed)
+            print("link: ", link, ", needs: ", needsToBeProcessed)
 
             if needsToBeProcessed:
 
@@ -83,7 +87,7 @@ class FindChurchStaffWebPagesUsingSearch:
                                                 link.find('who-we-are') >= 0 or \
                                                 link.find('pastor') >= 0:
 
-                                            page = self.getPage(pages, "staff", link)
+                                            page = self.helpers.getPage(pages, "staff", link)
                                             if page is None:
                                                 page = {
                                                     "type": "staff",
@@ -97,7 +101,7 @@ class FindChurchStaffWebPagesUsingSearch:
 
                                 break
 
-                    needsToBeProcessed = self.markAsProcessed(church, processor, link)
+                    needsToBeProcessed = self.helpers.markAsProcessed(church, processor, church["link"])
 
 
         return changed

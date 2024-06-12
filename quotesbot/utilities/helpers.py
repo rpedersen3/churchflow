@@ -3,7 +3,7 @@ from datetime import datetime
 
 class Helpers:
 
-    def checkIfNeedsProcessing(currentChurch, processor, url):
+    def checkIfNeedsProcessing(self, currentChurch, processor, url):
 
         if "processed" not in currentChurch:
             currentChurch["processed"] = {}
@@ -13,7 +13,7 @@ class Helpers:
 
         needsToBeProcessed = True
         for processed in currentChurch["processed"][processor]:
-            if processed["page"] == url:
+            if processed["page"].lower().startswith(url.lower()):
 
                 needsToBeProcessed = False
 
@@ -57,3 +57,15 @@ class Helpers:
                     break
 
         return currentChurch, isHomePage
+
+
+
+
+
+    def getPage(self, pages, type, url):
+
+        for page in pages:
+            if page["type"] == type and page["url"] == url:
+                return page
+
+        return None
