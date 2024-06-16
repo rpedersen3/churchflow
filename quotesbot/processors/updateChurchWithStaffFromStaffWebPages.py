@@ -36,17 +36,22 @@ class UpdateChurchWithStaffFromWebPages:
 
                     if typ == "staff" and url.find(".pdf") == -1:
 
-                        if url.find('staff') >= 0 or \
-                                url.find('about') >= 0 or \
-                                url.find('leader') >= 0 or \
-                                url.find('contact') >= 0 or \
-                                url.find('team') >= 0 or \
-                                url.find('leader') >= 0 or \
-                                url.find('who-we-are') >= 0 or \
-                                url.find('pastor') >= 0:
+                        processor = "extract-profile-contacts-from-webpage"
+                        needsToBeProcessed = self.helpers.checkIfNeedsProcessing(church, processor, url)
 
-                            print('**************** process page: ', url)
-                            startURLs.append(url)
+                        if needsToBeProcessed:
+
+                            if url.find('staff') >= 0 or \
+                                    url.find('about') >= 0 or \
+                                    url.find('leader') >= 0 or \
+                                    url.find('contact') >= 0 or \
+                                    url.find('team') >= 0 or \
+                                    url.find('leader') >= 0 or \
+                                    url.find('who-we-are') >= 0 or \
+                                    url.find('pastor') >= 0:
+
+                                print('**************** process page: ', url)
+                                startURLs.append(url)
 
     def save_image(self, response):
 

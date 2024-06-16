@@ -3,12 +3,14 @@ import json
 import scrapy
 from scrapy_splash import SplashRequest
 
+from quotesbot.utilities.helpers import Helpers
+
 from quotesbot.processors.findChurchesGoogleSearch import FindChurchesGoogleSearch
 from quotesbot.processors.findChurchesGooglePlaces import FindChurchesGooglePlaces
 
 from quotesbot.processors.updateRDFWithCities import UpdateRDFWithCities
 from quotesbot.processors.updateRDFWithChurches import UpdateRDFWithChurches
-
+from quotesbot.processors.updateRDFWithMultiChurchOrgs import UpdateRDFWithMultiChurchOrgs
 
 from quotesbot.processors.findChurchStaffWebPagesUsingSearch import FindChurchStaffWebPagesUsingSearch
 
@@ -19,6 +21,12 @@ class chcrawlerSpider(scrapy.Spider):
     name = "chcrawler"
 
     googleKey = ""
+
+    churches_file_path = "churches.json"
+    with open(churches_file_path, "r") as file:
+        churchesData = json.load(file)
+    churches = churchesData["churches"]
+
 
     startURLs = [
         "https://calvarybible.com"
@@ -33,6 +41,9 @@ class chcrawlerSpider(scrapy.Spider):
     updateRDF.updateWithChurches()
     '''
 
+    updateRDF = UpdateRDFWithMultiChurchOrgs()
+    updateRDF.updateRDFWithMultiChurchOrgs()
+
     # add churches based on cities
     '''
     churchFinder = FindChurchesGoogleSearch()
@@ -42,12 +53,10 @@ class chcrawlerSpider(scrapy.Spider):
     churchFinder.findChurches(googleKey)
     '''
 
-    # process church info
-    churches_file_path = "churches.json"
-    with open(churches_file_path, "r") as file:
-        churchesData = json.load(file)
-    churches = churchesData["churches"]
 
+    # process church info
+
+    '''
     for church in churches:
 
         changed = False
@@ -65,18 +74,7 @@ class chcrawlerSpider(scrapy.Spider):
             with open(churches_file_path, "w") as json_file:
                 json.dump(churchesData, json_file, indent=4)
 
-
-
-    # churchFinder.findChurchesUsingSpreadsheet()
-    # churchFinder.findChurchesUsingGooglePlaces()
-    # churchFinder.findChurchesUsingNonProfitData()
-    # churchFinder.findCityDemographicsFromCensusData()
-    # churchFinder.findCityDemographics()
-    # churchFinder.findCities()
-    # churchFinder.findChurches()
-    # churchFinder.findCounties()
-
-
+    '''
 
     def start_requests(self):
         print("............ start_requests ..........")
@@ -122,13 +120,16 @@ class chcrawlerSpider(scrapy.Spider):
 
     def parse(self, response):
 
-        church, isHomePage = self.findCurrentChurch(self.churches, response.url)
+        helpers = Helpers()
+        church, isHomePage = helpers.findChurch(self.churches, response.url)
         if church is not None and "name" in church:
 
             changed = False
 
+            '''
             updateWithStaff = UpdateChurchWithStaffFromWebPages()
-            changed = updateWithStaff.updateChurchWithStaffFromWebPages(church)
+            changed = updateWithStaff.updateChurchWithStaffFromWebPages(church, response)
+            '''
 
             if changed:
                 # save to churches file

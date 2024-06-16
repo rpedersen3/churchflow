@@ -16,6 +16,7 @@ class Helpers:
             if processed["page"].lower().startswith(url.lower()):
 
                 needsToBeProcessed = False
+                print("found page so don't process")
 
                 if "datetime" in processed:
 
@@ -23,6 +24,9 @@ class Helpers:
                     dt = datetime.strptime(datetimeStr, "%Y-%m-%d %H:%M:%S.%f")
                     if dt.date() >= datetime.today().date():
                         needsToBeProcessed = False
+
+
+                break
 
         return needsToBeProcessed
 
@@ -34,7 +38,7 @@ class Helpers:
                 }
         currentChurch["processed"][processor].append(processed)
 
-    def findCurrentChurch(self, churches, url):
+    def findChurch(self, churches, url):
 
         isHomePage = False
         currentChurch = None

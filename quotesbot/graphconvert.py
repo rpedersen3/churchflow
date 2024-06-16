@@ -44,9 +44,6 @@ class GraphConvert:
         OWL = Namespace("http://www.w3.org/2002/07/owl#")
         g2.bind("owl", OWL)
 
-        FOAF = Namespace("http://xmlns.com/foaf/0.1/")
-        g2.bind("foaf", FOAF)
-
         GEO = Namespace("http://www.w3.org/2003/01/geo/wgs84_pos#")
         g2.bind("geo", GEO)
 
@@ -94,7 +91,6 @@ class GraphConvert:
 
         n = URIRef("http://churchcore.io/frontrange#")
         OWL = Namespace("http://www.w3.org/2002/07/owl#")
-        FOAF = Namespace("http://xmlns.com/foaf/0.1/")
         GEO = Namespace("http://www.w3.org/2003/01/geo/wgs84_pos#")
         VCARD = Namespace("http://www.w3.org/2006/vcard/ns#")
         RC = Namespace("http://richcanvas.io/ns#")
@@ -214,7 +210,6 @@ class GraphConvert:
 
         n = URIRef("http://churchcore.io/frontrange#")
         OWL = Namespace("http://www.w3.org/2002/07/owl#")
-        FOAF = Namespace("http://xmlns.com/foaf/0.1/")
         GEO = Namespace("http://www.w3.org/2003/01/geo/wgs84_pos#")
         VCARD = Namespace("http://www.w3.org/2006/vcard/ns#")
         RC = Namespace("http://richcanvas.io/ns#")
