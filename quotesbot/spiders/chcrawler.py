@@ -33,16 +33,17 @@ class chcrawlerSpider(scrapy.Spider):
     ]
 
     # update rdf file with church data
-    '''
+
     updateRDF = UpdateRDFWithCities()
     updateRDF.updateWithCities()
 
     updateRDF = UpdateRDFWithChurches()
     updateRDF.updateWithChurches()
-    '''
 
+    '''
     updateRDF = UpdateRDFWithMultiChurchOrgs()
     updateRDF.updateRDFWithMultiChurchOrgs()
+    '''
 
     # add churches based on cities
     '''
