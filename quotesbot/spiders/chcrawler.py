@@ -7,10 +7,12 @@ from quotesbot.utilities.helpers import Helpers
 
 from quotesbot.processors.findChurchesGoogleSearch import FindChurchesGoogleSearch
 from quotesbot.processors.findChurchesGooglePlaces import FindChurchesGooglePlaces
+from quotesbot.processors.findDuplicateChurches import FindDuplicateChurches
 
 from quotesbot.processors.updateRDFWithCities import UpdateRDFWithCities
 from quotesbot.processors.updateRDFWithChurches import UpdateRDFWithChurches
 from quotesbot.processors.updateRDFWithMultiChurchOrgs import UpdateRDFWithMultiChurchOrgs
+
 
 from quotesbot.processors.findChurchStaffWebPagesUsingSearch import FindChurchStaffWebPagesUsingSearch
 
@@ -34,17 +36,20 @@ class chcrawlerSpider(scrapy.Spider):
 
     # update rdf file with church data
 
+    '''
     updateRDF = UpdateRDFWithCities()
     updateRDF.updateWithCities()
 
     updateRDF = UpdateRDFWithChurches()
     updateRDF.updateWithChurches()
 
-    '''
+    
     updateRDF = UpdateRDFWithMultiChurchOrgs()
     updateRDF.updateRDFWithMultiChurchOrgs()
-    '''
 
+    updateRDF = UpdateRDFWithColocatedChurches()
+    updateRDF.updateRDFWithColocatedChurches()
+    '''
     # add churches based on cities
     '''
     churchFinder = FindChurchesGoogleSearch()
@@ -53,7 +58,8 @@ class chcrawlerSpider(scrapy.Spider):
     churchFinder = FindChurchesGooglePlaces()
     churchFinder.findChurches(googleKey)
     '''
-
+    churchFinder = FindDuplicateChurches()
+    churchFinder.findDuplicateChurches()
 
     # process church info
 

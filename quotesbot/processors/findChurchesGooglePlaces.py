@@ -110,7 +110,6 @@ class FindChurchesGooglePlaces:
 
         if "websiteUri" in data:
             currentChurch["link"] = data["websiteUri"]
-            currentChurch["websiteUri"] = data["websiteUri"]
             print("google websiteUri: ", data["websiteUri"])
 
         if "nationalPhoneNumber" in data:

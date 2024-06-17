@@ -3,7 +3,7 @@ from urllib.parse import urlparse
 import json
 
 
-class UpdateRDFWithMultiChurchOrgs:
+class FindDuplicateChurches:
 
     OWL = Namespace("http://www.w3.org/2002/07/owl#")
     FOAF = Namespace("http://xmlns.com/foaf/0.1/")
@@ -99,7 +99,7 @@ class UpdateRDFWithMultiChurchOrgs:
         return None
 
 
-    def findChurchWithSameLocation(self, matchChurches, church):
+    def findChurchMatch(self, matchChurches, church):
 
         for ch in matchChurches:
 
@@ -114,7 +114,31 @@ class UpdateRDFWithMultiChurchOrgs:
                     longitude = float(church["longitude"])
 
                     if (abs(chLatitude - latitude) < 0.003 and abs(chLongitude - longitude) < 0.003):
-                        return ch
+
+                        # find another thing to cause match
+                        if "googlePlaceId" in ch and "googlePlaceId" in church:
+                            if ch["googlePlaceId"] == church["googlePlaceId"]:
+                                return ch
+
+                        if "ein" in ch and "ein" in church:
+                            if ch["ein"] == church["ein"]:
+                                return ch
+
+                        if "name" in ch and "name" in church:
+                            if ch["name"].lower() == church["name"].lower():
+                                return ch
+
+                        if "link" in ch and "link" in church:
+
+                            parsed_url = urlparse(ch["link"])
+                            chDomain = parsed_url.netloc.replace("www.", "")
+
+                            parsed_url = urlparse(church["link"])
+                            churchDomain = parsed_url.netloc.replace("www.", "")
+
+                            if chDomain == churchDomain:
+                                return ch
+
 
         return None
 
@@ -123,53 +147,52 @@ class UpdateRDFWithMultiChurchOrgs:
         return church["name"]
 
 
-    def updateRDFWithMultiChurchOrgs(self):
+    def findDuplicateChurches(self):
+
+        print(" ........ updateRDFWithColocatedChurches")
 
         g2 = self.setupRDFFile()
 
         # get a list of unique churches
-        uniqueChurches = []
+        colocatedChurches = []
         for church in self.churches:
-            if self.findChurchWithSameLocation(uniqueChurches, church) is None:
-                uniqueChurches.append(church)
 
-        # cluster church orgs
-        churchOrgs = []
-        for church in uniqueChurches:
+            if "latitude" in church and "longitude" in church:
+                colocatedChurch = self.findChurchMatch(colocatedChurches, church)
+                if colocatedChurch is None:
+                    colocatedChurch = {
+                        "latitude": church["latitude"],
+                        "longitude": church["longitude"],
+                        "churches": []
+                    }
 
+                    # find another thing
+                    foundAnotherThing = False
+                    if "googlePlaceId" in church:
+                        colocatedChurch["googlePlaceId"] = church["googlePlaceId"]
 
-            if "name" not in church:
-                return
+                    if "ein" in church:
+                        colocatedChurch["ein"] = church["ein"]
 
+                    if "name" in church:
+                        colocatedChurch["name"] = church["name"]
 
-            if "name" in church and "link" in church:
-
-                link = church["link"]
-                parsed_url = urlparse(link)
-                domain = parsed_url.netloc.replace("www.", "")
-
-                # not a social website
-                if domain.find("facebook") == -1 and domain.find("tripadvisor") == -1:
-
-                    foundChurchOrg = self.findChurchOrgWithDomain(churchOrgs, domain)
-                    if foundChurchOrg is None:
-                        rootName = self.getRootName(church)
-                        rootLink = "https://www." + domain
-                        foundChurchOrg = {
-                            "name": rootName,
-                            "link": rootLink,
-                            "subChurches": []
-                        }
-
-                        churchOrgs.append(foundChurchOrg)
-
-                    foundChurchOrg["subChurches"].append(church)
+                    if "link" in church:
+                        colocatedChurch["link"] = church["link"]
 
 
-        for churchOrg in churchOrgs:
 
-            if (len(churchOrg["subChurches"]) > 1):
+                    colocatedChurch["churches"].append(church)
+                    colocatedChurches.append(colocatedChurch)
 
-                print("multi church org: ", churchOrg["name"], ', ', churchOrg["link"])
-                for subChurch in churchOrg["subChurches"]:
-                    print(".... ", subChurch["name"], ", ", subChurch["link"])
+                else:
+                    colocatedChurch["churches"].append(church)
+
+
+        for colocatedChurch in colocatedChurches:
+
+            if len(colocatedChurch["churches"]) > 1:
+                print("colocated churches")
+                for ch in colocatedChurch["churches"]:
+                    print(".... name: ", ch["name"])
+
