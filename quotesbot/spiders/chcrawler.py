@@ -66,6 +66,7 @@ class chcrawlerSpider(scrapy.Spider):
     churchFinder = FindChurchWebsite()
     churchFinder.findChurchWebsite()
 
+
     # process church info
 
     '''
