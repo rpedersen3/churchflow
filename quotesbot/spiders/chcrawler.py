@@ -7,7 +7,8 @@ from quotesbot.utilities.helpers import Helpers
 
 from quotesbot.processors.findChurchesGoogleSearch import FindChurchesGoogleSearch
 from quotesbot.processors.findChurchesGooglePlaces import FindChurchesGooglePlaces
-from quotesbot.processors.findDuplicateChurches import FindDuplicateChurches
+from quotesbot.processors.findChurchDuplicates import FindChurchDuplicates
+from quotesbot.processors.findChurchWebsite import FindChurchWebsite
 
 from quotesbot.processors.updateRDFWithCities import UpdateRDFWithCities
 from quotesbot.processors.updateRDFWithChurches import UpdateRDFWithChurches
@@ -57,9 +58,13 @@ class chcrawlerSpider(scrapy.Spider):
 
     churchFinder = FindChurchesGooglePlaces()
     churchFinder.findChurches(googleKey)
+    
+    churchFinder = FindChurchDuplicates()
+    churchFinder.findChurchDuplicates()
     '''
-    churchFinder = FindDuplicateChurches()
-    churchFinder.findDuplicateChurches()
+
+    churchFinder = FindChurchWebsite()
+    churchFinder.findChurchWebsite()
 
     # process church info
 
