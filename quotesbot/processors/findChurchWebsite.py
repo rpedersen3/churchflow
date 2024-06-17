@@ -96,7 +96,9 @@ class FindChurchWebsite:
 
                 if linkDomain.lower() != websiteDomain.lower():
 
+                    print("..................")
                     print("link: ", church["link"], ", websiteUri: ", church["websiteUri"])
+                    print("name: ", church["name"])
 
 
 
