@@ -3906,6 +3906,17 @@
             "numberOfChurches": 58
         },
         {
+            "name": "Peyton ",
+            "fips": "8041",
+            "lat": 39.026409,
+            "lon": -104.478523,
+            "population": 300,
+            "crawled": "2024-04-07 06:02:49.582141",
+            "crawled-city": "Peyton",
+            "countyName": "El Paso",
+            "numberOfChurches": 5
+        },
+        {
             "name": "Canon City",
             "fips": "8043",
             "lat": 38.443,
