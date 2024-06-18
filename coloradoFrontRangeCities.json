@@ -3917,6 +3917,15 @@
             "numberOfChurches": 5
         },
         {
+            "name": "LaSalle ",
+            "fips": "",
+            "lat": 40.351234,
+            "lon": -104.702663,
+            "population": 2359,
+            "countyName": "Weld",
+            "numberOfChurches": 3
+        },
+        {
             "name": "Canon City",
             "fips": "8043",
             "lat": 38.443,
