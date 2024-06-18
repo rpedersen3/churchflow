@@ -82,6 +82,7 @@ class FindChurchWebsite:
 
         print(" ........ updateRDFWithColocatedChurches")
 
+        count = 1
         for church in self.churches:
 
             if "link" in church and "websiteUri" in church:
@@ -99,6 +100,8 @@ class FindChurchWebsite:
                     print("..................")
                     print("link: ", church["link"], ", websiteUri: ", church["websiteUri"])
                     print("name: ", church["name"])
+                    print("count: ", count)
+                    count = count + 1
 
 
 
