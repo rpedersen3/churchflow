@@ -118,14 +118,17 @@ class FindChurchDuplicates:
                         # find another thing to cause match
                         if "googlePlaceId" in ch and "googlePlaceId" in church:
                             if ch["googlePlaceId"] == church["googlePlaceId"]:
+                                print("match google place id")
                                 return ch
 
                         if "ein" in ch and "ein" in church:
                             if ch["ein"] == church["ein"]:
+                                print("match ein")
                                 return ch
 
                         if "name" in ch and "name" in church:
                             if ch["name"].lower() == church["name"].lower():
+                                print("match name")
                                 return ch
 
                         if "link" in ch and "link" in church:
@@ -137,6 +140,7 @@ class FindChurchDuplicates:
                             churchDomain = parsed_url.netloc.replace("www.", "")
 
                             if chDomain == churchDomain:
+                                print("match domain")
                                 return ch
 
 
@@ -145,6 +149,14 @@ class FindChurchDuplicates:
 
     def getRootName(self, church):
         return church["name"]
+
+
+    def saveChurches(self):
+
+        # save to churches file
+        self.churchesData["churches"] = self.churches
+        with open(self.churches_file_path, "w") as json_file:
+            json.dump(self.churchesData, json_file, indent=4)
 
 
     def findChurchDuplicates(self):
@@ -178,8 +190,9 @@ class FindChurchDuplicates:
                         colocatedChurch["name"] = church["name"]
 
                     if "link" in church:
-                        colocatedChurch["link"] = church["link"]
-
+                        link = church["link"]
+                        parsed_url = urlparse(link)
+                        churchDomain = parsed_url.netloc.replace("www.", "")
 
 
                     colocatedChurch["churches"].append(church)
@@ -189,10 +202,34 @@ class FindChurchDuplicates:
                     colocatedChurch["churches"].append(church)
 
 
+        matched = 1
+        for ch in self.churches:
+            ch["is-primary"] = "yes"
+            ch["mergeChurches"] = []
+
         for colocatedChurch in colocatedChurches:
 
             if len(colocatedChurch["churches"]) > 1:
+
+                print("------------ ", matched)
                 print("colocated churches")
+
+                matched = matched + 1
+
+                primaryChurch = colocatedChurch["churches"][0]
+                mergeChurches = []
+                offset = 0
                 for ch in colocatedChurch["churches"]:
                     print(".... name: ", ch["name"])
+
+                    if offset >= 1:
+                        mergeChurches.append(ch)
+                        ch["is-primary"] = "no"
+                    offset = offset + 1
+
+                primaryChurch["mergeChurches"] = mergeChurches
+
+
+        self.saveChurches()
+
 

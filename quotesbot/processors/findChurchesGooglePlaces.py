@@ -184,3 +184,4 @@ class FindChurchesGooglePlaces:
 
                             self.churches.append(currentChurch)
                             self.saveChurches()
+

@@ -99,195 +99,194 @@ class UpdateRDFWithChurches:
 
         for church in self.churches:
 
-            if "name" not in church:
-                return
+            if "name" in church and "is-primary" in church and church["is-primary"] == "yes":
 
-            glooOrgName = "gloo"
-            glooOrgId = glooOrgName.replace(" ", "").lower()
-            glooOrg = self.n + glooOrgId
+                glooOrgName = "gloo"
+                glooOrgId = glooOrgName.replace(" ", "").lower()
+                glooOrg = self.n + glooOrgId
 
-            squarespaceBusinessSystemName = "squarespace"
-            squarespaceBusinessSystemId = squarespaceBusinessSystemName.replace(" ", "").lower()
-            squarespaceBusinessSystem = self.n + squarespaceBusinessSystemId
+                squarespaceBusinessSystemName = "squarespace"
+                squarespaceBusinessSystemId = squarespaceBusinessSystemName.replace(" ", "").lower()
+                squarespaceBusinessSystem = self.n + squarespaceBusinessSystemId
 
-            churchCenterBusinessSystemName = "churchcenter"
-            churchCenterBusinessSystemId = churchCenterBusinessSystemName.replace(" ", "").lower()
-            churchCenterBusinessSystem = self.n + churchCenterBusinessSystemId
-
-            if "name" in church and "latitude" in church and "longitude" in church:
-
-                churchOrgName = self.clean(church["name"])
-                churchOrgId = self.generate_random_string() # churchOrgName.replace(" ", "").lower()
-                chOrg = self.n + churchOrgId
-
-                '''
-                query = """select ?church where { ?church rc:name ?churchName .
-                                            FILTER(?church = <""" + str(chOrg) + """>) }
-                                            """
-
-                results = g2.query(query)
-
-                if len(results) == 0:
-                '''
-
-                g2.add((chOrg, RDF.type, self.OWL.NamedIndividual))
-                g2.add((chOrg, RDF.type, self.CC.ChurchOrganization))
-                g2.add((chOrg, self.RC.name, Literal(churchOrgName)))
-
-                if "org" in church:
-                    orgName = church["org"]
-
-                    orgChurchOrgName = self.clean(orgName)
-                    orgChurchOrgId = orgChurchOrgName.replace(" ", "").lower()
-                    orgChOrg = self.n + orgChurchOrgId
-
-                    g2.add((orgChOrg, RDF.type, self.OWL.NamedIndividual))
-                    g2.add((orgChOrg, RDF.type, self.CC.ChurchOrganization))
-                    g2.add((orgChOrg, self.RC.name, Literal(orgChurchOrgName)))
-
-                    g2.add((orgChOrg, self.RC.hasSubOrganization, chOrg))
-
-                churchSiteName = self.clean(church["name"]) + " Site"
-                churchSiteId = self.generate_random_string() # churchSiteName.replace(" ", "").lower()
-                chSite = self.n + churchSiteId
-
-                g2.add((chSite, RDF.type, self.OWL.NamedIndividual))
-                g2.add((chSite, RDF.type, self.CC.ChurchSite))
-                g2.add((chSite, self.RC.name, Literal(churchSiteName)))
-                g2.add((chOrg, self.RC.hasSite, chSite))
+                churchCenterBusinessSystemName = "churchcenter"
+                churchCenterBusinessSystemId = churchCenterBusinessSystemName.replace(" ", "").lower()
+                churchCenterBusinessSystem = self.n + churchCenterBusinessSystemId
 
                 if "latitude" in church and "longitude" in church:
-                    chSiteLat = church["latitude"]
-                    chSiteLong = church["longitude"]
-                    g2.add((chSite, self.GEO.lat, Literal(chSiteLat)))
-                    g2.add((chSite, self.GEO.long, Literal(chSiteLong)))
 
-                if "addressInfo" in church:
-                    if "city" in church["addressInfo"] and "county" in church["addressInfo"] and "zipcode" in \
-                            church["addressInfo"]:
+                    churchOrgName = self.clean(church["name"])
+                    churchOrgId = self.generate_random_string() # churchOrgName.replace(" ", "").lower()
+                    chOrg = self.n + churchOrgId
 
-                        print(".. add site address ..")
+                    '''
+                    query = """select ?church where { ?church rc:name ?churchName .
+                                                FILTER(?church = <""" + str(chOrg) + """>) }
+                                                """
+    
+                    results = g2.query(query)
+    
+                    if len(results) == 0:
+                    '''
 
-                        churchSiteAddressName = self.clean(church["name"]) + " Site Address"
-                        churchSiteAddressId = self.generate_random_string() # churchSiteAddressName.replace(" ", "").lower()
-                        chSiteAddress = self.n + churchSiteAddressId
+                    g2.add((chOrg, RDF.type, self.OWL.NamedIndividual))
+                    g2.add((chOrg, RDF.type, self.CC.ChurchOrganization))
+                    g2.add((chOrg, self.RC.name, Literal(churchOrgName)))
 
-                        g2.add((chSiteAddress, RDF.type, self.OWL.NamedIndividual))
-                        g2.add((chSiteAddress, RDF.type, self.RC.PostalAddress))
-                        g2.add((chSiteAddress, self.RC.name, Literal(churchSiteAddressName)))
+                    if "org" in church:
+                        orgName = church["org"]
 
-                        chSiteCity = church["addressInfo"]["city"]
-                        chSiteCounty = church["addressInfo"]["county"]
-                        chSiteZipcode = church["addressInfo"]["zipcode"]
-                        g2.add((chSiteAddress, self.VCARD.locality, Literal(chSiteCity)))
-                        g2.add((chSiteAddress, self.VCARD.region, Literal(chSiteCounty)))
-                        g2.add((chSiteAddress, self.VCARD.postalCode, Literal(chSiteZipcode)))
+                        orgChurchOrgName = self.clean(orgName)
+                        orgChurchOrgId = orgChurchOrgName.replace(" ", "").lower()
+                        orgChOrg = self.n + orgChurchOrgId
 
-                        if "latitude" in church and "longitude" in church:
-                            chSiteAddressLat = church["latitude"]
-                            chSiteAddressLong = church["longitude"]
-                            g2.add((chSiteAddress, self.VCARD.latitude, Literal(chSiteAddressLat)))
-                            g2.add((chSiteAddress, self.VCARD.longitude, Literal(chSiteAddressLong)))
+                        g2.add((orgChOrg, RDF.type, self.OWL.NamedIndividual))
+                        g2.add((orgChOrg, RDF.type, self.CC.ChurchOrganization))
+                        g2.add((orgChOrg, self.RC.name, Literal(orgChurchOrgName)))
 
-                        g2.add((chSite, self.RC.hasSiteAddress, chSiteAddress))
+                        g2.add((orgChOrg, self.RC.hasSubOrganization, chOrg))
 
-                        # link church to city
-                        query = """select ?city ?name where { ?city rdf:type rc:City .  ?city rc:name ?name . 
-                                                            FILTER(?name = \"""" + chSiteCity + """\") }
-                                                            """
-                        results = g2.query(query)
+                    churchSiteName = self.clean(church["name"]) + " Site"
+                    churchSiteId = self.generate_random_string() # churchSiteName.replace(" ", "").lower()
+                    chSite = self.n + churchSiteId
 
-                        print(".......... query for city: ", query)
-                        if len(results) > 0:
-                            for row in results:
-                                print("row: ", row["city"])
-                                g2.add((chSite, self.RC.city, row["city"]))
+                    g2.add((chSite, RDF.type, self.OWL.NamedIndividual))
+                    g2.add((chSite, RDF.type, self.CC.ChurchSite))
+                    g2.add((chSite, self.RC.name, Literal(churchSiteName)))
+                    g2.add((chOrg, self.RC.hasSite, chSite))
 
-                if "chmss" in church:
-                    for chms in church["chmss"]:
-                        if chms["type"] == "gloo":
-                            # add gloo as a ministry partner
-                            g2.add((chOrg, self.RC.isPartnerOf, glooOrg))
+                    if "latitude" in church and "longitude" in church:
+                        chSiteLat = church["latitude"]
+                        chSiteLong = church["longitude"]
+                        g2.add((chSite, self.GEO.lat, Literal(chSiteLat)))
+                        g2.add((chSite, self.GEO.long, Literal(chSiteLong)))
 
-                        if chms["type"] == "squarespace":
-                            # add business system
-                            g2.add((chOrg, self.RC.hasBusinessSystem, squarespaceBusinessSystem))
+                    if "addressInfo" in church:
+                        if "city" in church["addressInfo"] and "county" in church["addressInfo"] and "zipcode" in \
+                                church["addressInfo"]:
 
-                        if chms["type"] == "churchcenter":
-                            # add business system
-                            g2.add((chOrg, self.RC.hasChurchManagementSystem, churchCenterBusinessSystem))
+                            print(".. add site address ..")
 
-                if "leadPastor" in church:
-                    leadPastor = church["leadPastor"]
-                    if "name" in leadPastor:
-                        name = self.clean(leadPastor["name"])
+                            churchSiteAddressName = self.clean(church["name"]) + " Site Address"
+                            churchSiteAddressId = self.generate_random_string() # churchSiteAddressName.replace(" ", "").lower()
+                            chSiteAddress = self.n + churchSiteAddressId
 
-                        personName = name
-                        personId = self.generate_random_string() # personName.replace(" ", "").lower()
-                        person = self.n + personId
+                            g2.add((chSiteAddress, RDF.type, self.OWL.NamedIndividual))
+                            g2.add((chSiteAddress, RDF.type, self.RC.PostalAddress))
+                            g2.add((chSiteAddress, self.RC.name, Literal(churchSiteAddressName)))
 
-                        g2.add((person, RDF.type, self.OWL.NamedIndividual))
-                        g2.add((person, RDF.type, self.RC.Person))
-                        g2.add((person, self.RC.name, Literal(personName)))
+                            chSiteCity = church["addressInfo"]["city"]
+                            chSiteCounty = church["addressInfo"]["county"]
+                            chSiteZipcode = church["addressInfo"]["zipcode"]
+                            g2.add((chSiteAddress, self.VCARD.locality, Literal(chSiteCity)))
+                            g2.add((chSiteAddress, self.VCARD.region, Literal(chSiteCounty)))
+                            g2.add((chSiteAddress, self.VCARD.postalCode, Literal(chSiteZipcode)))
 
-                        g2.add((chOrg, self.RC.hasMember, person))
+                            if "latitude" in church and "longitude" in church:
+                                chSiteAddressLat = church["latitude"]
+                                chSiteAddressLong = church["longitude"]
+                                g2.add((chSiteAddress, self.VCARD.latitude, Literal(chSiteAddressLat)))
+                                g2.add((chSiteAddress, self.VCARD.longitude, Literal(chSiteAddressLong)))
 
-                        postName = churchOrgName + " Lead Pastor"
-                        postId = self.generate_random_string() # postName.replace(" ", "").lower()
-                        post = self.n + postId
+                            g2.add((chSite, self.RC.hasSiteAddress, chSiteAddress))
 
-                        g2.add((post, RDF.type, self.OWL.NamedIndividual))
-                        g2.add((post, RDF.type, self.RC.Post))
-                        g2.add((post, self.RC.name, Literal(postName)))
-                        g2.add((post, self.RC.heldBy, person))
-
-                        g2.add((chOrg, self.RC.hasPost, post))
-
-                if "link" in church:
-                    websiteUri = church["link"];
-                    websiteId = self.generate_random_string() # self.clean(websiteUri.replace(" ", "").lower())
-                    website = self.n + websiteId
-
-                    g2.add((website, RDF.type, self.OWL.NamedIndividual))
-                    g2.add((website, self.RC.type, self.RC.Website))
-                    g2.add((website, self.RC.uri, Literal(websiteUri)))
-
-                    g2.add((chOrg, self.RC.hasWebsite, website))
-
-                '''
-                if "contacts" in church:
-                    contacts = church["contacts"]
-                    for contact in contacts:
-                        if "name" in contact:
-
-                            name = self.clean(contact["name"])
-
-                            query = """select ?person where { ?person rc:name ?name . 
-                                    FILTER(?name = \"""" + name + """\") }
-                                    """
+                            # link church to city
+                            query = """select ?city ?name where { ?city rdf:type rc:City .  ?city rc:name ?name . 
+                                                                FILTER(?name = \"""" + chSiteCity + """\") }
+                                                                """
                             results = g2.query(query)
 
-                            if len(results) == 0:
-                                personName = name
-                                personId = personName.replace(" ", "").lower()
-                                person = self.n + personId
+                            print(".......... query for city: ", query)
+                            if len(results) > 0:
+                                for row in results:
+                                    print("row: ", row["city"])
+                                    g2.add((chSite, self.RC.city, row["city"]))
 
-                                g2.add((person, RDF.type, self.OWL.NamedIndividual))
-                                g2.add((person, RDF.type, self.RC.Person))
-                                g2.add((person, self.RC.name, Literal(personName)))
+                    if "chmss" in church:
+                        for chms in church["chmss"]:
+                            if chms["type"] == "gloo":
+                                # add gloo as a ministry partner
+                                g2.add((chOrg, self.RC.isPartnerOf, glooOrg))
 
-                                g2.add((chOrg, self.RC.hasMember, person))
-                            else:
-                                print("person already in knowledge base: ", name)
+                            if chms["type"] == "squarespace":
+                                # add business system
+                                g2.add((chOrg, self.RC.hasBusinessSystem, squarespaceBusinessSystem))
 
+                            if chms["type"] == "churchcenter":
+                                # add business system
+                                g2.add((chOrg, self.RC.hasChurchManagementSystem, churchCenterBusinessSystem))
 
-                print(g2.serialize(format="pretty-xml"))
-                data = g2.serialize(format="pretty-xml")
+                    if "leadPastor" in church:
+                        leadPastor = church["leadPastor"]
+                        if "name" in leadPastor:
+                            name = self.clean(leadPastor["name"])
 
-                with open('frontrange_out.rdf', "w", encoding="utf-8") as f:
-                    f.write(data)
+                            personName = name
+                            personId = self.generate_random_string() # personName.replace(" ", "").lower()
+                            person = self.n + personId
 
-                '''
+                            g2.add((person, RDF.type, self.OWL.NamedIndividual))
+                            g2.add((person, RDF.type, self.RC.Person))
+                            g2.add((person, self.RC.name, Literal(personName)))
+
+                            g2.add((chOrg, self.RC.hasMember, person))
+
+                            postName = churchOrgName + " Lead Pastor"
+                            postId = self.generate_random_string() # postName.replace(" ", "").lower()
+                            post = self.n + postId
+
+                            g2.add((post, RDF.type, self.OWL.NamedIndividual))
+                            g2.add((post, RDF.type, self.RC.Post))
+                            g2.add((post, self.RC.name, Literal(postName)))
+                            g2.add((post, self.RC.heldBy, person))
+
+                            g2.add((chOrg, self.RC.hasPost, post))
+
+                    if "link" in church:
+                        websiteUri = church["link"];
+                        websiteId = self.generate_random_string() # self.clean(websiteUri.replace(" ", "").lower())
+                        website = self.n + websiteId
+
+                        g2.add((website, RDF.type, self.OWL.NamedIndividual))
+                        g2.add((website, self.RC.type, self.RC.Website))
+                        g2.add((website, self.RC.uri, Literal(websiteUri)))
+
+                        g2.add((chOrg, self.RC.hasWebsite, website))
+
+                    '''
+                    if "contacts" in church:
+                        contacts = church["contacts"]
+                        for contact in contacts:
+                            if "name" in contact:
+    
+                                name = self.clean(contact["name"])
+    
+                                query = """select ?person where { ?person rc:name ?name . 
+                                        FILTER(?name = \"""" + name + """\") }
+                                        """
+                                results = g2.query(query)
+    
+                                if len(results) == 0:
+                                    personName = name
+                                    personId = personName.replace(" ", "").lower()
+                                    person = self.n + personId
+    
+                                    g2.add((person, RDF.type, self.OWL.NamedIndividual))
+                                    g2.add((person, RDF.type, self.RC.Person))
+                                    g2.add((person, self.RC.name, Literal(personName)))
+    
+                                    g2.add((chOrg, self.RC.hasMember, person))
+                                else:
+                                    print("person already in knowledge base: ", name)
+    
+    
+                    print(g2.serialize(format="pretty-xml"))
+                    data = g2.serialize(format="pretty-xml")
+    
+                    with open('frontrange_out.rdf', "w", encoding="utf-8") as f:
+                        f.write(data)
+    
+                    '''
 
             #print(f"Graph has {len(g2)} triples.\n")
             print(".")
