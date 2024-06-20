@@ -95,9 +95,12 @@ class FindChurchDuplicates:
 
             if "link" in church:
 
+                domain = domain.replace("/", "")
+
                 link = church["link"]
                 parsed_url = urlparse(link)
                 churchDomain = parsed_url.netloc.replace("www.", "")
+                churchDomain = churchDomain.replace("/", "")
 
                 if domain.lower() == churchDomain.lower():
 
@@ -144,9 +147,11 @@ class FindChurchDuplicates:
 
                             parsed_url = urlparse(ch["link"])
                             chDomain = parsed_url.netloc.replace("www.", "")
+                            chDomain = chDomain.replace("/", "")
 
                             parsed_url = urlparse(church["link"])
                             churchDomain = parsed_url.netloc.replace("www.", "")
+                            churchDomain = churchDomain.replace("/", "")
 
                             if chDomain == churchDomain:
                                 return ch
@@ -238,24 +243,29 @@ class FindChurchDuplicates:
                         }
                         print("set address: ", addr)
                         church["addressInfo"] = addr
-            '''
+            
 
             if "googlePlaceId" in church:
                 church["primary-source"] = "GooglePlaces"
+            '''
+
+            church["is-primary"] = "yes"
+            church["mergeChurches"] = []
 
             if "latitude" in church and "longitude" in church:
                 colocatedChurch = self.findChurchMatch(colocatedChurches, church)
                 if colocatedChurch is None:
+
                     colocatedChurch = {
                         "latitude": church["latitude"],
                         "longitude": church["longitude"],
                         "churches": []
                     }
 
-                    # find another thing
-                    foundAnotherThing = False
                     if "googlePlaceId" in church:
                         colocatedChurch["googlePlaceId"] = church["googlePlaceId"]
+                    if "openStreetMapPlaceId" in church:
+                        colocatedChurch["openStreetMapPlaceId"] = church["openStreetMapPlaceId"]
 
                     if "ein" in church:
                         colocatedChurch["ein"] = church["ein"]
@@ -265,14 +275,16 @@ class FindChurchDuplicates:
 
                     if "link" in church:
                         link = church["link"]
-                        parsed_url = urlparse(link)
-                        churchDomain = parsed_url.netloc.replace("www.", "")
-
+                        colocatedChurch["link"] = link
 
                     colocatedChurch["churches"].append(church)
                     colocatedChurches.append(colocatedChurch)
 
                 else:
+
+                    church["is-primary"] = "no"
+                    church["mergeChurches"] = []
+
                     addToChurches = True
                     if "openStreetMapPlaceId" not in church:
                         addToChurches = False
@@ -282,10 +294,6 @@ class FindChurchDuplicates:
 
 
         matched = 1
-        for ch in self.churches:
-            ch["is-primary"] = "yes"
-            ch["mergeChurches"] = []
-
         for colocatedChurch in colocatedChurches:
 
             if len(colocatedChurch["churches"]) > 1:
@@ -302,7 +310,7 @@ class FindChurchDuplicates:
 
                     if offset >= 1:
                         mergeChurches.append(ch["uniqueId"])
-                        ch["is-primary"] = "no"
+
                     offset = offset + 1
 
                 primaryChurch["mergeChurches"] = mergeChurches

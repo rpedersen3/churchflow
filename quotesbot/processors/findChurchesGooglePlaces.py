@@ -129,8 +129,11 @@ class FindChurchesGooglePlaces:
         with open(self.churches_file_path, "w") as json_file:
             json.dump(self.churchesData, json_file, indent=4)
 
+    def findChurch(self, church, googleApiKey):
 
-    def findChurches(self):
+        return None
+
+    def findChurches(self, googleApiKey):
 
         # get cities
         file_path = "coloradoFrontRangeCities.json"
@@ -151,7 +154,7 @@ class FindChurchesGooglePlaces:
 
                 time.sleep(1)
 
-                api_key = ''
+                api_key = googleApiKey
                 endpoint = 'https://places.googleapis.com/v1/places:searchText' + "?fields=*&key=" + api_key
 
                 query = city["name"] + " Colorado, Church"
