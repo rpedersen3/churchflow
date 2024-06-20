@@ -133,8 +133,16 @@ class UpdateRDFWithChurches:
                     g2.add((chOrg, RDF.type, self.CC.ChurchOrganization))
                     g2.add((chOrg, self.RC.name, Literal(churchOrgName)))
 
+                    if "primary-source" in church:
+                        primarySource = church["primary-source"]
+                        g2.add((chOrg, self.RC.primarySource, Literal(primarySource)))
+                    else:
+                        primarySource = "unknown"
+                        g2.add((chOrg, self.RC.primarySource, Literal(primarySource)))
+
                     if "org" in church:
                         orgName = church["org"]
+
 
                         orgChurchOrgName = self.clean(orgName)
                         orgChurchOrgId = orgChurchOrgName.replace(" ", "").lower()
@@ -145,6 +153,8 @@ class UpdateRDFWithChurches:
                         g2.add((orgChOrg, self.RC.name, Literal(orgChurchOrgName)))
 
                         g2.add((orgChOrg, self.RC.hasSubOrganization, chOrg))
+
+
 
                     churchSiteName = self.clean(church["name"]) + " Site"
                     churchSiteId = self.generate_random_string() # churchSiteName.replace(" ", "").lower()
@@ -192,7 +202,7 @@ class UpdateRDFWithChurches:
 
                             # link church to city
                             query = """select ?city ?name where { ?city rdf:type rc:City .  ?city rc:name ?name . 
-                                                                FILTER(?name = \"""" + chSiteCity + """\") }
+                                                                FILTER(LCASE(?name) = LCASE( \"""" + chSiteCity + """\")) }
                             
                                                               """
                             try:

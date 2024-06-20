@@ -3,6 +3,7 @@ from urllib.parse import urlparse
 import json
 import string
 import random
+import requests
 
 class FindChurchDuplicates:
 
@@ -15,10 +16,15 @@ class FindChurchDuplicates:
     FR = Namespace("http://churchcore.io/frontrange#")
     n = URIRef("http://churchcore.io/frontrange#")
 
+    def myfunc(e):
+        if 'primary-source' in e:
+            return e['primary-source']
+        return "abc"
+
     churches_file_path = "churches.json"
     with open(churches_file_path, "r") as file:
         churchesData = json.load(file)
-    churches = churchesData["churches"]
+    churches = sorted(churchesData["churches"], key=myfunc)
 
 
     def setupRDFFile(self):
@@ -119,22 +125,19 @@ class FindChurchDuplicates:
                         # find another thing to cause match
 
                         # if location match and openStreetMapPlaceId then just match it
-                        if "openStreetMapPlaceId" in ch:
+                        if "openStreetMapPlaceId" in church:
                             return ch
 
                         if "googlePlaceId" in ch and "googlePlaceId" in church:
                             if ch["googlePlaceId"] == church["googlePlaceId"]:
-                                print("match google place id")
                                 return ch
 
                         if "ein" in ch and "ein" in church:
                             if ch["ein"] == church["ein"]:
-                                print("match ein")
                                 return ch
 
                         if "name" in ch and "name" in church:
                             if ch["name"].lower() == church["name"].lower():
-                                print("match name")
                                 return ch
 
                         if "link" in ch and "link" in church:
@@ -146,7 +149,6 @@ class FindChurchDuplicates:
                             churchDomain = parsed_url.netloc.replace("www.", "")
 
                             if chDomain == churchDomain:
-                                print("match domain")
                                 return ch
 
 
@@ -174,6 +176,28 @@ class FindChurchDuplicates:
         random_id = ''.join(random.choice(characters) for _ in range(length))
         return random_id
 
+    def geocodeAddress(self, address):
+
+        url = 'https://nominatim.openstreetmap.org/search?format=json&email=richardpedersen3@gmail.com&q=' + address
+        '''
+            params = {
+            'q': address,
+            'format': 'json'
+        }
+        response = requests.get(url, params=params)
+        '''
+        response = requests.get(url)
+        if response.status_code == 200:
+            data = response.json()
+            if data:
+                return data[0]['lat'], data[0]['lon']
+            else:
+                print('Address not found')
+                return None, None
+        else:
+            print('Error:', response.status_code)
+            return None, None
+
     def findChurchDuplicates(self):
 
         print(" ........ updateRDFWithColocatedChurches")
@@ -186,6 +210,38 @@ class FindChurchDuplicates:
 
             if "uniqueId" not in church:
                 church["uniqueId"] = self.generateRandomString()
+
+            '''
+            if "latitude" not in church and "longitude" not in church and "address" in church:
+                print("get lat lon for: ", church["address"])
+                lat, lon = self.geocodeAddress(church["address"])
+                if lat != None and lon != None:
+                    print("set lat: ", lat, ", lon: ", lon)
+                    church["latitude"] = str(lat)
+                    church["longitude"] = str(lon)
+
+            if "addressInfo" not in church and "address" in church:
+                print("get address info for: ", church["address"])
+                addParts = church["address"].split(",")
+                if len(addParts) == 4:
+                    street = addParts[0].strip()
+                    city = addParts[1].strip()
+                    zipcode = addParts[3].strip()
+
+                    if street != '' and city != '' and zipcode != '':
+                        addr = {
+                            "street": addParts[0].strip(),
+                            "city": addParts[1].strip(),
+                            "state": "CO",
+                            "country": "US",
+                            "zipcode": addParts[3].strip(),
+                        }
+                        print("set address: ", addr)
+                        church["addressInfo"] = addr
+            '''
+
+            if "googlePlaceId" in church:
+                church["primary-source"] = "GooglePlaces"
 
             if "latitude" in church and "longitude" in church:
                 colocatedChurch = self.findChurchMatch(colocatedChurches, church)
@@ -243,10 +299,6 @@ class FindChurchDuplicates:
                 mergeChurches = []
                 offset = 0
                 for ch in colocatedChurch["churches"]:
-                    print(".... name: ", ch["name"])
-
-                    if "primary-source" in ch:
-                        print("primary: ", ch["primary-source"], ", name: ", ch["name"])
 
                     if offset >= 1:
                         mergeChurches.append(ch["uniqueId"])
