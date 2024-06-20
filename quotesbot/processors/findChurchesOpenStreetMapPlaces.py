@@ -35,11 +35,17 @@ class FindChurchesOpenStreetMapPlaces:
         streetRoute = element['tags'].get('addr:street', 'Unknown')
         zipcode = element['tags'].get('addr:postcode', 'Unknown')
         city = element['tags'].get('addr:city', 'Unknown')
+        state = element['tags'].get('addr:state', 'Unknown')
 
-        lat = element['lat']
-        lon = element['lon']
+        if "lat" in element:
+            lat = element['lat']
+            lon = element['lon']
 
-        county = self.getCounty(lat, lon)
+        elif "center" in element:
+            lat = element['center']['lat']
+            lon = element['center']['lon']
+
+        county = "" #vself.getCounty(lat, lon)
 
         state = "CO"
         country = "USA"
@@ -53,7 +59,7 @@ class FindChurchesOpenStreetMapPlaces:
 
         currentChurch["addressInfo"] = addressInfo
 
-    def getCounty(lat, lon):
+    def getCounty(self, lat, lon):
         nominatim_url = f"https://nominatim.openstreetmap.org/reverse?format=json&lat={lat}&lon={lon}&zoom=10"
         response = requests.get(nominatim_url)
         if response.status_code == 200:
@@ -65,10 +71,8 @@ class FindChurchesOpenStreetMapPlaces:
 
     def updateChurchWithResults(self, currentChurch, element):
 
-        osm_id = element['id']
+        osm_id = str(element['id'])
         name = element['tags'].get('name', 'Unnamed')
-        lat = element['lat']
-        lon = element['lon']
         denomination = element['tags'].get('denomination', 'Unnamed')
         building = element['tags'].get('building', 'Unknown')
         operator = element['tags'].get('operator', 'Unknown')
@@ -76,12 +80,21 @@ class FindChurchesOpenStreetMapPlaces:
         phone = element['tags'].get('contact:phone', 'Unknown')
         website = element['tags'].get('contact:website', 'Unknown')
 
+        if "lat" in element:
+            lat = element['lat']
+            lon = element['lon']
+
+        elif "center" in element:
+            lat = element['center']['lat']
+            lon = element['center']['lon']
+
+
         currentChurch["primary-source"] = "OpenStreetMap"
 
         currentChurch["openStreetMapPlaceId"] = osm_id
         print("open street map place id: ", osm_id)
 
-        if name is not "Unnamed":
+        if name != "Unnamed":
             currentChurch["name"] = name
             currentChurch["displayName"] = name
             print("name: ", name)
@@ -93,24 +106,24 @@ class FindChurchesOpenStreetMapPlaces:
 
         self.setAddressInfo(element, currentChurch)
 
-        if website is not "Unknown":
+        if website != "Unknown":
             currentChurch["link"] = website
             currentChurch["websiteUri"] = website
             print("websiteUri: ", website)
 
-        if email is not "Unknown":
+        if email != "Unknown":
             currentChurch["email"] = email
 
-        if phone is not "Unknown":
+        if phone != "Unknown":
             currentChurch["phone"] = phone
 
-        if denomination is not "Unknown":
+        if denomination != "Unnamed":
             currentChurch["denomination"] = denomination
 
-        if operator is not "Unknown":
+        if operator != "Unknown":
             currentChurch["place-organization"] = operator
 
-        if building is not "Unknown":
+        if building != "Unknown":
             currentChurch["place-type"] = building
 
     def saveChurches(self):
@@ -149,21 +162,45 @@ class FindChurchesOpenStreetMapPlaces:
         for element in data['elements']:
             if element['type'] == 'node':
 
-                osm_id = element['id']
-                currentChurch = self.getChurchByOpenStreetMapId(osm_id)
-                if currentChurch == None:
-                    currentChurch = {}
+                # check if in front range region
+                if "lat" in element:
+                    lat = element['lat']
+                    lon = element['lon']
 
-                self.updateChurchWithResults(currentChurch, element)
+                elif "center" in element:
+                    lat = element['center']['lat']
+                    lon = element['center']['lon']
+
+                if lat > 38.0 and lat < 41.0 and lon > -106.0 and lon < -104.0:
+
+                    osm_id = str(element['id'])
+                    currentChurch = self.getChurchByOpenStreetMapId(osm_id)
+                    if currentChurch == None:
+                        currentChurch = {}
+                        self.churches.append(currentChurch)
+
+                    self.updateChurchWithResults(currentChurch, element)
 
             elif element['type'] == 'way' or element['type'] == 'relation':
 
-                osm_id = element['id']
-                currentChurch = self.getChurchByOpenStreetMapId(osm_id)
-                if currentChurch == None:
-                    currentChurch = {}
+                # check if in front range region
+                if "lat" in element:
+                    lat = element['lat']
+                    lon = element['lon']
 
-                self.updateChurchWithResults(currentChurch, element)
+                elif "center" in element:
+                    lat = element['center']['lat']
+                    lon = element['center']['lon']
+
+                if lat > 38.0 and lat < 41.0 and lon > -106.0 and lon < -104.0:
+
+                    osm_id = str(element['id'])
+                    currentChurch = self.getChurchByOpenStreetMapId(osm_id)
+                    if currentChurch == None:
+                        currentChurch = {}
+                        self.churches.append(currentChurch)
+
+                    self.updateChurchWithResults(currentChurch, element)
 
         self.saveChurches()
 

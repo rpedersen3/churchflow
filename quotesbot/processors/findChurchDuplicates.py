@@ -1,7 +1,8 @@
 from rdflib import Graph, URIRef, Literal, Namespace, RDF, RDFS
 from urllib.parse import urlparse
 import json
-
+import string
+import random
 
 class FindChurchDuplicates:
 
@@ -116,6 +117,11 @@ class FindChurchDuplicates:
                     if (abs(chLatitude - latitude) < 0.003 and abs(chLongitude - longitude) < 0.003):
 
                         # find another thing to cause match
+
+                        # if location match and openStreetMapPlaceId then just match it
+                        if "openStreetMapPlaceId" in ch:
+                            return ch
+
                         if "googlePlaceId" in ch and "googlePlaceId" in church:
                             if ch["googlePlaceId"] == church["googlePlaceId"]:
                                 print("match google place id")
@@ -158,6 +164,15 @@ class FindChurchDuplicates:
         with open(self.churches_file_path, "w") as json_file:
             json.dump(self.churchesData, json_file, indent=4)
 
+    def generateRandomString(self):
+
+        length = 12
+
+        # Define the characters to choose from: lowercase, uppercase, digits, hyphens, underscores, and periods
+        characters = string.ascii_letters + string.digits + '-_.'
+        # Generate a random ID by selecting random characters from the character set
+        random_id = ''.join(random.choice(characters) for _ in range(length))
+        return random_id
 
     def findChurchDuplicates(self):
 
@@ -168,6 +183,9 @@ class FindChurchDuplicates:
         # get a list of unique churches
         colocatedChurches = []
         for church in self.churches:
+
+            if "uniqueId" not in church:
+                church["uniqueId"] = self.generateRandomString()
 
             if "latitude" in church and "longitude" in church:
                 colocatedChurch = self.findChurchMatch(colocatedChurches, church)
@@ -199,7 +217,12 @@ class FindChurchDuplicates:
                     colocatedChurches.append(colocatedChurch)
 
                 else:
-                    colocatedChurch["churches"].append(church)
+                    addToChurches = True
+                    if "openStreetMapPlaceId" not in church:
+                        addToChurches = False
+
+                    if addToChurches:
+                        colocatedChurch["churches"].append(church)
 
 
         matched = 1
@@ -222,8 +245,11 @@ class FindChurchDuplicates:
                 for ch in colocatedChurch["churches"]:
                     print(".... name: ", ch["name"])
 
+                    if "primary-source" in ch:
+                        print("primary: ", ch["primary-source"], ", name: ", ch["name"])
+
                     if offset >= 1:
-                        mergeChurches.append(ch)
+                        mergeChurches.append(ch["uniqueId"])
                         ch["is-primary"] = "no"
                     offset = offset + 1
 

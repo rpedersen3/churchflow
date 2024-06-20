@@ -116,7 +116,7 @@ class UpdateRDFWithChurches:
                 if "latitude" in church and "longitude" in church:
 
                     churchOrgName = self.clean(church["name"])
-                    churchOrgId = self.generate_random_string() # churchOrgName.replace(" ", "").lower()
+                    churchOrgId = church["uniqueId"]
                     chOrg = self.n + churchOrgId
 
                     '''
@@ -162,7 +162,7 @@ class UpdateRDFWithChurches:
                         g2.add((chSite, self.GEO.long, Literal(chSiteLong)))
 
                     if "addressInfo" in church:
-                        if "city" in church["addressInfo"] and "county" in church["addressInfo"] and "zipcode" in \
+                        if "city" in church["addressInfo"] and "zipcode" in \
                                 church["addressInfo"]:
 
                             print(".. add site address ..")
@@ -176,10 +176,10 @@ class UpdateRDFWithChurches:
                             g2.add((chSiteAddress, self.RC.name, Literal(churchSiteAddressName)))
 
                             chSiteCity = church["addressInfo"]["city"]
-                            chSiteCounty = church["addressInfo"]["county"]
+                            #chSiteCounty = church["addressInfo"]["county"]
                             chSiteZipcode = church["addressInfo"]["zipcode"]
                             g2.add((chSiteAddress, self.VCARD.locality, Literal(chSiteCity)))
-                            g2.add((chSiteAddress, self.VCARD.region, Literal(chSiteCounty)))
+                            #g2.add((chSiteAddress, self.VCARD.region, Literal(chSiteCounty)))
                             g2.add((chSiteAddress, self.VCARD.postalCode, Literal(chSiteZipcode)))
 
                             if "latitude" in church and "longitude" in church:
@@ -193,14 +193,19 @@ class UpdateRDFWithChurches:
                             # link church to city
                             query = """select ?city ?name where { ?city rdf:type rc:City .  ?city rc:name ?name . 
                                                                 FILTER(?name = \"""" + chSiteCity + """\") }
-                                                                """
-                            results = g2.query(query)
+                            
+                                                              """
+                            try:
+                                results = g2.query(query)
 
-                            print(".......... query for city: ", query)
-                            if len(results) > 0:
-                                for row in results:
-                                    print("row: ", row["city"])
-                                    g2.add((chSite, self.RC.city, row["city"]))
+                                print(".......... query for city: ", query)
+                                if len(results) > 0:
+                                    for row in results:
+                                        print("row: ", row["city"])
+                                        g2.add((chSite, self.RC.city, row["city"]))
+                            except:
+                                print("err")
+
 
                     if "chmss" in church:
                         for chms in church["chmss"]:
