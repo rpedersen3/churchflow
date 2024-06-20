@@ -76,25 +76,40 @@ class chcrawlerSpider(scrapy.Spider):
     '''
     # process church info
 
-    '''
+
+    count = 0
     for church in churches:
+
+        count = count + 1
+        if count > 100000:
+            break
 
         changed = False
 
-        #find = FindChurchStaffWebPagesUsingSearch()
-        #changed = find.findStaffWebPages(church, googleKey)
+        '''
+        find = FindChurchStaffWebPagesUsingSearch()
+        changed = find.findStaffWebPages(church, googleKey)
 
-        updateWIthStaff = UpdateChurchWithStaffFromWebPages()
-        updateWIthStaff.appendWebPagesBasedOnStaff(church, startURLs)
+        updateWithStaff = UpdateChurchWithStaffFromWebPages()
+        updateWithStaff.appendWebPagesBasedOnStaff(church, startURLs)
+        '''
 
-        if changed:
 
-            # save to churches file
-            churchesData["churches"] = churches
-            with open(churches_file_path, "w") as json_file:
-                json.dump(churchesData, json_file, indent=4)
 
-    '''
+        if "name" in church:
+
+
+            churchFinder = FindChurchesGooglePlaces()
+            changed = churchFinder.updateChurch(church, googleKey)
+
+            if changed:
+
+                # save to churches file
+                churchesData["churches"] = churches
+                with open(churches_file_path, "w") as json_file:
+                    json.dump(churchesData, json_file, indent=4)
+
+
 
     def start_requests(self):
         print("............ start_requests ..........")

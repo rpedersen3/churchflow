@@ -73,6 +73,50 @@ class FindChurchesGooglePlaces:
 
         currentChurch["addressInfo"] = addressInfo
 
+    def updateChurchWithGoogleFindPlaceResults(self, currentChurch, data):
+
+        if "place_id" in data:
+            currentChurch["googlePlaceId"] = data["place_id"]
+            print("google place id: ", currentChurch["googlePlaceId"])
+
+        if "name" in data:
+            currentChurch["name"] = data["name"]
+            currentChurch["displayName"] = data["name"]
+            print("google display name: ", currentChurch["name"])
+
+        if "formatted_address" in data:
+            currentChurch["formattedAddress"] = data["formatted_address"]
+
+            addParts = currentChurch["formattedAddress"].split(",")
+            if len(addParts) == 4:
+                street = addParts[0].strip()
+                city = addParts[1].strip()
+                statezip = addParts[2].strip().split(" ")
+
+                zipcode = None
+                if len(statezip) > 1:
+                    state = statezip[0]
+                    zipcode = statezip[1]
+
+
+                if street != '' and city != '' and zipcode != None:
+                    addr = {
+                        "street": street,
+                        "city": city,
+                        "state": "CO",
+                        "country": "US",
+                        "zipcode": zipcode,
+                    }
+                    currentChurch["addressInfo"] = addr
+
+
+
+            print("google add: ", currentChurch["formattedAddress"])
+
+        if "business_status" in data:
+            currentChurch["businessStatus"] = data["business_status"]
+            print("google businessStatus: ", currentChurch["businessStatus"])
+
     def updateChurchWithGoogleResults(self, currentChurch, data):
 
         if "id" in data:
@@ -129,9 +173,51 @@ class FindChurchesGooglePlaces:
         with open(self.churches_file_path, "w") as json_file:
             json.dump(self.churchesData, json_file, indent=4)
 
-    def findChurch(self, church, googleApiKey):
+    def findPlace(self, api_key, name, latitude, longitude):
 
-        return None
+        fields = ['formatted_address', 'name', 'geometry', 'place_id', 'business_status']
+
+
+        url = 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json'
+        params = {
+            'key': api_key,
+            'input': name,
+            'inputtype': 'textquery',
+            'locationbias': f'point:{latitude},{longitude}',
+            'fields': ','.join(fields)
+        }
+        response = requests.get(url, params=params)
+        return response.json()
+
+
+    def updateChurch(self, church, googleApiKey):
+
+        changed = False
+
+        if "find-google-place" not in church:
+
+            changed = True
+            church["find-google-place"] = str(datetime.now())
+
+            if "latitude" in church and "longitude" in church:
+                print(" update church ............... ", church["name"])
+                time.sleep(0.3)
+
+                data = self.findPlace(googleApiKey, church["name"], church["latitude"], church["longitude"])
+
+                print("************* json returned: ", data)
+
+                if data != None and "candidates" in data and len(data["candidates"]) > 0:
+
+                    candidate = data["candidates"][0]
+
+                    print("update with candidate: ", candidate)
+                    self.updateChurchWithGoogleFindPlaceResults(church, candidate)
+
+                    changed = True
+
+
+        return changed
 
     def findChurches(self, googleApiKey):
 
