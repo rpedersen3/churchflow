@@ -7,9 +7,9 @@ import requests
 
 class FindChurchDuplicates:
 
-    def myfunc(e):
+    def orderFunc(e):
         if 'latitude' not in e:
-            return "xnolocation"
+            return "znolocation"
 
         if 'primary-source' in e:
             return e['primary-source']
@@ -19,7 +19,7 @@ class FindChurchDuplicates:
     churches_file_path = "churches.json"
     with open(churches_file_path, "r") as file:
         churchesData = json.load(file)
-    churches = sorted(churchesData["churches"], key=myfunc)
+    churches = sorted(churchesData["churches"], key=orderFunc)
 
 
     def findChurchOrgWithDomain(self, churchOrgs, domain):
@@ -56,7 +56,7 @@ class FindChurchDuplicates:
                     latitude = float(church["latitude"])
                     longitude = float(church["longitude"])
 
-                    if (abs(chLatitude - latitude) < 0.003 and abs(chLongitude - longitude) < 0.003):
+                    if (abs(chLatitude - latitude) < 0.001 and abs(chLongitude - longitude) < 0.001):
 
                         # find another thing to cause match
 
@@ -94,15 +94,9 @@ class FindChurchDuplicates:
 
     def findChurchMatchUsingNonLocationInfo(self, matchChurches, church):
 
+        returnCh = None
         for ch in matchChurches:
 
-            if "ein" in ch and "ein" in church:
-                if ch["ein"] == church["ein"]:
-                    return ch
-
-            if "name" in ch and "name" in church:
-                if ch["name"].lower() == church["name"].lower():
-                    return ch
 
 
             if "link" in ch and "link" in church:
@@ -115,11 +109,21 @@ class FindChurchDuplicates:
                 churchDomain = parsed_url.netloc.replace("www.", "")
                 churchDomain = churchDomain.replace("/", "")
 
-                if chDomain == churchDomain:
-                    return ch
+                if chDomain.lower() == churchDomain.lower():
+                    returnCh = ch
+                    #return ch
 
+            if "ein" in ch and "ein" in church:
+                if ch["ein"] == church["ein"]:
+                    returnCh = ch
+                    #return ch
 
-        return None
+            if "name" in ch and "name" in church:
+                if ch["name"].lower() == church["name"].lower():
+                    returnCh = ch
+                    #return ch
+
+        return returnCh
 
 
     def getRootName(self, church):
@@ -256,6 +260,8 @@ class FindChurchDuplicates:
                         colocatedChurch["churches"].append(church)
             else:
                 church["is-primary"] = "no"
+                if "link" in church and church["link"].lower().find("cripplecreek.church") >= 0:
+                    print("check cc to no location: ", church["link"])
                 matchedChurch = self.findChurchMatchUsingNonLocationInfo(colocatedChurches, church)
                 if matchedChurch == None:
 

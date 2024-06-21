@@ -44,7 +44,7 @@ class FindChurchWebsite:
                     latitude = float(church["latitude"])
                     longitude = float(church["longitude"])
 
-                    if (abs(chLatitude - latitude) < 0.003 and abs(chLongitude - longitude) < 0.003):
+                    if (abs(chLatitude - latitude) < 0.001 and abs(chLongitude - longitude) < 0.001):
 
                         # find another thing to cause match
                         if "googlePlaceId" in ch and "googlePlaceId" in church:

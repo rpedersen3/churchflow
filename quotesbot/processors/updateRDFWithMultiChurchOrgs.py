@@ -113,7 +113,7 @@ class UpdateRDFWithMultiChurchOrgs:
                     latitude = float(church["latitude"])
                     longitude = float(church["longitude"])
 
-                    if (abs(chLatitude - latitude) < 0.003 and abs(chLongitude - longitude) < 0.003):
+                    if (abs(chLatitude - latitude) < 0.001 and abs(chLongitude - longitude) < 0.001):
                         return ch
 
         return None
