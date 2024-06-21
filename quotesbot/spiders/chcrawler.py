@@ -65,10 +65,10 @@ class chcrawlerSpider(scrapy.Spider):
     churchFinder = FindChurchesOpenStreetMapPlaces()
     churchFinder.findChurches()
 
-
+    '''
     churchFinder = FindChurchDuplicates()
     churchFinder.findChurchDuplicates()
-
+    '''
 
     churchFinder = FindChurchWebsite()
     churchFinder.findChurchWebsite()
@@ -76,7 +76,7 @@ class chcrawlerSpider(scrapy.Spider):
     '''
     # process church info
 
-
+    '''
     count = 0
     for church in churches:
 
@@ -86,13 +86,13 @@ class chcrawlerSpider(scrapy.Spider):
 
         changed = False
 
-        '''
+        
         find = FindChurchStaffWebPagesUsingSearch()
         changed = find.findStaffWebPages(church, googleKey)
 
         updateWithStaff = UpdateChurchWithStaffFromWebPages()
         updateWithStaff.appendWebPagesBasedOnStaff(church, startURLs)
-        '''
+
 
 
 
@@ -109,7 +109,7 @@ class chcrawlerSpider(scrapy.Spider):
                 with open(churches_file_path, "w") as json_file:
                     json.dump(churchesData, json_file, indent=4)
 
-
+    '''
 
     def start_requests(self):
         print("............ start_requests ..........")
