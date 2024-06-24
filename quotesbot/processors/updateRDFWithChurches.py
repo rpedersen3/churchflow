@@ -140,6 +140,20 @@ class UpdateRDFWithChurches:
                         primarySource = "unknown"
                         g2.add((chOrg, self.RC.primarySource, Literal(primarySource)))
 
+                    if "denomination" in church:
+                        denomination = church["denomination"]
+                        g2.add((chOrg, self.RC.denomination, Literal(denomination)))
+                    else:
+                        if "mergeChurches" in church:
+                            for mergeChurch in church["mergeChurches"]:
+                                if "denomination" in mergeChurch:
+                                    denomination = mergeChurch["denomination"]
+                                    g2.add((chOrg, self.RC.denomination, Literal(denomination)))
+                                    break
+
+                        denomination = "unknown"
+                        g2.add((chOrg, self.RC.denomination, Literal(denomination)))
+
                     if "org" in church:
                         orgName = church["org"]
 
