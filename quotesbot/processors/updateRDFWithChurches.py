@@ -140,19 +140,43 @@ class UpdateRDFWithChurches:
                         primarySource = "unknown"
                         g2.add((chOrg, self.RC.primarySource, Literal(primarySource)))
 
+
+                    denomination = "unknown"
                     if "denomination" in church:
+
                         denomination = church["denomination"]
-                        g2.add((chOrg, self.RC.denomination, Literal(denomination)))
+                        if denomination == "edit denomination":
+                            denomination = "unknown"
+
                     else:
                         if "mergeChurches" in church:
                             for mergeChurch in church["mergeChurches"]:
                                 if "denomination" in mergeChurch:
                                     denomination = mergeChurch["denomination"]
-                                    g2.add((chOrg, self.RC.denomination, Literal(denomination)))
+                                    if denomination == "edit denomination":
+                                        denomination = "unknown"
                                     break
 
-                        denomination = "unknown"
-                        g2.add((chOrg, self.RC.denomination, Literal(denomination)))
+                    print("??????????????????? query for denomination ")
+
+                    # link church to city
+                    query = """select ?denomination ?tag where { 
+                                    ?denomination rdf:type cc:Denomination .  
+                                    ?denomination cc:denominationTag ?tag . 
+                                    ?tag rc:name ?tagName . 
+                                    FILTER(LCASE(?tagName) = LCASE( \"""" + denomination + """\")) }
+                                    """
+
+                    try:
+                        results = g2.query(query)
+
+                        if len(results) > 0:
+                            for row in results:
+                                g2.add((chOrg, self.CC.denomination, row["denomination"]))
+                                g2.add((chOrg, self.CC.denominationTag, row["tag"]))
+
+                    except Exception as e:
+                        print("get denomination err: ", e)
 
                     if "org" in church:
                         orgName = church["org"]
@@ -222,13 +246,12 @@ class UpdateRDFWithChurches:
                             try:
                                 results = g2.query(query)
 
-                                print(".......... query for city: ", query)
                                 if len(results) > 0:
                                     for row in results:
                                         print("row: ", row["city"])
                                         g2.add((chSite, self.RC.city, row["city"]))
                             except:
-                                print("err")
+                                print("err getting city")
 
 
                     if "chmss" in church:
