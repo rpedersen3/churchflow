@@ -432,7 +432,20 @@ class UpdatePersonInfo:
                                 part == "ullrico" or \
                                 part == "staci" or \
                                 part == "tamaya" or \
+                                part == "cristin" or \
                                 part == "zipporah" or \
+                                part == "brianne" or \
+                                part == "jamila" or \
+                                part == "nadia" or \
+                                part == "darcie" or \
+                                part == "kristi" or \
+                                part == "glenda" or \
+                                part == "ashlea" or \
+                                part == "eleina" or \
+                                part == "emeteria" or \
+                                part == "darcee" or \
+                                part == "sasha" or \
+                                part == "deann" or \
                                 part == "quyen" :
 
                             firstname = part
@@ -500,7 +513,8 @@ class UpdatePersonInfo:
 
             for contact in church["contacts"]:
 
-                if "name" in contact:
+                # if not processed contact and valid name
+                if "valid" not in contact and "name" in contact:
 
                     name = contact["name"]
                     fullname, firstname, lastname, nameRace, nameRacePercent = self.extractNameFromText(name)
