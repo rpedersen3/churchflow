@@ -25,6 +25,10 @@ class UpdatePersonInfo:
 
     key = ""
 
+    firstnames_file_path = 'firstnames.csv'
+    df = pd.read_csv(firstnames_file_path)
+    df['name_lower'] = df['name'].str.lower()
+
     def getNameParts(self, name):
 
         parts = name.split()
@@ -135,6 +139,7 @@ class UpdatePersonInfo:
                 valid = False
 
         return valid
+
 
 
     def removeNonNamePartsFromText(self, txt):
@@ -354,101 +359,12 @@ class UpdatePersonInfo:
                             #print("valid firstname: ", part)
                             firstname = part
                         else:
-                            print(">>>>>>> bad firstname: ", part)
-
-                        # correct for some screw ups
-                        if part == "cindy" or \
-                                part == "chazz" or \
-                                part == "betsy" or \
-                                part == "doni" or \
-                                part == "anisha" or \
-                                part == "arely" or \
-                                part == "jettie" or \
-                                part == "cleide" or \
-                                part == "zipporah" or \
-                                part == "daminica" or \
-                                part == "skylur" or \
-                                part == "romy" or \
-                                part == "vanessa" or \
-                                part == "marianna" or \
-                                part == "jonny" or \
-                                part == "marianna" or \
-                                part == "kuriko" or \
-                                part == "brendan" or \
-                                part == "meghan" or \
-                                part == "mindy" or \
-                                part == "traci" or \
-                                part == "cheryl" or \
-                                part == "erika" or \
-                                part == "genine" or \
-                                part == "sonja" or \
-                                part == "suzanne" or \
-                                part == "yourdy" or \
-                                part == "catie" or \
-                                part == "shaylin" or \
-                                part == "sheri" or \
-                                part == "moriah" or \
-                                part == "micah" or \
-                                part == "kylie" or \
-                                part == "sheila" or \
-                                part == "heidi" or \
-                                part == "tomy" or \
-                                part == "ryanne" or \
-                                part == "karys" or \
-                                part == "georgopulos" or \
-                                part == "dianne" or \
-                                part == "abi" or \
-                                part == "marleen" or \
-                                part == "caryn" or \
-                                part == "charis" or \
-                                part == "chaeli" or \
-                                part == "sadrie" or \
-                                part == "alycia" or \
-                                part == "peggy" or \
-                                part == "aidan" or \
-                                part == "laci" or \
-                                part == "alysa" or \
-                                part == "vonna" or \
-                                part == "cherese" or \
-                                part == "kenslee" or \
-                                part == "kayla" or \
-                                part == "darlene" or \
-                                part == "annie" or \
-                                part == "celena" or \
-                                part == "caitlyn" or \
-                                part == "geoff" or \
-                                part == "shaun" or \
-                                part == "joanna" or \
-                                part == "jessi" or \
-                                part == "brandilynn" or \
-                                part == "njiba" or \
-                                part == "vic" or \
-                                part == "tammy" or \
-                                part == "kiersten" or \
-                                part == "sondra" or \
-                                part == "firdaus" or \
-                                part == "eileen" or \
-                                part == "kaitlyn" or \
-                                part == "ullrico" or \
-                                part == "staci" or \
-                                part == "tamaya" or \
-                                part == "cristin" or \
-                                part == "zipporah" or \
-                                part == "brianne" or \
-                                part == "jamila" or \
-                                part == "nadia" or \
-                                part == "darcie" or \
-                                part == "kristi" or \
-                                part == "glenda" or \
-                                part == "ashlea" or \
-                                part == "eleina" or \
-                                part == "emeteria" or \
-                                part == "darcee" or \
-                                part == "sasha" or \
-                                part == "deann" or \
-                                part == "quyen" :
-
-                            firstname = part
+                            # check in first names file for name
+                            result = self.df[self.df['name_lower'] == part]
+                            if not result.empty:
+                                firstname = part
+                            else:
+                                print(">>>>>>> bad firstname: ", part)
 
 
                     else:  # looking for lastname
@@ -525,10 +441,22 @@ class UpdatePersonInfo:
                         updated = True
                         contact["valid"] = "yes"
 
+
+                        # set race based on name if high confidence
+                        if "race" not in contact and nameRacePercent > .90:
+                            print("*********** name race", nameRace, ", ", str(nameRacePercent))
+                            contact["race"] = nameRace
+
+
+                        '''
                         # set race based on image if moderate confidence
                         if "race" not in contact and photoCount < 5 and "photo" in contact:
 
                             photoCount = photoCount + 1
+                            
+                            if "photo
+                            
+                            
 
                             url = contact["photo"]
                             photoRace, photoRacePercent = self.extractRaceFromPhoto(url)
@@ -536,11 +464,7 @@ class UpdatePersonInfo:
                             if photoRace != None and photoRacePercent > 0.5:
                                 print("*********** photo race: ", photoRace, ", ", str(photoRacePercent))
                                 contact["race"] = photoRace
-
-                        # set race based on name if high confidence
-                        if "race" not in contact and nameRacePercent > .90:
-                            print("*********** name race", nameRace, ", ", str(nameRacePercent))
-                            contact["race"] = nameRace
+                        '''
 
                         # set race to unknown if not defined
                         if "race" not in contact:
