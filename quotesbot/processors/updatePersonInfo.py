@@ -26,7 +26,7 @@ class UpdatePersonInfo:
     key = ""
 
     firstnames_file_path = 'firstnames.csv'
-    df = pd.read_csv(firstnames_file_path)
+    df = pd.read_csv(firstnames_file_path, sep=';')
     df['name_lower'] = df['name'].str.lower()
 
     def getNameParts(self, name):
@@ -291,6 +291,8 @@ class UpdatePersonInfo:
 
                         if race == 'latino_hispanic':
                             race = 'hispanic'
+                        if race == 'api':
+                            race = 'asian'
 
                         racePercent = first.value
 
@@ -447,28 +449,28 @@ class UpdatePersonInfo:
                             print("*********** name race", nameRace, ", ", str(nameRacePercent))
                             contact["race"] = nameRace
 
-
-                        '''
-                        # set race based on image if moderate confidence
-                        if "race" not in contact and photoCount < 5 and "photo" in contact:
-
-                            photoCount = photoCount + 1
-                            
-                            if "photo
-                            
-                            
-
-                            url = contact["photo"]
-                            photoRace, photoRacePercent = self.extractRaceFromPhoto(url)
-
-                            if photoRace != None and photoRacePercent > 0.5:
-                                print("*********** photo race: ", photoRace, ", ", str(photoRacePercent))
-                                contact["race"] = photoRace
-                        '''
-
                         # set race to unknown if not defined
                         if "race" not in contact:
                             contact["race"] = "unknown"
+
+                        '''
+                        # set race based on image if moderate confidence
+                        if contact["race"] == "unknown" and photoCount < 5 and "photo" in contact:
+
+                            photoCount = photoCount + 1
+
+                            if "photoRaceCheck" not in "contact":
+
+                                contact["photoRaceCheck"] = "yes"
+
+
+                                url = contact["photo"]
+                                photoRace, photoRacePercent = self.extractRaceFromPhoto(url)
+
+                                if photoRace != None and photoRacePercent > 0.5:
+                                    print("*********** photo race: ", photoRace, ", ", str(photoRacePercent))
+                                    contact["race"] = photoRace
+                        '''
 
                     else:
                         updated = True
