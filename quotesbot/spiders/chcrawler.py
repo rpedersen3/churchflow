@@ -16,7 +16,7 @@ from quotesbot.processors.updateRDFWithChurches import UpdateRDFWithChurches
 from quotesbot.processors.updateRDFWithMultiChurchOrgs import UpdateRDFWithMultiChurchOrgs
 from quotesbot.processors.updateRDFWithDenominations import UpdateRDFWithDenominations
 
-
+from quotesbot.processors.updatePersonInfo import UpdatePersonInfo
 
 from quotesbot.processors.findChurchStaffWebPagesUsingSearch import FindChurchStaffWebPagesUsingSearch
 
@@ -40,6 +40,9 @@ class chcrawlerSpider(scrapy.Spider):
 
     # update rdf file with church data
 
+
+
+    '''
     updateRDF = UpdateRDFWithDenominations()
     updateRDF.updateRDFWithDenominations()
 
@@ -51,7 +54,7 @@ class chcrawlerSpider(scrapy.Spider):
 
 
 
-    '''
+    
     
     updateRDF = UpdateRDFWithMultiChurchOrgs()
     updateRDF.updateRDFWithMultiChurchOrgs()
@@ -82,31 +85,49 @@ class chcrawlerSpider(scrapy.Spider):
     '''
     # process church info
 
-    '''
+
+
+    name = "cindy norton"
+    url = "https://thechurchco-production.s3.amazonaws.com/uploads/sites/6087/2023/02/CelebrationChurchHeadshotsAlecSavig-22-800x800.jpg"
+    updatePersonInfo = UpdatePersonInfo()
+    fullname, firstname, lastname, nameRace, nameRacePercent = updatePersonInfo.extractNameFromText(name)
+    print("*********** name", fullname, ", ", nameRace, ", ", nameRacePercent)
+
+    photoRace, photoRacePercent = updatePersonInfo.extractRaceFromPhoto(url)
+    print("*********** race", photoRace, ", ", photoRacePercent)
+
+
+
+
     count = 0
     for church in churches:
 
         count = count + 1
-        if count > 100000:
+        if count > 30000:
             break
 
         changed = False
 
-        
+        '''
         find = FindChurchStaffWebPagesUsingSearch()
         changed = find.findStaffWebPages(church, googleKey)
 
         updateWithStaff = UpdateChurchWithStaffFromWebPages()
         updateWithStaff.appendWebPagesBasedOnStaff(church, startURLs)
-
+        '''
 
 
 
         if "name" in church:
 
 
+            '''
             churchFinder = FindChurchesGooglePlaces()
             changed = churchFinder.updateChurch(church, googleKey)
+            '''
+
+            updatePersonInfo = UpdatePersonInfo()
+            changed = updatePersonInfo.updateContactInfo(church)
 
             if changed:
 
@@ -115,7 +136,8 @@ class chcrawlerSpider(scrapy.Spider):
                 with open(churches_file_path, "w") as json_file:
                     json.dump(churchesData, json_file, indent=4)
 
-    '''
+
+
 
     def start_requests(self):
         print("............ start_requests ..........")

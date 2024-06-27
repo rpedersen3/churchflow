@@ -634,7 +634,7 @@ class ProfileCheck:
 
 
 
-    def isProfilePhoto(self, response, url):
+    def isProfilePhoto(self, url, minNumberOfFaces, minPercentOfHeight):
 
         foundPhoto = False
         foundProfilePhoto = False
@@ -740,10 +740,10 @@ class ProfileCheck:
                     #print('rects: ', str(rects))
 
 
-                    # allow 2 faces
+                    # allow # of faces
                     numberOfFaces = len(rects)
-                    #print("********* number of faces: ", numberOfFaces)
-                    if numberOfFaces < 3:
+                    print("********* number of faces: ", numberOfFaces)
+                    if numberOfFaces <= minNumberOfFaces:
                         for rect in rects:
                             x, y, x2, y2, w, h = (rect.left(), rect.top(), rect.right(), rect.bottom(), rect.width(), rect.height())
                             #cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
@@ -756,9 +756,9 @@ class ProfileCheck:
                             percentFromTop = (y / height) * 100
                             percentFromBottom = ((height-y2) / height) * 100
 
-                            #print("percentOfHeight: ", percentOfHeight)
-                            #print("percentFromTop: ", percentFromTop)
-                            #print("percentFromBottom: ", percentFromBottom)
+                            print("percentOfHeight: ", percentOfHeight)
+                            print("percentFromTop: ", percentFromTop)
+                            print("percentFromBottom: ", percentFromBottom)
 
 
 
@@ -766,7 +766,7 @@ class ProfileCheck:
                             #if numberOfFaces == 1 and percentOfHeight > 20 and percentFromTop < 40 and percentFromBottom < 65:
                             #    foundProfilePhoto = True
                             #    print("found photo")
-                            if percentOfHeight > 15:
+                            if percentOfHeight > minPercentOfHeight:
                                 foundProfilePhoto = True
 
 
@@ -802,5 +802,6 @@ class ProfileCheck:
 
 
 
+        print(" returning : ", foundPhoto, ", url of photo: ", foundProfilePhoto)
         return foundPhoto, foundProfilePhoto
 

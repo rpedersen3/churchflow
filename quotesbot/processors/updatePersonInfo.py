@@ -1,0 +1,539 @@
+import re
+
+import nltk
+import pandas as pd
+from ethnicolr import census_ln, pred_census_ln, census_ln, pred_wiki_ln
+
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
+nltk.download('maxent_ne_chunker')
+nltk.download('words')
+nltk.download('stopwords')
+
+
+from quotesbot.profilecheck import ProfileCheck
+
+
+from clarifai.client.model import Model
+
+
+
+
+
+
+class UpdatePersonInfo:
+
+    key = ""
+
+    def getNameParts(self, name):
+
+        parts = name.split()
+
+        if len(parts) > 1:
+
+            firstName = parts[0]
+            lastName = parts[1]
+
+        return firstName, lastName
+
+
+
+    def checkInvalidPartsFromNameText(self, txt):
+
+        valid = True
+
+        # grab first two words that sound like real names
+        parts = txt.split()
+
+        skipNextPart = False
+        for part in parts:
+
+            part = part.replace(".", "")
+            part = part.replace(",", "")
+            part = part.strip()
+            if (len(part) < 2):
+                continue
+
+            if part == "is" or \
+                part == "his" or \
+                part == "wife" or \
+                part == "on" or \
+                part == "with" or \
+                part == "mountain" or \
+                part == "states" or \
+                part == "forward" or \
+                part == "world" or \
+                part == "which" or \
+                part == "not" or \
+                part == "what" or \
+                part == "do" or \
+                part == "stay" or \
+                part == "site" or \
+                part == "from" or \
+                part == "po" or \
+                part == "box" or \
+                part == "left" or \
+                part == "one" or \
+                part == "for" or \
+                part == "our" or \
+                part == "small" or \
+                part == "sing" or \
+                part == "god" or \
+                part == "live" or \
+                part == "she" or \
+                part == "he" or \
+                part == "while" or \
+                part == "first" or \
+                part == "time" or \
+                part == "check" or \
+                part == "out" or \
+                part == "at" or \
+                part == "info" or \
+                part == "came" or \
+                part == "plan" or \
+                part == "your" or \
+                part == "who" or \
+                part == "the" or \
+                part == "st" or \
+                part == "was" or \
+                part == "my" or \
+                part == "if" or \
+                part == "us" or \
+                part == "next" or \
+                part == "of" or \
+                part == "as" or \
+                part == "learn" or \
+                part == "more" or \
+                part == "ask" or \
+                part == "you" or \
+                part == "we" or \
+                part == "in" or \
+                part == "all" or \
+                part == "mass" or \
+                part == "new" or \
+                part == "has" or \
+                part == "email" or \
+                part == "food" or \
+                part == "bank" or \
+                part == "member" or \
+                part == "portal" or \
+                part == "life" or \
+                part == "back" or \
+                part == "to" or \
+                part == "her":
+
+                # print("break on part: ", part)
+                valid = False
+
+            # check for bad characters
+            pattern = re.compile(r'[^a-zA-Z\s]')  # Matches any character that is not a letter or whitespace
+
+            # Use the search method to check if the string contains any non-character characters
+            match = pattern.search(part)
+            if match:
+                # print("break on non visible character: ", part)
+                valid = False
+
+        return valid
+
+
+    def removeNonNamePartsFromText(self, txt):
+
+        #  replace the name beginning with
+        txt = txt.lower()
+        if txt.startswith("the "):
+            txt = txt.replace("the ", "")
+
+        txt = txt.replace("&", "and")
+
+        # remove some common titles in front of name
+        stopwords = ["fr.",
+                    "dr.",
+                    "rev.",
+                    "deacon",
+                    "associate",
+                    "board",
+                    "reverend",
+                    "staff",
+                    "africa",
+                    "asia",
+                    "takes",
+                    "father",
+                    "teach",
+                    "agenda",
+                    "weekend",
+                    "council",
+                    "members",
+                    "creed",
+                    "nicene",
+                    "evangelist",
+                    "ministerial",
+                    "minister",
+                    "read more",
+                    "suffragan",
+                    "zion",
+                    "lady",
+                    "sister",
+                    "brother",
+                    "worship",
+                    "arts",
+                    "women",
+                    "bible",
+                    "adult",
+                    "music",
+                    "player",
+                    "welcome",
+                    "about",
+                    "home",
+                    "clergy",
+                    "student",
+                    "elder",
+                    "community",
+                    "care ",
+                    "ministries ",
+                    "center",
+                    "select",
+                    "pastoral",
+                    "pastor",
+                    "founder",
+                    "standard",
+                    "celebration",
+                    "administrator",
+                    "senior",
+                    "peace",
+                    "street",
+                    "together",
+                    "gathering",
+                    "building",
+                    "bookkeeper",
+                    "trusting",
+                    "benefited",
+                    "raised",
+                    "business",
+                    "personally",
+                    "event",
+                    "registration",
+                    "social",
+                    "scheduler",
+                    "sermons",
+                    "feature",
+                    "programs",
+                    "prayer",
+                    "reuests",
+                    "groups",
+                    "ministry",
+                    "early",
+                    "learning",
+                    "pathways",
+                    "connected",
+                    "apostle",
+                    "church",
+                    "emeritus",
+                    "school",
+                    "volunteers",
+                    "growth",
+                    "director",
+                    "coordinator",
+                    "office",
+                    "campus",
+                    "lead",
+                    "strategic",
+                    "associate",
+                    "contact",
+                    "team",
+                    "evangelist",
+                    "first",
+                    "lady",
+                    "lay "]
+
+
+        querywords = txt.split()
+
+        resultwords = [word for word in querywords if word.lower() not in stopwords]
+        txt = ' '.join(resultwords)
+
+        return txt
+
+    def extractRaceFromPhoto(self, url):
+
+        race = None
+        racePercent = None
+
+        # first check to verify just one face in photo and good size photo
+        profileCheck = ProfileCheck()
+        foundPhoto, foundProfilePhoto = profileCheck.isProfilePhoto(url, 1, 20)
+
+        if foundProfilePhoto == True:
+
+            try:
+
+                # now determine race of person in picture
+                model_url = (
+                    "https://clarifai.com/clarifai/main/models/ethnicity-demographics-recognition"
+                )
+                image_url = url
+
+                model_prediction = Model(url=model_url, pat=self.key).predict_by_url(
+                    image_url, input_type="image"
+                )
+
+                if len(model_prediction.outputs[0].data.concepts):
+                    first = model_prediction.outputs[0].data.concepts[0]
+                    racePercent = first.value
+                    if racePercent > 0.5:
+
+                        race = first.name.lower()
+
+                        if race == 'latino_hispanic':
+                            race = 'hispanic'
+
+                        racePercent = first.value
+
+
+            except Exception as e:
+                print("get race err: ", e)
+
+        # Get the output
+        return race, racePercent
+
+    def extractNameFromText(self, text):
+
+
+
+        firstname = None
+        lastname = None
+
+        race = None
+        racePercent = None
+
+        text = self.removeNonNamePartsFromText(text)
+        checkValidity = self.checkInvalidPartsFromNameText(text)
+
+
+
+        if checkValidity == True:
+
+            print("check name: ", text)
+
+            parts = text.split()
+
+            # if find two first names like "joe and sue jones" then skip second first name
+            skipNextPart = False
+
+            for part in parts:
+
+                # print("part: ", part)
+                if part.lower() != "and" and skipNextPart == False:
+
+                    print("part: ", part)
+
+                    if firstname is None:
+
+                        # see if firstname is valid name
+                        # print("part: ", part)
+
+                        # check firstname against known names
+                        names = [{'name': part}]
+                        df = pd.DataFrame(names)
+                        predictions = census_ln(df, 'name')
+
+                        #print("firstname predictions: ", predictions)
+
+                        # check that firstname is a valid name by checking if any return value is not 'nan'
+                        pctwhite = predictions['pctwhite'].iloc[0]
+                        pctblack = predictions['pctblack'].iloc[0]
+                        pctapi = predictions['pctapi'].iloc[0]
+                        pctaian = predictions['pctaian'].iloc[0]
+                        pct2prace = predictions['pct2prace'].iloc[0]
+                        pcthispanic = predictions['pcthispanic'].iloc[0]
+
+
+
+                        # check that lastname is a valid name
+                        if str(pctwhite) != 'nan':
+                            #print("valid firstname: ", part)
+                            firstname = part
+                        else:
+                            print(">>>>>>> bad firstname: ", part)
+
+                        # correct for some screw ups
+                        if part == "cindy" or \
+                                part == "chazz" or \
+                                part == "betsy" or \
+                                part == "doni" or \
+                                part == "anisha" or \
+                                part == "arely" or \
+                                part == "jettie" or \
+                                part == "cleide" or \
+                                part == "zipporah" or \
+                                part == "daminica" or \
+                                part == "skylur" or \
+                                part == "romy" or \
+                                part == "vanessa" or \
+                                part == "marianna" or \
+                                part == "jonny" or \
+                                part == "marianna" or \
+                                part == "kuriko" or \
+                                part == "brendan" or \
+                                part == "meghan" or \
+                                part == "mindy" or \
+                                part == "traci" or \
+                                part == "cheryl" or \
+                                part == "erika" or \
+                                part == "genine" or \
+                                part == "sonja" or \
+                                part == "suzanne" or \
+                                part == "yourdy" or \
+                                part == "catie" or \
+                                part == "shaylin" or \
+                                part == "sheri" or \
+                                part == "moriah" or \
+                                part == "micah" or \
+                                part == "kylie" or \
+                                part == "sheila" or \
+                                part == "heidi" or \
+                                part == "tomy" or \
+                                part == "ryanne" or \
+                                part == "karys" or \
+                                part == "georgopulos" or \
+                                part == "dianne" or \
+                                part == "abi" or \
+                                part == "marleen" or \
+                                part == "caryn" or \
+                                part == "charis" or \
+                                part == "chaeli" or \
+                                part == "sadrie" or \
+                                part == "alycia" or \
+                                part == "peggy" or \
+                                part == "aidan" or \
+                                part == "laci" or \
+                                part == "alysa" or \
+                                part == "vonna" or \
+                                part == "cherese" or \
+                                part == "kenslee" or \
+                                part == "kayla" or \
+                                part == "darlene" or \
+                                part == "annie" or \
+                                part == "celena" or \
+                                part == "caitlyn" or \
+                                part == "geoff" or \
+                                part == "shaun" or \
+                                part == "joanna" or \
+                                part == "jessi" or \
+                                part == "brandilynn" or \
+                                part == "njiba" or \
+                                part == "vic" or \
+                                part == "tammy" or \
+                                part == "kiersten" or \
+                                part == "sondra" or \
+                                part == "firdaus" or \
+                                part == "eileen" or \
+                                part == "kaitlyn" or \
+                                part == "ullrico" or \
+                                part == "staci" or \
+                                part == "tamaya" or \
+                                part == "zipporah" or \
+                                part == "quyen" :
+
+                            firstname = part
+
+
+                    else:  # looking for lastname
+
+                        # firstname is repeated, sometimes happens then just ignor it
+                        if part == firstname:
+                            continue
+
+                        # check lastname against known names
+                        names = [{'name': part}]
+                        df = pd.DataFrame(names)
+                        predictions = census_ln(df, 'name')
+
+                        #print("lastname: ", part)
+                        #print("lastname predictions: ", predictions)
+
+                        pctwhite = predictions['pctwhite'].iloc[0]
+                        pctblack = predictions['pctblack'].iloc[0]
+                        pctapi = predictions['pctapi'].iloc[0]
+                        pctaian = predictions['pctaian'].iloc[0]
+                        pct2prace = predictions['pct2prace'].iloc[0]
+                        pcthispanic = predictions['pcthispanic'].iloc[0]
+
+                        # check that lastname is a valid name by checking if any return value is not 'nan'
+                        if str(pctwhite) != 'nan':
+                            print("valid lastname: ", part)
+                            lastname = part
+                        else:
+                            print("=========== bad lastname: ", part)
+
+
+                    # adjust for two people like Jane and Joe Smith => Jane Smith
+                    if skipNextPart:
+                        skipNextPart = False
+
+                    if part.lower() == "and":
+                        skipNextPart = True
+
+                    if firstname != None and lastname != None:
+
+                        fullname = firstname + " " + lastname
+
+                        names = [{'name': lastname}]
+                        df = pd.DataFrame(names)
+                        lastnamePred = pred_census_ln(df, 'name')
+                        race = lastnamePred['race'].iloc[0]
+                        racePercent = lastnamePred[race].iloc[0]
+
+                        print("return found name")
+                        return fullname, firstname, lastname, race, racePercent
+
+
+
+        return None, None, None, None, None
+
+    def updateContactInfo(self, church):
+
+        updated = False
+
+        photoCount = 0
+        if "contacts" in church:
+
+            for contact in church["contacts"]:
+
+                if "name" in contact:
+
+                    name = contact["name"]
+                    fullname, firstname, lastname, nameRace, nameRacePercent = self.extractNameFromText(name)
+                    print("*********** name", fullname, ", ", nameRace, ", ", nameRacePercent)
+
+                    if fullname != None:
+
+                        updated = True
+                        contact["valid"] = "yes"
+
+                        # set race based on image if moderate confidence
+                        if "race" not in contact and photoCount < 5 and "photo" in contact:
+
+                            photoCount = photoCount + 1
+
+                            url = contact["photo"]
+                            photoRace, photoRacePercent = self.extractRaceFromPhoto(url)
+
+                            if photoRace != None and photoRacePercent > 0.5:
+                                print("*********** photo race: ", photoRace, ", ", str(photoRacePercent))
+                                contact["race"] = photoRace
+
+                        # set race based on name if high confidence
+                        if "race" not in contact and nameRacePercent > .90:
+                            print("*********** name race", nameRace, ", ", str(nameRacePercent))
+                            contact["race"] = nameRace
+
+                        # set race to unknown if not defined
+                        if "race" not in contact:
+                            contact["race"] = "unknown"
+
+                    else:
+                        updated = True
+                        contact["valid"] = "no"
+
+        return updated

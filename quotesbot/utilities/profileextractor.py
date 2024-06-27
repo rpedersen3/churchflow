@@ -1053,7 +1053,7 @@ class ProfileExtractor:
                     if isCDN or img_src.find(domain.replace("www.", "")) >= 0:
 
                         #print("********** check photo ****** ", img_src)
-                        foundPhoto, foundProfilePhoto = profCheck.isProfilePhoto(response, img_src)
+                        foundPhoto, foundProfilePhoto = profCheck.isProfilePhoto(img_src, 2, 15)
                         if foundPhoto:
 
                             tagName = el.xpath('name()').extract()[0]
