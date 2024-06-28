@@ -104,7 +104,7 @@ class chcrawlerSpider(scrapy.Spider):
     for church in churches:
 
         count = count + 1
-        if count > 100:
+        if count > 10000000:
             break
 
         changed = False
@@ -135,7 +135,6 @@ class chcrawlerSpider(scrapy.Spider):
                 with open(churches_file_path, "w") as json_file:
                     json.dump(churchesData, json_file, indent=4)
 
-        '''
 
 
     def start_requests(self):

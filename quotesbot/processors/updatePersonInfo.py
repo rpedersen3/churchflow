@@ -492,6 +492,11 @@ class UpdatePersonInfo:
                                 url = contact["photo"]
                                 photoRace, photoRacePercent, photoAge, photoGender = self.extractRaceFromPhoto(url)
 
+                                if photoRace == "latino hispanic":
+                                    photoRace = "hispanic"
+
+                                photoGender = photoGender.lower()
+
                                 if photoRace != None and photoRacePercent > 0.5:
                                     print("*********** photo race: ", photoRace, ", ", str(photoRacePercent))
                                     contact["probRace"] = photoRace
@@ -502,10 +507,13 @@ class UpdatePersonInfo:
                                     contact["probRace"] = "unknown"
                                     contact["probAge"] = "unknown"
                                     contact["probGender"] = "unknown"
-                        '''
+
 
                     else:
                         updated = True
-                        contact["valid"] = "no"
+
+                        if "valid" not in contact:
+                            contact["valid"] = "no"
+
 
         return updated
