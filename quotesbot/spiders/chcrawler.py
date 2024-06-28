@@ -40,7 +40,7 @@ class chcrawlerSpider(scrapy.Spider):
 
     # update rdf file with church data
 
-    '''
+
     updateRDF = UpdateRDFWithDenominations()
     updateRDF.updateRDFWithDenominations()
 
@@ -50,7 +50,7 @@ class chcrawlerSpider(scrapy.Spider):
     updateRDF = UpdateRDFWithChurches()
     updateRDF.updateWithChurches()
 
-    
+    '''
 
     
     
@@ -116,14 +116,14 @@ class chcrawlerSpider(scrapy.Spider):
         updateWithStaff = UpdateChurchWithStaffFromWebPages()
         updateWithStaff.appendWebPagesBasedOnStaff(church, startURLs)
         '''
-
+        '''
 
         if "name" in church:
 
-            '''
+            
             churchFinder = FindChurchesGooglePlaces()
             changed = churchFinder.updateChurch(church, googleKey)
-            '''
+            
 
             updatePersonInfo = UpdatePersonInfo()
             changed = updatePersonInfo.updateContactInfo(church)
@@ -135,7 +135,7 @@ class chcrawlerSpider(scrapy.Spider):
                 with open(churches_file_path, "w") as json_file:
                     json.dump(churchesData, json_file, indent=4)
 
-
+        '''
 
     def start_requests(self):
         print("............ start_requests ..........")
