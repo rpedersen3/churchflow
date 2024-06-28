@@ -357,7 +357,7 @@ Florida	Leon	12	073
 Florida	Levy	12	075
 Florida	Liberty	12	077
 Florida	Madison	12	079
-Florida	Manatee	12	081
+Florida	manatee	12	081
 Florida	Marion	12	083
 Florida	Martin	12	085
 Florida	Miami-Dade	12	086
@@ -1278,7 +1278,7 @@ Michigan	Livingston	26	093
 Michigan	Luce	26	095
 Michigan	Mackinac	26	097
 Michigan	Macomb	26	099
-Michigan	Manistee	26	101
+Michigan	manistee	26	101
 Michigan	Marquette	26	103
 Michigan	Mason	26	105
 Michigan	Mecosta	26	107
@@ -2933,8 +2933,8 @@ Virginia	Harrisonburg City	51	660
 Virginia	Hopewell City	51	670
 Virginia	Lexington City	51	678
 Virginia	Lynchburg City	51	680
-Virginia	Manassas City	51	683
-Virginia	Manassas Park City	51	685
+Virginia	manassas City	51	683
+Virginia	manassas Park City	51	685
 Virginia	Martinsville City	51	690
 Virginia	Newport News City	51	700
 Virginia	Norfolk City	51	710
@@ -3082,7 +3082,7 @@ Wisconsin	La Crosse	55	063
 Wisconsin	Lafayette	55	065
 Wisconsin	Langlade	55	067
 Wisconsin	Lincoln	55	069
-Wisconsin	Manitowoc	55	071
+Wisconsin	manitowoc	55	071
 Wisconsin	Marathon	55	073
 Wisconsin	Marinette	55	075
 Wisconsin	Marquette	55	077

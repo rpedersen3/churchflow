@@ -167,8 +167,8 @@ class ProfileCheck:
 
         if "manager" in text.lower():
             if "financial" in text.lower():
-                return "Financial Manager"
-            return "Manager"
+                return "Financial manager"
+            return "manager"
 
         if "coordinator" in text.lower():
             if "facilities" in text.lower():

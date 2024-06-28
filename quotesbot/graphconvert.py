@@ -82,7 +82,7 @@ class GraphConvert:
         churchCenterBusinessSystem = n + churchCenterBusinessSystemId
 
         g2.add((churchCenterBusinessSystem, RDF.type, OWL.NamedIndividual))
-        g2.add((churchCenterBusinessSystem, RDF.type, RC.ChurchManagementSystem))
+        g2.add((churchCenterBusinessSystem, RDF.type, RC.ChurchmanagementSystem))
         g2.add((churchCenterBusinessSystem, RC.name, Literal(churchCenterBusinessSystemName)))
 
         return g2
@@ -334,7 +334,7 @@ class GraphConvert:
 
                         if chms["type"] == "churchcenter":
                             # add business system
-                            g2.add((chOrg, RC.hasChurchManagementSystem, churchCenterBusinessSystem))
+                            g2.add((chOrg, RC.hasChurchmanagementSystem, churchCenterBusinessSystem))
 
                 if "leadPastor" in church:
                     leadPastor = church["leadPastor"]

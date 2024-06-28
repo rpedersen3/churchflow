@@ -57,7 +57,7 @@ class UpdateRDFWithMultiChurchOrgs:
         churchCenterBusinessSystem = self.n + churchCenterBusinessSystemId
 
         g2.add((churchCenterBusinessSystem, RDF.type, self.OWL.NamedIndividual))
-        g2.add((churchCenterBusinessSystem, RDF.type, self.RC.ChurchManagementSystem))
+        g2.add((churchCenterBusinessSystem, RDF.type, self.RC.ChurchmanagementSystem))
         g2.add((churchCenterBusinessSystem, self.RC.name, Literal(churchCenterBusinessSystemName)))
 
         return g2

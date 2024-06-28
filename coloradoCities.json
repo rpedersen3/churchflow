@@ -1387,28 +1387,28 @@
             "population": 180
         },
         {
-            "name": "Manzanola",
+            "name": "manzanola",
             "fips": "8089",
             "lat": 38.1088,
             "lon": -103.8668,
             "population": 497
         },
         {
-            "name": "Manitou Springs",
+            "name": "manitou Springs",
             "fips": "8041",
             "lat": 38.8575,
             "lon": -104.9127,
             "population": 4912
         },
         {
-            "name": "Mancos",
+            "name": "mancos",
             "fips": "8083",
             "lat": 37.3466,
             "lon": -108.2939,
             "population": 1168
         },
         {
-            "name": "Manassa",
+            "name": "manassa",
             "fips": "8021",
             "lat": 37.1738,
             "lon": -105.9373,

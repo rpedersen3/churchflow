@@ -57,7 +57,7 @@ class UpdateRDFWithChurches:
         churchCenterBusinessSystem = self.n + churchCenterBusinessSystemId
 
         g2.add((churchCenterBusinessSystem, RDF.type, self.OWL.NamedIndividual))
-        g2.add((churchCenterBusinessSystem, RDF.type, self.RC.ChurchManagementSystem))
+        g2.add((churchCenterBusinessSystem, RDF.type, self.RC.ChurchmanagementSystem))
         g2.add((churchCenterBusinessSystem, self.RC.name, Literal(churchCenterBusinessSystemName)))
 
         return g2
@@ -274,7 +274,7 @@ class UpdateRDFWithChurches:
 
                             if chms["type"] == "churchcenter":
                                 # add business system
-                                g2.add((chOrg, self.RC.hasChurchManagementSystem, churchCenterBusinessSystem))
+                                g2.add((chOrg, self.RC.hasChurchmanagementSystem, churchCenterBusinessSystem))
 
                     if "leadPastor" in church:
                         leadPastor = church["leadPastor"]

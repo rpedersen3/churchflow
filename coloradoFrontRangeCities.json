@@ -1617,7 +1617,7 @@
             "numberOfChurches": 6
         },
         {
-            "name": "Manitou Springs",
+            "name": "manitou Springs",
             "fips": "8041",
             "lat": 38.8575,
             "lon": -104.9127,
@@ -1634,7 +1634,7 @@
             "asianPercent": 1.1,
             "hispanicPercent": 6.9,
             "crawled": "2024-04-06 16:01:52.158785",
-            "crawled-city": "Manitou Springs",
+            "crawled-city": "manitou Springs",
             "countyName": "El Paso",
             "numberOfChurches": 11
         },

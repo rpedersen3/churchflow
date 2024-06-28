@@ -196,10 +196,10 @@ Maybell	Maybell	City	8081	CO	Colorado	40.5188	-108.0885	43
 Matheson	Matheson	City	8039	CO	Colorado	39.1683	-103.977	25
 Marvel	Marvel	City	8067	CO	Colorado	37.1112	-108.1262	95
 Marble	Marble	City	8051	CO	Colorado	39.0716	-107.1909	180
-Manzanola	Manzanola	City	8089	CO	Colorado	38.1088	-103.8668	497
-Manitou Springs	Manitou Springs	City	8041	CO	Colorado	38.8575	-104.9127	4912
-Mancos	Mancos	City	8083	CO	Colorado	37.3466	-108.2939	1168
-Manassa	Manassa	City	8021	CO	Colorado	37.1738	-105.9373	981
+manzanola	manzanola	City	8089	CO	Colorado	38.1088	-103.8668	497
+manitou Springs	manitou Springs	City	8041	CO	Colorado	38.8575	-104.9127	4912
+mancos	mancos	City	8083	CO	Colorado	37.3466	-108.2939	1168
+manassa	manassa	City	8021	CO	Colorado	37.1738	-105.9373	981
 Lyons	Lyons	City	8013	CO	Colorado	40.223	-105.2692	2261
 Lynn	Lynn	City	8071	CO	Colorado	37.4219	-104.6431	49
 Loveland	Loveland	City	8069	CO	Colorado	40.4166	-105.0623	75938
