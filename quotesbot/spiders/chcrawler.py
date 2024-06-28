@@ -42,7 +42,7 @@ class chcrawlerSpider(scrapy.Spider):
 
 
 
-    '''
+
     updateRDF = UpdateRDFWithDenominations()
     updateRDF.updateRDFWithDenominations()
 
@@ -52,7 +52,7 @@ class chcrawlerSpider(scrapy.Spider):
     updateRDF = UpdateRDFWithChurches()
     updateRDF.updateWithChurches()
 
-
+    '''
 
     
     
@@ -86,7 +86,7 @@ class chcrawlerSpider(scrapy.Spider):
     # process church info
 
 
-
+    '''
     name = "cindy norton"
     url = "https://thechurchco-production.s3.amazonaws.com/uploads/sites/6087/2023/02/CelebrationChurchHeadshotsAlecSavig-22-800x800.jpg"
     updatePersonInfo = UpdatePersonInfo()
@@ -95,7 +95,7 @@ class chcrawlerSpider(scrapy.Spider):
 
     photoRace, photoRacePercent = updatePersonInfo.extractRaceFromPhoto(url)
     print("*********** race", photoRace, ", ", photoRacePercent)
-
+    '''
 
 
 
@@ -116,15 +116,14 @@ class chcrawlerSpider(scrapy.Spider):
         updateWithStaff.appendWebPagesBasedOnStaff(church, startURLs)
         '''
 
-
-
+        '''
         if "name" in church:
 
 
-            '''
+            
             churchFinder = FindChurchesGooglePlaces()
             changed = churchFinder.updateChurch(church, googleKey)
-            '''
+
 
             updatePersonInfo = UpdatePersonInfo()
             changed = updatePersonInfo.updateContactInfo(church)
@@ -136,7 +135,7 @@ class chcrawlerSpider(scrapy.Spider):
                 with open(churches_file_path, "w") as json_file:
                     json.dump(churchesData, json_file, indent=4)
 
-
+        '''
 
 
     def start_requests(self):
