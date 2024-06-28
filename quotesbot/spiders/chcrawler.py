@@ -40,9 +40,7 @@ class chcrawlerSpider(scrapy.Spider):
 
     # update rdf file with church data
 
-
-
-
+    '''
     updateRDF = UpdateRDFWithDenominations()
     updateRDF.updateRDFWithDenominations()
 
@@ -52,7 +50,7 @@ class chcrawlerSpider(scrapy.Spider):
     updateRDF = UpdateRDFWithChurches()
     updateRDF.updateWithChurches()
 
-    '''
+    
 
     
     
@@ -93,17 +91,20 @@ class chcrawlerSpider(scrapy.Spider):
     fullname, firstname, lastname, nameRace, nameRacePercent = updatePersonInfo.extractNameFromText(name)
     print("*********** name", fullname, ", ", nameRace, ", ", nameRacePercent)
 
-    photoRace, photoRacePercent = updatePersonInfo.extractRaceFromPhoto(url)
-    print("*********** race", photoRace, ", ", photoRacePercent)
+    photoRace, photoRacePercent, age, gender = updatePersonInfo.extractRaceFromPhoto(url)
+    print("*********** race", photoRace, ", ", photoRacePercent, ", ", age, ", ", gender)
+    
+
+    updatePersonInfo = UpdatePersonInfo()
+    updatePersonInfo.extractRaceFromPhoto(
+        "https://www.houseofhopeaurora.org/wp-content/uploads/2022/04/Pastor-Richard-Lewis-e1649862402960.jpg")
     '''
-
-
 
     count = 0
     for church in churches:
 
         count = count + 1
-        if count > 30000:
+        if count > 100:
             break
 
         changed = False
@@ -116,14 +117,13 @@ class chcrawlerSpider(scrapy.Spider):
         updateWithStaff.appendWebPagesBasedOnStaff(church, startURLs)
         '''
 
-        '''
+
         if "name" in church:
 
-
-            
+            '''
             churchFinder = FindChurchesGooglePlaces()
             changed = churchFinder.updateChurch(church, googleKey)
-
+            '''
 
             updatePersonInfo = UpdatePersonInfo()
             changed = updatePersonInfo.updateContactInfo(church)

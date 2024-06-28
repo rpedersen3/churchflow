@@ -11,8 +11,8 @@ class FindChurchDuplicates:
         if 'latitude' not in e:
             return "znolocation"
 
-        if 'primary-source' in e:
-            return e['primary-source']
+        if 'primarySource' in e:
+            return e['primarySource']
 
         return "ynoprimarysource"
 
@@ -209,7 +209,7 @@ class FindChurchDuplicates:
             
 
             if "googlePlaceId" in church:
-                church["primary-source"] = "GooglePlaces"
+                church["primarySource"] = "GooglePlaces"
             '''
 
             church["is-primary"] = "yes"

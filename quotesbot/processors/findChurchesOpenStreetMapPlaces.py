@@ -89,7 +89,7 @@ class FindChurchesOpenStreetMapPlaces:
             lon = element['center']['lon']
 
 
-        currentChurch["primary-source"] = "OpenStreetMap"
+        currentChurch["primarySource"] = "OpenStreetMap"
 
         currentChurch["openStreetMapPlaceId"] = osm_id
         print("open street map place id: ", osm_id)

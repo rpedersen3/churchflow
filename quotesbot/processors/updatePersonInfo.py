@@ -4,6 +4,9 @@ import nltk
 import pandas as pd
 from ethnicolr import census_ln, pred_census_ln, census_ln, pred_wiki_ln
 
+from deepface import DeepFace
+import matplotlib.pyplot as plt
+
 nltk.download('punkt')
 nltk.download('averaged_perceptron_tagger')
 nltk.download('maxent_ne_chunker')
@@ -261,6 +264,8 @@ class UpdatePersonInfo:
 
     def extractRaceFromPhoto(self, url):
 
+        age = None
+        gender = None
         race = None
         racePercent = None
 
@@ -272,6 +277,26 @@ class UpdatePersonInfo:
 
             try:
 
+                objs = DeepFace.analyze(
+                    img_path=url,
+                    actions=['age', 'gender', 'race'],
+                )
+
+                if len(objs) > 0:
+
+                    firstFace = objs[0]
+
+                    confidence = firstFace["face_confidence"]
+                    age = firstFace["age"]
+                    gender = firstFace["dominant_gender"]
+                    race = firstFace["dominant_race"]
+                    racePercent = firstFace["race"][race] / 100.0
+
+                    print("done: ", age, ", ", gender, ", ", race)
+
+
+
+                '''
                 # now determine race of person in picture
                 model_url = (
                     "https://clarifai.com/clarifai/main/models/ethnicity-demographics-recognition"
@@ -295,13 +320,14 @@ class UpdatePersonInfo:
                             race = 'asian'
 
                         racePercent = first.value
+                '''
 
 
             except Exception as e:
                 print("get race err: ", e)
 
         # Get the output
-        return race, racePercent
+        return race, racePercent, age, gender
 
     def extractNameFromText(self, text):
 
@@ -432,7 +458,7 @@ class UpdatePersonInfo:
             for contact in church["contacts"]:
 
                 # if not processed contact and valid name
-                if "valid" not in contact and "name" in contact:
+                if "name" in contact:
 
                     name = contact["name"]
                     fullname, firstname, lastname, nameRace, nameRacePercent = self.extractNameFromText(name)
@@ -441,7 +467,9 @@ class UpdatePersonInfo:
                     if fullname != None:
 
                         updated = True
-                        contact["valid"] = "yes"
+
+                        if "valid" not in contact:
+                            contact["valid"] = "yes"
 
 
                         # set race based on name if high confidence
@@ -453,23 +481,27 @@ class UpdatePersonInfo:
                         if "race" not in contact:
                             contact["race"] = "unknown"
 
-                        '''
-                        # set race based on image if moderate confidence
-                        if contact["race"] == "unknown" and photoCount < 5 and "photo" in contact:
+
+                        # set age, gender, race based on image if moderate confidence
+                        if photoCount < 5 and "photo" in contact:
 
                             photoCount = photoCount + 1
 
-                            if "photoRaceCheck" not in "contact":
-
-                                contact["photoRaceCheck"] = "yes"
-
+                            if "probRace" not in "contact":
 
                                 url = contact["photo"]
-                                photoRace, photoRacePercent = self.extractRaceFromPhoto(url)
+                                photoRace, photoRacePercent, photoAge, photoGender = self.extractRaceFromPhoto(url)
 
                                 if photoRace != None and photoRacePercent > 0.5:
                                     print("*********** photo race: ", photoRace, ", ", str(photoRacePercent))
-                                    contact["race"] = photoRace
+                                    contact["probRace"] = photoRace
+                                    contact["probAge"] = str(photoAge)
+                                    contact["probGender"] = photoGender
+
+                                else:
+                                    contact["probRace"] = "unknown"
+                                    contact["probAge"] = "unknown"
+                                    contact["probGender"] = "unknown"
                         '''
 
                     else:

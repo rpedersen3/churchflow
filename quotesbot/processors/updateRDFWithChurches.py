@@ -133,12 +133,20 @@ class UpdateRDFWithChurches:
                     g2.add((chOrg, RDF.type, self.CC.ChurchOrganization))
                     g2.add((chOrg, self.RC.name, Literal(churchOrgName)))
 
-                    if "primary-source" in church:
-                        primarySource = church["primary-source"]
+                    if "primarySource" in church:
+                        primarySource = church["primarySource"]
                         g2.add((chOrg, self.RC.primarySource, Literal(primarySource)))
                     else:
                         primarySource = "unknown"
                         g2.add((chOrg, self.RC.primarySource, Literal(primarySource)))
+
+
+                    if "primaryRace" in church:
+                        primaryRace = church["primaryRace"]
+                        g2.add((chOrg, self.CC.primaryRace, Literal(primaryRace)))
+                    else:
+                        primaryRace = "unknown"
+                        g2.add((chOrg, self.CC.primaryRace, Literal(primaryRace)))
 
 
                     denomination = "unknown"
