@@ -113,7 +113,7 @@ class UpdateRDFWithChurches:
                 churchCenterBusinessSystemId = churchCenterBusinessSystemName.replace(" ", "").lower()
                 churchCenterBusinessSystem = self.n + churchCenterBusinessSystemId
 
-                if "latitude" in church and "longitude" in church:
+                if "latitude" in church and "longitude" in church and "uniqueId" in church:
 
                     churchOrgName = self.clean(church["name"])
                     churchOrgId = church["uniqueId"]
