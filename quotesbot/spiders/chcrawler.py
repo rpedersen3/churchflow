@@ -41,7 +41,8 @@ class chcrawlerSpider(scrapy.Spider):
 
     # update rdf file with church data
 
-
+    '''
+    
     updateRDF = UpdateRDFWithDenominations()
     updateRDF.updateRDFWithDenominations()
 
@@ -51,7 +52,7 @@ class chcrawlerSpider(scrapy.Spider):
     updateRDF = UpdateRDFWithChurches()
     updateRDF.updateWithChurches()
 
-    '''
+    
 
     
     
@@ -104,8 +105,8 @@ class chcrawlerSpider(scrapy.Spider):
     count = 0
     for church in churches:
 
-        count = count + 1
-        if count > 10000000:
+
+        if count > 10000:
             break
 
         changed = False
@@ -119,7 +120,9 @@ class chcrawlerSpider(scrapy.Spider):
         '''
 
 
-        if "name" in church:
+        if "name" in church and "denomination" not in church:
+
+            count = count + 1
 
             '''
             churchFinder = FindChurchesGooglePlaces()
@@ -128,10 +131,10 @@ class chcrawlerSpider(scrapy.Spider):
 
             updatePersonInfo = UpdatePersonInfo()
             changed = updatePersonInfo.updateContactInfo(church)
+            
             '''
-
             updateChurchInfo = UpdateChurchDenomination()
-            changed = updateChurchInfo.updateChurchDenominations(church)
+            changed = updateChurchInfo.updateChurchDenomination(church)
 
             if changed:
 
