@@ -22,6 +22,7 @@ class FindChurchDuplicates:
     churches = sorted(churchesData["churches"], key=orderFunc)
 
 
+
     def findChurchOrgWithDomain(self, churchOrgs, domain):
 
         for church in churchOrgs:
