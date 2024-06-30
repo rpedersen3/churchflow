@@ -17,6 +17,7 @@ from quotesbot.processors.updateRDFWithMultiChurchOrgs import UpdateRDFWithMulti
 from quotesbot.processors.updateRDFWithDenominations import UpdateRDFWithDenominations
 
 from quotesbot.processors.updatePersonInfo import UpdatePersonInfo
+from quotesbot.processors.updateChurchDenomination import UpdateChurchDenomination
 
 from quotesbot.processors.findChurchStaffWebPagesUsingSearch import FindChurchStaffWebPagesUsingSearch
 
@@ -116,17 +117,21 @@ class chcrawlerSpider(scrapy.Spider):
         updateWithStaff = UpdateChurchWithStaffFromWebPages()
         updateWithStaff.appendWebPagesBasedOnStaff(church, startURLs)
         '''
-        '''
+
 
         if "name" in church:
 
-            
+            '''
             churchFinder = FindChurchesGooglePlaces()
             changed = churchFinder.updateChurch(church, googleKey)
             
 
             updatePersonInfo = UpdatePersonInfo()
             changed = updatePersonInfo.updateContactInfo(church)
+            '''
+
+            updateChurchInfo = UpdateChurchDenomination()
+            changed = updateChurchInfo.updateChurchDenominations(church)
 
             if changed:
 
@@ -135,7 +140,7 @@ class chcrawlerSpider(scrapy.Spider):
                 with open(churches_file_path, "w") as json_file:
                     json.dump(churchesData, json_file, indent=4)
 
-        '''
+
 
     def start_requests(self):
         print("............ start_requests ..........")

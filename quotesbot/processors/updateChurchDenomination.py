@@ -7,31 +7,59 @@ import requests
 
 class UpdateChurchDenomination:
 
-    churches_file_path = "churches.json"
-    with open(churches_file_path, "r") as file:
-        churchesData = json.load(file)
-    churches = sorted(churchesData["churches"])
 
-    def saveChurches(self):
+    def updateChurchDeonomination(self, church):
 
-        # save to churches file
-        self.churchesData["churches"] = self.churches
-        with open(self.churches_file_path, "w") as json_file:
-            json.dump(self.churchesData, json_file, indent=4)
+        changed = False
 
-    def updateChurchDeonominations(self):
+        if "denomination" not in church and "name" in church:
 
-        for church in self.churches:
+            name = church["name"].lower()
 
-            if "name" in church:
+            if name.find("baptist") >= 0:
+                church["denomination"] = "baptist"
 
-                name = church["name"].lower()
+            elif name.find("catholic") >= 0:
+                church["denomination"] = "catholic"
+            elif name.find("sacred heart") >= 0:
+                church["denomination"] = "catholic"
+            elif name.find("our lady") >= 0:
+                church["denomination"] = "catholic"
 
-                #if name.find("baptist") >= 0:
+            elif name.find("united methodist") >= 0:
+                church["denomination"] = "united methodist church"
+
+            elif name.find("presbyterian") >= 0:
+                church["denomination"] = "presbyterian"
+
+            elif name.find("united church of christ") >= 0:
+                church["denomination"] = "united church of christ"
+
+            elif name.find("apostolic") >= 0:
+                church["denomination"] = "apostolic"
+
+            elif name.find("lutheran") >= 0:
+                church["denomination"] = "lutheran"
+
+            elif name.find("episcopal") >= 0:
+                church["denomination"] = "episcopal"
 
 
+            elif name.find("church of christ") >= 0:
+                church["denomination"] = "church of christ"
 
+            elif name.find("nazarene") >= 0:
+                church["denomination"] = "church of the nazarene"
 
-        self.saveChurches()
+            elif name.find("evangelical") >= 0:
+                church["denomination"] = "evangelical"
 
+            elif name.find("adventist") >= 0:
+                church["denomination"] = "seventh-day adventist"
 
+            elif name.find("mennonite") >= 0:
+                church["denomination"] = "mennonite"
+
+            changed = True
+
+        return changed
