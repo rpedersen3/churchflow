@@ -27,7 +27,7 @@ class UpdateChurchDenomination:
 
                 name = church["name"].lower()
 
-                if name.find("baptist") >= 0:
+                #if name.find("baptist") >= 0:
 
 
 
