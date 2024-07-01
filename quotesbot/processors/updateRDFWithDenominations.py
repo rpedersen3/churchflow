@@ -190,7 +190,7 @@ class UpdateRDFWithDenominations:
                 {
                     "name": "Non-Denominational Christianity",
                     "description": "churches that do not formally align with any specific denomination",
-                    "tags": ["nondenominational"]
+                    "tags": ["nondenominational", "non-denominational", "interdenominational"]
                 }
             ]
         },

@@ -157,6 +157,11 @@ class UpdateRDFWithChurches:
                             denomination = "unknown"
 
                     else:
+                        if "openai" in church:
+                            if "denomination" in church["openai"]:
+                                denomination = church["openai"]["denomination"]
+
+
                         if "mergeChurches" in church:
                             for mergeChurch in church["mergeChurches"]:
                                 if "denomination" in mergeChurch:
