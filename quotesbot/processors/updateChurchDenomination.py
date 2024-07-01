@@ -65,7 +65,7 @@ class UpdateChurchDenomination:
             changed = True
 
 
-        if "openai" not in church and "is-primary" in church and "name" in church and "addressInfo" in church and "city" in church["addressInfo"]:
+        if "is-primary" in church and "name" in church and "addressInfo" in church and "city" in church["addressInfo"]:
 
             if church["is-primary"] == "yes":
 
@@ -87,6 +87,9 @@ class UpdateChurchDenomination:
                 name = church["name"]
                 city = church["addressInfo"]["city"]
 
+                query = 'What is the denomination, lead pastor, facebook url, twitter url, instagram url, youtube url and website URL of ' + name + " in " + city + ', CO? Provide response in JSON format.'
+                print("Query: ", query)
+
                 # Define the payload with your query
                 payload = {
                     'model': 'gpt-4o',
@@ -97,16 +100,15 @@ class UpdateChurchDenomination:
                         },
                         {
                             'role': 'user',
-                            'content': 'What is the denomination, lead pastor, facebook url, twitter url, instagram url, youtube url and website URL of ' + name + " in " + city + ', CO? Provide response in JSON format.'
+                            'content': query
                         }
                     ],
-                    'max_tokens': 200
+                    'max_tokens': 400
                 }
 
                 # Make the API call
                 response = requests.post(url, headers=headers, json=payload)
 
-                print("ai response: ", response)
 
                 # Parse the response
                 if response.status_code == 200:

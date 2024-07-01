@@ -120,28 +120,30 @@ class chcrawlerSpider(scrapy.Spider):
         '''
 
 
-        if "name" in church and "denomination" not in church:
+        if "name" in church:
 
-            count = count + 1
+            if church["name"] == "Calvary Church Monument":
 
-            '''
-            churchFinder = FindChurchesGooglePlaces()
-            changed = churchFinder.updateChurch(church, googleKey)
-            
+                count = count + 1
 
-            updatePersonInfo = UpdatePersonInfo()
-            changed = updatePersonInfo.updateContactInfo(church)
-            
-            '''
-            updateChurchInfo = UpdateChurchDenomination()
-            changed = updateChurchInfo.updateChurchDenomination(church)
+                '''
+                churchFinder = FindChurchesGooglePlaces()
+                changed = churchFinder.updateChurch(church, googleKey)
+                
+    
+                updatePersonInfo = UpdatePersonInfo()
+                changed = updatePersonInfo.updateContactInfo(church)
+                
+                '''
+                updateChurchInfo = UpdateChurchDenomination()
+                changed = updateChurchInfo.updateChurchDenomination(church)
 
-            if changed:
+                if changed:
 
-                # save to churches file
-                churchesData["churches"] = churches
-                with open(churches_file_path, "w") as json_file:
-                    json.dump(churchesData, json_file, indent=4)
+                    # save to churches file
+                    churchesData["churches"] = churches
+                    with open(churches_file_path, "w") as json_file:
+                        json.dump(churchesData, json_file, indent=4)
 
 
 
