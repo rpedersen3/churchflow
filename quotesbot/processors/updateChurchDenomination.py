@@ -9,6 +9,7 @@ import time
 
 class UpdateChurchDenomination:
 
+    api_key = ''
 
     def updateChurchDenomination(self, church):
 
@@ -61,11 +62,14 @@ class UpdateChurchDenomination:
 
             elif name.find("mennonite") >= 0:
                 church["denomination"] = "mennonite"
+                
+            else:
+                church["denomination"] = "unknown"
 
             changed = True
 
 
-        if "is-primary" in church and "name" in church and "addressInfo" in church and "city" in church["addressInfo"]:
+        if self.api_key != '' and "is-primary" in church and "name" in church and "addressInfo" in church and "city" in church["addressInfo"]:
 
             if church["is-primary"] == "yes":
 
@@ -73,7 +77,7 @@ class UpdateChurchDenomination:
 
                 time.sleep(0.5)
 
-                api_key = ''
+
 
                 # Define the endpoint URL
                 url = 'https://api.openai.com/v1/chat/completions'
@@ -81,7 +85,7 @@ class UpdateChurchDenomination:
                 # Set up the headers including the API key
                 headers = {
                     'Content-Type': 'application/json',
-                    'Authorization': f'Bearer {api_key}',
+                    'Authorization': f'Bearer {self.api_key}',
                 }
 
                 name = church["name"]
