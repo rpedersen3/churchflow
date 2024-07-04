@@ -39,6 +39,12 @@ class UpdateRDFWithNetworks:
             "description": "",
             "websiteUri": "https://archden.org/parish-locator/",
             "tags": ["archdioces of denver"]
+        },
+        {
+            "name": "The Calvary",
+            "description": "",
+            "websiteUri": "https://thecalvary.org/churches/",
+            "tags": ["the calvary"]
         }
     ]
 
