@@ -11,6 +11,8 @@ from quotesbot.processors.findChurchesOpenStreetMapPlaces import FindChurchesOpe
 from quotesbot.processors.findChurchDuplicates import FindChurchDuplicates
 from quotesbot.processors.findChurchWebsite import FindChurchWebsite
 
+from quotesbot.processors.networks.elcaNetworkProcessor import ElcaProcessor
+
 from quotesbot.processors.updateRDFWithCities import UpdateRDFWithCities
 from quotesbot.processors.updateRDFWithChurches import UpdateRDFWithChurches
 from quotesbot.processors.updateRDFWithMultiChurchOrgs import UpdateRDFWithMultiChurchOrgs
@@ -43,6 +45,10 @@ class chcrawlerSpider(scrapy.Spider):
     # update rdf file with church data
 
 
+    processor = ElcaProcessor()
+    processor.findChurches()
+
+    '''
     updateRDF = UpdateRDFWithDenominations()
     updateRDF.updateRDFWithDenominations()
 
@@ -55,7 +61,7 @@ class chcrawlerSpider(scrapy.Spider):
     updateRDF = UpdateRDFWithChurches()
     updateRDF.updateWithChurches()
 
-    '''
+    
     
     
     updateRDF = UpdateRDFWithMultiChurchOrgs()
