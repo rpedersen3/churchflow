@@ -156,6 +156,6 @@ class TcProcessor:
 
                         foundChurch["network"] = network
 
-                        #self.saveChurches()
+                        self.saveChurches()
 
 

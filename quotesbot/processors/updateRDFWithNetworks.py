@@ -45,6 +45,12 @@ class UpdateRDFWithNetworks:
             "description": "",
             "websiteUri": "https://thecalvary.org/churches/",
             "tags": ["the calvary"]
+        },
+        {
+            "name": "SBC",
+            "description": "",
+            "websiteUri": "https://churches.sbc.net/?_search=39.7392358%2C-104.990251%2C100%2CDenver%252C%2520CO%252C%2520USA",
+            "tags": ["sbc"]
         }
     ]
 
