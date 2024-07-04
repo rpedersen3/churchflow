@@ -33,6 +33,12 @@ class UpdateRDFWithNetworks:
             "description": "",
             "websiteUri": "https://search.elca.org/Pages/WorldMap.aspx",
             "tags": ["elca", "evangelical lutheran church"]
+        },
+        {
+            "name": "Archdioces of Denver",
+            "description": "",
+            "websiteUri": "https://archden.org/parish-locator/",
+            "tags": ["archdioces of denver"]
         }
     ]
 

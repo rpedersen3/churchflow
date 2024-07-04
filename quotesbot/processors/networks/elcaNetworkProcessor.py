@@ -74,6 +74,8 @@ class ElcaProcessor:
             addressParts = church.find('p').get_text().split(',')
             address = addressParts[0]
 
+            foundChurch = None
+
             lat, lon = self.geocodeAddress(address)
             if lat != None and lon != None:
 
@@ -82,7 +84,7 @@ class ElcaProcessor:
 
                 if latValue > 38.0 and latValue < 41.0 and lonValue < -104.0 and lonValue > -106.0:
 
-                    foundChurch = None
+
                     for ch in self.churches:
                         if "addressInfo" in ch and "street" in ch["addressInfo"] and "latitude" in ch and "longitude" in ch:
                             chLat = float(ch["latitude"])
@@ -98,33 +100,53 @@ class ElcaProcessor:
                                     foundChurch = ch
                                     break
 
-                    if foundChurch != None:
+                    if foundChurch == None:
 
-                        network = ""
-                        if "network" in church:
-                            network = church["network"]
+                        # cycle through and see if address just matches
+                        for ch in self.churches:
+                            if "addressInfo" in ch and "street" in ch["addressInfo"]:
+                                if address.lower().find(ch["addressInfo"]["street"].lower()) >= 0:
+                                    foundChurch = ch
+                                    break
 
-                        if network.find("Evangelical Lutheran Church in America") == -1:
-                            if network == "":
-                                network = "Evangelical Lutheran Church in America"
-                                print(f"found Name: {name}, Address: {address}, loc: {lat} - {lon}")
-                            else:
-                                network = network + ", " + "Evangelical Lutheran Church in America"
+                    if foundChurch == None:
 
-                        church["network"] = network
-
-
-
-                    else:
                         print(f"****** not found Name: {name}, Address: {address}, loc: {lat} - {lon}")
 
                         i = i + 1
-                        if i > 10:
+                        if i > 10000000:
                             break
 
-                    self.saveChurches()
-
             else:
-                print(f"****** bad address: {name}, Address: {address}")
+
+                # cycle through and see if address just matches
+                if foundChurch == None:
+                    for ch in self.churches:
+                        if "addressInfo" in ch and "street" in ch["addressInfo"]:
+                            if address.lower().find(ch["addressInfo"]["street"].lower()) >= 0:
+                                foundChurch = ch
+                                break
+
+                if foundChurch == None:
+                    print(f"****** bad address: {name}, Address: {address}")
+
+
+            if foundChurch != None:
+
+                network = ""
+                if "network" in foundChurch:
+                    network = foundChurch["network"]
+
+                if network.find("Evangelical Lutheran Church in America") == -1:
+                    if network == "":
+                        network = "Evangelical Lutheran Church in America"
+                        print(f"found Name: {name}, Address: {address}, loc: {lat} - {lon}")
+                    else:
+                        network = network + ", " + "Evangelical Lutheran Church in America"
+
+
+                foundChurch["network"] = network
+
+                self.saveChurches()
 
 

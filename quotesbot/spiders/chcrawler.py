@@ -12,6 +12,7 @@ from quotesbot.processors.findChurchDuplicates import FindChurchDuplicates
 from quotesbot.processors.findChurchWebsite import FindChurchWebsite
 
 from quotesbot.processors.networks.elcaNetworkProcessor import ElcaProcessor
+from quotesbot.processors.networks.aodNetworkProcessor import AodProcessor
 
 from quotesbot.processors.updateRDFWithCities import UpdateRDFWithCities
 from quotesbot.processors.updateRDFWithChurches import UpdateRDFWithChurches
@@ -45,7 +46,8 @@ class chcrawlerSpider(scrapy.Spider):
     # update rdf file with church data
 
 
-    processor = ElcaProcessor()
+    #processor = ElcaProcessor()
+    processor = AodProcessor()
     processor.findChurches()
 
     '''
