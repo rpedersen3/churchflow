@@ -3926,6 +3926,24 @@
             "numberOfChurches": 3
         },
         {
+            "name": "Bennett ",
+            "fips": "",
+            "lat": 39.7589,
+            "lon": -104.4275,
+            "population": 2862,
+            "countyName": "Adams",
+            "numberOfChurches": 1
+        },
+        {
+            "name": "Strasburg ",
+            "fips": "",
+            "lat": 39.718076,
+            "lon": -104.319499,
+            "population": 3307,
+            "countyName": "Adams",
+            "numberOfChurches": 1
+        },
+        {
             "name": "Canon City",
             "fips": "8043",
             "lat": 38.443,

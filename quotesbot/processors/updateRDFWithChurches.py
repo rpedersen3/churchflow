@@ -150,7 +150,7 @@ class UpdateRDFWithChurches:
 
 
                     denomination = "unknown"
-                    if "denomination" in church:
+                    if "denomination" in church and church["denomination"] != "unknown":
 
                         denomination = church["denomination"]
                         if denomination == "edit denomination":
@@ -158,7 +158,7 @@ class UpdateRDFWithChurches:
 
                     else:
                         if "openai" in church:
-                            if "denomination" in church["openai"]:
+                            if "denomination" in church["openai"] and church["openai"]["denomination"] != '':
                                 denomination = church["openai"]["denomination"]
 
 
@@ -177,7 +177,7 @@ class UpdateRDFWithChurches:
                                     ?denomination rdf:type cc:Denomination .  
                                     ?denomination cc:denominationTag ?tag . 
                                     ?tag rc:name ?tagName . 
-                                    FILTER(LCASE(?tagName) = LCASE( \"""" + denomination + """\")) }
+                                    FILTER(STRSTARTS(LCASE( \"""" + denomination + """\"), LCASE(?tagName))) }
                                     """
 
                     try:
@@ -187,6 +187,10 @@ class UpdateRDFWithChurches:
                             for row in results:
                                 g2.add((chOrg, self.CC.denomination, row["denomination"]))
                                 g2.add((chOrg, self.CC.denominationTag, row["tag"]))
+                                break
+                        else:
+                            g2.add((chOrg, self.CC.denomination, "unknown"))
+                            g2.add((chOrg, self.CC.denominationTag, '<cc:denominationTag rdf:resource="http://churchcore.io/frontrange#unknowntag"/>'))
 
                     except Exception as e:
                         print("get denomination err: ", e)

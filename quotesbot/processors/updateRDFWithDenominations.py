@@ -59,7 +59,9 @@ class UpdateRDFWithDenominations:
                     "description": "includes national churches like the Greek Orthodox Church, Russian Orthodox Church, etc.",
                     "tags": ["orthodox",
                                 "orthodox christian",
-                                "greek_orthodox"]
+                                "greek_orthodox",
+                                "greek orthodox",
+                                "romanian orthodox"]
                 },
                 {
                     "name": "Oriental Orthodox Churches",
@@ -161,6 +163,11 @@ class UpdateRDFWithDenominations:
                     "name": "Christian and Missionary Alliance",
                     "description": "",
                     "tags": ["christian and missionary alliance"]
+                },
+                {
+                    "name": "Metropolitan Community Church",
+                    "description": "",
+                    "tags": ["metropolitan community church"]
                 }
             ]
         },
@@ -180,7 +187,7 @@ class UpdateRDFWithDenominations:
                 {
                     "name": "Unitarian Universalism",
                     "description": "historically Christian, now multi-religious",
-                    "tags": []
+                    "tags": ["unitarian"]
                 }
             ]
         },

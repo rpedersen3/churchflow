@@ -62,7 +62,7 @@ class UpdateChurchDenomination:
 
             elif name.find("mennonite") >= 0:
                 church["denomination"] = "mennonite"
-                
+
             else:
                 church["denomination"] = "unknown"
 

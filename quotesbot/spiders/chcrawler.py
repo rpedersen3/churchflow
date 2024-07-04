@@ -15,6 +15,7 @@ from quotesbot.processors.updateRDFWithCities import UpdateRDFWithCities
 from quotesbot.processors.updateRDFWithChurches import UpdateRDFWithChurches
 from quotesbot.processors.updateRDFWithMultiChurchOrgs import UpdateRDFWithMultiChurchOrgs
 from quotesbot.processors.updateRDFWithDenominations import UpdateRDFWithDenominations
+from quotesbot.processors.updateRDFWithNetworks import UpdateRDFWithNetworks
 
 from quotesbot.processors.updatePersonInfo import UpdatePersonInfo
 from quotesbot.processors.updateChurchDenomination import UpdateChurchDenomination
@@ -42,9 +43,11 @@ class chcrawlerSpider(scrapy.Spider):
     # update rdf file with church data
 
 
-    
     updateRDF = UpdateRDFWithDenominations()
     updateRDF.updateRDFWithDenominations()
+
+    updateRDF = UpdateRDFWithNetworks()
+    updateRDF.updateRDFWithNetworks()
 
     updateRDF = UpdateRDFWithCities()
     updateRDF.updateWithCities()
@@ -53,7 +56,6 @@ class chcrawlerSpider(scrapy.Spider):
     updateRDF.updateWithChurches()
 
     '''
-
     
     
     updateRDF = UpdateRDFWithMultiChurchOrgs()
