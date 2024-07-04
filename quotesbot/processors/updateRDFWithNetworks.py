@@ -19,14 +19,20 @@ class UpdateRDFWithNetworks:
         {
             "name": "Calvary Chapel",
             "description": "",
-            "websiteUri": "https://calvarychapel.com/",
+            "websiteUri": "https://calvarychapel.com/church-locator/",
             "tags": ["calvary chapel"]
         },
         {
             "name": "Converge Rock Mountain",
             "description": "",
-            "websiteUri": "https://www.convergerockymountain.org/",
+            "websiteUri": "https://www.convergerockymountain.org/churches/",
             "tags": ["converge"]
+        },
+        {
+            "name": "Evangelical Lutheran Church in America",
+            "description": "",
+            "websiteUri": "https://search.elca.org/Pages/WorldMap.aspx",
+            "tags": ["elca", "evangelical lutheran church"]
         }
     ]
 
@@ -64,7 +70,7 @@ class UpdateRDFWithNetworks:
             f.write(data)
 
 
-    def updateRDFWithDenominations(self):
+    def updateRDFWithNetworks(self):
 
         g2 = self.setupRDFFile()
 
@@ -72,7 +78,7 @@ class UpdateRDFWithNetworks:
         for ntwk in self.networks:
 
             name = ntwk["name"]
-            networkId = ntwk.replace(" ", "").lower()
+            networkId = name.replace(" ", "").lower()
             network = self.n + networkId
 
             g2.add((network, RDF.type, self.OWL.NamedIndividual))

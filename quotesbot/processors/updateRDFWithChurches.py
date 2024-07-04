@@ -172,7 +172,7 @@ class UpdateRDFWithChurches:
 
                     print("??????????????????? query for denomination ")
 
-                    # link church to city
+                    # link church to denomination
                     query = """select ?denomination ?tag where { 
                                     ?denomination rdf:type cc:Denomination .  
                                     ?denomination cc:denominationTag ?tag . 
@@ -194,6 +194,40 @@ class UpdateRDFWithChurches:
 
                     except Exception as e:
                         print("get denomination err: ", e)
+
+
+
+                    # link church to network
+
+                    network = "unknown"
+                    if "network" in church and church["network"] != "unknown":
+                        network = church["network"]
+
+
+                    query = """select ?network ?tag where { 
+                                    ?network rdf:type cc:Network .  
+                                    ?network cc:networkTag ?tag . 
+                                    ?tag rc:name ?tagName . 
+                                    FILTER(STRSTARTS(LCASE( \"""" + network + """\"), LCASE(?tagName))) }
+                                    """
+
+                    try:
+                        results = g2.query(query)
+
+                        if len(results) > 0:
+                            for row in results:
+                                g2.add((chOrg, self.CC.network, row["network"]))
+                                g2.add((chOrg, self.CC.networkTag, row["tag"]))
+                                break
+                        else:
+                            g2.add((chOrg, self.CC.network, "unknown"))
+                            g2.add((chOrg, self.CC.networkTag,
+                                    '<cc:networkTag rdf:resource="http://churchcore.io/frontrange#unknowntag"/>'))
+
+                    except Exception as e:
+                        print("get network err: ", e)
+
+
 
                     if "org" in church:
                         orgName = church["org"]
