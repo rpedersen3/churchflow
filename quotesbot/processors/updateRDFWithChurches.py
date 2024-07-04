@@ -198,34 +198,33 @@ class UpdateRDFWithChurches:
 
 
                     # link church to network
-
-                    network = "unknown"
                     if "network" in church and church["network"] != "unknown":
-                        network = church["network"]
+                        networks = church["network"]
 
+                        networkList = networks.split(',')
+                        for network in networkList:
+                            print("************ find network: ", network)
+                            query = """select ?network ?tag where { 
+                                            ?network rdf:type cc:Network .  
+                                            ?network cc:networkTag ?tag . 
+                                            ?tag rc:name ?tagName . 
+                                            FILTER(STRSTARTS(LCASE( \"""" + network + """\"), LCASE(?tagName))) }
+                                            """
 
-                    query = """select ?network ?tag where { 
-                                    ?network rdf:type cc:Network .  
-                                    ?network cc:networkTag ?tag . 
-                                    ?tag rc:name ?tagName . 
-                                    FILTER(STRSTARTS(LCASE( \"""" + network + """\"), LCASE(?tagName))) }
-                                    """
+                            try:
+                                results = g2.query(query)
 
-                    try:
-                        results = g2.query(query)
+                                if len(results) > 0:
+                                    print("****** found network **********", results)
+                                    for row in results:
 
-                        if len(results) > 0:
-                            for row in results:
-                                g2.add((chOrg, self.CC.network, row["network"]))
-                                g2.add((chOrg, self.CC.networkTag, row["tag"]))
-                                break
-                        else:
-                            g2.add((chOrg, self.CC.network, "unknown"))
-                            g2.add((chOrg, self.CC.networkTag,
-                                    '<cc:networkTag rdf:resource="http://churchcore.io/frontrange#unknowntag"/>'))
+                                        print("***************  add network to org ***********")
+                                        g2.add((chOrg, self.CC.network, row["network"]))
+                                        g2.add((chOrg, self.CC.networkTag, row["tag"]))
+                                        break
 
-                    except Exception as e:
-                        print("get network err: ", e)
+                            except Exception as e:
+                                print("get network err: ", e)
 
 
 
@@ -274,12 +273,18 @@ class UpdateRDFWithChurches:
                             g2.add((chSiteAddress, RDF.type, self.RC.PostalAddress))
                             g2.add((chSiteAddress, self.RC.name, Literal(churchSiteAddressName)))
 
-                            chSiteCity = church["addressInfo"]["city"]
-                            #chSiteCounty = church["addressInfo"]["county"]
-                            chSiteZipcode = church["addressInfo"]["zipcode"]
-                            g2.add((chSiteAddress, self.VCARD.locality, Literal(chSiteCity)))
-                            #g2.add((chSiteAddress, self.VCARD.region, Literal(chSiteCounty)))
-                            g2.add((chSiteAddress, self.VCARD.postalCode, Literal(chSiteZipcode)))
+                            if  "city" in church["addressInfo"] and \
+                                "zipcode" in church["addressInfo"] and \
+                                "street" in church["addressInfo"]:
+
+                                chSiteCity = church["addressInfo"]["city"]
+                                #chSiteCounty = church["addressInfo"]["county"]
+                                chSiteZipcode = church["addressInfo"]["zipcode"]
+                                address1 = church["addressInfo"]["street"]
+                                g2.add((chSiteAddress, self.VCARD.locality, Literal(chSiteCity)))
+                                #g2.add((chSiteAddress, self.VCARD.region, Literal(chSiteCounty)))
+                                g2.add((chSiteAddress, self.VCARD.postalCode, Literal(chSiteZipcode)))
+                                g2.add((chSiteAddress, self.VCARD.streetAddress, Literal(address1)))
 
                             if "latitude" in church and "longitude" in church:
                                 chSiteAddressLat = church["latitude"]

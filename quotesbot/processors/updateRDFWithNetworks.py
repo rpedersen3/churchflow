@@ -78,7 +78,7 @@ class UpdateRDFWithNetworks:
         for ntwk in self.networks:
 
             name = ntwk["name"]
-            networkId = name.replace(" ", "").lower()
+            networkId = name.replace(" ", "").lower() + "_network"
             network = self.n + networkId
 
             g2.add((network, RDF.type, self.OWL.NamedIndividual))
