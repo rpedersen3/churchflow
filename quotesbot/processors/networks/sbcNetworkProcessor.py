@@ -50,62 +50,83 @@ class SBCProcessor:
     def findChurches(self):
 
 
-        service = Service(ChromeDriverManager().install())
-        driver = webdriver.Chrome(service=service)
-
-        # URL of the ELCA World Map page
-        url = "https://churches.sbc.net/?_search=39.7392358%2C-104.990251%2C100%2CDenver%252C%2520CO%252C%2520USA"
-        #url = "https://churches.sbc.net/?_search=39.7392358%2C-104.990251%2C100%2CDenver%252C%2520CO%252C%2520USA&_paged=2"
-        driver.get(url)
-
-        # Wait for the page to load completely
-        time.sleep(10)  # Increase this if necessary for your connection
-
-        # Get the page source and parse it with BeautifulSoup
-        soup = BeautifulSoup(driver.page_source, 'html.parser')
-        driver.quit()
-
-        i = 1
-
-        for church in soup.find_all('div', class_ ="el-e584j"):
-
-            if church.find('a') and church.find('div', class_ ="el-tcd3ur") and church.find('div', class_="el-rsu39"):
 
 
-                name = church.find('a').get_text(strip=True)
-                street = church.find('div', class_ ="el-tcd3ur").get_text(strip=True)
-                city = church.find('div', class_="el-rsu39").get_text(strip=True)
-                address = street + ", " + city
+        for i in range(1, 10):
 
-                foundChurch = None
+            service = Service(ChromeDriverManager().install())
+            driver = webdriver.Chrome(service=service)
 
-                lat, lon = self.geocodeAddress(address)
-                if lat != None and lon != None:
+            # URL of the ELCA World Map page
+            url = "https://churches.sbc.net/?_search=39.7392358%2C-104.990251%2C100%2CDenver%252C%2520CO%252C%2520USA"
 
-                    latValue = float(lat)
-                    lonValue = float(lon)
+            if i > 1:
+                url = "https://churches.sbc.net/?_search=39.7392358%2C-104.990251%2C100%2CDenver%252C%2520CO%252C%2520USA&_paged=" + str(i)
 
-                    if latValue > 38.0 and latValue < 41.0 and lonValue < -104.0 and lonValue > -106.0:
+            print("url: ", url)
+            driver.get(url)
+
+            # Wait for the page to load completely
+            time.sleep(10)  # Increase this if necessary for your connection
+
+            # Get the page source and parse it with BeautifulSoup
+            soup = BeautifulSoup(driver.page_source, 'html.parser')
+            driver.quit()
+
+            for church in soup.find_all('div', class_ ="el-e584j"):
+
+                if church.find('a') and church.find('div', class_ ="el-tcd3ur") and church.find('div', class_="el-rsu39"):
 
 
-                        for ch in self.churches:
-                            if "addressInfo" in ch and "street" in ch["addressInfo"] and "latitude" in ch and "longitude" in ch:
-                                chLat = float(ch["latitude"])
-                                chLon = float(ch["longitude"])
+                    name = church.find('a').get_text(strip=True)
+                    street = church.find('div', class_ ="el-tcd3ur").get_text(strip=True)
+                    city = church.find('div', class_="el-rsu39").get_text(strip=True)
+                    address = street + ", " + city
 
-                                if (abs(chLat - latValue) < 0.01 and abs(chLon - lonValue) < 0.01):
+                    foundChurch = None
 
-                                    firstPart = address.split(' ')[0]
-                                    chFirstPart = ch["addressInfo"]["street"].split(' ')[0]
+                    lat, lon = self.geocodeAddress(address)
+                    if lat != None and lon != None:
 
-                                    if firstPart.lower() == chFirstPart.lower():
+                        latValue = float(lat)
+                        lonValue = float(lon)
 
-                                        foundChurch = ch
-                                        break
+                        if latValue > 38.0 and latValue < 41.0 and lonValue < -104.0 and lonValue > -106.0:
 
+
+                            for ch in self.churches:
+                                if "addressInfo" in ch and "street" in ch["addressInfo"] and "latitude" in ch and "longitude" in ch:
+                                    chLat = float(ch["latitude"])
+                                    chLon = float(ch["longitude"])
+
+                                    if (abs(chLat - latValue) < 0.01 and abs(chLon - lonValue) < 0.01):
+
+                                        firstPart = address.split(' ')[0]
+                                        chFirstPart = ch["addressInfo"]["street"].split(' ')[0]
+
+                                        if firstPart.lower() == chFirstPart.lower():
+
+                                            foundChurch = ch
+                                            break
+
+                            if foundChurch == None:
+
+                                # cycle through and see if address just matches
+                                for ch in self.churches:
+                                    if "addressInfo" in ch and "street" in ch["addressInfo"]:
+                                        if address.lower().find(ch["addressInfo"]["street"].lower()) >= 0:
+                                            foundChurch = ch
+                                            break
+
+                            if foundChurch == None:
+
+                                print(f"****** not found Name: {name}, Address: {address}, loc: {lat} - {lon}")
+
+
+                    else:
+
+                        # cycle through and see if address just matches
                         if foundChurch == None:
-
-                            # cycle through and see if address just matches
                             for ch in self.churches:
                                 if "addressInfo" in ch and "street" in ch["addressInfo"]:
                                     if address.lower().find(ch["addressInfo"]["street"].lower()) >= 0:
@@ -113,44 +134,26 @@ class SBCProcessor:
                                         break
 
                         if foundChurch == None:
-
-                            print(f"****** not found Name: {name}, Address: {address}, loc: {lat} - {lon}")
-
-                            i = i + 1
-                            if i > 10000000:
-                                break
-
-                else:
-
-                    # cycle through and see if address just matches
-                    if foundChurch == None:
-                        for ch in self.churches:
-                            if "addressInfo" in ch and "street" in ch["addressInfo"]:
-                                if address.lower().find(ch["addressInfo"]["street"].lower()) >= 0:
-                                    foundChurch = ch
-                                    break
-
-                    if foundChurch == None:
-                        print(f"****** bad address: {name}, Address: {address}")
+                            print(f"****** bad address: {name}, Address: {address}")
 
 
-                if foundChurch != None:
+                    if foundChurch != None:
 
-                    network = ""
-                    if "network" in foundChurch:
-                        network = foundChurch["network"]
+                        network = ""
+                        if "network" in foundChurch:
+                            network = foundChurch["network"]
 
-                    networkName = "SBC"
-                    if network.find(networkName) == -1:
-                        if network == "":
-                            network = networkName
-                            print(f"found Name: {name}, Address: {address}, loc: {lat} - {lon}")
-                        else:
-                            network = network + ", " + networkName
+                        networkName = "SBC"
+                        if network.find(networkName) == -1:
+                            if network == "":
+                                network = networkName
+                                print(f"found Name: {name}, Address: {address}, loc: {lat} - {lon}")
+                            else:
+                                network = network + ", " + networkName
 
 
-                    foundChurch["network"] = network
+                        foundChurch["network"] = network
 
-                    #self.saveChurches()
+                        self.saveChurches()
 
 

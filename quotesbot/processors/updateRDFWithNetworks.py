@@ -51,6 +51,12 @@ class UpdateRDFWithNetworks:
             "description": "",
             "websiteUri": "https://churches.sbc.net/?_search=39.7392358%2C-104.990251%2C100%2CDenver%252C%2520CO%252C%2520USA",
             "tags": ["sbc"]
+        },
+        {
+            "name": "Venture Church Network",
+            "description": "",
+            "websiteUri": "https://venturechurches.org/search-vcn-churches/?_state=co",
+            "tags": ["vcn", "venture church network"]
         }
     ]
 
