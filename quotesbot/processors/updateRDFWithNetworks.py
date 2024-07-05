@@ -57,6 +57,12 @@ class UpdateRDFWithNetworks:
             "description": "",
             "websiteUri": "https://venturechurches.org/search-vcn-churches/?_state=co",
             "tags": ["vcn", "venture church network"]
+        },
+        {
+            "name": "Evangelical Free Church",
+            "description": "",
+            "websiteUri": "https://churches.efca.org/?s=colorado",
+            "tags": ["efc", "evangelical free church"]
         }
     ]
 

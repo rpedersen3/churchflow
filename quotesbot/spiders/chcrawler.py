@@ -17,6 +17,7 @@ from quotesbot.processors.networks.ldsNetworkProcessor import LdsProcessor
 from quotesbot.processors.networks.tcNetworkProcessor import TcProcessor
 from quotesbot.processors.networks.sbcNetworkProcessor import SBCProcessor
 from quotesbot.processors.networks.vcnNetworkProcessor import VcnProcessor
+from quotesbot.processors.networks.efcNetworkProcessor import EfcProcessor
 
 from quotesbot.processors.updateRDFWithCities import UpdateRDFWithCities
 from quotesbot.processors.updateRDFWithChurches import UpdateRDFWithChurches
@@ -49,13 +50,14 @@ class chcrawlerSpider(scrapy.Spider):
 
     # update rdf file with church data
 
-
+    '''
     #processor = ElcaProcessor()
     #processor = AodProcessor()
     #processor = LdsProcessor()
     #processor = TcProcessor()
     #processor = SBCProcessor()
-    processor = VcnProcessor()
+    #processor = VcnProcessor()
+    processor = EfcProcessor()
     processor.findChurches()
 
     '''
@@ -71,7 +73,7 @@ class chcrawlerSpider(scrapy.Spider):
     updateRDF = UpdateRDFWithChurches()
     updateRDF.updateWithChurches()
 
-   
+    '''
     
     updateRDF = UpdateRDFWithMultiChurchOrgs()
     updateRDF.updateRDFWithMultiChurchOrgs()

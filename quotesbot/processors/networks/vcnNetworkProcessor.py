@@ -73,7 +73,7 @@ class VcnProcessor:
         driver.quit()
 
         i = 1
-        print("soup: ", soup)
+        #print("soup: ", soup)
         for church in soup.find_all('div', class_ ="el-nppdd"):
 
             if church.find('h3'):
@@ -153,14 +153,14 @@ class VcnProcessor:
                         if "network" in foundChurch:
                             network = foundChurch["network"]
 
-                        networkName = "The Calvary"
+                        networkName = "Venture Church Network"
+
                         if network.find(networkName) == -1:
                             if network == "":
                                 network = networkName
                                 print(f"found Name: {name}, Address: {address}, loc: {lat} - {lon}")
                             else:
                                 network = network + ", " + networkName
-
 
                         foundChurch["network"] = network
 
