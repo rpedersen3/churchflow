@@ -18,6 +18,9 @@ from quotesbot.processors.networks.tcNetworkProcessor import TcProcessor
 from quotesbot.processors.networks.sbcNetworkProcessor import SBCProcessor
 from quotesbot.processors.networks.vcnNetworkProcessor import VcnProcessor
 from quotesbot.processors.networks.efcNetworkProcessor import EfcProcessor
+from quotesbot.processors.networks.vineyardNetworkProcessor import VineyardProcessor
+
+from quotesbot.processors.partners.ifaPartnerProcessor import IfaProcessor
 
 from quotesbot.processors.updateRDFWithCities import UpdateRDFWithCities
 from quotesbot.processors.updateRDFWithChurches import UpdateRDFWithChurches
@@ -31,7 +34,7 @@ from quotesbot.processors.updateChurchDenomination import UpdateChurchDenominati
 from quotesbot.processors.findChurchStaffWebPagesUsingSearch import FindChurchStaffWebPagesUsingSearch
 
 from quotesbot.processors.updateChurchWithStaffFromStaffWebPages import UpdateChurchWithStaffFromWebPages
-
+from quotesbot.processors.updateChurchWithSocialData import UpdateChurchWithSocialData
 class chcrawlerSpider(scrapy.Spider):
 
     name = "chcrawler"
@@ -45,22 +48,27 @@ class chcrawlerSpider(scrapy.Spider):
 
 
     startURLs = [
-        "https://calvarybible.com"
     ]
 
     # update rdf file with church data
 
     '''
+
     #processor = ElcaProcessor()
     #processor = AodProcessor()
     #processor = LdsProcessor()
     #processor = TcProcessor()
     #processor = SBCProcessor()
     #processor = VcnProcessor()
-    processor = EfcProcessor()
- 
+    #processor = EfcProcessor()
+
+    #processor = VineyardProcessor()
     processor.findChurches()
     '''
+
+    processor = IfaProcessor()
+    processor.findChurches()
+
     '''
     updateRDF = UpdateRDFWithDenominations()
     updateRDF.updateRDFWithDenominations()
@@ -125,8 +133,7 @@ class chcrawlerSpider(scrapy.Spider):
     count = 0
     for church in churches:
 
-
-        if count > 1:
+        if count > -10:
             break
 
         changed = False
@@ -139,9 +146,12 @@ class chcrawlerSpider(scrapy.Spider):
         updateWithStaff.appendWebPagesBasedOnStaff(church, startURLs)
         '''
 
+        if "name" in church:
+                #if "name" in church and church["name"] == "Calvary Bible Church - Erie Campus":
 
-        if "name" in church and church["name"] == "River Rock Church":
-
+                # add to urls
+                updateWithSocialData = UpdateChurchWithSocialData()
+                updateWithSocialData.appendWebPagesBasedOnSocial(church, startURLs)
 
                 count = count + 1
 
@@ -156,20 +166,18 @@ class chcrawlerSpider(scrapy.Spider):
                 
 
                 updateChurchInfo = UpdateChurchDenomination()
-                changed = updateChurchInfo.updateChurchDenomination(church)
-                '''
+                changed = updateChurchInfo.updateChurchDenominationWithGoogleGraph(church)
+
                 if changed:
 
                     # save to churches file
                     churchesData["churches"] = churches
                     with open(churches_file_path, "w") as json_file:
                         json.dump(churchesData, json_file, indent=4)
-
+                '''
 
 
     def start_requests(self):
-        print("............ start_requests ..........")
-
         lua_script_template = """
                 function main(splash, args)  
 
@@ -211,6 +219,8 @@ class chcrawlerSpider(scrapy.Spider):
 
     def parse(self, response):
 
+        print("parse response..........")
+
         helpers = Helpers()
         church, isHomePage = helpers.findChurch(self.churches, response.url)
         if church is not None and "name" in church:
@@ -221,6 +231,9 @@ class chcrawlerSpider(scrapy.Spider):
             updateWithStaff = UpdateChurchWithStaffFromWebPages()
             changed = updateWithStaff.updateChurchWithStaffFromWebPages(church, response)
             '''
+
+            updateWithSocial = UpdateChurchWithSocialData()
+            changed = updateWithSocial.updateChurchWithSocialData(church, response)
 
             if changed:
                 # save to churches file

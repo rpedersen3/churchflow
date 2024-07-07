@@ -65,6 +65,7 @@ class AodProcessor:
         driver.quit()
 
         i = 1
+        print("soup: ", soup)
         for church in soup.find_all('div', class_ ="store-locator__infobox"):
 
             #print("ch: ", church)

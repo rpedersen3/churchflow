@@ -1773,7 +1773,7 @@ class crawler(scrapy.Spider):
     def start_requests(self):
 
 
-        print("............ start_requests ..........")
+        print("............ start_requests .......... qqqq")
 
 
 
