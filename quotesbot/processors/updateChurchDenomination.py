@@ -89,9 +89,11 @@ class UpdateChurchDenomination:
                 }
 
                 name = church["name"]
+                street = church["addressInfo"]["street"]
                 city = church["addressInfo"]["city"]
+                website = church["link"]
 
-                query = 'What is the denomination, lead pastor, facebook url, twitter url, instagram url, youtube url and website URL of ' + name + " in " + city + ', CO? Provide response in JSON format.'
+                query = 'What is the church denomination, lead pastor, facebook url, twitter url, instagram url, youtube url and website URL for church at webiste' + website + '? Provide response in JSON format.'
                 print("Query: ", query)
 
                 # Define the payload with your query
@@ -112,7 +114,7 @@ class UpdateChurchDenomination:
 
                 # Make the API call
                 response = requests.post(url, headers=headers, json=payload)
-
+                print("openai response: ", response)
 
                 # Parse the response
                 if response.status_code == 200:

@@ -58,8 +58,9 @@ class chcrawlerSpider(scrapy.Spider):
     #processor = SBCProcessor()
     #processor = VcnProcessor()
     processor = EfcProcessor()
+ 
     processor.findChurches()
-
+    '''
     '''
     updateRDF = UpdateRDFWithDenominations()
     updateRDF.updateRDFWithDenominations()
@@ -73,7 +74,7 @@ class chcrawlerSpider(scrapy.Spider):
     updateRDF = UpdateRDFWithChurches()
     updateRDF.updateWithChurches()
 
-    '''
+
     
     updateRDF = UpdateRDFWithMultiChurchOrgs()
     updateRDF.updateRDFWithMultiChurchOrgs()
@@ -139,7 +140,7 @@ class chcrawlerSpider(scrapy.Spider):
         '''
 
 
-        if "name" in church:
+        if "name" in church and church["name"] == "River Rock Church":
 
 
                 count = count + 1
@@ -153,16 +154,17 @@ class chcrawlerSpider(scrapy.Spider):
                 changed = updatePersonInfo.updateContactInfo(church)
                 
                 
+
                 updateChurchInfo = UpdateChurchDenomination()
                 changed = updateChurchInfo.updateChurchDenomination(church)
-
+                '''
                 if changed:
 
                     # save to churches file
                     churchesData["churches"] = churches
                     with open(churches_file_path, "w") as json_file:
                         json.dump(churchesData, json_file, indent=4)
-                '''
+
 
 
     def start_requests(self):
