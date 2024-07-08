@@ -54,7 +54,7 @@ class UpdateChurchWithSocialData:
         soup = BeautifulSoup(driver.page_source, 'html.parser')
         driver.quit()
 
-        #print("soup: ", soup)
+        print("soup: ", soup)
         for link in soup.find_all('span'):
             linkValue = link.get_text()
             previous_span = link.find_previous_sibling('span')
@@ -78,8 +78,51 @@ class UpdateChurchWithSocialData:
             if previous_span_text == "TikTok" and "tiktokUrl" not in social:
                 social["tiktokUrl"] = "https://" + linkValue
                 print(previous_span_text)
-                print("ticktok: ", linkValue)
+                print("tiktok: ", linkValue)
 
+            if previous_span_text == "Pinterest" and "pinterestUrl" not in social:
+                social["pinterestUrl"] = "https://" + linkValue
+                print(previous_span_text)
+                print("pinterest: ", linkValue)
+
+        for tr in soup.find_all('tr', class_ ="description-item"):
+            for td in tr.find_all('td', class_ ="style-scope"):
+
+                ytIcon = td.find("yt-icon")
+                if ytIcon != None:
+                    icon = ytIcon.get("icon")
+
+                    nextTd = td.find_next_sibling('td')
+                    if nextTd != None and icon != None:
+
+                        youtube = {}
+                        if "youtube" in social:
+                            youtube = social["youtube"]
+
+                        text = nextTd.get_text().strip("\n")
+
+                        if icon == "language":
+                            youtube["url"] = text
+                            print("youtube url: ", text)
+
+
+                        if icon == "person_radar":
+                            youtube["subscribers"] = text
+                            print("subscribers: ", text)
+
+                        if icon == "my_videos":
+                            youtube["videos"] = text
+                            print("videos: ", text)
+
+                        if icon == "trending_up":
+                            youtube["views"] = text
+                            print("views: ", text)
+
+                        if icon == "info_outline":
+                            youtube["joined"] = text
+                            print("joined: ", text)
+
+                        social["youtube"] = youtube
 
 
 
@@ -120,7 +163,7 @@ class UpdateChurchWithSocialData:
                     social["twitterUrl"] = href.rstrip("/")
                     print("twitter: ", href)
                 if href.find("youtube.com") >= 0 and "youtubeUrl" not in social:
-                    youtubeUrl = href.rstrip("/about").rstrip("/featured").rstrip("/streams").rstrip("/")
+                    youtubeUrl = href.rstrip("/about").rstrip("/featured").rstrip("/streams").rstrip("/liv").rstrip("/video").rstrip("/")
                     if youtubeUrl.find("?") == -1:
                         social["youtubeUrl"] = youtubeUrl
                         self.processYoutubeAbout(youtubeUrl, social)
@@ -141,5 +184,16 @@ class UpdateChurchWithSocialData:
             church["social"] = social
 
             self.helpers.markAsProcessed(church, processor, response.url)
+
+
+        # get data from social pages
+        if "social" in church:
+            social = church["social"]
+
+            if "youtubeUrl" in social:
+                youtubeUrl = social["youtubeUrl"]
+                changed = True
+                self.processYoutubeAbout(youtubeUrl, social)
+
 
         return changed
