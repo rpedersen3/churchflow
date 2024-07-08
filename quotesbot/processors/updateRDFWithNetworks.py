@@ -81,6 +81,12 @@ class UpdateRDFWithNetworks:
             "description": "",
             "websiteUri": "https://www.ucc.org/church-finder/",
             "tags": ["united church of christ"]
+        },
+        {
+            "name": "Association of Related Churches",
+            "description": "",
+            "websiteUri": "https://www.arcchurches.com/find-a-church/?gad_source=1&gclid=Cj0KCQjw-ai0BhDPARIsAB6hmP6tTooA6eZhprldmvFjUOcdLTcwl0nCrLdNpKmoq4Fdape-YhyEvKcaAoP5EALw_wcB",
+            "tags": ["arc", "association of related churches"]
         }
     ]
 
