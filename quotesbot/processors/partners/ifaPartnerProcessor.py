@@ -115,7 +115,7 @@ class IfaProcessor:
 
                             foundChurch = True
 
-                            #self.saveChurches()
+                            self.saveChurches()
 
                 if foundChurch == False:
                     print(f"********* not found church: {name}, domain: {domain}")

@@ -228,6 +228,37 @@ class UpdateRDFWithChurches:
 
 
 
+                    # link church to partner
+                    if "partner" in church and church["partner"] != "unknown":
+                        partners = church["partner"]
+
+                        partnerList = partners.split(',')
+                        for partner in partnerList:
+                            print("************ find partner: ", partner)
+                            query = """select ?partner ?tag where { 
+                                            ?partner rdf:type cc:Partner .  
+                                            ?partner cc:partnerTag ?tag . 
+                                            ?tag rc:name ?tagName . 
+                                            FILTER(STRSTARTS(LCASE( \"""" + partner + """\"), LCASE(?tagName))) }
+                                            """
+
+                            try:
+                                results = g2.query(query)
+
+                                if len(results) > 0:
+                                    print("****** found partner **********", results)
+                                    for row in results:
+
+                                        print("***************  add partner to org ***********")
+                                        g2.add((chOrg, self.CC.partner, row["partner"]))
+                                        g2.add((chOrg, self.CC.partnerTag, row["tag"]))
+                                        break
+
+                            except Exception as e:
+                                print("get partner err: ", e)
+
+
+
                     if "org" in church:
                         orgName = church["org"]
 

@@ -41,6 +41,12 @@ class UpdateRDFWithNetworks:
             "tags": ["archdioces of denver"]
         },
         {
+            "name": "Archdioces of Colorado Springs",
+            "description": "",
+            "websiteUri": "https://www.diocs.org/Parishes-Masses/Parish-Directory-by-Name",
+            "tags": ["archdioces of colorado springs"]
+        },
+        {
             "name": "The Calvary",
             "description": "",
             "websiteUri": "https://thecalvary.org/churches/",
@@ -63,6 +69,18 @@ class UpdateRDFWithNetworks:
             "description": "",
             "websiteUri": "https://churches.efca.org/?s=colorado",
             "tags": ["efc", "evangelical free church"]
+        },
+        {
+            "name": "Episcopal Colorado",
+            "description": "",
+            "websiteUri": "https://episcopalcolorado.org/",
+            "tags": ["episcopal colorado"]
+        },
+        {
+            "name": "United Church of Christ",
+            "description": "",
+            "websiteUri": "https://www.ucc.org/church-finder/",
+            "tags": ["united church of christ"]
         }
     ]
 
