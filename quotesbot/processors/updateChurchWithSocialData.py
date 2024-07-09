@@ -125,6 +125,79 @@ class UpdateChurchWithSocialData:
                         social["youtube"] = youtube
 
 
+    def processFacebook(self, url, social):
+
+        print("process facebook .....................")
+        service = Service(ChromeDriverManager().install())
+        driver = webdriver.Chrome(service=service)
+
+        driver.get(url)
+
+        # Wait for the page to load completely
+        time.sleep(10)  # Increase this if necessary for your connection
+
+        # Get the page source and parse it with BeautifulSoup
+        soup = BeautifulSoup(driver.page_source, 'html.parser')
+        driver.quit()
+
+        facebook = {}
+        if "facebook" in social:
+            facebook = social["facebook"]
+
+        #print("soup: ", soup)
+        changed = False
+        for span in soup.find_all('span'):
+            txt = span.get_text()
+
+            if txt.find("Page") >= 0:
+                changed = True
+                type = txt.replace("Page \u00b7", "").strip()
+                facebook["type"] = type
+                print("type: ", type)
+
+            if txt.find("Colorado") >= 0:
+                changed = True
+                address = txt
+                facebook["address"] = address
+                print("address: ", address)
+
+            if txt.find("(") < txt.find(")") and txt.find(")") < txt.find("-"):
+                changed = True
+                phoneNumber = txt
+                facebook["phoneNumber"] = phoneNumber
+                print("phoneNumber: ", phoneNumber)
+
+            pattern = re.compile(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$')
+            if pattern.match(txt) is not None:
+                changed = True
+                email = txt
+                facebook["email"] = email
+                print("email: ", email)
+
+
+            if txt.find("Reviews") >= 0:
+                changed = True
+                reviews = txt
+                print("reviews: ", reviews)
+
+
+        a_tags = soup.find_all('a')
+        hrefs = [a.get('href') for a in a_tags if a.get('href') is not None]
+        for href in hrefs:
+            offset = href.find("http%3A%2F%2Fwww.")
+            if offset > 0:
+                offset = offset + 17
+                url = href[offset:]
+                offset = url.find("%2F")
+                if offset > 0:
+                    changed = True
+                    url = url[:offset]
+                    facebook["websiteUrl"] = url
+                    print("url: ", url)
+
+        if changed:
+            print("facebook updated: ", facebook)
+            social["facebook"] = facebook
 
 
     def updateChurchWithSocialData(self, church, response):
@@ -190,10 +263,15 @@ class UpdateChurchWithSocialData:
         if "social" in church:
             social = church["social"]
 
-            if "youtubeUrl" in social:
+            if "youtubeUrl" in social and "youtube" not in social:
                 youtubeUrl = social["youtubeUrl"]
                 changed = True
                 self.processYoutubeAbout(youtubeUrl, social)
+
+            if "facebookUrl" in social and "facebook" not in social:
+                facebookUrl = social["facebookUrl"]
+                changed = True
+                self.processFacebook(facebookUrl, social)
 
 
         return changed
