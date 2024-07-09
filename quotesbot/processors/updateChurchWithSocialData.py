@@ -4,6 +4,7 @@ import base64
 from io import BytesIO
 from PIL import Image
 import os
+import urllib.parse
 
 from quotesbot.utilities.helpers import Helpers
 
@@ -155,7 +156,7 @@ class UpdateChurchWithSocialData:
                 facebook["type"] = type
                 print("type: ", type)
 
-            if txt.find("Colorado") >= 0:
+            if txt.find("Colorado") >= 0 and txt.find("United States") >= 0:
                 changed = True
                 address = txt
                 facebook["address"] = address
@@ -176,24 +177,46 @@ class UpdateChurchWithSocialData:
 
 
             if txt.find("Reviews") >= 0:
+                "Rating \u00b7 4.9 (328 Reviews)\ufeff"
                 changed = True
-                reviews = txt
+                reviews = urllib.parse.unquote(txt).replace("\u00b7 ", "").replace("\ufeff", "")
+                facebook["reviews"] = reviews
                 print("reviews: ", reviews)
 
 
         a_tags = soup.find_all('a')
         hrefs = [a.get('href') for a in a_tags if a.get('href') is not None]
         for href in hrefs:
-            offset = href.find("http%3A%2F%2Fwww.")
+            decoded_string = urllib.parse.unquote(href)[10:]
+            #print("href: ", decoded_string)
+            offset = decoded_string.find("https://")
             if offset > 0:
-                offset = offset + 17
-                url = href[offset:]
-                offset = url.find("%2F")
+                offset = offset + 8
+                url = decoded_string[offset:]
+                offset = url.find("&h=")
                 if offset > 0:
                     changed = True
                     url = url[:offset]
-                    facebook["websiteUrl"] = url
-                    print("url: ", url)
+
+                    print("************* url: ", url)
+                    if url.find("instagram") >= 0:
+                        facebook["instagramUrl"] = url
+                        print("instagramUrl: ", url)
+                    elif url.find("youtube") >= 0:
+                        facebook["youtubeUrl"] = url
+                        print("youtubeUrl: ", url)
+                    else:
+                        facebook["websiteUrl"] = url
+                        print("websiteUrl: ", url)
+
+        for a_tag in a_tags:
+            txt = a_tag.get_text()
+            if txt.find("likes") >= 0:
+                facebook["likes"] = txt
+                print('likes: ', txt)
+            if txt.find("followers") >= 0:
+                facebook["followers"] = txt
+                print('followers: ', txt)
 
         if changed:
             print("facebook updated: ", facebook)
