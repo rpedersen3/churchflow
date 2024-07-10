@@ -39,8 +39,21 @@ class UpdateChurchWithSocialData:
     def appendWebPagesBasedOnSocial(self, church, startURLs):
 
         if "link" in church and "is-primary" in church and church["is-primary"] == "yes":
-            print("add to urls: ", church["link"])
-            startURLs.append(church["link"])
+
+
+            addToList = False
+            if "social" in church:
+                social = church["social"]
+
+                if "facebookUrl" in social and "facebook" not in social:
+                    addToList = True
+                elif "facebookUrl" in social and "facebook" in social and "type" not in social["facebook"]:
+                    addToList = True
+
+
+            if addToList:
+                print("add to urls: ", church["link"])
+                startURLs.append(church["link"])
 
             #if "social" in church and "facebookUrl" in church["social"]:
             #    facebookUrl = church["social"]["facebookUrl"]
