@@ -155,7 +155,7 @@ class chcrawlerSpider(scrapy.Spider):
         if "name" in church:
 
 
-                if church["name"] == "Roots Church":
+                if church["name"] == "The Embassy Church":
                     start = True
 
                 if start:

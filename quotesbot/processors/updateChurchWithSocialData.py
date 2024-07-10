@@ -145,7 +145,7 @@ class UpdateChurchWithSocialData:
         driver.get(url)
 
         # Wait for the page to load completely
-        time.sleep(1)  # Increase this if necessary for your connection
+        time.sleep(4)  # Increase this if necessary for your connection
 
         # Get the page source and parse it with BeautifulSoup
         soup = BeautifulSoup(driver.page_source, 'html.parser')
