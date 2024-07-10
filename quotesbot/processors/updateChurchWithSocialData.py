@@ -145,7 +145,7 @@ class UpdateChurchWithSocialData:
         driver.get(url)
 
         # Wait for the page to load completely
-        time.sleep(4)  # Increase this if necessary for your connection
+        time.sleep(1)  # Increase this if necessary for your connection
 
         # Get the page source and parse it with BeautifulSoup
         soup = BeautifulSoup(driver.page_source, 'html.parser')
@@ -361,7 +361,7 @@ class UpdateChurchWithSocialData:
                     youtubeUrl = href.rstrip("/about").rstrip("/featured").rstrip("/streams").rstrip("/liv").rstrip("/video").rstrip("/")
                     if youtubeUrl.find("?") == -1:
                         social["youtubeUrl"] = youtubeUrl
-                        self.processYoutubeAbout(youtubeUrl, social)
+                        #self.processYoutubeAbout(youtubeUrl, social)
                         print("youtube: ", href)
                 if href.find("instagram.com") >= 0 and "instagramUrl" not in social:
                     social["instagramUrl"] = href.rstrip("/")
@@ -388,7 +388,7 @@ class UpdateChurchWithSocialData:
             if "youtubeUrl" in social and "youtube" not in social:
                 youtubeUrl = social["youtubeUrl"]
                 changed = True
-                self.processYoutubeAbout(youtubeUrl, social)
+                #self.processYoutubeAbout(youtubeUrl, social)
 
             if "facebookUrl" in social and "facebook" not in social:
                 facebookUrl = social["facebookUrl"]
