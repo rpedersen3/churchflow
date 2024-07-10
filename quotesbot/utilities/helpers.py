@@ -44,6 +44,11 @@ class Helpers:
         currentChurch = None
         for church in churches:
 
+            if url.find("facebook") >= 0 and "social" in church and "facebookUrl" in church["social"]:
+                if church["social"]["facebookUrl"] == url:
+                    currentChurch = church
+                    break
+
             if "link" in church:
                 churchParse = urlparse(church["link"])
                 churchDomain = churchParse.netloc.replace("www.", "")

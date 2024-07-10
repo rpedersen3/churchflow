@@ -87,7 +87,14 @@ class UpdateRDFWithNetworks:
             "description": "",
             "websiteUri": "https://www.arcchurches.com/find-a-church/?gad_source=1&gclid=Cj0KCQjw-ai0BhDPARIsAB6hmP6tTooA6eZhprldmvFjUOcdLTcwl0nCrLdNpKmoq4Fdape-YhyEvKcaAoP5EALw_wcB",
             "tags": ["arc", "association of related churches"]
+        },
+        {
+            "name": "Adventist",
+            "description": "",
+            "websiteUri": "https://www.adventistdirectory.org/SearchResults.aspx?CtryCode=US&StateProv=CO&City=Aurora",
+            "tags": ["adventist"]
         }
+
     ]
 
     churches_file_path = "churches.json"

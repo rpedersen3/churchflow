@@ -16,6 +16,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
+
+
 import time
 import requests
 
@@ -40,7 +42,13 @@ class UpdateChurchWithSocialData:
             print("add to urls: ", church["link"])
             startURLs.append(church["link"])
 
+            #if "social" in church and "facebookUrl" in church["social"]:
+            #    facebookUrl = church["social"]["facebookUrl"]
+            #    startURLs.append(facebookUrl)
+
     def processYoutubeAbout(self, url, social):
+
+
 
         service = Service(ChromeDriverManager().install())
         driver = webdriver.Chrome(service=service)
@@ -50,6 +58,7 @@ class UpdateChurchWithSocialData:
 
         # Wait for the page to load completely
         time.sleep(10)  # Increase this if necessary for your connection
+
 
         # Get the page source and parse it with BeautifulSoup
         soup = BeautifulSoup(driver.page_source, 'html.parser')
@@ -126,6 +135,7 @@ class UpdateChurchWithSocialData:
                         social["youtube"] = youtube
 
 
+
     def processFacebook(self, url, social):
 
         print("process facebook .....................")
@@ -135,7 +145,7 @@ class UpdateChurchWithSocialData:
         driver.get(url)
 
         # Wait for the page to load completely
-        time.sleep(10)  # Increase this if necessary for your connection
+        time.sleep(1)  # Increase this if necessary for your connection
 
         # Get the page source and parse it with BeautifulSoup
         soup = BeautifulSoup(driver.page_source, 'html.parser')
@@ -145,7 +155,7 @@ class UpdateChurchWithSocialData:
         if "facebook" in social:
             facebook = social["facebook"]
 
-        #print("soup: ", soup)
+        # print("soup: ", soup)
         changed = False
         for span in soup.find_all('span'):
             txt = span.get_text()
@@ -175,7 +185,6 @@ class UpdateChurchWithSocialData:
                 facebook["email"] = email
                 print("email: ", email)
 
-
             if txt.find("Reviews") >= 0:
                 "Rating \u00b7 4.9 (328 Reviews)\ufeff"
                 changed = True
@@ -183,12 +192,11 @@ class UpdateChurchWithSocialData:
                 facebook["reviews"] = reviews
                 print("reviews: ", reviews)
 
-
         a_tags = soup.find_all('a')
         hrefs = [a.get('href') for a in a_tags if a.get('href') is not None]
         for href in hrefs:
             decoded_string = urllib.parse.unquote(href)[10:]
-            #print("href: ", decoded_string)
+            # print("href: ", decoded_string)
             offset = decoded_string.find("https://")
             if offset > 0:
                 offset = offset + 8
@@ -222,6 +230,97 @@ class UpdateChurchWithSocialData:
             print("facebook updated: ", facebook)
             social["facebook"] = facebook
 
+    '''
+
+    def processFacebook(self, url, response, social):
+
+
+        # Wait for the page to load completely
+        time.sleep(1)  # Increase this if necessary for your connection
+
+        facebook = {}
+        if "facebook" in social:
+            facebook = social["facebook"]
+
+        print("scan text")
+        changed = False
+        spans = response.xpath('//span').extract()
+        for span in spans:
+
+            txt = span
+
+            if txt.find("Page") >= 0:
+
+                changed = True
+                type = txt.replace("Page \u00b7", "").strip()
+                facebook["type"] = type
+                print("type: ", type)
+
+            if txt.find("Colorado") >= 0 and txt.find("United States") >= 0:
+                changed = True
+                address = txt
+                facebook["address"] = address
+                print("address: ", address)
+
+            if txt.find("(") < txt.find(")") and txt.find(")") < txt.find("-"):
+                changed = True
+                phoneNumber = txt
+                facebook["phoneNumber"] = phoneNumber
+                print("phoneNumber: ", phoneNumber)
+
+            pattern = re.compile(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$')
+            if pattern.match(txt) is not None:
+                changed = True
+                email = txt
+                facebook["email"] = email
+                print("email: ", email)
+
+
+            if txt.find("Reviews") >= 0:
+                "Rating \u00b7 4.9 (328 Reviews)\ufeff"
+                changed = True
+                reviews = urllib.parse.unquote(txt).replace("\u00b7 ", "").replace("\ufeff", "")
+                facebook["reviews"] = reviews
+                print("reviews: ", reviews)
+
+        hrefs = response.xpath('//a/@href').extract()
+        for href in hrefs:
+            decoded_string = urllib.parse.unquote(href)[10:]
+            #print("href: ", decoded_string)
+            offset = decoded_string.find("https://")
+            if offset > 0:
+                offset = offset + 8
+                url = decoded_string[offset:]
+                offset = url.find("&h=")
+                if offset > 0:
+                    changed = True
+                    url = url[:offset]
+
+                    print("************* url: ", url)
+                    if url.find("instagram") >= 0:
+                        facebook["instagramUrl"] = url
+                        print("instagramUrl: ", url)
+                    elif url.find("youtube") >= 0:
+                        facebook["youtubeUrl"] = url
+                        print("youtubeUrl: ", url)
+                    else:
+                        facebook["websiteUrl"] = url
+                        print("websiteUrl: ", url)
+
+        aTags = response.xpath('//a').extract()
+        for a_tag in aTags:
+            txt = a_tag.get_text()
+            if txt.find("likes") >= 0:
+                facebook["likes"] = txt
+                print('likes: ', txt)
+            if txt.find("followers") >= 0:
+                facebook["followers"] = txt
+                print('followers: ', txt)
+
+        if changed:
+            print("facebook updated: ", facebook)
+            social["facebook"] = facebook
+    '''
 
     def updateChurchWithSocialData(self, church, response):
 
