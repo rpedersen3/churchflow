@@ -135,7 +135,7 @@ class chcrawlerSpider(scrapy.Spider):
     '''
 
     count = 0
-    start = False
+    start = True
     for church in churches:
 
         if count > 10000:
@@ -155,8 +155,8 @@ class chcrawlerSpider(scrapy.Spider):
         if "name" in church:
 
 
-                if church["name"] == "The Embassy Church":
-                    start = True
+                #if church["name"] == "The Embassy Church":
+                #    start = True
 
                 if start:
 

@@ -395,5 +395,10 @@ class UpdateChurchWithSocialData:
                 changed = True
                 self.processFacebook(facebookUrl, social)
 
+            elif "facebookUrl" in social and "facebook" in social and "type" not in social["facebook"]:
+                facebookUrl = social["facebookUrl"]
+                changed = True
+                self.processFacebook(facebookUrl, social)
+
 
         return changed
