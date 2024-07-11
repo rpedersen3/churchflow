@@ -93,6 +93,21 @@ class UpdateRDFWithChurches:
         random_id = ''.join(random.choice(characters) for _ in range(length))
         return random_id
 
+    def convertToNumber(self, s):
+        s = s.lower()
+        s = s.replace(",", "")  # Remove commas
+
+        try:
+            if 'k' in s:
+                return int(float(s.replace("k", "")) * 1_000)
+            elif 'm' in s:
+                return int(float(s.replace("m", "")) * 1_000_000)
+            else:
+                return int(s)
+        except:
+            print("problem converting: ", s)
+            return 0
+
     def updateWithChurches(self):
 
         g2 = self.setupRDFFile()
@@ -149,6 +164,7 @@ class UpdateRDFWithChurches:
                         g2.add((chOrg, self.CC.primaryRace, Literal(primaryRace)))
 
 
+                    # update church with denomination
                     denomination = "unknown"
                     if "denomination" in church and church["denomination"] != "unknown":
 
@@ -228,34 +244,68 @@ class UpdateRDFWithChurches:
 
 
 
-                    # link church to partner
-                    if "partner" in church and church["partner"] != "unknown":
-                        partners = church["partner"]
+                    # church social networks
 
-                        partnerList = partners.split(',')
-                        for partner in partnerList:
-                            print("************ find partner: ", partner)
-                            query = """select ?partner ?tag where { 
-                                            ?partner rdf:type cc:Partner .  
-                                            ?partner cc:partnerTag ?tag . 
-                                            ?tag rc:name ?tagName . 
-                                            FILTER(STRSTARTS(LCASE( \"""" + partner + """\"), LCASE(?tagName))) }
-                                            """
+                    if "social" in church:
+                        social = church["social"]
 
-                            try:
-                                results = g2.query(query)
 
-                                if len(results) > 0:
-                                    print("****** found partner **********", results)
-                                    for row in results:
+                        if "facebook" in social:
 
-                                        print("***************  add partner to org ***********")
-                                        g2.add((chOrg, self.CC.partner, row["partner"]))
-                                        g2.add((chOrg, self.CC.partnerTag, row["tag"]))
-                                        break
+                            facebook = self.n + "facebook"
 
-                            except Exception as e:
-                                print("get partner err: ", e)
+                            orgSocialNetworkName = self.clean(churchOrgName) + " facebook"
+                            orgSocialNetworkId = self.generate_random_string()
+                            orgSocialNetwork = self.n + orgSocialNetworkId
+
+                            g2.add((orgSocialNetwork, RDF.type, self.OWL.NamedIndividual))
+                            g2.add((orgSocialNetwork, RDF.type, self.RC.OrgSocialNetwork))
+                            g2.add((orgSocialNetwork, self.RC.socialNetwork, facebook))
+                            g2.add((orgSocialNetwork, self.RC.name, Literal(orgSocialNetworkName)))
+
+                            g2.add((chOrg, self.RC.orgSocialNetwork, orgSocialNetwork))
+
+
+                            if "url" in social["facebook"]:
+                                g2.add((orgSocialNetwork, self.RC.uri, Literal(social["facebook"]["url"])))
+                            elif "facebookUrl" in social:
+                                g2.add((orgSocialNetwork, self.RC.uri, Literal(social["facebookUrl"])))
+
+                            if "followers" in social["facebook"]:
+                                followers = self.convertToNumber(social["facebook"]["followers"].replace("followers", "").strip())
+                                g2.add((orgSocialNetwork, self.RC.socialFollowers, Literal(followers)))
+                            if "likes" in social["facebook"]:
+                                likes = self.convertToNumber(social["facebook"]["likes"].replace("likes", "").strip())
+                                g2.add((orgSocialNetwork, self.RC.socialLikes, Literal(likes)))
+
+                        if "youtube" in social:
+
+                            youtube = self.n + "youtube"
+
+                            orgSocialNetworkName = self.clean(churchOrgName) + " youtube"
+                            orgSocialNetworkId = self.generate_random_string()
+                            orgSocialNetwork = self.n + orgSocialNetworkId
+
+                            g2.add((orgSocialNetwork, RDF.type, self.OWL.NamedIndividual))
+                            g2.add((orgSocialNetwork, RDF.type, self.RC.OrgSocialNetwork))
+                            g2.add((orgSocialNetwork, self.RC.socialNetwork, youtube))
+                            g2.add((orgSocialNetwork, self.RC.name, Literal(orgSocialNetworkName)))
+
+                            if "url" in social["youtube"]:
+                                g2.add((orgSocialNetwork, self.RC.uri, Literal(social["youtube"]["url"])))
+                            elif "youtubeUrl" in social:
+                                g2.add((orgSocialNetwork, self.RC.uri, Literal(social["youtubeUrl"])))
+
+                            if "subscribers" in social["youtube"]:
+                                subscribers = self.convertToNumber(social["youtube"]["subscribers"].replace("subscribers", "").strip())
+                                g2.add((orgSocialNetwork, self.RC.socialSubscribers, Literal(subscribers)))
+                            if "views" in social["youtube"]:
+                                views = self.convertToNumber(social["youtube"]["views"].replace("views", "").strip())
+                                g2.add((orgSocialNetwork, self.RC.socialViews, Literal(views)))
+
+                            g2.add((orgSocialNetwork, self.RC.socialNetwork, youtube))
+
+                            g2.add((chOrg, self.RC.orgSocialNetwork, orgSocialNetwork))
 
 
 

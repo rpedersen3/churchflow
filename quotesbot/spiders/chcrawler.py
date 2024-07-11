@@ -28,6 +28,7 @@ from quotesbot.processors.updateRDFWithMultiChurchOrgs import UpdateRDFWithMulti
 from quotesbot.processors.updateRDFWithDenominations import UpdateRDFWithDenominations
 from quotesbot.processors.updateRDFWithNetworks import UpdateRDFWithNetworks
 from quotesbot.processors.updateRDFWithPartners import UpdateRDFWithPartners
+from quotesbot.processors.updateRDFWithSocial import UpdateRDFWithSocial
 
 from quotesbot.processors.updatePersonInfo import UpdatePersonInfo
 from quotesbot.processors.updateChurchDenomination import UpdateChurchDenomination
@@ -70,6 +71,7 @@ class chcrawlerSpider(scrapy.Spider):
     processor = IfaProcessor()
     processor.findChurches()
 
+    '''
 
     updateRDF = UpdateRDFWithDenominations()
     updateRDF.updateRDFWithDenominations()
@@ -80,22 +82,26 @@ class chcrawlerSpider(scrapy.Spider):
     updateRDF = UpdateRDFWithPartners()
     updateRDF.updateRDFWithPartners()
 
+    updateRDF = UpdateRDFWithSocial()
+    updateRDF.updateRDFWithSocialNetworks()
+
     updateRDF = UpdateRDFWithCities()
     updateRDF.updateWithCities()
 
     updateRDF = UpdateRDFWithChurches()
     updateRDF.updateWithChurches()
 
-
     
     updateRDF = UpdateRDFWithMultiChurchOrgs()
     updateRDF.updateRDFWithMultiChurchOrgs()
 
+    ''''
     updateRDF = UpdateRDFWithColocatedChurches()
     updateRDF.updateRDFWithColocatedChurches()
-    '''
+    
+
     # add churches based on cities
-    '''
+
     churchFinder = FindChurchesGoogleSearch()
     churchFinder.findChurches(googleKey)
 
@@ -113,12 +119,10 @@ class chcrawlerSpider(scrapy.Spider):
 
     churchFinder = FindChurchWebsite()
     churchFinder.findChurchWebsite()
-
+    '''
     '''
     # process church info
 
-
-    '''
     name = "cindy norton"
     url = "https://thechurchco-production.s3.amazonaws.com/uploads/sites/6087/2023/02/CelebrationChurchHeadshotsAlecSavig-22-800x800.jpg"
     updatePersonInfo = UpdatePersonInfo()
@@ -135,7 +139,7 @@ class chcrawlerSpider(scrapy.Spider):
     '''
 
     count = 0
-    start = False
+    start = True
     for church in churches:
 
         if count > 10000:
@@ -155,18 +159,20 @@ class chcrawlerSpider(scrapy.Spider):
         if "name" in church:
 
 
-                if church["name"] == "Encounter Church Denver":
-                    start = True
+                #if church["name"] == "Encounter Church Denver":
+                #    start = True
 
                 if start:
 
+                    '''
                     # add to urls
                     updateWithSocialData = UpdateChurchWithSocialData()
                     updateWithSocialData.appendWebPagesBasedOnSocial(church, startURLs)
+                    '''
 
                     count = count + 1
 
-                    if count > 10000:
+                    if count > 1:
                         break
 
                     '''
