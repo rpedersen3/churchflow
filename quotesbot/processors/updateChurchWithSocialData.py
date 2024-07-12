@@ -147,8 +147,6 @@ class UpdateChurchWithSocialData:
 
                         social["youtube"] = youtube
 
-
-
     def processFacebook(self, url, social):
 
         print("process facebook .....................")
@@ -164,7 +162,9 @@ class UpdateChurchWithSocialData:
         soup = BeautifulSoup(driver.page_source, 'html.parser')
         driver.quit()
 
-        facebook = {}
+        facebook = {
+            "facebookUrl": url
+        }
         if "facebook" in social:
             facebook = social["facebook"]
 
@@ -239,101 +239,47 @@ class UpdateChurchWithSocialData:
                 facebook["followers"] = txt
                 print('followers: ', txt)
 
+        h1_tags = soup.find_all('h1')
+        if len(h1_tags):
+            name = h1_tags[0].get_text()
+            facebook["name"] = name
+            print('name: ', name)
+
         if changed:
             print("facebook updated: ", facebook)
             social["facebook"] = facebook
 
-    '''
+    def updateLatLonFromFacebookData(self, googleKey, church):
 
-    def processFacebook(self, url, response, social):
-
-
-        # Wait for the page to load completely
-        time.sleep(1)  # Increase this if necessary for your connection
-
-        facebook = {}
-        if "facebook" in social:
-            facebook = social["facebook"]
-
-        print("scan text")
         changed = False
-        spans = response.xpath('//span').extract()
-        for span in spans:
 
-            txt = span
+        print("process facebook lat lon .....................")
 
-            if txt.find("Page") >= 0:
+        if "social" not in church or "facebook" not in church["social"] or "address" not in church["social"]["address"]:
+            return
 
-                changed = True
-                type = txt.replace("Page \u00b7", "").strip()
-                facebook["type"] = type
-                print("type: ", type)
-
-            if txt.find("Colorado") >= 0 and txt.find("United States") >= 0:
-                changed = True
-                address = txt
-                facebook["address"] = address
-                print("address: ", address)
-
-            if txt.find("(") < txt.find(")") and txt.find(")") < txt.find("-"):
-                changed = True
-                phoneNumber = txt
-                facebook["phoneNumber"] = phoneNumber
-                print("phoneNumber: ", phoneNumber)
-
-            pattern = re.compile(r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$')
-            if pattern.match(txt) is not None:
-                changed = True
-                email = txt
-                facebook["email"] = email
-                print("email: ", email)
+        address = church["social"]["address"]
 
 
-            if txt.find("Reviews") >= 0:
-                "Rating \u00b7 4.9 (328 Reviews)\ufeff"
-                changed = True
-                reviews = urllib.parse.unquote(txt).replace("\u00b7 ", "").replace("\ufeff", "")
-                facebook["reviews"] = reviews
-                print("reviews: ", reviews)
+        endpoint = 'https://maps.googleapis.com/maps/api/geocode/json'
 
-        hrefs = response.xpath('//a/@href').extract()
-        for href in hrefs:
-            decoded_string = urllib.parse.unquote(href)[10:]
-            #print("href: ", decoded_string)
-            offset = decoded_string.find("https://")
-            if offset > 0:
-                offset = offset + 8
-                url = decoded_string[offset:]
-                offset = url.find("&h=")
-                if offset > 0:
-                    changed = True
-                    url = url[:offset]
+        if googleKey == '':
+            print("api key is not set for getAddressInfoUsingGooglePlaces")
+            return
 
-                    print("************* url: ", url)
-                    if url.find("instagram") >= 0:
-                        facebook["instagramUrl"] = url
-                        print("instagramUrl: ", url)
-                    elif url.find("youtube") >= 0:
-                        facebook["youtubeUrl"] = url
-                        print("youtubeUrl: ", url)
-                    else:
-                        facebook["websiteUrl"] = url
-                        print("websiteUrl: ", url)
 
-        aTags = response.xpath('//a').extract()
-        for a_tag in aTags:
-            txt = a_tag.get_text()
-            if txt.find("likes") >= 0:
-                facebook["likes"] = txt
-                print('likes: ', txt)
-            if txt.find("followers") >= 0:
-                facebook["followers"] = txt
-                print('followers: ', txt)
+        params = {
+            'address': address,
+            'key': googleKey
+        }
 
-        if changed:
-            print("facebook updated: ", facebook)
-            social["facebook"] = facebook
-    '''
+        response = requests.get(endpoint, params=params)
+        data = response.json()
+
+        print("data: ", data)
+
+        return changed
+
 
     def updateChurchWithSocialData(self, church, response):
 

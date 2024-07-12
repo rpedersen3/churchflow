@@ -74,7 +74,10 @@ class UpdateRDFWithNetworks:
             "name": "Episcopal Colorado",
             "description": "",
             "websiteUri": "https://episcopalcolorado.org/",
-            "tags": ["episcopal colorado"]
+            "tags": ["episcopal colorado"],
+            "social": {
+                "facebookUrl": "https://www.facebook.com/EpiscopalCO/"
+            }
         },
         {
             "name": "United Church of Christ",

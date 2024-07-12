@@ -101,11 +101,9 @@ class chcrawlerSpider(scrapy.Spider):
     
 
     # add churches based on cities
-    '''
     churchFinder = FindChurchesGoogleSearch()
     churchFinder.findChurchesFromFacebook(googleKey)
 
-    '''
     churchFinder = FindChurchesGoogleSearch()
     churchFinder.findChurches(googleKey)
 
@@ -152,13 +150,18 @@ class chcrawlerSpider(scrapy.Spider):
 
         changed = False
 
+        if "latitude" not in church and "longitude" not in church and "social" in church or "facebook" in church["social"] or "address" in church["social"]["address"]:
+            print("update latitude and longitud with facebook address info ")
+            updateSocial = UpdateChurchWithSocialData()
+            changed = updateSocial.updateLatLonFromFacebookData(googleKey, church)
+            break
+
         '''
         find = FindChurchStaffWebPagesUsingSearch()
         changed = find.findStaffWebPages(church, googleKey)
 
         updateWithStaff = UpdateChurchWithStaffFromWebPages()
         updateWithStaff.appendWebPagesBasedOnStaff(church, startURLs)
-        '''
 
         if "name" in church:
 
@@ -168,18 +171,16 @@ class chcrawlerSpider(scrapy.Spider):
 
                 if start:
 
-                    '''
                     # add to urls
                     updateWithSocialData = UpdateChurchWithSocialData()
                     updateWithSocialData.appendWebPagesBasedOnSocial(church, startURLs)
-                    '''
 
                     count = count + 1
 
-                    if count > 1:
+                    if count > 10000000:
                         break
 
-                    '''
+
                     churchFinder = FindChurchesGooglePlaces()
                     changed = churchFinder.updateChurch(church, googleKey)
                     
@@ -192,14 +193,15 @@ class chcrawlerSpider(scrapy.Spider):
                     updateChurchInfo = UpdateChurchDenomination()
                     changed = updateChurchInfo.updateChurchDenominationWithGoogleGraph(church)
                     
-                    
-                    if changed:
-    
-                        # save to churches file
-                        churchesData["churches"] = churches
-                        with open(churches_file_path, "w") as json_file:
-                            json.dump(churchesData, json_file, indent=4)
-                    '''
+        '''
+
+        if changed:
+
+            # save to churches file
+            churchesData["churches"] = churches
+            with open(churches_file_path, "w") as json_file:
+                json.dump(churchesData, json_file, indent=4)
+
 
 
     def start_requests(self):
@@ -256,12 +258,12 @@ class chcrawlerSpider(scrapy.Spider):
             updateWithStaff = UpdateChurchWithStaffFromWebPages()
             changed = updateWithStaff.updateChurchWithStaffFromWebPages(church, response)
             
-            '''
+
 
             updateWithSocial = UpdateChurchWithSocialData()
             changed = updateWithSocial.updateChurchWithSocialData(church, response)
 
-            '''
+
 
             updateWithSocial = UpdateChurchWithSocialData()
             if "social" in church:

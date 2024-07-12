@@ -3,7 +3,27 @@ from datetime import datetime
 import json
 import time
 
+from quotesbot.processors.updateChurchWithSocialData import UpdateChurchWithSocialData
 class FindChurchesGoogleSearch:
+
+    def checkFacebookType(self, type):
+        valid = False
+
+        type = type.lower()
+
+        if type.find("church") >= 0:
+            valid = True
+        if type.find("religious organization") >= 0:
+            valid = True
+        if type.find("religious center") >= 0:
+            valid = True
+        if type.find("nonprofit organization") >= 0:
+            valid = True
+        if type.find("mission") >= 0:
+            valid = True
+
+        return valid
+
 
     def findChurchesFromFacebook(self, googleKey):
 
@@ -26,7 +46,7 @@ class FindChurchesGoogleSearch:
         starts = [1, 11, 21, 31, 41, 51]
         for st in starts:
 
-            query = "'Christian Church' colorado"
+            query = "'Christian Church' pueblo, colorado"
             print("query: ", query)
             res = (
                 service.cse()
@@ -38,7 +58,7 @@ class FindChurchesGoogleSearch:
                 .execute()
             )
             print("--------------------------------------")
-            print(res)
+            #print(res)
             print("--------------------------------------")
 
             found = 0
@@ -46,38 +66,53 @@ class FindChurchesGoogleSearch:
 
                 link = item["link"]
                 dashCount = len(link.split("/"))
-                print("link: ", link, ",  dashCount: ", dashCount)
                 if link.find('?') == -1 and \
                         link.find('&') == -1 and \
-                        dashCount <= 4 and \
-                        link.find("linkedin") == -1 and \
-                        link.find(".gov") == -1:
+                        link.find('/posts') == -1 and \
+                        link.find('/people') == -1 and \
+                        link.find('/photos') == -1 and \
+                        link.find('/events') == -1 and \
+                        link.endswith('/'):
+
+                    print("link: ", link, ",  dashCount: ", dashCount)
 
                     found = found + 1
 
-                    name = item["displayLink"]
-                    name = name.replace('www.', '')
-                    name = name.replace('.com', '')
-                    name = name.replace('.org', '')
-                    name = name.replace('.net', '')
-                    name = name.replace('.church', '')
 
                     # looking for existing church with this link
-                    selectedChurch = None
+                    foundChurch = None
                     for church in churches:
-                        if "link" in church and church["link"] == link:
-                            selectedChurch = church
-                            break
+                        if "social" in church and "facebookUrl" in church["social"]:
+                            if church["social"]["facebookUrl"].replace("www.", "").replace("https://", "").replace("http://", "").replace("/", "").lower().strip() == link.replace("www.", "").replace("https://", "").replace("http://", "").replace("/", "").lower().strip():
+                                foundChurch = church
+                                print("************* found church: ", church["name"])
+                                break
 
-                    if selectedChurch == None:
-                        print("add church: ", name)
-                        church = {
-                            "link": link,
-                            "name": name
+                    if foundChurch == None:
+
+                        social = {
+                            "facebookUrl": link
                         }
-                        churches.append(church)
 
-                        print('link: ', item["link"])
+                        update = UpdateChurchWithSocialData()
+                        update.processFacebook(link, social)
+                        if "facebook" in social and "type" in social["facebook"]:
+
+                            type = social["facebook"]["type"]
+                            if self.checkFacebookType(type):
+
+                                lnk = link.replace("https://www.facebook.com/", "").replace("http://www.facebook.com/", "")
+                                name = lnk.split("/")[0]
+
+                                church = {
+                                    "name": name,
+                                    "source": "facebook"
+                                }
+
+                                print('add church with facebook info: ', name, ", link: ", link)
+
+                                church["social"] = social
+                                churches.append(church)
 
                     # save to churches file
                     churchesData["churches"] = churches
