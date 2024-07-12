@@ -385,6 +385,12 @@ class UpdateChurchWithSocialData:
                 if href.find("vimeo.com") >= 0 and "vimeoUrl" not in social:
                     social["vimeoUrl"] = href.rstrip("/")
                     print("vimeo: ", href)
+                if href.find("spotify.com") >= 0 and "spotifyUrl" not in social:
+                    social["spotifyUrl"] = href.rstrip("/")
+                    print("spotify: ", href)
+                if href.find("podcasts.apple.com") >= 0 and "appleUrl" not in social:
+                    social["appleUrl"] = href.rstrip("/")
+                    print("apple: ", href)
                 if href.find("mailto:") >= 0 and "email" not in social:
                     social["email"] = href.replace("mailto:", "")
                     print("email: ", href.replace("mailto:", ""))

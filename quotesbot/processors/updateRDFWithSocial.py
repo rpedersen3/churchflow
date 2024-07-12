@@ -50,6 +50,11 @@ class UpdateRDFWithSocial:
             "name": "Tiktok",
             "description": "",
             "websiteUri": "https://Tiktok.com"
+        },
+        {
+            "name": "spotify",
+            "description": "",
+            "websiteUrl": "https://open.spotify.com"
         }
     ]
 

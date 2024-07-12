@@ -93,6 +93,43 @@ class UpdateRDFWithNetworks:
             "description": "",
             "websiteUri": "https://www.adventistdirectory.org/SearchResults.aspx?CtryCode=US&StateProv=CO&City=Aurora",
             "tags": ["adventist"]
+        },
+        {
+            "name": "Foursquare Ministries",
+            "description": "",
+            "websiteUri": "https://www.foursquare.org/locator/",
+            "tags": ["foursquare"],
+            "social": {
+                "facebookUrl": "https://www.facebook.com/WeAreFoursquare"
+            }
+        },
+        {
+            "name": "Church of Scientology",
+            "description": "",
+            "websiteUri": "https://www.scientology.org/",
+            "social": {
+                "facebookUrl": "https://facebook.com/ChurchOfScientology",
+                "youtubeUrl": "https://youtube.com/scientology",
+                "instagramUrl": "https://instagram.com/scientology",
+                "twitterUrl": "https://twitter.com/scientology",
+                "youtube": {
+                    "url": "www.youtube.com/@scientology",
+                    "subscribers": "89.1K subscribers",
+                    "videos": "885 videos",
+                    "views": "274,276,096 views",
+                    "joined": "Joined Sep 19, 2006"
+                },
+                "facebook": {
+                    "type": "is responsible for this Page",
+                    "instagramUrl": "www.instagram.com/scientology",
+                    "websiteUrl": "bit.ly/fbsb2024",
+                    "youtubeUrl": "youtube.com/@scientology",
+                    "likes": "616K likes",
+                    "followers": "614K followers"
+                }
+
+            },
+            "tags": ["adventist"]
         }
 
     ]
