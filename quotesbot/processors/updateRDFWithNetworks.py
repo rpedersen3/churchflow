@@ -104,6 +104,18 @@ class UpdateRDFWithNetworks:
             }
         },
         {
+            "name": "Disciples of Christ",
+            "description": "",
+            "websiteUri": "https://disciples.org/find-congregation/",
+            "tags": ["disciples", "disciples of christ"]
+        },
+        {
+            "name": "Community of Christ",
+            "description": "",
+            "websiteUri": "https://cofchrist.org/",
+            "tags": ["cofchrist", "community of christ"]
+        },
+        {
             "name": "Church of Scientology",
             "description": "",
             "websiteUri": "https://www.scientology.org/",
