@@ -26,16 +26,68 @@ class FindChurchesGoogleSearch:
         return valid
 
 
-    def updateLatLonFromFacebookData(self, googleKey, facebook):
+    def setAddressInfoWithGoogleAddressComponents(self, components, currentChurch):
+
+        addressInfo = {}
+        if "addressInfo" in currentChurch:
+            addressInfo = currentChurch["addressInfo"]
+
+        streetNumber = None
+        streetRoute = None
+        city = None
+        county = None
+        state = None
+        country = None
+        zipcode = None
+
+        for component in components:
+
+            if component["types"][0] == "street_number":
+                streetNumber =  component["longText"]
+            if component["types"][0] == "route":
+                streetRoute =  component["longText"]
+            if component["types"][0] == "locality":
+                city = component["longText"]
+            if component["types"][0] == "administrative_area_level_2":
+                county = component["longText"]
+            if component["types"][0] == "administrative_area_level_1":
+                state = component["shortText"]
+            if component["types"][0] == "country":
+                country = component["shortText"]
+            if component["types"][0] == "postal_code":
+                zipcode = component["shortText"]
+
+            if streetNumber is not None and streetRoute is not None:
+                addressInfo["street"] = streetNumber + " " + streetRoute
+            if city is not None:
+                addressInfo["city"] = city
+            if county is not None:
+                addressInfo["county"] = county
+            if state is not None:
+                addressInfo["state"] = state
+            if country is not None:
+                addressInfo["country"] = country
+            if zipcode is not None:
+                addressInfo["zipcode"] = zipcode
+
+        currentChurch["addressInfo"] = addressInfo
+
+    def updateLocationInfoFromFacebookData(self, googleKey, facebook, church):
 
         changed = False
 
         print("process facebook lat lon .....................")
 
-        if "address" not in facebook:
-            return
+        address = None
+        facebook = None
+        if "social" in church:
+            if "facebook" in church["social"]:
+                facebook = church["social"]["facebook"]
+                if "address" in church["social"]["facebook"]:
+                    address = church["social"]["facebook"]["address"]
 
-        address = facebook["address"]
+        if address == None:
+            return
 
 
         endpoint = 'https://maps.googleapis.com/maps/api/geocode/json'
@@ -53,9 +105,15 @@ class FindChurchesGoogleSearch:
         response = requests.get(endpoint, params=params)
         data = response.json()
 
+        print("data: ", data)
+
         if "results" in data:
             if len(data["results"]) > 0:
                 result = data["results"][0]
+                if "components" in result:
+                    components = result["components"]
+                    self.setAddressInfoWithGoogleAddressComponents(components, church)
+
                 if "geometry" in result:
                     if "location" in result["geometry"]:
                         location = result["geometry"]["location"]
@@ -190,12 +248,14 @@ class FindChurchesGoogleSearch:
                                             if "name" in facebook:
                                                 name = facebook["name"]
 
-                                            self.updateLatLonFromFacebookData(googleKey, facebook)
-
                                             church = {
                                                 "name": name,
                                                 "source": "facebook"
                                             }
+
+                                            self.updateLocationInfoFromFacebookData(googleKey, church)
+
+
 
                                             if "latitude" in facebook and "longitude" in facebook:
                                                 church["latitude"] = facebook["latitude"]
@@ -206,11 +266,17 @@ class FindChurchesGoogleSearch:
                                             church["social"] = social
 
                                             churches.append(church)
+                                else:
+                                    #update lat, lon and addressinfo
+                                    self.updateLocationInfoFromFacebookData(googleKey, church)
+                                    break
 
                                 # save to churches file
                                 churchesData["churches"] = churches
                                 with open(churches_file_path, "w") as json_file:
                                     json.dump(churchesData, json_file, indent=4)
+
+                                break
 
 
 
