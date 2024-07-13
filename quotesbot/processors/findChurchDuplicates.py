@@ -65,6 +65,10 @@ class FindChurchDuplicates:
                         if "openStreetMapPlaceId" in church:
                             return ch
 
+                        # if source is facebook then just match it
+                        if "source" in church and church["source"] == "facebook":
+                            return ch
+
                         if "googlePlaceId" in ch and "googlePlaceId" in church:
                             if ch["googlePlaceId"] == church["googlePlaceId"]:
                                 return ch
@@ -253,16 +257,16 @@ class FindChurchDuplicates:
                     church["is-primary"] = "no"
                     church["mergeChurches"] = []
 
-                    addToChurches = True
-                    if "openStreetMapPlaceId" not in church:
-                        addToChurches = False
+                    addToChurches = False
+                    if "source" in church:
+                        addToChurches = True
+                    if "openStreetMapPlaceId" in church:
+                        addToChurches = True
 
                     if addToChurches:
                         colocatedChurch["churches"].append(church)
             else:
                 church["is-primary"] = "no"
-                if "link" in church and church["link"].lower().find("cripplecreek.church") >= 0:
-                    print("check cc to no location: ", church["link"])
                 matchedChurch = self.findChurchMatchUsingNonLocationInfo(colocatedChurches, church)
                 if matchedChurch == None:
 
@@ -276,6 +280,10 @@ class FindChurchDuplicates:
         for colocatedChurch in colocatedChurches:
 
             if len(colocatedChurch["churches"]) > 1:
+
+                if "name" in colocatedChurch:
+                    print("colocated church", colocatedChurch["name"])
+
                 matched = matched + 1
                 primaryChurch = colocatedChurch["churches"][0]
                 mergeChurches = []
@@ -283,6 +291,12 @@ class FindChurchDuplicates:
                 for ch in colocatedChurch["churches"]:
 
                     if offset >= 1:
+
+                        #if "name" in ch:
+                        #    print("add mergeChurch: ", ch["name"])
+                        if "source" in ch and ch["source"] == "facebook":
+                            print("add mergeChurch: ", ch["name"])
+
                         mergeChurches.append(ch["uniqueId"])
 
                     offset = offset + 1
