@@ -87,115 +87,135 @@ class FindChurchesGoogleSearch:
         if churches == None:
             churches = []
 
+        # 'Christian Church'   pueblo, erie, colorado springs, denver, boulder, windsor
+        # 'Religious organization'   pueblo
+        # 'Religious Center'   pueblo
+        cities = ["pueblo", "erie", "colorado springs", "denver", "boulder", "windsor"]
+        cities = ["denver"]
+        terms = ["Religious organization",
+                 "Religious Center",
+                 "Nonprofit organization",
+                 "Christian Church",
+                 "Nondenominational Church",
+                 "Interdenominational Church",
+                 "Anglican Church",
+                 "Lutheran Church",
+                 "Catholic Church",
+                 "Methodist Church",
+                 "Episcopal Church",
+                 "Baptist Church",
+                 "Presbyterian Church",
+                 "Nazarene Church",
+                 "Assemblies of God",
+                 "Evangelical Church",
+                 "Congregational Church",
+                 "Church of God",
+                 "Charismatic Church",
+                 "Church of Christ",
+                 "Eastern Orthodox Church",
+                 "Seventh Day Adventist Church",
+                 "Apostolic Church",
+                 "Pentecostal Church",
+                 "Independent Church",
+                 "Synagogue",
+                 "Church",
+                 ]
+        for city in cities:
+
+                for term in terms:
+
+                    query = "'" + term + "' " + city + ", colorado"
+                    print("query: ", query)
+
+                    starts = [1, 11, 21, 31, 41, 51]
+                    for st in starts:
 
 
-        starts = [1, 11, 21, 31, 41, 51]
-        for st in starts:
+                        res = (
+                            service.cse()
+                            .list(
+                                q=query,
+                                cx="2612db1d6c3494ff0",
+                                start=st
+                            )
+                            .execute()
+                        )
+                        print("--------------------------------------")
+                        #print(res)
+                        print("--------------------------------------")
 
-            # 'Christian Church'   pueblo, erie, colorado springs, denver, boulder, windsor
-            # 'Religious organization'   pueblo
-            # 'Religious Center'   pueblo
-            query = "'Religious Center' pueblo, colorado"
-            print("query: ", query)
-            res = (
-                service.cse()
-                .list(
-                    q=query,
-                    cx="2612db1d6c3494ff0",
-                    start=st
-                )
-                .execute()
-            )
-            print("--------------------------------------")
-            #print(res)
-            print("--------------------------------------")
+                        found = 0
+                        for item in res["items"]:
 
-            found = 0
-            for item in res["items"]:
+                            link = item["link"]
+                            dashCount = len(link.split("/"))
+                            if link.find('?') == -1 and \
+                                    link.find('&') == -1 and \
+                                    link.find('/posts') == -1 and \
+                                    link.find('/people') == -1 and \
+                                    link.find('/photos') == -1 and \
+                                    link.find('/events') == -1 and \
+                                    link.endswith('/'):
 
-                link = item["link"]
-                dashCount = len(link.split("/"))
-                if link.find('?') == -1 and \
-                        link.find('&') == -1 and \
-                        link.find('/posts') == -1 and \
-                        link.find('/people') == -1 and \
-                        link.find('/photos') == -1 and \
-                        link.find('/events') == -1 and \
-                        link.endswith('/'):
+                                print("link: ", link, ",  dashCount: ", dashCount)
 
-                    print("link: ", link, ",  dashCount: ", dashCount)
-
-                    found = found + 1
+                                found = found + 1
 
 
-                    # looking for existing church with this link
-                    foundChurch = None
-                    for church in churches:
-                        if "social" in church and "facebookUrl" in church["social"]:
-                            if church["social"]["facebookUrl"].replace("www.", "").replace("https://", "").replace("http://", "").replace("/", "").lower().strip() == link.replace("www.", "").replace("https://", "").replace("http://", "").replace("/", "").lower().strip():
-                                foundChurch = church
-                                print("************* found church: ", church["name"])
-                                break
+                                # looking for existing church with this link
+                                foundChurch = None
+                                for church in churches:
+                                    if "social" in church and "facebookUrl" in church["social"]:
+                                        if church["social"]["facebookUrl"].replace("www.", "").replace("https://", "").replace("http://", "").replace("/", "").lower().strip() == link.replace("www.", "").replace("https://", "").replace("http://", "").replace("/", "").lower().strip():
+                                            foundChurch = church
+                                            print("************* found church: ", church["name"])
+                                            break
 
-                    if foundChurch == None:
+                                if foundChurch == None:
 
-                        social = {
-                            "facebookUrl": link
-                        }
+                                    social = {
+                                        "facebookUrl": link
+                                    }
 
-                        update = UpdateChurchWithSocialData()
-                        update.processFacebook(link, social)
-                        if "facebook" in social and "type" in social["facebook"]:
+                                    update = UpdateChurchWithSocialData()
+                                    update.processFacebook(link, social)
+                                    if "facebook" in social and "type" in social["facebook"]:
 
-                            facebook = social["facebook"]
-                            type = facebook["type"]
-                            if self.checkFacebookType(type):
+                                        facebook = social["facebook"]
+                                        type = facebook["type"]
+                                        if self.checkFacebookType(type):
 
-                                lnk = link.replace("https://www.facebook.com/", "").replace("http://www.facebook.com/", "")
-                                name = lnk.split("/")[0]
+                                            lnk = link.replace("https://www.facebook.com/", "").replace("http://www.facebook.com/", "")
+                                            name = lnk.split("/")[0]
 
-                                if "name" in facebook:
-                                    name = facebook["name"]
+                                            if "name" in facebook:
+                                                name = facebook["name"]
 
-                                self.updateLatLonFromFacebookData(googleKey, facebook)
+                                            self.updateLatLonFromFacebookData(googleKey, facebook)
 
-                                church = {
-                                    "name": name,
-                                    "source": "facebook"
-                                }
+                                            church = {
+                                                "name": name,
+                                                "source": "facebook"
+                                            }
 
-                                if "latitude" in facebook and "longitude" in facebook:
-                                    church["latitude"] = facebook["latitude"]
-                                    church["longitude"] = facebook["longitude"]
+                                            if "latitude" in facebook and "longitude" in facebook:
+                                                church["latitude"] = facebook["latitude"]
+                                                church["longitude"] = facebook["longitude"]
 
-                                print('add church with facebook info: ', name, ", link: ", link)
+                                            print('add church with facebook info: ', name, ", link: ", link)
 
-                                church["social"] = social
+                                            church["social"] = social
 
-                                churches.append(church)
+                                            churches.append(church)
 
-                    # save to churches file
-                    churchesData["churches"] = churches
-                    with open(churches_file_path, "w") as json_file:
-                        json.dump(churchesData, json_file, indent=4)
+                                # save to churches file
+                                churchesData["churches"] = churches
+                                with open(churches_file_path, "w") as json_file:
+                                    json.dump(churchesData, json_file, indent=4)
 
 
 
-        '''
 
-        service = build("customsearch", "v1", developerKey=api_key)
-
-        search_engine_id = "d744719d644574dd7"
-        api_version = "v1"
-        search_engine = service.cse().liste_(cx=search_enginid, version=api_version)
-
-        query = "zenserp API tutorials"
-        search_engine.q = query
-        response = search_engine.execute()
-        results = response["items"]
-
-        print("results: ", results)
-        '''
 
 
     def findChurches(self, googleKey):
