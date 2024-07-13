@@ -71,7 +71,7 @@ class chcrawlerSpider(scrapy.Spider):
     processor = IfaProcessor()
     processor.findChurches()
 
-
+    '''
 
     updateRDF = UpdateRDFWithDenominations()
     updateRDF.updateRDFWithDenominations()
@@ -95,6 +95,7 @@ class chcrawlerSpider(scrapy.Spider):
     updateRDF = UpdateRDFWithMultiChurchOrgs()
     updateRDF.updateRDFWithMultiChurchOrgs()
 
+    '''
 
     updateRDF = UpdateRDFWithColocatedChurches()
     updateRDF.updateRDFWithColocatedChurches()
@@ -115,11 +116,9 @@ class chcrawlerSpider(scrapy.Spider):
     churchFinder = FindChurchesOpenStreetMapPlaces()
     churchFinder.findChurches()
 
-  
-    '''
+
     churchFinder = FindChurchDuplicates()
     churchFinder.findChurchDuplicates()
-    '''
 
     churchFinder = FindChurchWebsite()
     churchFinder.findChurchWebsite()

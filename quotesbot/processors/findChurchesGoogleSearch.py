@@ -146,6 +146,8 @@ class FindChurchesGoogleSearch:
         if churches == None:
             churches = []
 
+        '''
+
         # 'Christian Church'   pueblo, erie, colorado springs, denver, boulder, windsor
         # 'Religious organization'   pueblo
         # 'Religious Center'   pueblo
@@ -233,8 +235,6 @@ class FindChurchesGoogleSearch:
                                     social = {
                                         "facebookUrl": link
                                     }
-                                    '''
-
 
                                     update = UpdateChurchWithSocialData()
                                     update.processFacebook(link, social)
@@ -268,14 +268,7 @@ class FindChurchesGoogleSearch:
                                             church["social"] = social
 
                                             churches.append(church)
-                                    '''
-                                else:
 
-                                    time.sleep(0.3)
-
-                                    #update lat, lon and addressinfo
-                                    if "source" in foundChurch and foundChurch["source"] == "facebook" and "addressInfo" not in foundChurch:
-                                        self.updateLocationInfoFromFacebookData(googleKey, foundChurch)
 
 
                                 # save to churches file
@@ -283,10 +276,20 @@ class FindChurchesGoogleSearch:
                                 with open(churches_file_path, "w") as json_file:
                                     json.dump(churchesData, json_file, indent=4)
 
+        '''
+        for church in churches:
 
+            # update lat, lon and addressinfo
+            if "source" in church and church["source"] == "facebook" and "addressInfo" not in church:
 
+                time.sleep(0.3)
 
+                self.updateLocationInfoFromFacebookData(googleKey, church)
 
+                # save to churches file
+                churchesData["churches"] = churches
+                with open(churches_file_path, "w") as json_file:
+                    json.dump(churchesData, json_file, indent=4)
 
 
     def findChurches(self, googleKey):
