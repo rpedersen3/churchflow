@@ -99,11 +99,12 @@ class chcrawlerSpider(scrapy.Spider):
     updateRDF = UpdateRDFWithColocatedChurches()
     updateRDF.updateRDFWithColocatedChurches()
     
-
+    '''
     # add churches based on cities
     churchFinder = FindChurchesGoogleSearch()
     churchFinder.findChurchesFromFacebook(googleKey)
 
+    '''
     churchFinder = FindChurchesGoogleSearch()
     churchFinder.findChurches(googleKey)
 
@@ -144,17 +145,13 @@ class chcrawlerSpider(scrapy.Spider):
     start = True
     for church in churches:
 
-        if count > 10000:
+        if count > 1:
             break
 
 
         changed = False
 
-        if "latitude" not in church and "longitude" not in church and "social" in church or "facebook" in church["social"] or "address" in church["social"]["address"]:
-            print("update latitude and longitud with facebook address info ")
-            updateSocial = UpdateChurchWithSocialData()
-            changed = updateSocial.updateLatLonFromFacebookData(googleKey, church)
-            break
+        break
 
         '''
         find = FindChurchStaffWebPagesUsingSearch()

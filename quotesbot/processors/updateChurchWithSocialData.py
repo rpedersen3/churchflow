@@ -241,44 +241,13 @@ class UpdateChurchWithSocialData:
 
         h1_tags = soup.find_all('h1')
         if len(h1_tags):
-            name = h1_tags[0].get_text()
+            name = h1_tags[0].get_text().replace("\xa0", "").replace("\u00a0", "")
             facebook["name"] = name
             print('name: ', name)
 
         if changed:
             print("facebook updated: ", facebook)
             social["facebook"] = facebook
-
-    def updateLatLonFromFacebookData(self, googleKey, church):
-
-        changed = False
-
-        print("process facebook lat lon .....................")
-
-        if "social" not in church or "facebook" not in church["social"] or "address" not in church["social"]["address"]:
-            return
-
-        address = church["social"]["address"]
-
-
-        endpoint = 'https://maps.googleapis.com/maps/api/geocode/json'
-
-        if googleKey == '':
-            print("api key is not set for getAddressInfoUsingGooglePlaces")
-            return
-
-
-        params = {
-            'address': address,
-            'key': googleKey
-        }
-
-        response = requests.get(endpoint, params=params)
-        data = response.json()
-
-        print("data: ", data)
-
-        return changed
 
 
     def updateChurchWithSocialData(self, church, response):

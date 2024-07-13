@@ -2,6 +2,7 @@ from googleapiclient.discovery import build
 from datetime import datetime
 import json
 import time
+import requests
 
 from quotesbot.processors.updateChurchWithSocialData import UpdateChurchWithSocialData
 class FindChurchesGoogleSearch:
@@ -23,6 +24,51 @@ class FindChurchesGoogleSearch:
             valid = True
 
         return valid
+
+
+    def updateLatLonFromFacebookData(self, googleKey, facebook):
+
+        changed = False
+
+        print("process facebook lat lon .....................")
+
+        if "address" not in facebook:
+            return
+
+        address = facebook["address"]
+
+
+        endpoint = 'https://maps.googleapis.com/maps/api/geocode/json'
+
+        if googleKey == '':
+            print("api key is not set for getAddressInfoUsingGooglePlaces")
+            return
+
+
+        params = {
+            'address': address,
+            'key': googleKey
+        }
+
+        response = requests.get(endpoint, params=params)
+        data = response.json()
+
+        if "results" in data:
+            if len(data["results"]) > 0:
+                result = data["results"][0]
+                if "geometry" in result:
+                    if "location" in result["geometry"]:
+                        location = result["geometry"]["location"]
+                        if "lat" in location and "lng" in location:
+                            latitude = location["lat"]
+                            longitude = location["lng"]
+
+                            facebook["latitude"] = str(latitude)
+                            facebook["longitude"] = str(longitude)
+
+        #print("data: ", data)
+
+        return changed
 
 
     def findChurchesFromFacebook(self, googleKey):
@@ -98,20 +144,31 @@ class FindChurchesGoogleSearch:
                         update.processFacebook(link, social)
                         if "facebook" in social and "type" in social["facebook"]:
 
-                            type = social["facebook"]["type"]
+                            facebook = social["facebook"]
+                            type = facebook["type"]
                             if self.checkFacebookType(type):
 
                                 lnk = link.replace("https://www.facebook.com/", "").replace("http://www.facebook.com/", "")
                                 name = lnk.split("/")[0]
+
+                                if "name" in facebook:
+                                    name = facebook["name"]
+
+                                self.updateLatLonFromFacebookData(googleKey, facebook)
 
                                 church = {
                                     "name": name,
                                     "source": "facebook"
                                 }
 
+                                if "latitude" in facebook and "longitude" in facebook:
+                                    church["latitude"] = facebook["latitude"]
+                                    church["longitude"] = facebook["longitude"]
+
                                 print('add church with facebook info: ', name, ", link: ", link)
 
                                 church["social"] = social
+
                                 churches.append(church)
 
                     # save to churches file
