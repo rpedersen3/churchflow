@@ -94,7 +94,6 @@ class FindChurchesGoogleSearch:
         cities = ["denver"]
         terms = ["Religious organization",
                  "Religious Center",
-                 "Nonprofit organization",
                  "Christian Church",
                  "Nondenominational Church",
                  "Interdenominational Church",
