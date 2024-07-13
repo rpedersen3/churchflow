@@ -43,19 +43,19 @@ class FindChurchesGoogleSearch:
         for component in components:
 
             if component["types"][0] == "street_number":
-                streetNumber =  component["longText"]
+                streetNumber =  component["long_name"]
             if component["types"][0] == "route":
-                streetRoute =  component["longText"]
+                streetRoute =  component["long_name"]
             if component["types"][0] == "locality":
-                city = component["longText"]
+                city = component["long_name"]
             if component["types"][0] == "administrative_area_level_2":
-                county = component["longText"]
+                county = component["long_name"]
             if component["types"][0] == "administrative_area_level_1":
-                state = component["shortText"]
+                state = component["short_name"]
             if component["types"][0] == "country":
-                country = component["shortText"]
+                country = component["short_name"]
             if component["types"][0] == "postal_code":
-                zipcode = component["shortText"]
+                zipcode = component["short_name"]
 
             if streetNumber is not None and streetRoute is not None:
                 addressInfo["street"] = streetNumber + " " + streetRoute
@@ -72,7 +72,7 @@ class FindChurchesGoogleSearch:
 
         currentChurch["addressInfo"] = addressInfo
 
-    def updateLocationInfoFromFacebookData(self, googleKey, facebook, church):
+    def updateLocationInfoFromFacebookData(self, googleKey, church):
 
         changed = False
 
@@ -80,21 +80,21 @@ class FindChurchesGoogleSearch:
 
         address = None
         facebook = None
-        if "social" in church:
+        if "source" in church and church["source"] == "facebook" and "social" in church:
             if "facebook" in church["social"]:
                 facebook = church["social"]["facebook"]
                 if "address" in church["social"]["facebook"]:
                     address = church["social"]["facebook"]["address"]
 
         if address == None:
-            return
+            return changed
 
 
         endpoint = 'https://maps.googleapis.com/maps/api/geocode/json'
 
         if googleKey == '':
             print("api key is not set for getAddressInfoUsingGooglePlaces")
-            return
+            return changed
 
 
         params = {
@@ -105,19 +105,20 @@ class FindChurchesGoogleSearch:
         response = requests.get(endpoint, params=params)
         data = response.json()
 
-        print("data: ", data)
 
         if "results" in data:
             if len(data["results"]) > 0:
                 result = data["results"][0]
-                if "components" in result:
-                    components = result["components"]
+                if "address_components" in result:
+                    changed = True
+                    components = result["address_components"]
                     self.setAddressInfoWithGoogleAddressComponents(components, church)
 
                 if "geometry" in result:
                     if "location" in result["geometry"]:
                         location = result["geometry"]["location"]
                         if "lat" in location and "lng" in location:
+                            changed = True
                             latitude = location["lat"]
                             longitude = location["lng"]
 
@@ -125,7 +126,7 @@ class FindChurchesGoogleSearch:
                             facebook["longitude"] = str(longitude)
 
         #print("data: ", data)
-
+        print("church info: ", church)
         return changed
 
 
@@ -229,10 +230,11 @@ class FindChurchesGoogleSearch:
                                             break
 
                                 if foundChurch == None:
-
                                     social = {
                                         "facebookUrl": link
                                     }
+                                    '''
+
 
                                     update = UpdateChurchWithSocialData()
                                     update.processFacebook(link, social)
@@ -253,7 +255,7 @@ class FindChurchesGoogleSearch:
                                                 "source": "facebook"
                                             }
 
-                                            self.updateLocationInfoFromFacebookData(googleKey, church)
+                                            changed = self.updateLocationInfoFromFacebookData(googleKey, church)
 
 
 
@@ -266,17 +268,21 @@ class FindChurchesGoogleSearch:
                                             church["social"] = social
 
                                             churches.append(church)
+                                    '''
                                 else:
+
+                                    time.sleep(0.3)
+
                                     #update lat, lon and addressinfo
-                                    self.updateLocationInfoFromFacebookData(googleKey, church)
-                                    break
+                                    if "source" in foundChurch and foundChurch["source"] == "facebook" and "addressInfo" not in foundChurch:
+                                        self.updateLocationInfoFromFacebookData(googleKey, foundChurch)
+
 
                                 # save to churches file
                                 churchesData["churches"] = churches
                                 with open(churches_file_path, "w") as json_file:
                                     json.dump(churchesData, json_file, indent=4)
 
-                                break
 
 
 
