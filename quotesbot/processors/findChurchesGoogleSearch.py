@@ -92,8 +92,8 @@ class FindChurchesGoogleSearch:
         starts = [1, 11, 21, 31, 41, 51]
         for st in starts:
 
-            # pueblo, erie, colorado springs, denver
-            query = "'Christian Church' denver, colorado"
+            # 'Christian Church'   pueblo, erie, colorado springs, denver, boulder, windsor
+            query = "'Christian Church' windsor, colorado"
             print("query: ", query)
             res = (
                 service.cse()
