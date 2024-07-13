@@ -24,6 +24,12 @@ import requests
 
 class UpdateChurchWithSocialData:
 
+    # get facebook urls processed
+    facebookurls_file_path = "facebookUrlsProcessed.json"
+    with open(facebookurls_file_path, "r") as file:
+        facebookUrlsData = json.load(file)
+    facebookUrls = facebookUrlsData["urls"]
+
     helpers = Helpers()
 
     # get churches
@@ -149,6 +155,18 @@ class UpdateChurchWithSocialData:
 
     def processFacebook(self, url, social):
 
+        # if processed then return
+        for fUrl in self.facebookUrls:
+            if fUrl == url:
+                return
+
+        self.facebookUrls.append(url)
+
+        # save to url files
+        self.facebookUrlsData["urls"] = self.facebookUrls
+        with open(self.facebookurls_file_path, "w") as json_file:
+            json.dump(self.facebookUrlsData, json_file, indent=4)
+
         print("process facebook .....................")
         service = Service(ChromeDriverManager().install())
         driver = webdriver.Chrome(service=service)
@@ -242,8 +260,9 @@ class UpdateChurchWithSocialData:
         h1_tags = soup.find_all('h1')
         if len(h1_tags):
             name = h1_tags[0].get_text().replace("\xa0", "").replace("\u00a0", "")
-            facebook["name"] = name
-            print('name: ', name)
+            if "name" not in facebook:
+                facebook["name"] = name
+                print('name: ', name)
 
         if changed:
             print("facebook updated: ", facebook)
