@@ -154,7 +154,7 @@ class FindChurchesGoogleSearch:
         # 'Religious organization'   pueblo
         # 'Religious Center'   pueblo
         cities = ["pueblo", "erie", "colorado springs", "denver", "boulder", "windsor", "westminster"]
-        cities = ["castle pines"]
+        cities = ["larkspur"]
         terms = ["Religious organization",
                  "Religious Center",
                  "Christian Church",
