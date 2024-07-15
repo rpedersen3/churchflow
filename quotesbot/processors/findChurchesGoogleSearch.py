@@ -256,7 +256,7 @@ class FindChurchesGoogleSearch:
 
                                             church = {
                                                 "name": name,
-                                                "source": "facebook",
+                                                "primarySource": "Facebook",
                                                 "social": social
                                             }
 

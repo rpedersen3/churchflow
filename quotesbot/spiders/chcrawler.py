@@ -72,7 +72,7 @@ class chcrawlerSpider(scrapy.Spider):
     processor.findChurches()
 
 
-
+    '''
     updateRDF = UpdateRDFWithDenominations()
     updateRDF.updateRDFWithDenominations()
 
@@ -95,16 +95,14 @@ class chcrawlerSpider(scrapy.Spider):
     updateRDF = UpdateRDFWithMultiChurchOrgs()
     updateRDF.updateRDFWithMultiChurchOrgs()
 
-
+    '''
 
     updateRDF = UpdateRDFWithColocatedChurches()
     updateRDF.updateRDFWithColocatedChurches()
     
-    '''
     # add churches based on cities
     churchFinder = FindChurchesGoogleSearch()
     churchFinder.findChurchesFromFacebook(googleKey)
-    '''
 
     churchFinder = FindChurchesGoogleSearch()
     churchFinder.findChurches(googleKey)
@@ -115,10 +113,10 @@ class chcrawlerSpider(scrapy.Spider):
 
     churchFinder = FindChurchesOpenStreetMapPlaces()
     churchFinder.findChurches()
-
+    
     churchFinder = FindChurchDuplicates()
     churchFinder.findChurchDuplicates()
-
+    
     churchFinder = FindChurchWebsite()
     churchFinder.findChurchWebsite()
     '''
