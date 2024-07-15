@@ -146,13 +146,13 @@ class FindChurchesGoogleSearch:
         if churches == None:
             churches = []
 
-        '''
+
 
         # 'Christian Church'   pueblo, erie, colorado springs, denver, boulder, windsor
         # 'Religious organization'   pueblo
         # 'Religious Center'   pueblo
         cities = ["pueblo", "erie", "colorado springs", "denver", "boulder", "windsor"]
-        cities = ["denver"]
+        cities = ["colorado springs"]
         terms = ["Religious organization",
                  "Religious Center",
                  "Christian Church",
@@ -180,6 +180,8 @@ class FindChurchesGoogleSearch:
                  "Synagogue",
                  "Church",
                  ]
+
+
         for city in cities:
 
                 for term in terms:
@@ -260,14 +262,15 @@ class FindChurchesGoogleSearch:
 
 
                                             if "latitude" in facebook and "longitude" in facebook:
+
                                                 church["latitude"] = facebook["latitude"]
                                                 church["longitude"] = facebook["longitude"]
 
-                                            print('add church with facebook info: ', name, ", link: ", link)
+                                                print('add church with facebook info: ', name, ", link: ", link)
 
-                                            church["social"] = social
+                                                church["social"] = social
 
-                                            churches.append(church)
+                                                churches.append(church)
 
 
 
@@ -290,7 +293,7 @@ class FindChurchesGoogleSearch:
                 churchesData["churches"] = churches
                 with open(churches_file_path, "w") as json_file:
                     json.dump(churchesData, json_file, indent=4)
-
+        '''
 
     def findChurches(self, googleKey):
 
