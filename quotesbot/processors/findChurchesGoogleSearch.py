@@ -154,7 +154,7 @@ class FindChurchesGoogleSearch:
         # 'Religious organization'   pueblo
         # 'Religious Center'   pueblo
         cities = ["pueblo", "erie", "colorado springs", "denver", "boulder", "windsor"]
-        cities = ["colorado springs"]
+        cities = ["longmont"]
         terms = ["Religious organization",
                  "Religious Center",
                  "Christian Church",
@@ -191,7 +191,8 @@ class FindChurchesGoogleSearch:
                     query = "'" + term + "' " + city + ", colorado"
                     print("query: ", query)
 
-                    starts = [1, 11, 21, 31, 41, 51]
+                    #starts = [1, 11, 21, 31, 41, 51]
+                    starts = [1, 11]
                     for st in starts:
 
 
