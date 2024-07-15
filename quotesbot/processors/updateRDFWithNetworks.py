@@ -105,6 +105,12 @@ class UpdateRDFWithNetworks:
             "tags": ["adventist"]
         },
         {
+            "name": "the church of jesus christ of latter-day saints",
+            "description": "",
+            "websiteUri": "https://www.churchofjesuschrist.org/welcome/find-a-church?lang=eng&location=colorado",
+            "tags": ["lds", "the church of jesus christ of latter-day saints"]
+        },
+        {
             "name": "Foursquare Ministries",
             "description": "",
             "websiteUri": "https://www.foursquare.org/locator/",
