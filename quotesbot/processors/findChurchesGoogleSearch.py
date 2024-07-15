@@ -87,9 +87,11 @@ class FindChurchesGoogleSearch:
                     address = church["social"]["facebook"]["address"]
 
         if address == None:
+            print("no address in facebook")
             return changed
 
 
+        print("get address info ...............")
         endpoint = 'https://maps.googleapis.com/maps/api/geocode/json'
 
         if googleKey == '':
@@ -126,7 +128,7 @@ class FindChurchesGoogleSearch:
                             facebook["longitude"] = str(longitude)
 
         #print("data: ", data)
-        print("church info: ", church)
+        print("************** church info: ", church)
         return changed
 
 
@@ -254,7 +256,8 @@ class FindChurchesGoogleSearch:
 
                                             church = {
                                                 "name": name,
-                                                "source": "facebook"
+                                                "source": "facebook",
+                                                "social": social
                                             }
 
                                             changed = self.updateLocationInfoFromFacebookData(googleKey, church)

@@ -197,6 +197,12 @@ class UpdateChurchWithSocialData:
                 facebook["type"] = type
                 print("type: ", type)
 
+            if txt.find(", CO") >= 0 and "address" not in facebook:
+                changed = True
+                address = txt
+                facebook["address"] = address
+                print("address: ", address)
+
             if txt.find("Colorado") >= 0 and txt.find("United States") >= 0:
                 changed = True
                 address = txt
