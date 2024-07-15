@@ -41,7 +41,7 @@ class chcrawlerSpider(scrapy.Spider):
 
     name = "chcrawler"
 
-    googleKey = ""
+    googleKey = "AIzaSyBZmF_hDBdNZHguSUL0xKW2nZZC1KRSYY0"
 
     churches_file_path = "churches.json"
     with open(churches_file_path, "r") as file:
