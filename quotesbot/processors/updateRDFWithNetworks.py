@@ -119,6 +119,12 @@ class UpdateRDFWithNetworks:
             "tags": ["cofchrist", "community of christ"]
         },
         {
+            "name": "COLORADO ECCLESIASTICAL JURISDICTION CHURCH OF GOD IN CHRIST",
+            "description": "",
+            "websiteUri": "https://www.joccogic.org/churches.htm",
+            "tags": ["cogic", "COLORADO ECCLESIASTICAL JURISDICTION CHURCH OF GOD IN CHRIST"]
+        },
+        {
             "name": "Church of Scientology",
             "description": "",
             "websiteUri": "https://www.scientology.org/",
