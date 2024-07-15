@@ -71,6 +71,13 @@ class UpdateRDFWithNetworks:
             "tags": ["efc", "evangelical free church"]
         },
         {
+            "name": "Assemblies of God",
+            "description": "",
+            "websiteUri": "https://ag.org/Resources/Directories/Find-a-Church?S=CO",
+            "tags": ["aog", "assemblies of god"]
+        },
+
+        {
             "name": "Episcopal Colorado",
             "description": "",
             "websiteUri": "https://episcopalcolorado.org/",

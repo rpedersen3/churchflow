@@ -41,7 +41,7 @@ class chcrawlerSpider(scrapy.Spider):
 
     name = "chcrawler"
 
-    googleKey = "AIzaSyBZmF_hDBdNZHguSUL0xKW2nZZC1KRSYY0"
+    googleKey = ""
 
     churches_file_path = "churches.json"
     with open(churches_file_path, "r") as file:
@@ -100,11 +100,11 @@ class chcrawlerSpider(scrapy.Spider):
     updateRDF = UpdateRDFWithColocatedChurches()
     updateRDF.updateRDFWithColocatedChurches()
     
-    '''
+
     # add churches based on cities
     churchFinder = FindChurchesGoogleSearch()
     churchFinder.findChurchesFromFacebook(googleKey)
-    '''
+
 
     churchFinder = FindChurchesGoogleSearch()
     churchFinder.findChurches(googleKey)
@@ -116,10 +116,11 @@ class chcrawlerSpider(scrapy.Spider):
     churchFinder = FindChurchesOpenStreetMapPlaces()
     churchFinder.findChurches()
 
-
+    '''
     churchFinder = FindChurchDuplicates()
     churchFinder.findChurchDuplicates()
 
+    '''
     churchFinder = FindChurchWebsite()
     churchFinder.findChurchWebsite()
     '''
