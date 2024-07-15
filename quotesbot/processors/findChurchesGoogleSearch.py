@@ -153,8 +153,8 @@ class FindChurchesGoogleSearch:
         # 'Christian Church'   pueblo, erie, colorado springs, denver, boulder, windsor
         # 'Religious organization'   pueblo
         # 'Religious Center'   pueblo
-        cities = ["pueblo", "erie", "colorado springs", "denver", "boulder", "windsor"]
-        cities = ["longmont"]
+        cities = ["pueblo", "erie", "colorado springs", "denver", "boulder", "windsor", "westminster"]
+        cities = ["castle pines"]
         terms = ["Religious organization",
                  "Religious Center",
                  "Christian Church",
@@ -179,7 +179,6 @@ class FindChurchesGoogleSearch:
                  "Apostolic Church",
                  "Pentecostal Church",
                  "Independent Church",
-                 "Synagogue",
                  "Church",
                  ]
 
