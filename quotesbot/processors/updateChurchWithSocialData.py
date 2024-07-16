@@ -273,6 +273,8 @@ class UpdateChurchWithSocialData:
         if changed:
             print("facebook updated: ", facebook)
             social["facebook"] = facebook
+        else:
+            print("facebook not updated: ", url)
 
 
     def updateChurchWithSocialData(self, church, response):

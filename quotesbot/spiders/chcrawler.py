@@ -72,7 +72,6 @@ class chcrawlerSpider(scrapy.Spider):
     processor.findChurches()
 
 
-    '''
     updateRDF = UpdateRDFWithDenominations()
     updateRDF.updateRDFWithDenominations()
 
@@ -95,7 +94,6 @@ class chcrawlerSpider(scrapy.Spider):
     updateRDF = UpdateRDFWithMultiChurchOrgs()
     updateRDF.updateRDFWithMultiChurchOrgs()
 
-    '''
 
     updateRDF = UpdateRDFWithColocatedChurches()
     updateRDF.updateRDFWithColocatedChurches()
@@ -142,13 +140,7 @@ class chcrawlerSpider(scrapy.Spider):
     start = True
     for church in churches:
 
-        if count > 1:
-            break
-
-
         changed = False
-
-        break
 
         '''
         find = FindChurchStaffWebPagesUsingSearch()
@@ -156,6 +148,7 @@ class chcrawlerSpider(scrapy.Spider):
 
         updateWithStaff = UpdateChurchWithStaffFromWebPages()
         updateWithStaff.appendWebPagesBasedOnStaff(church, startURLs)
+        '''
 
         if "name" in church:
 
@@ -165,29 +158,43 @@ class chcrawlerSpider(scrapy.Spider):
 
                 if start:
 
+                    '''
                     # add to urls
                     updateWithSocialData = UpdateChurchWithSocialData()
                     updateWithSocialData.appendWebPagesBasedOnSocial(church, startURLs)
+                    '''
 
                     count = count + 1
 
                     if count > 10000000:
                         break
 
+                    # update facebook using url
+                    if "social" in church and "facebookUrl" in church["social"]:
+                        if "facebook" not in church["social"]:
 
+                            social = church["social"]
+                            facebookUrl = social["facebookUrl"]
+
+                            print("process facebook url: ", facebookUrl)
+
+                            updateChurchWithSocialData = UpdateChurchWithSocialData()
+                            updateChurchWithSocialData.processFacebook(facebookUrl, social)
+
+                            changed = True
+
+                    '''
+                    
                     churchFinder = FindChurchesGooglePlaces()
                     changed = churchFinder.updateChurch(church, googleKey)
-                    
         
                     updatePersonInfo = UpdatePersonInfo()
                     changed = updatePersonInfo.updateContactInfo(church)
-                    
-                    
     
                     updateChurchInfo = UpdateChurchDenomination()
                     changed = updateChurchInfo.updateChurchDenominationWithGoogleGraph(church)
-                    
-        '''
+                    '''
+
 
         if changed:
 
@@ -253,10 +260,8 @@ class chcrawlerSpider(scrapy.Spider):
             changed = updateWithStaff.updateChurchWithStaffFromWebPages(church, response)
             
 
-
             updateWithSocial = UpdateChurchWithSocialData()
             changed = updateWithSocial.updateChurchWithSocialData(church, response)
-
 
 
             updateWithSocial = UpdateChurchWithSocialData()
