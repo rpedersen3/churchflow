@@ -405,10 +405,13 @@ class UpdateRDFWithChurches:
                                 # add business system
                                 g2.add((chOrg, self.RC.hasChurchmanagementSystem, churchCenterBusinessSystem))
 
+                    leadPastorName = None
                     if "leadPastor" in church:
                         leadPastor = church["leadPastor"]
                         if "name" in leadPastor:
+
                             name = self.clean(leadPastor["name"])
+                            leadPastorName = name
 
                             personName = name
                             personId = self.generate_random_string() # personName.replace(" ", "").lower()
@@ -417,6 +420,7 @@ class UpdateRDFWithChurches:
                             g2.add((person, RDF.type, self.OWL.NamedIndividual))
                             g2.add((person, RDF.type, self.RC.Person))
                             g2.add((person, self.RC.name, Literal(personName)))
+                            g2.add((person, self.RC.title, Literal("lead pastor")))
 
                             g2.add((chOrg, self.RC.hasMember, person))
 
@@ -431,6 +435,35 @@ class UpdateRDFWithChurches:
 
                             g2.add((chOrg, self.RC.hasPost, post))
 
+                    if "contacts" in church:
+
+                        contacts = church["contacts"]
+                        for contact in contacts:
+
+                            name = self.clean(contact["name"])
+                            if leadPastorName != None and leadPastorName.lower() == name.lower():
+                                continue
+
+                            personName = name
+                            personId = self.generate_random_string()
+                            person = self.n + personId
+
+                            g2.add((person, RDF.type, self.OWL.NamedIndividual))
+                            g2.add((person, RDF.type, self.RC.Person))
+                            g2.add((person, self.RC.name, Literal(personName)))
+
+                            if "title" in contact:
+                                title = self.clean(contact["title"])
+                                g2.add((person, self.RC.title, Literal(title)))
+
+                            if "photo" in contact:
+                                photo = contact["photo"]
+                                g2.add((person, self.RC.photo, Literal(photo)))
+
+                            g2.add((chOrg, self.RC.hasMember, person))
+
+
+
                     if "link" in church:
                         websiteUri = church["link"];
                         websiteId = self.generate_random_string() # self.clean(websiteUri.replace(" ", "").lower())
@@ -442,40 +475,7 @@ class UpdateRDFWithChurches:
 
                         g2.add((chOrg, self.RC.hasWebsite, website))
 
-                    '''
-                    if "contacts" in church:
-                        contacts = church["contacts"]
-                        for contact in contacts:
-                            if "name" in contact:
-    
-                                name = self.clean(contact["name"])
-    
-                                query = """select ?person where { ?person rc:name ?name . 
-                                        FILTER(?name = \"""" + name + """\") }
-                                        """
-                                results = g2.query(query)
-    
-                                if len(results) == 0:
-                                    personName = name
-                                    personId = personName.replace(" ", "").lower()
-                                    person = self.n + personId
-    
-                                    g2.add((person, RDF.type, self.OWL.NamedIndividual))
-                                    g2.add((person, RDF.type, self.RC.Person))
-                                    g2.add((person, self.RC.name, Literal(personName)))
-    
-                                    g2.add((chOrg, self.RC.hasMember, person))
-                                else:
-                                    print("person already in knowledge base: ", name)
-    
-    
-                    print(g2.serialize(format="pretty-xml"))
-                    data = g2.serialize(format="pretty-xml")
-    
-                    with open('frontrange_out.rdf', "w", encoding="utf-8") as f:
-                        f.write(data)
-    
-                    '''
+
 
             #print(f"Graph has {len(g2)} triples.\n")
             print(".")
