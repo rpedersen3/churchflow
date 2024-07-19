@@ -13,6 +13,8 @@ from scrapy_splash import SplashRequest
 
 class UpdateChurchWithStaffFromWebPages:
 
+    print("setup class")
+
     helpers = Helpers()
 
     # get churches
@@ -24,6 +26,7 @@ class UpdateChurchWithStaffFromWebPages:
     if churches == None:
         churches = []
 
+    print("churches resolved")
 
     def appendWebPagesBasedOnStaff(self, church, startURLs):
 
@@ -76,27 +79,35 @@ class UpdateChurchWithStaffFromWebPages:
         except:
             print('..')
 
+
     def updateChurchWithStaffFromWebPages(self, church, response):
+
+        print(".........................")
 
         changed = False
 
         # extract contacts from staff web pages
 
         print("process church: ", church["name"])
+        print("process staff page: ", response.url)
 
         processor = "extract-profile-contacts-from-webpage"
         needsToBeProcessed = self.helpers.checkIfNeedsProcessing(church, processor, response.url)
 
         if needsToBeProcessed == True:
+            print("process staff page: ", response.url)
 
             changed = True
 
             # crawl page and get schema
-            schema = ProfileExtractor.extractProfilesFromWebPage(church, response, None, None, None, None)
-            ProfileExtractor.extractProfilesUsingSchema(church, response, schema)
+            extractor = ProfileExtractor()
+            schema = extractor.extractProfilesFromWebPage(church, response, None, None, None, None)
+            extractor.extractProfilesUsingSchema(church, response, schema)
 
             self.helpers.markAsProcessed(church, processor, response.url)
 
+
+            '''
             # save images to directory
             lua_script_template = """
                                         function main(splash, args)  
@@ -175,9 +186,14 @@ class UpdateChurchWithStaffFromWebPages:
                     except Exception as e:
                         print(".")
 
-
+            '''
         else:
             print("processing not needed")
 
         # self.getLeadPastorInfoUsingAzureAI(currentChurch)
         # self.searchForContacts(currentChurch, response)
+
+
+
+
+        return changed

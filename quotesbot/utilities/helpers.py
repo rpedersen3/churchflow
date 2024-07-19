@@ -15,8 +15,8 @@ class Helpers:
         for processed in currentChurch["processed"][processor]:
             if processed["page"].lower().startswith(url.lower()):
 
-                needsToBeProcessed = False
-                print("found page so don't process")
+                #needsToBeProcessed = False
+                #print("found page so don't process")
 
                 if "datetime" in processed:
 

@@ -29,6 +29,7 @@ from quotesbot.processors.updateRDFWithDenominations import UpdateRDFWithDenomin
 from quotesbot.processors.updateRDFWithNetworks import UpdateRDFWithNetworks
 from quotesbot.processors.updateRDFWithPartners import UpdateRDFWithPartners
 from quotesbot.processors.updateRDFWithSocial import UpdateRDFWithSocial
+from quotesbot.processors.findChurchOrganizations import FindChurchOrganizations
 
 from quotesbot.processors.updatePersonInfo import UpdatePersonInfo
 from quotesbot.processors.updateChurchDenomination import UpdateChurchDenomination
@@ -71,8 +72,6 @@ class chcrawlerSpider(scrapy.Spider):
     processor = IfaProcessor()
     processor.findChurches()
 
-    '''
-
     updateRDF = UpdateRDFWithDenominations()
     updateRDF.updateRDFWithDenominations()
 
@@ -95,7 +94,7 @@ class chcrawlerSpider(scrapy.Spider):
     updateRDF = UpdateRDFWithMultiChurchOrgs()
     updateRDF.updateRDFWithMultiChurchOrgs()
 
-    '''
+    
     
     updateRDF = UpdateRDFWithColocatedChurches()
     updateRDF.updateRDFWithColocatedChurches()
@@ -147,13 +146,21 @@ class chcrawlerSpider(scrapy.Spider):
         '''
         find = FindChurchStaffWebPagesUsingSearch()
         changed = find.findStaffWebPages(church, googleKey)
-
-        updateWithStaff = UpdateChurchWithStaffFromWebPages()
-        updateWithStaff.appendWebPagesBasedOnStaff(church, startURLs)
-
+        '''
 
         if "name" in church:
 
+            if church["name"] == "Mission Hills Church Littleton Campus":
+
+                updateOrg = FindChurchOrganizations()
+                updateOrg.findChurchOrganizationStructure(church, "https://theorg.com/org/mission-hills-church")
+
+                '''
+                updateWithStaff = UpdateChurchWithStaffFromWebPages()
+                updateWithStaff.appendWebPagesBasedOnStaff(church, startURLs)
+                '''
+
+                '''
 
                 #if church["name"] == "Encounter Church Denver":
                 #    start = True
@@ -197,7 +204,7 @@ class chcrawlerSpider(scrapy.Spider):
                     changed = updateChurchInfo.updateChurchDenominationWithGoogleGraph(church)
                     
 
-
+                '''
         if changed:
 
             # save to churches file
@@ -205,7 +212,7 @@ class chcrawlerSpider(scrapy.Spider):
             with open(churches_file_path, "w") as json_file:
                 json.dump(churchesData, json_file, indent=4)
 
-        '''
+
 
     def start_requests(self):
         lua_script_template = """
@@ -249,18 +256,16 @@ class chcrawlerSpider(scrapy.Spider):
 
     def parse(self, response):
 
-        print("parse response..........")
-
         helpers = Helpers()
         church, isHomePage = helpers.findChurch(self.churches, response.url)
         if church is not None and "name" in church:
 
             changed = False
 
-            '''
             updateWithStaff = UpdateChurchWithStaffFromWebPages()
             changed = updateWithStaff.updateChurchWithStaffFromWebPages(church, response)
-            
+
+            '''
 
             updateWithSocial = UpdateChurchWithSocialData()
             changed = updateWithSocial.updateChurchWithSocialData(church, response)
@@ -279,5 +284,5 @@ class chcrawlerSpider(scrapy.Spider):
                 with open(self.churches_file_path, "w") as json_file:
                     json.dump(self.churchesData, json_file, indent=4)
 
-        pass
+
 

@@ -406,15 +406,17 @@ class UpdateRDFWithChurches:
                                 g2.add((chOrg, self.RC.hasChurchmanagementSystem, churchCenterBusinessSystem))
 
                     leadPastorName = None
+                    leadPasterUniqueId = None
                     if "leadPastor" in church:
                         leadPastor = church["leadPastor"]
                         if "name" in leadPastor:
 
                             name = self.clean(leadPastor["name"])
                             leadPastorName = name
+                            leadPasterUniqueId = self.generate_random_string()
 
                             personName = name
-                            personId = self.generate_random_string() # personName.replace(" ", "").lower()
+                            personId = leadPasterUniqueId # personName.replace(" ", "").lower()
                             person = self.n + personId
 
                             g2.add((person, RDF.type, self.OWL.NamedIndividual))
@@ -440,27 +442,34 @@ class UpdateRDFWithChurches:
                         contacts = church["contacts"]
                         for contact in contacts:
 
-                            name = self.clean(contact["name"])
-                            if leadPastorName != None and leadPastorName.lower() == name.lower():
-                                continue
+                            if "valid" in contact:
 
-                            personName = name
-                            personId = self.generate_random_string()
-                            person = self.n + personId
+                                isValid = contact["valid"]
+                                if isValid == "yes":
 
-                            g2.add((person, RDF.type, self.OWL.NamedIndividual))
-                            g2.add((person, RDF.type, self.RC.Person))
-                            g2.add((person, self.RC.name, Literal(personName)))
+                                    name = self.clean(contact["name"])
 
-                            if "title" in contact:
-                                title = self.clean(contact["title"])
-                                g2.add((person, self.RC.title, Literal(title)))
+                                    uniqueId = self.generate_random_string()
+                                    if leadPastorName != None and leadPastorName.lower() == name.lower():
+                                        uniqueId = leadPasterUniqueId
 
-                            if "photo" in contact:
-                                photo = contact["photo"]
-                                g2.add((person, self.RC.photo, Literal(photo)))
+                                    personName = name
+                                    personId = self.generate_random_string()
+                                    person = self.n + personId
 
-                            g2.add((chOrg, self.RC.hasMember, person))
+                                    g2.add((person, RDF.type, self.OWL.NamedIndividual))
+                                    g2.add((person, RDF.type, self.RC.Person))
+                                    g2.add((person, self.RC.name, Literal(personName)))
+
+                                    if "title" in contact:
+                                        title = self.clean(contact["title"])
+                                        g2.add((person, self.RC.title, Literal(title)))
+
+                                    if "photo" in contact:
+                                        photo = contact["photo"]
+                                        g2.add((person, self.RC.photo, Literal(photo)))
+
+                                    g2.add((chOrg, self.RC.hasMember, person))
 
 
 
