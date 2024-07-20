@@ -5,6 +5,7 @@ from io import BytesIO
 from PIL import Image
 import os
 import urllib.parse
+from urllib.parse import urlparse
 
 from quotesbot.utilities.helpers import Helpers
 
@@ -143,30 +144,44 @@ class FindChurchOrganizations:
 
         #print("soup: ", soup)
 
+        link = church["link"]
+        parsed_url = urlparse(link)
+        churchDomain = parsed_url.netloc.replace("www.", "")
+        churchDomain = churchDomain.replace("/", "")
 
+        print("find church domain: ", churchDomain)
 
-        for positionCard in soup.find_all('div', class_="PositionCard_root__I4CrT"):
+        foundWebsite = False
+        for websiteAnch in soup.find_all('a', title="View the website"):
+            href = websiteAnch.get('href')
+            print("found church url: ", href)
+            if href.lower().find(churchDomain.lower()) >= 0:
+                foundWebsite = True
 
-            cardNameAnch = positionCard.find('a', class_="PositionCard_info___JC8V")
-            cardTitle = positionCard.find('div', class_="PositionCard_role__XNUly")
-            cardReports = positionCard.find('div', class_="PositionCard_childIndicator__VsHgE")
-            if cardNameAnch != None and cardTitle != None and cardReports != None:
+        if foundWebsite:
+            print("valid page that references website: ", churchDomain)
+            for positionCard in soup.find_all('div', class_="PositionCard_root__I4CrT"):
 
-                positionCardName = cardNameAnch.get_text()
+                cardNameAnch = positionCard.find('a', class_="PositionCard_info___JC8V")
+                cardTitle = positionCard.find('div', class_="PositionCard_role__XNUly")
+                cardReports = positionCard.find('div', class_="PositionCard_childIndicator__VsHgE")
+                if cardNameAnch != None and cardTitle != None and cardReports != None:
 
-                positionCardTitle = positionCard.find('div', class_="PositionCard_role__XNUly").get_text()
-                positionCardReports = positionCard.find('div', class_="PositionCard_childIndicator__VsHgE").get_text()
-                print("name: ", positionCardName, ", title: ", positionCardTitle, ", reports: ", positionCardReports)
+                    positionCardName = cardNameAnch.get_text()
 
-                href = cardNameAnch.get('href')
-                url = "https://theorg.com" + href
-                print("href: ", url)
+                    positionCardTitle = positionCard.find('div', class_="PositionCard_role__XNUly").get_text()
+                    positionCardReports = positionCard.find('div', class_="PositionCard_childIndicator__VsHgE").get_text()
+                    print("name: ", positionCardName, ", title: ", positionCardTitle, ", reports: ", positionCardReports)
 
-                self.addToTheOrg(church, positionCardName, "name", positionCardName)
-                self.addToTheOrg(church, positionCardName, "title", positionCardTitle)
-                self.addToTheOrg(church, positionCardName, "number-of-reports", positionCardReports)
-                self.addToTheOrg(church, positionCardName, "details", url)
+                    href = cardNameAnch.get('href')
+                    url = "https://theorg.com" + href
+                    print("href: ", url)
 
-                self.findPersonInfo(church, positionCardName, url)
+                    self.addToTheOrg(church, positionCardName, "name", positionCardName)
+                    self.addToTheOrg(church, positionCardName, "title", positionCardTitle)
+                    self.addToTheOrg(church, positionCardName, "number-of-reports", positionCardReports)
+                    self.addToTheOrg(church, positionCardName, "details", url)
+
+                    self.findPersonInfo(church, positionCardName, url)
 
 

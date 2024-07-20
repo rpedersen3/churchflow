@@ -149,9 +149,12 @@ class FindChurchesGoogleSearch:
             churches = []
 
 
+        count = 0
         for church in churches:
 
-            if "theorg" not in churches:
+            if "theorg" not in church and "link" in church and "contacts" in church and len(church["contacts"]) > 0:
+
+                time.sleep(0.5)
 
                 link = church["link"]
                 parsed_url = urlparse(link)
@@ -165,30 +168,46 @@ class FindChurchesGoogleSearch:
                     service.cse()
                     .list(
                         q=query,
-                        cx="951f3778240354b1a",
-                        start=1
+                        cx="951f3778240354b1a"
                     )
                     .execute()
                 )
                 print("--------------------------------------")
-                # print(res)
+                #print(res)
                 print("--------------------------------------")
 
-                for item in res["items"]:
+                church["theorg"] = {
+                }
 
-                    link = item["link"]
+                if "items" in res:
+                    for item in res["items"]:
 
-                    church["theorg"] = {
-                        "url": link
-                    }
+                        link = item["link"]
 
-                    # save to churches file
-                    churchesData["churches"] = churches
-                    with open(churches_file_path, "w") as json_file:
-                        json.dump(churchesData, json_file, indent=4)
+                        offset = link.find("/org-chart")
+                        if offset > 0:
+                            link = link[:offset]
 
-                    break
+                        print("add link: ", link)
+                        church["theorg"] = {
+                            "url": link
+                        }
 
+                        # save to churches file
+                        churchesData["churches"] = churches
+                        with open(churches_file_path, "w") as json_file:
+                            json.dump(churchesData, json_file, indent=4)
+
+                        count = count + 1
+                        if count > 20:
+                            return
+
+                        break
+
+                # save to churches file
+                churchesData["churches"] = churches
+                with open(churches_file_path, "w") as json_file:
+                    json.dump(churchesData, json_file, indent=4)
 
     def findChurchesFromFacebook(self, googleKey):
 
