@@ -152,7 +152,7 @@ class FindChurchesGoogleSearch:
         count = 0
         for church in churches:
 
-            if "theorg" not in church and "link" in church and "contacts" in church and len(church["contacts"]) > 0:
+            if "theorg" not in church and "link" in church and "name" in church and "contacts" in church and len(church["contacts"]) > 0:
 
                 time.sleep(0.5)
 
@@ -161,7 +161,7 @@ class FindChurchesGoogleSearch:
                 churchDomain = parsed_url.netloc.replace("www.", "")
                 churchDomain = churchDomain.replace("/", "")
 
-                query = churchDomain
+                query = church["name"] #churchDomain
                 print("query: ", query)
 
                 res = (
@@ -199,8 +199,8 @@ class FindChurchesGoogleSearch:
                             json.dump(churchesData, json_file, indent=4)
 
                         count = count + 1
-                        if count > 20:
-                            return
+                        #if count > 20:
+                        #    return
 
                         break
 
