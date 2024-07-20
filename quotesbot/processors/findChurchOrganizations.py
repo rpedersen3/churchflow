@@ -31,6 +31,64 @@ class FindChurchOrganizations:
 
 
 
+    def addToTheOrg(self, church, name, tag, value):
+
+        theorg = {}
+        if "theorg" in church:
+            theorg = church["theorg"]
+
+        if "contacts" not in theorg:
+            theorg["contacts"] = []
+
+        contactRecord = None
+        for contact in theorg["contacts"]:
+            if contact["name"].lower() == name.lower():
+                contactRecord = contact
+                break
+
+        if contactRecord == None:
+            contact = {
+                "name": name
+            }
+            theorg["contacts"].append(contact)
+
+        if tag not in contact:
+            contact[tag] = value
+
+        church["theorg"] = theorg
+
+
+    def findPersonInfo(self, church, name, orgChartUrl):
+
+        service = Service(ChromeDriverManager().install())
+        driver = webdriver.Chrome(service=service)
+
+        driver.get(orgChartUrl)
+
+        # Wait for the page to load completely
+        time.sleep(1)  # Increase this if necessary for your connection
+
+        # Get the page source and parse it with BeautifulSoup
+        soup = BeautifulSoup(driver.page_source, 'html.parser')
+        driver.quit()
+
+        #print("soup: ", soup)
+
+        img = soup.find('img', class_="hLdhge")
+        imgSrc = img.get('src')
+
+        print("photo: ", imgSrc)
+        self.addToTheOrg(church, name, "photo", imgSrc)
+
+
+        for positionCard in soup.find_all('a', title="View on linkedIn"):
+
+            href = positionCard.get('href')
+            print("linkedin href: ", href)
+            self.addToTheOrg(church, name, "linkedin", href)
+
+
+
     def findChurchOrganizationStructure(self, church, orgChartUrl):
 
         service = Service(ChromeDriverManager().install())
@@ -40,80 +98,34 @@ class FindChurchOrganizations:
         driver.get(orgChartUrl)
 
         # Wait for the page to load completely
-        time.sleep(10)  # Increase this if necessary for your connection
+        time.sleep(1)  # Increase this if necessary for your connection
 
         # Get the page source and parse it with BeautifulSoup
         soup = BeautifulSoup(driver.page_source, 'html.parser')
         driver.quit()
 
-        print("soup: ", soup)
-        '''
-        for link in soup.find_all('span'):
-            linkValue = link.get_text()
-            previous_span = link.find_previous_sibling('span')
-            previous_span_text = previous_span.get_text() if previous_span else None
+        #print("soup: ", soup)
 
-            if previous_span_text == "Website" and "websiteUrl" not in social:
-                social["websiteUrl"] = "https://" + linkValue
-                print(previous_span_text)
-                print("website: ", linkValue)
 
-            if previous_span_text == "Facebook" and "facebookUrl" not in social:
-                social["facebookUrl"] = "https://" + linkValue
-                print(previous_span_text)
-                print("facebook: ", linkValue)
 
-            if previous_span_text == "Instagram" and "instagramUrl" not in social:
-                social["instagramUrl"] = "https://" + linkValue
-                print(previous_span_text)
-                print("instagram: ", linkValue)
+        for positionCard in soup.find_all('div', class_="PositionCard_root__I4CrT"):
 
-            if previous_span_text == "TikTok" and "tiktokUrl" not in social:
-                social["tiktokUrl"] = "https://" + linkValue
-                print(previous_span_text)
-                print("tiktok: ", linkValue)
+            cardNameAnch = positionCard.find('a', class_="PositionCard_info___JC8V")
+            positionCardName = cardNameAnch.get_text()
 
-            if previous_span_text == "Pinterest" and "pinterestUrl" not in social:
-                social["pinterestUrl"] = "https://" + linkValue
-                print(previous_span_text)
-                print("pinterest: ", linkValue)
+            positionCardTitle = positionCard.find('div', class_="PositionCard_role__XNUly").get_text()
+            positionCardReports = positionCard.find('div', class_="PositionCard_childIndicator__VsHgE").get_text()
+            print("name: ", positionCardName, ", title: ", positionCardTitle, ", reports: ", positionCardReports)
 
-        for tr in soup.find_all('tr', class_="description-item"):
-            for td in tr.find_all('td', class_="style-scope"):
+            href = cardNameAnch.get('href')
+            url = "https://theorg.com" + href
+            print("href: ", url)
 
-                ytIcon = td.find("yt-icon")
-                if ytIcon != None:
-                    icon = ytIcon.get("icon")
+            self.addToTheOrg(church, positionCardName, "name", positionCardName)
+            self.addToTheOrg(church, positionCardName, "title", positionCardTitle)
+            self.addToTheOrg(church, positionCardName, "number-of-reports", positionCardReports)
+            self.addToTheOrg(church, positionCardName, "details", url)
 
-                    nextTd = td.find_next_sibling('td')
-                    if nextTd != None and icon != None:
+            self.findPersonInfo(church, positionCardName, "https://theorg.com" + href)
 
-                        youtube = {}
-                        if "youtube" in social:
-                            youtube = social["youtube"]
 
-                        text = nextTd.get_text().strip("\n")
-
-                        if icon == "language":
-                            youtube["url"] = text
-                            print("youtube url: ", text)
-
-                        if icon == "person_radar":
-                            youtube["subscribers"] = text
-                            print("subscribers: ", text)
-
-                        if icon == "my_videos":
-                            youtube["videos"] = text
-                            print("videos: ", text)
-
-                        if icon == "trending_up":
-                            youtube["views"] = text
-                            print("views: ", text)
-
-                        if icon == "info_outline":
-                            youtube["joined"] = text
-                            print("joined: ", text)
-
-                        social["youtube"] = youtube
-
-        '''

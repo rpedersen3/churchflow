@@ -150,10 +150,14 @@ class chcrawlerSpider(scrapy.Spider):
 
         if "name" in church:
 
-            if church["name"] == "Mission Hills Church Littleton Campus":
 
-                updateOrg = FindChurchOrganizations()
-                updateOrg.findChurchOrganizationStructure(church, "https://theorg.com/org/mission-hills-church")
+
+                if "theorg" in church and "url" in church["theorg"] and "contacts" not in church["theorg"]:
+
+                    url = church["theorg"]["url"]
+                    updateOrg = FindChurchOrganizations()
+                    updateOrg.findChurchOrganizationStructure(church, url)
+                    changed = True
 
                 '''
                 updateWithStaff = UpdateChurchWithStaffFromWebPages()
@@ -261,11 +265,11 @@ class chcrawlerSpider(scrapy.Spider):
         if church is not None and "name" in church:
 
             changed = False
-
+            '''
             updateWithStaff = UpdateChurchWithStaffFromWebPages()
             changed = updateWithStaff.updateChurchWithStaffFromWebPages(church, response)
 
-            '''
+            
 
             updateWithSocial = UpdateChurchWithSocialData()
             changed = updateWithSocial.updateChurchWithSocialData(church, response)
