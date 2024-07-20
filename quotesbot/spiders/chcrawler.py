@@ -72,6 +72,7 @@ class chcrawlerSpider(scrapy.Spider):
     processor = IfaProcessor()
     processor.findChurches()
 
+
     updateRDF = UpdateRDFWithDenominations()
     updateRDF.updateRDFWithDenominations()
 
@@ -94,6 +95,7 @@ class chcrawlerSpider(scrapy.Spider):
     updateRDF = UpdateRDFWithMultiChurchOrgs()
     updateRDF.updateRDFWithMultiChurchOrgs()
 
+
     
     
     updateRDF = UpdateRDFWithColocatedChurches()
@@ -102,7 +104,14 @@ class chcrawlerSpider(scrapy.Spider):
     # add churches based on cities
     churchFinder = FindChurchesGoogleSearch()
     churchFinder.findChurchesFromFacebook(googleKey)
+    
+    '''
 
+    # add churches based on cities
+    churchFinder = FindChurchesGoogleSearch()
+    churchFinder.findChurchesFromTheOrg(googleKey)
+
+    '''
     churchFinder = FindChurchesGoogleSearch()
     churchFinder.findChurches(googleKey)
 
@@ -150,65 +159,62 @@ class chcrawlerSpider(scrapy.Spider):
 
         if "name" in church:
 
+            '''
+
+            if "theorg" in church and "url" in church["theorg"] and "contacts" not in church["theorg"]:
+
+                url = church["theorg"]["url"]
+                updateOrg = FindChurchOrganizations()
+                updateOrg.findChurchOrganizationStructure(church, url)
+                changed = True
+
+            
+            updateWithStaff = UpdateChurchWithStaffFromWebPages()
+            updateWithStaff.appendWebPagesBasedOnStaff(church, startURLs)
+
+            #if church["name"] == "Encounter Church Denver":
+            #    start = True
+
+            if start:
 
 
-                if "theorg" in church and "url" in church["theorg"] and "contacts" not in church["theorg"]:
-
-                    url = church["theorg"]["url"]
-                    updateOrg = FindChurchOrganizations()
-                    updateOrg.findChurchOrganizationStructure(church, url)
-                    changed = True
-
-                '''
-                updateWithStaff = UpdateChurchWithStaffFromWebPages()
-                updateWithStaff.appendWebPagesBasedOnStaff(church, startURLs)
-                '''
-
-                '''
-
-                #if church["name"] == "Encounter Church Denver":
-                #    start = True
-
-                if start:
+                # add to urls
+                updateWithSocialData = UpdateChurchWithSocialData()
+                updateWithSocialData.appendWebPagesBasedOnSocial(church, startURLs)
 
 
-                    # add to urls
-                    updateWithSocialData = UpdateChurchWithSocialData()
-                    updateWithSocialData.appendWebPagesBasedOnSocial(church, startURLs)
+                count = count + 1
+
+                if count > 10000000:
+                    break
+
+                # update facebook using url
+                if "social" in church and "facebookUrl" in church["social"]:
+                    if "facebook" not in church["social"]:
+
+                        social = church["social"]
+                        facebookUrl = social["facebookUrl"]
+
+                        print("process facebook url: ", facebookUrl)
+
+                        updateChurchWithSocialData = UpdateChurchWithSocialData()
+                        updateChurchWithSocialData.processFacebook(facebookUrl, social)
+
+                        changed = True
 
 
-                    count = count + 1
-
-                    if count > 10000000:
-                        break
-
-                    # update facebook using url
-                    if "social" in church and "facebookUrl" in church["social"]:
-                        if "facebook" not in church["social"]:
-
-                            social = church["social"]
-                            facebookUrl = social["facebookUrl"]
-
-                            print("process facebook url: ", facebookUrl)
-
-                            updateChurchWithSocialData = UpdateChurchWithSocialData()
-                            updateChurchWithSocialData.processFacebook(facebookUrl, social)
-
-                            changed = True
-
-
-                    
-                    churchFinder = FindChurchesGooglePlaces()
-                    changed = churchFinder.updateChurch(church, googleKey)
-        
-                    updatePersonInfo = UpdatePersonInfo()
-                    changed = updatePersonInfo.updateContactInfo(church)
+                
+                churchFinder = FindChurchesGooglePlaces()
+                changed = churchFinder.updateChurch(church, googleKey)
     
-                    updateChurchInfo = UpdateChurchDenomination()
-                    changed = updateChurchInfo.updateChurchDenominationWithGoogleGraph(church)
-                    
+                updatePersonInfo = UpdatePersonInfo()
+                changed = updatePersonInfo.updateContactInfo(church)
 
-                '''
+                updateChurchInfo = UpdateChurchDenomination()
+                changed = updateChurchInfo.updateChurchDenominationWithGoogleGraph(church)
+                
+
+            '''
         if changed:
 
             # save to churches file

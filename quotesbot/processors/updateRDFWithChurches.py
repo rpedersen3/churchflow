@@ -439,6 +439,8 @@ class UpdateRDFWithChurches:
 
                     if "contacts" in church:
 
+                        memberCount = 0
+
                         contacts = church["contacts"]
                         for contact in contacts:
 
@@ -446,6 +448,8 @@ class UpdateRDFWithChurches:
 
                                 isValid = contact["valid"]
                                 if isValid == "yes":
+
+                                    memberCount = memberCount + 1
 
                                     name = self.clean(contact["name"])
 
@@ -472,6 +476,8 @@ class UpdateRDFWithChurches:
                                     g2.add((chOrg, self.RC.hasMember, person))
 
 
+                        if memberCount > 0:
+                            g2.add((chOrg, self.RC.memberCount, Literal(str(memberCount))))
 
                     if "link" in church:
                         websiteUri = church["link"];

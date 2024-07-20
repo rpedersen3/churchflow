@@ -3,6 +3,7 @@ from datetime import datetime
 import json
 import time
 import requests
+from urllib.parse import urlparse
 
 from quotesbot.processors.updateChurchWithSocialData import UpdateChurchWithSocialData
 class FindChurchesGoogleSearch:
@@ -130,6 +131,63 @@ class FindChurchesGoogleSearch:
         #print("data: ", data)
         print("************** church info: ", church)
         return changed
+
+
+    def findChurchesFromTheOrg(self, googleKey):
+
+        service = build(
+            "customsearch", "v1", developerKey=googleKey
+        )
+
+        # get churches
+        churches_file_path = "churches.json"
+        with open(churches_file_path, "r") as file:
+            churchesData = json.load(file)
+
+        churches = churchesData["churches"]
+        if churches == None:
+            churches = []
+
+
+        for church in churches:
+
+            if "theorg" not in churches:
+
+                link = church["link"]
+                parsed_url = urlparse(link)
+                churchDomain = parsed_url.netloc.replace("www.", "")
+                churchDomain = churchDomain.replace("/", "")
+
+                query = churchDomain
+                print("query: ", query)
+
+                res = (
+                    service.cse()
+                    .list(
+                        q=query,
+                        cx="951f3778240354b1a",
+                        start=1
+                    )
+                    .execute()
+                )
+                print("--------------------------------------")
+                # print(res)
+                print("--------------------------------------")
+
+                for item in res["items"]:
+
+                    link = item["link"]
+
+                    church["theorg"] = {
+                        "url": link
+                    }
+
+                    # save to churches file
+                    churchesData["churches"] = churches
+                    with open(churches_file_path, "w") as json_file:
+                        json.dump(churchesData, json_file, indent=4)
+
+                    break
 
 
     def findChurchesFromFacebook(self, googleKey):

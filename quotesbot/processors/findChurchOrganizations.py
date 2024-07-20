@@ -30,6 +30,20 @@ class FindChurchOrganizations:
     churches = churchesData["churches"]
 
 
+    def findContact(self, church, name):
+
+        contactRecord = None
+
+        theorg = {}
+        if "theorg" in church:
+            theorg = church["theorg"]
+
+        for contact in theorg["contacts"]:
+            if contact["name"].lower() == name.lower():
+                contactRecord = contact
+                break
+
+        return contactRecord
 
     def addToTheOrg(self, church, name, tag, value):
 
@@ -75,19 +89,42 @@ class FindChurchOrganizations:
         #print("soup: ", soup)
 
         img = soup.find('img', class_="hLdhge")
-        imgSrc = img.get('src')
+        if img != None:
+            imgSrc = img.get('src')
 
-        print("photo: ", imgSrc)
-        self.addToTheOrg(church, name, "photo", imgSrc)
+            print("photo: ", imgSrc)
+            self.addToTheOrg(church, name, "photo", imgSrc)
 
 
-        for positionCard in soup.find_all('a', title="View on linkedIn"):
+        for linkedinInfo in soup.find_all('a', title="View on linkedIn"):
 
-            href = positionCard.get('href')
+            href = linkedinInfo.get('href')
             print("linkedin href: ", href)
             self.addToTheOrg(church, name, "linkedin", href)
 
+        print("************ loop through sub folks ************")
+        for positionCard in soup.find_all('a', class_="iZOAPd"):
 
+            print("****************  get next level down")
+
+            positionCardTitle = positionCard.find('p', class_="dLmfce").get_text()
+            positionCardName = positionCard.find('p', class_="hTySEN").get_text()
+
+            href = positionCard.get('href')
+            url = "https://theorg.com" + href
+            print("href: ", url)
+
+            print(" look for name: ", positionCardName)
+            contact = self.findContact(church, positionCardName)
+            if contact == None:
+                print("name not found so add")
+                self.addToTheOrg(church, positionCardName, "name", positionCardName)
+                self.addToTheOrg(church, positionCardName, "title", positionCardTitle)
+                self.addToTheOrg(church, positionCardName, "details", url)
+                self.addToTheOrg(church, name, "linkedin", href)
+
+                print("go to next level ........")
+                self.findPersonInfo(church, positionCardName, url)
 
     def findChurchOrganizationStructure(self, church, orgChartUrl):
 
@@ -111,21 +148,25 @@ class FindChurchOrganizations:
         for positionCard in soup.find_all('div', class_="PositionCard_root__I4CrT"):
 
             cardNameAnch = positionCard.find('a', class_="PositionCard_info___JC8V")
-            positionCardName = cardNameAnch.get_text()
+            cardTitle = positionCard.find('div', class_="PositionCard_role__XNUly")
+            cardReports = positionCard.find('div', class_="PositionCard_childIndicator__VsHgE")
+            if cardNameAnch != None and cardTitle != None and cardReports != None:
 
-            positionCardTitle = positionCard.find('div', class_="PositionCard_role__XNUly").get_text()
-            positionCardReports = positionCard.find('div', class_="PositionCard_childIndicator__VsHgE").get_text()
-            print("name: ", positionCardName, ", title: ", positionCardTitle, ", reports: ", positionCardReports)
+                positionCardName = cardNameAnch.get_text()
 
-            href = cardNameAnch.get('href')
-            url = "https://theorg.com" + href
-            print("href: ", url)
+                positionCardTitle = positionCard.find('div', class_="PositionCard_role__XNUly").get_text()
+                positionCardReports = positionCard.find('div', class_="PositionCard_childIndicator__VsHgE").get_text()
+                print("name: ", positionCardName, ", title: ", positionCardTitle, ", reports: ", positionCardReports)
 
-            self.addToTheOrg(church, positionCardName, "name", positionCardName)
-            self.addToTheOrg(church, positionCardName, "title", positionCardTitle)
-            self.addToTheOrg(church, positionCardName, "number-of-reports", positionCardReports)
-            self.addToTheOrg(church, positionCardName, "details", url)
+                href = cardNameAnch.get('href')
+                url = "https://theorg.com" + href
+                print("href: ", url)
 
-            self.findPersonInfo(church, positionCardName, "https://theorg.com" + href)
+                self.addToTheOrg(church, positionCardName, "name", positionCardName)
+                self.addToTheOrg(church, positionCardName, "title", positionCardTitle)
+                self.addToTheOrg(church, positionCardName, "number-of-reports", positionCardReports)
+                self.addToTheOrg(church, positionCardName, "details", url)
+
+                self.findPersonInfo(church, positionCardName, url)
 
 
