@@ -6,6 +6,8 @@ import requests
 from urllib.parse import urlparse
 
 from quotesbot.processors.updateChurchWithSocialData import UpdateChurchWithSocialData
+
+from quotesbot.processors.findChurchOrganizations import FindChurchOrganizations
 class FindChurchesGoogleSearch:
 
     def checkFacebookType(self, type):
@@ -149,6 +151,51 @@ class FindChurchesGoogleSearch:
             churches = []
 
 
+
+        # get cities
+        file_path = "coloradoFrontRangeCities.json"
+        with open(file_path, "r") as file:
+            citiesData = json.load(file)
+
+        # cycle through cities looking for church web sites
+        cities = citiesData["cities"]
+        count = 1
+
+        for city in cities:
+
+            query = "'Religion' '" + city["name"] + "'"
+            print("query: ", query)
+
+            res = (
+                service.cse()
+                .list(
+                    q=query,
+                    cx="951f3778240354b1a"
+                )
+                .execute()
+            )
+            print("--------------------------------------")
+            # print(res)
+            print("--------------------------------------")
+
+
+            if "items" in res:
+                for item in res["items"]:
+                    link = item["link"]
+
+                    offset = link.find("/org-chart")
+                    if offset > 0:
+                        link = link[:offset]
+
+                        offset = link.find("/org-chart")
+                        if offset > 0:
+                            link = link[:offset]
+
+                        find = FindChurchOrganizations()
+                        find.findChurchOrganizationStructure(None, link)
+
+
+        '''
         count = 0
         for church in churches:
 
@@ -208,6 +255,7 @@ class FindChurchesGoogleSearch:
                 churchesData["churches"] = churches
                 with open(churches_file_path, "w") as json_file:
                     json.dump(churchesData, json_file, indent=4)
+        '''
 
     def findChurchesFromFacebook(self, googleKey):
 

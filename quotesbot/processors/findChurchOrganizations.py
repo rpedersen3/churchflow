@@ -55,6 +55,8 @@ class FindChurchOrganizations:
         if "contacts" not in theorg:
             theorg["contacts"] = []
 
+        theorg["valid"] = "yes"
+
         contactRecord = None
         for contact in theorg["contacts"]:
             if contact["name"].lower() == name.lower():
@@ -144,22 +146,58 @@ class FindChurchOrganizations:
 
         #print("soup: ", soup)
 
-        link = church["link"]
-        parsed_url = urlparse(link)
-        churchDomain = parsed_url.netloc.replace("www.", "")
-        churchDomain = churchDomain.replace("/", "")
-
-        print("find church domain: ", churchDomain)
 
         foundWebsite = False
+        websiteUrl = None
         for websiteAnch in soup.find_all('a', title="View the website"):
-            href = websiteAnch.get('href')
-            print("found church url: ", href)
-            if href.lower().find(churchDomain.lower()) >= 0:
-                foundWebsite = True
+
+            websiteUrl = websiteAnch.get('href')
+            if websiteUrl.find("http://") >= 0:
+                websiteUrl.replace("http://", "https://")
+
+            print("found church url: ", websiteUrl)
+
+            if church != None:
+
+                link = church["link"]
+                if link.find("http://") >= 0:
+                    link = link.replace("http://", "https://")
+                if link.find("https://") == -1:
+                    link = "https://" + link
+
+                parsed_url = urlparse(link)
+                churchDomain = parsed_url.netloc.replace("www.", "")
+                churchDomain = churchDomain.replace("/", "")
+
+                if churchDomain.strip() != "" and websiteUrl.lower().find(churchDomain.lower()) >= 0:
+                    foundWebsite = True
+                    break
+
+            else:
+
+                for churchRec in self.churches:
+                    if "link" in churchRec:
+
+                        link = churchRec["link"]
+                        if link.find("http://") >= 0:
+                            link = link.replace("http://", "https://")
+                        if link.find("https://") == -1:
+                            link = "https://" + link
+
+                        parsed_url = urlparse(link)
+                        churchDomain = parsed_url.netloc.replace("www.", "")
+                        churchDomain = churchDomain.replace("/", "")
+
+                        if churchDomain.strip() != "" and websiteUrl.lower().find(churchDomain.lower()) >= 0:
+                            print("link: ", link)
+                            print("domain: >", churchDomain, "<")
+                            print("matched org url: ", websiteUrl, " to church domain: >", churchDomain, "<")
+                            church = churchRec
+                            foundWebsite = True
+                            break
 
         if foundWebsite:
-            print("valid page that references website: ", churchDomain)
+            print("found church: ", church["name"], " for domain: ", websiteUrl)
             for positionCard in soup.find_all('div', class_="PositionCard_root__I4CrT"):
 
                 cardNameAnch = positionCard.find('a', class_="PositionCard_info___JC8V")
