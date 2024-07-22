@@ -90,7 +90,7 @@ class UpdateRDFWithNetworks:
             "name": "United Church of Christ",
             "description": "",
             "websiteUri": "https://www.ucc.org/church-finder/",
-            "tags": ["united church of christ"]
+            "tags": ["ucc", "united church of christ"]
         },
         {
             "name": "Association of Related Churches",
@@ -124,6 +124,12 @@ class UpdateRDFWithNetworks:
             "description": "",
             "websiteUri": "https://disciples.org/find-congregation/",
             "tags": ["disciples", "disciples of christ"]
+        },
+        {
+            "name": "U.S. Conferene of Mennonite Brethren Churches",
+            "description": "",
+            "websiteUri": "https://usmb.org/",
+            "tags": ["usmb"]
         },
         {
             "name": "Community of Christ",

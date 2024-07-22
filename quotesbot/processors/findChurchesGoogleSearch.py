@@ -161,38 +161,43 @@ class FindChurchesGoogleSearch:
         cities = citiesData["cities"]
         count = 1
 
+        start = False
         for city in cities:
 
-            query = "'Religion' '" + city["name"] + "'"
-            print("query: ", query)
+            if city["name"] == "Kittredge":
+                start = True
 
-            res = (
-                service.cse()
-                .list(
-                    q=query,
-                    cx="951f3778240354b1a"
+            if start:
+                query = "'Church' '" + city["name"] + "'"
+                print("query: ", query)
+
+                res = (
+                    service.cse()
+                    .list(
+                        q=query,
+                        cx="951f3778240354b1a"
+                    )
+                    .execute()
                 )
-                .execute()
-            )
-            print("--------------------------------------")
-            # print(res)
-            print("--------------------------------------")
+                print("--------------------------------------")
+                # print(res)
+                print("--------------------------------------")
 
 
-            if "items" in res:
-                for item in res["items"]:
-                    link = item["link"]
-
-                    offset = link.find("/org-chart")
-                    if offset > 0:
-                        link = link[:offset]
+                if "items" in res:
+                    for item in res["items"]:
+                        link = item["link"]
 
                         offset = link.find("/org-chart")
                         if offset > 0:
                             link = link[:offset]
 
-                        find = FindChurchOrganizations()
-                        find.findChurchOrganizationStructure(None, link)
+                            offset = link.find("/org-chart")
+                            if offset > 0:
+                                link = link[:offset]
+
+                            find = FindChurchOrganizations()
+                            find.findChurchOrganizationStructure(None, link)
 
 
         '''
