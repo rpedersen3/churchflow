@@ -602,7 +602,7 @@ class ProfileExtractor:
 
     def extractProfilesFromWebPage(self, currentChurch, response, boundaryAttribute, boundaryTag, boundaryClass, boundaryLevel):
 
-        print('**************** extract profiles from webpage: ', response.url)
+        #print('**************** extract profiles from webpage: ', response.url)
         #if boundaryClass is not None:
         #    print("we are looking for class: ", boundaryClass, ", and level: ", boundaryLevel)
 
@@ -614,7 +614,7 @@ class ProfileExtractor:
 
 
 
-        print("--------- parse page: ", response.url)
+        #print("--------- parse page: ", response.url)
         #print("body: ", response.body)
         profCheck = ProfileCheck()
 
@@ -1113,3 +1113,6 @@ class ProfileExtractor:
 
 
         return schemaStructure
+
+
+

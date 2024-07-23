@@ -105,13 +105,13 @@ class chcrawlerSpider(scrapy.Spider):
     churchFinder = FindChurchesGoogleSearch()
     churchFinder.findChurchesFromFacebook(googleKey)
     
-    '''
+
 
     # add churches based on cities
     churchFinder = FindChurchesGoogleSearch()
     churchFinder.findChurchesFromTheOrg(googleKey)
 
-    '''
+
  
     churchFinder = FindChurchesGoogleSearch()
     churchFinder.findChurches(googleKey)
@@ -158,7 +158,13 @@ class chcrawlerSpider(scrapy.Spider):
         changed = find.findStaffWebPages(church, googleKey)
         '''
 
-        if "name" in church:
+        if "name" in church and church["name"] == 'Mission Hills Church Littleton Campus':
+
+            print("update church with staff .........")
+            updateWithStaff = UpdateChurchWithStaffFromWebPages()
+            updateWithStaff.updateWithStaffFromStaffWebPagesUsingChromeDriver(church)
+            changed = True
+
             '''
             if "theorg" in church and "url" in church["theorg"] and "contacts" not in church["theorg"]:
 
@@ -270,10 +276,11 @@ class chcrawlerSpider(scrapy.Spider):
         if church is not None and "name" in church:
 
             changed = False
-            '''
+
             updateWithStaff = UpdateChurchWithStaffFromWebPages()
             changed = updateWithStaff.updateChurchWithStaffFromWebPages(church, response)
 
+            '''
             
 
             updateWithSocial = UpdateChurchWithSocialData()

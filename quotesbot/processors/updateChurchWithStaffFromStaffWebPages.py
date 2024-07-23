@@ -8,8 +8,16 @@ import os
 from quotesbot.utilities.helpers import Helpers
 
 from quotesbot.utilities.profileextractor import ProfileExtractor
-
+from quotesbot.utilities.profileextractorbeautifulsoup import ProfileExtractorBeautifulSoup
 from scrapy_splash import SplashRequest
+
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from bs4 import BeautifulSoup
+
+import time
+import requests
 
 class UpdateChurchWithStaffFromWebPages:
 
@@ -30,7 +38,7 @@ class UpdateChurchWithStaffFromWebPages:
 
     def appendWebPagesBasedOnStaff(self, church, startURLs):
 
-        if "pages" in church:
+        if "pages" in church and "name" in church and church["name"] == "Mission Hills Church Littleton Campus":
             for page in church["pages"][:3]:
 
                 if "url" in page and "type" in page:
@@ -80,120 +88,50 @@ class UpdateChurchWithStaffFromWebPages:
             print('..')
 
 
-    def updateChurchWithStaffFromWebPages(self, church, response):
-
-        print(".........................")
+    def updateWithStaffFromStaffWebPagesUsingChromeDriver(self, church):
 
         changed = False
 
         # extract contacts from staff web pages
-
         print("process church: ", church["name"])
-        print("process staff page: ", response.url)
 
-        processor = "extract-profile-contacts-from-webpage"
-        needsToBeProcessed = self.helpers.checkIfNeedsProcessing(church, processor, response.url)
+        if "pages" in church:
+            for page in church["pages"]:
+                if "url" in page and "type" in page and page["type"] == "staff":
 
-        if needsToBeProcessed == True:
-            print("process staff page: ", response.url)
+                    changed = True
 
-            changed = True
+                    url = page["url"]
 
-            # crawl page and get schema
-            extractor = ProfileExtractor()
-            schema = extractor.extractProfilesFromWebPage(church, response, None, None, None, None)
-            extractor.extractProfilesUsingSchema(church, response, schema)
+                    processor = "extract-profile-contacts-from-webpage-chromedriver"
+                    needsToBeProcessed = self.helpers.checkIfNeedsProcessing(church, processor, url)
 
-            self.helpers.markAsProcessed(church, processor, response.url)
+                    if needsToBeProcessed == True:
 
+                        print("process staff page: ", url)
 
-            '''
-            # save images to directory
-            lua_script_template = """
-                                        function main(splash, args)  
+                        changed = True
 
-                                              splash.private_mode_enabled = false
-                                              splash.images_enabled = true
-                                              splash:set_user_agent("Different User Agent")
-                                              splash.plugins_enabled = true
-                                              splash.html5_media_enabled = true
-                                              assert(splash:go(args.url))
+                        print("process facebook .....................")
+                        service = Service(ChromeDriverManager().install())
+                        driver = webdriver.Chrome(service=service)
 
-                                            print("urla cccccc: ", args.url)
-                                              return {
-                                                png = splash:png()
-                                              }
+                        driver.get(url)
 
+                        # Wait for the page to load completely
+                        time.sleep(10)  # Increase this if necessary for your connection
 
-                                        end
-                                        """
+                        # Get the page source and parse it with BeautifulSoup
+                        soup = BeautifulSoup(driver.page_source, 'html.parser')
+                        driver.quit()
 
-            image_urls = response.xpath('//img')
+                        # crawl page and get schema
+                        extractor = ProfileExtractorBeautifulSoup()
+                        schema = extractor.constructSchema(church, url, soup)
+                        extractor.extractProfilesUsingSchema(church, url, soup, schema)
 
-            # Process each image URL
-            for el in image_urls:
+                        self.helpers.markAsProcessed(church, processor, url)
 
-                # get image source
-                img_src = None
-                # get photo inside elements
-                if el.xpath('@src').get():
-                    img_src = el.xpath('@src').get()
-
-                    # if this is an svg thing like popupbox then set to None
-                    if img_src.find("data:image/svg+xml") >= 0:
-                        img_src = None
-
-                if img_src is None and el.xpath('@data-src').get():
-                    img_src = el.xpath('@data-src').get()
-
-                    # if this is an svg thing like popupbox then set to None
-                    if img_src.find("data:image/svg+xml") >= 0:
-                        img_src = None
-
-                if img_src is None and el.xpath('@style').get():
-                    st = el.xpath('@style').get()
-                    if st.find("background:url") >= 0:
-                        parts = re.findall(r'\((.*?)\)', st)
-                        if len(parts) > 0:
-                            img_src = parts[0]
-                    elif st.find("background-image:url") >= 0:
-                        parts = re.findall(r'\((.*?)\)', st)
-                        if len(parts) > 0:
-                            img_src = parts[0]
-
-                if el.xpath('@data-src').get():
-                    img_src = el.xpath('@data-src | @srcset').get()
-
-                if el.xpath('@srcset').get():
-                    # get highest resolution image if one exists
-                    img_src = el.xpath('@srcset').get()
-                    imgEls = img_src.split(",")
-                    img_src = imgEls[-1].split()[0]
-
-
-                if img_src is not None:
-                    print("splash request ............. ", img_src)
-                    try:
-                        lua_script = lua_script_template.replace("PAGE_URL", img_src)
-                        yield SplashRequest(img_src, self.save_image, endpoint='execute',
-                                            args={
-                                                "render_all": 1,
-                                                "wait": 5,
-                                                "png": 1,
-                                                'lua_source': lua_script
-                                            })
-
-                    except Exception as e:
-                        print(".")
-
-            '''
-        else:
-            print("processing not needed")
-
-        # self.getLeadPastorInfoUsingAzureAI(currentChurch)
-        # self.searchForContacts(currentChurch, response)
-
-
-
+                    break
 
         return changed
