@@ -53,42 +53,47 @@ class UpdateChurchWithChurchCenter:
 
         if foundPage != None and url != None and url.find(".churchcenter.com") < 0:
 
-            service = Service(ChromeDriverManager().install())
-            driver = webdriver.Chrome(service=service)
+            try:
 
-            url = url
-            driver.get(url)
+                service = Service(ChromeDriverManager().install())
+                driver = webdriver.Chrome(service=service)
 
-            # Wait for the page to load completely
-            time.sleep(1)  # Increase this if necessary for your connection
+                url = url
+                driver.get(url)
+
+                # Wait for the page to load completely
+                time.sleep(1)  # Increase this if necessary for your connection
 
 
-            # Get the page source and parse it with BeautifulSoup
-            soup = BeautifulSoup(driver.page_source, 'html.parser')
-            driver.quit()
+                # Get the page source and parse it with BeautifulSoup
+                soup = BeautifulSoup(driver.page_source, 'html.parser')
+                driver.quit()
 
-            #print("soup: ", soup)
-            churchcenterDomain = None
-            a_tags = soup.find_all('a')
-            hrefs = [a.get('href') for a in a_tags if a.get('href') is not None]
-            for href in hrefs:
-                print("href: ", href)
-                if href.find("churchcenter.com") >= 0:
-                    print("decode: ", href)
-                    offset = href.find("https://")
-                    if offset >= 0:
-                        offset = offset + 8
-                        churchCenterUrl = href[offset:]
+                #print("soup: ", soup)
+                churchcenterDomain = None
+                a_tags = soup.find_all('a')
+                hrefs = [a.get('href') for a in a_tags if a.get('href') is not None]
+                for href in hrefs:
+                    print("href: ", href)
+                    if href.find("churchcenter.com") >= 0:
+                        print("decode: ", href)
+                        offset = href.find("https://")
+                        if offset >= 0:
+                            offset = offset + 8
+                            churchCenterUrl = href[offset:]
 
-                        offsetEnd = churchCenterUrl.find("churchcenter.com")
-                        churchcenterDomain = "https://" + churchCenterUrl[:offsetEnd-1] + ".churchcenter.com"
-                        print("found domain: ", churchcenterDomain)
-                        break
+                            offsetEnd = churchCenterUrl.find("churchcenter.com")
+                            churchcenterDomain = "https://" + churchCenterUrl[:offsetEnd-1] + ".churchcenter.com"
+                            print("found domain: ", churchcenterDomain)
+                            break
 
-            if churchcenterDomain != None:
-                print("update domain: ", churchcenterDomain)
-                foundPage["url"] = churchcenterDomain
-                changed = True
+                if churchcenterDomain != None:
+                    print("update domain: ", churchcenterDomain)
+                    foundPage["url"] = churchcenterDomain
+                    changed = True
+
+            except:
+                print("error getting url content")
 
         return changed
 
