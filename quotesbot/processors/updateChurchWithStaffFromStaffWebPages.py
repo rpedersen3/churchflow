@@ -112,14 +112,13 @@ class UpdateChurchWithStaffFromWebPages:
 
                         changed = True
 
-                        print("process facebook .....................")
                         service = Service(ChromeDriverManager().install())
                         driver = webdriver.Chrome(service=service)
 
                         driver.get(url)
 
                         # Wait for the page to load completely
-                        time.sleep(10)  # Increase this if necessary for your connection
+                        time.sleep(20)  # Increase this if necessary for your connection
 
                         # Get the page source and parse it with BeautifulSoup
                         soup = BeautifulSoup(driver.page_source, 'html.parser')

@@ -38,6 +38,9 @@ from quotesbot.processors.findChurchStaffWebPagesUsingSearch import FindChurchSt
 
 from quotesbot.processors.updateChurchWithStaffFromStaffWebPages import UpdateChurchWithStaffFromWebPages
 from quotesbot.processors.updateChurchWithSocialData import UpdateChurchWithSocialData
+
+from quotesbot.processors.updateChurchWithChurchCenter import UpdateChurchWithChurchCenter
+
 class chcrawlerSpider(scrapy.Spider):
 
     name = "chcrawler"
@@ -158,12 +161,15 @@ class chcrawlerSpider(scrapy.Spider):
         changed = find.findStaffWebPages(church, googleKey)
         '''
 
-        if "name" in church and church["name"] == 'Mission Hills Church Littleton Campus':
+        if "name" in church:
 
+            '''
             print("update church with staff .........")
             updateWithStaff = UpdateChurchWithStaffFromWebPages()
             updateWithStaff.updateWithStaffFromStaffWebPagesUsingChromeDriver(church)
             changed = True
+            '''
+
 
             '''
             if "theorg" in church and "url" in church["theorg"] and "contacts" not in church["theorg"]:
@@ -176,23 +182,28 @@ class chcrawlerSpider(scrapy.Spider):
             
             updateWithStaff = UpdateChurchWithStaffFromWebPages()
             updateWithStaff.appendWebPagesBasedOnStaff(church, startURLs)
+            '''
 
-            #if church["name"] == "Encounter Church Denver":
-            #    start = True
 
             if start:
 
 
+                '''
                 # add to urls
                 updateWithSocialData = UpdateChurchWithSocialData()
                 updateWithSocialData.appendWebPagesBasedOnSocial(church, startURLs)
+                '''
 
+                updateWithChurchCenter = UpdateChurchWithChurchCenter()
+                updateWithChurchCenter.processChurchCenterForDomain(church)
+                changed = updateWithChurchCenter.processChurchCenterGroups(church)
 
                 count = count + 1
 
                 if count > 10000000:
                     break
 
+                '''
                 # update facebook using url
                 if "social" in church and "facebookUrl" in church["social"]:
                     if "facebook" not in church["social"]:
@@ -206,9 +217,12 @@ class chcrawlerSpider(scrapy.Spider):
                         updateChurchWithSocialData.processFacebook(facebookUrl, social)
 
                         changed = True
+                '''
 
 
-                
+
+
+                '''
                 churchFinder = FindChurchesGooglePlaces()
                 changed = churchFinder.updateChurch(church, googleKey)
     
@@ -217,9 +231,9 @@ class chcrawlerSpider(scrapy.Spider):
 
                 updateChurchInfo = UpdateChurchDenomination()
                 changed = updateChurchInfo.updateChurchDenominationWithGoogleGraph(church)
-                
+                '''
 
-            '''
+
         if changed:
 
             # save to churches file

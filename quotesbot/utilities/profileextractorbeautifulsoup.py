@@ -248,10 +248,10 @@ class ProfileExtractorBeautifulSoup:
 
         common_ancestor_article = None
 
-        for ancestor1 in ancestors1[::-1]:
+        for ancestor1 in ancestors1:
             s1 = str(ancestor1)
             #print('look for common article 1: ', s1)
-            for ancestor2 in ancestors2[::-1]:
+            for ancestor2 in ancestors2:
                 s2 = str(ancestor2)
                 #print('look for common article 2: ', s2)
 
@@ -265,7 +265,6 @@ class ProfileExtractorBeautifulSoup:
 
         return common_ancestor_article
 
-
     def commonSection(self, el1, el2):
 
         ancestors1 = el1.find_parents('section')
@@ -276,10 +275,10 @@ class ProfileExtractorBeautifulSoup:
 
         common_ancestor_section = None
 
-        for ancestor1 in ancestors1[::-1]:
+        for ancestor1 in ancestors1:
             s1 = str(ancestor1)
             #print('look for common section 1: ', s1)
-            for ancestor2 in ancestors2[::-1]:
+            for ancestor2 in ancestors2:
                 s2 = str(ancestor2)
                 #print('look for common section 2: ', s2)
 
@@ -292,38 +291,6 @@ class ProfileExtractorBeautifulSoup:
                 break
 
         return common_ancestor_section
-
-    def getBoundingDiv(self, els):
-        #print("look for lowest common div")
-        lastEl = None
-        divCounts = []
-        for el1 in els[:5]:
-            if lastEl != None:
-                cDiv, cDivLevel, cClassName = self.commonDiv(el1, lastEl)
-                #cDivLevel = self.commonDivCount(el1, lastEl)
-
-                divCount = DivCount(cDiv, cDivLevel, cClassName, 1)
-                matching_items = [item for item in divCounts if item.level == cDivLevel and item.className == cClassName]
-                if (len(matching_items) == 0):
-                    divCounts.append(divCount)
-                else:
-                    matching_items[0].count = matching_items[0].count + 1
-
-            lastEl = el1
-
-        sortedDivCounts = sorted(divCounts, reverse=True,  key=lambda x: x.count)
-        bestDivLevel = sortedDivCounts[0].level
-        bestClassName = sortedDivCounts[0].className
-        bestDiv = sortedDivCounts[0].div
-
-        print("lowest: ", bestDivLevel, ", class name: ", bestClassName)
-        return bestDiv, bestClassName
-
-
-    def replace_multiple_spaces(self, text):
-        # Replace multiple spaces with just one space
-        cleaned_text = re.sub(r'\s+', ' ', text)
-        return cleaned_text
 
     def getContact(self, contacts, name, email):
 
@@ -392,7 +359,7 @@ class ProfileExtractorBeautifulSoup:
         print("****************************")
 
 
-    def isSmallerThanBeautifulSoup(self, el, maxSize):
+    def isSmallerThan(self, el, maxSize):
 
         heightStr = el.get('height')
         widthStr = el.get('width')
@@ -434,7 +401,7 @@ class ProfileExtractorBeautifulSoup:
 
 
             if validMatch:
-                #print("set because of photo a: ", profileName)
+                print("set because of photo a: ", profileName)
                 self.setChurchContact(currentChurch, profileName, profileTitle, profileDepartment,
                                       profileEmail, profilePhoto)
 
@@ -451,7 +418,7 @@ class ProfileExtractorBeautifulSoup:
                         validMatch = True
 
             if validMatch:
-                # print("set because of profileName and email 1 a: name = ", profileName, ", email = ", profileEmail)
+                print("set because of profileName and email 1 a: name = ", profileName, ", email = ", profileEmail)
                 self.setChurchContact(currentChurch, profileName, profileTitle, profileDepartment,
                                       profileEmail, profilePhoto)
 
@@ -612,6 +579,7 @@ class ProfileExtractorBeautifulSoup:
 
                     # make sure we are past first boundary before setting contact
                     if hasHitBoundaryBefore is not None:
+                        print("----------------------  evaludate to add contact: ", profileName, ", photo: ", profilePhoto)
                         self.evaluateToSetChurchContacts(currentChurch, boundaryAttribute, profilePhoto,
                                                          requirePhotoCheck, profileName, profileTitle, profileDepartment,
                                                          profileEmail, imageUrls)
@@ -656,17 +624,19 @@ class ProfileExtractorBeautifulSoup:
                         # setup check for name first boundary
                         nameFirst_el = el
 
-                    jobTitle = profCheck.isProfileJobTitle(shortText)
-                    if jobTitle is not None:
+                    foundJobTitle = profCheck.isProfileJobTitle(shortText)
+                    if foundJobTitle is not None:
 
-                        # print(">> title: ", jobTitle)
+                        # print(">> title: ", shortText)
                         if profileTitle is None:
-                            profileTitle = jobTitle
+                            profileTitle = shortText
 
 
-                    department = profCheck.isProfileDepartment(shortText)
-                    if department is not None:
-                        print(">> department: ", department)
+                    foundDepartment = profCheck.isProfileDepartment(shortText)
+                    if foundDepartment is not None:
+                        #print(">> department: ", shortText)
+                        if profileDepartment is None:
+                            profileDepartment = shortText
 
 
                 email_address = None
@@ -732,7 +702,7 @@ class ProfileExtractorBeautifulSoup:
 
                     print('.................  img_src: ', img_src)
 
-                    if self.isSmallerThanBeautifulSoup(el, 100) == True:
+                    if self.isSmallerThan(el, 100) == True:
                         continue
 
                     print("***************************** img src found: ", img_src)
@@ -763,10 +733,11 @@ class ProfileExtractorBeautifulSoup:
 
                     if isCDN or img_src.find(domain.replace("www.", "")) >= 0:
 
-                        # print("********** check photo ****** ", img_src)
+                        print("********** check photo ****** ", img_src)
                         foundPhoto, foundProfilePhoto = profCheck.isProfilePhoto(img_src, 2, 15)
                         if foundPhoto:
 
+                            print("********* found photo: ", foundPhoto)
                             tagName = el.name
 
                             requirePhotoCheck = None
@@ -780,6 +751,16 @@ class ProfileExtractorBeautifulSoup:
                             print(">> photo: ", img_src)
                             print(">> requirePhotoCheck: ", requirePhotoCheck)
 
+                            # if boundary has been hit and this is a photo boundary then clear everything
+                            if hasHitBoundaryBefore is not None:
+                                if profilePhoto is None:
+                                    profilePhoto = img_src
+
+
+        if hasHitBoundaryBefore is not None:
+            self.evaluateToSetChurchContacts(currentChurch, boundaryAttribute, profilePhoto,
+                                             requirePhotoCheck, profileName, profileTitle, profileDepartment,
+                                             profileEmail, imageUrls)
 
     def constructSchema(self, currentChurch, url, soup: BeautifulSoup):
 
@@ -888,46 +869,51 @@ class ProfileExtractorBeautifulSoup:
                         if validMatch:
 
                             print("found match............")
+                            foundCommonEl = False
 
                             cDiv, cDivLevel, cClassName = self.commonDiv(photoFirst_el, el)
                             if cClassName != None and cDivLevel != None:
                                 print("add to schema: ", cClassName, ", level: ", cDivLevel)
                                 self.addFirst(schemaStructure, "photo", "div", cClassName, cDivLevel)
-                                photoFirst_el = None
+                                foundCommonEl = True
 
-                            '''
-    
                             cLi, cClassName = self.commonLi(photoFirst_el, el)
                             if cLi is not None:
                                 self.addFirst(schemaStructure, "photo", "li", cClassName, None)
+                                foundCommonEl = True
     
                             cArticle  = self.commonArticle(photoFirst_el, el)
                             if cArticle is not None:
                                 #print("-------------------  add first article ----------------")
                                 self.addFirst(schemaStructure, "photo", "article", None, None)
+                                foundCommonEl = True
     
                             cSection = self.commonSection(photoFirst_el, el)
                             if cSection is not None:
                                 #print("-------------------  add first section ----------------")
                                 self.addFirst(schemaStructure, "photo", "section", None, None)
-                            '''
+                                foundCommonEl = True
+
+                            if foundCommonEl:
+                                photoFirst_el = None
 
                     # setup check for name first boundary
                     nameFirst_el = el
 
 
-                jobTitle = profCheck.isProfileJobTitle(shortText)
-                if jobTitle is not None:
+                foundJobTitle = profCheck.isProfileJobTitle(shortText)
+                if foundJobTitle is not None:
 
                     #print(">> title: ", jobTitle)
                     if profileTitle is None:
-                        profileTitle = jobTitle
+                        profileTitle = shortText
 
                     self.addToElement(schemaStructure, "title", tagName, className, styleName)
 
 
-                department = profCheck.isProfileDepartment(shortText)
-                if department is not None:
+                foundDepartment = profCheck.isProfileDepartment(shortText)
+                if foundDepartment is not None:
+                    department = shortText
 
                     print(">> department: ", department)
 
@@ -1044,7 +1030,7 @@ class ProfileExtractorBeautifulSoup:
 
                 print('.................  img_src: ', img_src)
 
-                if self.isSmallerThanBeautifulSoup(el, 100) == True:
+                if self.isSmallerThan(el, 100) == True:
                     continue
 
 
