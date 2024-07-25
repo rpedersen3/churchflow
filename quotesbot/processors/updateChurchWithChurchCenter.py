@@ -31,15 +31,20 @@ class UpdateChurchWithChurchCenter:
 
         changed = False
 
+        foundChms = None
         foundPage = None
+
         churchLink = None
         churchCenterUrl = ""
 
         if "link" in church:
             churchLink = church["link"]
 
+        if "chmss" not in church:
+            church["chmss"] = []
+
         if "chmss" in church:
-            foundChurchCenter = False
+
             for chms in church["chmss"]:
                 if "type" in chms and chms["type"] == "churchcenter":
 
@@ -53,7 +58,17 @@ class UpdateChurchWithChurchCenter:
 
                     break
 
-        if foundPage != None and churchLink != None and churchCenterUrl.find(".churchcenter.com") < 0:
+            if foundChms == None:
+                    foundChms = {
+                        "type": "churchcenter",
+                        "pages": []
+                    }
+                    church["chmss"].append(foundChms)
+
+
+
+
+        if churchLink != None and churchCenterUrl.find(".churchcenter.com") < 0:
 
             try:
 
@@ -91,6 +106,13 @@ class UpdateChurchWithChurchCenter:
 
                 if churchcenterDomain != None:
                     print("update domain: ", churchcenterDomain)
+
+                    if foundPage == None:
+
+                        foundPage = {
+                        }
+                        foundChms.pages.append(foundPage)
+
                     foundPage["url"] = churchcenterDomain
                     changed = True
 
@@ -216,6 +238,13 @@ class UpdateChurchWithChurchCenter:
 
             #print("soup: ", soup)
 
+            churchCenter = {
+            }
+            if "churchcenter" in church:
+                churchCenter = church["churchcenter"]
+
+
+
             ministryClassification = {
                 "name": groupCategoryName,
                 "description": groupCategoryDescription,
@@ -225,8 +254,10 @@ class UpdateChurchWithChurchCenter:
                 ministryClassification
             ]
 
-            if "ministryClassifications" in church:
-                ministryClassifications = church["ministryClassifications"]
+
+
+            if "ministryClassifications" in churchCenter:
+                ministryClassifications = churchCenter["ministryClassifications"]
                 foundMinistryClassification = False
                 for ministryClassificationRec in ministryClassifications:
                     if ministryClassificationRec["name"].lower() == groupCategoryName.lower():
@@ -235,7 +266,7 @@ class UpdateChurchWithChurchCenter:
                 if foundMinistryClassification == False:
                     ministryClassifications.append(ministryClassification)
             else:
-                church["ministryClassifications"] = ministryClassifications
+                churchCenter["ministryClassifications"] = ministryClassifications
 
 
 
@@ -290,7 +321,7 @@ class UpdateChurchWithChurchCenter:
                             group
                         ]
                         if "groups" in church:
-                            groups = church["groups"]
+                            groups = churchCenter["groups"]
                             foundGroup = False
                             for groupsRec in groups:
                                 if groupsRec["name"].lower() == groupName.lower():
@@ -299,7 +330,7 @@ class UpdateChurchWithChurchCenter:
                             if foundGroup == False:
                                 groups.append(group)
                         else:
-                            church["groups"] = groups
+                            churchCenter["groups"] = groups
 
                         self.processChurchCenterGroupDetails(church, ministryClassification, group, groupCategoryName, groupCategoryDescription, groupCategoryUrl,
                                         groupName, groupDescription, groupHref)
@@ -331,6 +362,7 @@ class UpdateChurchWithChurchCenter:
         needsToBeProcessed = self.helpers.checkIfNeedsProcessing(church, processor, url)
 
         if needsToBeProcessed == True:
+
 
             if url != None and "ministryClassifications" not in church:
 
