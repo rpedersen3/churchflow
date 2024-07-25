@@ -32,10 +32,11 @@ class UpdateChurchWithChurchCenter:
         changed = False
 
         foundPage = None
-        url = None
+        churchLink = None
+        churchCenterUrl = ""
 
         if "link" in church:
-            url = church["link"]
+            churchLink = church["link"]
 
         if "chmss" in church:
             foundChurchCenter = False
@@ -47,19 +48,20 @@ class UpdateChurchWithChurchCenter:
                     if "pages" in chms:
                         for page in chms["pages"]:
                             foundPage = page
+                            churchCenterUrl = foundPage["url"]
                             break
 
                     break
 
-        if foundPage != None and url != None and url.find(".churchcenter.com") < 0:
+        if foundPage != None and churchLink != None and churchCenterUrl.find(".churchcenter.com") < 0:
 
             try:
 
                 service = Service(ChromeDriverManager().install())
                 driver = webdriver.Chrome(service=service)
 
-                url = url
-                driver.get(url)
+                url = churchLink
+                driver.get(churchLink)
 
                 # Wait for the page to load completely
                 time.sleep(1)  # Increase this if necessary for your connection
