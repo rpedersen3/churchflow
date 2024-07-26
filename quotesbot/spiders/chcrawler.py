@@ -151,7 +151,7 @@ class chcrawlerSpider(scrapy.Spider):
     '''
 
     count = 0
-    start = True
+    start = False
     for church in churches:
 
         changed = False
@@ -184,6 +184,9 @@ class chcrawlerSpider(scrapy.Spider):
             updateWithStaff.appendWebPagesBasedOnStaff(church, startURLs)
             '''
 
+            #if "link" in church and church["link"] == "https://www.faiththatworks4u.org/":
+            #    start = True
+
 
             if start:
 
@@ -195,8 +198,10 @@ class chcrawlerSpider(scrapy.Spider):
                 '''
 
                 updateWithChurchCenter = UpdateChurchWithChurchCenter()
-                updateWithChurchCenter.processChurchCenterForDomain(church)
-                changed = updateWithChurchCenter.processChurchCenterGroups(church)
+                changed = updateWithChurchCenter.processChurchCenterForDomain(church)
+                if changed:
+                    print("***************  process church center groups ***************")
+                    changed = updateWithChurchCenter.processChurchCenterGroups(church)
 
                 count = count + 1
 

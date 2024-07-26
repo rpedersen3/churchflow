@@ -91,7 +91,7 @@ class UpdateChurchWithChurchCenter:
                 a_tags = soup.find_all('a')
                 hrefs = [a.get('href') for a in a_tags if a.get('href') is not None]
                 for href in hrefs:
-                    print("href: ", href)
+                    #print("href: ", href)
                     if href.find("churchcenter.com") >= 0:
                         print("decode: ", href)
                         offset = href.find("https://")
@@ -243,29 +243,29 @@ class UpdateChurchWithChurchCenter:
             if "churchcenter" in church:
                 churchCenter = church["churchcenter"]
 
-
-
-            ministryClassification = {
-                "name": groupCategoryName,
-                "description": groupCategoryDescription,
-                "uri": groupCategoryUrl
-            }
-            ministryClassifications = [
-                ministryClassification
-            ]
-
-
-
+            ministryClassification = None
             if "ministryClassifications" in churchCenter:
                 ministryClassifications = churchCenter["ministryClassifications"]
                 foundMinistryClassification = False
                 for ministryClassificationRec in ministryClassifications:
                     if ministryClassificationRec["name"].lower() == groupCategoryName.lower():
+                        foundMinistryClassification = True
                         ministryClassification = ministryClassificationRec
+                        ministryClassification["name"] = groupCategoryName
+                        ministryClassification["description"] = groupCategoryDescription
+                        ministryClassification["uri"] = groupCategoryUrl
                         break
                 if foundMinistryClassification == False:
                     ministryClassifications.append(ministryClassification)
             else:
+                ministryClassification = {
+                    "name": groupCategoryName,
+                    "description": groupCategoryDescription,
+                    "uri": groupCategoryUrl
+                }
+                ministryClassifications = [
+                    ministryClassification
+                ]
                 churchCenter["ministryClassifications"] = ministryClassifications
 
 
@@ -317,19 +317,21 @@ class UpdateChurchWithChurchCenter:
                                 groupCategoryName.lower()
                             ]
                         }
-                        groups = [
-                            group
-                        ]
+
                         if "groups" in church:
                             groups = churchCenter["groups"]
                             foundGroup = False
                             for groupsRec in groups:
                                 if groupsRec["name"].lower() == groupName.lower():
+                                    foundGroup = True
                                     group = groupsRec
                                     break
                             if foundGroup == False:
                                 groups.append(group)
                         else:
+                            groups = [
+                                group
+                            ]
                             churchCenter["groups"] = groups
 
                         self.processChurchCenterGroupDetails(church, ministryClassification, group, groupCategoryName, groupCategoryDescription, groupCategoryUrl,
@@ -392,7 +394,7 @@ class UpdateChurchWithChurchCenter:
                     if categoryNameEl != None:
                         categoryName = categoryNameEl.get_text()
 
-                        categoryDescriptionEl = soup.find(class_='fs-4')
+                        categoryDescriptionEl = categoryEl.find(class_='fs-4')
                         if categoryDescriptionEl != None:
                             categoryDescription = categoryDescriptionEl.get_text()
 
