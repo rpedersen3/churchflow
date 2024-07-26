@@ -120,6 +120,12 @@ class UpdateRDFWithNetworks:
             }
         },
         {
+            "name": "American Baptist Churches of the Rocky Mountains",
+            "description": "",
+            "websiteUri": "https://www.abcrm.org/find-a-church",
+            "tags": ["abcrm", "american baptist churches of the rocky mountains"]
+        },
+        {
             "name": "Disciples of Christ",
             "description": "",
             "websiteUri": "https://disciples.org/find-congregation/",
@@ -142,6 +148,12 @@ class UpdateRDFWithNetworks:
             "description": "",
             "websiteUri": "https://www.joccogic.org/churches.htm",
             "tags": ["cogic", "COLORADO ECCLESIASTICAL JURISDICTION CHURCH OF GOD IN CHRIST"]
+        },
+        {
+            "name": "Colorado council of churches",
+            "description": "",
+            "websiteUri": "https://cochurches.org/",
+            "tags": ["ccc", "colorado council of churches"]
         },
         {
             "name": "Church of Scientology",
