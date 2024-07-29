@@ -4699,6 +4699,12 @@
             "crawled-city": "Acres Green",
             "countyName": "Douglas",
             "numberOfChurches": 0
+        },
+        {
+            "name": "Roggen",
+            "lat": 40.168380,
+            "lon": -104.371662
         }
+
     ]
 }

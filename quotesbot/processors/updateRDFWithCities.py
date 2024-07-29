@@ -71,8 +71,14 @@ class UpdateRDFWithCities:
 
             lat = cy["lat"]
             long = cy["lon"]
-            population = cy["population"]
-            numberOfChurches = cy["numberOfChurches"]
+
+            population = 0
+            if "population" in cy:
+                population = cy["population"]
+
+            numberOfChurches = 0
+            if "numberOfChurches" in cy:
+                numberOfChurches = cy["numberOfChurches"]
 
             g2.add((city, RDF.type, self.OWL.NamedIndividual))
             g2.add((city, RDF.type, self.RC.City))
