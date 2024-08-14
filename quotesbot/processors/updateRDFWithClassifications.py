@@ -307,7 +307,7 @@ class UpdateRDFWithGroupClassifications:
         }
     ]
 
-    groupClassifications = [
+    orgClassifications = [
         {
             "name": "life groups",
             "tags": ["small groups", "base camps"],
@@ -328,7 +328,6 @@ class UpdateRDFWithGroupClassifications:
         },
         {
             "name": "bible studies group for women",
-
             "broader": ["bible studies group"],
             "related": ["women"],
             "type": "growth ministry"
