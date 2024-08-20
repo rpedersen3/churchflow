@@ -29,6 +29,9 @@ from quotesbot.processors.updateRDFWithDenominations import UpdateRDFWithDenomin
 from quotesbot.processors.updateRDFWithNetworks import UpdateRDFWithNetworks
 from quotesbot.processors.updateRDFWithPartners import UpdateRDFWithPartners
 from quotesbot.processors.updateRDFWithSocial import UpdateRDFWithSocial
+from quotesbot.processors.updateRDFWithChurchMinistries import UpdateRDFWithChurchMinistries
+
+
 from quotesbot.processors.findChurchOrganizations import FindChurchOrganizations
 
 from quotesbot.processors.updatePersonInfo import UpdatePersonInfo
@@ -75,7 +78,9 @@ class chcrawlerSpider(scrapy.Spider):
     processor = IfaProcessor()
     processor.findChurches()
 
+    '''
 
+    '''
     updateRDF = UpdateRDFWithDenominations()
     updateRDF.updateRDFWithDenominations()
 
@@ -97,9 +102,14 @@ class chcrawlerSpider(scrapy.Spider):
     
     updateRDF = UpdateRDFWithMultiChurchOrgs()
     updateRDF.updateRDFWithMultiChurchOrgs()
-
-
     
+    '''
+
+    updateRDF = UpdateRDFWithChurchMinistries()
+    updateRDF.updateRDFWithChurchMinistries()
+
+
+    '''
     
     updateRDF = UpdateRDFWithColocatedChurches()
     updateRDF.updateRDFWithColocatedChurches()
@@ -197,6 +207,7 @@ class chcrawlerSpider(scrapy.Spider):
                 updateWithSocialData.appendWebPagesBasedOnSocial(church, startURLs)
                 '''
 
+                '''
                 updateWithChurchCenter = UpdateChurchWithChurchCenter()
                 changed = updateWithChurchCenter.processChurchCenterForDomain(church)
                 if changed:
@@ -207,6 +218,7 @@ class chcrawlerSpider(scrapy.Spider):
 
                 if count > 10000000:
                     break
+                '''
 
                 '''
                 # update facebook using url
