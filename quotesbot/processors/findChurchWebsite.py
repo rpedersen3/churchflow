@@ -80,8 +80,6 @@ class FindChurchWebsite:
 
     def findChurchWebsite(self):
 
-        print(" ........ updateRDFWithColocatedChurches")
-
         count = 1
         for church in self.churches:
 

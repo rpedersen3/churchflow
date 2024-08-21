@@ -111,9 +111,6 @@ class chcrawlerSpider(scrapy.Spider):
 
     '''
     
-    updateRDF = UpdateRDFWithColocatedChurches()
-    updateRDF.updateRDFWithColocatedChurches()
-    
     # add churches based on cities
     churchFinder = FindChurchesGoogleSearch()
     churchFinder.findChurchesFromFacebook(googleKey)

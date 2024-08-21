@@ -19,8 +19,26 @@ class UpdateRDFWithPartners:
         {
             "name": "Interfaith Alliance",
             "description": "",
-            "websiteUri": "https://interfaithallianceco.org/partners/",
+            "link": "https://interfaithallianceco.org",
             "tags": ["interfaith alliance"]
+        },
+        {
+            "name": "Alpha",
+            "description": "",
+            "link": "https://alphausa.org",
+            "tags": ["alpha"]
+        },
+        {
+            "name": "Gloo",
+            "description": "",
+            "link": "https://www.gloo.us",
+            "tags": ["gloo"]
+        },
+        {
+            "name": "HeGetsUs",
+            "description": "",
+            "link": "https://hegetsus.com/",
+            "tags": ["hegetsus"]
         }
     ]
 
@@ -65,13 +83,25 @@ class UpdateRDFWithPartners:
 
         for ptnr in self.partners:
 
+
             name = ptnr["name"]
-            partnerId = name.replace(" ", "").lower() + "_network"
+            partnerId = name.replace(" ", "").lower()
             partner = self.n + partnerId
 
             g2.add((partner, RDF.type, self.OWL.NamedIndividual))
-            g2.add((partner, RDF.type, self.CC.Partner))
+            g2.add((partner, RDF.type, self.CC.MinistryOrganization))
             g2.add((partner, self.RC.name, Literal(name)))
+
+            if "link" in ptnr:
+                websiteUri = ptnr["link"];
+                websiteId = self.generate_random_string()  # self.clean(websiteUri.replace(" ", "").lower())
+                website = self.n + websiteId
+
+                g2.add((website, RDF.type, self.OWL.NamedIndividual))
+                g2.add((website, self.RC.type, self.RC.Website))
+                g2.add((website, self.RC.uri, Literal(websiteUri)))
+
+                g2.add((partner, self.RC.hasWebsite, website))
 
             tags = ptnr["tags"]
             for tagName in tags:
@@ -80,10 +110,10 @@ class UpdateRDFWithPartners:
                 tag = self.n + tagId
 
                 g2.add((tag, RDF.type, self.OWL.NamedIndividual))
-                g2.add((tag, RDF.type, self.CC.PartnerTag))
+                g2.add((tag, RDF.type, self.RC.Tag))
                 g2.add((tag, self.RC.name, Literal(tagName)))
 
-                g2.add((partner, self.CC.partnerTag, tag))
+                g2.add((partner, self.RC.hasTag, tag))
                 
                 
 
