@@ -1,7 +1,8 @@
 from rdflib import Graph, URIRef, Literal, Namespace, RDF, RDFS
 from urllib.parse import urlparse
 import json
-
+import string
+import random
 
 class UpdateRDFWithPartners:
 
@@ -75,6 +76,15 @@ class UpdateRDFWithPartners:
         with open('frontrange_out.rdf', "w", encoding="utf-8") as f:
             f.write(data)
 
+    def generate_random_string(self):
+
+        length = 12
+
+        # Define the characters to choose from: lowercase, uppercase, digits, hyphens, underscores, and periods
+        characters = string.ascii_letters + string.digits + '-_.'
+        # Generate a random ID by selecting random characters from the character set
+        random_id = ''.join(random.choice(characters) for _ in range(length))
+        return random_id
 
     def updateRDFWithPartners(self):
 

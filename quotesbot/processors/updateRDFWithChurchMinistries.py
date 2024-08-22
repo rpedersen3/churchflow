@@ -484,8 +484,22 @@ class UpdateRDFWithChurchMinistries:
                                         contextFocus = ministry["context-focus"]
                                         g2.add((ministryOrg, self.CC.ministryFocus, Literal(contextFocus)))
 
-                                    if "network" in ministry:
-                                        network = ministry["network"]
+                                    if "partner" in ministry:
+                                        partnerName = ministry["partner"]
+
+                                        query3 = """select ?ministry where { ?ministry rdf:type cc:MinistryOrganization .
+                                                        ?ministry rc:name ?name .
+                                                        FILTER(STRSTARTS(LCASE( \"""" + partnerName + """\"), LCASE(?name))) }
+                                                        """
+
+                                        print("query3: ", query3)
+                                        results3 = g2.query(query3)
+                                        print("************ query for partner ministries: ", len(results3))
+                                        if len(results3) > 0:
+                                            for row in results3:
+                                                g2.add((ministryOrg, self.RC.isPartnerOf, row["ministry"]))
+                                                break
+
 
                                     if "audience" in ministry:
 
@@ -505,7 +519,7 @@ class UpdateRDFWithChurchMinistries:
 
                                         if "classifications" in audienceRec:
                                             classifications = audienceRec["classifications"]
-                                            print("classifications: ", classifications)
+                                            #print("classifications: ", classifications)
                                             for classification in classifications:
                                                 if "name" in classification and "category" in classification:
 

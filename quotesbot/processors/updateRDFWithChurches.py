@@ -20,6 +20,8 @@ class UpdateRDFWithChurches:
     churches = churchesData["churches"]
 
 
+
+
     def setupRDFFile(self):
 
         g2 = Graph()

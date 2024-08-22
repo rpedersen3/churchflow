@@ -102,12 +102,9 @@ class chcrawlerSpider(scrapy.Spider):
     
     updateRDF = UpdateRDFWithMultiChurchOrgs()
     updateRDF.updateRDFWithMultiChurchOrgs()
-    
     '''
-
     updateRDF = UpdateRDFWithChurchMinistries()
     updateRDF.updateRDFWithChurchMinistries()
-
 
     '''
     
