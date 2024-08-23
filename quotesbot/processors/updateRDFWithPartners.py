@@ -40,6 +40,12 @@ class UpdateRDFWithPartners:
             "description": "",
             "link": "https://hegetsus.com/",
             "tags": ["hegetsus"]
+        },
+        {
+            "name": "Erie Uplink",
+            "description": "",
+            "link": "https://www.facebook.com/ErieUpLink",
+            "tags": ["erie uplink"]
         }
     ]
 

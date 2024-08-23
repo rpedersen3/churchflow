@@ -395,9 +395,6 @@ class UpdateRDFWithChurches:
 
                     if "chmss" in church:
                         for chms in church["chmss"]:
-                            if chms["type"] == "gloo":
-                                # add gloo as a ministry partner
-                                g2.add((chOrg, self.RC.isPartnerOf, glooOrg))
 
                             if chms["type"] == "squarespace":
                                 # add business system
