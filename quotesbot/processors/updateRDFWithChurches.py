@@ -307,7 +307,7 @@ class UpdateRDFWithChurches:
 
 
                         g2.add((orgChOrg, self.RC.hasSubOrganization, chOrg))
-
+                        g2.add((chOrg, self.RC.isSubOrganizationOf, orgChOrg))
 
 
                     churchSiteName = self.clean(church["name"]) + " Site"
