@@ -1,4 +1,6 @@
 from rdflib import Graph, URIRef, Literal, Namespace, RDF, RDFS
+from urllib.parse import urlparse
+
 import json
 import random
 import string
@@ -36,31 +38,6 @@ class UpdateRDFWithChurches:
         g2.bind("rc", self.RC)
         g2.bind("cc", self.CC)
         g2.bind("fr", self.FR)
-
-
-        glooOrgName = "gloo"
-        glooOrgId = glooOrgName.replace(" ", "").lower()
-        glooOrg = self.n + glooOrgId
-
-        g2.add((glooOrg, RDF.type, self.OWL.NamedIndividual))
-        g2.add((glooOrg, RDF.type, self.CC.MinistryOrganization))
-        g2.add((glooOrg, self.RC.name, Literal(glooOrgName)))
-
-        squarespaceBusinessSystemName = "squarespace"
-        squarespaceBusinessSystemId = squarespaceBusinessSystemName.replace(" ", "").lower()
-        squarespaceBusinessSystem = self.n + squarespaceBusinessSystemId
-
-        g2.add((squarespaceBusinessSystem, RDF.type, self.OWL.NamedIndividual))
-        g2.add((squarespaceBusinessSystem, RDF.type, self.RC.BusinessSystem))
-        g2.add((squarespaceBusinessSystem, self.RC.name, Literal(squarespaceBusinessSystemName)))
-
-        churchCenterBusinessSystemName = "churchcenter"
-        churchCenterBusinessSystemId = churchCenterBusinessSystemName.replace(" ", "").lower()
-        churchCenterBusinessSystem = self.n + churchCenterBusinessSystemId
-
-        g2.add((churchCenterBusinessSystem, RDF.type, self.OWL.NamedIndividual))
-        g2.add((churchCenterBusinessSystem, RDF.type, self.RC.ChurchmanagementSystem))
-        g2.add((churchCenterBusinessSystem, self.RC.name, Literal(churchCenterBusinessSystemName)))
 
         return g2
 
@@ -118,17 +95,7 @@ class UpdateRDFWithChurches:
 
             if "name" in church and "is-primary" in church and church["is-primary"] == "yes":
 
-                glooOrgName = "gloo"
-                glooOrgId = glooOrgName.replace(" ", "").lower()
-                glooOrg = self.n + glooOrgId
 
-                squarespaceBusinessSystemName = "squarespace"
-                squarespaceBusinessSystemId = squarespaceBusinessSystemName.replace(" ", "").lower()
-                squarespaceBusinessSystem = self.n + squarespaceBusinessSystemId
-
-                churchCenterBusinessSystemName = "churchcenter"
-                churchCenterBusinessSystemId = churchCenterBusinessSystemName.replace(" ", "").lower()
-                churchCenterBusinessSystem = self.n + churchCenterBusinessSystemId
 
                 if "latitude" in church and "longitude" in church and "uniqueId" in church:
 
@@ -312,16 +279,32 @@ class UpdateRDFWithChurches:
 
 
                     if "org" in church:
-                        orgName = church["org"]
 
+                        orgName = church["org"]
 
                         orgChurchOrgName = self.clean(orgName)
                         orgChurchOrgId = orgChurchOrgName.replace(" ", "").lower()
                         orgChOrg = self.n + orgChurchOrgId
 
-                        g2.add((orgChOrg, RDF.type, self.OWL.NamedIndividual))
-                        g2.add((orgChOrg, RDF.type, self.CC.ChurchOrganization))
-                        g2.add((orgChOrg, self.RC.name, Literal(orgChurchOrgName)))
+                        query = """select ?church where { 
+                                                            ?church rdf:type cc:ChurchOrganization .  
+                                                            ?church rc:name ?name . 
+                                                            FILTER(STRSTARTS(LCASE( \"""" + orgName + """\"), LCASE(?name))) }
+                                                            """
+
+                        results = g2.query(query)
+                        if len(results) <= 0:
+                            # no org found so add it
+                            g2.add((orgChOrg, RDF.type, self.OWL.NamedIndividual))
+                            g2.add((orgChOrg, RDF.type, self.CC.ChurchOrganization))
+                            g2.add((orgChOrg, self.RC.name, Literal(orgChurchOrgName)))
+
+                        else:
+                            # found existing org
+                            for row in results:
+                                orgChOrg = row["church"]
+                                break
+
 
                         g2.add((orgChOrg, self.RC.hasSubOrganization, chOrg))
 
@@ -398,10 +381,19 @@ class UpdateRDFWithChurches:
 
                             if chms["type"] == "squarespace":
                                 # add business system
+                                squarespaceBusinessSystemName = "squarespace"
+                                squarespaceBusinessSystemId = squarespaceBusinessSystemName.replace(" ", "").lower()
+                                squarespaceBusinessSystem = self.n + squarespaceBusinessSystemId
+
                                 g2.add((chOrg, self.RC.hasBusinessSystem, squarespaceBusinessSystem))
 
                             if chms["type"] == "churchcenter":
+
                                 # add business system
+                                churchCenterBusinessSystemName = "churchcenter"
+                                churchCenterBusinessSystemId = churchCenterBusinessSystemName.replace(" ", "").lower()
+                                churchCenterBusinessSystem = self.n + churchCenterBusinessSystemId
+
                                 g2.add((chOrg, self.RC.hasChurchmanagementSystem, churchCenterBusinessSystem))
 
                     leadPastorName = None
@@ -443,49 +435,68 @@ class UpdateRDFWithChurches:
                         contacts = church["contacts"]
                         for contact in contacts:
 
+                            isValid = "yes"
                             if "valid" in contact:
-
                                 isValid = contact["valid"]
-                                if isValid == "yes":
 
-                                    memberCount = memberCount + 1
+                            if isValid == "yes":
 
-                                    name = self.clean(contact["name"])
+                                memberCount = memberCount + 1
 
-                                    uniqueId = self.generate_random_string()
-                                    if leadPastorName != None and leadPastorName.lower() == name.lower():
-                                        uniqueId = leadPasterUniqueId
+                                name = self.clean(contact["name"])
 
-                                    personName = name
-                                    personId = self.generate_random_string()
-                                    person = self.n + personId
+                                uniqueId = self.generate_random_string()
+                                if leadPastorName != None and leadPastorName.lower() == name.lower():
+                                    uniqueId = leadPasterUniqueId
 
-                                    g2.add((person, RDF.type, self.OWL.NamedIndividual))
-                                    g2.add((person, RDF.type, self.RC.Person))
-                                    g2.add((person, self.RC.name, Literal(personName)))
+                                personName = name
+                                personId = self.generate_random_string()
+                                person = self.n + personId
 
-                                    if "title" in contact:
-                                        title = self.clean(contact["title"])
-                                        g2.add((person, self.RC.title, Literal(title)))
+                                g2.add((person, RDF.type, self.OWL.NamedIndividual))
+                                g2.add((person, RDF.type, self.RC.Person))
+                                g2.add((person, self.RC.name, Literal(personName)))
 
-                                    if "photo" in contact:
-                                        photo = contact["photo"]
-                                        g2.add((person, self.RC.photo, Literal(photo)))
+                                if "title" in contact:
+                                    title = self.clean(contact["title"])
+                                    g2.add((person, self.RC.title, Literal(title)))
 
-                                    g2.add((chOrg, self.RC.hasMember, person))
+                                if "photo" in contact:
+                                    photo = contact["photo"]
+                                    g2.add((person, self.RC.photo, Literal(photo)))
+
+                                g2.add((chOrg, self.RC.hasMember, person))
 
 
                         if memberCount > 0:
                             g2.add((chOrg, self.RC.memberCount, Literal(str(memberCount))))
 
+
+
                     if "link" in church:
-                        websiteUri = church["link"];
-                        websiteId = self.generate_random_string() # self.clean(websiteUri.replace(" ", "").lower())
+
+
+                        link = church["link"]
+                        parsed_url = urlparse(link)
+                        churchDomain = parsed_url.netloc.replace("www.", "")
+                        churchDomain = churchDomain.replace("/", "").strip()
+
+                        query = """select ?website where { 
+                                                            ?website rdf:type rc:Website .  
+                                                            ?website rc:uri ?uri . 
+                                                            FILTER(STRSTARTS(LCASE( \"""" + churchDomain + """\"), LCASE(?uri))) }
+                                                            """
+
+                        results = g2.query(query)
+
+                        websiteUri = churchDomain
+                        websiteId = self.clean(churchDomain)
                         website = self.n + websiteId
 
-                        g2.add((website, RDF.type, self.OWL.NamedIndividual))
-                        g2.add((website, self.RC.type, self.RC.Website))
-                        g2.add((website, self.RC.uri, Literal(websiteUri)))
+                        if len(results) <= 0:
+                            g2.add((website, RDF.type, self.OWL.NamedIndividual))
+                            g2.add((website, self.RC.type, self.RC.Website))
+                            g2.add((website, self.RC.uri, Literal(websiteUri)))
 
                         g2.add((chOrg, self.RC.hasWebsite, website))
 

@@ -22,9 +22,10 @@ from quotesbot.processors.networks.vineyardNetworkProcessor import VineyardProce
 
 from quotesbot.processors.partners.ifaPartnerProcessor import IfaProcessor
 
+from quotesbot.processors.updateRDFWithTechSystems import UpdateRDFWithTechSystems
 from quotesbot.processors.updateRDFWithCities import UpdateRDFWithCities
 from quotesbot.processors.updateRDFWithChurches import UpdateRDFWithChurches
-from quotesbot.processors.updateRDFWithMultiChurchOrgs import UpdateRDFWithMultiChurchOrgs
+from quotesbot.processors.updateRDFWithMultiCampusChurches import UpdateRDFWithMultiCampusChurches
 from quotesbot.processors.updateRDFWithDenominations import UpdateRDFWithDenominations
 from quotesbot.processors.updateRDFWithNetworks import UpdateRDFWithNetworks
 from quotesbot.processors.updateRDFWithPartners import UpdateRDFWithPartners
@@ -80,6 +81,8 @@ class chcrawlerSpider(scrapy.Spider):
 
     '''
 
+    updateRDF = UpdateRDFWithTechSystems()
+    updateRDF.updateWithTechSystems()
 
     updateRDF = UpdateRDFWithDenominations()
     updateRDF.updateRDFWithDenominations()
@@ -96,12 +99,11 @@ class chcrawlerSpider(scrapy.Spider):
     updateRDF = UpdateRDFWithCities()
     updateRDF.updateWithCities()
 
+    updateRDF = UpdateRDFWithMultiCampusChurches()
+    updateRDF.updateWithMultiCampusChurches()
+
     updateRDF = UpdateRDFWithChurches()
     updateRDF.updateWithChurches()
-
-    
-    updateRDF = UpdateRDFWithMultiChurchOrgs()
-    updateRDF.updateRDFWithMultiChurchOrgs()
 
     updateRDF = UpdateRDFWithChurchMinistries()
     updateRDF.updateRDFWithChurchMinistries()

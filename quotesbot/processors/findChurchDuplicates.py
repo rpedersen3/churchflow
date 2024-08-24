@@ -22,27 +22,6 @@ class FindChurchDuplicates:
     churches = sorted(churchesData["churches"], key=orderFunc)
 
 
-
-    def findChurchOrgWithDomain(self, churchOrgs, domain):
-
-        for church in churchOrgs:
-
-            if "link" in church:
-
-                domain = domain.replace("/", "")
-
-                link = church["link"]
-                parsed_url = urlparse(link)
-                churchDomain = parsed_url.netloc.replace("www.", "")
-                churchDomain = churchDomain.replace("/", "")
-
-                if domain.lower() == churchDomain.lower():
-
-                    return church
-
-        return None
-
-
     def findChurchMatch(self, matchChurches, church):
 
         for ch in matchChurches:

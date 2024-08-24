@@ -42,6 +42,12 @@ class UpdateRDFWithPartners:
             "tags": ["hegetsus"]
         },
         {
+            "name": "celebrate recovery",
+            "description": "",
+            "link": "https://celebraterecovery.com/",
+            "tags": ["celebrate recovery"]
+        },
+        {
             "name": "Erie Uplink",
             "description": "",
             "link": "https://www.facebook.com/ErieUpLink",
