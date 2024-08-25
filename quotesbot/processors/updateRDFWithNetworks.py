@@ -126,6 +126,18 @@ class UpdateRDFWithNetworks:
             "tags": ["abcrm", "american baptist churches of the rocky mountains"]
         },
         {
+            "name": "The Church of Jesus Christ of Latter-day Saints",
+            "description": "",
+            "websiteUri": "https://churchofjesuschrist.org",
+            "tags": ["The Church of Jesus Christ of Latter-day Saints"]
+        },
+        {
+            "name": "Jehovahs Witnesses",
+            "description": "",
+            "websiteUri": "https://jw.org/",
+            "tags": ["jehovahs witnesses"]
+        },
+        {
             "name": "Disciples of Christ",
             "description": "",
             "websiteUri": "https://disciples.org/find-congregation/",
