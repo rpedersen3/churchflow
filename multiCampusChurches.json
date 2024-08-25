@@ -1,7 +1,7 @@
 {
     "churches": [
         {
-            "name": "Mission Hills",
+            "name": "Mission Hills Church",
             "network": "converge",
             "link": "https://www.missionhills.org/",
             "denomination": "nondenominational",
@@ -319,6 +319,9 @@
         {
             "name": "Rocky Mountain Christian Church",
             "link": "https://www.rocky.church"
+        },
+        {
+            "name": "The Well Church"
         },
         {
             "name": "Calvary Bible Church",
