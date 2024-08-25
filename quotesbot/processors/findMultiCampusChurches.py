@@ -100,6 +100,8 @@ class FindMultiCampusChurches:
                         churchOrgs.append(foundChurchOrg)
 
                     foundChurchOrg["subChurches"].append(church)
+                else:
+                    print("facebook domain: ", church["link"])
 
 
         for churchOrg in churchOrgs:

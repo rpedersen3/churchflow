@@ -10,6 +10,7 @@ from quotesbot.processors.findChurchesGooglePlaces import FindChurchesGooglePlac
 from quotesbot.processors.findChurchesOpenStreetMapPlaces import FindChurchesOpenStreetMapPlaces
 from quotesbot.processors.findChurchDuplicates import FindChurchDuplicates
 from quotesbot.processors.findChurchWebsite import FindChurchWebsite
+from quotesbot.processors.findMultiCampusChurches import FindMultiCampusChurches
 
 from quotesbot.processors.networks.elcaNetworkProcessor import ElcaProcessor
 from quotesbot.processors.networks.aodNetworkProcessor import AodProcessor
@@ -81,6 +82,10 @@ class chcrawlerSpider(scrapy.Spider):
 
     '''
 
+    findMultiCampusChurches = FindMultiCampusChurches()
+    findMultiCampusChurches.findMultiCampusChurches()
+
+    '''
     updateRDF = UpdateRDFWithTechSystems()
     updateRDF.updateWithTechSystems()
 
@@ -107,7 +112,7 @@ class chcrawlerSpider(scrapy.Spider):
 
     updateRDF = UpdateRDFWithChurchMinistries()
     updateRDF.updateRDFWithChurchMinistries()
-
+    '''
     '''
     
     # add churches based on cities
