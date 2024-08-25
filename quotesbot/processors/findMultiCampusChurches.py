@@ -19,6 +19,10 @@ class FindMultiCampusChurches:
         churchesData = json.load(file)
     churches = churchesData["churches"]
 
+    multi_churches_file_path = "multiCampusChurches.json"
+    with open(multi_churches_file_path, "r") as file:
+        multiCampusChurchesData = json.load(file)
+    multiCampusChurches = multiCampusChurchesData["churches"]
 
     def findChurchOrgWithDomain(self, churchOrgs, domain):
 
@@ -73,35 +77,26 @@ class FindMultiCampusChurches:
         churchOrgs = []
         for church in uniqueChurches:
 
-
-            if "name" not in church:
-                return
-
-
             if "name" in church and "link" in church:
 
                 link = church["link"]
                 parsed_url = urlparse(link)
                 domain = parsed_url.netloc.replace("www.", "")
 
-                # not a social website
-                if domain.find("facebook") == -1:
+                foundChurchOrg = self.findChurchOrgWithDomain(churchOrgs, domain)
+                if foundChurchOrg is None:
+                    rootName = self.getRootName(church)
+                    rootLink = "https://www." + domain
+                    foundChurchOrg = {
+                        "name": rootName,
+                        "link": rootLink,
+                        "subChurches": []
+                    }
 
-                    foundChurchOrg = self.findChurchOrgWithDomain(churchOrgs, domain)
-                    if foundChurchOrg is None:
-                        rootName = self.getRootName(church)
-                        rootLink = "https://www." + domain
-                        foundChurchOrg = {
-                            "name": rootName,
-                            "link": rootLink,
-                            "subChurches": []
-                        }
+                    churchOrgs.append(foundChurchOrg)
 
-                        churchOrgs.append(foundChurchOrg)
+                foundChurchOrg["subChurches"].append(church)
 
-                    foundChurchOrg["subChurches"].append(church)
-                else:
-                    print("facebook domain: ", church["link"])
 
 
         for churchOrg in churchOrgs:
@@ -109,5 +104,24 @@ class FindMultiCampusChurches:
             if (len(churchOrg["subChurches"]) > 1):
 
                 print("multi church org: ", churchOrg["name"], ', ', churchOrg["link"])
+
+                foundMultiCampusChurch = False
+                for multiCampusChurch in self.multiCampusChurches:
+                    if multiCampusChurch["link"] == churchOrg["link"]:
+                        foundMultiCampusChurch = True
+
+                if foundMultiCampusChurch == False:
+                    multiCampusChurch = {
+                        "name": churchOrg["name"],
+                        "link": churchOrg["link"]
+                    }
+                    self.multiCampusChurches.append(multiCampusChurch)
+
                 for subChurch in churchOrg["subChurches"]:
                     print(".... ", subChurch["name"], ", ", subChurch["link"])
+
+
+        # save to churches file
+        self.multiCampusChurchesData["churches"] = self.multiCampusChurches
+        with open(self.multi_churches_file_path, "w") as json_file:
+            json.dump(self.multiCampusChurchesData, json_file, indent=4)

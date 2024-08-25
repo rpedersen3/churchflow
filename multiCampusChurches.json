@@ -1,290 +1,504 @@
 {
-  "churches": [
-    {
-      "name": "Mission Hills",
-      "network": "converge",
-      "link": "https://www.missionhills.org/",
-      "denomination": "nondenominational",
-      "email": "info@missionhills.org",
-      "phone": "303.794.3564",
-      "addressInfo": {
-        "street": "5814 S Datura St",
-        "city": "Littleton",
-        "state": "CO",
-        "country": "US",
-        "zipcode": "80120"
-      },
-      "ein": "237154715",
-      "contacts": [
+    "churches": [
         {
-          "name": "craig smith",
-          "email": "csmith@missionhills.org",
-          "title": "Lead Pastor",
-          "photo": "https://www.missionhills.org/wp-content/uploads/2024/05/Smith-Craig-Horizontal-480x384.jpg",
-          "department": "Ministry Environments"
-        },
-        {
-          "name": "keith carson",
-          "email": "kcarson@missionhills.org",
-          "title": "Executive Pastor",
-          "department": "Ministry Environments",
-          "photo": "https://www.missionhills.org/wp-content/uploads/2024/05/Carson-Keith-480x600.jpg"
-        },
-        {
-          "name": "heidi lopez",
-          "email": "hlopez@missionhills.org",
-          "title": "Executive",
-          "photo": "https://www.missionhills.org/wp-content/uploads/2024/05/Lopez-Heidi-480x600.jpg"
-        },
-        {
-          "name": "danny oertli",
-          "email": "doertli@missionhills.org",
-          "title": "Executive Pastor",
-          "department": "Weekend Experience",
-          "photo": "https://www.missionhills.org/wp-content/uploads/2024/05/Oertli-Danny-480x600.jpg"
-        },
-        {
-          "name": "jon roberts",
-          "email": "jroberts@missionhills.org",
-          "title": "Executive Pastor",
-          "department": "Ministry Services",
-          "photo": "https://www.missionhills.org/wp-content/uploads/2024/05/Roberts-Jon-480x600.jpg"
-        }
-      ],
-      "chmss": [
-        {
-          "type": "subsplash",
-          "pages": [
-            {
-              "type": "subsplash",
-              "url": "https://www.missionhills.org/mhc-app/"
+            "name": "Mission Hills",
+            "network": "converge",
+            "link": "https://www.missionhills.org/",
+            "denomination": "nondenominational",
+            "email": "info@missionhills.org",
+            "phone": "303.794.3564",
+            "addressInfo": {
+                "street": "5814 S Datura St",
+                "city": "Littleton",
+                "state": "CO",
+                "country": "US",
+                "zipcode": "80120"
             },
-            {
-              "type": "subsplash",
-              "url": "https://www.missionhills.org/podcast-channels/"
+            "ein": "237154715",
+            "contacts": [
+                {
+                    "name": "craig smith",
+                    "email": "csmith@missionhills.org",
+                    "title": "Lead Pastor",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2024/05/Smith-Craig-Horizontal-480x384.jpg",
+                    "department": "Ministry Environments"
+                },
+                {
+                    "name": "keith carson",
+                    "email": "kcarson@missionhills.org",
+                    "title": "Executive Pastor",
+                    "department": "Ministry Environments",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2024/05/Carson-Keith-480x600.jpg"
+                },
+                {
+                    "name": "heidi lopez",
+                    "email": "hlopez@missionhills.org",
+                    "title": "Executive",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2024/05/Lopez-Heidi-480x600.jpg"
+                },
+                {
+                    "name": "danny oertli",
+                    "email": "doertli@missionhills.org",
+                    "title": "Executive Pastor",
+                    "department": "Weekend Experience",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2024/05/Oertli-Danny-480x600.jpg"
+                },
+                {
+                    "name": "jon roberts",
+                    "email": "jroberts@missionhills.org",
+                    "title": "Executive Pastor",
+                    "department": "Ministry Services",
+                    "photo": "https://www.missionhills.org/wp-content/uploads/2024/05/Roberts-Jon-480x600.jpg"
+                }
+            ],
+            "chmss": [
+                {
+                    "type": "subsplash",
+                    "pages": [
+                        {
+                            "type": "subsplash",
+                            "url": "https://www.missionhills.org/mhc-app/"
+                        },
+                        {
+                            "type": "subsplash",
+                            "url": "https://www.missionhills.org/podcast-channels/"
+                        },
+                        {
+                            "type": "subsplash",
+                            "url": "https://www.missionhills.org/uncharted/"
+                        },
+                        {
+                            "type": "subsplash",
+                            "url": "https://www.missionhills.org/yes/"
+                        }
+                    ]
+                },
+                {
+                    "name": "Mission Hills Church North Littleton Campus",
+                    "type": "wordpress",
+                    "pages": [
+                        {
+                            "url": "https://www.missionhills.org/",
+                            "type": "wordpress"
+                        }
+                    ]
+                },
+                {
+                    "name": "Mission Hills Church North Littleton Campus",
+                    "type": "schema",
+                    "pages": [
+                        {
+                            "url": "https://www.missionhills.org/",
+                            "type": "schema"
+                        }
+                    ]
+                },
+                {
+                    "type": "churchcenter",
+                    "pages": []
+                }
+            ],
+            "schemaTypes": [
+                "WebSite"
+            ],
+            "uniqueId": ".qrjs7js7rZaff3",
+            "businessStatus": "OPERATIONAL",
+            "social": {
+                "websiteUrl": "https://www.missionhills.org/",
+                "facebookUrl": "https://www.facebook.com/missionhillschurch",
+                "instagramUrl": "https://www.instagram.com/missionhillsco",
+                "tiktokUrl": "https://www.tiktok.com/@missionhillschurch",
+                "youtubeUrl": "https://www.youtube.com/user/MissionHillsCO",
+                "email": "info@missionhills.org",
+                "youtube": {
+                    "url": "www.youtube.com/@MissionHills",
+                    "subscribers": "3.4K subscribers",
+                    "videos": "1,117 videos",
+                    "views": "305,557 views",
+                    "joined": "Joined Oct 9, 2011"
+                },
+                "facebook": {
+                    "type": "Religious organization",
+                    "address": "620 Southpark Dr, Littleton, CO, United States, Colorado",
+                    "phoneNumber": "(303) 794-3564",
+                    "email": "web@missionhills.org",
+                    "reviews": "Rating 4.8 (366 Reviews)",
+                    "websiteUrl": "www.missionhills.org/",
+                    "followers": "7.3K followers"
+                }
             },
-            {
-              "type": "subsplash",
-              "url": "https://www.missionhills.org/uncharted/"
+            "theorg": {
+                "url": "https://theorg.com/org/mission-hills-church",
+                "contacts": [
+                    {
+                        "name": "Mike Romberger",
+                        "title": "Senior Pastor",
+                        "number-of-reports": "17",
+                        "details": "https://theorg.com/org/mission-hills-church/org-chart/mike-romberger",
+                        "photo": "https://cdn.theorg.com/7d3a2f64-40dd-422d-9363-cb05de6adc14_thumb.jpg",
+                        "linkedin": "/org/mission-hills-church/org-chart/matt-rhodes"
+                    },
+                    {
+                        "name": "Matt Rhodes",
+                        "title": "Creative Associate Director",
+                        "details": "https://theorg.com/org/mission-hills-church/org-chart/matt-rhodes",
+                        "photo": "https://cdn.theorg.com/7d3a2f64-40dd-422d-9363-cb05de6adc14_thumb.jpg",
+                        "linkedin": "https://www.linkedin.com/in/mattrrhodes",
+                        "number-of-reports": "2"
+                    },
+                    {
+                        "name": "Kelly Meadows",
+                        "title": "Communications Coordinator",
+                        "details": "https://theorg.com/org/mission-hills-church/org-chart/kelly-meadows",
+                        "photo": "https://cdn.theorg.com/7d3a2f64-40dd-422d-9363-cb05de6adc14_thumb.jpg",
+                        "linkedin": "https://www.linkedin.com/in/kelly-meadows-65bba552",
+                        "number-of-reports": "0"
+                    },
+                    {
+                        "name": "Colin McFarland",
+                        "title": "Digital & Website Marketing Manager",
+                        "details": "https://theorg.com/org/mission-hills-church/org-chart/colin-mcfarland",
+                        "photo": "https://cdn.theorg.com/1c3e547c-b710-43f6-ac83-bc6a2cb49ea9_thumb.jpg",
+                        "linkedin": "https://www.linkedin.com/in/colinmcfarland",
+                        "number-of-reports": "1"
+                    },
+                    {
+                        "name": "Brooke Brock",
+                        "title": "Executive Assistant",
+                        "details": "https://theorg.com/org/mission-hills-church/org-chart/brooke-brock",
+                        "photo": "https://cdn.theorg.com/76da6759-d75b-4cfd-b858-6a2497ebb890_thumb.jpg",
+                        "linkedin": "https://www.linkedin.com/in/brookelusher",
+                        "number-of-reports": "0"
+                    },
+                    {
+                        "name": "Stephen Schoenfeld",
+                        "title": "Next Gen Tech Coordinator",
+                        "details": "https://theorg.com/org/mission-hills-church/org-chart/stephen-schoenfeld",
+                        "photo": "https://cdn.theorg.com/f272a105-557a-4ad3-b01b-5190fdfb34e7_thumb.jpg",
+                        "linkedin": "https://www.linkedin.com/in/stephen-schoenfeld-0a695693"
+                    },
+                    {
+                        "name": "Eric Price",
+                        "title": "Middle School Director",
+                        "details": "https://theorg.com/org/mission-hills-church/org-chart/eric-price",
+                        "photo": "https://cdn.theorg.com/28a7726a-fb24-4a28-ba1c-97921a0b36c5_thumb.jpg",
+                        "linkedin": "https://www.linkedin.com/in/eric-price-9a8896183"
+                    },
+                    {
+                        "name": "James Leeper",
+                        "title": "Assistant Video Production Specialist",
+                        "details": "https://theorg.com/org/mission-hills-church/org-chart/james-leeper",
+                        "photo": "https://cdn.theorg.com/4b62418a-1a36-4c00-83a8-f4f7e559e4f8_thumb.jpg",
+                        "linkedin": "https://www.linkedin.com/in/jamesleeper11"
+                    },
+                    {
+                        "name": "Colleen Loftus Burge",
+                        "title": "Weekday Childcare Liaison",
+                        "details": "https://theorg.com/org/mission-hills-church/org-chart/colleen-loftus-burge",
+                        "photo": "https://cdn.theorg.com/7d3a2f64-40dd-422d-9363-cb05de6adc14_thumb.jpg",
+                        "linkedin": "https://www.linkedin.com/in/colleen-loftus-burge-754b068a",
+                        "number-of-reports": "0"
+                    },
+                    {
+                        "name": "Craig Smith",
+                        "title": "Lead Pastor",
+                        "number-of-reports": "1",
+                        "details": "https://theorg.com/org/mission-hills-church/org-chart/craig-smith",
+                        "photo": "https://cdn.theorg.com/96542616-a3ba-4a9a-8c28-08866985b608_thumb.jpg",
+                        "linkedin": "https://www.linkedin.com/in/craig-smith-62046838"
+                    },
+                    {
+                        "name": "Dr. Jeff Baxter",
+                        "title": "Next Gen Pastor",
+                        "details": "https://theorg.com/org/mission-hills-church/org-chart/dr-jeff-baxter",
+                        "photo": "https://cdn.theorg.com/ad83dba5-e077-4827-8395-2abb3290843b_thumb.jpg",
+                        "linkedin": "https://www.linkedin.com/in/dr-jeff-baxter-5914ab34"
+                    },
+                    {
+                        "name": "Aleta Coleman",
+                        "title": "Care Minister",
+                        "number-of-reports": "0",
+                        "details": "https://theorg.com/org/mission-hills-church/org-chart/aleta-coleman",
+                        "photo": "https://cdn.theorg.com/9304cc51-c187-4b2d-b73c-a5311ddc7b14_thumb.jpg",
+                        "linkedin": "https://www.linkedin.com/in/aleta-coleman-70997b21"
+                    },
+                    {
+                        "name": "Justin Curtis Adams",
+                        "title": "Worship Pastor",
+                        "number-of-reports": "0",
+                        "details": "https://theorg.com/org/mission-hills-church/org-chart/justin-curtis-adams",
+                        "photo": "https://cdn.theorg.com/7d3a2f64-40dd-422d-9363-cb05de6adc14_thumb.jpg",
+                        "linkedin": "https://www.linkedin.com/in/justin-curtis-adams-3a192217"
+                    },
+                    {
+                        "name": "Lillian Dehn",
+                        "title": "Biblical Counselor",
+                        "number-of-reports": "0",
+                        "details": "https://theorg.com/org/mission-hills-church/org-chart/lillian-dehn",
+                        "photo": "https://cdn.theorg.com/7d3a2f64-40dd-422d-9363-cb05de6adc14_thumb.jpg",
+                        "linkedin": "https://www.linkedin.com/in/lillian-dehn-ab2a473a"
+                    },
+                    {
+                        "name": "Tyler Peterson",
+                        "title": "Campus Pastor",
+                        "number-of-reports": "0",
+                        "details": "https://theorg.com/org/mission-hills-church/org-chart/tyler-peterson",
+                        "photo": "https://cdn.theorg.com/7d3a2f64-40dd-422d-9363-cb05de6adc14_thumb.jpg",
+                        "linkedin": "https://www.linkedin.com/in/tyler-peterson-b7096195"
+                    },
+                    {
+                        "name": "Leslie Samson",
+                        "title": "Care Coordinator",
+                        "number-of-reports": "0",
+                        "details": "https://theorg.com/org/mission-hills-church/org-chart/leslie-samson",
+                        "photo": "https://cdn.theorg.com/6b902428-5857-432a-a936-bfc45f71a250_thumb.jpg",
+                        "linkedin": "https://www.linkedin.com/in/lesliesamson"
+                    },
+                    {
+                        "name": "Lindsy Robinson",
+                        "title": "Kids Coordinator",
+                        "number-of-reports": "0",
+                        "details": "https://theorg.com/org/mission-hills-church/org-chart/lindsy-robinson",
+                        "photo": "https://cdn.theorg.com/7ff18ae4-3405-4618-91d2-51260edc3abc_thumb.jpg",
+                        "linkedin": "https://www.linkedin.com/in/lindsy-robinson-b06744b2"
+                    },
+                    {
+                        "name": "Madelyn Brouwer",
+                        "title": "Communications Coordinator",
+                        "number-of-reports": "0",
+                        "details": "https://theorg.com/org/mission-hills-church/org-chart/madelyn-brouwer",
+                        "photo": "https://cdn.theorg.com/ab20fea7-1770-4b81-8411-5a8570dc2ac6_thumb.jpg",
+                        "linkedin": "https://www.linkedin.com/in/madelynbrouwer"
+                    }
+                ]
             },
-            {
-              "type": "subsplash",
-              "url": "https://www.missionhills.org/yes/"
-            }
-          ]
+            "ministries": [
+                {
+                    "name": "gloo",
+                    "link": "https://www.missionhills.org/",
+                    "photo": "https://www.gloo.us/hubfs/gloo-white.svg",
+                    "phase": "pre-evangelism",
+                    "context-region": "local",
+                    "context-focus": "outreach",
+                    "partner": "gloo"
+                }
+            ]
         },
         {
-          "name": "Mission Hills Church North Littleton Campus",
-          "type": "wordpress",
-          "pages": [
-            {
-              "url": "https://www.missionhills.org/",
-              "type": "wordpress"
-            }
-          ]
+            "name": "Woodmen Valley Chapel",
+            "link": "https://www.woodmenvalley.org"
         },
         {
-          "name": "Mission Hills Church North Littleton Campus",
-          "type": "schema",
-          "pages": [
-            {
-              "url": "https://www.missionhills.org/",
-              "type": "schema"
-            }
-          ]
+            "name": "Academy Christian Church",
+            "link": "https://www.academychristian.org"
         },
         {
-          "type": "churchcenter",
-          "pages": []
+            "name": "Our Lady of the Woods Parish",
+            "link": "https://www.tellercatholic.org"
+        },
+        {
+            "name": "Flatirons Community Church",
+            "link": "https://www.flatironschurch.com"
+        },
+        {
+            "name": "Red Rocks Church",
+            "link": "https://www.redrockschurch.com"
+        },
+        {
+            "name": "BRAVE Church",
+            "link": "https://www.bravechurch.online"
+        },
+        {
+            "name": "Colorado Christian Fellowship",
+            "link": "https://www.ccfyourhome.org"
+        },
+        {
+            "name": "Orchard.Church",
+            "link": "https://www.orchard.church"
+        },
+        {
+            "name": "Rocky Mountain Christian Church",
+            "link": "https://www.rocky.church"
+        },
+        {
+            "name": "Calvary Bible Church",
+            "link": "https://www.calvarybible.com"
+        },
+        {
+            "name": "Journey Church Colorado",
+            "link": "https://www.journeycolorado.com"
+        },
+        {
+            "name": "Calvary Severance",
+            "link": "https://www.severance.thecalvary.org"
+        },
+        {
+            "name": "Lighthouse Church - Parker",
+            "link": "https://www.lighthouseparker.com"
+        },
+        {
+            "name": "Redeemer Presbyterian Church",
+            "link": "https://www.redeemerparker.com"
+        },
+        {
+            "name": "Crossroads Church",
+            "link": "https://www.crossroadscolorado.com"
+        },
+        {
+            "name": "Foundations Church",
+            "link": "https://www.foundationschurch.org"
+        },
+        {
+            "name": "Foothills Bible Church",
+            "link": "https://www.foothillsbiblechurch.org"
+        },
+        {
+            "name": "Redeemer Lutheran Church",
+            "link": "https://www.redeemerconnect.com"
+        },
+        {
+            "name": "Mother Cabrini Shrine",
+            "link": "https://www.mothercabrinishrine.org"
+        },
+        {
+            "name": "Bible Baptist Church Of Erie",
+            "link": "https://www.biblebaptisterie.com"
+        },
+        {
+            "name": "Mountain Life Church",
+            "link": "https://www.mountainlifechurch.com"
+        },
+        {
+            "name": "St Andrew's Episcopal Church",
+            "link": "https://www.standrewsepiscopalcc.org"
+        },
+        {
+            "name": "Radiant Church, Central Campus",
+            "link": "https://www.radiantchurch.org"
+        },
+        {
+            "name": "Christ the King Community Church",
+            "link": "https://www.ctkbh.com"
+        },
+        {
+            "name": "Foothills Baptist Church",
+            "link": "https://www.foothillsbaptistchurch.com"
+        },
+        {
+            "name": "Hillcrest Christian Church",
+            "link": "https://www.hillcrestdenver.org"
+        },
+        {
+            "name": "Faith Lutheran Church",
+            "link": "https://www.faithlutheranchurchlcms.org"
+        },
+        {
+            "name": "Highlands Lutheran Church",
+            "link": "https://www.highlandslutheran.org"
+        },
+        {
+            "name": "True Vine Tabernacle",
+            "link": "https://www.facebook.com"
+        },
+        {
+            "name": "Holy Comforter Episcopal Church",
+            "link": "https://www.holycomforterchurch.net"
+        },
+        {
+            "name": "Chapel In the Hills",
+            "link": "https://www.chapelinthehills.org"
+        },
+        {
+            "name": "Ridgeview Baptist Church",
+            "link": "https://www.m.facebook.com"
+        },
+        {
+            "name": "Victory Church",
+            "link": "https://www.victorydenver.com"
+        },
+        {
+            "name": "Calvary Chapel Cherry Creek",
+            "link": "https://www.calvarycherrycreek.org"
+        },
+        {
+            "name": "The Church of Jesus Christ of Latter-day Saints",
+            "link": "https://www.local.churchofjesuschrist.org"
+        },
+        {
+            "name": "St. Isidore Catholic Church & Priory",
+            "link": "https://www.stisidores-priory.com"
+        },
+        {
+            "name": "Thrive Church",
+            "link": "https://www.wethrive.org"
+        },
+        {
+            "name": "Life.Church North Denver",
+            "link": "https://www.life.church"
+        },
+        {
+            "name": "Parker Firehouse Church",
+            "link": "https://www.parkerfirehouse.com"
+        },
+        {
+            "name": "The River Church",
+            "link": "https://www.theriverchurchcolorado.org"
+        },
+        {
+            "name": "Fresh Hope Church",
+            "link": "https://www.freshhope.church"
+        },
+        {
+            "name": "St Philip in the Field Church",
+            "link": "https://www.saintphilipinthefield.org"
+        },
+        {
+            "name": "The Oasis Christian Church",
+            "link": "https://www.theoasiscc.com"
+        },
+        {
+            "name": "Jehovah's Witness",
+            "link": "https://www.jw.org"
+        },
+        {
+            "name": "Denver Colorado Temple",
+            "link": "https://www.churchofjesuschrist.org"
+        },
+        {
+            "name": "Longs Peak Church",
+            "link": "https://www.longspeakchurch.com"
+        },
+        {
+            "name": "Connections Christian Church",
+            "link": "https://www.connections.cc"
+        },
+        {
+            "name": "Veterans Chapel",
+            "link": "https://www.fortcarsonchapels.com"
+        },
+        {
+            "name": "Platte Canyon Community Church",
+            "link": "https://www.pccchurch.net"
+        },
+        {
+            "name": "River of Life Fellowship",
+            "link": "https://www.riveroflifewellington.org"
+        },
+        {
+            "name": "23rd Avenue Church",
+            "link": "https://www.23church.org"
+        },
+        {
+            "name": "Calvary Chapel Fort Collins",
+            "link": "https://www.calvaryfortcollins.org"
+        },
+        {
+            "name": "Shepherd of the Hills Presbyterian",
+            "link": "https://www.soth.net"
+        },
+        {
+            "name": "Summitview Church",
+            "link": "https://www.summitview.com"
         }
-      ],
-      "schemaTypes": [
-        "WebSite"
-      ],
-      "uniqueId": ".qrjs7js7rZaff3",
-      "businessStatus": "OPERATIONAL",
-      "social": {
-        "websiteUrl": "https://www.missionhills.org/",
-        "facebookUrl": "https://www.facebook.com/missionhillschurch",
-        "instagramUrl": "https://www.instagram.com/missionhillsco",
-        "tiktokUrl": "https://www.tiktok.com/@missionhillschurch",
-        "youtubeUrl": "https://www.youtube.com/user/MissionHillsCO",
-        "email": "info@missionhills.org",
-        "youtube": {
-          "url": "www.youtube.com/@MissionHills",
-          "subscribers": "3.4K subscribers",
-          "videos": "1,117 videos",
-          "views": "305,557 views",
-          "joined": "Joined Oct 9, 2011"
-        },
-        "facebook": {
-          "type": "Religious organization",
-          "address": "620 Southpark Dr, Littleton, CO, United States, Colorado",
-          "phoneNumber": "(303) 794-3564",
-          "email": "web@missionhills.org",
-          "reviews": "Rating 4.8 (366 Reviews)",
-          "websiteUrl": "www.missionhills.org/",
-          "followers": "7.3K followers"
-        }
-      },
-      "theorg": {
-        "url": "https://theorg.com/org/mission-hills-church",
-        "contacts": [
-          {
-            "name": "Mike Romberger",
-            "title": "Senior Pastor",
-            "number-of-reports": "17",
-            "details": "https://theorg.com/org/mission-hills-church/org-chart/mike-romberger",
-            "photo": "https://cdn.theorg.com/7d3a2f64-40dd-422d-9363-cb05de6adc14_thumb.jpg",
-            "linkedin": "/org/mission-hills-church/org-chart/matt-rhodes"
-          },
-          {
-            "name": "Matt Rhodes",
-            "title": "Creative Associate Director",
-            "details": "https://theorg.com/org/mission-hills-church/org-chart/matt-rhodes",
-            "photo": "https://cdn.theorg.com/7d3a2f64-40dd-422d-9363-cb05de6adc14_thumb.jpg",
-            "linkedin": "https://www.linkedin.com/in/mattrrhodes",
-            "number-of-reports": "2"
-          },
-          {
-            "name": "Kelly Meadows",
-            "title": "Communications Coordinator",
-            "details": "https://theorg.com/org/mission-hills-church/org-chart/kelly-meadows",
-            "photo": "https://cdn.theorg.com/7d3a2f64-40dd-422d-9363-cb05de6adc14_thumb.jpg",
-            "linkedin": "https://www.linkedin.com/in/kelly-meadows-65bba552",
-            "number-of-reports": "0"
-          },
-          {
-            "name": "Colin McFarland",
-            "title": "Digital & Website Marketing Manager",
-            "details": "https://theorg.com/org/mission-hills-church/org-chart/colin-mcfarland",
-            "photo": "https://cdn.theorg.com/1c3e547c-b710-43f6-ac83-bc6a2cb49ea9_thumb.jpg",
-            "linkedin": "https://www.linkedin.com/in/colinmcfarland",
-            "number-of-reports": "1"
-          },
-          {
-            "name": "Brooke Brock",
-            "title": "Executive Assistant",
-            "details": "https://theorg.com/org/mission-hills-church/org-chart/brooke-brock",
-            "photo": "https://cdn.theorg.com/76da6759-d75b-4cfd-b858-6a2497ebb890_thumb.jpg",
-            "linkedin": "https://www.linkedin.com/in/brookelusher",
-            "number-of-reports": "0"
-          },
-          {
-            "name": "Stephen Schoenfeld",
-            "title": "Next Gen Tech Coordinator",
-            "details": "https://theorg.com/org/mission-hills-church/org-chart/stephen-schoenfeld",
-            "photo": "https://cdn.theorg.com/f272a105-557a-4ad3-b01b-5190fdfb34e7_thumb.jpg",
-            "linkedin": "https://www.linkedin.com/in/stephen-schoenfeld-0a695693"
-          },
-          {
-            "name": "Eric Price",
-            "title": "Middle School Director",
-            "details": "https://theorg.com/org/mission-hills-church/org-chart/eric-price",
-            "photo": "https://cdn.theorg.com/28a7726a-fb24-4a28-ba1c-97921a0b36c5_thumb.jpg",
-            "linkedin": "https://www.linkedin.com/in/eric-price-9a8896183"
-          },
-          {
-            "name": "James Leeper",
-            "title": "Assistant Video Production Specialist",
-            "details": "https://theorg.com/org/mission-hills-church/org-chart/james-leeper",
-            "photo": "https://cdn.theorg.com/4b62418a-1a36-4c00-83a8-f4f7e559e4f8_thumb.jpg",
-            "linkedin": "https://www.linkedin.com/in/jamesleeper11"
-          },
-          {
-            "name": "Colleen Loftus Burge",
-            "title": "Weekday Childcare Liaison",
-            "details": "https://theorg.com/org/mission-hills-church/org-chart/colleen-loftus-burge",
-            "photo": "https://cdn.theorg.com/7d3a2f64-40dd-422d-9363-cb05de6adc14_thumb.jpg",
-            "linkedin": "https://www.linkedin.com/in/colleen-loftus-burge-754b068a",
-            "number-of-reports": "0"
-          },
-          {
-            "name": "Craig Smith",
-            "title": "Lead Pastor",
-            "number-of-reports": "1",
-            "details": "https://theorg.com/org/mission-hills-church/org-chart/craig-smith",
-            "photo": "https://cdn.theorg.com/96542616-a3ba-4a9a-8c28-08866985b608_thumb.jpg",
-            "linkedin": "https://www.linkedin.com/in/craig-smith-62046838"
-          },
-          {
-            "name": "Dr. Jeff Baxter",
-            "title": "Next Gen Pastor",
-            "details": "https://theorg.com/org/mission-hills-church/org-chart/dr-jeff-baxter",
-            "photo": "https://cdn.theorg.com/ad83dba5-e077-4827-8395-2abb3290843b_thumb.jpg",
-            "linkedin": "https://www.linkedin.com/in/dr-jeff-baxter-5914ab34"
-          },
-          {
-            "name": "Aleta Coleman",
-            "title": "Care Minister",
-            "number-of-reports": "0",
-            "details": "https://theorg.com/org/mission-hills-church/org-chart/aleta-coleman",
-            "photo": "https://cdn.theorg.com/9304cc51-c187-4b2d-b73c-a5311ddc7b14_thumb.jpg",
-            "linkedin": "https://www.linkedin.com/in/aleta-coleman-70997b21"
-          },
-          {
-            "name": "Justin Curtis Adams",
-            "title": "Worship Pastor",
-            "number-of-reports": "0",
-            "details": "https://theorg.com/org/mission-hills-church/org-chart/justin-curtis-adams",
-            "photo": "https://cdn.theorg.com/7d3a2f64-40dd-422d-9363-cb05de6adc14_thumb.jpg",
-            "linkedin": "https://www.linkedin.com/in/justin-curtis-adams-3a192217"
-          },
-          {
-            "name": "Lillian Dehn",
-            "title": "Biblical Counselor",
-            "number-of-reports": "0",
-            "details": "https://theorg.com/org/mission-hills-church/org-chart/lillian-dehn",
-            "photo": "https://cdn.theorg.com/7d3a2f64-40dd-422d-9363-cb05de6adc14_thumb.jpg",
-            "linkedin": "https://www.linkedin.com/in/lillian-dehn-ab2a473a"
-          },
-          {
-            "name": "Tyler Peterson",
-            "title": "Campus Pastor",
-            "number-of-reports": "0",
-            "details": "https://theorg.com/org/mission-hills-church/org-chart/tyler-peterson",
-            "photo": "https://cdn.theorg.com/7d3a2f64-40dd-422d-9363-cb05de6adc14_thumb.jpg",
-            "linkedin": "https://www.linkedin.com/in/tyler-peterson-b7096195"
-          },
-          {
-            "name": "Leslie Samson",
-            "title": "Care Coordinator",
-            "number-of-reports": "0",
-            "details": "https://theorg.com/org/mission-hills-church/org-chart/leslie-samson",
-            "photo": "https://cdn.theorg.com/6b902428-5857-432a-a936-bfc45f71a250_thumb.jpg",
-            "linkedin": "https://www.linkedin.com/in/lesliesamson"
-          },
-          {
-            "name": "Lindsy Robinson",
-            "title": "Kids Coordinator",
-            "number-of-reports": "0",
-            "details": "https://theorg.com/org/mission-hills-church/org-chart/lindsy-robinson",
-            "photo": "https://cdn.theorg.com/7ff18ae4-3405-4618-91d2-51260edc3abc_thumb.jpg",
-            "linkedin": "https://www.linkedin.com/in/lindsy-robinson-b06744b2"
-          },
-          {
-            "name": "Madelyn Brouwer",
-            "title": "Communications Coordinator",
-            "number-of-reports": "0",
-            "details": "https://theorg.com/org/mission-hills-church/org-chart/madelyn-brouwer",
-            "photo": "https://cdn.theorg.com/ab20fea7-1770-4b81-8411-5a8570dc2ac6_thumb.jpg",
-            "linkedin": "https://www.linkedin.com/in/madelynbrouwer"
-          }
-        ]
-      },
-      "ministries": [
-        {
-          "name": "gloo",
-          "link": "https://www.missionhills.org/",
-          "photo": "https://www.gloo.us/hubfs/gloo-white.svg",
-          "phase": "pre-evangelism",
-          "context-region": "local",
-          "context-focus": "outreach",
-          "partner": "gloo"
-        }
-      ]
-
-
-    }
-  ]
+    ]
 }
