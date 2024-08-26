@@ -107,7 +107,7 @@ class FindMultiCampusChurches:
 
                 foundMultiCampusChurch = False
                 for multiCampusChurch in self.multiCampusChurches:
-                    if multiCampusChurch["link"] == churchOrg["link"]:
+                    if "link" in multiCampusChurch and multiCampusChurch["link"] == churchOrg["link"]:
                         foundMultiCampusChurch = True
 
                 if foundMultiCampusChurch == False:

@@ -82,6 +82,7 @@ class chcrawlerSpider(scrapy.Spider):
 
     '''
 
+    '''
     findMultiCampusChurches = FindMultiCampusChurches()
     findMultiCampusChurches.findMultiCampusChurches()
 
@@ -112,7 +113,7 @@ class chcrawlerSpider(scrapy.Spider):
 
     updateRDF = UpdateRDFWithChurchMinistries()
     updateRDF.updateRDFWithChurchMinistries()
-    '''
+
     '''
     
     # add churches based on cities

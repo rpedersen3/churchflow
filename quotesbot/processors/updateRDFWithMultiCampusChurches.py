@@ -84,7 +84,7 @@ class UpdateRDFWithMultiCampusChurches:
             else:
                 return int(s)
         except:
-            print("problem converting: ", s)
+            #print("problem converting: ", s)
             return 0
 
     def updateWithMultiCampusChurches(self):
@@ -114,9 +114,9 @@ class UpdateRDFWithMultiCampusChurches:
                             denomination = "unknown"
 
                     # link church to denomination
-                    query = """select ?denomination ?tag where { 
-                                    ?denomination rdf:type cc:Denomination .  
-                                    ?denomination cc:denominationTag ?tag . 
+                    query = """select ?denomination where { 
+                                    ?denomination rdf:type cc:Denomination . 
+                                    ?denomination rc:hasTag ?tag . 
                                     ?tag rc:name ?tagName . 
                                     FILTER(STRSTARTS(LCASE( \"""" + denomination + """\"), LCASE(?tagName))) }
                                     """
@@ -127,14 +127,14 @@ class UpdateRDFWithMultiCampusChurches:
                         if len(results) > 0:
                             for row in results:
                                 g2.add((chOrg, self.CC.denomination, row["denomination"]))
-                                g2.add((chOrg, self.CC.denominationTag, row["tag"]))
+                                #g2.add((chOrg, self.RC.Tag, row["tag"]))
                                 break
-                        else:
-                            g2.add((chOrg, self.CC.denomination, "unknown"))
-                            g2.add((chOrg, self.CC.denominationTag, '<cc:denominationTag rdf:resource="http://churchcore.io/frontrange#unknowntag"/>'))
+                        #else:
+                            #g2.add((chOrg, self.CC.denomination, "unknown"))
+                            #g2.add((chOrg, self.RC.Tag, '<rc:Tag rdf:resource="http://churchcore.io/frontrange#unknowntag"/>'))
 
                     except Exception as e:
-                        print("get denomination err: ", e)
+                        print("get denomination err 1: ", e)
 
 
 
@@ -144,10 +144,10 @@ class UpdateRDFWithMultiCampusChurches:
 
                         networkList = networks.split(',')
                         for network in networkList:
-                            print("************ find network: ", network)
+                            #print("************ find network: ", network)
                             query = """select ?network ?tag where { 
                                             ?network rdf:type cc:Network .  
-                                            ?network cc:networkTag ?tag . 
+                                            ?network rc:hasTag ?tag . 
                                             ?tag rc:name ?tagName . 
                                             FILTER(STRSTARTS(LCASE( \"""" + network + """\"), LCASE(?tagName))) }
                                             """
@@ -156,12 +156,12 @@ class UpdateRDFWithMultiCampusChurches:
                                 results = g2.query(query)
 
                                 if len(results) > 0:
-                                    print("****** found network **********", results)
+                                    #print("****** found network **********", results)
                                     for row in results:
 
-                                        print("***************  add network to org ***********")
+                                        #print("***************  add network to org ***********")
                                         g2.add((chOrg, self.CC.network, row["network"]))
-                                        g2.add((chOrg, self.CC.networkTag, row["tag"]))
+                                        #g2.add((chOrg, self.CC.networkTag, row["tag"]))
                                         break
 
                             except Exception as e:

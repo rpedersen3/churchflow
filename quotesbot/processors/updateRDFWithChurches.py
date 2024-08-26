@@ -91,7 +91,17 @@ class UpdateRDFWithChurches:
 
         g2 = self.setupRDFFile()
 
+        print("number of churches: ", len(self.churches))
+
+        count = 0
+        processedCount = 0
         for church in self.churches:
+
+            processedCount = processedCount + 1
+            count = count + 1
+            if count > 100:
+                count = 0
+                print("processed: ", processedCount)
 
             if "name" in church and "is-primary" in church and church["is-primary"] == "yes":
 
@@ -155,12 +165,12 @@ class UpdateRDFWithChurches:
                                         denomination = "unknown"
                                     break
 
-                    print("??????????????????? query for denomination ")
 
                     # link church to denomination
-                    query = """select ?denomination ?tag where { 
-                                    ?denomination rdf:type cc:Denomination .  
-                                    ?denomination cc:denominationTag ?tag . 
+                    #print("denomination: ", denomination)
+                    query = """select ?denomination where { 
+                                    ?denomination rdf:type cc:Denomination . 
+                                    ?denomination rc:hasTag ?tag . 
                                     ?tag rc:name ?tagName . 
                                     FILTER(STRSTARTS(LCASE( \"""" + denomination + """\"), LCASE(?tagName))) }
                                     """
@@ -171,14 +181,14 @@ class UpdateRDFWithChurches:
                         if len(results) > 0:
                             for row in results:
                                 g2.add((chOrg, self.CC.denomination, row["denomination"]))
-                                g2.add((chOrg, self.CC.denominationTag, row["tag"]))
+                                #g2.add((chOrg, self.RC.tag, row["tag"]))
                                 break
-                        else:
-                            g2.add((chOrg, self.CC.denomination, "unknown"))
-                            g2.add((chOrg, self.CC.denominationTag, '<cc:denominationTag rdf:resource="http://churchcore.io/frontrange#unknowntag"/>'))
+                        #else:
+                            #g2.add((chOrg, self.CC.denomination, "unknown"))
+                            #g2.add((chOrg, self.RC.Tag, '<rc:Tag rdf:resource="http://churchcore.io/frontrange#unknowntag"/>'))
 
                     except Exception as e:
-                        print("get denomination err: ", e)
+                        print("get denomination err 2: ", e)
 
 
 
@@ -188,10 +198,10 @@ class UpdateRDFWithChurches:
 
                         networkList = networks.split(',')
                         for network in networkList:
-                            print("************ find network: ", network)
+                            #print("************ find network: ", network)
                             query = """select ?network ?tag where { 
                                             ?network rdf:type cc:Network .  
-                                            ?network cc:networkTag ?tag . 
+                                            ?network rc:hasTag ?tag . 
                                             ?tag rc:name ?tagName . 
                                             FILTER(STRSTARTS(LCASE( \"""" + network + """\"), LCASE(?tagName))) }
                                             """
@@ -200,12 +210,12 @@ class UpdateRDFWithChurches:
                                 results = g2.query(query)
 
                                 if len(results) > 0:
-                                    print("****** found network **********", results)
+                                    #print("****** found network **********", results)
                                     for row in results:
 
-                                        print("***************  add network to org ***********")
+                                        #print("***************  add network to org ***********")
                                         g2.add((chOrg, self.CC.network, row["network"]))
-                                        g2.add((chOrg, self.CC.networkTag, row["tag"]))
+                                        #g2.add((chOrg, self.CC.networkTag, row["tag"]))
                                         break
 
                             except Exception as e:
@@ -295,6 +305,7 @@ class UpdateRDFWithChurches:
                         results = g2.query(query)
                         if len(results) <= 0:
                             # no org found so add it
+                            print("********* not found org in church orgs *******, ", orgName)
                             g2.add((orgChOrg, RDF.type, self.OWL.NamedIndividual))
                             g2.add((orgChOrg, RDF.type, self.CC.ChurchOrganization))
                             g2.add((orgChOrg, self.RC.name, Literal(orgChurchOrgName)))
@@ -329,7 +340,7 @@ class UpdateRDFWithChurches:
                         if "city" in church["addressInfo"] and "zipcode" in \
                                 church["addressInfo"]:
 
-                            print(".. add site address ..")
+                            #print(".. add site address ..")
 
                             churchSiteAddressName = self.clean(church["name"]) + " Site Address"
                             churchSiteAddressId = self.generate_random_string() # churchSiteAddressName.replace(" ", "").lower()
@@ -370,7 +381,7 @@ class UpdateRDFWithChurches:
 
                                 if len(results) > 0:
                                     for row in results:
-                                        print("row: ", row["city"])
+                                        #print("row: ", row["city"])
                                         g2.add((chSite, self.RC.city, row["city"]))
                             except:
                                 print("err getting city")
@@ -503,6 +514,6 @@ class UpdateRDFWithChurches:
 
 
             #print(f"Graph has {len(g2)} triples.\n")
-            print(".")
+            #print(".")
 
         self.saveRDFFile(g2)

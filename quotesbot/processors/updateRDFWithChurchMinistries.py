@@ -426,7 +426,7 @@ class UpdateRDFWithChurchMinistries:
                             if "name" in ministry:
 
                                 ministryName = ministry["name"].lower()
-                                print("************ find ministry: ", ministryName)
+                                #print("************ find ministry: ", ministryName)
 
 
                                 query = """select ?church where { ?church rc:name ?churchName .
@@ -438,10 +438,10 @@ class UpdateRDFWithChurchMinistries:
                                 #print("************ query: ", query)
                                 #try:
                                 results = g2.query(query)
-                                print("************ query results: ", len(results))
+                                #print("************ query results: ", len(results))
                                 if len(results) <= 0:
 
-                                    print("****** found no ministry so add to rdf **********")
+                                    #print("****** found no ministry so add to rdf **********")
 
                                     # create church ministry
                                     ministryOrgName = self.clean(ministryName)
@@ -492,9 +492,9 @@ class UpdateRDFWithChurchMinistries:
                                                         FILTER(STRSTARTS(LCASE( \"""" + partnerName + """\"), LCASE(?name))) }
                                                         """
 
-                                        print("query3: ", query3)
+                                        #print("query3: ", query3)
                                         results3 = g2.query(query3)
-                                        print("************ query for partner ministries: ", len(results3))
+                                        #print("************ query for partner ministries: ", len(results3))
                                         if len(results3) > 0:
                                             for row in results3:
                                                 g2.add((ministryOrg, self.RC.isPartnerOf, row["ministry"]))

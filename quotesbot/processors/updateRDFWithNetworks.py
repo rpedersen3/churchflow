@@ -254,10 +254,10 @@ class UpdateRDFWithNetworks:
                 tag = self.n + tagId
 
                 g2.add((tag, RDF.type, self.OWL.NamedIndividual))
-                g2.add((tag, RDF.type, self.CC.NetworkTag))
+                g2.add((tag, RDF.type, self.RC.Tag))
                 g2.add((tag, self.RC.name, Literal(tagName)))
 
-                g2.add((network, self.CC.networkTag, tag))
+                g2.add((network, self.RC.hasTag, tag))
                 
                 
 
