@@ -67,11 +67,35 @@ class FindMinistriesUsingGoogleSearch:
                 searchTerm = "celebrate recovery"
                 name = "celebrate recovery"
                 photo = "https://celebraterecovery.com/wp-content/uploads/2024/03/Celebrate-Recovery-Logo-Left-White_RM.svg"
+                caseMatch = False
                 '''
 
+                '''
                 searchTerm = "griefshare"
                 name = "grief share"
                 photo = "https://www.griefshare.org/assets/logos/gs_white-fdf8435def3272cf1783fc0ec6e9a53c74328f282bc4ecbde4a37bfde2458ccc.svg"
+                caseMatch = False
+                '''
+
+                '''
+                searchTerm = "divorcecare"
+                name = "divorce care"
+                photo = "https://www.divorcecare.org/assets/logos/dc_white-8bdb21a230d39bd1928c8c51994bdebd70c82a20298e55a3cd7e923102217f09.svg"
+                caseMatch = False
+                '''
+
+                '''
+                searchTerm = "habitat for humanity"
+                name = "habitat for humanity"
+                photo = "https://habitatcolorado.org/wp-content/uploads/2022/08/logo.svg"
+                caseMatch = False
+                '''
+
+                searchTerm = "Alpha"
+                name = "habitat for humanity"
+                photo = "https://habitatcolorado.org/wp-content/uploads/2022/08/logo.svg"
+                caseMatch = True
+
 
                 query = "site:" + churchDomain + " '" + searchTerm + "'"
                 print("--------------------------------------")
@@ -93,7 +117,10 @@ class FindMinistriesUsingGoogleSearch:
                 if "items" in res:
                     for item in res["items"]:
 
-                        snippet = item["snippet"].lower()
+                        snippet = item["snippet"]
+                        if caseMatch == False:
+                            snippet = snippet.lower()
+
                         if snippet.find(searchTerm) >= 0:
 
                             link = item["link"]

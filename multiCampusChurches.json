@@ -12,6 +12,24 @@
                     "context-region": "local",
                     "context-focus": "outreach",
                     "partner": "celebrate recovery"
+                },
+                {
+                    "name": "grief share",
+                    "link": "https://coloradocommunity.org/care",
+                    "photo": "https://www.griefshare.org/assets/logos/gs_white-fdf8435def3272cf1783fc0ec6e9a53c74328f282bc4ecbde4a37bfde2458ccc.svg",
+                    "phase": "pre-evangelism",
+                    "context-region": "local",
+                    "context-focus": "outreach",
+                    "partner": "grief share"
+                },
+                {
+                    "name": "divorce care",
+                    "link": "https://coloradocommunity.org/care",
+                    "photo": "https://www.divorcecare.org/assets/logos/dc_white-8bdb21a230d39bd1928c8c51994bdebd70c82a20298e55a3cd7e923102217f09.svg",
+                    "phase": "pre-evangelism",
+                    "context-region": "local",
+                    "context-focus": "outreach",
+                    "partner": "divorce care"
                 }
             ]
         },
@@ -296,6 +314,24 @@
                     "context-region": "local",
                     "context-focus": "outreach",
                     "partner": "gloo"
+                },
+                {
+                    "name": "grief share",
+                    "link": "https://www.missionhills.org/care-ministry/",
+                    "photo": "https://www.griefshare.org/assets/logos/gs_white-fdf8435def3272cf1783fc0ec6e9a53c74328f282bc4ecbde4a37bfde2458ccc.svg",
+                    "phase": "pre-evangelism",
+                    "context-region": "local",
+                    "context-focus": "outreach",
+                    "partner": "grief share"
+                },
+                {
+                    "name": "divorce care",
+                    "link": "https://www.missionhills.org/event/blood-drive-november/",
+                    "photo": "https://www.divorcecare.org/assets/logos/dc_white-8bdb21a230d39bd1928c8c51994bdebd70c82a20298e55a3cd7e923102217f09.svg",
+                    "phase": "pre-evangelism",
+                    "context-region": "local",
+                    "context-focus": "outreach",
+                    "partner": "divorce care"
                 }
             ]
         },
@@ -1613,7 +1649,18 @@
                     "views": "272,240 views",
                     "joined": "Joined Jan 13, 2017"
                 }
-            }
+            },
+            "ministries": [
+                {
+                    "name": "grief share",
+                    "link": "https://woodmenvalley.org/support/",
+                    "photo": "https://www.griefshare.org/assets/logos/gs_white-fdf8435def3272cf1783fc0ec6e9a53c74328f282bc4ecbde4a37bfde2458ccc.svg",
+                    "phase": "pre-evangelism",
+                    "context-region": "local",
+                    "context-focus": "outreach",
+                    "partner": "grief share"
+                }
+            ]
         },
         {
             "name": "Academy Christian Church",
@@ -1737,7 +1784,18 @@
                     "likes": "1.4K likes",
                     "followers": "1.7K followers"
                 }
-            }
+            },
+            "ministries": [
+                {
+                    "name": "grief share",
+                    "link": "https://www.academychristian.org/northside/calendar/upcoming-events/",
+                    "photo": "https://www.griefshare.org/assets/logos/gs_white-fdf8435def3272cf1783fc0ec6e9a53c74328f282bc4ecbde4a37bfde2458ccc.svg",
+                    "phase": "pre-evangelism",
+                    "context-region": "local",
+                    "context-focus": "outreach",
+                    "partner": "grief share"
+                }
+            ]
         },
         {
             "name": "Our Lady of the Woods Parish",
@@ -1996,6 +2054,24 @@
                     "context-region": "local",
                     "context-focus": "outreach",
                     "partner": "celebrate recovery"
+                },
+                {
+                    "name": "grief share",
+                    "link": "https://www.redrockschurch.com/supportgroups/",
+                    "photo": "https://www.griefshare.org/assets/logos/gs_white-fdf8435def3272cf1783fc0ec6e9a53c74328f282bc4ecbde4a37bfde2458ccc.svg",
+                    "phase": "pre-evangelism",
+                    "context-region": "local",
+                    "context-focus": "outreach",
+                    "partner": "grief share"
+                },
+                {
+                    "name": "divorce care",
+                    "link": "https://www.redrockschurch.com/supportgroups/",
+                    "photo": "https://www.divorcecare.org/assets/logos/dc_white-8bdb21a230d39bd1928c8c51994bdebd70c82a20298e55a3cd7e923102217f09.svg",
+                    "phase": "pre-evangelism",
+                    "context-region": "local",
+                    "context-focus": "outreach",
+                    "partner": "divorce care"
                 }
             ]
         },
@@ -2551,7 +2627,18 @@
             ],
             "social": {
                 "websiteUrl": "https://ccfyourhome.org/"
-            }
+            },
+            "ministries": [
+                {
+                    "name": "habitat for humanity",
+                    "link": "https://ccfyourhome.org/activities-and-announcements-2/",
+                    "photo": "https://habitatcolorado.org/wp-content/uploads/2022/08/logo.svg",
+                    "phase": "pre-evangelism",
+                    "context-region": "local",
+                    "context-focus": "outreach",
+                    "partner": "habitat for humanity"
+                }
+            ]
         },
         {
             "name": "Orchard.Church",
@@ -3267,7 +3354,27 @@
                     "likes": "5.4K likes",
                     "followers": "5.8K followers"
                 }
-            }
+            },
+            "ministries": [
+                {
+                    "name": "grief share",
+                    "link": "https://rocky.church/care/",
+                    "photo": "https://www.griefshare.org/assets/logos/gs_white-fdf8435def3272cf1783fc0ec6e9a53c74328f282bc4ecbde4a37bfde2458ccc.svg",
+                    "phase": "pre-evangelism",
+                    "context-region": "local",
+                    "context-focus": "outreach",
+                    "partner": "grief share"
+                },
+                {
+                    "name": "divorce care",
+                    "link": "https://rocky.church/care/",
+                    "photo": "https://www.divorcecare.org/assets/logos/dc_white-8bdb21a230d39bd1928c8c51994bdebd70c82a20298e55a3cd7e923102217f09.svg",
+                    "phase": "pre-evangelism",
+                    "context-region": "local",
+                    "context-focus": "outreach",
+                    "partner": "divorce care"
+                }
+            ]
         },
         {
             "name": "The Well Church",
@@ -4078,7 +4185,18 @@
                     "reviews": "Rating 4.6 (52 Reviews)",
                     "followers": "2.1K followers"
                 }
-            }
+            },
+            "ministries": [
+                {
+                    "name": "habitat for humanity",
+                    "link": "https://calvarybible.com/local/boulder/habitat/",
+                    "photo": "https://habitatcolorado.org/wp-content/uploads/2022/08/logo.svg",
+                    "phase": "pre-evangelism",
+                    "context-region": "local",
+                    "context-focus": "outreach",
+                    "partner": "habitat for humanity"
+                }
+            ]
         },
         {
             "name": "Journey Church",
@@ -4280,6 +4398,15 @@
                     "context-region": "local",
                     "context-focus": "outreach",
                     "partner": "celebrate recovery"
+                },
+                {
+                    "name": "divorce care",
+                    "link": "https://crossroadscolorado.com/divorcecare-logo-square/",
+                    "photo": "https://www.divorcecare.org/assets/logos/dc_white-8bdb21a230d39bd1928c8c51994bdebd70c82a20298e55a3cd7e923102217f09.svg",
+                    "phase": "pre-evangelism",
+                    "context-region": "local",
+                    "context-focus": "outreach",
+                    "partner": "divorce care"
                 }
             ]
         },
@@ -4668,6 +4795,33 @@
                     "context-region": "local",
                     "context-focus": "outreach",
                     "partner": "celebrate recovery"
+                },
+                {
+                    "name": "grief share",
+                    "link": "https://www.redeemerconnect.com/care-support",
+                    "photo": "https://www.griefshare.org/assets/logos/gs_white-fdf8435def3272cf1783fc0ec6e9a53c74328f282bc4ecbde4a37bfde2458ccc.svg",
+                    "phase": "pre-evangelism",
+                    "context-region": "local",
+                    "context-focus": "outreach",
+                    "partner": "grief share"
+                },
+                {
+                    "name": "divorce care",
+                    "link": "https://www.redeemerconnect.com/care-support",
+                    "photo": "https://www.divorcecare.org/assets/logos/dc_white-8bdb21a230d39bd1928c8c51994bdebd70c82a20298e55a3cd7e923102217f09.svg",
+                    "phase": "pre-evangelism",
+                    "context-region": "local",
+                    "context-focus": "outreach",
+                    "partner": "divorce care"
+                },
+                {
+                    "name": "habitat for humanity",
+                    "link": "https://www.redeemerconnect.com/events/events/habitat-build-august",
+                    "photo": "https://habitatcolorado.org/wp-content/uploads/2022/08/logo.svg",
+                    "phase": "pre-evangelism",
+                    "context-region": "local",
+                    "context-focus": "outreach",
+                    "partner": "habitat for humanity"
                 }
             ]
         },
@@ -4990,6 +5144,15 @@
                     "context-region": "local",
                     "context-focus": "outreach",
                     "partner": "celebrate recovery"
+                },
+                {
+                    "name": "grief share",
+                    "link": "https://info.life.church/prayer-infertility-miscarriage",
+                    "photo": "https://www.griefshare.org/assets/logos/gs_white-fdf8435def3272cf1783fc0ec6e9a53c74328f282bc4ecbde4a37bfde2458ccc.svg",
+                    "phase": "pre-evangelism",
+                    "context-region": "local",
+                    "context-focus": "outreach",
+                    "partner": "grief share"
                 }
             ]
         },
