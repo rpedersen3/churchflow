@@ -12,6 +12,9 @@ from quotesbot.processors.findChurchDuplicates import FindChurchDuplicates
 from quotesbot.processors.findChurchWebsite import FindChurchWebsite
 from quotesbot.processors.findMultiCampusChurches import FindMultiCampusChurches
 
+from quotesbot.processors.findMinistriesUsingGoogleSearch import FindMinistriesUsingGoogleSearch
+
+
 from quotesbot.processors.networks.elcaNetworkProcessor import ElcaProcessor
 from quotesbot.processors.networks.aodNetworkProcessor import AodProcessor
 from quotesbot.processors.networks.ldsNetworkProcessor import LdsProcessor
@@ -82,11 +85,14 @@ class chcrawlerSpider(scrapy.Spider):
 
     '''
 
+    findMinistriesUsingGoogleSearch = FindMinistriesUsingGoogleSearch()
+    findMinistriesUsingGoogleSearch.findMinistries(googleKey)
+
     '''
     findMultiCampusChurches = FindMultiCampusChurches()
     findMultiCampusChurches.findMultiCampusChurches()
 
-    '''
+
     updateRDF = UpdateRDFWithTechSystems()
     updateRDF.updateWithTechSystems()
 
@@ -113,6 +119,11 @@ class chcrawlerSpider(scrapy.Spider):
 
     updateRDF = UpdateRDFWithChurchMinistries()
     updateRDF.updateRDFWithChurchMinistries()
+
+ 
+    '''
+
+    FindMinistriesUsingGoogleSearch
 
     '''
     
