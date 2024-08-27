@@ -63,10 +63,15 @@ class FindMinistriesUsingGoogleSearch:
                 parsed_url = urlparse(link)
                 churchDomain = parsed_url.netloc.replace("www.", "")
 
+                '''
                 searchTerm = "celebrate recovery"
-
                 name = "celebrate recovery"
                 photo = "https://celebraterecovery.com/wp-content/uploads/2024/03/Celebrate-Recovery-Logo-Left-White_RM.svg"
+                '''
+
+                searchTerm = "griefshare"
+                name = "grief share"
+                photo = "https://www.griefshare.org/assets/logos/gs_white-fdf8435def3272cf1783fc0ec6e9a53c74328f282bc4ecbde4a37bfde2458ccc.svg"
 
                 query = "site:" + churchDomain + " '" + searchTerm + "'"
                 print("--------------------------------------")

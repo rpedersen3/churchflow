@@ -3,7 +3,17 @@
         {
             "name": "coloradocommunity",
             "link": "https://coloradocommunity.org",
-            "ministries": []
+            "ministries": [
+                {
+                    "name": "celebrate recovery",
+                    "link": "https://coloradocommunity.org/celebrate-recovery",
+                    "photo": "https://celebraterecovery.com/wp-content/uploads/2024/03/Celebrate-Recovery-Logo-Left-White_RM.svg",
+                    "phase": "pre-evangelism",
+                    "context-region": "local",
+                    "context-focus": "outreach",
+                    "partner": "celebrate recovery"
+                }
+            ]
         },
         {
             "name": "Mission Hills Church",
@@ -1977,7 +1987,17 @@
                     "followers": "34K followers"
                 }
             },
-            "ministries": []
+            "ministries": [
+                {
+                    "name": "celebrate recovery",
+                    "link": "https://www.redrockschurch.com/resources/addiction-mental-health/",
+                    "photo": "https://celebraterecovery.com/wp-content/uploads/2024/03/Celebrate-Recovery-Logo-Left-White_RM.svg",
+                    "phase": "pre-evangelism",
+                    "context-region": "local",
+                    "context-focus": "outreach",
+                    "partner": "celebrate recovery"
+                }
+            ]
         },
         {
             "name": "BRAVE Church",
@@ -4251,7 +4271,17 @@
                     "followers": "1.5K followers"
                 }
             },
-            "ministries": []
+            "ministries": [
+                {
+                    "name": "celebrate recovery",
+                    "link": "https://crossroadscolorado.com/love-god-love-people/",
+                    "photo": "https://celebraterecovery.com/wp-content/uploads/2024/03/Celebrate-Recovery-Logo-Left-White_RM.svg",
+                    "phase": "pre-evangelism",
+                    "context-region": "local",
+                    "context-focus": "outreach",
+                    "partner": "celebrate recovery"
+                }
+            ]
         },
         {
             "name": "Foundations Church",
@@ -4629,7 +4659,17 @@
             "name": "Redeemer Lutheran Church",
             "uniqueId": "redeemerlutheranchurch",
             "link": "https://www.redeemerconnect.com",
-            "ministries": []
+            "ministries": [
+                {
+                    "name": "celebrate recovery",
+                    "link": "https://www.redeemerconnect.com/history",
+                    "photo": "https://celebraterecovery.com/wp-content/uploads/2024/03/Celebrate-Recovery-Logo-Left-White_RM.svg",
+                    "phase": "pre-evangelism",
+                    "context-region": "local",
+                    "context-focus": "outreach",
+                    "partner": "celebrate recovery"
+                }
+            ]
         },
         {
             "name": "Radiant Church",
@@ -4941,7 +4981,17 @@
             "name": "Life.Church",
             "uniqueId": "lifechurch",
             "link": "https://www.life.church",
-            "ministries": []
+            "ministries": [
+                {
+                    "name": "celebrate recovery",
+                    "link": "https://info.life.church/prayer-weight-loss-eating-disorders",
+                    "photo": "https://celebraterecovery.com/wp-content/uploads/2024/03/Celebrate-Recovery-Logo-Left-White_RM.svg",
+                    "phase": "pre-evangelism",
+                    "context-region": "local",
+                    "context-focus": "outreach",
+                    "partner": "celebrate recovery"
+                }
+            ]
         },
         {
             "name": "Connections Christian Church",
@@ -5019,7 +5069,17 @@
             "name": "Cornerstone Church",
             "uniqueId": "cornerstonechurch",
             "link": "https://cornerstonechurchco.com",
-            "ministries": []
+            "ministries": [
+                {
+                    "name": "celebrate recovery",
+                    "link": "https://cornerstonechurchco.com/buenavista/",
+                    "photo": "https://celebraterecovery.com/wp-content/uploads/2024/03/Celebrate-Recovery-Logo-Left-White_RM.svg",
+                    "phase": "pre-evangelism",
+                    "context-region": "local",
+                    "context-focus": "outreach",
+                    "partner": "celebrate recovery"
+                }
+            ]
         }
     ]
 }
