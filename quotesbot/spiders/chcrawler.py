@@ -83,7 +83,7 @@ class chcrawlerSpider(scrapy.Spider):
     processor = IfaProcessor()
     processor.findChurches()
 
-    '''
+
 
     findMinistriesUsingGoogleSearch = FindMinistriesUsingGoogleSearch()
     findMinistriesUsingGoogleSearch.findMinistries(googleKey)
@@ -125,7 +125,6 @@ class chcrawlerSpider(scrapy.Spider):
 
     FindMinistriesUsingGoogleSearch
 
-    '''
     
     # add churches based on cities
     churchFinder = FindChurchesGoogleSearch()
